@@ -1,0 +1,25 @@
+        private bool IsUserProfileLoginAllowed(int userId)
+        {
+            try
+            {
+                if (!HasUserProfileTable())
+                {
+                    return true;
+                }
+
+                string status = _context.Database.SqlQuery<string>(
+                    "SELECT TOP (1) [Status] FROM [dbo].[PortalBiz_UserProfiles] WHERE [UserId] = @p0",
+                    userId).SingleOrDefault();
+                return string.IsNullOrEmpty(status) ||
+                       string.Equals(status, PortalUserProfileStatuses.Active, StringComparison.Ordinal);
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>profile 读取失败时保持旧路径可用，部署健康检查会另行暴露缺失或损坏的扩展表。</zh-CN>
+                //   <en>Keep the legacy path usable when profile reads fail; deployment health checks will expose</en>
+                // </lang>
+                // missing or damaged extension tables separately.
+                return true;
+            }
+        }

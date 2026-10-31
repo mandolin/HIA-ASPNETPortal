@@ -1,0 +1,29 @@
+        private static byte[] TrimLeadingZeroBytes(byte[] value)
+        {
+            // <lang>
+            //   <zh-CN>空值不让 ASN.1 INTEGER 变成零长度，保留一个零字节作为合法数值。</zh-CN>
+            //   <en>Do not let null or empty input become a zero-length ASN.1 INTEGER; retain one zero byte as a valid value.</en>
+            // </lang>
+            if (value == null || value.Length == 0)
+            {
+                return new byte[] { 0 };
+            }
+
+            // <lang>
+            //   <zh-CN>跳过冗余前导零，但始终保留最后一个字节，避免全零数值被清空。</zh-CN>
+            //   <en>Skip redundant leading zeros while retaining the final byte so an all-zero value is never emptied.</en>
+            // </lang>
+            int index = 0;
+            while (index < value.Length - 1 && value[index] == 0)
+            {
+                index++;
+            }
+
+            // <lang>
+            //   <zh-CN>复制规范化后的尾部字节，保持 RSA 参数的大端方向。</zh-CN>
+            //   <en>Copy the normalized tail bytes while preserving RSA parameter big-endian direction.</en>
+            // </lang>
+            byte[] normalized = new byte[value.Length - index];
+            Buffer.BlockCopy(value, index, normalized, 0, normalized.Length);
+            return normalized;
+        }

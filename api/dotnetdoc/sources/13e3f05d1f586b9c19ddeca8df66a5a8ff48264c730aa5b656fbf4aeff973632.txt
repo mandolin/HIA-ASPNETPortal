@@ -1,0 +1,33 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存前重新初始化请求，确保联系人归属与模块编辑权限来自服务器端实时校验。</zh-CN>
+            //   <en>The request is initialized again before saving so contact ownership and module edit permission come from live server-side validation.</en>
+            // </lang>
+            IContactItem item;
+            if (!TryInitializeRequest(out item) || !Page.IsValid)
+            {
+                return;
+            }
+
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>新增联系人使用当前模块标识，创建人来自服务器端认证身份，不接受浏览器传入。</zh-CN>
+                //   <en>New contacts use the current module id, and creator identity comes from the server-side authenticated principal rather than browser input.</en>
+                // </lang>
+                ContactsDB.AddContact(moduleId, Context.User.Identity.Name, NameField.Text, RoleField.Text,
+                    EmailField.Text, Contact1Field.Text, Contact2Field.Text);
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>更新路径已经在 `TryInitializeRequest` 中核验条目归属，避免跨模块编辑。</zh-CN>
+                //   <en>The update path has already validated item ownership in `TryInitializeRequest`, avoiding cross-module edits.</en>
+                // </lang>
+                ContactsDB.UpdateContact(itemId, Context.User.Identity.Name, NameField.Text, RoleField.Text,
+                    EmailField.Text, Contact1Field.Text, Contact2Field.Text);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

@@ -1,0 +1,41 @@
+    public sealed class PortalOperationAuditEntry
+    {
+        /// <summary><lang><zh-CN>审计表的稳定主键，用于排序和关联，不表示业务对象本身。</zh-CN><en>Stable audit-table key used for ordering and correlation; it is not the business-object identifier.</en></lang></summary>
+        public long AuditId { get; set; }
+
+        /// <summary><lang><zh-CN>动作发生的 UTC 时间；查询使用其作为包含起点、排除终点的时间范围字段。</zh-CN><en>UTC instant at which the action occurred; queries use it in an inclusive-start, exclusive-end time range.</en></lang></summary>
+        public DateTime OccurredUtc { get; set; }
+
+        /// <summary><lang><zh-CN>稳定的运营分类，用于受限筛选和事件归组。</zh-CN><en>Stable operations category used for restricted filtering and event grouping.</en></lang></summary>
+        public string Category { get; set; }
+
+        /// <summary><lang><zh-CN>稳定的动作名称，用于表示已发生的状态变化或管理操作。</zh-CN><en>Stable action name that represents the completed state change or administrative operation.</en></lang></summary>
+        public string Action { get; set; }
+
+        /// <summary><lang><zh-CN>记录时确定的动作结果；写入门面默认只写成功事实，安全类必需事件（认证失败、授权失败）可显式写入失败事实，任何情况下都不伪造成功记录。</zh-CN><en>Outcome known when the audit is recorded; the facade writes success facts by default, while security-critical required events (authentication failures, authorization failures) may explicitly write failure facts; a success record is never fabricated under any circumstance.</en></lang></summary>
+        public string Outcome { get; set; }
+
+        /// <summary><lang><zh-CN>执行动作的门户用户名；没有可用 HTTP 身份时写入受限回退值。</zh-CN><en>Portal user name that performed the action; a constrained fallback is written when no HTTP identity is available.</en></lang></summary>
+        public string ActorUserName { get; set; }
+
+        /// <summary><lang><zh-CN>被操作资源的稳定类型，避免将领域细节隐含在摘要文本中。</zh-CN><en>Stable type of the operated resource, avoiding domain detail being hidden in free-form summary text.</en></lang></summary>
+        public string TargetType { get; set; }
+
+        /// <summary><lang><zh-CN>经调用方确认可审计的非敏感目标标识；不得放入口令、令牌或业务正文。</zh-CN><en>Non-sensitive target identifier approved by the caller for auditing; it must not contain passwords, tokens, or business body text.</en></lang></summary>
+        public string TargetId { get; set; }
+
+        /// <summary><lang><zh-CN>写入前按列长度净化的动作摘要；它服务运营追溯而不是原始请求存档。</zh-CN><en>Action summary sanitized to the column limit before writing; it serves operations traceability rather than raw-request archival.</en></lang></summary>
+        public string Summary { get; set; }
+
+        /// <summary><lang><zh-CN>可选运行时诊断事件编号，用于关联失败调查而不复制诊断正文。</zh-CN><en>Optional runtime-diagnostics event identifier used to correlate failure investigation without copying diagnostic body text.</en></lang></summary>
+        public string RelatedEventId { get; set; }
+
+        /// <summary><lang><zh-CN>请求可用时的客户端地址；该值会受写入净化和数据库列长度限制。</zh-CN><en>Client address when the request is available; the value remains subject to write sanitization and database column limits.</en></lang></summary>
+        public string ClientIp { get; set; }
+
+        /// <summary><lang><zh-CN>请求可用时的客户端 User-Agent，仅作为受限运营上下文，不作为身份凭据。</zh-CN><en>Client User-Agent when the request is available, retained only as restricted operations context and never as an identity credential.</en></lang></summary>
+        public string UserAgent { get; set; }
+
+        /// <summary><lang><zh-CN>为未来请求关联预留的编号；当前写入路径保持为空，避免凭空声明关联关系。</zh-CN><en>Identifier reserved for future request correlation; the current write path keeps it empty to avoid claiming a correlation that does not exist.</en></lang></summary>
+        public string CorrelationId { get; set; }
+    }

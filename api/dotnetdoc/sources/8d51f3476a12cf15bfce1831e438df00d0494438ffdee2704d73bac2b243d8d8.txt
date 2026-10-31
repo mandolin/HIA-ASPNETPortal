@@ -1,0 +1,8 @@
+        public static bool IsValidThemeName(string themeName)
+        {
+            // <lang>
+            //   <zh-CN>先拒绝空白，再用文化无关正则校验稳定 ASCII 形状；trim 只用于验证，不改写调用方值。</zh-CN>
+            //   <en>Reject blank input first, then validate a stable ASCII shape with the culture-invariant regex; trimming is validation-only and does not rewrite caller input.</en>
+            // </lang>
+            return !string.IsNullOrWhiteSpace(themeName) && ThemeNamePattern.IsMatch(themeName.Trim());
+        }

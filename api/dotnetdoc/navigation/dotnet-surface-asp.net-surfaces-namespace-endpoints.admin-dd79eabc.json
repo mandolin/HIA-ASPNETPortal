@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:endpoints.admin",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints.admin:type:hia-document-aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
+      "kind": "type",
+      "label": "DiagnosticsLogs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx",
+      "symbolId": "aspnet:aspnet-webforms-page:admin-diagnosticslogs.aspx",
+      "contentPath": "entries/hia-document-aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx-2336a5b2.html"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints.admin:type:hia-document-aspnet-aspnet-webforms-page-admin-operationaudits.aspx",
+      "kind": "type",
+      "label": "OperationAudits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:aspnet-aspnet-webforms-page-admin-operationaudits.aspx",
+      "sourcePath": "src/Portal/Admin/OperationAudits.aspx",
+      "symbolId": "aspnet:aspnet-webforms-page:admin-operationaudits.aspx",
+      "contentPath": "entries/hia-document-aspnet-aspnet-webforms-page-admin-operationaudits.aspx-94dc8e28.html"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints.admin:type:hia-document-aspnet-aspnet-webforms-page-admin-register.aspx",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:aspnet-aspnet-webforms-page-admin-register.aspx",
+      "sourcePath": "src/Portal/Admin/Register.aspx",
+      "symbolId": "aspnet:aspnet-webforms-page:admin-register.aspx",
+      "contentPath": "entries/hia-document-aspnet-aspnet-webforms-page-admin-register.aspx-44e59a16.html"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints.admin:type:hia-document-aspnet-aspnet-webforms-page-admin-systemhealth.aspx",
+      "kind": "type",
+      "label": "SystemHealth",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:aspnet-aspnet-webforms-page-admin-systemhealth.aspx",
+      "sourcePath": "src/Portal/Admin/SystemHealth.aspx",
+      "symbolId": "aspnet:aspnet-webforms-page:admin-systemhealth.aspx",
+      "contentPath": "entries/hia-document-aspnet-aspnet-webforms-page-admin-systemhealth.aspx-7ccf12dc.html"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints.admin:type:hia-document-aspnet-aspnet-webforms-page-admin-themesettings.aspx",
+      "kind": "type",
+      "label": "ThemeSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:aspnet-aspnet-webforms-page-admin-themesettings.aspx",
+      "sourcePath": "src/Portal/Admin/ThemeSettings.aspx",
+      "symbolId": "aspnet:aspnet-webforms-page:admin-themesettings.aspx",
+      "contentPath": "entries/hia-document-aspnet-aspnet-webforms-page-admin-themesettings.aspx-34c8509f.html"
+    }
+  ]
+}

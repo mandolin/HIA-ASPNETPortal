@@ -1,0 +1,6 @@
+            <%--
+            <lang>
+              <zh-CN>P8.2 用文字状态按钮替代旧 minus GIF；折叠仍走原 `collapse` 命令，降低旧回发路径变化。</zh-CN>
+              <en>P8.2 replaced the old minus GIF with a textual state button; collapse still uses the original `collapse` command to keep the legacy postback path stable.</en>
+            </lang>
+            --%>

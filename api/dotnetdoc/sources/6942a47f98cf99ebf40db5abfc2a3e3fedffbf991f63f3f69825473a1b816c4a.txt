@@ -1,0 +1,25 @@
+        private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
+        {
+            value = 0;
+            // <lang>
+            //   <zh-CN>索引允许零，但必须在参与返回 URL 前完成非负整数校验。</zh-CN>
+            //   <en>The index permits zero but must be validated as non-negative before it participates in a return URL.</en>
+            // </lang>
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadNonNegativeInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非法索引不降级为默认值，直接拒绝继续处理。</zh-CN>
+            //   <en>Do not downgrade an invalid index to a default; reject further processing directly.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }

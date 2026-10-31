@@ -1,0 +1,72 @@
+        public IEnumerable<IEmployeeInfo> GetEmployees(EmployeeDirectoryQuery query)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return Enumerable.Empty<IEmployeeInfo>();
+            }
+
+            EmployeeDirectoryQuery normalizedQuery = NormalizeQuery(query);
+            string keyword = Normalize(normalizedQuery.Keyword);
+            string status = Normalize(normalizedQuery.Status);
+            if (!string.IsNullOrEmpty(status) && !PortalEmployeeStatuses.IsKnown(status))
+            {
+                return Enumerable.Empty<IEmployeeInfo>();
+            }
+
+            string keywordPattern = ToLikePattern(keyword);
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>员工列表联接组织名称用于后台浏览和绑定辅助，不在此处计算权限或员工账号状态。</zh-CN>
+                //   <en>The employee list joins organization names for administration browsing and binding assistance; it does not calculate authorization or employee-account state here.</en>
+                // </lang>
+                var rows = _context.Database.SqlQuery<EmployeeProjection>(
+                    @"
+SELECT
+    [Employee].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName],
+    [Employee].[PreferredName],
+    [Employee].[WorkEmail],
+    [Employee].[OrganizationUnitId],
+    [Organization].[DisplayName] AS [OrganizationDisplayName],
+    [Employee].[EmploymentStatus],
+    [Employee].[JoinedUtc],
+    [Employee].[LeftUtc],
+    [Employee].[SourceSystem],
+    [Employee].[UpdatedUtc]
+FROM [dbo].[PortalBiz_Employees] AS [Employee]
+LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
+    ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
+WHERE (@p0 = N'' OR [Employee].[EmployeeCode] LIKE @p1 OR [Employee].[DisplayName] LIKE @p1
+    OR [Employee].[PreferredName] LIKE @p1 OR [Employee].[WorkEmail] LIKE @p1
+    OR [Organization].[OrganizationCode] LIKE @p1 OR [Organization].[DisplayName] LIKE @p1)
+    AND (@p2 = N'' OR [Employee].[EmploymentStatus] = @p2)
+ORDER BY [Employee].[EmployeeCode], [Employee].[EmployeeId]
+OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
+                    keyword,
+                    keywordPattern,
+                    status,
+                    normalizedQuery.Skip,
+                    normalizedQuery.Take).ToList();
+
+                return rows.Select(row => new EmployeeInfo(
+                    row.EmployeeId,
+                    row.EmployeeCode,
+                    row.DisplayName,
+                    row.PreferredName,
+                    row.WorkEmail,
+                    row.OrganizationUnitId,
+                    row.OrganizationDisplayName,
+                    row.EmploymentStatus,
+                    row.JoinedUtc,
+                    row.LeftUtc,
+                    row.SourceSystem,
+                    row.UpdatedUtc)).ToList();
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<IEmployeeInfo>();
+            }
+        }

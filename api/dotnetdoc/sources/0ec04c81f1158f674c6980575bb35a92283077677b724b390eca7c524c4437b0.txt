@@ -1,0 +1,1 @@
+        public DbSet<ContactItem> Contacts { get; set; }

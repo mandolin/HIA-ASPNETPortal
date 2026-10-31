@@ -1,0 +1,6 @@
+                            <%--
+                              <lang>
+                                <zh-CN>RegisterBtn_Click 是账号创建与失败提示的服务器入口；Message 只能反馈服务器结果，不能由页面标记宣称注册成功。</zh-CN>
+                                <en>RegisterBtn_Click is the server entry for account creation and failure messaging; Message reports the server result and cannot be used by markup to claim registration success.</en>
+                              </lang>
+                            --%>

@@ -1,0 +1,18 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>联系人列表没有复杂页面状态；每次请求都重新按模块读取，避免旧缓存显示错误模块的数据。</zh-CN>
+            //   <en>The contact list has no complex page state; each request reloads by module so stale cache cannot show another module's data.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>绑定前先取行数：表尾空态依赖它，且必须早于 DataBind 写入。
+            //   数据源类型保持 <c>IEnumerable</c> 不变（不改成 List），以免改变既有绑定与枚举行为。</zh-CN>
+            //   <en>Take the row count before binding: the footer's empty state depends on it and it must be written before
+            //   DataBind. The data source type stays <c>IEnumerable</c> (not converted to a List) so existing binding and
+            //   enumeration behaviour is unchanged.</en>
+            // </lang>
+            System.Collections.Generic.IEnumerable<IContactItem> contacts = ContactsDB.GetContacts(ModuleId);
+            contactsEmptyStateRowCount = System.Linq.Enumerable.Count(contacts);
+            myDataGrid.DataSource = contacts;
+            myDataGrid.DataBind();
+        }

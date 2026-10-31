@@ -1,0 +1,4 @@
+        public void UpdateUser(int userId, string email, string password)
+        {
+            UpdateUserProfile(userId, null, null, null, email, password, "system-admin");
+        }

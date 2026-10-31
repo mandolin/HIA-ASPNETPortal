@@ -1,0 +1,17 @@
+        public static bool IsTabGateEnabled(string configuredValue)
+        {
+            // <lang>
+            //   <zh-CN>识别范围保持保守：只接受 true/1/yes/on（忽略大小写与空白）。无法识别的一律按关闭处理，使配置写错时退回现状而不是改变导航。</zh-CN>
+            //   <en>Recognition stays conservative: only true/1/yes/on (case-insensitive, trimmed) count. Anything unrecognized is treated as off, so a bad configuration falls back to current behaviour instead of changing navigation.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(configuredValue))
+            {
+                return false;
+            }
+
+            string normalized = configuredValue.Trim();
+            return string.Equals(normalized, "true", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(normalized, "1", StringComparison.Ordinal)
+                || string.Equals(normalized, "yes", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(normalized, "on", StringComparison.OrdinalIgnoreCase);
+        }

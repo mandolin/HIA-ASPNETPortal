@@ -1,0 +1,1 @@
+        public string Permission { get; private set; }

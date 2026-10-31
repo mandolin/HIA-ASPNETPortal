@@ -1,0 +1,30 @@
+        private void BindData()
+        {
+            if (currentUser == null)
+            {
+                return;
+            }
+
+            IUserProfileInfo profile = UsersDB.GetUserProfileInfo(currentUser.UserId);
+            Email.Text = profile == null || string.IsNullOrWhiteSpace(profile.PreferredEmail)
+                ? currentUser.Email
+                : profile.PreferredEmail;
+            LegacyUserNameText.Text = EncodeDisplay(currentUser.Name);
+            LoginName.Text = profile == null ? currentUser.Name : profile.LoginName;
+            DisplayName.Text = profile == null ? currentUser.Name : profile.DisplayName;
+            Nickname.Text = profile == null ? string.Empty : profile.Nickname;
+            ProfileStatusText.Text = EncodeDisplay(profile == null ? PortalUserProfileStatuses.Active : profile.Status);
+            ProfileSourceText.Text = EncodeDisplay(profile == null ? "LegacyNoProfileInfo" : profile.Source);
+            SetProfileInputsEnabled(profile == null || profile.IsAvailable);
+            IUserRegistrationInfo registration = BindRegistrationInfo(currentUser.UserId);
+            BindEmployeeBindingInfo(currentUser.UserId);
+            BindProfileLifecycleActions(profile, registration);
+            TitleText.Text = Server.HtmlEncode("Manage User: " + GetEffectiveDisplayName(profile, currentUser.Name));
+
+            userRoles.DataSource = UsersDB.GetRolesByUser(currentUser.Name);
+            userRoles.DataBind();
+
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            allRoles.DataSource = RolesDB.GetPortalRoles(portalSettings.PortalId);
+            allRoles.DataBind();
+        }

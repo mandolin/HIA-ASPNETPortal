@@ -1,0 +1,27 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet",
+      "kind": "namespace",
+      "label": "ASPNET",
+      "entryCount": 2142,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet-132d4419.json"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources",
+      "kind": "namespace",
+      "label": "Resources",
+      "entryCount": 972,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-resources-ef6be3d7.json"
+    }
+  ]
+}

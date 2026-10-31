@@ -1,0 +1,5 @@
+        internal static string Admin_LeaveRequests_InlineAttachment {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineAttachment", resourceCulture);
+            }
+        }

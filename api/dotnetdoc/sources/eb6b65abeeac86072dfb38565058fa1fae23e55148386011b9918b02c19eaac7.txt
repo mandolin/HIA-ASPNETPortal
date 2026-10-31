@@ -1,0 +1,22 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>页面加载先执行注册开关门禁，再按当前邀请码配置控件验证；这里不创建用户或消费密码。</zh-CN>
+            //   <en>Gate page loading with the registration switch first, then configure controls from the current invite code; no user is created and no password is consumed here.</en>
+            // </lang>
+            if (!PortalRegistrationOptions.AllowSelfRegistration)
+            {
+                // <lang>
+                //   <zh-CN>拒绝出口统一走集中策略；该策略不抛线程中止异常，因此必须显式 return，避免开关关闭后继续执行后续逻辑。</zh-CN>
+                //   <en>The denial exit now goes through the centralized policy; because that policy does not throw a thread-abort exception, an explicit return is required so later logic does not run once the switch is disabled.</en>
+                // </lang>
+                PortalNavigationPolicy.RedirectToAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>集中配置员工号和密码提交控件，使首次加载与回发使用同一设置语义。</zh-CN>
+            //   <en>Configure employee-code and password-submission controls in one place so initial load and postback share the same setting semantics.</en>
+            // </lang>
+            ConfigureRegistrationForm();
+        }

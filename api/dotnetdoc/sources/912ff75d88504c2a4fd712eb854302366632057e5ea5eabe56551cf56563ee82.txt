@@ -1,0 +1,7 @@
+        private static string RenderLink(PortalNavigationEntry entry)
+        {
+            string text = HttpUtility.HtmlEncode(GetDisplayText(entry));
+            string href = HttpUtility.HtmlAttributeEncode(ResolveTarget(entry));
+
+            return "<a class=\"CommandButton portal-secondary-action\" href=\"" + href + "\" title=\"" + text + "\">" + text + "</a>";
+        }

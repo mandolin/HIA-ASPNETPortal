@@ -1,0 +1,18 @@
+        private sealed class CollaborationItemWriteRow
+        {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>批次实际更新的协同事项标识。</zh-CN>
+            ///   <en>Identifier of the collaboration item actually updated by the batch.</en>
+            /// </lang>
+            /// </summary>
+            public long ItemId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>批次实际更新的稳定事项编码。</zh-CN>
+            ///   <en>Stable item code of the collaboration item actually updated by the batch.</en>
+            /// </lang>
+            /// </summary>
+            public string ItemCode { get; set; }
+        }

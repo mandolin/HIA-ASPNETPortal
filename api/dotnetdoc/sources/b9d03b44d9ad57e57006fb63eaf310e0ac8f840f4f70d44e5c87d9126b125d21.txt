@@ -1,0 +1,1 @@
+        public string RequestStatus { get; private set; }

@@ -1,0 +1,17 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet",
+      "kind": "namespace",
+      "label": "ASPNET",
+      "entryCount": 1295,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet-e4a2a361.json"
+    }
+  ]
+}

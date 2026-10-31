@@ -1,0 +1,29 @@
+        private void BindRecentApplications(int userId)
+        {
+            // <lang>
+            //   <zh-CN>服务不可用或用户无效时构造空读模型，避免把零值身份传入严格查询。</zh-CN>
+            //   <en>Build an empty read model when the service is unavailable or the user is invalid, avoiding strict queries with a zero identity.</en>
+            // </lang>
+            IList<BusinessApplicationInfo> applications = BusinessApplicationDb == null || userId <= 0
+                ? new List<BusinessApplicationInfo>()
+                : BusinessApplicationDb.GetRecentApplicationsForUser(userId, RecentApplicationLimit);
+            // <lang>
+            //   <zh-CN>只把申请读模型转换为展示行，模板层不直接接触数据访问对象。</zh-CN>
+            //   <en>Convert application read models into display rows so templates do not consume data-access objects directly.</en>
+            // </lang>
+            List<BusinessApplicationRecentRow> rows = applications
+                .Select(application => new BusinessApplicationRecentRow(application)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前先记录行数：标记层在表尾用该计数决定是否渲染空态提示行（Repeater 在零条时仍渲染表头与表尾）。</zh-CN>
+            //   <en>Record the row count before binding: the markup uses it in the footer to decide whether to render the empty-state hint (a Repeater still renders header and footer with zero rows).</en>
+            // </lang>
+            recentApplicationRowCount = rows.Count;
+
+            RecentApplicationsRepeater.DataSource = rows;
+            // <lang>
+            //   <zh-CN>提交数据源后触发 Web Forms 重复器绑定。</zh-CN>
+            //   <en>Bind the Web Forms repeater after assigning its data source.</en>
+            // </lang>
+            RecentApplicationsRepeater.DataBind();
+        }

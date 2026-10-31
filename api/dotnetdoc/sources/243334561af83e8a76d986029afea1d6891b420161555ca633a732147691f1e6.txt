@@ -1,0 +1,5 @@
+        public PortalOrganizationTreeEdge(int organizationUnitId, int? parentOrganizationUnitId)
+        {
+            OrganizationUnitId = organizationUnitId;
+            ParentOrganizationUnitId = parentOrganizationUnitId;
+        }

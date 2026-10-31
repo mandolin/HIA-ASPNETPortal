@@ -1,0 +1,13 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!EnsureCanViewRequests())
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                BindStatusFilter();
+                BindRequests();
+            }
+        }

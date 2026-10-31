@@ -1,0 +1,1 @@
+        public DbSet<EventItem> Events { get; set; }

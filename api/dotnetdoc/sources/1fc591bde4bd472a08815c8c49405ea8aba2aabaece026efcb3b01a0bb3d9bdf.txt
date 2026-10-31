@@ -1,0 +1,33 @@
+        private static bool TryReadOriginalUpdatedUtc(int entityId, string value, out DateTime? parsedValue)
+        {
+            // <lang>
+            //   <zh-CN>并发时间戳输出默认为空，新增路径不会因缺少隐藏域而失败。</zh-CN>
+            //   <en>Default the concurrency timestamp to null so creation does not fail because the hidden field is absent.</en>
+            // </lang>
+            parsedValue = null;
+            if (entityId <= 0)
+            {
+                // <lang>
+                //   <zh-CN>新增没有旧版本可比较，直接接受空时间戳；更新路径仍必须提供合法值。</zh-CN>
+                //   <en>Creation has no prior version to compare, so accept a null timestamp; update paths still require a valid value.</en>
+                // </lang>
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>按 round-trip 语义解析隐藏域，保留 UTC/Kind 信息供数据层并发比较。</zh-CN>
+            //   <en>Parse the hidden field with round-trip semantics, preserving UTC/Kind information for data-layer concurrency comparison.</en>
+            // </lang>
+            DateTime dateTime;
+            if (DateTime.TryParse(
+                value,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind,
+                out dateTime))
+            {
+                parsedValue = dateTime;
+                return true;
+            }
+
+            return false;
+        }

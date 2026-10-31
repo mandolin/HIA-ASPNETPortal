@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>P7.4.2-D 文档编辑页改为主题化表单外壳，并保留旧 WebForms 事件模型。</zh-CN>
+            <en>P7.4.2-D rebuilds the document editor shell while keeping legacy WebForms events.</en>
+        </lang>
+    --%>

@@ -1,0 +1,37 @@
+        public IList<CollaborationItemInfo> GetRecentItemsForUser(int userId, int take)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
+            // <lang>
+            //   <zh-CN>列表读取前先在服务端重新解析动作人授权；身份无法确认时不返回任何事项，避免用客户端传入的用户标识直接换取数据。</zh-CN>
+            //   <en>Re-resolve actor authorization on the server before the list read; when the identity cannot be confirmed, return no items so a client-supplied user identifier cannot by itself fetch data.</en>
+            // </lang>
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(userId, out actor))
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>SQL 只做粗筛，返回前统一用数据范围判定裁剪；列表与详情共用同一判定，避免两条路径出现不同的可见性口径。</zh-CN>
+                //   <en>The SQL only pre-filters; every row is trimmed by the data-scope decision before returning, so list and detail share one decision instead of two visibility rules.</en>
+                // </lang>
+                return QueryItems(
+                    @"
+WHERE [Item].[InitiatorUserId] = @UserId
+   OR [Item].[OwnerUserId] = @UserId",
+                    NormalizeTake(take, 20),
+                    new SqlParameter("@UserId", userId))
+                    .Where(item => CanView(item, actor))
+                    .ToList();
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemInfo>();
+            }
+        }

@@ -1,0 +1,63 @@
+    public sealed class PortalPermissionDefinition
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建权限定义。</zh-CN>
+        ///   <en>Creates a permission definition.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="key">
+        /// <l>
+        ///   <zh-CN>稳定权限键名。</zh-CN>
+        ///   <en>Stable permission key.</en>
+        /// </l>
+        /// </param>
+        /// <param name="category">
+        /// <l>
+        ///   <zh-CN>权限分组。</zh-CN>
+        ///   <en>Permission category.</en>
+        /// </l>
+        /// </param>
+        /// <param name="description">
+        /// <l>
+        ///   <zh-CN>面向维护者的权限说明。</zh-CN>
+        ///   <en>Maintainer-facing permission description.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>构造函数只保存权限元数据，不读取角色、配置或数据库。注册键名的校验由注册表规范化方法负责。</zh-CN>
+        ///   <en>The constructor stores permission metadata only; it does not read roles, configuration, or the database. Registered-key validation belongs to the registry normalization methods.</en>
+        /// </lang>
+        /// </remarks>
+        public PortalPermissionDefinition(string key, string category, string description)
+        {
+            Key = key;
+            Category = category;
+            Description = description;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>稳定权限键名。</zh-CN>
+        ///   <en>Stable permission key.</en>
+        /// </lang>
+        /// </summary>
+        public string Key { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>权限分组。</zh-CN>
+        ///   <en>Permission category.</en>
+        /// </lang>
+        /// </summary>
+        public string Category { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>面向维护者的权限说明。</zh-CN>
+        ///   <en>Maintainer-facing permission description.</en>
+        /// </lang>
+        /// </summary>
+        public string Description { get; private set; }
+    }

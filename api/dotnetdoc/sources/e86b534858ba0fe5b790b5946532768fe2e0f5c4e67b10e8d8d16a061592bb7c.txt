@@ -1,0 +1,7 @@
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            return string.IsNullOrWhiteSpace(rawValue) ||
+                   PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value);
+        }

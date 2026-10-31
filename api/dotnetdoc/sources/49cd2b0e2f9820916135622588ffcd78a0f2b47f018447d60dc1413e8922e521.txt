@@ -1,0 +1,25 @@
+        protected string BuildTabDisplayName(ITabItem tab)
+        {
+            if (tab == null)
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>JSON 列损坏时记 Warn：页签名仍能显示，但脏数据要被发现。缺翻译不记录，避免噪声。</zh-CN>
+            //   <en>Record a Warn when the JSON column is damaged: the tab name still renders, but dirty data must be surfaced. A missing translation is not recorded, to avoid noise.</en>
+            // </lang>
+            string displayName = PortalDisplayNameResolver.Resolve(
+                tab.TabName,
+                tab.TabNameEn,
+                tab.TabNameLocalizedJson,
+                CultureInfo.CurrentUICulture,
+                out tabNameDiagnostic);
+
+            if (!string.IsNullOrEmpty(tabNameDiagnostic))
+            {
+                PortalDiagnostics.Warn("TabName", tabNameDiagnostic);
+            }
+
+            return displayName;
+        }

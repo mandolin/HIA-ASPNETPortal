@@ -1,0 +1,4 @@
+        public static bool TryReadPositiveInt32(string value, out int parsedValue)
+        {
+            return int.TryParse(value, out parsedValue) && parsedValue > 0;
+        }

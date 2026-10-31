@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_ColumnCategory {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ColumnCategory", resourceCulture);
+            }
+        }

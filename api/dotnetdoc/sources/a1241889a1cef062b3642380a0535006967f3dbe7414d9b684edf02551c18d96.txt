@@ -1,0 +1,5 @@
+        internal static string Signin_EmailOrName {
+            get {
+                return ResourceManager.GetString("Signin_EmailOrName", resourceCulture);
+            }
+        }

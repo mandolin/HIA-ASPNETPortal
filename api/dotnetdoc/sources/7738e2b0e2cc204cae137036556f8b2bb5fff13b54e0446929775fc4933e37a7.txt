@@ -1,0 +1,8 @@
+        public ReferenceDataDb(PortalBizDbContext context)
+        {
+            // <lang>
+            //   <zh-CN>保留调用方注入的上下文实例，使 schema 探测与目录查询共享同一连接和事务边界。</zh-CN>
+            //   <en>Keep the caller-injected context so schema probing and catalog querying share the same connection and transaction boundary.</en>
+            // </lang>
+            this.context = context;
+        }

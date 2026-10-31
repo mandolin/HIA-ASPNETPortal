@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>DataList 以 RoleID 作为命令键并保留角色行事件；显示名称采用编码绑定，编辑和删除必须由服务器重新确认目标与权限。</zh-CN>
+                    <en>The DataList keeps RoleID as the command key and retains role-row events; the name uses encoded binding, while edit and delete must be rechecked by the server for target and authorization.</en>
+                </lang>
+            --%>

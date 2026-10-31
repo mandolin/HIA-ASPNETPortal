@@ -1,0 +1,37 @@
+        public static IList<PortalThemePackage> GetTrustedPackages()
+        {
+            // <lang>
+            //   <zh-CN>收集本次扫描中通过最小信任契约的包；失败包不会阻断其他包或默认主题回退。</zh-CN>
+            //   <en>Collect packages that pass the minimal trust contract for this scan; one failed package does not block other packages or the default-theme fallback.</en>
+            // </lang>
+            var packages = new List<PortalThemePackage>();
+            // <lang>
+            //   <zh-CN>只映射应用内 App_Themes 根目录；根目录不可用时返回空只读集合，不暴露物理路径。</zh-CN>
+            //   <en>Map only the in-application App_Themes root; return an empty read-only collection when unavailable without exposing a physical path.</en>
+            // </lang>
+            string rootPath = HostingEnvironment.MapPath("~/App_Themes");
+            if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
+            {
+                return packages.AsReadOnly();
+            }
+
+            foreach (DirectoryInfo directory in new DirectoryInfo(rootPath).GetDirectories())
+            {
+                // <lang>
+                //   <zh-CN>逐目录执行独立验证；reason 仅用于诊断边界，本入口不把失败原因写入返回集合。</zh-CN>
+                //   <en>Validate each directory independently; reason is kept within the diagnostic boundary and is not emitted in the returned collection.</en>
+                // </lang>
+                PortalThemePackage package;
+                string reason;
+                if (TryGetTrustedPackage(directory.Name, out package, out reason))
+                {
+                    packages.Add(package);
+                }
+            }
+
+            return packages
+                .OrderBy(item => item.DisplayName, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.Name, StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }

@@ -1,0 +1,10 @@
+        public GlobalsDb(PortalCfgDbContext context)
+        {
+            _context = context;
+
+            // <lang>
+            //   <zh-CN>构造时加载一次配置快照，后面的读取直接走内存列表，符合旧站点设置控件的轻量访问模式。</zh-CN>
+            //   <en>Load one configuration snapshot during construction so later reads use the in-memory list, matching the lightweight access pattern of the legacy site-settings control.</en>
+            // </lang>
+            _items = _context.Globals.ToList();
+        }

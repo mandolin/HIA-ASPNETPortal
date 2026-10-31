@@ -1,0 +1,6 @@
+        public bool IsSchemaAvailable()
+        {
+            return HasTable(OrganizationTableName) &&
+                   HasTable(EmployeeTableName) &&
+                   HasTable(BindingTableName);
+        }

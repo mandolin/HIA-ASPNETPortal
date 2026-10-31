@@ -1,0 +1,63 @@
+        protected void AddUser_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>成员新增事件重新解析角色和请求上下文，防止陈旧页面状态绕过门禁。</zh-CN>
+            //   <en>Re-resolve the role and request context for member addition so stale page state cannot bypass the gate.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>没有选择项时不访问用户服务，也不改变角色关系。</zh-CN>
+            //   <en>Do not call the user service or change membership when no option is selected.</en>
+            // </lang>
+            if (allUsers.SelectedItem == null)
+            {
+                ShowMessage(lang.Admin_SecurityRoles_MessageSelectValidUser);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>选中值必须是正整数且对应当前可读取用户，避免直接信任下拉项值。</zh-CN>
+            //   <en>Require a positive id that resolves to a readable user instead of trusting the dropdown value directly.</en>
+            // </lang>
+            int userId;
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(allUsers.SelectedItem.Value, out userId) ||
+                UsersDB.FindUserById(userId) == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只向已验证角色加入已验证用户，并在成功后记录审计、刷新读模型。</zh-CN>
+                //   <en>Add only the verified user to the verified role, then audit success and refresh the read model.</en>
+                // </lang>
+                RolesDB.AddUserRole(roleId, userId);
+                PortalOperationAudit.Record(
+                    "RoleAdministration",
+                    "AddMember",
+                    "Role",
+                    roleId.ToString(),
+                    "Added user id " + userId + " to role.",
+                    Context);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>成员新增异常写入统一诊断并返回事件编号，不暴露数据层细节。</zh-CN>
+                //   <en>Record member-add failures through shared diagnostics and return an event id without exposing data-layer details.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.SecurityRoles.AddUser",
+                    "Adding a role member failed. RoleId=" + roleId + "; UserId=" + userId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_SecurityRoles_MessageMemberAddFailed, eventId));
+            }
+        }

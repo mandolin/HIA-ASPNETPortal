@@ -1,0 +1,393 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alldefinitions",
+      "kind": "entry",
+      "label": "AllDefinitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alldefinitions",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.alldefinitions",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.al-b7298346.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.allowpendingemployeebinding",
+      "kind": "entry",
+      "label": "AllowPendingEmployeeBinding",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.allowpendingemployeebinding",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.allowpendingemployeebinding",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.al-d82c8faa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.allowselfregistration",
+      "kind": "entry",
+      "label": "AllowSelfRegistration",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.allowselfregistration",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.allowselfregistration",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.al-53420879.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alloweddocumentextensions",
+      "kind": "entry",
+      "label": "AllowedDocumentExtensions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alloweddocumentextensions",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.alloweddocumentextensions",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.al-7d1407a8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.cookiessamesite",
+      "kind": "entry",
+      "label": "CookiesSameSite",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.cookiessamesite",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.cookiessamesite",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.co-9710adb5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.cookiessecure",
+      "kind": "entry",
+      "label": "CookiesSecure",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.cookiessecure",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.cookiessecure",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.co-e64165b1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsallowadmindetailview",
+      "kind": "entry",
+      "label": "DiagnosticsAllowAdminDetailView",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsallowadmindetailview",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.diagnosticsallowadmindetailview",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.di-2cda825b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsdetailederrors",
+      "kind": "entry",
+      "label": "DiagnosticsDetailedErrors",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsdetailederrors",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.diagnosticsdetailederrors",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.di-64d862c0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticslogdirectory",
+      "kind": "entry",
+      "label": "DiagnosticsLogDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticslogdirectory",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.diagnosticslogdirectory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.di-e9f1627a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsmaxfilebytes",
+      "kind": "entry",
+      "label": "DiagnosticsMaxFileBytes",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsmaxfilebytes",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.diagnosticsmaxfilebytes",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.di-07e0645c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsretentiondays",
+      "kind": "entry",
+      "label": "DiagnosticsRetentionDays",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsretentiondays",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.diagnosticsretentiondays",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.di-60b08d14.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.getall",
+      "kind": "entry",
+      "label": "GetAll",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.getall",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsettingsregistry.getall",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.ge-797619f5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.hiaportalinstanceid",
+      "kind": "entry",
+      "label": "HiaPortalInstanceId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.hiaportalinstanceid",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.hiaportalinstanceid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.hi-c84031bd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.maxuploadbytes",
+      "kind": "entry",
+      "label": "MaxUploadBytes",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.maxuploadbytes",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.maxuploadbytes",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.ma-c431f137.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys",
+      "kind": "entry",
+      "label": "NavigationAnonymousHiddenNavigationKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-6d1dd86a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "kind": "entry",
+      "label": "NavigationExcludedNavigationKeyPrefixes",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-06e3d35e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "kind": "entry",
+      "label": "NavigationHiddenNavigationKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-98be4449.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "kind": "entry",
+      "label": "NavigationHideTabsWithoutRenderableModules",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-4cf03ee6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
+      "kind": "entry",
+      "label": "NavigationLogHiddenTabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-67fccd77.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passworddisallowcontextterms",
+      "kind": "entry",
+      "label": "PasswordDisallowContextTerms",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passworddisallowcontextterms",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.passworddisallowcontextterms",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.pa-cb6d874b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passworditerationcount",
+      "kind": "entry",
+      "label": "PasswordIterationCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passworditerationcount",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.passworditerationcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.pa-c5377a32.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passwordminimumlength",
+      "kind": "entry",
+      "label": "PasswordMinimumLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passwordminimumlength",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.passwordminimumlength",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.pa-5b1d664c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passwordrequiredcategorycount",
+      "kind": "entry",
+      "label": "PasswordRequiredCategoryCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passwordrequiredcategorycount",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.passwordrequiredcategorycount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.pa-6e7926f0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passwordweakdictionaryenabled",
+      "kind": "entry",
+      "label": "PasswordWeakDictionaryEnabled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.passwordweakdictionaryenabled",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.passwordweakdictionaryenabled",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.pa-6caa8d81.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.registrationinvitedefaultexpirydays",
+      "kind": "entry",
+      "label": "RegistrationInviteDefaultExpiryDays",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.registrationinvitedefaultexpirydays",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.registrationinvitedefaultexpirydays",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.re-42a51fea.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.requireencryptedloginpassword",
+      "kind": "entry",
+      "label": "RequireEncryptedLoginPassword",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.requireencryptedloginpassword",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.requireencryptedloginpassword",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.re-1e5a5408.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.requireregistrationapproval",
+      "kind": "entry",
+      "label": "RequireRegistrationApproval",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.requireregistrationapproval",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.requireregistrationapproval",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.re-15a48ed2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.themename",
+      "kind": "entry",
+      "label": "ThemeName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.themename",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.themename",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.th-9531ebed.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.tryget-system.string-aspnet.starterkit.portal.portalsettingdefinition",
+      "kind": "entry",
+      "label": "TryGet",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.tryget-system.string-aspnet.starterkit.portal.portalsettingdefinition",
+      "sourcePath": "src/Portal/Components/PortalSettingsRegistry.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsettingsregistry.tryget-system.string-aspnet.starterkit.portal.portalsettingdefinition",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.tr-2298e538.html"
+    }
+  ]
+}

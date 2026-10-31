@@ -1,0 +1,19 @@
+        private static bool ReadOptionalBoolean(JObject manifest, string propertyName)
+        {
+            // <lang>
+            //   <zh-CN>缺失布尔值采用 false 这一声明性回退；存在但类型不符仍然阻止包通过。</zh-CN>
+            //   <en>Use false as the declarative fallback for a missing Boolean; an existing value with the wrong type still blocks the package.</en>
+            // </lang>
+            JToken token = manifest[propertyName];
+            if (token == null || token.Type == JTokenType.Null)
+            {
+                return false;
+            }
+
+            if (token.Type != JTokenType.Boolean)
+            {
+                throw new InvalidOperationException("Manifest boolean value is invalid.");
+            }
+
+            return token.Value<bool>();
+        }

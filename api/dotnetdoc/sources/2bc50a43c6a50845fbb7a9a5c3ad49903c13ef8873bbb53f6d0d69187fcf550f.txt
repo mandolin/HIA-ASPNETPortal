@@ -1,0 +1,1 @@
+        public string FieldName { get; private set; }

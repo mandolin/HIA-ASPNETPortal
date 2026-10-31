@@ -1,0 +1,6 @@
+                            <%--
+                              <lang>
+                                <zh-CN>EmployeeCode 在企业临时邀请注册中作为必填绑定线索；普通自注册路径默认不强制，启用状态由服务器策略切换。</zh-CN>
+                                <en>EmployeeCode is the required binding hint for enterprise invitation registration; ordinary self-registration does not require it by default, and the enabled state is switched by server policy.</en>
+                              </lang>
+                            --%>

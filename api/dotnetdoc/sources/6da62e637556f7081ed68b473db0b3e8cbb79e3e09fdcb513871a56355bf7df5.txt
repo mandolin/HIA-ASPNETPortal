@@ -1,0 +1,4 @@
+        private static SqlParameter BoolParameter(string name, bool value)
+        {
+            return new SqlParameter(name, SqlDbType.Bit) { Value = value };
+        }

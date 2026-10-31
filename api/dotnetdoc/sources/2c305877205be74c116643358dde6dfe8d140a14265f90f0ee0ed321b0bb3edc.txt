@@ -1,0 +1,5 @@
+        internal static string Admin_SecurityRoles_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_Subtitle", resourceCulture);
+            }
+        }

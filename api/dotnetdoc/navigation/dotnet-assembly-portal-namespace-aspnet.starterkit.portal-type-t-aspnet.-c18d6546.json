@@ -1,0 +1,679 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.accessdenied",
+      "kind": "entry",
+      "label": "AccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.accessdenied",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.accessdenied",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-d26b7595.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessapplicationreviewed",
+      "kind": "entry",
+      "label": "BusinessApplicationReviewed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessapplicationreviewed",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.businessapplicationreviewed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-a28f7cc9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessapplicationsubmitted",
+      "kind": "entry",
+      "label": "BusinessApplicationSubmitted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessapplicationsubmitted",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.businessapplicationsubmitted",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-dbef37d1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessapplicationtargettype",
+      "kind": "entry",
+      "label": "BusinessApplicationTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessapplicationtargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.businessapplicationtargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-7898efd5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessmodulecategory",
+      "kind": "entry",
+      "label": "BusinessModuleCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.businessmodulecategory",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.businessmodulecategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-5f5ef752.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcancelled",
+      "kind": "entry",
+      "label": "CollaborationItemCancelled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcancelled",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcancelled",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-28eaa5bd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemclosed",
+      "kind": "entry",
+      "label": "CollaborationItemClosed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemclosed",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemclosed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-807dbf86.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcommentadded",
+      "kind": "entry",
+      "label": "CollaborationItemCommentAdded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcommentadded",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcommentadded",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-1db36fc3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcompleted",
+      "kind": "entry",
+      "label": "CollaborationItemCompleted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcompleted",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcompleted",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-ccdb094f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemrejected",
+      "kind": "entry",
+      "label": "CollaborationItemRejected",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemrejected",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemrejected",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-8241f1b8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemresubmitted",
+      "kind": "entry",
+      "label": "CollaborationItemResubmitted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemresubmitted",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemresubmitted",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-db8307f8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemreturned",
+      "kind": "entry",
+      "label": "CollaborationItemReturned",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemreturned",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemreturned",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-3bacc645.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemstarted",
+      "kind": "entry",
+      "label": "CollaborationItemStarted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemstarted",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemstarted",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-4d6a3613.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemsubmitted",
+      "kind": "entry",
+      "label": "CollaborationItemSubmitted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemsubmitted",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemsubmitted",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-97452df3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemtargettype",
+      "kind": "entry",
+      "label": "CollaborationItemTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemtargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemtargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-62ac24e3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.credentialcostupgraded",
+      "kind": "entry",
+      "label": "CredentialCostUpgraded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.credentialcostupgraded",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.credentialcostupgraded",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-cca96b58.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.editaccessdenied",
+      "kind": "entry",
+      "label": "EditAccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.editaccessdenied",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.editaccessdenied",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-f87acab1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeecreated",
+      "kind": "entry",
+      "label": "EmployeeCreated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeecreated",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeecreated",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-b7db2b74.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofileconfirmationtargettype",
+      "kind": "entry",
+      "label": "EmployeeProfileConfirmationTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofileconfirmationtargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeeprofileconfirmationtargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-bb7290f1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofileconfirmed",
+      "kind": "entry",
+      "label": "EmployeeProfileConfirmed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofileconfirmed",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeeprofileconfirmed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-c2ac8ffa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionrequesttargettype",
+      "kind": "entry",
+      "label": "EmployeeProfileCorrectionRequestTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionrequesttargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionrequesttargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-ce0b32b3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionrequested",
+      "kind": "entry",
+      "label": "EmployeeProfileCorrectionRequested",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionrequested",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionrequested",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-db6cde5b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionreviewed",
+      "kind": "entry",
+      "label": "EmployeeProfileCorrectionReviewed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionreviewed",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeeprofilecorrectionreviewed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-085248b0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeetargettype",
+      "kind": "entry",
+      "label": "EmployeeTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeetargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeetargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-3cb6ee5d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeupdated",
+      "kind": "entry",
+      "label": "EmployeeUpdated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.employeeupdated",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.employeeupdated",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-9f5f124b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.enterprisedirectorycategory",
+      "kind": "entry",
+      "label": "EnterpriseDirectoryCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.enterprisedirectorycategory",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.enterprisedirectorycategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-b6057662.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.legacycredentialupgraded",
+      "kind": "entry",
+      "label": "LegacyCredentialUpgraded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.legacycredentialupgraded",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.legacycredentialupgraded",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-87123632.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.organizationunitcreated",
+      "kind": "entry",
+      "label": "OrganizationUnitCreated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.organizationunitcreated",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.organizationunitcreated",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-7123f9ef.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.organizationunittargettype",
+      "kind": "entry",
+      "label": "OrganizationUnitTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.organizationunittargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.organizationunittargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-2950dd7c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.organizationunitupdated",
+      "kind": "entry",
+      "label": "OrganizationUnitUpdated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.organizationunitupdated",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.organizationunitupdated",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-64c0b5ac.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.passwordreset",
+      "kind": "entry",
+      "label": "PasswordReset",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.passwordreset",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.passwordreset",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-e74e7278.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.profileupdated",
+      "kind": "entry",
+      "label": "ProfileUpdated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.profileupdated",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.profileupdated",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-8c153cc4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.registrationapproved",
+      "kind": "entry",
+      "label": "RegistrationApproved",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.registrationapproved",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.registrationapproved",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-9f3cef22.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.registrationrejected",
+      "kind": "entry",
+      "label": "RegistrationRejected",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.registrationrejected",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.registrationrejected",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-5b96542f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.registrationsubmitted",
+      "kind": "entry",
+      "label": "RegistrationSubmitted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.registrationsubmitted",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.registrationsubmitted",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-e1f00c8a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.roleadded",
+      "kind": "entry",
+      "label": "RoleAdded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.roleadded",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.roleadded",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-13a6dd3e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.roleremoved",
+      "kind": "entry",
+      "label": "RoleRemoved",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.roleremoved",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.roleremoved",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-2752e370.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.securityauthenticationcategory",
+      "kind": "entry",
+      "label": "SecurityAuthenticationCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.securityauthenticationcategory",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.securityauthenticationcategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-74a6a6c6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.securityauthorizationcategory",
+      "kind": "entry",
+      "label": "SecurityAuthorizationCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.securityauthorizationcategory",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.securityauthorizationcategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-a92769b7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.securitycredentialscategory",
+      "kind": "entry",
+      "label": "SecurityCredentialsCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.securitycredentialscategory",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.securitycredentialscategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-44557e74.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.signinfailed",
+      "kind": "entry",
+      "label": "SignInFailed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.signinfailed",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.signinfailed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-2bbf9717.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useradministrationcategory",
+      "kind": "entry",
+      "label": "UserAdministrationCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useradministrationcategory",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.useradministrationcategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-a7065889.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.userdisabled",
+      "kind": "entry",
+      "label": "UserDisabled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.userdisabled",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.userdisabled",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-5f25094f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useremployeebindingtargettype",
+      "kind": "entry",
+      "label": "UserEmployeeBindingTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useremployeebindingtargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.useremployeebindingtargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-608e7f71.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useremployeebound",
+      "kind": "entry",
+      "label": "UserEmployeeBound",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useremployeebound",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.useremployeebound",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-11736c2d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useremployeeunbound",
+      "kind": "entry",
+      "label": "UserEmployeeUnbound",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.useremployeeunbound",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.useremployeeunbound",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-72b131f8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.userlifecyclecategory",
+      "kind": "entry",
+      "label": "UserLifecycleCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.userlifecyclecategory",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.userlifecyclecategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-e2fd19fd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.userrestored",
+      "kind": "entry",
+      "label": "UserRestored",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.userrestored",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.userrestored",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-45ed2f99.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.usertargettype",
+      "kind": "entry",
+      "label": "UserTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.usertargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.usertargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-a3e59b52.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.workitemtargettype",
+      "kind": "entry",
+      "label": "WorkItemTargetType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.workitemtargettype",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.workitemtargettype",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-ef3458db.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.workitemsviewed",
+      "kind": "entry",
+      "label": "WorkItemsViewed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.workitemsviewed",
+      "sourcePath": "src/Portal/Components/PortalOperationAuditEvents.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.workitemsviewed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-1c3bef07.html"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+        private static bool IsSingleRepeatedCharacter(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>从第二个字符起与首字符比较；发现差异即可确定不是单字符重复模式。</zh-CN>
+            //   <en>Compare from the second character against the first; any difference proves the token is not a single-character repetition pattern.</en>
+            // </lang>
+            for (int index = 1; index < value.Length; index++)
+            {
+                if (value[index] != value[0])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }

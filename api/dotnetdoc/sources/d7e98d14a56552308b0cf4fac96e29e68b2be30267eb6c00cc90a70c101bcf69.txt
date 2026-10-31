@@ -1,0 +1,43 @@
+        private static void AddRuntimeChecks(IList<PortalHealthCheckResult> checks)
+        {
+            // <lang>
+            //   <zh-CN>使用固定匿名占位初始化身份文本，保证身份读取失败时结果仍可序列化且不携带异常原文。</zh-CN>
+            //   <en>Initialize identity text with a fixed placeholder so the result remains serializable on identity-read failure without carrying raw exception text.</en>
+            // </lang>
+            string identityName = "(unknown)";
+            try
+            {
+                // <lang>
+                //   <zh-CN>读取当前进程身份作为运行环境事实；该调用只获取身份对象，不改变线程或权限。</zh-CN>
+                //   <en>Read the current process identity as a runtime fact; this call only obtains the identity object and changes neither thread nor permissions.</en>
+                // </lang>
+                WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                if (identity != null)
+                {
+                    // <lang>
+                    //   <zh-CN>仅保存身份名文本供健康结果使用，不保存身份对象或令牌生命周期。</zh-CN>
+                    //   <en>Keep only the identity name text for the health result, not the identity object or token lifetime.</en>
+                    // </lang>
+                    identityName = identity.Name;
+                }
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>身份读取失败时使用受控提示，健康检查继续收集其它运行时事实。</zh-CN>
+                //   <en>Use a controlled notice when identity reading fails and continue collecting the other runtime facts.</en>
+                // </lang>
+                identityName = "无法读取进程身份: " + exception.Message;
+            }
+
+            checks.Add(new PortalHealthCheckResult(
+                "Runtime",
+                "运行时环境",
+                PortalHealthStatus.Healthy,
+                "运行时基本信息可用。",
+                "MachineName=" + Environment.MachineName +
+                "; ProcessId=" + Process.GetCurrentProcess().Id +
+                "; Identity=" + identityName +
+                "; OSVersion=" + Environment.OSVersion +
+                "; CLR=" + Environment.Version));
+        }

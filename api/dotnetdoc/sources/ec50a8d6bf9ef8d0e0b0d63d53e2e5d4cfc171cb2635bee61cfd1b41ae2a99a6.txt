@@ -1,0 +1,68 @@
+        public EmployeeProfileConfirmationView GetCurrentProfileForUser(int userId)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return null;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只取当前用户最新 Active 绑定对应的 Active 员工，同时带出最近一次确认记录，供前台显示“已确认”状态。</zh-CN>
+                //   <en>Only the current user's latest active binding to an active employee is loaded, with the latest confirmation record included for the front-end confirmation state.</en>
+                // </lang>
+                ProfileProjection row = context.Database.SqlQuery<ProfileProjection>(
+                    @"
+SELECT TOP (1)
+    [Employee].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName],
+    [Employee].[PreferredName],
+    [Employee].[WorkEmail],
+    [Organization].[DisplayName] AS [OrganizationDisplayName],
+    [Employee].[EmploymentStatus],
+    [Binding].[BindingId],
+    [Binding].[BoundUtc],
+    [Latest].[ConfirmationId] AS [LastConfirmationId],
+    [Latest].[ConfirmedUtc] AS [LastConfirmedUtc]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
+    ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
+OUTER APPLY
+(
+    SELECT TOP (1)
+        [Confirmation].[ConfirmationId],
+        [Confirmation].[ConfirmedUtc]
+    FROM [dbo].[PortalBiz_EmployeeProfileConfirmations] AS [Confirmation]
+    WHERE [Confirmation].[EmployeeId] = [Employee].[EmployeeId]
+      AND [Confirmation].[UserId] = [Binding].[UserId]
+    ORDER BY [Confirmation].[ConfirmedUtc] DESC, [Confirmation].[ConfirmationId] DESC
+) AS [Latest]
+WHERE [Binding].[UserId] = @p0
+  AND [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active'
+ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;",
+                    userId).SingleOrDefault();
+
+                return row == null
+                    ? null
+                    : new EmployeeProfileConfirmationView(
+                        row.EmployeeId,
+                        row.EmployeeCode,
+                        row.DisplayName,
+                        row.PreferredName,
+                        row.WorkEmail,
+                        row.OrganizationDisplayName,
+                        row.EmploymentStatus,
+                        row.BindingId,
+                        row.BoundUtc,
+                        row.LastConfirmationId,
+                        row.LastConfirmedUtc);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }

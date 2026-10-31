@@ -1,0 +1,2 @@
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }

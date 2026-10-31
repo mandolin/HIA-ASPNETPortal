@@ -1,0 +1,9 @@
+        public static void LoadConfig(string appSettingsConfig, bool preservePrevious = true,
+            bool preserveLocalSqlServer = true)
+        {
+            string envPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, appSettingsConfig);
+            if (File.Exists(envPath))
+            {
+                LoadConfigFile(appSettingsConfig, preservePrevious, preserveLocalSqlServer);
+            }
+        }

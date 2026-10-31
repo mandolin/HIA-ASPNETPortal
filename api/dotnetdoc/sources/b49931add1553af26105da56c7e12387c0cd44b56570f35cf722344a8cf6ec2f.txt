@@ -1,0 +1,114 @@
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            //string TestKey = ConfigurationManager.AppSettings.Get("TestKey").ToString();
+            //System.Diagnostics.Debug.WriteLine($"获取TestKey：{TestKey}");
+
+            if (IsGenericErrorPageRequest(Request))
+            {
+                // <lang>
+                //   <zh-CN>通用错误页必须跳过门户设置和文化构造，避免错误处理链再次触发同一异常。</zh-CN>
+                //   <en>The generic error page must bypass Portal settings and culture construction so the error-handling path does not trigger the same failure again.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>BeginRequest 必须先使用安全的活动 Tab 上下文。无效查询参数由具体页面随后拒绝，避免门户设置构造阶段因不存在的 Tab 直接进入全局错误页。</zh-CN>
+            //   <en>BeginRequest must first use a safe active-Tab context. Individual pages reject invalid query parameters afterwards, preventing a nonexistent Tab from reaching the global error page during settings construction.</en>
+            // </lang>
+            int tabIndex = GetNonNegativeIntParam("tabindex", 0);
+            int tabId = GetPositiveIntParam("tabid", 1);
+
+            var portalConfig = Container.Resolve<IGlobalsDb>();
+            var tabsConfig = Container.Resolve<ITabsDb>();
+            var modulesConfig = Container.Resolve<IModulesDb>();
+            var moduleDefConfig = Container.Resolve<IModuleDefsDb>();
+
+            // <lang>
+            //   <zh-CN>四个数据依赖只用于构造当前请求的 PortalSettings 快照；此处不执行页面级权限判断，具体页面仍须自行授权。</zh-CN>
+            //   <en>The four data dependencies only compose the current request's PortalSettings snapshot; this stage does not perform page-level authorization, which remains the page's responsibility.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>PortalSettings 是旧门户请求级对象图的核心；先集中构造，再通过 PortalContext 挂入当前请求。</zh-CN>
+            //   <en>PortalSettings is the core request-level object graph of the legacy portal; build it centrally and attach it to the current request through PortalContext.</en>
+            // </lang>
+            PortalContext.SetPortalSettings(new PortalSettings(tabIndex, tabId, portalConfig, tabsConfig, modulesConfig, moduleDefConfig), Context);
+
+            SetLanguage();
+
+            // <lang>
+            //   <zh-CN>文化名来自 Cookie 或浏览器请求头，必须先确认是 .NET 支持的 culture，再写入线程上下文。</zh-CN>
+            //   <en>Culture names come from cookies or browser headers and must be confirmed as .NET-supported cultures before being applied to the thread context.</en>
+            // </lang>
+            bool IsValidCulture(string cultureName)
+            {
+                return CultureInfo.GetCultures(CultureTypes.AllCultures)?.Any(c => c.Name == cultureName) ?? false;
+            }
+
+            // <lang>
+            //   <zh-CN>同时设置 CurrentCulture 与 CurrentUICulture，避免格式化文化和资源文化在同一请求内分裂。</zh-CN>
+            //   <en>Set both CurrentCulture and CurrentUICulture so formatting culture and resource culture do not diverge within the same request.</en>
+            // </lang>
+            void SetCulture(string cultureName)
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureName);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
+            }
+
+            // <lang>
+            //   <zh-CN>活动 Tab 索引允许零；负数、非数字和缺失值使用安全默认值。</zh-CN>
+            //   <en>Active Tab indexes may be zero; negative, nonnumeric, and missing values use the safe default.</en>
+            // </lang>
+            int GetNonNegativeIntParam(string paramName, int defaultValue)
+            {
+                string rawValue = Request.QueryString[paramName] ?? Request.Unvalidated.Form[paramName];
+                if (int.TryParse(rawValue, out int value) && value >= 0)
+                {
+                    return value;
+                }
+
+                return defaultValue;
+            }
+
+            // <lang>
+            //   <zh-CN>活动 Tab 标识必须为正数；负数、零、非数字和缺失值使用安全默认值。</zh-CN>
+            //   <en>Active Tab identifiers must be positive; negative, zero, nonnumeric, and missing values use the safe default.</en>
+            // </lang>
+            int GetPositiveIntParam(string paramName, int defaultValue)
+            {
+                string rawValue = Request.QueryString[paramName] ?? Request.Unvalidated.Form[paramName];
+                if (int.TryParse(rawValue, out int value) && value > 0)
+                {
+                    return value;
+                }
+
+                return defaultValue;
+            }
+
+            // <lang>
+            //   <zh-CN>语言选择优先显式 Cookie，其次浏览器首选语言，最后回退 en-US；此处只影响当前请求线程。</zh-CN>
+            //   <en>Language selection prefers the explicit cookie, then the browser's first preferred language, and finally falls back to en-US; it affects only the current request thread.</en>
+            // </lang>
+            void SetLanguage()
+            {
+                var langCookie = Request.Cookies["lang"];
+                var userLanguages = Request.UserLanguages;
+
+                if (IsValidCulture(langCookie?.Value))
+                {
+                    SetCulture(langCookie.Value);
+                }
+                else if (userLanguages?.Length > 0 && IsValidCulture(userLanguages[0]))
+                {
+                    SetCulture(userLanguages[0]);
+                }
+                else
+                {
+                    // <lang>
+                    //   <zh-CN>Cookie 和浏览器首选语言都不可用时，使用固定的 en-US 线程文化；该回退不写回 Cookie 或用户资料。</zh-CN>
+                    //   <en>When neither the cookie nor the browser preference is usable, use a fixed en-US thread culture; this fallback does not write a cookie or user profile.</en>
+                    // </lang>
+                    SetCulture("en-US"); // 设置默认语言
+                }
+            }
+        }

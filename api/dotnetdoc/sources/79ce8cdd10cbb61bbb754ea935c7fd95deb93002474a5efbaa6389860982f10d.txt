@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_LabelWorkEmail {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelWorkEmail", resourceCulture);
+            }
+        }

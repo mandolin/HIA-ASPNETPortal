@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.globalinfo",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.globalinfo:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.globalinfo:entry:hia-document:dotnet-f-aspnet.starterkit.portal.sys.globalinfo.environment",
+      "kind": "entry",
+      "label": "Environment",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.sys.globalinfo.environment",
+      "sourcePath": "src/Portal/Sys/GlobalInfo.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.sys.globalinfo.environment",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.sys.globalinfo.environmen-e401e960.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.globalinfo:entry:hia-document:dotnet-f-aspnet.starterkit.portal.sys.globalinfo.extinfo",
+      "kind": "entry",
+      "label": "ExtInfo",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.sys.globalinfo.extinfo",
+      "sourcePath": "src/Portal/Sys/GlobalInfo.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.sys.globalinfo.extinfo",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.sys.globalinfo.extinfo-2bf8db92.html"
+    }
+  ]
+}

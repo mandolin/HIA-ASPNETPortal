@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>查看权限和导航参数是列表及后续编辑/删除入口的共同门禁。</zh-CN>
+            //   <en>View permission and navigation parameters gate the list and the later edit/delete entry points.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在首次请求绑定可选用户列表，保留回发时的选择状态。</zh-CN>
+            //   <en>Bind selectable users only on the initial request, preserving the postback selection state.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }

@@ -1,0 +1,1 @@
+        internal bool HasDecision { get; private set; }

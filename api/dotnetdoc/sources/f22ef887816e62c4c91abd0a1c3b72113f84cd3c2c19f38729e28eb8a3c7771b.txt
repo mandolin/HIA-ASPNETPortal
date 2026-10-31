@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>角色成员页用于维护选定门户角色下的用户成员关系；角色定义本身仍由旧 Roles/ModuleDefinitions 等后台入口维护。</zh-CN>
+  <en>The role-membership page maintains user membership for the selected Portal role; role definitions themselves remain managed by legacy admin entries such as Roles and ModuleDefinitions.</en>
+</lang>
+--%>

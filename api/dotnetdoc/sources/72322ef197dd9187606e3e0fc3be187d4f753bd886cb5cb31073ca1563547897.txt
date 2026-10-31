@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition RequireRegistrationApproval =
+            new PortalSettingDefinition(
+                PortalSettingKeys.RequireRegistrationApproval,
+                "自主注册需要审核",
+                "控制自主注册用户是否必须先由管理员批准才能登录；默认开启。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");

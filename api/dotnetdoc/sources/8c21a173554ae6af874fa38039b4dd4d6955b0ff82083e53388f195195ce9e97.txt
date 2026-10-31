@@ -1,0 +1,29 @@
+        private static byte[] EncodeSubjectPublicKeyInfo(RSAParameters parameters)
+        {
+            // <lang>
+            //   <zh-CN>先编码 RSA 公钥主体：模数和指数按 SEQUENCE 顺序排列。</zh-CN>
+            //   <en>Encode the RSA public-key body first, placing modulus and exponent in SEQUENCE order.</en>
+            // </lang>
+            byte[] rsaPublicKey = EncodeSequence(
+                Concat(
+                    EncodeInteger(parameters.Modulus),
+                    EncodeInteger(parameters.Exponent)));
+
+            // <lang>
+            //   <zh-CN>使用 rsaEncryption OID 与空参数构造算法标识，保持 SubjectPublicKeyInfo 结构兼容。</zh-CN>
+            //   <en>Build the algorithm identifier with the rsaEncryption OID and empty parameters to preserve SubjectPublicKeyInfo compatibility.</en>
+            // </lang>
+            byte[] algorithmIdentifier = EncodeSequence(
+                Concat(
+                    new byte[] { 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01 },
+                    new byte[] { 0x05, 0x00 }));
+
+            // <lang>
+            //   <zh-CN>把算法标识和 BIT STRING 公钥主体包装为顶层 SubjectPublicKeyInfo。</zh-CN>
+            //   <en>Wrap the algorithm identifier and BIT STRING public-key body as the top-level SubjectPublicKeyInfo.</en>
+            // </lang>
+            return EncodeSequence(
+                Concat(
+                    algorithmIdentifier,
+                    EncodeBitString(rsaPublicKey)));
+        }

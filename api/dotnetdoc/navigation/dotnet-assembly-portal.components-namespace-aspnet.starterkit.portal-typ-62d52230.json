@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalsecurity",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalsecurity:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iportalsecurity.haseditpermissions-system.int32",
+      "kind": "entry",
+      "label": "HasEditPermissions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalsecurity.haseditpermissions-system.int32",
+      "sourcePath": "src/Portal.Components/IPortalSecurity.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalsecurity.haseditpermissions-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalsecurity.haseditpe-b732915d.html"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+        public int CompareTo(TabSettings other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+
+            // <lang>
+            //   <zh-CN>旧门户只按 `TabOrder` 排序；同序值保持相等，由调用侧集合稳定性决定最终显示顺序。</zh-CN>
+            //   <en>The legacy portal sorts only by `TabOrder`; equal values remain equal and the caller collection decides final display order stability.</en>
+            // </lang>
+            if (TabOrder == other.TabOrder)
+            {
+                return 0;
+            }
+
+            if (TabOrder < other.TabOrder)
+            {
+                return -1;
+            }
+
+            return 1;
+        }

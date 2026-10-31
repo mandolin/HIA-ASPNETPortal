@@ -1,0 +1,1 @@
+        public int? AssignedUserId { get; set; }

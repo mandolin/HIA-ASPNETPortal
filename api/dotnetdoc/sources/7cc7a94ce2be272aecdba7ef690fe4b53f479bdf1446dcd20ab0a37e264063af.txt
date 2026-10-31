@@ -1,0 +1,5 @@
+        private string GetResource(string key)
+        {
+            object value = GetGlobalResourceObject("lang", key);
+            return value == null ? key : value.ToString();
+        }

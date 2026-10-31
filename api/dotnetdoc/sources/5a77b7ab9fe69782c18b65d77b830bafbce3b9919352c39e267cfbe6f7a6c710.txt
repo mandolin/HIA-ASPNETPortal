@@ -1,0 +1,9 @@
+        public static string LocalizeExpenseStatus(string status)
+        {
+            if (string.Equals(status, ExpenseReimbursementStatuses.Pending, StringComparison.Ordinal)) return Resources.lang.Common_StatusPending;
+            if (string.Equals(status, ExpenseReimbursementStatuses.Approved, StringComparison.Ordinal)) return Resources.lang.Common_StatusApproved;
+            if (string.Equals(status, ExpenseReimbursementStatuses.Rejected, StringComparison.Ordinal)) return Resources.lang.Common_StatusRejected;
+            if (string.Equals(status, ExpenseReimbursementStatuses.Closed, StringComparison.Ordinal)) return Resources.lang.Common_StatusClosed;
+            if (string.Equals(status, ExpenseReimbursementStatuses.Returned, StringComparison.Ordinal)) return Resources.lang.Common_StatusReturned;
+            return status ?? string.Empty;
+        }

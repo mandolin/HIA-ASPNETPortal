@@ -1,0 +1,6 @@
+        private static string FormatUtc(DateTime? value)
+        {
+            return value.HasValue
+                ? value.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
+                : "(not confirmed)";
+        }

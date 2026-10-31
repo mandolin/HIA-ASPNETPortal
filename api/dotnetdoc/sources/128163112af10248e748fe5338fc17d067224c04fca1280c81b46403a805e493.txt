@@ -1,0 +1,5 @@
+        internal static string Common_ModulePathMessageEmpty {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageEmpty", resourceCulture);
+            }
+        }

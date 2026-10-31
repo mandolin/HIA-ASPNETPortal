@@ -1,0 +1,1 @@
+        public bool Secure { get; private set; }

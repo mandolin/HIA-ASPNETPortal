@@ -1,0 +1,10 @@
+        private void IncrementDegradationReason(string reasonCode)
+        {
+            string key = string.IsNullOrEmpty(reasonCode)
+                ? PortalWorkItemTargetResolver.ReasonSourceUnavailable
+                : reasonCode;
+
+            degradationReasonCounts[key] = degradationReasonCounts.ContainsKey(key)
+                ? degradationReasonCounts[key] + 1
+                : 1;
+        }

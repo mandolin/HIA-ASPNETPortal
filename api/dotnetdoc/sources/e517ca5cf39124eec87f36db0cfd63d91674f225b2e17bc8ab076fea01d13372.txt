@@ -1,0 +1,15 @@
+        private static void AddNullableTextParameter(SqlCommand command, string parameterName, int size, string value)
+        {
+            // <lang>
+            //   <zh-CN>管理员备注先按列长度净化；该文本只能作为状态元数据，不参与包验证、Profile 解析或 SQL 拼接。</zh-CN>
+            //   <en>Sanitize the administrator note to the column length first; this text is state metadata only and participates in neither package validation, profile resolution, nor SQL concatenation.</en>
+            // </lang>
+            string sanitized = PortalDiagnosticSanitizer.SanitizeAndTruncate(value, size);
+
+            // <lang>
+            //   <zh-CN>净化后空白保留为数据库 NULL，以区分没有备注和包含受控文本的备注；参数化绑定不暴露原始输入。</zh-CN>
+            //   <en>Keep post-sanitization blank text as database NULL to distinguish no note from a note containing controlled text; parameterized binding exposes no raw input.</en>
+            // </lang>
+            command.Parameters.Add(parameterName, SqlDbType.NVarChar, size).Value =
+                string.IsNullOrWhiteSpace(sanitized) ? (object)DBNull.Value : sanitized;
+        }

@@ -1,0 +1,4 @@
+        public bool IsSchemaAvailable()
+        {
+            return HasTable(WorkItemTableName) && HasTable(WorkItemEventTableName);
+        }

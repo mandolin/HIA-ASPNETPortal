@@ -1,0 +1,9 @@
+        private static void RegisterPasswordPolicyOptionsProvider()
+        {
+            PortalPasswordPolicy.ConfigureOptionsProvider(
+                () => new PortalPasswordPolicyOptions(
+                    PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordMinimumLength),
+                    PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordRequiredCategoryCount),
+                    PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordWeakDictionaryEnabled),
+                    PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordDisallowContextTerms)));
+        }

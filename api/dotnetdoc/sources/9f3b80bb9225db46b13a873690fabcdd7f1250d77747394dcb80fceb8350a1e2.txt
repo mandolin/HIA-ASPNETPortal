@@ -1,0 +1,52 @@
+        private bool TryInitializeRequest(out IAnnouncementItem item)
+        {
+            // <lang>
+            //   <zh-CN>输出参数先清空，保证所有失败分支都不会向调用方暴露未授权公告快照。</zh-CN>
+            //   <en>The output parameter is cleared first so no failure path exposes an unauthorized announcement snapshot to callers.</en>
+            // </lang>
+            item = null;
+            // <lang>
+            //   <zh-CN>模块标识既决定权限范围也决定新增条目归属；缺失或非法时直接拒绝。</zh-CN>
+            //   <en>The module identifier determines both permission scope and ownership for new rows; missing or invalid values are denied immediately.</en>
+            // </lang>
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
+                !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>ItemId 是可选参数；缺失代表新增公告，非空时必须是正整数。</zh-CN>
+            //   <en>ItemId is optional; absence represents a new announcement, and non-empty values must be positive integers.</en>
+            // </lang>
+            string requestedItemId = Request.Params["ItemId"];
+            if (!string.IsNullOrWhiteSpace(requestedItemId) &&
+                !PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>新增路径无需读取数据库条目，前面的模块编辑权限就是完整授权条件。</zh-CN>
+                //   <en>The creation path does not read a database item, so the earlier module edit permission is the complete authorization condition.</en>
+                // </lang>
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>既有公告必须重新按 ItemId 读取并比对模块归属，避免跨模块直接对象引用。</zh-CN>
+            //   <en>An existing announcement must be reloaded by ItemId and compared against module ownership, avoiding cross-module direct object references.</en>
+            // </lang>
+            item = AnnouncementsDB.GetSingleAnnouncement(itemId);
+            if (item == null || item.ModuleId != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }

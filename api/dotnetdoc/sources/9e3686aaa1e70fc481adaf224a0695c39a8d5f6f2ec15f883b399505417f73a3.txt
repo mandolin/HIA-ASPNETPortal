@@ -1,0 +1,5 @@
+        internal static string EditImage_SectionDisplaySize {
+            get {
+                return ResourceManager.GetString("EditImage_SectionDisplaySize", resourceCulture);
+            }
+        }

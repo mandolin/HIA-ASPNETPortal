@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>保存时会规范化为当前应用内虚拟路径，避免写入外部 URL 或任意物理路径。</zh-CN>
+                        <en>Saving normalizes this value to a virtual path inside the current application, avoiding external URLs or arbitrary physical paths.</en>
+                    </lang>
+                --%>

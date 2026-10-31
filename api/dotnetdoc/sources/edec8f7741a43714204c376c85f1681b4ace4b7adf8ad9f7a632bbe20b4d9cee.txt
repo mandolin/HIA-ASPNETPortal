@@ -1,0 +1,73 @@
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage("请先登录后再提交请假申请。");
+                return;
+            }
+
+            if (LeaveRequestDb == null || !LeaveRequestDb.IsSchemaAvailable())
+            {
+                ShowMessage("请假服务暂不可用，请稍后重试。");
+                return;
+            }
+
+            var leaveType = ddlLeaveType.SelectedValue;
+            DateTime startDate;
+            DateTime endDate;
+            if (!DateTime.TryParse(txtStartDate.Text, out startDate) ||
+                !DateTime.TryParse(txtEndDate.Text, out endDate) ||
+                string.IsNullOrWhiteSpace(txtDays.Text))
+            {
+                ShowMessage("请完整填写请假类型、起止日期与天数。");
+                return;
+            }
+
+            decimal days;
+            if (!decimal.TryParse(txtDays.Text, out days) || days <= 0)
+            {
+                ShowMessage("请假天数必须为正数。");
+                return;
+            }
+
+            var attachmentName = fileAttach.HasFile ? fileAttach.FileName : null;
+            var result = LeaveRequestDb.CreateRequest(new LeaveRequestCreateRequest
+            {
+                UserId = userId,
+                LeaveType = leaveType,
+                StartDate = startDate,
+                EndDate = endDate,
+                Days = days,
+                Reason = txtReason.Text,
+                AttachmentName = attachmentName
+            });
+
+            if (!result.Ok)
+            {
+                ShowMessage("提交失败，请稍后重试。");
+                return;
+            }
+
+            WorkItemDb.EnsureWorkItem(new PortalWorkItemCreateRequest
+            {
+                BusinessKind = PortalWorkItemBusinessKinds.LeaveRequest,
+                BusinessId = result.RequestId.ToString(CultureInfo.InvariantCulture),
+                Title = "请假申请 #" + result.RequestId,
+                Summary = leaveType + " " + startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + " ~ " + endDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                AssignedRoleKey = "Admins"
+            });
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                "LeaveRequest.Submit",
+                "Request",
+                result.RequestId.ToString(CultureInfo.InvariantCulture),
+                "Leave request submitted. UserId=" + userId,
+                Context,
+                null,
+                "Success");
+
+            ShowMessage("请假申请已提交，可在「我的待办」跟踪审批进度。", false);
+            RenderRecent();
+        }

@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>分页按钮仅发送前后页意图且关闭页面验证；实际页码边界、数据读取和越界回退由 code-behind 控制。</zh-CN>
+            <en>Pager buttons submit only previous/next intent with page validation disabled; code-behind controls page boundaries, data reads, and out-of-range fallback.</en>
+          </lang>
+        --%>

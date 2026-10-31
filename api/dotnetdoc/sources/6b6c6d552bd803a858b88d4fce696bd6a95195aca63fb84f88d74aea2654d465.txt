@@ -1,0 +1,25 @@
+        private void BindStatusFilter()
+        {
+            // <lang>
+            //   <zh-CN>先清空控件项，保证初始化路径可重入且不会因生命周期重复执行累积重复筛选项。</zh-CN>
+            //   <en>Clear existing items first so the initialization path is re-entrant and repeated lifecycle execution cannot accumulate duplicate filters.</en>
+            // </lang>
+            StatusFilterList.Items.Clear();
+
+            // <lang>
+            //   <zh-CN>仅暴露稳定状态契约及空值“全部”选项；列表顺序和值同时构成当前 UI 与后端筛选的兼容边界。</zh-CN>
+            //   <en>Expose only the stable status contract and the empty-value “All” option; their order and values together form the current UI-to-backend filtering compatibility boundary.</en>
+            // </lang>
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Open, PortalWorkItemStatuses.Open));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.InProgress, PortalWorkItemStatuses.InProgress));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Completed, PortalWorkItemStatuses.Completed));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Cancelled, PortalWorkItemStatuses.Cancelled));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Expired, PortalWorkItemStatuses.Expired));
+
+            // <lang>
+            //   <zh-CN>此默认值仅经首次加载路径设置；搜索回发保留控件当前选择，避免静默回退到待处理状态。</zh-CN>
+            //   <en>This default is set only through the initial-load path; search postbacks retain the control's current selection instead of silently reverting to Open.</en>
+            // </lang>
+            StatusFilterList.SelectedValue = PortalWorkItemStatuses.Open;
+        }

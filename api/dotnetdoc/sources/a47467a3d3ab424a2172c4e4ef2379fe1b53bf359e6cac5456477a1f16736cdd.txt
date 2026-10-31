@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>三个 ListBox 及其命令栏共同表达模块所在 pane 和顺序；移动、编辑、删除操作均通过既有事件回调进入服务器状态机。</zh-CN>
+                        <en>The three ListBoxes and their command bars together express module pane membership and order; move, edit, and delete actions enter the server state machine through the existing callbacks.</en>
+                    </lang>
+                --%>

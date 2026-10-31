@@ -1,0 +1,5 @@
+        internal static string EditImage_LabelImageHeight {
+            get {
+                return ResourceManager.GetString("EditImage_LabelImageHeight", resourceCulture);
+            }
+        }

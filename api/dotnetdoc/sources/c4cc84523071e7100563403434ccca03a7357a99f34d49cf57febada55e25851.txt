@@ -1,0 +1,1 @@
+        CollaborationItemResult ApplyAction(CollaborationItemActionRequest request);

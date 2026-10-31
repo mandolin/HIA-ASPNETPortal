@@ -1,0 +1,24 @@
+        private static bool HasManifestCandidate(string source)
+        {
+            string[] segments = source.Split('/');
+            if (segments.Length < 3 || !string.Equals(segments[0], "DesktopModules", StringComparison.OrdinalIgnoreCase) ||
+                !DirectoryNamePattern.IsMatch(segments[1]))
+            {
+                return false;
+            }
+
+            string rootPath = HostingEnvironment.MapPath(ModuleRootVirtualPath);
+            if (string.IsNullOrWhiteSpace(rootPath))
+            {
+                return false;
+            }
+
+            try
+            {
+                return File.Exists(Path.Combine(GetChildPath(rootPath, segments[1]), "module.json"));
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
+        }

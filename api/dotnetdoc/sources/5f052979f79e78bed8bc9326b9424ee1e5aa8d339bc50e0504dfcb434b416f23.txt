@@ -1,0 +1,98 @@
+        private sealed class EmployeeProjection
+        {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工标识。</zh-CN>
+            ///   <en>Employee identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
+            public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
+            public string DisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>偏好称呼。</zh-CN>
+            ///   <en>Preferred name.</en>
+            /// </lang>
+            /// </summary>
+            public string PreferredName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>工作邮箱。</zh-CN>
+            ///   <en>Work email.</en>
+            /// </lang>
+            /// </summary>
+            public string WorkEmail { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>所属组织单元标识。</zh-CN>
+            ///   <en>Owning organization-unit identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int? OrganizationUnitId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>所属组织显示名。</zh-CN>
+            ///   <en>Owning organization display name.</en>
+            /// </lang>
+            /// </summary>
+            public string OrganizationDisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工状态。</zh-CN>
+            ///   <en>Employee status.</en>
+            /// </lang>
+            /// </summary>
+            public string EmploymentStatus { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>入职 UTC 时间。</zh-CN>
+            ///   <en>Join UTC time.</en>
+            /// </lang>
+            /// </summary>
+            public DateTime? JoinedUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>离职 UTC 时间。</zh-CN>
+            ///   <en>Leave UTC time.</en>
+            /// </lang>
+            /// </summary>
+            public DateTime? LeftUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>来源系统标识。</zh-CN>
+            ///   <en>Source-system identifier.</en>
+            /// </lang>
+            /// </summary>
+            public string SourceSystem { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>最近更新 UTC 时间。</zh-CN>
+            ///   <en>Latest update UTC time.</en>
+            /// </lang>
+            /// </summary>
+            public DateTime UpdatedUtc { get; set; }
+        }

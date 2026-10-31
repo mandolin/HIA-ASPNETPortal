@@ -1,0 +1,450 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:base:t-aspnet.starterkit.portal.portalpage-aspnet.starterkit.portal.diagnosticslogs",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.PortalPage{ASPNET.StarterKit.Portal.DiagnosticsLogs}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:base:t-system.web.ui.control",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Control",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:base:t-system.web.ui.page",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Page",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:base:t-system.web.ui.templatecontrol",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.TemplateControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.componentmodel.icomponent",
+      "kind": "relation",
+      "label": "Interface: System.ComponentModel.IComponent",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ihttphandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.icontrolbuilderaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlBuilderAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.icontroldesigneraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlDesignerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.idatabindingsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IDataBindingsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.iexpressionsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IExpressionsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.ifilterresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IFilterResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.inamingcontainer",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.INamingContainer",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.iparseraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IParserAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:interface:t-system.web.ui.iurlresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IUrlResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.bindentries",
+      "kind": "entry",
+      "label": "BindEntries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.bindentries",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.diagnosticslogs.bindentries",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.diagnosticslogs.bindentri-bd7e88a8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.categoryfilter",
+      "kind": "entry",
+      "label": "CategoryFilter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.categoryfilter",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.categoryfilter",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.categoryf-8aa38750.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-p-aspnet.starterkit.portal.diagnosticslogs.currentpage",
+      "kind": "entry",
+      "label": "CurrentPage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.diagnosticslogs.currentpage",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.diagnosticslogs.currentpage",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.diagnosticslogs.currentpa-1fde7802.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.enddatetextbox",
+      "kind": "entry",
+      "label": "EndDateTextBox",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.enddatetextbox",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.enddatetextbox",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.enddatete-7973aaf1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-p-aspnet.starterkit.portal.diagnosticslogs.entriesemptystaterowcount",
+      "kind": "entry",
+      "label": "EntriesEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.diagnosticslogs.entriesemptystaterowcount",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.diagnosticslogs.entriesemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.diagnosticslogs.entriesem-c999b589.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-p-aspnet.starterkit.portal.diagnosticslogs.entriesemptystatetext",
+      "kind": "entry",
+      "label": "EntriesEmptyStateText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.diagnosticslogs.entriesemptystatetext",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.diagnosticslogs.entriesemptystatetext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.diagnosticslogs.entriesem-8aef316d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.entriesrepeater",
+      "kind": "entry",
+      "label": "EntriesRepeater",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.entriesrepeater",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.entriesrepeater",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.entriesre-3b5fe18a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.eventidfilter",
+      "kind": "entry",
+      "label": "EventIdFilter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.eventidfilter",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.eventidfilter",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.eventidfi-68ccf2c1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.getdetailurl-system.object",
+      "kind": "entry",
+      "label": "GetDetailUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.getdetailurl-system.object",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.diagnosticslogs.getdetailurl-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.diagnosticslogs.getdetail-2e0ff7fe.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.levelfilter",
+      "kind": "entry",
+      "label": "LevelFilter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.levelfilter",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.levelfilter",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.levelfilt-010d027e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.messagelabel",
+      "kind": "entry",
+      "label": "MessageLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.messagelabel",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.messagelabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.messagela-2ff228c5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.nextbutton",
+      "kind": "entry",
+      "label": "NextButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.nextbutton",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.nextbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.nextbutto-b4a9b9bb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.nextbutton_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "NextButton_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.nextbutton_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.diagnosticslogs.nextbutton_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.diagnosticslogs.nextbutto-2c9d3403.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.pagesize",
+      "kind": "entry",
+      "label": "PageSize",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.pagesize",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.pagesize",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.pagesize-cc26e45c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.diagnosticslogs.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.diagnosticslogs.page_load-907cc4fb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.previousbutton",
+      "kind": "entry",
+      "label": "PreviousButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.previousbutton",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.previousbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.previousb-3a708fdb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.previousbutton_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "PreviousButton_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.previousbutton_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.diagnosticslogs.previousbutton_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.diagnosticslogs.previousb-d89d161f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.resultlabel",
+      "kind": "entry",
+      "label": "ResultLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.resultlabel",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.resultlabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.resultlab-c1bfccef.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.searchbutton",
+      "kind": "entry",
+      "label": "SearchButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.searchbutton",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.searchbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.searchbut-43680b0e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.searchbutton_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "SearchButton_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.searchbutton_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.diagnosticslogs.searchbutton_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.diagnosticslogs.searchbut-5ae0cbb0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.startdatetextbox",
+      "kind": "entry",
+      "label": "StartDateTextBox",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.startdatetextbox",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.startdatetextbox",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.startdate-dba2319e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.tryreaddaterange-system.datetime-system.datetime",
+      "kind": "entry",
+      "label": "TryReadDateRange",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.diagnosticslogs.tryreaddaterange-system.datetime-system.datetime",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.diagnosticslogs.tryreaddaterange-system.datetime-system.datetime",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.diagnosticslogs.tryreadda-d112989d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.diagnosticslogs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.entriesemptystaterowcount",
+      "kind": "entry",
+      "label": "entriesEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.diagnosticslogs.entriesemptystaterowcount",
+      "sourcePath": "src/Portal/Admin/DiagnosticsLogs.aspx.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.diagnosticslogs.entriesemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.diagnosticslogs.entriesem-e000893f.html"
+    }
+  ]
+}

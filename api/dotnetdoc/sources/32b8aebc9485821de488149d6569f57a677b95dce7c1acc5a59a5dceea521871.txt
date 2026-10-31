@@ -1,0 +1,25 @@
+        private static bool TryNormalizeDimension(string value, out string normalizedValue)
+        {
+            // <lang>
+            //   <zh-CN>输出值先清空，保证任何失败分支都不会保留旧解析结果。</zh-CN>
+            //   <en>The output value is cleared first so no failure path retains an old parse result.</en>
+            // </lang>
+            normalizedValue = string.Empty;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>dimension 是管理员输入解析出的像素数，只接受非负整数以保持旧 Web Forms 尺寸语义。</zh-CN>
+            //   <en>dimension is the pixel count parsed from administrator input, accepting only non-negative integers to preserve legacy Web Forms sizing semantics.</en>
+            // </lang>
+            int dimension;
+            if (!int.TryParse(value, out dimension) || dimension < 0)
+            {
+                return false;
+            }
+
+            normalizedValue = dimension.ToString(CultureInfo.InvariantCulture);
+            return true;
+        }

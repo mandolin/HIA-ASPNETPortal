@@ -1,0 +1,4 @@
+        private string EncodeForLabel(string value)
+        {
+            return Server.HtmlEncode(value ?? string.Empty);
+        }

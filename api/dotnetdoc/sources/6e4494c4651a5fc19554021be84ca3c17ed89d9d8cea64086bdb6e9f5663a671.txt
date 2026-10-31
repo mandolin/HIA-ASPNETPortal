@@ -1,0 +1,1 @@
+        protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;

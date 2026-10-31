@@ -1,0 +1,156 @@
+    public static class PortalPasswordSubmissionCrypto
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取口令提交是否必须使用前端加密。</zh-CN>
+        ///   <en>Reads whether password submission must use client-side encryption.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>必须加密提交时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when encrypted submission is required.</en>
+        /// </l>
+        /// </returns>
+        public static bool IsEncryptedSubmissionRequired()
+        {
+            return PortalLoginPasswordCrypto.IsEncryptedSubmissionRequired();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为当前 Session 签发一个一次性口令提交公钥。</zh-CN>
+        ///   <en>Issues a one-time password-submission public key for the current Session.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>PEM 公钥和密钥位数。</zh-CN>
+        ///   <en>PEM public key and key size.</en>
+        /// </l>
+        /// </returns>
+        public static PortalLoginPasswordPublicKey IssuePasswordSubmissionKey(HttpContext context)
+        {
+            return PortalLoginPasswordCrypto.IssueLoginPasswordKey(context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解密单个口令提交密文字段。</zh-CN>
+        ///   <en>Decrypts one encrypted password-submission field.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="encryptedPassword">
+        /// <l>
+        ///   <zh-CN>Base64 RSA 密文。</zh-CN>
+        ///   <en>Base64 RSA ciphertext.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>解密后的当前请求内明文。</zh-CN>
+        ///   <en>Decrypted plain value for the current request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="failureCode">
+        /// <l>
+        ///   <zh-CN>失败分类。</zh-CN>
+        ///   <en>Failure category.</en>
+        /// </l>
+        /// </param>
+        /// <param name="eventId">
+        /// <l>
+        ///   <zh-CN>诊断事件编号。</zh-CN>
+        ///   <en>Diagnostics event id.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>解密成功时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when decryption succeeds.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryDecryptSubmittedPassword(
+            HttpContext context,
+            string encryptedPassword,
+            out string password,
+            out string failureCode,
+            out string eventId)
+        {
+            return PortalLoginPasswordCrypto.TryDecryptSubmittedPassword(
+                context,
+                encryptedPassword,
+                out password,
+                out failureCode,
+                out eventId);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解密同一口令表单中的多个密文字段。</zh-CN>
+        ///   <en>Decrypts multiple encrypted fields from one password form.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="encryptedPasswords">
+        /// <l>
+        ///   <zh-CN>同一次提交中的密文字段。</zh-CN>
+        ///   <en>Ciphertext fields in the same submission.</en>
+        /// </l>
+        /// </param>
+        /// <param name="passwords">
+        /// <l>
+        ///   <zh-CN>解密后的当前请求内明文数组。</zh-CN>
+        ///   <en>Decrypted plain values for the current request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="failureCode">
+        /// <l>
+        ///   <zh-CN>失败分类。</zh-CN>
+        ///   <en>Failure category.</en>
+        /// </l>
+        /// </param>
+        /// <param name="eventId">
+        /// <l>
+        ///   <zh-CN>诊断事件编号。</zh-CN>
+        ///   <en>Diagnostics event id.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>全部解密成功时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when all fields decrypt successfully.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryDecryptSubmittedPasswords(
+            HttpContext context,
+            string[] encryptedPasswords,
+            out string[] passwords,
+            out string failureCode,
+            out string eventId)
+        {
+            return PortalLoginPasswordCrypto.TryDecryptSubmittedPasswords(
+                context,
+                encryptedPasswords,
+                out passwords,
+                out failureCode,
+                out eventId);
+        }
+    }

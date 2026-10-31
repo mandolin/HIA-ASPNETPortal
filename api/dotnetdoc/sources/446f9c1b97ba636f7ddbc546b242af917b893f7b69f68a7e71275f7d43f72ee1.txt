@@ -1,0 +1,5 @@
+        internal static string EditLinks_Heading {
+            get {
+                return ResourceManager.GetString("EditLinks_Heading", resourceCulture);
+            }
+        }

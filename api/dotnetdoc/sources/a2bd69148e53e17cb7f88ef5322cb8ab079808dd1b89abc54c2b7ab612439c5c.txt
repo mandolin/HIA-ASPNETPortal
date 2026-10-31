@@ -1,0 +1,8 @@
+        private static PortalNavigationVisibilityContext BuildContext(IEnumerable<PortalNavigationEntry> candidates)
+        {
+            // <lang>
+            //   <zh-CN>上下文组装已抽到 PortalNavigationVisibilityContextFactory，与主导航 Tab 门控共用同一份语义；此处只做转调，不再各自维护一份实现。</zh-CN>
+            //   <en>Context assembly moved to PortalNavigationVisibilityContextFactory so it is shared with the main-navigation tab gate; this method now only delegates instead of maintaining a second copy.</en>
+            // </lang>
+            return PortalNavigationVisibilityContextFactory.Create(candidates);
+        }

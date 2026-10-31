@@ -1,0 +1,9 @@
+        private static void AddUnlimitedTextParameter(SqlCommand command, string parameterName, string value)
+        {
+            // <lang>
+            //   <zh-CN>该 helper 只由已通过非敏感定义门禁的设置审计调用；使用参数化 NVarChar(max) 保留数据库 NULL 语义，不把值内联到 SQL。</zh-CN>
+            //   <en>This helper is called only by setting audit after the non-sensitive definition gate; use parameterized NVarChar(max) to preserve database NULL semantics and never inline the value into SQL.</en>
+            // </lang>
+            command.Parameters.Add(parameterName, SqlDbType.NVarChar, -1).Value =
+                string.IsNullOrEmpty(value) ? (object)DBNull.Value : value;
+        }

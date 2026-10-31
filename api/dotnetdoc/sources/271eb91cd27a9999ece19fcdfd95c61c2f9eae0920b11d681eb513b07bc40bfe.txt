@@ -1,0 +1,5 @@
+        internal static string Document_EmptyNoDocuments {
+            get {
+                return ResourceManager.GetString("Document_EmptyNoDocuments", resourceCulture);
+            }
+        }

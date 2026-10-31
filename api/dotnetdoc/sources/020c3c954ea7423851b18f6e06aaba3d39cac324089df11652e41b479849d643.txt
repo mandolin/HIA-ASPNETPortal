@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot", resourceCulture);
+            }
+        }

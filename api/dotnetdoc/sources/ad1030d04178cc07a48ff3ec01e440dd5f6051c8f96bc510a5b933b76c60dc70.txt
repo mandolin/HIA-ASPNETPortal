@@ -1,0 +1,4 @@
+        public static EmployeeDirectoryWriteResult Failed(string message)
+        {
+            return new EmployeeDirectoryWriteResult(false, 0, message, false, false);
+        }

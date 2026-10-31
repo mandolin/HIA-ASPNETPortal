@@ -1,0 +1,5 @@
+        internal static string BusinessApplicationRequest_MessageSubmittedPrefix {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageSubmittedPrefix", resourceCulture);
+            }
+        }

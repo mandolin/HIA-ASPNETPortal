@@ -1,0 +1,20 @@
+        public ModuleSettings(IModuleItem module, IModuleDefsDb moduleDefConfig)
+        {
+            ModuleTitle              = module.ModuleTitle;
+            ModuleTitleEn            = module.ModuleTitleEn;
+            ModuleTitleLocalizedJson = module.ModuleTitleLocalizedJson;
+            ModuleId                 = module.ModuleId;            
+            ModuleOrder         = module.ModuleOrder.Value;            
+            PaneName            = module.PaneName;
+            AuthorizedEditRoles = module.EditRoles;
+            CacheTime           = module.CacheTimeout.Value;
+            ShowMobile          = module.ShowMobile.Value;
+
+            // <lang>
+            //   <zh-CN>模块定义查询采用严格单条语义；失败会在数据访问层或构造函数边界显式暴露。</zh-CN>
+            //   <en>The module-definition lookup uses strict single-row semantics; failures surface explicitly at the data-access or constructor boundary.</en>
+            // </lang>
+            IModuleDefinitionItem moduleDefinitionItem = moduleDefConfig.GetSingleModuleDefinition(module.ModuleDefId.Value);
+
+            DesktopSrc = moduleDefinitionItem.DesktopSourceFile;            
+        }

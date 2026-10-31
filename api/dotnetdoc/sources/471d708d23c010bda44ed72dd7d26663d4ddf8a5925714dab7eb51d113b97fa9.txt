@@ -1,0 +1,1 @@
+        public string MobileTabNameLocalizedJson { get; private set; }

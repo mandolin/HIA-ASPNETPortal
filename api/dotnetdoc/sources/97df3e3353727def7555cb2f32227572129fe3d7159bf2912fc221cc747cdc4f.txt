@@ -1,0 +1,21 @@
+        private static void TryDelete(string path)
+        {
+            // <lang>
+            //   <zh-CN>只对非空且确实存在的路径执行删除；不创建目录、不解析用户路径，也不传播清理异常。</zh-CN>
+            //   <en>Delete only a nonblank path that exists; do not create directories, resolve user paths, or propagate cleanup exceptions.</en>
+            // </lang>
+            try
+            {
+                if (!string.IsNullOrEmpty(path) && File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>临时文件清理失败不应中断健康页；目录检查结果已经记录。</zh-CN>
+                //   <en>Temporary cleanup failures must not break the health page; the check result is already recorded.</en>
+                // </lang>
+            }
+        }

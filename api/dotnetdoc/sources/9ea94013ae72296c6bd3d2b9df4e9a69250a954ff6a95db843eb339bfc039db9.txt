@@ -1,0 +1,6 @@
+    <%--
+    <lang>
+      <zh-CN>角色成员页只调整后台展示结构，成员增删仍由原 DataList 命令、下拉用户列表和 code-behind 控制，避免改动旧授权字符串同步逻辑。</zh-CN>
+      <en>The role-membership page only adjusts the admin display structure; membership add/remove behavior still uses the original DataList commands, user dropdown, and code-behind, avoiding changes to legacy authorization-string synchronization.</en>
+    </lang>
+    --%>

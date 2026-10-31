@@ -1,0 +1,15 @@
+        private OrganizationUnitSaveRequest NormalizeOrganizationRequest(OrganizationUnitSaveRequest request)
+        {
+            request = request ?? new OrganizationUnitSaveRequest();
+            return new OrganizationUnitSaveRequest
+            {
+                OrganizationUnitId = request.OrganizationUnitId,
+                ParentOrganizationUnitId = request.ParentOrganizationUnitId,
+                OrganizationCode = NormalizeOptional(request.OrganizationCode),
+                DisplayName = NormalizeRequired(request.DisplayName),
+                SortOrder = request.SortOrder,
+                IsActive = request.IsActive,
+                OriginalUpdatedUtc = request.OriginalUpdatedUtc,
+                ActorName = NormalizeActor(request.ActorName)
+            };
+        }

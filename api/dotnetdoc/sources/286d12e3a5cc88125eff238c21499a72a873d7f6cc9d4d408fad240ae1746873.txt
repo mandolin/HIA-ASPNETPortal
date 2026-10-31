@@ -1,0 +1,51 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>所有路径先统一读取并校验请求标识；非法模块或消息标识直接进入受控拒绝页，不继续触碰数据绑定。</zh-CN>
+            //   <en>All paths first read and validate request identifiers; invalid module or message identifiers go to the controlled denial page before any data binding continues.</en>
+            // </lang>
+            if (!TryReadRequestIdentifiers())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>新增主题或回复需要模块编辑权限；读现有消息不要求编辑权限，但稍后会隐藏回复入口。</zh-CN>
+            //   <en>Creating a topic or reply requires module edit permission; reading an existing message does not, but the reply entry is hidden later.</en>
+            // </lang>
+            bool canEdit = PortalSecurity.HasEditPermissions(moduleId);
+            if (itemId == 0)
+            {
+                if (!canEdit)
+                {
+                    PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>新增主题没有原始消息详情可显示，因此直接切换到编辑面板并隐藏详情页动作区。</zh-CN>
+                //   <en>A new topic has no original message detail to display, so the page switches directly to the editor and hides detail actions.</en>
+                // </lang>
+                EditPanel.Visible = true;
+                ButtonPanel.Visible = false;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>首次加载时绑定当前消息；回发时保留控件状态，避免覆盖用户正在编辑的内容。</zh-CN>
+            //   <en>Bind the current message only on first load; on postback, keep control state so user edits are not overwritten.</en>
+            // </lang>
+            if (!Page.IsPostBack && !BindData())
+            {
+                return;
+            }
+
+            if (!canEdit)
+            {
+                // <lang>
+                //   <zh-CN>访客仍可读取消息详情，但不能看到回复入口；真正写入仍由回发授权再次校验。</zh-CN>
+                //   <en>Visitors may still read message details but cannot see the reply entry; write attempts are rechecked on postback authorization.</en>
+                // </lang>
+                ReplyBtn.Visible = false;
+            }
+        }

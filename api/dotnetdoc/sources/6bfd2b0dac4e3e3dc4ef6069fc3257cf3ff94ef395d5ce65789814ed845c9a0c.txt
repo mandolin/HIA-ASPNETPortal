@@ -1,0 +1,8 @@
+        private static string CreateEventId()
+        {
+            // <lang>
+            //   <zh-CN>UTC 时间与短 GUID 片段仅用于日志关联和查找，不是认证票据、授权依据或保密值。</zh-CN>
+            //   <en>The UTC time and short GUID fragment are for log correlation and lookup only, not an authentication token, authorization basis, or secret.</en>
+            // </lang>
+            return DateTime.UtcNow.ToString("yyyyMMddHHmmssfff") + "-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+        }

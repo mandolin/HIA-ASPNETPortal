@@ -1,0 +1,10 @@
+        private static readonly IDictionary<string, string> LegacyGroupMap =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "Admin.CollaborationItems", GroupAdminCapability },
+                { "Admin.WorkItems", GroupAdminCapability },
+                { "Admin.ModuleCatalog", GroupAdminModules },
+                { "Admin.SystemHealth", GroupAdminOps },
+                { "Admin.ThemeSettings", GroupAdminPresentation },
+                { "Account.Register.Legacy", GroupAdminAccount }
+            };

@@ -1,0 +1,1 @@
+        List<IDiscussionItem> GetTopLevelMessages(int moduleId);

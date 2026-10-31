@@ -1,0 +1,400 @@
+    public static class PortalOperationAuditEvents
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户生命周期分类，覆盖注册、审核、资料状态和账号启停等动作。</zh-CN>
+        ///   <en>User-lifecycle category covering registration, review, profile status, and account enable/disable actions.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserLifecycleCategory = "UserLifecycle";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>安全凭据分类，覆盖密码重置和旧凭据升级等动作。</zh-CN>
+        ///   <en>Security-credential category covering password resets and legacy-credential upgrades.</en>
+        /// </lang>
+        /// </summary>
+        public const string SecurityCredentialsCategory = "SecurityCredentials";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户管理分类，覆盖角色成员关系等仍属于后台管理而非生命周期状态的动作。</zh-CN>
+        ///   <en>User-administration category for role memberships and other administrative actions that are not lifecycle-status changes.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserAdministrationCategory = "UserAdministration";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业目录分类，覆盖员工和组织主数据维护动作。</zh-CN>
+        ///   <en>Enterprise-directory category covering employee and organization master-data maintenance actions.</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseDirectoryCategory = "EnterpriseDirectory";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>业务模块分类，覆盖新业务模块的领域动作。</zh-CN>
+        ///   <en>Business-module category covering domain actions from new business modules.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessModuleCategory = "BusinessModule";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：门户用户。</zh-CN>
+        ///   <en>Audit target type for a Portal user.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserTargetType = "User";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：组织单元。</zh-CN>
+        ///   <en>Audit target type for an organization unit.</en>
+        /// </lang>
+        /// </summary>
+        public const string OrganizationUnitTargetType = "OrganizationUnit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：员工。</zh-CN>
+        ///   <en>Audit target type for an employee.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeTargetType = "Employee";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：门户账号员工绑定。</zh-CN>
+        ///   <en>Audit target type for a Portal-user employee binding.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserEmployeeBindingTargetType = "UserEmployeeBinding";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：员工资料确认记录。</zh-CN>
+        ///   <en>Audit target type for an employee-profile confirmation record.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileConfirmationTargetType = "EmployeeProfileConfirmation";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：员工资料更正请求。</zh-CN>
+        ///   <en>Audit target type for an employee-profile correction request.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestTargetType = "EmployeeProfileCorrectionRequest";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：抽象业务申请。</zh-CN>
+        ///   <en>Audit target type for an abstract business application.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationTargetType = "BusinessApplication";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：企业协同事项。</zh-CN>
+        ///   <en>Audit target type for an enterprise collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemTargetType = "CollaborationItem";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>自主注册已提交。</zh-CN>
+        ///   <en>Self-registration was submitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string RegistrationSubmitted = "RegistrationSubmitted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>注册申请已批准。</zh-CN>
+        ///   <en>Registration request was approved.</en>
+        /// </lang>
+        /// </summary>
+        public const string RegistrationApproved = "RegistrationApproved";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>注册申请已拒绝。</zh-CN>
+        ///   <en>Registration request was rejected.</en>
+        /// </lang>
+        /// </summary>
+        public const string RegistrationRejected = "RegistrationRejected";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户资料已更新。</zh-CN>
+        ///   <en>User profile was updated.</en>
+        /// </lang>
+        /// </summary>
+        public const string ProfileUpdated = "ProfileUpdated";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号已被管理员禁用。</zh-CN>
+        ///   <en>Account was disabled by an administrator.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserDisabled = "UserDisabled";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号已由管理员恢复启用。</zh-CN>
+        ///   <en>Account was restored by an administrator.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserRestored = "UserRestored";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理员重置了密码。</zh-CN>
+        ///   <en>Password was reset by an administrator.</en>
+        /// </lang>
+        /// </summary>
+        public const string PasswordReset = "PasswordReset";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧凭据在登录成功后升级。</zh-CN>
+        ///   <en>Legacy credential was upgraded after a successful sign-in.</en>
+        /// </lang>
+        /// </summary>
+        public const string LegacyCredentialUpgraded = "LegacyCredentialUpgraded";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>凭据在登录成功后按更高的哈希迭代次数重哈希。</zh-CN>
+        ///   <en>Credential was rehashed to a higher hash iteration count after a successful sign-in.</en>
+        /// </lang>
+        /// </summary>
+        public const string CredentialCostUpgraded = "CredentialCostUpgraded";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>认证分类：登录成功与失败等身份鉴别事件；失败尝试是撞库与口令爆破的早期检测依据。</zh-CN>
+        ///   <en>Authentication category: identity-verification events such as sign-in success and failure; failed attempts are an early indicator of credential stuffing and password spraying.</en>
+        /// </lang>
+        /// </summary>
+        public const string SecurityAuthenticationCategory = "SecurityAuthentication";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>登录失败动作；仅记录登录标识这类非敏感事实，绝不写入口令、盐或哈希材料。</zh-CN>
+        ///   <en>Failed sign-in action; records only non-sensitive facts such as the login identifier and never writes passwords, salts, or hash material.</en>
+        /// </lang>
+        /// </summary>
+        public const string SignInFailed = "SignInFailed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>授权分类：访问控制失败等被拒绝的越权尝试事件。</zh-CN>
+        ///   <en>Authorization category: access-control failure events such as denied authorization attempts.</en>
+        /// </lang>
+        /// </summary>
+        public const string SecurityAuthorizationCategory = "SecurityAuthorization";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>普通访问被拒动作。</zh-CN>
+        ///   <en>General access-denied action.</en>
+        /// </lang>
+        /// </summary>
+        public const string AccessDenied = "AccessDenied";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑访问被拒动作。</zh-CN>
+        ///   <en>Edit access-denied action.</en>
+        /// </lang>
+        /// </summary>
+        public const string EditAccessDenied = "EditAccessDenied";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户被加入角色。</zh-CN>
+        ///   <en>User was added to a role.</en>
+        /// </lang>
+        /// </summary>
+        public const string RoleAdded = "RoleAdded";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户被移出角色。</zh-CN>
+        ///   <en>User was removed from a role.</en>
+        /// </lang>
+        /// </summary>
+        public const string RoleRemoved = "RoleRemoved";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元已创建。</zh-CN>
+        ///   <en>Organization unit was created.</en>
+        /// </lang>
+        /// </summary>
+        public const string OrganizationUnitCreated = "OrganizationUnitCreated";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元已更新。</zh-CN>
+        ///   <en>Organization unit was updated.</en>
+        /// </lang>
+        /// </summary>
+        public const string OrganizationUnitUpdated = "OrganizationUnitUpdated";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工主数据已创建。</zh-CN>
+        ///   <en>Employee master data was created.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeCreated = "EmployeeCreated";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工主数据已更新。</zh-CN>
+        ///   <en>Employee master data was updated.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeUpdated = "EmployeeUpdated";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户账号与员工已绑定。</zh-CN>
+        ///   <en>A Portal user was bound to an employee.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserEmployeeBound = "UserEmployeeBound";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户账号与员工绑定已结束。</zh-CN>
+        ///   <en>A Portal-user employee binding was ended.</en>
+        /// </lang>
+        /// </summary>
+        public const string UserEmployeeUnbound = "UserEmployeeUnbound";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工资料已由当前绑定用户确认。</zh-CN>
+        ///   <en>Employee profile was confirmed by the current bound user.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileConfirmed = "EmployeeProfileConfirmed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工资料更正请求已提交。</zh-CN>
+        ///   <en>Employee-profile correction request was submitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequested = "EmployeeProfileCorrectionRequested";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工资料更正请求已由管理员处理。</zh-CN>
+        ///   <en>Employee-profile correction request was reviewed by an administrator.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionReviewed = "EmployeeProfileCorrectionReviewed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>抽象业务申请已提交。</zh-CN>
+        ///   <en>Abstract business application was submitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationSubmitted = "BusinessApplicationSubmitted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>抽象业务申请已由审核人处理。</zh-CN>
+        ///   <en>Abstract business application was handled by a reviewer.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationReviewed = "BusinessApplicationReviewed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已提交。</zh-CN>
+        ///   <en>Enterprise collaboration item was submitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemSubmitted = "CollaborationItemSubmitted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已开始处理。</zh-CN>
+        ///   <en>Enterprise collaboration item handling was started.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemStarted = "CollaborationItemStarted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已完成。</zh-CN>
+        ///   <en>Enterprise collaboration item was completed.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemCompleted = "CollaborationItemCompleted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已退回。</zh-CN>
+        ///   <en>Enterprise collaboration item was returned.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemReturned = "CollaborationItemReturned";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已退回的企业协同事项已重新提交。</zh-CN>
+        ///   <en>A returned enterprise collaboration item was resubmitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemResubmitted = "CollaborationItemResubmitted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已驳回。</zh-CN>
+        ///   <en>Enterprise collaboration item was rejected.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemRejected = "CollaborationItemRejected";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已取消。</zh-CN>
+        ///   <en>Enterprise collaboration item was cancelled.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemCancelled = "CollaborationItemCancelled";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已关闭。</zh-CN>
+        ///   <en>Enterprise collaboration item was closed.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemClosed = "CollaborationItemClosed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已新增纯文本评论。</zh-CN>
+        ///   <en>A plain-text comment was added to an enterprise collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemCommentAdded = "CollaborationItemCommentAdded";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>前台「我的待办」被查看的表现动作，含列表条数、筛选态与目标解析统计。此前散写为字面量，P77.3 收敛到此。</zh-CN>
+        ///   <en>Presentation action for a front-end "My To-Do Items" view, carrying the row count, filter state, and target-resolution counters. It was previously scattered as a literal and was converged here in P77.3.</en>
+        /// </lang>
+        /// </summary>

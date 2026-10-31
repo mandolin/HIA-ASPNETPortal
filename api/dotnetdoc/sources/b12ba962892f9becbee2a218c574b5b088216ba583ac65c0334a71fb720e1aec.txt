@@ -1,0 +1,400 @@
+    public partial class ManageUsers : PortalPage<ManageUsers>
+    {
+        private int tabId;
+        private int tabIndex;
+        private int userId;
+        private IUserItem currentUser;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户和注册审核数据访问依赖。</zh-CN>
+        ///   <en>User and registration-review data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IUsersDb UsersDB { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>角色和成员关系数据访问依赖。</zh-CN>
+        ///   <en>Role and membership data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IRolesDb RolesDB { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工目录只读数据访问依赖，用于展示当前账号员工绑定。</zh-CN>
+        ///   <en>Employee-directory read dependency used to display the current user-employee binding.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IEmployeeDirectoryDb EmployeeDirectoryDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>授权并解析规范用户目标；首次请求绑定用户、角色和审核信息。</zh-CN>
+        ///   <en>Authorizes and resolves the canonical user target, then binds user, role, and review information on the initial request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>初始化先解析并授权目标用户，再按角色编辑权限配置密码提交脚本；只有首次请求才绑定页面数据，回发动作仍由各自 handler 再次复核权限。</zh-CN>
+        ///   <en>Initialization resolves and authorizes the target user before configuring password-submission scripts for role editing; data binds only on the initial request, while each postback handler rechecks its own permission.</en>
+        /// </lang>
+        /// </remarks>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit))
+            {
+                return;
+            }
+
+            ConfigurePasswordSubmission();
+
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理仅返回门户页的保存按钮事件。</zh-CN>
+        ///   <en>Handles the save-button event that only returns to the Portal page.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该动作只安全返回门户页，不保存用户资料；目标和回跳参数仍由统一初始化与安全 URL 策略约束。</zh-CN>
+        ///   <en>This action only returns safely to the Portal and does not save user data; the target and return parameters remain constrained by shared initialization and safe-URL policy.</en>
+        /// </lang>
+        /// </remarks>
+        protected void Save_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将当前用户加入所选的当前门户角色，并记录不含角色名称的运营审计。</zh-CN>
+        ///   <en>Adds the current user to a selected role of the current Portal and records an operations audit without the role name.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>所选角色必须来自当前门户角色集合；角色写入成功后才记录运营审计，二者不共享本页声明的跨服务事务。</zh-CN>
+        ///   <en>The selected role must come from the current Portal role set; operations audit is recorded only after the role write succeeds, and the two calls do not share a cross-service transaction claimed by this page.</en>
+        /// </lang>
+        /// </remarks>
+        protected void AddRole_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            IRoleItem role;
+            if (!TryGetSelectedPortalRole(out role))
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>角色成员写入先于运营审计；审计失败不会把已完成的角色关系写入误报为已回滚。</zh-CN>
+                //   <en>Role membership persistence precedes operations audit; an audit failure must not be read as rollback of an already completed role change.</en>
+                // </lang>
+                RolesDB.AddUserRole(role.RoleId, userId);
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserAdministrationCategory,
+                    PortalOperationAuditEvents.RoleAdded,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    "Added role id " + role.RoleId + " to user.",
+                    Context);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRoleJoined, false);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.AddRole",
+                    "Adding a role to user failed. UserId=" + userId + "; RoleId=" + role.RoleId,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageJoinRoleFailed, eventId), true);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>更新当前用户的资料扩展，并在填写密码时重置强哈希凭据；审计不记录密码或资料原文。</zh-CN>
+        ///   <en>Updates the current user's profile extension and resets the strong-hash credential when a password is entered; audit entries do not record passwords or raw profile values.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>资料字段先按长度和单行规则归一化，再按当前加密策略解析密码并复核重置权限；资料写入、资料审计和密码审计是顺序步骤，不把异常提示解释为自动回滚。</zh-CN>
+        ///   <en>Profile fields are normalized for length and single-line form before password values are resolved under the current encryption policy and reset permission is rechecked; profile write, profile audit, and password audit are sequential steps, and an exception message does not imply automatic rollback.</en>
+        /// </lang>
+        /// </remarks>
+        protected void UpdateUser_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
+            {
+                return;
+            }
+
+            string email;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(Email.Text, 256, out email))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidEmail, true);
+                return;
+            }
+
+            string loginName;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(LoginName.Text, 100, out loginName))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidLoginName, true);
+                return;
+            }
+
+            string displayName;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(DisplayName.Text, 150, out displayName))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidDisplayName, true);
+                return;
+            }
+
+            string nickname;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(Nickname.Text, 100, out nickname))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidNickName, true);
+                return;
+            }
+
+            bool passwordResetSubmitted = HasPasswordResetSubmission();
+            if (passwordResetSubmitted && !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersResetPassword))
+            {
+                return;
+            }
+
+            string password;
+            string confirmPassword;
+            bool shouldResetPassword;
+            if (!TryResolvePasswordResetSubmission(
+                passwordResetSubmitted,
+                out password,
+                out confirmPassword,
+                out shouldResetPassword))
+            {
+                ClearSubmittedPasswordFields();
+                return;
+            }
+
+            ClearSubmittedPasswordFields();
+
+            if (shouldResetPassword && !string.Equals(password, confirmPassword, StringComparison.Ordinal))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessagePasswordMismatch, true);
+                return;
+            }
+
+            PortalPasswordRejection passwordRejection;
+            if (shouldResetPassword && !PortalPasswordPolicy.TryValidate(
+                password,
+                BuildPasswordPolicyContextTerms(loginName, displayName, nickname, email),
+                out passwordRejection))
+            {
+                // <lang>
+                //   <zh-CN>密码策略失败时按原因码显示对应本地化文案，不记录密码或完整上下文词项。</zh-CN>
+                //   <en>On password-policy failure, show the localized text for the rejection code and never log the password or full context terms.</en>
+                // </lang>
+                switch (passwordRejection)
+                {
+                    case PortalPasswordRejection.BelowComplexityPolicy:
+                        PortalPasswordPolicyOptions passwordPolicyOptions = PortalPasswordPolicy.GetEffectiveOptions();
+                        ShowRegistrationMessage(
+                            string.Format(lang.Common_PasswordMessageComplexityPolicy, passwordPolicyOptions.MinimumLength, passwordPolicyOptions.RequiredCategoryCount),
+                            true);
+                        break;
+                    case PortalPasswordRejection.WeakDictionaryMatch:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageWeakDictionaryMatch, true);
+                        break;
+                    case PortalPasswordRejection.ContainsAccountContextTerm:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageContainsAccountContextTerm, true);
+                        break;
+                    default:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageRejected, true);
+                        break;
+                }
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>数据服务负责资料和凭据持久化；本页随后分别记录资料/密码审计，不在审计调用中传递密码或资料原文。</zh-CN>
+                //   <en>The data service owns profile and credential persistence; this page records separate profile/password audits afterward without passing passwords or raw profile values.</en>
+                // </lang>
+                IUserProfileInfo profileBefore = UsersDB.GetUserProfileInfo(userId);
+                UsersDB.UpdateUserProfile(
+                    userId,
+                    loginName,
+                    displayName,
+                    nickname,
+                    email,
+                    shouldResetPassword ? password : string.Empty,
+                    GetCurrentActor());
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    PortalOperationAuditEvents.ProfileUpdated,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    BuildProfileAuditSummary(profileBefore, loginName, displayName, nickname, email),
+                    Context);
+                if (shouldResetPassword)
+                {
+                    PortalOperationAudit.Record(
+                        PortalOperationAuditEvents.SecurityCredentialsCategory,
+                        PortalOperationAuditEvents.PasswordReset,
+                        PortalOperationAuditEvents.UserTargetType,
+                        userId.ToString(),
+                        "User credential reset by administrator.",
+                        Context);
+                }
+
+                RedirectToCurrentUser();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.UpdateUser",
+                    "Updating user profile failed. UserId=" + userId,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageProfileUpdateFailed, eventId), true);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按加密开关配置管理员重置密码提交脚本。</zh-CN>
+        ///   <en>Configures administrator password-reset submission scripts from the encryption switch.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>加密开关只决定客户端脚本和服务端提交载体；脚本 URL 经过现有 JavaScript 编码，服务端仍必须在回发中验证密文完整性，不能把前端加密当作授权。</zh-CN>
+        ///   <en>The encryption switch controls only the client script and server submission carrier; script URLs use the existing JavaScript encoding, and the server must still validate encrypted fields on postback, so client encryption is not authorization.</en>
+        /// </lang>
+        /// </remarks>
+        private void ConfigurePasswordSubmission()
+        {
+            if (!PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                UpdateUserBtn.OnClientClick = string.Empty;
+                return;
+            }
+
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(ManageUsers),
+                "JSEncryptIE6",
+                ResolveUrl("~/Scripts/Security/jsencrypt-ie6.min.js"));
+
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(ManageUsers),
+                "PortalLoginPasswordEncryption",
+                ResolveUrl("~/Scripts/Security/PortalLoginPasswordEncryption.js"));
+
+            UpdateUserBtn.OnClientClick = string.Format(
+                "return PortalLoginPasswordEncryption.encryptPasswordFields([{0},{1}],'{2}','{3}');",
+                BuildPasswordFieldScriptObject(Password.ClientID, EncryptedPassword.ClientID),
+                BuildPasswordFieldScriptObject(ConfirmPassword.ClientID, EncryptedConfirmPassword.ClientID),
+                HttpUtility.JavaScriptStringEncode(ResolveUrl("~/Security/LoginPasswordKey.ashx")),
+                HttpUtility.JavaScriptStringEncode(RegistrationMessage.ClientID));
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断本次后台用户资料提交是否包含重置密码意图。</zh-CN>
+        ///   <en>Determines whether this user-profile submission intends to reset the password.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>任一明文或密文字段非空时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when any plain or encrypted field is present.</en>
+        /// </l>
+        /// </returns>
+        private bool HasPasswordResetSubmission()
+        {
+            return !string.IsNullOrEmpty(Password.Text) ||
+                   !string.IsNullOrEmpty(ConfirmPassword.Text) ||
+                   !string.IsNullOrWhiteSpace(EncryptedPassword.Value) ||
+                   !string.IsNullOrWhiteSpace(EncryptedConfirmPassword.Value);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析管理员重置密码提交，保持“两框任一填写即重置”的旧语义。</zh-CN>
+        ///   <en>Resolves administrator password-reset submission while preserving the legacy "either field means reset" semantics.</en>
+        /// </lang>

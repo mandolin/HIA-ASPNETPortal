@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>组织维护属于员工目录写权限范围；权限失败时统一 helper 已负责跳转，页面不再继续绑定表单。</zh-CN>
+            //   <en>Organization maintenance belongs to employee-directory edit permission; when authorization fails, the shared helper redirects and the form is not bound.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在首次请求绑定组织表单，避免回发时覆盖管理员尚未保存的输入。</zh-CN>
+            //   <en>Bind the organization form only on the initial request so postbacks do not overwrite unsaved administrator input.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindForm();
+            }
+        }

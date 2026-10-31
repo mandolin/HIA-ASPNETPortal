@@ -1,0 +1,19 @@
+        private EmployeeSaveRequest NormalizeEmployeeRequest(EmployeeSaveRequest request)
+        {
+            request = request ?? new EmployeeSaveRequest();
+            return new EmployeeSaveRequest
+            {
+                EmployeeId = request.EmployeeId,
+                EmployeeCode = NormalizeRequired(request.EmployeeCode),
+                DisplayName = NormalizeRequired(request.DisplayName),
+                PreferredName = NormalizeOptional(request.PreferredName),
+                WorkEmail = NormalizeOptional(request.WorkEmail),
+                OrganizationUnitId = request.OrganizationUnitId,
+                EmploymentStatus = NormalizeRequired(request.EmploymentStatus),
+                JoinedUtc = request.JoinedUtc,
+                LeftUtc = request.LeftUtc,
+                SourceSystem = string.IsNullOrWhiteSpace(request.SourceSystem) ? "Portal" : NormalizeRequired(request.SourceSystem),
+                OriginalUpdatedUtc = request.OriginalUpdatedUtc,
+                ActorName = NormalizeActor(request.ActorName)
+            };
+        }

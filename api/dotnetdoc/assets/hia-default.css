@@ -1,0 +1,972 @@
+:root {
+  color-scheme: light dark;
+  --hia-color-canvas: #f7f8fa;
+  --hia-color-surface: #ffffff;
+  --hia-color-surface-muted: #eef2f6;
+  --hia-color-border: #8793a5;
+  --hia-color-text: #172033;
+  --hia-color-text-muted: #4f5e75;
+  --hia-color-accent: #08736f;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #d5f0eb;
+  --hia-color-accent-hover: #065f5b;
+  --hia-color-focus-ring: #005fcc;
+  --hia-color-code-background: #101820;
+  --hia-color-code-text: #d7f4ff;
+  --hia-color-danger: #9b2c2c;
+  --hia-bg: var(--hia-color-canvas);
+  --hia-surface: var(--hia-color-surface);
+  --hia-border: var(--hia-color-border);
+  --hia-text: var(--hia-color-text);
+  --hia-muted: var(--hia-color-text-muted);
+  --hia-accent: var(--hia-color-accent);
+  --hia-accent-soft: var(--hia-color-accent-soft);
+  --hia-code-bg: var(--hia-color-code-background);
+  --hia-code-text: var(--hia-color-code-text);
+  font-family: "Inter", "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hia-color-canvas: #10151f;
+    --hia-color-surface: #18202c;
+    --hia-color-surface-muted: #202a38;
+    --hia-color-border: #7b899d;
+    --hia-color-text: #eff4ff;
+    --hia-color-text-muted: #c6d0df;
+    --hia-color-accent: #6ee7da;
+    --hia-color-accent-contrast: #061a19;
+    --hia-color-accent-soft: #153c3a;
+    --hia-color-accent-hover: #9af2e8;
+    --hia-color-focus-ring: #f7c948;
+    --hia-color-code-background: #090f17;
+    --hia-color-code-text: #d7f4ff;
+    --hia-color-danger: #ffb4ab;
+  }
+}
+
+:root[data-hia-skin="portal.classic"] {
+  --hia-color-canvas: #f7f8fa;
+  --hia-color-surface: #ffffff;
+  --hia-color-surface-muted: #eef2f6;
+  --hia-color-border: #8793a5;
+  --hia-color-text: #172033;
+  --hia-color-text-muted: #4f5e75;
+  --hia-color-accent: #08736f;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #d5f0eb;
+  --hia-color-accent-hover: #065f5b;
+  --hia-color-focus-ring: #005fcc;
+  --hia-color-code-background: #101820;
+  --hia-color-code-text: #d7f4ff;
+  --hia-color-danger: #9b2c2c;
+  --hia-density: 1;
+  --hia-radius: 6px;
+}
+
+:root[data-hia-skin="portal.classic"][data-hia-scheme="light"] {
+  --hia-color-canvas: #f7f8fa;
+  --hia-color-surface: #ffffff;
+  --hia-color-surface-muted: #eef2f6;
+  --hia-color-border: #8793a5;
+  --hia-color-text: #172033;
+  --hia-color-text-muted: #4f5e75;
+  --hia-color-accent: #08736f;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #d5f0eb;
+  --hia-color-accent-hover: #065f5b;
+  --hia-color-focus-ring: #005fcc;
+  --hia-color-code-background: #101820;
+  --hia-color-code-text: #d7f4ff;
+  --hia-color-danger: #9b2c2c;
+  --hia-density: 1;
+  --hia-radius: 6px;
+}
+
+:root[data-hia-skin="portal.classic"][data-hia-scheme="dark"] {
+  --hia-color-canvas: #10151f;
+  --hia-color-surface: #18202c;
+  --hia-color-surface-muted: #202a38;
+  --hia-color-border: #7b899d;
+  --hia-color-text: #eff4ff;
+  --hia-color-text-muted: #c6d0df;
+  --hia-color-accent: #6ee7da;
+  --hia-color-accent-contrast: #061a19;
+  --hia-color-accent-soft: #153c3a;
+  --hia-color-accent-hover: #9af2e8;
+  --hia-color-focus-ring: #f7c948;
+  --hia-color-code-background: #090f17;
+  --hia-color-code-text: #d7f4ff;
+  --hia-color-danger: #ffb4ab;
+  --hia-density: 1;
+  --hia-radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+:root[data-hia-skin="portal.classic"][data-hia-scheme="system"] {
+  --hia-color-canvas: #10151f;
+  --hia-color-surface: #18202c;
+  --hia-color-surface-muted: #202a38;
+  --hia-color-border: #7b899d;
+  --hia-color-text: #eff4ff;
+  --hia-color-text-muted: #c6d0df;
+  --hia-color-accent: #6ee7da;
+  --hia-color-accent-contrast: #061a19;
+  --hia-color-accent-soft: #153c3a;
+  --hia-color-accent-hover: #9af2e8;
+  --hia-color-focus-ring: #f7c948;
+  --hia-color-code-background: #090f17;
+  --hia-color-code-text: #d7f4ff;
+  --hia-color-danger: #ffb4ab;
+  --hia-density: 1;
+  --hia-radius: 6px;
+}
+}
+
+:root[data-hia-skin="portal.graphite"] {
+  --hia-color-canvas: #eef0f3;
+  --hia-color-surface: #fafafa;
+  --hia-color-surface-muted: #e1e5ea;
+  --hia-color-border: #69717c;
+  --hia-color-text: #181b20;
+  --hia-color-text-muted: #4b525c;
+  --hia-color-accent: #4059a9;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #dce3fb;
+  --hia-color-accent-hover: #30458c;
+  --hia-color-focus-ring: #9a3e00;
+  --hia-color-code-background: #171a20;
+  --hia-color-code-text: #edf1f7;
+  --hia-color-danger: #9a2e35;
+  --hia-density: .94;
+  --hia-radius: 3px;
+}
+
+:root[data-hia-skin="portal.graphite"][data-hia-scheme="light"] {
+  --hia-color-canvas: #eef0f3;
+  --hia-color-surface: #fafafa;
+  --hia-color-surface-muted: #e1e5ea;
+  --hia-color-border: #69717c;
+  --hia-color-text: #181b20;
+  --hia-color-text-muted: #4b525c;
+  --hia-color-accent: #4059a9;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #dce3fb;
+  --hia-color-accent-hover: #30458c;
+  --hia-color-focus-ring: #9a3e00;
+  --hia-color-code-background: #171a20;
+  --hia-color-code-text: #edf1f7;
+  --hia-color-danger: #9a2e35;
+  --hia-density: .94;
+  --hia-radius: 3px;
+}
+
+:root[data-hia-skin="portal.graphite"][data-hia-scheme="dark"] {
+  --hia-color-canvas: #111318;
+  --hia-color-surface: #191c22;
+  --hia-color-surface-muted: #232730;
+  --hia-color-border: #89919d;
+  --hia-color-text: #f2f4f7;
+  --hia-color-text-muted: #c4cad2;
+  --hia-color-accent: #a8b9ff;
+  --hia-color-accent-contrast: #12182e;
+  --hia-color-accent-soft: #29345d;
+  --hia-color-accent-hover: #cad4ff;
+  --hia-color-focus-ring: #ffbf69;
+  --hia-color-code-background: #080a0e;
+  --hia-color-code-text: #edf1f7;
+  --hia-color-danger: #ffb3bb;
+  --hia-density: .94;
+  --hia-radius: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+:root[data-hia-skin="portal.graphite"][data-hia-scheme="system"] {
+  --hia-color-canvas: #111318;
+  --hia-color-surface: #191c22;
+  --hia-color-surface-muted: #232730;
+  --hia-color-border: #89919d;
+  --hia-color-text: #f2f4f7;
+  --hia-color-text-muted: #c4cad2;
+  --hia-color-accent: #a8b9ff;
+  --hia-color-accent-contrast: #12182e;
+  --hia-color-accent-soft: #29345d;
+  --hia-color-accent-hover: #cad4ff;
+  --hia-color-focus-ring: #ffbf69;
+  --hia-color-code-background: #080a0e;
+  --hia-color-code-text: #edf1f7;
+  --hia-color-danger: #ffb3bb;
+  --hia-density: .94;
+  --hia-radius: 3px;
+}
+}
+
+:root[data-hia-skin="portal.lumen"] {
+  --hia-color-canvas: #fffaf0;
+  --hia-color-surface: #ffffff;
+  --hia-color-surface-muted: #f8efd9;
+  --hia-color-border: #9b835b;
+  --hia-color-text: #2c2418;
+  --hia-color-text-muted: #685944;
+  --hia-color-accent: #9c4f00;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #ffe2b7;
+  --hia-color-accent-hover: #783d00;
+  --hia-color-focus-ring: #005fcc;
+  --hia-color-code-background: #252019;
+  --hia-color-code-text: #fff5df;
+  --hia-color-danger: #a22b35;
+  --hia-density: 1.06;
+  --hia-radius: 12px;
+}
+
+:root[data-hia-skin="portal.lumen"][data-hia-scheme="light"] {
+  --hia-color-canvas: #fffaf0;
+  --hia-color-surface: #ffffff;
+  --hia-color-surface-muted: #f8efd9;
+  --hia-color-border: #9b835b;
+  --hia-color-text: #2c2418;
+  --hia-color-text-muted: #685944;
+  --hia-color-accent: #9c4f00;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #ffe2b7;
+  --hia-color-accent-hover: #783d00;
+  --hia-color-focus-ring: #005fcc;
+  --hia-color-code-background: #252019;
+  --hia-color-code-text: #fff5df;
+  --hia-color-danger: #a22b35;
+  --hia-density: 1.06;
+  --hia-radius: 12px;
+}
+
+:root[data-hia-skin="portal.lumen"][data-hia-scheme="dark"] {
+  --hia-color-canvas: #1d1811;
+  --hia-color-surface: #282117;
+  --hia-color-surface-muted: #352b1d;
+  --hia-color-border: #b8a078;
+  --hia-color-text: #fff5df;
+  --hia-color-text-muted: #e1ceb0;
+  --hia-color-accent: #ffbd70;
+  --hia-color-accent-contrast: #2a1600;
+  --hia-color-accent-soft: #59401f;
+  --hia-color-accent-hover: #ffd39e;
+  --hia-color-focus-ring: #78c8ff;
+  --hia-color-code-background: #100d09;
+  --hia-color-code-text: #fff5df;
+  --hia-color-danger: #ffb3bb;
+  --hia-density: 1.06;
+  --hia-radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+:root[data-hia-skin="portal.lumen"][data-hia-scheme="system"] {
+  --hia-color-canvas: #1d1811;
+  --hia-color-surface: #282117;
+  --hia-color-surface-muted: #352b1d;
+  --hia-color-border: #b8a078;
+  --hia-color-text: #fff5df;
+  --hia-color-text-muted: #e1ceb0;
+  --hia-color-accent: #ffbd70;
+  --hia-color-accent-contrast: #2a1600;
+  --hia-color-accent-soft: #59401f;
+  --hia-color-accent-hover: #ffd39e;
+  --hia-color-focus-ring: #78c8ff;
+  --hia-color-code-background: #100d09;
+  --hia-color-code-text: #fff5df;
+  --hia-color-danger: #ffb3bb;
+  --hia-density: 1.06;
+  --hia-radius: 12px;
+}
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--hia-bg);
+  color: var(--hia-text);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--hia-accent);
+}
+
+.hia-shell {
+  /* <lang><zh-CN>宿主可覆写层级缩进；紧凑默认值为深命名空间保留阅读宽度。</zh-CN><en>Hosts may override tree indentation; the compact default preserves reading width for deep namespaces.</en></lang> */
+  --hia-tree-indent: .6rem;
+  display: grid;
+  grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.hia-sidebar {
+  border-right: 1px solid var(--hia-border);
+  padding: 1rem;
+  background: var(--hia-color-surface-muted);
+}
+
+.hia-project-split-site .hia-sidebar {
+  height: 100vh;
+  overflow: auto;
+  position: sticky;
+  top: 0;
+}
+
+.hia-sidebar nav ul,
+.hia-project-summary ul {
+  padding-left: 1.25rem;
+}
+
+.hia-sidebar nav li,
+.hia-project-summary li {
+  margin: .25rem 0;
+}
+
+.hia-sidebar nav a {
+  display: grid;
+  gap: .1rem;
+  min-width: 0;
+  text-decoration: none;
+}
+
+/* <lang><zh-CN>极深列表保留局部可读下限，由侧栏滚动承接；不把名称压成单字符列。</zh-CN><en>Very deep lists retain a local readable floor and scroll within the sidebar instead of collapsing names into single-character columns.</en></lang> */
+.hia-sidebar [data-hia-project-tree] {
+  /* <lang><zh-CN>横向滚动仅属于树，避免深层焦点带动标题、语言和皮肤控件左右偏移。</zh-CN><en>Keep horizontal scrolling inside the tree so deep focus does not shift the title, locale or skin controls.</en></lang> */
+  overflow-x: auto;
+  padding-block: .25rem;
+}
+
+.hia-sidebar .hia-project-hierarchy-list {
+  list-style: none;
+  margin: 0;
+  min-width: 8rem;
+  padding-left: var(--hia-tree-indent);
+}
+
+.hia-sidebar nav small {
+  color: var(--hia-muted);
+  font-size: .72rem;
+}
+
+.hia-project-views {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  margin: 1rem 0;
+}
+
+.hia-project-view-button {
+  appearance: none;
+  background: var(--hia-surface);
+  border: 1px solid var(--hia-border);
+  border-radius: 6px;
+  color: var(--hia-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: .86rem;
+  line-height: 1.2;
+  min-height: 2rem;
+  padding: .35rem .65rem;
+}
+
+.hia-project-view-button span {
+  display: inline-block;
+  font-size: .72rem;
+  margin-left: .35rem;
+  opacity: .8;
+}
+
+.hia-project-view-button:hover {
+  border-color: var(--hia-accent);
+  color: var(--hia-accent);
+}
+
+.hia-project-view-button[aria-pressed="true"] {
+  background: var(--hia-accent);
+  border-color: var(--hia-accent);
+  color: var(--hia-color-accent-contrast);
+}
+
+.hia-project-search {
+  display: grid;
+  gap: .35rem;
+  margin: .75rem 0 1rem;
+}
+
+.hia-project-search span {
+  color: var(--hia-muted);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.hia-project-search input {
+  background: var(--hia-surface);
+  border: 1px solid var(--hia-border);
+  border-radius: 6px;
+  color: var(--hia-text);
+  font: inherit;
+  min-height: 2.25rem;
+  padding: .45rem .6rem;
+  width: 100%;
+}
+
+.hia-project-search input:focus-visible,
+.hia-language-switch select:focus-visible {
+  border-color: var(--hia-accent);
+  outline: 3px solid var(--hia-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.hia-language-switch {
+  display: grid;
+  gap: .35rem;
+  margin: 1rem 0;
+}
+
+.hia-theme-switch {
+  display: grid;
+  gap: .5rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin: 1rem 0;
+}
+
+.hia-theme-switch label {
+  color: var(--hia-muted);
+  display: grid;
+  font-size: .82rem;
+  font-weight: 700;
+  gap: .3rem;
+}
+
+.hia-theme-switch select {
+  background: var(--hia-surface);
+  border: 1px solid var(--hia-border);
+  border-radius: var(--hia-radius, 6px);
+  color: var(--hia-text);
+  min-width: 0;
+  padding: .4rem .45rem;
+  width: 100%;
+}
+
+.hia-language-switch label {
+  color: var(--hia-muted);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.hia-language-switch select {
+  border: 1px solid var(--hia-border);
+  border-radius: 6px;
+  padding: .4rem .55rem;
+  width: 100%;
+}
+
+.hia-main {
+  max-width: 72rem;
+  min-width: 0;
+  width: 100%;
+  padding: 2rem;
+}
+
+.hia-symbol {
+  background: var(--hia-surface);
+  border: 1px solid var(--hia-border);
+  border-radius: var(--hia-radius, 6px);
+  margin: 1rem 0;
+  min-width: 0;
+  padding: 1rem;
+}
+
+.hia-project-meta,
+.hia-project-meta dd,
+.hia-project-entry,
+.hia-project-entry a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.hia-symbol h2 {
+  margin: 0 0 .5rem;
+  /* <lang><zh-CN>长成员标识在单页与多页均可折行，不改变内容层级。</zh-CN><en>Wrap long member identifiers in document and project pages without changing content hierarchy.</en></lang> */
+  overflow-wrap: anywhere;
+}
+
+.hia-kind {
+  display: inline-block;
+  border: 1px solid var(--hia-border);
+  border-radius: 999px;
+  color: var(--hia-muted);
+  font-size: .78rem;
+  padding: .05rem .45rem;
+}
+
+.hia-signature,
+.hia-source-code {
+  overflow-x: auto;
+  border-radius: 6px;
+  font-family: "Sarasa Mono SC", "Sarasa Fixed SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "Cascadia Code", "JetBrains Mono", "Fira Code", monospace;
+}
+
+.hia-signature {
+  border: 1px solid var(--hia-border);
+  padding: .5rem;
+  /* <lang><zh-CN>长签名保留空白并在窄屏换行；源码预览仍沿用独立的原始排版。</zh-CN><en>Long signatures preserve whitespace and wrap on narrow screens; source previews retain their separate original formatting.</en></lang> */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.hia-source-code {
+  background: var(--hia-code-bg);
+  color: var(--hia-code-text);
+  padding: 1rem;
+}
+
+.hia-source-line {
+  color: var(--hia-muted);
+}
+
+.hia-localized-text[hidden] {
+  display: none;
+}
+
+.hia-fallback-badge {
+  background: var(--hia-accent-soft);
+  border-radius: 999px;
+  color: var(--hia-accent);
+  display: inline-block;
+  font-size: .75rem;
+  margin-left: .5rem;
+  padding: .08rem .45rem;
+}
+
+.hia-i18n-fields,
+.hia-source-section {
+  border-top: 1px solid var(--hia-border);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.hia-i18n-fields h3,
+.hia-source-section h3,
+.hia-source-references h4 {
+  margin: 0 0 .75rem;
+}
+
+.hia-i18n-field {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr);
+  gap: .75rem;
+  margin: .5rem 0;
+}
+
+.hia-i18n-field dt {
+  color: var(--hia-muted);
+  font-family: "Sarasa Mono SC", "Sarasa Fixed SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "Cascadia Code", "JetBrains Mono", "Fira Code", monospace;
+  font-size: .85rem;
+}
+
+.hia-i18n-field dt,
+.hia-i18n-field dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.hia-i18n-field dd {
+  margin: 0;
+}
+
+.hia-source-preview,
+.hia-source-fragment {
+  margin: .75rem 0;
+}
+
+.hia-source-preview summary,
+.hia-source-fragment summary {
+  color: var(--hia-muted);
+  cursor: pointer;
+  font-family: "Sarasa Mono SC", "Sarasa Fixed SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "Cascadia Code", "JetBrains Mono", "Fira Code", monospace;
+  font-size: .86rem;
+  margin-bottom: .35rem;
+}
+
+.hia-source-unresolved {
+  color: var(--hia-color-danger);
+}
+
+.hia-project-source-preview {
+  margin-top: .75rem;
+}
+
+.hia-source-fetch-button,
+.hia-source-reset-button,
+.hia-project-secondary-action,
+.hia-project-entry-link {
+  appearance: none;
+  border: 1px solid var(--hia-border);
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.hia-source-fetch-button,
+.hia-source-reset-button,
+.hia-project-secondary-action {
+  background: var(--hia-surface);
+  color: var(--hia-text);
+  min-height: 2rem;
+  padding: .35rem .65rem;
+}
+
+.hia-project-secondary-action {
+  margin-top: .75rem;
+  width: 100%;
+}
+
+.hia-source-fetch-button:hover,
+.hia-source-reset-button:hover,
+.hia-project-secondary-action:hover,
+.hia-project-entry-link:hover {
+  border-color: var(--hia-accent);
+  color: var(--hia-accent);
+}
+
+.hia-project-entry-link {
+  background: transparent;
+  color: var(--hia-accent);
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+  padding: .15rem .2rem;
+  text-align: left;
+}
+
+.hia-project-hierarchy-list details > summary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .15rem .4rem;
+  justify-content: space-between;
+  padding-inline-start: 1rem;
+  position: relative;
+}
+
+/* <lang><zh-CN>只让标签折行；打开入口可换到下一行，不与标签争抢最后几个像素。</zh-CN><en>Only the label wraps words; the open action may move to the next row rather than consume the label's last pixels.</en></lang> */
+.hia-project-hierarchy-list details > summary > span {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* <lang><zh-CN>flex布局仍显示与原生open状态一致的装饰提示；不复制aria-expanded状态。</zh-CN><en>Flex layouts retain a decorative cue derived from native open state without duplicating aria-expanded.</en></lang> */
+.hia-project-hierarchy-list details > summary::before {
+  content: "▸";
+  inset-inline-start: 0;
+  position: absolute;
+}
+
+.hia-project-hierarchy-list details[open] > summary::before {
+  content: "▾";
+}
+
+details > summary:focus-visible,
+.hia-project-entry-link:focus-visible,
+.hia-project-secondary-action:focus-visible,
+.hia-project-view-button:focus-visible,
+.hia-source-fetch-button:focus-visible,
+.hia-source-reset-button:focus-visible,
+.hia-theme-switch select:focus-visible {
+  outline: 3px solid var(--hia-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.hia-project-hierarchy-list details[data-hia-active-ancestor="true"] > summary {
+  background: var(--hia-accent-soft);
+  border-radius: 4px;
+  color: var(--hia-accent);
+}
+
+.hia-project-hierarchy-list [data-hia-active-entry="true"] > .hia-project-entry-link,
+.hia-project-hierarchy-list [data-hia-active-entry="true"] > details > summary {
+  font-weight: 700;
+}
+
+.hia-project-tree-open {
+  flex: none;
+  font-size: .78rem;
+  margin-inline-start: auto;
+  padding: .18rem .45rem;
+}
+
+.hia-project-hierarchy-list details > ul {
+  border-left: 1px solid var(--hia-border);
+  margin-left: 0;
+}
+
+.hia-project-loading,
+.hia-project-load-error {
+  color: var(--hia-muted);
+}
+
+.hia-project-load-error {
+  border-left: 3px solid var(--hia-color-danger);
+  padding-left: .75rem;
+}
+
+.hia-source-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .75rem;
+}
+
+.hia-source-actions button {
+  appearance: none;
+  background: var(--hia-accent);
+  border: 1px solid var(--hia-accent);
+  border-radius: 6px;
+  color: var(--hia-color-accent-contrast);
+  cursor: pointer;
+  font: inherit;
+  font-size: .86rem;
+  min-height: 2rem;
+  padding: .35rem .65rem;
+}
+
+.hia-source-actions button:hover {
+  background: var(--hia-color-accent-hover);
+  border-color: var(--hia-color-accent-hover);
+  color: var(--hia-color-accent-contrast);
+}
+
+.hia-project-source-map-list {
+  margin: .35rem 0 0;
+  padding-left: 1rem;
+}
+
+.hia-project-groups h3 {
+  color: var(--hia-muted);
+  font-size: .82rem;
+  margin: .75rem 0 .25rem;
+}
+
+.hia-project-group-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.hia-project-group-list li {
+  align-items: baseline;
+  display: flex;
+  gap: .75rem;
+  justify-content: space-between;
+}
+
+.hia-project-group-list strong {
+  color: var(--hia-muted);
+  font-size: .78rem;
+}
+
+.hia-project-relation-list {
+  display: grid;
+  gap: .5rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+.hia-project-relation-list li {
+  border-top: 1px solid var(--hia-border);
+  display: grid;
+  gap: .2rem;
+  padding-top: .5rem;
+}
+
+.hia-project-relation-list small {
+  color: var(--hia-muted);
+  overflow-wrap: anywhere;
+}
+
+.hia-project-empty {
+  color: var(--hia-muted);
+  padding: 1rem;
+}
+
+.hia-project-topic-header {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+
+.hia-project-topic-header h2 {
+  flex: 1 1 100%;
+}
+
+.hia-project-topic-section {
+  border-top: 1px solid var(--hia-border);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.hia-project-topic-section > summary,
+.hia-project-member-card > summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: .25rem 0;
+}
+
+.hia-project-topic-section > .hia-project-topic-section-body,
+.hia-project-member-card > .hia-project-member-card-body {
+  padding-top: .65rem;
+}
+
+.hia-project-member-card {
+  border: 1px solid var(--hia-border);
+  border-left: 3px solid var(--hia-accent);
+  border-radius: var(--hia-radius, 6px);
+  padding: .5rem .75rem;
+}
+
+.hia-project-topic-section > h3 {
+  margin: 0 0 .65rem;
+}
+
+.hia-project-member-topics {
+  display: grid;
+  gap: .75rem;
+}
+
+.hia-project-member-topics > .hia-project-topic {
+  border-left: 3px solid var(--hia-accent-soft);
+  margin: 0;
+}
+
+.hia-project-unavailable {
+  color: var(--hia-muted);
+  font-style: italic;
+}
+
+@media (forced-colors: active) {
+  /* <lang><zh-CN>第二个 selector 与 skin/scheme rule 等 specificity，且后声明，保证系统颜色真正覆盖主题 token。</zh-CN><en>The second selector matches the skin/scheme rule specificity and appears later so system colors actually override theme tokens.</en></lang> */
+  :root,
+  :root[data-hia-skin][data-hia-scheme] {
+    --hia-color-canvas: Canvas;
+    --hia-color-surface: Canvas;
+    --hia-color-surface-muted: Canvas;
+    --hia-color-border: CanvasText;
+    --hia-color-text: CanvasText;
+    --hia-color-text-muted: CanvasText;
+    --hia-color-accent: LinkText;
+    --hia-color-accent-contrast: Canvas;
+    --hia-color-accent-soft: Canvas;
+    --hia-color-accent-hover: LinkText;
+    --hia-color-focus-ring: Highlight;
+    --hia-color-code-background: Canvas;
+    --hia-color-code-text: CanvasText;
+    --hia-color-danger: MarkText;
+  }
+}
+
+@media print {
+  /* <lang><zh-CN>显式匹配 skin/scheme specificity，避免打印仍继承暗色画布。</zh-CN><en>Explicitly match skin/scheme specificity so print output cannot retain a dark canvas.</en></lang> */
+  :root,
+  :root[data-hia-skin][data-hia-scheme] {
+    color-scheme: only light;
+    --hia-color-canvas: #ffffff;
+    --hia-color-surface: #ffffff;
+    --hia-color-surface-muted: #ffffff;
+    --hia-color-border: #000000;
+    --hia-color-text: #000000;
+    --hia-color-text-muted: #222222;
+    --hia-color-accent: #000000;
+    --hia-color-accent-contrast: #ffffff;
+    --hia-color-accent-soft: #ffffff;
+    --hia-color-code-background: #ffffff;
+    --hia-color-code-text: #000000;
+  }
+
+  body,
+  .hia-shell {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .hia-shell {
+    display: block;
+  }
+
+  .hia-sidebar,
+  .hia-project-split-site .hia-sidebar {
+    border: 0;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    position: static;
+  }
+
+  .hia-main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .hia-language-switch,
+  .hia-theme-switch,
+  .hia-project-search,
+  .hia-project-secondary-action,
+  .hia-project-views,
+  .hia-source-actions {
+    display: none !important;
+  }
+
+  details:not([open]) > *:not(summary) {
+    display: block !important;
+  }
+
+  details > summary {
+    color: #000000;
+  }
+
+  a {
+    color: #000000;
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 760px) {
+  .hia-shell {
+    display: block;
+  }
+
+  /* <lang><zh-CN>窄屏把长字段键与正文改为单列，避免术语键撑大页面。</zh-CN><en>Stack long field keys and bodies on narrow screens so terminology keys cannot widen the page.</en></lang> */
+  .hia-i18n-field {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hia-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--hia-border);
+  }
+
+  .hia-project-split-site .hia-sidebar {
+    height: auto;
+    max-height: 48vh;
+    position: static;
+  }
+
+  .hia-main {
+    padding: 1rem;
+  }
+}
+
+:root, :root[data-hia-skin], :root[data-hia-skin][data-hia-scheme] {
+  --hia-color-accent: #0f4f82;
+  --hia-color-accent-contrast: #ffffff;
+  --hia-color-accent-soft: #e6eef6;
+  --hia-color-accent-hover: #0d4068;
+}

@@ -1,0 +1,65 @@
+        public IDiscussionItem GetSingleMessage(int itemId)
+        {
+            // <lang>
+            //   <zh-CN>单条详情查询使用短生命周期连接和命令；调用方仍负责把 itemId 与当前模块上下文关联。</zh-CN>
+            //   <en>The single-message detail query uses a short-lived connection and command; callers still associate itemId with the current module context.</en>
+            // </lang>
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand("Portal_GetSingleMessage", connection))
+            {
+                // <lang>
+                //   <zh-CN>明确声明存储过程模式并使用强类型消息标识参数，避免字符串拼接 SQL。</zh-CN>
+                //   <en>Declare stored-procedure mode explicitly and use a strongly typed message identifier parameter, avoiding string-concatenated SQL.</en>
+                // </lang>
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@ItemID", SqlDbType.Int) { Value = itemId });
+
+                // <lang>
+                //   <zh-CN>命令配置完成后打开连接；reader 关闭即释放连接作用域。</zh-CN>
+                //   <en>Open the connection after command configuration; closing the reader releases the connection scope.</en>
+                // </lang>
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // <lang>
+                    //   <zh-CN>只读取第一行，保持“单条消息”查询契约；存储过程若返回重复行，应由数据库侧约束修复。</zh-CN>
+                    //   <en>Read only the first row to preserve the single-message query contract; if the stored procedure returns duplicate rows, the database constraints should be corrected.</en>
+                    // </lang>
+                    if (reader.Read())
+                    {
+                        // <lang>
+                        //   <zh-CN>列序号只在确认存在一行后解析；空结果不依赖 schema 元数据。</zh-CN>
+                        //   <en>Resolve column ordinals only after confirming a row exists; empty results do not depend on schema metadata.</en>
+                        // </lang>
+                        int idxItemID = reader.GetOrdinal("ItemID");
+                        int idxModuleID = reader.GetOrdinal("ModuleID");
+                        int idxTitle = reader.GetOrdinal("Title");
+                        int idxCreatedDate = reader.GetOrdinal("CreatedDate");
+                        int idxBody = reader.GetOrdinal("Body");
+                        int idxDisplayOrder = reader.GetOrdinal("DisplayOrder");
+                        int idxCreatedByUser = reader.GetOrdinal("CreatedByUser");
+
+                        // <lang>
+                        //   <zh-CN>直接返回已物化详情对象；可空字段保留 null，展示/错误处理由调用页完成。</zh-CN>
+                        //   <en>Return the materialized detail object directly; nullable fields remain null and display/error handling stays with the caller page.</en>
+                        // </lang>
+                        return new DiscussionItem
+                        {
+                            ItemID = reader.GetInt32(idxItemID),
+                            ModuleID = reader.GetInt32(idxModuleID),
+                            Title = reader.IsDBNull(idxTitle) ? null : reader.GetString(idxTitle),
+                            CreatedDate = reader.IsDBNull(idxCreatedDate) ? (DateTime?)null : reader.GetDateTime(idxCreatedDate),
+                            Body = reader.IsDBNull(idxBody) ? null : reader.GetString(idxBody),
+                            DisplayOrder = reader.IsDBNull(idxDisplayOrder) ? null : reader.GetString(idxDisplayOrder),
+                            CreatedByUser = reader.IsDBNull(idxCreatedByUser) ? null : reader.GetString(idxCreatedByUser)
+                        };
+                    }
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>没有匹配消息时返回 null，不在数据层泄露原因或构造用户可见错误文案。</zh-CN>
+            //   <en>Return null when no message matches, without leaking a cause or constructing user-visible error text in the data layer.</en>
+            // </lang>
+            return null;
+        }

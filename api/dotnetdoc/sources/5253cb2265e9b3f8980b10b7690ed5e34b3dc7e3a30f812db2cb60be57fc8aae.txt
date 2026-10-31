@@ -1,0 +1,47 @@
+        private bool TryReadDateRange(out DateTime startUtc, out DateTime endUtc)
+        {
+            startUtc = DateTime.MinValue;
+            endUtc = DateTime.MinValue;
+            if (!DateTime.TryParseExact(
+                    StartDateTextBox.Text,
+                    "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out startUtc) ||
+                !DateTime.TryParseExact(
+                    EndDateTextBox.Text,
+                    "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out endUtc))
+            {
+                // <lang>
+                //   <zh-CN>只接受不带本地化歧义的 yyyy-MM-dd 文本，失败时不向查询服务传递部分解析值。</zh-CN>
+                //   <en>Accept only unambiguous yyyy-MM-dd text and do not pass partially parsed values to the query service on failure.</en>
+                // </lang>
+                MessageLabel.Text = lang.Admin_Common_DateRangeFormat;
+                return false;
+            }
+
+            if (endUtc < startUtc)
+            {
+                // <lang>
+                //   <zh-CN>结束日期不得早于起始日期，保持服务端区间方向稳定。</zh-CN>
+                //   <en>The end date cannot precede the start date, keeping the service interval direction stable.</en>
+                // </lang>
+                MessageLabel.Text = lang.Admin_Common_EndBeforeStart;
+                return false;
+            }
+
+            if ((endUtc - startUtc).TotalDays >= 31)
+            {
+                // <lang>
+                //   <zh-CN>限制小于 31 天的输入窗口，避免后台查询放大扫描成本。</zh-CN>
+                //   <en>Limit the input window to fewer than 31 days to avoid amplifying the administrative scan cost.</en>
+                // </lang>
+                MessageLabel.Text = lang.Admin_Common_DateRangeMax31Days;
+                return false;
+            }
+
+            return true;
+        }

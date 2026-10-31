@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>最近请求列表只展示服务器返回的有限快照，字段使用编码绑定；列表是状态提示，不等同于员工主数据已修改或审核已完成。</zh-CN>
+                    <en>The recent-request list shows a bounded server-returned snapshot with encoded fields; it is a status hint, not proof that employee master data changed or review completed.</en>
+                </lang>
+            --%>

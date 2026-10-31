@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>标题栏控件继续承载旧模块的编辑入口和权限可见性逻辑，避免讨论列表标记层重复实现模块标题区域。</zh-CN>
+  <en>The title control continues to own the legacy module edit entry and visibility behavior, avoiding duplicate title-bar logic in the discussion list markup.</en>
+</lang>
+--%>

@@ -1,0 +1,87 @@
+        private bool TryRenameRole(IRoleItem role, string requestedName)
+        {
+            // <lang>
+            //   <zh-CN>名称先经过角色名策略归一化；无效输入不访问角色或授权数据。</zh-CN>
+            //   <en>Normalize the name through the role-name policy first; invalid input performs no role or authorization data access.</en>
+            // </lang>
+            string roleName;
+            if (!PortalAdministrationPolicy.TryNormalizeRoleName(requestedName, out roleName))
+            {
+                ShowMessage(lang.Admin_Roles_MessageInvalidRoleName);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>同一门户内角色名称必须保持唯一；跨门户同名不在本控件处理范围内。</zh-CN>
+            //   <en>Role names must be unique within the same Portal; same names across Portals are outside this control's scope.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>读取当前门户快照并在同一门户内排除当前角色后检查重名。</zh-CN>
+            //   <en>Read the current Portal snapshot and check duplicates within that Portal while excluding the current role.</en>
+            // </lang>
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            // <lang>
+            //   <zh-CN>重名比较不区分大小写，避免授权字符串出现看似不同但实际冲突的角色。</zh-CN>
+            //   <en>Compare names case-insensitively to prevent authorization conflicts that differ only by case.</en>
+            // </lang>
+            bool duplicate = RolesDB.GetPortalRoles(portalSettings.PortalId).Any(item =>
+                item.RoleId != role.RoleId &&
+                string.Equals(item.RoleName, roleName, StringComparison.OrdinalIgnoreCase));
+            if (duplicate)
+            {
+                ShowMessage(lang.Admin_Roles_MessageDuplicateRoleName);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>名称未变化时直接视为成功，不触碰数据库或授权引用。</zh-CN>
+            //   <en>Treat an unchanged name as success without touching persistence or authorization references.</en>
+            // </lang>
+            if (string.Equals(role.RoleName, roleName, StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>核心管理员角色是旧门户安全兜底角色，当前阶段禁止改名。</zh-CN>
+            //   <en>The core administrator role is the legacy Portal safety backstop and cannot be renamed in the current stage.</en>
+            // </lang>
+            if (string.Equals(role.RoleName, PortalRoleNames.Administrators, StringComparison.OrdinalIgnoreCase))
+            {
+                ShowMessage(lang.Admin_Roles_MessageCoreRoleRenameBlocked);
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>保存旧名称用于精确同步；角色更新成功后再更新 Tab/模块授权引用并写审计。</zh-CN>
+                //   <en>Keep the old name for exact synchronization; update the role first, then references and audit.</en>
+                // </lang>
+                string previousRoleName = role.RoleName;
+                RolesDB.UpdateRole(role.RoleId, roleName);
+                UpdateRoleReferences(portalSettings, previousRoleName, roleName);
+                PortalOperationAudit.Record(
+                    "RoleAdministration",
+                    "Rename",
+                    "Role",
+                    role.RoleId.ToString(),
+                    "Renamed role and synchronized exact authorization references.",
+                    Context);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>改名或引用同步失败写入统一诊断并返回事件编号。</zh-CN>
+                //   <en>Record rename or reference-synchronization failures through shared diagnostics and return an event id.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Roles.Rename",
+                    "Renaming a role failed. RoleId=" + role.RoleId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Roles_MessageRenameFailed, eventId));
+                return false;
+            }
+        }

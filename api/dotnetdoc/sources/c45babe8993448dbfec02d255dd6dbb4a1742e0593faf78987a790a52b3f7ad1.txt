@@ -1,0 +1,21 @@
+        public LeaveRequestResult CreateRequest(LeaveRequestCreateRequest request)
+        {
+            try
+            {
+                var id = context.Database.SqlQuery<long>(
+                    "INSERT INTO dbo.PortalBiz_LeaveRequests (UserId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc) " +
+                    "OUTPUT INSERTED.RequestId VALUES (@UserId, @LeaveType, @StartDate, @EndDate, @Days, @Reason, @AttachmentName, N'Pending', SYSUTCDATETIME());",
+                    new SqlParameter("@UserId", request.UserId),
+                    new SqlParameter("@LeaveType", (object)request.LeaveType ?? DBNull.Value),
+                    new SqlParameter("@StartDate", request.StartDate),
+                    new SqlParameter("@EndDate", request.EndDate),
+                    new SqlParameter("@Days", request.Days),
+                    new SqlParameter("@Reason", (object)request.Reason ?? DBNull.Value),
+                    new SqlParameter("@AttachmentName", (object)request.AttachmentName ?? DBNull.Value)).Single();
+                return new LeaveRequestResult { Ok = true, RequestId = id };
+            }
+            catch
+            {
+                return new LeaveRequestResult { Ok = false, ErrorCode = "DbError" };
+            }
+        }

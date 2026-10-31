@@ -1,0 +1,7 @@
+        public bool IsSchemaAvailable()
+        {
+            return HasTable(ItemTableName) &&
+                   HasTable(EventTableName) &&
+                   HasColumn(EventTableName, "EventType") &&
+                   HasColumn(EventTableName, "VisibilityScope");
+        }

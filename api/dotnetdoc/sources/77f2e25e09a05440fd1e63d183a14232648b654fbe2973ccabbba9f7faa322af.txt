@@ -1,0 +1,13 @@
+        public EmployeeDirectoryWriteResult(
+            bool succeeded,
+            int entityId,
+            string message,
+            bool conflict,
+            bool notFound)
+        {
+            Succeeded = succeeded;
+            EntityId = entityId;
+            Message = message ?? string.Empty;
+            Conflict = conflict;
+            NotFound = notFound;
+        }

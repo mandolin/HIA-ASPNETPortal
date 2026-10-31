@@ -1,0 +1,1 @@
+        public string PreferredEmail { get; private set; }

@@ -1,0 +1,90 @@
+        public int AddSelfRegisteredUser(
+            string fullName,
+            string email,
+            string password,
+            string employeeCode,
+            string inviteCode,
+            bool requiresApproval)
+        {
+            if (!HasRegistrationTable() || !HasCredentialTables())
+            {
+                return -1;
+            }
+
+            PortalPasswordRejection passwordRejection;
+            if (!PortalPasswordPolicy.TryValidate(
+                password,
+                BuildPasswordPolicyContextTerms(fullName, email, employeeCode),
+                out passwordRejection))
+            {
+                return -1;
+            }
+
+            string normalizedInviteCode = Normalize(inviteCode);
+            PortalRegistrationInviteRejection inviteRejection;
+            if (!ValidateRegistrationInvite(normalizedInviteCode, out inviteRejection))
+            {
+                return -1;
+            }
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var item = new UserItem
+                    {
+                        Name = fullName,
+                        Email = email,
+                        Password = string.Empty
+                    };
+
+                    _context.Users.Add(item);
+                    _context.SaveChanges();
+
+                    EnsureSecurityState(item.UserId, "SelfRegistration");
+                    TryEnsureUserProfile(
+                        item.UserId,
+                        item.Name,
+                        item.Email,
+                        requiresApproval
+                            ? PortalUserProfileStatuses.PendingApproval
+                            : PortalUserProfileStatuses.Active,
+                        "system-self-registration");
+                    UpsertCredential(item.UserId, password, null, null, false, null);
+
+                    // <lang>
+                    //   <zh-CN>所有注册审核时间统一以 UTC 保存。</zh-CN>
+                    //   <en>Store all registration-review timestamps in UTC.</en>
+                    // </lang>
+                    DateTime nowUtc = DateTime.UtcNow;
+                    _context.UserRegistrations.Add(new UserRegistrationItem
+                    {
+                        UserId = item.UserId,
+                        Status = requiresApproval
+                            ? PortalUserRegistrationStatuses.PendingApproval
+                            : PortalUserRegistrationStatuses.Approved,
+                        RequiresApproval = requiresApproval,
+                        EmployeeCode = NullIfEmpty(employeeCode),
+                        InviteCode = NullIfEmpty(normalizedInviteCode),
+                        RegisteredUtc = nowUtc,
+                        ApprovedUtc = requiresApproval ? (DateTime?)null : nowUtc,
+                        ApprovedBy = requiresApproval ? null : "system-self-registration"
+                    });
+
+                    // <lang>
+                    //   <zh-CN>空邀请码不会增加使用次数；有效邀请码的计数与用户创建同一事务提交。</zh-CN>
+                    //   <en>Empty invite codes do not increment usage; valid invite counts commit in the same transaction as user creation.</en>
+                    // </lang>
+                    IncrementInviteUsage(normalizedInviteCode);
+                    _context.SaveChanges();
+                    transaction.Commit();
+
+                    return item.UserId;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }

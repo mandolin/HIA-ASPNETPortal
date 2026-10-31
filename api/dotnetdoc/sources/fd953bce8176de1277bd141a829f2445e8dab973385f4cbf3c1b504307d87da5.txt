@@ -1,0 +1,11 @@
+        private static int GetMaximumUploadBytes()
+        {
+            // <lang>
+            //   <zh-CN>运行设置只提供可收紧的覆盖值；无效值不能扩大基础设施允许范围。</zh-CN>
+            //   <en>Runtime settings provide only a narrowing override; invalid values cannot expand the infrastructure allowance.</en>
+            // </lang>
+            int configured = PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.MaxUploadBytes);
+            return configured > 0 && configured <= InfrastructureMaximumUploadBytes
+                ? configured
+                : 10485760;
+        }

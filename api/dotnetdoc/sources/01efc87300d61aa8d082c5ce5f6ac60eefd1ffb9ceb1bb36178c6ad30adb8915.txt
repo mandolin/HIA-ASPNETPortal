@@ -1,0 +1,5 @@
+        internal static string Legacy_Discussion_AnonymousAuthor {
+            get {
+                return ResourceManager.GetString("Legacy_Discussion_AnonymousAuthor", resourceCulture);
+            }
+        }

@@ -1,0 +1,6 @@
+                    <%--
+                        <lang>
+                            <zh-CN>排序、编辑和删除共用旧事件回调；删除语义受 code-behind 的核心 Tab 保护约束，页面提示不能替代服务器校验。</zh-CN>
+                            <en>Ordering, editing, and deletion share the legacy callbacks; deletion is constrained by the code-behind's core-tab protection, and the page hint cannot replace server validation.</en>
+                        </lang>
+                    --%>

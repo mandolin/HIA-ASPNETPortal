@@ -1,0 +1,5 @@
+        internal static string Admin_Roles_MessageCreateFailed {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageCreateFailed", resourceCulture);
+            }
+        }

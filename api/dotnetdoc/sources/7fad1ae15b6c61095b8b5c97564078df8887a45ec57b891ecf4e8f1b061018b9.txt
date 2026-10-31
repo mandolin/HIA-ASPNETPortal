@@ -1,0 +1,1 @@
+        IDictionary<long, IList<CollaborationItemEventInfo>> GetVisibleEventsForItems(IList<long> itemIds, int actorUserId);

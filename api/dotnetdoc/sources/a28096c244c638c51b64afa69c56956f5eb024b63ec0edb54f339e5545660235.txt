@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_Title {
+            get {
+                return ResourceManager.GetString("LeaveRequest_Title", resourceCulture);
+            }
+        }

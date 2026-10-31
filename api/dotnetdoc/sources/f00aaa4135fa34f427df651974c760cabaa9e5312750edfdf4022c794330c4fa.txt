@@ -1,0 +1,20 @@
+        private static bool CanWrite(
+            PortalSettingDefinition definition,
+            string settingValue,
+            out string normalizedValue)
+        {
+            // <lang>
+            //   <zh-CN>先建立稳定失败输出，避免失败路径将原始候选值带到调用方或后续 SQL 参数。</zh-CN>
+            //   <en>Establish a stable failure output first so a failure path cannot carry raw candidate text to a caller or later SQL parameter.</en>
+            // </lang>
+            normalizedValue = string.Empty;
+
+            // <lang>
+            //   <zh-CN>门禁同时要求定义存在、声明允许在线编辑且非敏感，并复用运行时类型/范围规范化；它不检查当前用户或页面权限。</zh-CN>
+            //   <en>The gate requires a definition, declared online editability, non-sensitivity, and shared runtime type/range normalization; it does not check current-user or page authorization.</en>
+            // </lang>
+            return definition != null &&
+                   definition.CanEditOnline &&
+                   !definition.IsSensitive &&
+                   PortalRuntimeSettings.TryNormalizeValue(definition, settingValue, out normalizedValue);
+        }

@@ -1,0 +1,6 @@
+<%--
+   <lang>
+     <zh-CN>Register.aspx 为公开或邀请式注册提供旧 Web Forms 表单；页面只收集账号、邮箱、员工号与密码输入，唯一性校验、邀请策略、密码处理和数据库写入均由 RegisterBtn_Click 及 UsersDB 服务器链路完成。</zh-CN>
+     <en>Register.aspx provides the legacy Web Forms surface for public or invitation registration; the page only collects account, email, employee code, and password input, while uniqueness checks, invitation policy, password handling, and database persistence are handled by RegisterBtn_Click and the UsersDB server path.</en>
+   </lang>
+--%>

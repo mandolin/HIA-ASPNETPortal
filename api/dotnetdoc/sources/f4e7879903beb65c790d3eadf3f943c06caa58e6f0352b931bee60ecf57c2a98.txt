@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_LabelDueUtc {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelDueUtc", resourceCulture);
+            }
+        }

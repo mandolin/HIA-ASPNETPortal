@@ -1,0 +1,8 @@
+        private string EncodeDisplayText(string value)
+        {
+            // <lang>
+            //   <zh-CN>展示历史创建人等文本时先解码再编码，兼容旧实体存储并保持 HTML 文本节点安全。</zh-CN>
+            //   <en>When displaying historical creator text and similar values, decode before encoding to support legacy entity storage while keeping HTML text nodes safe.</en>
+            // </lang>
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
+        }

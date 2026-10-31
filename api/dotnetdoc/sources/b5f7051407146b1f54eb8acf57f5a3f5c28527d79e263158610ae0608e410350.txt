@@ -1,0 +1,9 @@
+        private void ShowValidationMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>校验提示由服务器固定分支提供，不回显管理员输入的原始日期或路径。</zh-CN>
+            //   <en>The validation notice comes from fixed server-side branches and does not echo the administrator's raw date or path input.</en>
+            // </lang>
+            ValidationMessage.Text = message;
+            ValidationMessage.Visible = true;
+        }

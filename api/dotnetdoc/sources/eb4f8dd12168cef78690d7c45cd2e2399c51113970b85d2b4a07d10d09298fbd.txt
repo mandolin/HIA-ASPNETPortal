@@ -1,0 +1,1 @@
+        public const int DefaultMaxRelatedEntries = 4;

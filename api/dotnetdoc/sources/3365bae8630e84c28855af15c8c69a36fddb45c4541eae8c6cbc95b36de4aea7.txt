@@ -1,0 +1,5 @@
+        internal static string Common_ModulePathMessageNotSiteRelative {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageNotSiteRelative", resourceCulture);
+            }
+        }

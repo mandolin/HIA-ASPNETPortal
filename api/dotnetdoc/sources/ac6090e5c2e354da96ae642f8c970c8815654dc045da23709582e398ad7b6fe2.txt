@@ -1,0 +1,14 @@
+        private static bool IsAllowedResourceExtension(string resource)
+        {
+            // <lang>
+            //   <zh-CN>allowlist 是当前静态资源能力边界，不按 MIME 猜测、不接受无扩展名，也不把新扩展名作为向后兼容自动放行。</zh-CN>
+            //   <en>The allowlist is the current static-resource capability boundary: do not infer from MIME, accept extensionless files, or automatically allow new extensions as backward compatibility.</en>
+            // </lang>
+            string extension = Path.GetExtension(resource);
+            return string.Equals(extension, ".css", StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(extension, ".png", StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(extension, ".gif", StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(extension, ".webp", StringComparison.OrdinalIgnoreCase);
+        }

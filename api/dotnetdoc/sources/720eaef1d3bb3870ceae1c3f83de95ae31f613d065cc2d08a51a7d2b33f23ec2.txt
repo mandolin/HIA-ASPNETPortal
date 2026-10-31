@@ -1,0 +1,12 @@
+        internal EmployeeProfileCorrectionRecentRequestRow(EmployeeProfileCorrectionRequestInfo request)
+        {
+            // <lang>
+            //   <zh-CN>把服务投影转换为专用展示行；时间固定为 UTC 文本，空当前值使用统一占位符，避免标记层承担业务判断。</zh-CN>
+            //   <en>Convert the service projection into a dedicated display row; keep time as UTC text, normalize an empty current value, and keep business decisions out of markup.</en>
+            // </lang>
+            SubmittedUtcText = request.SubmittedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+            FieldName = request.FieldName;
+            CurrentValueSnapshot = string.IsNullOrWhiteSpace(request.CurrentValueSnapshot) ? lang.Common_NonePlaceholder : request.CurrentValueSnapshot;
+            ProposedValue = request.ProposedValue;
+            RequestStatus = request.RequestStatus;
+        }

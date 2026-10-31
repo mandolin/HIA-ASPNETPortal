@@ -1,0 +1,40 @@
+        public void UpdateModuleSetting(int moduleId, string key, string val)
+        {
+            // <lang>
+            //   <zh-CN>先通过严格模块查找取得现有设置；模块不存在时应暴露为配置错误。</zh-CN>
+            //   <en>Resolve existing settings through strict module lookup first; a missing module should surface as a configuration error.</en>
+            // </lang>
+            var settings = GetModuleSettings(moduleId);
+
+            if (settings.ContainsKey(key))
+            {
+                // <lang>
+                //   <zh-CN>已有键只更新值，保留原有设置行和模块关联。</zh-CN>
+                //   <en>For an existing key, update only the value while preserving the setting row and module association.</en>
+                // </lang>
+                var setting = _items.Single(i => i.ModuleId == moduleId).Settings.Single(s => s.SettingName == key);
+                setting.SettingText = val;
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>缺失键按旧门户约定创建新设置行。</zh-CN>
+                //   <en>A missing key creates a new setting row following the legacy Portal convention.</en>
+                // </lang>
+                var setting = new ModuleSettingItem
+                {
+                    ModuleId = moduleId,
+                    SettingName = key,
+                    SettingText = val
+                };
+                _context.Settings.Add(setting);
+            }
+
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>设置写入后刷新快照，保证模块初始化读取到最新配置。</zh-CN>
+            //   <en>Refresh the snapshot after saving settings so module initialization reads the latest configuration.</en>
+            // </lang>
+            _items = _context.Modules.ToList();
+        }

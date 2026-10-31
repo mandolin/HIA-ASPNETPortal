@@ -1,0 +1,19 @@
+        public static int GetInt32(PortalSettingDefinition definition)
+        {
+            // <lang>
+            //   <zh-CN>先验证定义与整数契约；最终解析再次应用范围门禁，所有来源均不可用时按既有契约返回 <c>0</c>。</zh-CN>
+            //   <en>Validate definition and integer contract first; apply the range gate again to final parsing and return <c>0</c> by the established contract when no source is usable.</en>
+            // </lang>
+            EnsureDefinition(definition);
+            EnsureValueType(definition, PortalSettingValueType.Integer);
+
+            // <lang>
+            //   <zh-CN>承接最终文本的整数解析结果；随后再次检查定义边界，避免最终回退值绕过范围契约。</zh-CN>
+            //   <en>Receive the integer parse result for the final text; the definition bounds are checked again so the final fallback cannot bypass the range contract.</en>
+            // </lang>
+            int parsed;
+            return int.TryParse(GetEffectiveValue(definition).Value, out parsed) &&
+                   IsIntegerInRange(definition, parsed)
+                ? parsed
+                : 0;
+        }

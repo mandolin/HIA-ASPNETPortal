@@ -1,0 +1,25 @@
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            // <lang>
+            //   <zh-CN>缺失参数保留兼容默认值 0；存在参数必须通过正整数策略。</zh-CN>
+            //   <en>Keep the compatibility default of 0 when absent; a supplied value must pass positive-integer validation.</en>
+            // </lang>
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非法导航参数统一拒绝，不将原始值回显到后台页面。</zh-CN>
+            //   <en>Reject invalid navigation input consistently without echoing the raw value into the administration page.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }

@@ -1,0 +1,14 @@
+        private static IList<PortalWorkItemInfo> FilterOverdue(IList<PortalWorkItemInfo> items)
+        {
+            IList<PortalWorkItemInfo> overdue = new List<PortalWorkItemInfo>();
+            DateTime nowUtc = DateTime.UtcNow;
+            foreach (PortalWorkItemInfo item in items)
+            {
+                if (item != null && item.DueUtc.HasValue && item.DueUtc.Value < nowUtc)
+                {
+                    overdue.Add(item);
+                }
+            }
+
+            return overdue;
+        }

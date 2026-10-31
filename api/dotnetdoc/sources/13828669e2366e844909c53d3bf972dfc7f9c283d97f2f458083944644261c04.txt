@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>P7.4.2-E 将 XML/XSL 配置页改为主题化表单；资源仍必须由受信任部署提供。</zh-CN>
+            <en>P7.4.2-E rebuilds the XML/XSL settings page with a themed form while deployed resources must still be provided by trusted deployment.</en>
+        </lang>
+    --%>

@@ -1,0 +1,53 @@
+        public IList<EmployeeProfileCorrectionRequestInfo> GetRecentRequestsForUser(int userId, int take)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<EmployeeProfileCorrectionRequestInfo>();
+            }
+
+            int safeTake = NormalizeTake(take, 10);
+            try
+            {
+                // <lang>
+                //   <zh-CN>用户侧最近请求只按当前用户过滤，避免员工多人绑定或历史绑定时串看到其他账号的申请。</zh-CN>
+                //   <en>User-facing recent requests are filtered by current user to avoid leaking another account's requests when employees have multiple or historical bindings.</en>
+                // </lang>
+                return context.Database.SqlQuery<EmployeeProfileCorrectionRequestInfo>(
+                    @"
+SELECT TOP (@Take)
+    [Request].[RequestId],
+    [Request].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName] AS [EmployeeDisplayName],
+    [Request].[UserId],
+    [User].[Name] AS [UserName],
+    [Request].[BindingId],
+    [Request].[SubmittedUtc],
+    [Request].[SubmittedBy],
+    [Request].[FieldName],
+    [Request].[CurrentValueSnapshot],
+    [Request].[ProposedValue],
+    [Request].[RequestNote],
+    [Request].[RequestStatus],
+    [Request].[ReviewedUtc],
+    [Request].[ReviewedBy],
+    [Request].[ReviewNote]
+FROM [dbo].[PortalBiz_EmployeeProfileCorrectionRequests] AS [Request]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Request].[EmployeeId]
+INNER JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [Request].[UserId]
+WHERE [Request].[UserId] = @UserId
+ORDER BY [Request].[SubmittedUtc] DESC, [Request].[RequestId] DESC;",
+                    new SqlParameter("@Take", safeTake),
+                    new SqlParameter("@UserId", userId)).ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>历史请求列表读取失败时返回空集合，页面保持可用；提交动作仍会单独校验并返回明确失败。</zh-CN>
+                //   <en>When recent-request reading fails, return an empty list so the page remains usable; submission still validates independently and returns explicit failures.</en>
+                // </lang>
+                return new List<EmployeeProfileCorrectionRequestInfo>();
+            }
+        }

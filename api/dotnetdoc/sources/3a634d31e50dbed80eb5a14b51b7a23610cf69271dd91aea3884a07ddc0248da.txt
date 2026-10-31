@@ -1,0 +1,10 @@
+        public void BuildUpControl(Control ctrl)
+        {
+            /*
+             * <lang>
+             *   <zh-CN>复用页面已经解析出的容器，为动态控件补齐声明式依赖。</zh-CN>
+             *   <en>Reuse the container already resolved by the page to complete declared dependencies on the dynamic control.</en>
+             * </lang>
+             */
+            _accessor.Container.BuildUp(typeof(Control), ctrl, string.Empty);
+        }

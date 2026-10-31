@@ -1,0 +1,4 @@
+        private string GetCurrentUserName()
+        {
+            return IsCurrentUserAuthenticated() ? Context.User.Identity.Name : string.Empty;
+        }

@@ -1,0 +1,7 @@
+        public CollaborationItemCommentResult(bool succeeded, long itemId, long eventId, string message)
+        {
+            Succeeded = succeeded;
+            ItemId = itemId;
+            EventId = eventId;
+            Message = message ?? string.Empty;
+        }

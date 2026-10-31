@@ -1,0 +1,198 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-e2a121d4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.emptytonone-system.string",
+      "kind": "entry",
+      "label": "EmptyToNone",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.emptytonone-system.string",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.emptytonone-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-b648028a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.hasparentitem",
+      "kind": "entry",
+      "label": "HasParentItem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.hasparentitem",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.hasparentitem",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-41bb068d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemcode",
+      "kind": "entry",
+      "label": "ItemCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemcode",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemcode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-1bfa1f9c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemid",
+      "kind": "entry",
+      "label": "ItemId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemid",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-a7edff28.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemstatus",
+      "kind": "entry",
+      "label": "ItemStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemstatus",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.itemstatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-926258a7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.lastactioncomment",
+      "kind": "entry",
+      "label": "LastActionComment",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.lastactioncomment",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.lastactioncomment",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-40074e45.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.lastactionutctext",
+      "kind": "entry",
+      "label": "LastActionUtcText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.lastactionutctext",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.lastactionutctext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-b39af595.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.latestparticipantcomment",
+      "kind": "entry",
+      "label": "LatestParticipantComment",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.latestparticipantcomment",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.latestparticipantcomment",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-8648a4d3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.participantlines",
+      "kind": "entry",
+      "label": "ParticipantLines",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.participantlines",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.participantlines",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-011300ce.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.participantstext",
+      "kind": "entry",
+      "label": "ParticipantsText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.participantstext",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.participantstext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-966e0567.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.prioritykey",
+      "kind": "entry",
+      "label": "PriorityKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.prioritykey",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.prioritykey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-155c82a9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.statustext",
+      "kind": "entry",
+      "label": "StatusText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.statustext",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.statustext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-5b6b47b7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.title",
+      "kind": "entry",
+      "label": "Title",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.title",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.title",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.enterprisecapabilityworkb-094b5e38.html"
+    }
+  ]
+}

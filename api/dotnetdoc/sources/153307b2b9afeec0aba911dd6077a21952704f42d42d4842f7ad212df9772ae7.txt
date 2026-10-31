@@ -1,0 +1,1 @@
+        IEnumerable<IModuleItem> GetModulesByTab(int tabId);

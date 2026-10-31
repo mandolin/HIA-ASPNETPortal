@@ -1,0 +1,107 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.anonymoushiddennavigationkeys-system.web.httpcontext",
+      "kind": "entry",
+      "label": "AnonymousHiddenNavigationKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.anonymoushiddennavigationkeys-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.anonymoushiddennavigationkeys-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-914cbe17.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ExcludedNavigationKeyPrefixes",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-5f60b17f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "kind": "entry",
+      "label": "HiddenNavigationKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-8bf3304a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "kind": "entry",
+      "label": "HideTabsWithoutRenderableModules",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-cad44b53.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "kind": "entry",
+      "label": "LogHiddenTabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-b914f190.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ReadBoolean",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-7777c66a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ReadList",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-49be249e.html"
+    }
+  ]
+}

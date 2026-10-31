@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>当前资料快照用字段网格展示；提交区仍保留原控件 ID 和事件，以维持 code-behind 绑定和回发兼容。</zh-CN>
+                <en>The current profile snapshot renders in a field grid; the submission area keeps the original control IDs and events to preserve code-behind binding and postback compatibility.</en>
+            </lang>
+        --%>

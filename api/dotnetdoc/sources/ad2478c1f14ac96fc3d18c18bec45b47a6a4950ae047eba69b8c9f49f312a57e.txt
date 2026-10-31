@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>P2.3 注册审核状态区域只展示当前状态，并提供最小批准/拒绝动作。</zh-CN>
+                <en>The P2.3 registration-review status area displays the current state and exposes only minimal approve/reject actions.</en>
+              </lang>
+            --%>

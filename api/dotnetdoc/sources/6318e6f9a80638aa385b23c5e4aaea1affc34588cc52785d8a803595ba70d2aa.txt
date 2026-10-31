@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleSettings_LabelModuleName {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LabelModuleName", resourceCulture);
+            }
+        }

@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "layout": "split-site",
+  "generator": "@hia-doc/dotnetdoc-runner（hia-dotnetdoc）+ @hia-doc/renderer-html（hia docs build），由 dev/scripts/Publish-PortalDotNetDoc.ps1 编排",
+  "publishedBy": "HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）",
+  "generatedUtc": "2026-10-30T23:40:39Z",
+  "entrypoint": "index.html",
+  "defaultLocale": "zh-CN",
+  "locales": [
+    "zh-CN",
+    "en"
+  ],
+  "localeNote": "条目页内含中英双语内容块，站内语言切换器切换显示语言；默认显示中文。已知限制：搜索索引按默认语言（中文）建立。",
+  "sourceFingerprint": "1ce9326c7c4337e6dc5c1711bf825b98c217d98c83b50a491dddccb375b17905",
+  "fingerprintAlgorithm": "SHA256 over '<relativePath>|<byteLength>|<sha256(content)>' lines, joined by LF；输入缺失记 <missing>。覆盖 dotnetdoc.config.json 及其声明的全部输入。",
+  "fingerprintInputs": [
+    "dotnetdoc.config.json",
+    "src/master.sln",
+    "src/Portal.Components/bin/Debug/Portal.Components.xml",
+    "src/Portal/Admin/AccessDenied.aspx",
+    "src/Portal/Admin/DiagnosticLogDetail.aspx",
+    "src/Portal/Admin/DiagnosticsLogs.aspx",
+    "src/Portal/Admin/EditAccessDenied.aspx",
+    "src/Portal/Admin/EmployeeDirectory.aspx",
+    "src/Portal/Admin/EmployeeEdit.aspx",
+    "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx",
+    "src/Portal/Admin/Logoff.aspx",
+    "src/Portal/Admin/ManageUsers.aspx",
+    "src/Portal/Admin/ModuleCatalog.aspx",
+    "src/Portal/Admin/ModuleDefinitions.aspx",
+    "src/Portal/Admin/ModuleDefs.ascx",
+    "src/Portal/Admin/ModuleSettings.aspx",
+    "src/Portal/Admin/NotImplemented.aspx",
+    "src/Portal/Admin/OperationAudits.aspx",
+    "src/Portal/Admin/OrganizationUnitEdit.aspx",
+    "src/Portal/Admin/Register.aspx",
+    "src/Portal/Admin/Roles.ascx",
+    "src/Portal/Admin/SecurityRoles.aspx",
+    "src/Portal/Admin/SiteSettings.ascx",
+    "src/Portal/Admin/SystemHealth.aspx",
+    "src/Portal/Admin/TabLayout.aspx",
+    "src/Portal/Admin/Tabs.ascx",
+    "src/Portal/Admin/ThemeSettings.aspx",
+    "src/Portal/Admin/UserEmployeeBindingEdit.aspx",
+    "src/Portal/Admin/Users.ascx",
+    "src/Portal/Admin/WorkItems.aspx",
+    "src/Portal/bin/Portal.Components.Data.xml",
+    "src/Portal/bin/Portal.Components.Data1.xml",
+    "src/Portal/bin/Portal.xml",
+    "src/Portal/Default.aspx",
+    "src/Portal/Default.master",
+    "src/Portal/DesktopDefault.aspx",
+    "src/Portal/DesktopModules/Announcements.ascx",
+    "src/Portal/DesktopModules/Contacts.ascx",
+    "src/Portal/DesktopModules/DiscussDetails.aspx",
+    "src/Portal/DesktopModules/Discussion.ascx",
+    "src/Portal/DesktopModules/Document.ascx",
+    "src/Portal/DesktopModules/EditAnnouncements.aspx",
+    "src/Portal/DesktopModules/EditContacts.aspx",
+    "src/Portal/DesktopModules/EditDocs.aspx",
+    "src/Portal/DesktopModules/EditEvents.aspx",
+    "src/Portal/DesktopModules/EditHtml.aspx",
+    "src/Portal/DesktopModules/EditImage.aspx",
+    "src/Portal/DesktopModules/EditLinks.aspx",
+    "src/Portal/DesktopModules/EditXml.aspx",
+    "src/Portal/DesktopModules/EmployeeProfileConfirm/EmployeeProfileConfirm.ascx",
+    "src/Portal/DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
+    "src/Portal/DesktopModules/Events.ascx",
+    "src/Portal/DesktopModules/HtmlModule.ascx",
+    "src/Portal/DesktopModules/ImageModule.ascx",
+    "src/Portal/DesktopModules/Links.ascx",
+    "src/Portal/DesktopModules/ModuleProbe/ModuleProbe.ascx",
+    "src/Portal/DesktopModules/QuickLinks.ascx",
+    "src/Portal/DesktopModules/Signin.ascx",
+    "src/Portal/DesktopModules/ViewDocument.aspx",
+    "src/Portal/DesktopModules/XmlModule.ascx",
+    "src/Portal/DesktopModuleTitle.ascx",
+    "src/Portal/DesktopPortalBanner.ascx",
+    "src/Portal/GenericErrorPage.aspx"
+  ],
+  "counts": {
+    "entryPages": 5521,
+    "files": 21945,
+    "bytes": 172149012.0
+  },
+  "declaredInputs": [
+    {
+      "half": "api/Portal.Components.Data",
+      "locales": [
+        "en",
+        "zh-CN"
+      ],
+      "title": "HIA-ASPNETPortal Portal.Components.Data API"
+    },
+    {
+      "half": "api/Portal.Components.Data1",
+      "locales": [
+        "en",
+        "zh-CN"
+      ],
+      "title": "HIA-ASPNETPortal Portal.Components.Data1 API"
+    },
+    {
+      "half": "api/Portal.Components",
+      "locales": [
+        "en",
+        "zh-CN"
+      ],
+      "title": "HIA-ASPNETPortal Portal.Components API"
+    },
+    {
+      "half": "api/Portal",
+      "locales": [
+        "en",
+        "zh-CN"
+      ],
+      "title": "HIA-ASPNETPortal Portal API"
+    },
+    {
+      "half": "markup/Portal",
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "title": "Portal Markup Comments"
+    },
+    {
+      "half": "project/Portal",
+      "locales": [
+        "en"
+      ],
+      "title": "HIA-ASPNETPortal Project Discovery"
+    },
+    {
+      "half": "surface/Portal",
+      "locales": [
+        "en"
+      ],
+      "title": "Portal Web Forms Surface"
+    }
+  ]
+}

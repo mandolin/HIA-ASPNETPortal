@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>分页按钮只表达前后页请求且不触发页面验证；实际审计结果页边界和空结果回退由服务端处理。</zh-CN>
+            <en>Pager buttons express only previous/next requests without page validation; the server handles audit-result page boundaries and empty-result fallback.</en>
+          </lang>
+        --%>

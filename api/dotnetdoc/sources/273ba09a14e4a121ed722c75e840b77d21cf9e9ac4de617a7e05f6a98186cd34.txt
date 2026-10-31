@@ -1,0 +1,1 @@
+        public bool IsStateAvailable { get; private set; }

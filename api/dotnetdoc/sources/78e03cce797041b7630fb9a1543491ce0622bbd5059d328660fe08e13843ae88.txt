@@ -1,0 +1,17 @@
+        public static void SetPortalSettings(PortalSettings settings, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>拒绝空设置，避免把缺失对象写入请求容器后延迟到无关读取点才失败。</zh-CN>
+            //   <en>Rejects null settings so a missing object cannot be stored and fail later at an unrelated read point.</en>
+            // </lang>
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            // <lang>
+            //   <zh-CN>通过统一 helper 解析显式或当前线程上下文，并只写入固定键名；不会复制或持久化设置对象。</zh-CN>
+            //   <en>Resolves the explicit or current-thread context through one helper and writes only the fixed key; it does not copy or persist the settings object.</en>
+            // </lang>
+            GetHttpContext(context).Items[PortalSettingsKey] = settings;
+        }

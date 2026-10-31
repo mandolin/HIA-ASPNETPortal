@@ -1,0 +1,32 @@
+    public sealed class PortalBusinessApplicationTransition
+    {
+        /// <summary><lang><zh-CN>动作键，取自 <see cref="PortalWorkflowActions"/> 的稳定常量。</zh-CN><en>The action key, taken from the stable constants in <see cref="PortalWorkflowActions"/>.</en></lang></summary>
+        public string ActionKey { get; private set; }
+
+        /// <summary><lang><zh-CN>该动作的唯一目标状态。</zh-CN><en>The single target status of the action.</en></lang></summary>
+        public string ToStatus { get; private set; }
+
+        /// <summary><lang><zh-CN>允许发起该动作的来源状态集合。</zh-CN><en>The set of source statuses from which the action may be started.</en></lang></summary>
+        public IList<string> FromStatuses { get; private set; }
+
+        /// <summary><lang><zh-CN>该动作是否走后台审核路径（决定是否进入审核 SQL 状态谓词）。</zh-CN><en>Whether the action travels the administration review path, which decides whether it enters the review SQL status predicate.</en></lang></summary>
+        public bool ViaReviewPath { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化一条迁移声明；来源集合会被复制为只读列表。</zh-CN>
+        ///   <en>Initializes a transition declaration; the source set is copied into a read-only list.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="actionKey"><l><zh-CN>动作键。</zh-CN><en>The action key.</en></l></param>
+        /// <param name="toStatus"><l><zh-CN>目标状态。</zh-CN><en>The target status.</en></l></param>
+        /// <param name="fromStatuses"><l><zh-CN>合法来源状态集合。</zh-CN><en>The legal source statuses.</en></l></param>
+        /// <param name="viaReviewPath"><l><zh-CN>是否走后台审核路径。</zh-CN><en>Whether it travels the administration review path.</en></l></param>
+        public PortalBusinessApplicationTransition(string actionKey, string toStatus, string[] fromStatuses, bool viaReviewPath)
+        {
+            ActionKey = actionKey;
+            ToStatus = toStatus;
+            FromStatuses = new List<string>(fromStatuses ?? new string[0]).AsReadOnly();
+            ViaReviewPath = viaReviewPath;
+        }
+    }

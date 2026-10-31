@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>应用按钮提交整组模块设置，事务、编辑角色授权、缓存策略写入和审计事件均由 ApplyChanges_Click 负责。</zh-CN>
+                <en>The apply button submits the complete module-settings set; ApplyChanges_Click owns the transaction, editor-role authorization, cache-policy write, and audit event.</en>
+              </lang>
+            --%>

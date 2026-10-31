@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition CookiesSecure =
+            new PortalSettingDefinition(
+                PortalSettingKeys.CookiesSecure,
+                "Cookie 启用 Secure",
+                "控制身份与角色 Cookie 是否下发 Secure 属性；仅 HTTPS 部署可启用，HTTP 环境启用会导致浏览器不回传 Cookie（表现为登录即掉线）。默认关闭。",
+                PortalSettingValueType.Boolean,
+                "false",
+                true,
+                false,
+                "Admins",
+                "Security");

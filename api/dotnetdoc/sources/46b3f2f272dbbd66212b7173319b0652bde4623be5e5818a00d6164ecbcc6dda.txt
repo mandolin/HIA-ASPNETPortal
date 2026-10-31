@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>登录控件负责采集登录标识、口令和记住登录选项，并通过 code-behind 的表单认证流程完成校验、票据写入和失败提示。</zh-CN>
+        <en>The sign-in control collects the login identifier, password, and remember-me option, then lets the code-behind forms-authentication flow validate credentials, issue tickets, or display failure messages.</en>
+    </lang>
+--%>

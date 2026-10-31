@@ -1,0 +1,13 @@
+        protected void Save_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存按钮不直接写角色关系，只在重新验证后执行受控回跳。</zh-CN>
+            //   <en>The save button does not write membership directly; it performs controlled return navigation only after revalidation.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
+        }

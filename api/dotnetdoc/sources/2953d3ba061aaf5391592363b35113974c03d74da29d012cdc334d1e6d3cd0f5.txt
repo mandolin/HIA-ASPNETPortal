@@ -1,0 +1,71 @@
+        protected void ApplicationsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>审核命令先通过固定动作白名单和处理权限，再校验申请标识与评论长度。</zh-CN>
+            //   <en>Review commands pass the fixed action allowlist and handling permission before validating the application identifier and comment length.</en>
+            // </lang>
+            string actionKey = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            if (!IsSupportedAction(actionKey))
+            {
+                MessageLabel.Text = lang.Admin_BusinessApplications_MessageUnsupportedAction;
+                BindApplications();
+                return;
+            }
+
+            if (!EnsureCanHandleApplications())
+            {
+                return;
+            }
+
+            long applicationId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out applicationId))
+            {
+                MessageLabel.Text = lang.Admin_BusinessApplications_MessageInvalidId;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>审核评论来自当前列表行控件，随后按固定上限归一化后交给数据服务。</zh-CN>
+            //   <en>Read the review comment from the current list-row control and normalize it to the fixed limit before calling the data service.</en>
+            // </lang>
+            TextBox commentBox = e.Item.FindControl("ReviewCommentTextBox") as TextBox;
+            string reviewComment = commentBox == null ? string.Empty : commentBox.Text;
+            // <lang>
+            //   <zh-CN>审核服务负责申请状态和 WorkflowEvent 事实写入，后台页面不自行推断状态。</zh-CN>
+            //   <en>The review service writes application state and WorkflowEvent facts; the page does not infer state locally.</en>
+            // </lang>
+            BusinessApplicationResult result = BusinessApplicationDb.ReviewApplication(
+                new BusinessApplicationReviewRequest
+                {
+                    ApplicationId = applicationId,
+                    ActionKey = actionKey,
+                    ReviewComment = NormalizeInput(reviewComment, 1000),
+                    ReviewedByUserId = GetCurrentUserId(),
+                    ReviewedBy = GetCurrentUserName(),
+                    ReviewedUtc = DateTime.UtcNow
+                });
+
+            if (!result.Succeeded)
+            {
+                MessageLabel.Text = result.Message;
+                BindApplications();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>审核事实成功后记录操作审计，再更新后台待办投影；待办失败不回滚申请状态。</zh-CN>
+            //   <en>Record operation audit after review succeeds, then update the work-item projection; work-item failure does not roll back application state.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.BusinessApplicationReviewed,
+                PortalOperationAuditEvents.BusinessApplicationTargetType,
+                result.ApplicationId.ToString(CultureInfo.InvariantCulture),
+                "Business application reviewed. ApplicationCode=" + result.ApplicationCode + "; ActionKey=" + actionKey,
+                Context);
+
+            TryCompleteWorkItem(result.ApplicationId, actionKey, reviewComment);
+
+            MessageLabel.Text = lang.Admin_BusinessApplications_MessageStateUpdated;
+            BindApplications();
+        }

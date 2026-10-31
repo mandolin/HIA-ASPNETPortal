@@ -1,0 +1,28 @@
+        private static void AddModuleProfileChecks(IList<PortalHealthCheckResult> checks, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>从当前部署和请求上下文解析一次 Profile 快照，后续只消费其已净化的集合。</zh-CN>
+            //   <en>Resolve one Profile snapshot from the deployment and request context, then consume only its sanitized collections.</en>
+            // </lang>
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(context);
+
+            // <lang>
+            //   <zh-CN>用无效条目数量决定警告级别；数量是健康判定事实，不把无效配置原文当作控制输入。</zh-CN>
+            //   <en>Use the invalid-entry count to decide warning severity; the count is the health fact, not raw invalid configuration as control input.</en>
+            // </lang>
+            bool hasInvalidEntries = profile.InvalidEntries.Count > 0;
+
+            // <lang>
+            //   <zh-CN>Profile 只展示非敏感名称和数量；它是部署能力集的解释信息，不展示连接串或文件内容。</zh-CN>
+            //   <en>The Profile check exposes only non-sensitive names and counts. It explains the deployment capability set and never shows connection strings or file contents.</en>
+            // </lang>
+            checks.Add(new PortalHealthCheckResult(
+                "Modules",
+                "模块 Profile",
+                hasInvalidEntries ? PortalHealthStatus.Warning : PortalHealthStatus.Healthy,
+                hasInvalidEntries ? "模块 Profile 已加载，但存在无效配置项。" : "模块 Profile 已加载。",
+                "ActiveProfile=" + profile.ActiveProfile +
+                "; AllowedPackageCount=" + profile.AllowedPackageIds.Count +
+                "; AllowedPackages=" + string.Join(",", profile.AllowedPackageIds.ToArray()) +
+                "; InvalidEntries=" + string.Join(",", profile.InvalidEntries.ToArray())));
+        }

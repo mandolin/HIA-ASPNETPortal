@@ -1,0 +1,52 @@
+        private bool TryInitializeRequest()
+        {
+            // <lang>
+            //   <zh-CN>权限与两个正整数参数构成统一入口门禁；非法参数不进入门户或数据读取。</zh-CN>
+            //   <en>Permission and the two positive-integer parameters form the entry gate; invalid input never reaches Portal or data reads.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.PortalModulesEdit) ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["mid"], out moduleId) ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["tabid"], out tabId))
+            {
+                // <lang>
+                //   <zh-CN>只有已具备编辑权限的请求才重定向到编辑拒绝页，匿名或无权请求沿用权限组件的处理。</zh-CN>
+                //   <en>Redirect to edit-denied only after permission is known; anonymous or unauthorized requests retain the authorization component's handling.</en>
+                // </lang>
+                if (PortalAuthorization.HasPermission(PortalPermissionKeys.PortalModulesEdit))
+                {
+                    PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                }
+
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>读取当前门户设置快照，用同一请求上下文完成 Tab 与 ActiveTab 归属核对。</zh-CN>
+            //   <en>Read the current Portal settings snapshot and verify Tab ownership against the same request context.</en>
+            // </lang>
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            // <lang>
+            //   <zh-CN>仅从桌面 Tab 集合匹配请求的 Tab 标识，避免把任意数字当作有效容器。</zh-CN>
+            //   <en>Match the requested Tab id only within desktop tabs so an arbitrary number cannot become a valid container.</en>
+            // </lang>
+            ITabItem targetTab = portalSettings.DesktopTabs.FirstOrDefault(tab => tab.TabId == tabId);
+            // <lang>
+            //   <zh-CN>旧门户的 ActiveTab 由请求参数驱动；这里同时检查目标 Tab 和 ActiveTab，避免跨 Tab 构造 mid/tabid 操作其他模块。</zh-CN>
+            //   <en>The legacy Portal drives ActiveTab from request parameters; checking both target Tab and ActiveTab prevents crafted mid/tabid pairs from editing another Tab's module.</en>
+            // </lang>
+            currentModule = targetTab == null || portalSettings.ActiveTab == null ||
+                            portalSettings.ActiveTab.TabId != tabId
+                ? null
+                : portalSettings.ActiveTab.Modules.FirstOrDefault(module => module.ModuleId == moduleId);
+            if (currentModule != null)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>未找到同一 ActiveTab 下的模块实例时拒绝编辑，阻断伪造 mid/tabid 组合。</zh-CN>
+            //   <en>Reject editing when the module is not found under the same ActiveTab, blocking forged mid/tabid pairs.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }

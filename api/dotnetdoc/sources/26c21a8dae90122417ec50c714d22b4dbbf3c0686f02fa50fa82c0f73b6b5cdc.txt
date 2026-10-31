@@ -1,0 +1,13 @@
+        public static readonly PortalSettingDefinition PasswordIterationCount =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordIterationCount,
+                "密码哈希迭代次数",
+                "控制新建与重哈希凭据使用的 PBKDF2 迭代次数；低于 210000 的配置会被视为无效并回落，避免降低既有哈希强度。",
+                PortalSettingValueType.Integer,
+                "210000",
+                true,
+                false,
+                "Admins",
+                "Security",
+                minIntegerValue: 210000,
+                maxIntegerValue: 10000000);

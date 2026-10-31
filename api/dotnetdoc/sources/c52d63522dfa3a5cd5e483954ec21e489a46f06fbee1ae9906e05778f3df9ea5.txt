@@ -1,0 +1,126 @@
+        private sealed class PortalModuleTargetSource : IPortalModuleTargetSource
+        {
+            /// <summary><l><zh-CN>宿主模块，用于读取已注入的门面。</zh-CN><en>The hosting module, used to read the injected facades.</en></l></summary>
+            private readonly MyWorkItems owner;
+
+            /// <summary><l><zh-CN>一次绑定内复用的"包标识 → 桌面入口"索引；未构建时为 <c>null</c>。</zh-CN><en>The package-to-desktop-entry index reused within one bind, or <c>null</c> before it is built.</en></l></summary>
+            private IDictionary<string, string> desktopEntries;
+
+            /// <summary><l><zh-CN>创建适配器。</zh-CN><en>Creates the adapter.</en></l></summary>
+            /// <param name="owner"><l><zh-CN>宿主模块。</zh-CN><en>The hosting module.</en></l></param>
+            internal PortalModuleTargetSource(MyWorkItems owner)
+            {
+                this.owner = owner;
+            }
+
+            /// <summary><l><zh-CN>按包标识读取已验证桌面入口；包不存在时为空串。</zh-CN><en>Reads the validated desktop entry by package identifier, or an empty string when absent.</en></l></summary>
+            /// <param name="packageId"><l><zh-CN>模块包标识。</zh-CN><en>The module package identifier.</en></l></param>
+            /// <returns><l><zh-CN>桌面入口虚拟路径或空串。</zh-CN><en>The desktop entry virtual path or an empty string.</en></l></returns>
+            public string GetDesktopEntry(string packageId)
+            {
+                if (string.IsNullOrEmpty(packageId))
+                {
+                    return string.Empty;
+                }
+
+                string entry;
+                return GetDesktopEntries().TryGetValue(packageId, out entry) ? entry : string.Empty;
+            }
+
+            /// <summary><l><zh-CN>读取全部模块定义；门面缺失时为空集合。</zh-CN><en>Reads all module definitions, or an empty collection when the facade is missing.</en></l></summary>
+            /// <returns><l><zh-CN>模块定义集合。</zh-CN><en>The module-definition collection.</en></l></returns>
+            public IEnumerable<IModuleDefinitionItem> GetModuleDefinitions()
+            {
+                IModuleDefsDb definitions = owner.ModuleDefinitionsConfig;
+                if (definitions == null)
+                {
+                    return Enumerable.Empty<IModuleDefinitionItem>();
+                }
+
+                return definitions.GetModuleDefinitions() ?? Enumerable.Empty<IModuleDefinitionItem>();
+            }
+
+            /// <summary><l><zh-CN>读取引用指定定义的模块实例标识；门面缺失时为空集合。</zh-CN><en>Reads the module-instance identifiers referencing the definition, or an empty collection when the facade is missing.</en></l></summary>
+            /// <param name="definitionId"><l><zh-CN>模块定义标识。</zh-CN><en>The module-definition identifier.</en></l></param>
+            /// <returns><l><zh-CN>模块实例标识集合。</zh-CN><en>The module-instance identifier collection.</en></l></returns>
+            public IEnumerable<int> GetModuleIdsByDefinitionId(int definitionId)
+            {
+                IModulesDb modules = owner.ModuleInstancesConfig;
+                if (modules == null)
+                {
+                    return Enumerable.Empty<int>();
+                }
+
+                return modules.GetModulesByModuleDefId(definitionId) ?? Enumerable.Empty<int>();
+            }
+
+            /// <summary><l><zh-CN>按标识查找模块实例；门面缺失时为 <c>null</c>。</zh-CN><en>Finds a module instance by identifier, or <c>null</c> when the facade is missing.</en></l></summary>
+            /// <param name="moduleId"><l><zh-CN>模块实例标识。</zh-CN><en>The module-instance identifier.</en></l></param>
+            /// <returns><l><zh-CN>模块实例或 <c>null</c>。</zh-CN><en>The module instance or <c>null</c>.</en></l></returns>
+            public IModuleItem FindModuleById(int moduleId)
+            {
+                IModulesDb modules = owner.ModuleInstancesConfig;
+                return modules == null ? null : modules.FindModuleById(moduleId);
+            }
+
+            /// <summary><l><zh-CN>按标识查找页签；门面缺失时为 <c>null</c>。</zh-CN><en>Finds a tab by identifier, or <c>null</c> when the facade is missing.</en></l></summary>
+            /// <param name="tabId"><l><zh-CN>页签标识。</zh-CN><en>The tab identifier.</en></l></param>
+            /// <returns><l><zh-CN>页签或 <c>null</c>。</zh-CN><en>The tab or <c>null</c>.</en></l></returns>
+            public ITabItem FindTabById(int tabId)
+            {
+                ITabsDb tabs = owner.TabsConfig;
+                return tabs == null ? null : tabs.FindTabById(tabId);
+            }
+
+            /// <summary><l><zh-CN>按既有安全策略判定当前请求是否满足角色串（无请求上下文时为 <c>false</c>）。</zh-CN><en>Decides with the established security policy whether the current request satisfies the role string (<c>false</c> with no request context).</en></l></summary>
+            /// <param name="accessRoles"><l><zh-CN>页签访问角色串。</zh-CN><en>The tab access-role string.</en></l></param>
+            /// <returns><l><zh-CN>满足时为 <c>true</c>。</zh-CN><en><c>true</c> when satisfied.</en></l></returns>
+            public bool IsInRoles(string accessRoles)
+            {
+                return PortalSecurity.IsInRoles(accessRoles);
+            }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>构建并缓存"包标识 → 桌面入口"索引：部署清单的读取与校验有成本，不宜逐行重复。清单读取异常按"无可用入口"降级，使一次部署损坏只影响提示而不影响页面渲染。</zh-CN>
+            ///   <en>Builds and caches the package-to-desktop-entry index, because reading and validating deployment manifests is costly and must not repeat per row. A manifest read failure degrades to "no entry available" so one broken deployment affects the hint only, not page rendering.</en>
+            /// </lang>
+            /// </summary>
+            /// <returns><l><zh-CN>包标识到桌面入口的索引；可能为空但不会为 <c>null</c>。</zh-CN><en>The package-to-desktop-entry index, which may be empty but is never <c>null</c>.</en></l></returns>
+            private IDictionary<string, string> GetDesktopEntries()
+            {
+                if (desktopEntries != null)
+                {
+                    return desktopEntries;
+                }
+
+                desktopEntries = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                IList<PortalModulePackage> packages;
+                try
+                {
+                    packages = PortalModuleCatalog.GetTrustedPackages();
+                }
+                catch (Exception)
+                {
+                    return desktopEntries;
+                }
+
+                if (packages == null)
+                {
+                    return desktopEntries;
+                }
+
+                foreach (PortalModulePackage package in packages)
+                {
+                    if (package == null || string.IsNullOrEmpty(package.PackageId))
+                    {
+                        continue;
+                    }
+
+                    desktopEntries[package.PackageId] = package.DesktopEntry ?? string.Empty;
+                }
+
+                return desktopEntries;
+            }
+        }

@@ -1,0 +1,1 @@
+        public DateTime? LastVerifiedUtc { get; set; }

@@ -1,0 +1,26 @@
+    public enum PortalRuntimeSettingSource
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>代码定义的默认值。</zh-CN>
+        ///   <en>Code-defined default value.</en>
+        /// </lang>
+        /// </summary>
+        Default,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Web.config 的 appSettings 值。</zh-CN>
+        ///   <en>Web.config appSettings value.</en>
+        /// </lang>
+        /// </summary>
+        AppSettings,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>允许在线管理的数据库覆盖值。</zh-CN>
+        ///   <en>Database override allowed for online management.</en>
+        /// </lang>
+        /// </summary>
+        Database
+    }

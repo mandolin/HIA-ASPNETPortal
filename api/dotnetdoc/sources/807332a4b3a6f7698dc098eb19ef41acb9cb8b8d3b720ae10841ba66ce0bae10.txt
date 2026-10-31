@@ -1,0 +1,3 @@
+        [Key]
+        [StringLength(64)]
+        public string InviteCode { get; set; }

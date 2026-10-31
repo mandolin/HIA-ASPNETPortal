@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>Email、Contact1 和 Contact2 仅承载联系信息文本；格式、隐私处理和输出编码不由标记层假定或放宽。</zh-CN>
+                        <en>Email, Contact1, and Contact2 carry contact text only; format, privacy handling, and output encoding are not assumed or relaxed by markup.</en>
+                    </lang>
+                --%>

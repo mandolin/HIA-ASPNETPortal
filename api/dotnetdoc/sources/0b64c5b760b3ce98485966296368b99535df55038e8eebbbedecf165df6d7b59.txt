@@ -1,0 +1,4 @@
+        public static bool IsDefined(string key)
+        {
+            return !string.IsNullOrWhiteSpace(key) && KnownKeys.Contains(key.Trim());
+        }

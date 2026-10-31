@@ -1,0 +1,33 @@
+        protected override void OnPreRender(EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先把当前请求已解析的主题作用域写到 body；若页面没有标准 body，后续资源挂载仍可独立跳过。</zh-CN>
+            //   <en>Write the resolved theme scope to the body first; if the page has no standard body, later resource attachment can still skip independently.</en>
+            // </lang>
+            HtmlGenericControl body = FindControl("PortalBody") as HtmlGenericControl;
+
+            // <lang>
+            //   <zh-CN>仅在标准 body 存在时写入主题作用域；缺少 body 不阻断随后独立的模块样式 helper，也不临时创建或替换标记节点。</zh-CN>
+            //   <en>Write the theme scope only when the standard body exists; a missing body does not block the independent module-style helper and does not create or replace markup nodes.</en>
+            // </lang>
+            if (body != null)
+            {
+                // <lang>
+                //   <zh-CN>使用当前请求已经解析的受控 CSS class 覆盖 body 的 class 属性；此处不重新选择 Theme，也不合并请求提供的 class 文本。</zh-CN>
+                //   <en>Set the body class attribute from the controlled CSS class already resolved for the current request; do not reselect Theme or merge request-supplied class text here.</en>
+                // </lang>
+                body.Attributes["class"] = PortalThemeResolver.GetCurrentCssClass(Context);
+            }
+
+            // <lang>
+            //   <zh-CN>模块包样式在 body class 之后挂载，确保主题基线先到位，再由受信任模块包补充局部样式。</zh-CN>
+            //   <en>Attach module-package styles after body classes so the theme baseline is established before trusted module packages add local styling.</en>
+            // </lang>
+            AddModulePackageStyles();
+
+            // <lang>
+            //   <zh-CN>在本类的受控 body/样式附加完成后交还 Web Forms 基类渲染生命周期；不提前或跳过该委托。</zh-CN>
+            //   <en>Return to the Web Forms base rendering lifecycle after this class completes controlled body/style attachment; do not invoke this delegation early or skip it.</en>
+            // </lang>
+            base.OnPreRender(e);
+        }

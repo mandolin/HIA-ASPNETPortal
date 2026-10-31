@@ -1,0 +1,20 @@
+        protected string GetBrowsePath(string url, object size, int documentId)
+        {
+            // <lang>
+            //   <zh-CN>内容大小来自旧数据绑定行；正数表示二进制内容在数据库中，必须走受控下载页而非直接 URL。</zh-CN>
+            //   <en>The content size comes from a legacy bound row; a positive value means binary content is in the database and must use the controlled download page rather than a direct URL.</en>
+            // </lang>
+            if (size != DBNull.Value && Convert.ToInt32(size) > 0)
+            {
+                return "~/DesktopModules/ViewDocument.aspx?DocumentID=" + documentId;
+            }
+
+            // <lang>
+            //   <zh-CN>normalizedUrl 是旧手填链接通过当前导航策略后的输出值；失败时不会回显原始 URL。</zh-CN>
+            //   <en>normalizedUrl is the output value for a legacy manually entered link after current navigation policy validation; failures do not echo the raw URL.</en>
+            // </lang>
+            string normalizedUrl;
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(url, Context.Request, out normalizedUrl)
+                ? normalizedUrl
+                : string.Empty;
+        }

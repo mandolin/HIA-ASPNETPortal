@@ -1,0 +1,25 @@
+        private void ConfigurePasswordSubmission()
+        {
+            if (!PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                UpdateUserBtn.OnClientClick = string.Empty;
+                return;
+            }
+
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(ManageUsers),
+                "JSEncryptIE6",
+                ResolveUrl("~/Scripts/Security/jsencrypt-ie6.min.js"));
+
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(ManageUsers),
+                "PortalLoginPasswordEncryption",
+                ResolveUrl("~/Scripts/Security/PortalLoginPasswordEncryption.js"));
+
+            UpdateUserBtn.OnClientClick = string.Format(
+                "return PortalLoginPasswordEncryption.encryptPasswordFields([{0},{1}],'{2}','{3}');",
+                BuildPasswordFieldScriptObject(Password.ClientID, EncryptedPassword.ClientID),
+                BuildPasswordFieldScriptObject(ConfirmPassword.ClientID, EncryptedConfirmPassword.ClientID),
+                HttpUtility.JavaScriptStringEncode(ResolveUrl("~/Security/LoginPasswordKey.ashx")),
+                HttpUtility.JavaScriptStringEncode(RegistrationMessage.ClientID));
+        }

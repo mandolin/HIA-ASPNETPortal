@@ -1,0 +1,4 @@
+            public bool IsInRoles(string accessRoles)
+            {
+                return PortalSecurity.IsInRoles(accessRoles);
+            }

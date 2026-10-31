@@ -1,0 +1,4 @@
+        public static string BuildTabEntryKey(string tabName)
+        {
+            return BuildTabEntryKey(tabName, null);
+        }

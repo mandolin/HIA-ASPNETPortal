@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepathvalidator",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepathvalidator:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepathvalidator:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator.normalizedesktopsourceorthrow-system.string",
+      "kind": "entry",
+      "label": "NormalizeDesktopSourceOrThrow",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator.normalizedesktopsourceorthrow-system.string",
+      "sourcePath": "src/Portal/Components/PortalModulePathValidator.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepathvalidator.normalizedesktopsourceorthrow-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator-ae05e051.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepathvalidator:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator.normalizeseparators-system.string",
+      "kind": "entry",
+      "label": "NormalizeSeparators",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator.normalizeseparators-system.string",
+      "sourcePath": "src/Portal/Components/PortalModulePathValidator.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepathvalidator.normalizeseparators-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator-78676869.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepathvalidator:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator.trynormalizedesktopsource-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryNormalizeDesktopSource",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator.trynormalizedesktopsource-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalModulePathValidator.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepathvalidator.trynormalizedesktopsource-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator-5b004767.html"
+    }
+  ]
+}

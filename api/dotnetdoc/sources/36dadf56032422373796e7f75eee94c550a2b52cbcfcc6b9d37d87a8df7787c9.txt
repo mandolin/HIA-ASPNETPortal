@@ -1,0 +1,6 @@
+<%--
+   <lang>
+     <zh-CN>注销页通过母版页承载，但页面自身不声明可见服务器控件；实际退出动作由 code-behind 在页面生命周期内完成。</zh-CN>
+     <en>The logoff page is hosted by the master page but declares no visible server controls; the actual sign-out action is completed by the code-behind during the page lifecycle.</en>
+   </lang>
+--%>

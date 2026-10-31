@@ -1,0 +1,2 @@
+        int AddModule(int tabId, int moduleOrder, string paneName, string title, int moduleDefId, int cacheTime,
+                      string editRoles, bool showMobile);

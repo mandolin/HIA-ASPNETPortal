@@ -1,0 +1,30 @@
+        private void BindOrganizationList()
+        {
+            // <lang>
+            //   <zh-CN>清空旧选项并保留空值哨兵，明确“无组织归属”与任意组织标识的区别。</zh-CN>
+            //   <en>Clear old options and retain an empty sentinel so “no organization” is distinct from any organization identifier.</en>
+            // </lang>
+            OrganizationUnitList.Items.Clear();
+            OrganizationUnitList.Items.Add(new ListItem(lang.Admin_EmployeeEdit_OptionNone, string.Empty));
+
+            // <lang>
+            //   <zh-CN>查询包含停用组织但限制最多 500 条；这是修复历史记录的候选集，不是权限或循环校验。</zh-CN>
+            //   <en>Query inactive organizations with a 500-item cap; this is a historical-repair candidate set, not an authorization or cycle check.</en>
+            // </lang>
+            IList<IOrganizationUnitInfo> organizations = EmployeeDirectoryDb.GetOrganizationUnits(new EmployeeDirectoryQuery
+            {
+                IncludeInactiveOrganizations = true,
+                Take = 500
+            }).ToList();
+
+            foreach (IOrganizationUnitInfo organization in organizations)
+            {
+                // <lang>
+                //   <zh-CN>显示名称供管理员识别，值使用不变文化格式的稳定主键，避免本地化文本参与提交。</zh-CN>
+                //   <en>Use the display name for administrator recognition and the stable key formatted invariantly as the submitted value, keeping localized text out of the identifier.</en>
+                // </lang>
+                OrganizationUnitList.Items.Add(new ListItem(
+                    organization.DisplayName + " (#" + organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture) + ")",
+                    organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture)));
+            }
+        }

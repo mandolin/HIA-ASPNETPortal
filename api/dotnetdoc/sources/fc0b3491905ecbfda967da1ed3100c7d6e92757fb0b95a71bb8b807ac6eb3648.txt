@@ -1,0 +1,61 @@
+    public sealed class EmployeeProfileCorrectionRecentRequestRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从资料更正请求投影创建最近请求展示行。</zh-CN>
+        ///   <en>Creates a recent-request display row from a profile-correction request projection.</en>
+        /// </lang>
+        /// </summary>
+        internal EmployeeProfileCorrectionRecentRequestRow(EmployeeProfileCorrectionRequestInfo request)
+        {
+            // <lang>
+            //   <zh-CN>把服务投影转换为专用展示行；时间固定为 UTC 文本，空当前值使用统一占位符，避免标记层承担业务判断。</zh-CN>
+            //   <en>Convert the service projection into a dedicated display row; keep time as UTC text, normalize an empty current value, and keep business decisions out of markup.</en>
+            // </lang>
+            SubmittedUtcText = request.SubmittedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+            FieldName = request.FieldName;
+            CurrentValueSnapshot = string.IsNullOrWhiteSpace(request.CurrentValueSnapshot) ? lang.Common_NonePlaceholder : request.CurrentValueSnapshot;
+            ProposedValue = request.ProposedValue;
+            RequestStatus = request.RequestStatus;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交时间文本。</zh-CN>
+        ///   <en>Submission time text.</en>
+        /// </lang>
+        /// </summary>
+        public string SubmittedUtcText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>字段名。</zh-CN>
+        ///   <en>Field name.</en>
+        /// </lang>
+        /// </summary>
+        public string FieldName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前值快照。</zh-CN>
+        ///   <en>Current-value snapshot.</en>
+        /// </lang>
+        /// </summary>
+        public string CurrentValueSnapshot { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>建议值。</zh-CN>
+        ///   <en>Proposed value.</en>
+        /// </lang>
+        /// </summary>
+        public string ProposedValue { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请求状态。</zh-CN>
+        ///   <en>Request status.</en>
+        /// </lang>
+        /// </summary>
+        public string RequestStatus { get; private set; }
+    }

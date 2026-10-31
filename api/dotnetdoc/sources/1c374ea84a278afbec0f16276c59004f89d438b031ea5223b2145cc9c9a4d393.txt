@@ -1,0 +1,29 @@
+        private bool TryReadOrganizationUnitId(out int organizationUnitId)
+        {
+            // <lang>
+            //   <zh-CN>缺失参数代表新增，因此以 0 初始化；该默认值不会触发数据库读取。</zh-CN>
+            //   <en>A missing parameter means creation, so initialize to zero; this default does not trigger a database read.</en>
+            // </lang>
+            organizationUnitId = 0;
+            // <lang>
+            //   <zh-CN>只信任当前请求参数作为路由标识，不用未验证控件值替代。</zh-CN>
+            //   <en>Trust only the current request parameter as the route identifier rather than substituting an unvalidated control value.</en>
+            // </lang>
+            string rawValue = Request.Params["organizationUnitId"];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out organizationUnitId))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非法标识统一回到编辑拒绝路径，不泄露解析细节也不继续绑定组织。</zh-CN>
+            //   <en>Route invalid identifiers to the edit-denied path without exposing parsing details or continuing organization binding.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }

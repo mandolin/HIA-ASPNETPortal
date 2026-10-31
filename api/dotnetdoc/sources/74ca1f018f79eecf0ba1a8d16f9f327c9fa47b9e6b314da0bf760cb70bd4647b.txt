@@ -1,0 +1,15 @@
+        private bool EnsureCanApplyRequestStatus(string targetStatus)
+        {
+            if (string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal))
+            {
+                return PortalAuthorization.EnsureAnyPermission(
+                    Context,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestCancel,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+            }
+
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+        }

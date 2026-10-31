@@ -1,0 +1,24 @@
+        public static PortalCookieSecurityOptions Normalize(
+            bool secure,
+            PortalCookieSameSiteMode sameSite,
+            string reason)
+        {
+            // <lang>
+            //   <zh-CN>已有原因代码即代表发生过降级；空原因表示配置尚未触发任何降级。</zh-CN>
+            //   <en>A non-empty reason code means degradation already occurred; an empty reason means configuration triggered no degradation yet.</en>
+            // </lang>
+            bool degraded = !string.IsNullOrEmpty(reason);
+
+            // <lang>
+            //   <zh-CN>None 必须配合 Secure，否则现代浏览器会直接拒绝该 Cookie；此处降级为 Unset 以保持可用性，而不是放任无效组合生效。</zh-CN>
+            //   <en>None requires Secure, otherwise modern browsers reject the cookie outright; degrade to Unset to keep the cookie usable instead of allowing an invalid combination to take effect.</en>
+            // </lang>
+            if (sameSite == PortalCookieSameSiteMode.None && !secure)
+            {
+                sameSite = PortalCookieSameSiteMode.Unset;
+                degraded = true;
+                reason = ReasonNoneRequiresSecure;
+            }
+
+            return new PortalCookieSecurityOptions(secure, sameSite, degraded, reason);
+        }

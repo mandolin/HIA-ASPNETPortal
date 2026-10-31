@@ -1,0 +1,3 @@
+        void UpdateTab(int portalId, int tabId, string tabName, int tabOrder, string authorizedRoles,
+                       string mobileTabName, bool showMobile,
+                       string tabNameEn = null, string tabNameLocalizedJson = null, string navigationKey = null);

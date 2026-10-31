@@ -1,0 +1,37 @@
+        protected void TopLevelList_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>只处理普通数据项；页眉、页脚和分隔项不携带讨论业务对象，不能参与回复绑定。</zh-CN>
+            //   <en>Only ordinary data items are processed; headers, footers, and separators do not carry discussion business objects and cannot bind replies.</en>
+            // </lang>
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                // <lang>
+                //   <zh-CN>当前顶级主题对象来自 DataList 数据源，生命周期只覆盖本次 ItemDataBound 回调。</zh-CN>
+                //   <en>The current top-level topic object comes from the DataList data source and lives only for this ItemDataBound callback.</en>
+                // </lang>
+                var item = (IDiscussionItem)e.Item.DataItem;
+
+                // <lang>
+                //   <zh-CN>模板中的子回复列表只在当前主题项内查找，避免跨主题复用控件状态。</zh-CN>
+                //   <en>The nested reply list is resolved only inside the current topic item to avoid sharing control state across topics.</en>
+                // </lang>
+                DataList detailList = (DataList)e.Item.FindControl("DetailList");
+                if (detailList != null)
+                {
+                    // <lang>
+                    //   <zh-CN>关键点：先记录顶级帖子的 DisplayOrder，再按该值读取它的所有回复。</zh-CN>
+                    //   <en>Key point: record the top-level post DisplayOrder before loading all replies under that value.</en>
+                    // </lang>
+                    _currentParentDisplayOrder = item.DisplayOrder;
+
+                    // <lang>
+                    //   <zh-CN>回复绑定限制在当前展开主题内，不改变顶级主题列表的选择状态。</zh-CN>
+                    //   <en>Reply binding remains scoped to the expanded topic and does not change the selected state of the top-level list.</en>
+                    // </lang>
+                    detailList.DataSource = DiscussionDB.GetThreadMessages(_currentParentDisplayOrder);
+                    detailList.DataBind();
+                }
+
+            }
+        }

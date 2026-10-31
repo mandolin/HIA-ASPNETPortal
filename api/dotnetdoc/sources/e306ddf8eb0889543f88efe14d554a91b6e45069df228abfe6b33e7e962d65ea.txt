@@ -1,0 +1,90 @@
+        public static PortalDiagnosticEntry FindByEventId(string eventId)
+        {
+            // <lang>
+            //   <zh-CN>先验证并提取事件编号中的日期；无效输入在任何目录或文件操作前按未找到返回，不把格式检查当作访问授权。</zh-CN>
+            //   <en>Validate and extract the event-id date first; invalid input returns not found before directory or file operation and format checking is not treated as access authorization.</en>
+            // </lang>
+            DateTime eventDate;
+            if (!TryGetEventDate(eventId, out eventDate))
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>按固定诊断策略解析日志目录，不接受事件编号或页面输入作为路径。</zh-CN>
+            //   <en>Resolve the log directory through fixed diagnostics policy and never accept event-id or page input as a path.</en>
+            // </lang>
+            string logDirectory = PortalDiagnostics.ResolveLogDirectory();
+            if (!Directory.Exists(logDirectory))
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>详情查找也跨候选文件累计扫描条目，确保单个事件编号不能绕过全局扫描上限。</zh-CN>
+            //   <en>Detail lookup also counts entries across candidate files so one event id cannot bypass the global scan cap.</en>
+            // </lang>
+            int scannedEntries = 0;
+
+            // <lang>
+            //   <zh-CN>只遍历事件日期对应的受控文件集合，不扫描其它日期或任意文件。</zh-CN>
+            //   <en>Traverse only the controlled file set for the event date and scan no other dates or arbitrary files.</en>
+            // </lang>
+            foreach (FileInfo logFile in GetLogFiles(logDirectory, eventDate, eventDate.AddDays(1)))
+            {
+                try
+                {
+                    foreach (string line in File.ReadLines(logFile.FullName))
+                    {
+                        // <lang>
+                        //   <zh-CN>详情路径逐行读取并受全局条目上限约束，不把原始 NDJSON 行传出。</zh-CN>
+                        //   <en>The detail path reads line by line under the global entry cap and never passes raw NDJSON lines outward.</en>
+                        // </lang>
+                        scannedEntries++;
+                        if (scannedEntries > MaximumScannedEntries)
+                        {
+                            // <lang>
+                            //   <zh-CN>详情读取也遵守同一固定扫描上限；达到上限只记录不含敏感正文的警告并按未找到返回，避免单个编号触发无界读取。</zh-CN>
+                            //   <en>Detail lookup obeys the same fixed scan cap; on reaching it, write only a warning without sensitive body content and return not found so one id cannot trigger unbounded reading.</en>
+                            // </lang>
+                            Trace.TraceWarning(
+                                "Portal diagnostic detail reached scan cap of {0} entries for event '{1}'.",
+                                MaximumScannedEntries,
+                                eventId);
+                            return null;
+                        }
+
+                        // <lang>
+                        //   <zh-CN>保存当前行解析结果，仅在事件编号 ordinal 精确匹配时返回。</zh-CN>
+                        //   <en>Keep the current-line parse result and return only on an ordinal exact event-id match.</en>
+                        // </lang>
+                        PortalDiagnosticEntry entry = ParseEntry(line, logFile.Name);
+                        if (entry != null && string.Equals(entry.EventId, eventId, StringComparison.Ordinal))
+                        {
+                            // <lang>
+                            //   <zh-CN>只在已解析条目的事件编号与已验证输入按 ordinal 精确相等时返回；不以文件名、部分匹配或客户端提供的其它字段替代该事实。</zh-CN>
+                            //   <en>Return only when a parsed entry event id equals validated input by ordinal comparison; do not substitute file name, partial matches, or other client-supplied fields for that fact.</en>
+                            // </lang>
+                            return entry;
+                        }
+                    }
+                }
+                // <lang>
+                //   <zh-CN>隔离单个详情文件异常，继续其它日期候选而不泄露原始异常内容。</zh-CN>
+                //   <en>Isolate one detail-file exception, continue with other date candidates, and expose no raw exception content.</en>
+                // </lang>
+                catch (Exception exception)
+                {
+                    // <lang>
+                    //   <zh-CN>跳过单个不可读详情文件并记录净化警告，保留其它候选文件的查找机会；不把异常详情返回给调用方。</zh-CN>
+                    //   <en>Skip one unreadable detail file with a sanitized warning while preserving lookup opportunity in other candidates; do not return exception detail to the caller.</en>
+                    // </lang>
+                    Trace.TraceWarning(
+                        "Portal diagnostic detail skipped file '{0}'. Error={1}",
+                        logFile.Name,
+                        PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 500));
+                }
+            }
+
+            return null;
+        }

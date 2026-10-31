@@ -1,0 +1,400 @@
+    public static class PortalModuleProfileResolver
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>未进入当前 Profile 时写入诊断原因的稳定前缀。</zh-CN>
+        ///   <en>Stable reason prefix used when a package is not allowed by the current Profile.</en>
+        /// </lang>
+        /// </summary>
+        public const string NotAllowedReasonPrefix = "ModuleProfile.NotAllowed:";
+
+        // <lang>
+        //   <zh-CN>未配置、空白或非法活动 Profile 的固定安全回退；它只保留核心能力，不能把未知 Profile 扩展为默认全量包。</zh-CN>
+        //   <en>Fixed safe fallback for a missing, blank, or invalid active Profile; it retains only core capability and must not expand an unknown Profile into all packages.</en>
+        // </lang>
+        private const string CoreOnlyProfile = "CoreOnly";
+
+        // <lang>
+        //   <zh-CN>部署级活动 Profile 的受控 appSettings 键；键名稳定，不能由请求或数据库设置替换。</zh-CN>
+        //   <en>Controlled appSettings key for the deployment-level active Profile; its stable name cannot be replaced by a request or database setting.</en>
+        // </lang>
+        private const string ActiveProfileKey = "Portal.ModuleProfiles.Active";
+
+        // <lang>
+        //   <zh-CN>为当前部署额外允许包的受控 appSettings 键；它只追加到 Profile 白名单，不表示模块已启用或调用者已获授权。</zh-CN>
+        //   <en>Controlled appSettings key for packages additionally allowed by this deployment; it only appends to the Profile allowlist and does not mean a module is enabled or a caller is authorized.</en>
+        // </lang>
+        private const string EnabledPackagesKey = "Portal.ModulePackages.Enabled";
+
+        // <lang>
+        //   <zh-CN>Profile 包列表配置键的固定后缀；与稳定 Profile 名拼接以限制可读取的 appSettings 命名空间。</zh-CN>
+        //   <en>Fixed suffix for a Profile package-list key; it joins a stable Profile name to constrain the appSettings namespace that may be read.</en>
+        // </lang>
+        private const string ProfilePackagesSuffix = ".Packages";
+
+        // <lang>
+        //   <zh-CN>Profile include 列表配置键的固定后缀；include 仍须经过名称门禁和循环检查。</zh-CN>
+        //   <en>Fixed suffix for a Profile include-list key; every include still passes the name gate and cycle check.</en>
+        // </lang>
+        private const string ProfileIncludesSuffix = ".Includes";
+
+        // <lang>
+        //   <zh-CN>所有 Profile 相关 appSettings 的固定前缀，避免由未规范化输入构造任意配置键。</zh-CN>
+        //   <en>Fixed prefix for every Profile-related appSettings entry, preventing unnormalized input from constructing arbitrary configuration keys.</en>
+        // </lang>
+        private const string ProfileKeyPrefix = "Portal.ModuleProfiles.";
+
+        // <lang>
+        //   <zh-CN>Profile 名、include 名和包 id 共享的稳定名称白名单：限制长度和字符集，供配置键拼接及集合比较安全复用。</zh-CN>
+        //   <en>Shared stable-name allowlist for Profile names, include names, and package ids: it constrains length and characters for safe reuse in configuration-key composition and set comparison.</en>
+        // </lang>
+        private static readonly Regex StableNamePattern = new Regex(
+            @"^[A-Za-z][A-Za-z0-9_.-]{0,99}$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        // <lang>
+        //   <zh-CN>内置 Profile 到包白名单的部署默认映射；仅在对应配置为空时使用，不能由其推断任意模块均可进入门户。</zh-CN>
+        //   <en>Deployment-default mapping from built-in Profiles to package allowlists; used only when the corresponding configuration is blank and never evidence that arbitrary modules may enter the Portal.</en>
+        // </lang>
+        private static readonly IDictionary<string, string> DefaultProfilePackages =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "EnterpriseBase", "HIA.EmployeeProfileConfirm,HIA.EmployeeProfileCorrectionRequest" },
+                { "EnterpriseWorkbench", PortalNavigationRegistry.EnterpriseWorkbenchPackageId },
+                { "BusinessWorkflow", "HIA.BusinessApplicationRequest" },
+                { "LegacyContent", "Legacy.Announcements,Legacy.Contacts,Legacy.Discussion,Legacy.Document,Legacy.Events,Legacy.HtmlModule,Legacy.ImageModule,Legacy.Links,Legacy.QuickLinks,Legacy.XmlModule" },
+                { "DevProbe", "HIA.ModuleProbe" }
+            };
+
+        // <lang>
+        //   <zh-CN>内置 Profile 的默认 include 图；仅表达能力组合，递归展开仍需防循环且不改变被包含 Profile 的独立配置边界。</zh-CN>
+        //   <en>Default include graph for built-in Profiles; it expresses capability composition only, while recursive expansion still prevents cycles and preserves each included Profile's own configuration boundary.</en>
+        // </lang>
+        private static readonly IDictionary<string, string> DefaultProfileIncludes =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "BusinessWorkflow", "EnterpriseBase,EnterpriseWorkbench" }
+            };
+
+        // <lang>
+        //   <zh-CN>历史桌面控件路径到虚拟 Legacy 包 id 的固定映射；它用于统一 Profile 判断，不把文件路径本身当作授权决定。</zh-CN>
+        //   <en>Fixed mapping from legacy desktop-control paths to virtual Legacy package ids; it unifies Profile checks and does not treat a file path itself as an authorization decision.</en>
+        // </lang>
+        private static readonly IDictionary<string, string> LegacyPackagesBySource =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "DesktopModules/Announcements.ascx", "Legacy.Announcements" },
+                { "DesktopModules/Contacts.ascx", "Legacy.Contacts" },
+                { "DesktopModules/Discussion.ascx", "Legacy.Discussion" },
+                { "DesktopModules/Document.ascx", "Legacy.Document" },
+                { "DesktopModules/Events.ascx", "Legacy.Events" },
+                { "DesktopModules/HtmlModule.ascx", "Legacy.HtmlModule" },
+                { "DesktopModules/ImageModule.ascx", "Legacy.ImageModule" },
+                { "DesktopModules/Links.ascx", "Legacy.Links" },
+                { "DesktopModules/QuickLinks.ascx", "Legacy.QuickLinks" },
+                { "DesktopModules/XmlModule.ascx", "Legacy.XmlModule" }
+            };
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析当前 Profile 快照。</zh-CN>
+        ///   <en>Resolves the current Profile snapshot.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>可选 HTTP 上下文；当前解析不读取它，以保持上层调用形状稳定。</zh-CN>
+        ///   <en>Optional HTTP context; the current resolver does not read it, keeping the upstream call shape stable.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>不可变的 Profile 快照。</zh-CN>
+        ///   <en>Immutable Profile snapshot.</en>
+        /// </l>
+        /// </returns>
+        public static PortalModuleProfileSnapshot Resolve(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>收集受控的配置问题摘要而非抛出原始配置文本；快照调用方可诊断部署错误，同时仍取得安全的允许包集合。</zh-CN>
+            //   <en>Collect controlled summaries of configuration issues instead of throwing raw configuration text; snapshot consumers can diagnose deployment faults while still receiving a safe allowed-package set.</en>
+            // </lang>
+            var invalidEntries = new List<string>();
+
+            // <lang>
+            //   <zh-CN>只读取固定活动键；HTTP 上下文和任何数据库覆盖均不参与决定本部署的模块能力范围。</zh-CN>
+            //   <en>Read only the fixed active key; neither HTTP context nor any database override participates in deciding this deployment's module-capability scope.</en>
+            // </lang>
+            string configuredActiveProfile = ConfigurationManager.AppSettings[ActiveProfileKey];
+
+            // <lang>
+            //   <zh-CN>活动值必须成为稳定名称，否则收敛到 CoreOnly；回退不保留非法文本作为 Profile 或配置键的一部分。</zh-CN>
+            //   <en>The active value must become a stable name or converge to CoreOnly; fallback does not retain invalid text as part of a Profile or configuration key.</en>
+            // </lang>
+            string activeProfile = NormalizeStableName(configuredActiveProfile, CoreOnlyProfile, invalidEntries, "active profile");
+
+            // <lang>
+            //   <zh-CN>允许集合使用 ordinal-ignore-case 语义，确保 Profile、include 和显式包重复出现时不会因大小写差异扩大或重复快照。</zh-CN>
+            //   <en>The allowed set uses ordinal-ignore-case semantics so duplicate Profile, include, and explicit packages do not enlarge or duplicate the snapshot through casing differences.</en>
+            // </lang>
+            var allowedPackages = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            // <lang>
+            //   <zh-CN>递归展开活动 Profile 与其 include；独立已访问和展开中集合分别处理重复引用与真正循环。</zh-CN>
+            //   <en>Recursively expand the active Profile and its includes; separate visited and expanding sets distinguish repeated references from actual cycles.</en>
+            // </lang>
+            AddProfileAndIncludes(
+                activeProfile,
+                allowedPackages,
+                invalidEntries,
+                new HashSet<string>(StringComparer.OrdinalIgnoreCase),
+                new HashSet<string>(StringComparer.OrdinalIgnoreCase));
+
+            // <lang>
+            //   <zh-CN>仅追加受控部署键中的显式包；这些包同样经稳定名称验证，且不跳过模块状态或页面授权。</zh-CN>
+            //   <en>Append only explicit packages from the controlled deployment key; they pass the same stable-name validation and do not bypass module state or page authorization.</en>
+            // </lang>
+            AddPackageList(ConfigurationManager.AppSettings[EnabledPackagesKey], allowedPackages, invalidEntries, EnabledPackagesKey);
+
+            // <lang>
+            //   <zh-CN>按稳定大小写不敏感顺序发布不可变快照，使同一配置产生可预测的展示与审计顺序。</zh-CN>
+            //   <en>Publish an immutable snapshot in stable case-insensitive order so the same configuration yields predictable display and audit ordering.</en>
+            // </lang>
+            return new PortalModuleProfileSnapshot(
+                activeProfile,
+                allowedPackages.OrderBy(item => item, StringComparer.OrdinalIgnoreCase).ToList(),
+                invalidEntries);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断一个已规范化桌面入口是否属于 Core 能力。</zh-CN>
+        ///   <en>Determines whether a normalized desktop entry belongs to Core capability.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="normalizedDesktopSource">
+        /// <l>
+        ///   <zh-CN>已去掉 ~/ 的桌面控件路径。</zh-CN>
+        ///   <en>Desktop control path without ~/.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>属于 Core 时为 true。</zh-CN>
+        ///   <en>True when the entry belongs to Core.</en>
+        /// </l>
+        /// </returns>
+        public static bool IsCoreDesktopSource(string normalizedDesktopSource)
+        {
+            // <lang>
+            //   <zh-CN>先将历史路径收敛为相对正斜杠形式，再仅识别登录入口和 Admin 前缀；该分类不替代访问该入口所需的授权检查。</zh-CN>
+            //   <en>First converge a legacy path to relative forward-slash form, then recognize only the sign-in entry and Admin prefix; this classification does not replace authorization required to access that entry.</en>
+            // </lang>
+            string source = NormalizeSource(normalizedDesktopSource);
+            return string.Equals(source, "DesktopModules/SignIn.ascx", StringComparison.OrdinalIgnoreCase) ||
+                   source.StartsWith("Admin/", StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试将旧模块入口映射为内置虚拟 package id。</zh-CN>
+        ///   <en>Attempts to map a legacy module entry to a built-in virtual package id.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="normalizedDesktopSource">
+        /// <l>
+        ///   <zh-CN>已规范化桌面入口。</zh-CN>
+        ///   <en>Normalized desktop entry.</en>
+        /// </l>
+        /// </param>
+        /// <param name="packageId">
+        /// <l>
+        ///   <zh-CN>成功时返回虚拟 package id。</zh-CN>
+        ///   <en>Virtual package id when successful.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>找到映射时为 true。</zh-CN>
+        ///   <en>True when a mapping is found.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryGetLegacyPackageId(string normalizedDesktopSource, out string packageId)
+        {
+            // <lang>
+            //   <zh-CN>映射前使用同一来源规范化，避免 ~/、起始斜杠或目录分隔符差异绕过固定 Legacy 映射表。</zh-CN>
+            //   <en>Apply the same source normalization before mapping so ~/ prefixes, leading slashes, or directory-separator differences cannot bypass the fixed Legacy mapping table.</en>
+            // </lang>
+            return LegacyPackagesBySource.TryGetValue(NormalizeSource(normalizedDesktopSource), out packageId);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取 Legacy 虚拟包映射的只读快照。</zh-CN>
+        ///   <en>Gets a read-only snapshot of the Legacy virtual package mappings.</en>
+        /// </lang>
+        /// </summary>
+        public static IDictionary<string, string> GetLegacyPackageMappings()
+        {
+            // <lang>
+            //   <zh-CN>返回独立副本而非内部可变字典，调用方的枚举或修改不能影响当前进程的 Profile 决策。</zh-CN>
+            //   <en>Return an independent copy rather than the mutable internal dictionary so caller enumeration or mutation cannot affect Profile decisions in the current process.</en>
+            // </lang>
+            return new Dictionary<string, string>(LegacyPackagesBySource, StringComparer.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取并验证一个 Profile 的直接 include 名称。</zh-CN>
+        ///   <en>Reads and validates the direct include names for one Profile.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="profileName">
+        /// <l>
+        ///   <zh-CN>已规范化的父 Profile 名称。</zh-CN>
+        ///   <en>Normalized parent Profile name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        /// <l>
+        ///   <zh-CN>用于追加受控无效配置摘要的集合。</zh-CN>
+        ///   <en>Collection that receives controlled invalid-configuration summaries.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>已过滤自身引用和无效名称的直接 include 序列。</zh-CN>
+        ///   <en>Direct include sequence with self-references and invalid names filtered out.</en>
+        /// </l>
+        /// </returns>
+        private static IEnumerable<string> ReadProfileIncludes(string profileName, IList<string> invalidEntries)
+        {
+            // <lang>
+            //   <zh-CN>该键只由已经通过稳定名称门禁的 Profile 与固定后缀组成，避免未验证配置文本控制 appSettings 读取位置。</zh-CN>
+            //   <en>This key consists only of a Profile that already passed the stable-name gate and a fixed suffix, preventing unvalidated configuration text from controlling the appSettings read location.</en>
+            // </lang>
+            string key = ProfileKeyPrefix + profileName + ProfileIncludesSuffix;
+
+            // <lang>
+            //   <zh-CN>部署配置优先；只有空白时才使用同名内置默认 include，不把缺失配置解释为任意包或任意 Profile。</zh-CN>
+            //   <en>Deployment configuration takes precedence; use the same-name built-in default include only when blank, never interpreting a missing entry as arbitrary packages or Profiles.</en>
+            // </lang>
+            string configured = ConfigurationManager.AppSettings[key];
+            if (string.IsNullOrWhiteSpace(configured) && DefaultProfileIncludes.ContainsKey(profileName))
+            {
+                configured = DefaultProfileIncludes[profileName];
+            }
+
+            // <lang>
+            //   <zh-CN>保留顺序化直接 include 列表供递归器处理；跨分支去重和循环判断由调用方的集合承担。</zh-CN>
+            //   <en>Keep an ordered direct-include list for the recursive expander; cross-branch deduplication and cycle detection belong to the caller's sets.</en>
+            // </lang>
+            var includes = new List<string>();
+            foreach (string include in SplitCsv(configured))
+            {
+                // <lang>
+                //   <zh-CN>每个 CSV 片段再次通过稳定名称验证，并以当前配置键记载受控问题摘要而不抛出原始配置内容。</zh-CN>
+                //   <en>Each CSV segment passes stable-name validation again and records a controlled issue summary under the current configuration key without throwing raw configuration content.</en>
+                // </lang>
+                string normalized = NormalizeStableName(include, string.Empty, invalidEntries, key);
+                if (!string.IsNullOrEmpty(normalized) &&
+                    !string.Equals(normalized, profileName, StringComparison.OrdinalIgnoreCase))
+                {
+                    // <lang>
+                    //   <zh-CN>直接自包含没有能力增益且会干扰递归图；将其静默排除，较长循环仍由展开栈报告。</zh-CN>
+                    //   <en>A direct self-include adds no capability and obscures the recursive graph; filter it silently while longer cycles remain reported by the expansion stack.</en>
+                    // </lang>
+                    includes.Add(normalized);
+                }
+            }
+
+            return includes;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将一个 Profile、其包和其递归 include 合并到允许集合。</zh-CN>
+        ///   <en>Adds one Profile, its packages, and its recursive includes to the allowed set.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="profileName">
+        ///   <l>
+        ///     <zh-CN>已规范化的待展开 Profile 名称。</zh-CN>
+        ///     <en>Normalized Profile name to expand.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="allowedPackages">
+        ///   <l>
+        ///     <zh-CN>按大小写不敏感语义合并的包白名单。</zh-CN>
+        ///     <en>Package allowlist merged with case-insensitive semantics.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        ///   <l>
+        ///     <zh-CN>接收受控无效或循环摘要的集合。</zh-CN>
+        ///     <en>Collection receiving controlled invalid or cycle summaries.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="visitedProfiles">
+        ///   <l>
+        ///     <zh-CN>已完整展开的 Profile 集合。</zh-CN>
+        ///     <en>Set of Profiles whose expansion completed.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="expandingProfiles">
+        ///   <l>
+        ///     <zh-CN>当前递归栈中的 Profile 集合。</zh-CN>
+        ///     <en>Set of Profiles on the current recursion stack.</en>
+        ///   </l>
+        /// </param>
+        private static void AddProfileAndIncludes(
+            string profileName,
+            ISet<string> allowedPackages,
+            IList<string> invalidEntries,
+            ISet<string> visitedProfiles,
+            ISet<string> expandingProfiles)
+        {
+            // <lang>
+            //   <zh-CN>空名称不能构成 Profile 或配置键，直接停止此分支，不为其添加任意默认包。</zh-CN>
+            //   <en>An empty name cannot form a Profile or configuration key, so stop this branch without adding any default packages.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(profileName))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>已完成分支再次被引用时不重复展开，保留集合去重和首次解析顺序的既有语义。</zh-CN>
+            //   <en>Do not expand an already completed branch again, retaining the established set-deduplication and first-resolution semantics.</en>
+            // </lang>
+            if (visitedProfiles.Contains(profileName))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只有当前展开栈中的重复才是 include 循环；记录受控 Profile 名称后停止该边，防止配置图无限递归。</zh-CN>
+            //   <en>Only a duplicate on the current expansion stack is an include cycle; record the controlled Profile name and stop that edge to prevent unbounded recursion in the configuration graph.</en>
+            // </lang>
+            if (!expandingProfiles.Add(profileName))
+            {
+                invalidEntries.Add("profile include cycle=" + profileName);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先合并当前 Profile 的直接包，再递归其有效 include；不因 include 失败回滚此前已通过验证的包。</zh-CN>
+            //   <en>Merge the current Profile's direct packages before recursively processing valid includes; an include failure does not roll back packages that already passed validation.</en>
+            // </lang>
+            AddProfilePackages(profileName, allowedPackages, invalidEntries);
+            foreach (string includedProfile in ReadProfileIncludes(profileName, invalidEntries))
+            {
+                // <lang>
+                //   <zh-CN>同一访问/展开集合在整个深度优先链共享，使重复引用与循环判断基于完整 Profile 图而不是单一局部列表。</zh-CN>
+                //   <en>Share the same visited and expanding sets across the depth-first chain so repeated-reference and cycle decisions apply to the complete Profile graph rather than one local list.</en>
+                // </lang>
+                AddProfileAndIncludes(includedProfile, allowedPackages, invalidEntries, visitedProfiles, expandingProfiles);
+            }
+
+            // <lang>
+            //   <zh-CN>离开当前分支时先从展开栈移除，再标记为已完成；这一顺序确保同级重复是去重而非误报循环。</zh-CN>

@@ -1,0 +1,25 @@
+    public sealed class PortalOperationAuditQueryResult
+    {
+        /// <summary><lang><zh-CN>创建查询结果，并在调用方没有提供列表时返回空集合以保持 UI 绑定稳定。</zh-CN><en>Creates a query result and returns an empty collection when the caller supplied no list, keeping UI binding stable.</en></lang></summary>
+        /// <param name="entries"><l><zh-CN>已读取且已受 SQL 范围限制的当前页记录。</zh-CN><en>Current-page records already read within the SQL range.</en></l></param>
+        /// <param name="hasMore"><l><zh-CN>探测记录表明是否存在下一页。</zh-CN><en>Whether the probe record indicates that another page exists.</en></l></param>
+        /// <param name="isAvailable"><l><zh-CN>审计表是否存在并成功完成本次查询。</zh-CN><en>Whether the audit table exists and this query completed successfully.</en></l></param>
+        public PortalOperationAuditQueryResult(
+            IList<PortalOperationAuditEntry> entries,
+            bool hasMore,
+            bool isAvailable)
+        {
+            Entries = entries ?? new List<PortalOperationAuditEntry>();
+            HasMore = hasMore;
+            IsAvailable = isAvailable;
+        }
+
+        /// <summary><lang><zh-CN>当前页的受限审计记录，不包含下一页探测行。</zh-CN><en>Restricted audit records for the current page, excluding the next-page probe row.</en></lang></summary>
+        public IList<PortalOperationAuditEntry> Entries { get; private set; }
+
+        /// <summary><lang><zh-CN>是否检测到下一页；它不承诺在随后的请求前审计数据不会发生变化。</zh-CN><en>Whether a next page was detected; it does not promise that audit data remains unchanged before the subsequent request.</en></lang></summary>
+        public bool HasMore { get; private set; }
+
+        /// <summary><lang><zh-CN>审计表是否在当前连接中已部署且可查询；false 是兼容降级信号，不是权限结论。</zh-CN><en>Whether the audit table is deployed and queryable on the current connection; false is a compatibility-degradation signal, not an authorization decision.</en></lang></summary>
+        public bool IsAvailable { get; private set; }
+    }

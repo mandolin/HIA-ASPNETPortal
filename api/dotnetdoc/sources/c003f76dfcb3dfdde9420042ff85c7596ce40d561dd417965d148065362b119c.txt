@@ -1,0 +1,1 @@
+        IList<EmployeeProfileCorrectionRequestInfo> GetRecentRequestsForUser(int userId, int take);

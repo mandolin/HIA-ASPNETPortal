@@ -1,0 +1,399 @@
+    public static class PortalThemeCatalog
+    {
+        // <lang>
+        //   <zh-CN>当前主题 manifest 的唯一受支持 schema 版本；未知版本 fail-closed，不按旧结构猜测。</zh-CN>
+        //   <en>Only supported schema version for the current theme manifest; unknown versions fail closed rather than being guessed as an old shape.</en>
+        // </lang>
+        private const int ManifestSchemaVersion = 1;
+
+        // <lang>
+        //   <zh-CN>主题名同时作为目录名和 CSS class 片段，限制为稳定 ASCII 标识符以阻断路径/标记结构。</zh-CN>
+        //   <en>Theme names serve as both directory names and CSS-class fragments, so they are restricted to stable ASCII identifiers to block path/markup structure.</en>
+        // </lang>
+        private static readonly Regex ThemeNamePattern = new Regex(
+            @"^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取所有已部署并通过 manifest 校验的主题包。</zh-CN>
+        ///   <en>Gets every deployed theme package that passes manifest validation.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按显示名排序的只读主题包列表。</zh-CN>
+        ///   <en>Read-only theme package list ordered by display name.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>无法读取主题根目录或单个包校验失败时会跳过对应包，不阻断其他合格主题或页面默认回退。</zh-CN>
+        ///   <en>When the theme root cannot be read or one package fails validation, the corresponding package is skipped; it does not block other valid themes or the page default fallback.</en>
+        /// </lang>
+        /// </remarks>
+        public static IList<PortalThemePackage> GetTrustedPackages()
+        {
+            // <lang>
+            //   <zh-CN>收集本次扫描中通过最小信任契约的包；失败包不会阻断其他包或默认主题回退。</zh-CN>
+            //   <en>Collect packages that pass the minimal trust contract for this scan; one failed package does not block other packages or the default-theme fallback.</en>
+            // </lang>
+            var packages = new List<PortalThemePackage>();
+            // <lang>
+            //   <zh-CN>只映射应用内 App_Themes 根目录；根目录不可用时返回空只读集合，不暴露物理路径。</zh-CN>
+            //   <en>Map only the in-application App_Themes root; return an empty read-only collection when unavailable without exposing a physical path.</en>
+            // </lang>
+            string rootPath = HostingEnvironment.MapPath("~/App_Themes");
+            if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
+            {
+                return packages.AsReadOnly();
+            }
+
+            foreach (DirectoryInfo directory in new DirectoryInfo(rootPath).GetDirectories())
+            {
+                // <lang>
+                //   <zh-CN>逐目录执行独立验证；reason 仅用于诊断边界，本入口不把失败原因写入返回集合。</zh-CN>
+                //   <en>Validate each directory independently; reason is kept within the diagnostic boundary and is not emitted in the returned collection.</en>
+                // </lang>
+                PortalThemePackage package;
+                string reason;
+                if (TryGetTrustedPackage(directory.Name, out package, out reason))
+                {
+                    packages.Add(package);
+                }
+            }
+
+            return packages
+                .OrderBy(item => item.DisplayName, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.Name, StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证并读取一个已部署主题包。</zh-CN>
+        ///   <en>Validates and reads one deployed theme package.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="themeName">
+        /// <l>
+        ///   <zh-CN>目录和 manifest 中应一致的主题名。</zh-CN>
+        ///   <en>Theme name expected in both directory and manifest.</en>
+        /// </l>
+        /// </param>
+        /// <param name="package">
+        /// <l>
+        ///   <zh-CN>成功时返回已验证的主题包。</zh-CN>
+        ///   <en>Validated theme package when successful.</en>
+        /// </l>
+        /// </param>
+        /// <param name="reason">
+        /// <l>
+        ///   <zh-CN>失败时返回不含物理路径的原因。</zh-CN>
+        ///   <en>Failure reason without physical paths.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>主题包是否可被当前门户安全选择。</zh-CN>
+        ///   <en>Whether the package can be safely selected by this portal.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>成功只表示目录、manifest 和本地资源满足当前最小契约；它不证明主题视觉质量、许可、签名或部署来源。</zh-CN>
+        ///   <en>Success means only that the directory, manifest, and local resources meet the current minimal contract; it does not prove visual quality, license, signature, or deployment provenance.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool TryGetTrustedPackage(
+            string themeName,
+            out PortalThemePackage package,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>先清空 out 结果，确保任一失败分支不会泄露上一次调用的包或原因。</zh-CN>
+            //   <en>Clear out results first so every failure branch cannot leak a package or reason from a previous call.</en>
+            // </lang>
+            package = null;
+            reason = string.Empty;
+
+            if (!IsValidThemeName(themeName))
+            {
+                reason = "Theme name contains invalid characters.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>主题根目录是后续物理路径检查的信任边界，目录缺失时保持不可用而非回退到任意路径。</zh-CN>
+            //   <en>The theme root is the trust boundary for later physical-path checks; when unavailable, remain unavailable instead of falling back to an arbitrary path.</en>
+            // </lang>
+            string rootPath = HostingEnvironment.MapPath("~/App_Themes");
+            if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
+            {
+                reason = "Theme root is unavailable.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>通过根目录内子路径 helper 解析包目录；越界异常转换为不含路径的安全原因。</zh-CN>
+            //   <en>Resolve the package directory through the root-contained child-path helper; convert escape exceptions into a path-free safe reason.</en>
+            // </lang>
+            string packagePath;
+            try
+            {
+                packagePath = GetChildPath(rootPath, themeName);
+            }
+            catch (InvalidOperationException)
+            {
+                reason = "Theme directory is outside the allowed root.";
+                return false;
+            }
+
+            if (!Directory.Exists(packagePath))
+            {
+                reason = "Theme directory does not exist.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>固定 manifest 和 Default.css 入口，只有两者都存在才进入内容解析。</zh-CN>
+            //   <en>Use fixed manifest and Default.css entry points; parse content only when both exist.</en>
+            // </lang>
+            string manifestPath = Path.Combine(packagePath, "theme.json");
+            string defaultCssPath = Path.Combine(packagePath, "Default.css");
+            if (!File.Exists(manifestPath) || !File.Exists(defaultCssPath))
+            {
+                reason = "theme.json or Default.css is missing.";
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>以 UTF-8 读取低敏 manifest；解析和契约失败统一转换为无路径的无效包结果。</zh-CN>
+                //   <en>Read the low-sensitivity manifest as UTF-8; parsing or contract failures become a path-free invalid-package result.</en>
+                // </lang>
+                JObject manifest = JObject.Parse(File.ReadAllText(manifestPath, Encoding.UTF8));
+                if (!IsSchemaVersionSupported(manifest))
+                {
+                    reason = "Theme manifest schemaVersion is unsupported.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>manifest 名称必须与已经验证的目录名精确一致，防止包投影与物理目录错配。</zh-CN>
+                //   <en>The manifest name must exactly match the already validated directory name so the package projection cannot diverge from its physical directory.</en>
+                // </lang>
+                string manifestName = ReadRequiredString(manifest, "name", 64);
+                if (!string.Equals(themeName, manifestName, StringComparison.Ordinal))
+                {
+                    reason = "Theme manifest name does not match its directory.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>读取展示、版本、兼容性和资源投影；这些值仅用于已验证包的低敏元数据，不改变主题加载授权。</zh-CN>
+                //   <en>Read display, version, compatibility, and resource projections; these values are low-sensitivity metadata for a validated package and do not grant theme-loading authorization.</en>
+                // </lang>
+                string displayName = ReadRequiredString(manifest, "displayName", 100);
+                string version = ReadRequiredString(manifest, "version", 64);
+                string minimumPortalVersion = ReadOptionalString(manifest, "minimumPortalVersion", 64);
+                bool inheritsDefault = ReadOptionalBoolean(manifest, "inheritsDefault");
+                IList<string> resources = ReadAndValidateResources(manifest, packagePath);
+
+                if (manifest["script"] != null || manifest["scripts"] != null ||
+                    manifest["externalUrl"] != null || manifest["externalUrls"] != null)
+                {
+                    reason = "Theme manifest declares a prohibited script or external URL.";
+                    return false;
+                }
+
+                package = new PortalThemePackage(
+                    manifestName,
+                    displayName,
+                    version,
+                    minimumPortalVersion,
+                    inheritsDefault,
+                    resources);
+                return true;
+            }
+            catch (Exception exception) when (
+                exception is IOException ||
+                exception is UnauthorizedAccessException ||
+                exception is Newtonsoft.Json.JsonException ||
+                exception is InvalidOperationException)
+            {
+                reason = "Theme manifest is invalid.";
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断主题名是否可安全作为部署目录和 CSS class 片段。</zh-CN>
+        ///   <en>Determines whether a theme name is safe as a deployment directory and CSS-class segment.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="themeName">
+        /// <l>
+        ///   <zh-CN>待校验主题名。</zh-CN>
+        ///   <en>Theme name to validate.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>主题名是否满足稳定 ASCII 契约。</zh-CN>
+        ///   <en>Whether the name meets the stable ASCII contract.</en>
+        /// </l>
+        /// </returns>
+        public static bool IsValidThemeName(string themeName)
+        {
+            // <lang>
+            //   <zh-CN>先拒绝空白，再用文化无关正则校验稳定 ASCII 形状；trim 只用于验证，不改写调用方值。</zh-CN>
+            //   <en>Reject blank input first, then validate a stable ASCII shape with the culture-invariant regex; trimming is validation-only and does not rewrite caller input.</en>
+            // </lang>
+            return !string.IsNullOrWhiteSpace(themeName) && ThemeNamePattern.IsMatch(themeName.Trim());
+        }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>检查 manifest schema 是否为当前加载器支持的最小版本。</zh-CN>
+        /// <en>Checks whether the manifest schema is the minimal version supported by the current loader.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="manifest">
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>schemaVersion 是否精确匹配当前受支持版本。</zh-CN>
+        ///   <en>Whether schemaVersion exactly matches the currently supported version.</en>
+        /// </l>
+        /// </returns>
+        private static bool IsSchemaVersionSupported(JObject manifest)
+        {
+            // <lang>
+            //   <zh-CN>只读取 schemaVersion 节点并要求整数精确匹配；缺失、null 或其它类型均拒绝。</zh-CN>
+            //   <en>Read only the schemaVersion node and require an exact integer match; missing, null, or other types are rejected.</en>
+            // </lang>
+            JToken token = manifest["schemaVersion"];
+            return token != null && token.Type == JTokenType.Integer && token.Value<int>() == ManifestSchemaVersion;
+        }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>读取必填字符串字段，并复用可选字符串读取器完成类型和长度校验。</zh-CN>
+        /// <en>Reads a required string field and reuses the optional-string reader for type and length validation.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="manifest">
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
+        /// </param>
+        /// <param name="propertyName">
+        /// <l>
+        ///   <zh-CN>需要读取的属性名。</zh-CN>
+        ///   <en>Property name to read.</en>
+        /// </l>
+        /// </param>
+        /// <param name="maximumLength">
+        /// <l>
+        ///   <zh-CN>允许的最大字符数。</zh-CN>
+        ///   <en>Maximum allowed character count.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>去除首尾空白后的必填字段值。</zh-CN>
+        ///   <en>Required field value after trimming surrounding whitespace.</en>
+        /// </l>
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>字段缺失、为空、类型不符或超过长度限制时抛出。</zh-CN>
+        ///   <en>Thrown when the field is missing, blank, incorrectly typed, or too long.</en>
+        /// </l>
+        /// </exception>
+        private static string ReadRequiredString(JObject manifest, string propertyName, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>复用可选读取器取得已完成类型、trim 和长度校验的值，再将空值提升为必填字段错误。</zh-CN>
+            //   <en>Reuse the optional reader for type, trimming, and length validation, then promote an empty value to a required-field error.</en>
+            // </lang>
+            string value = ReadOptionalString(manifest, propertyName, maximumLength);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new InvalidOperationException("Required manifest value is missing.");
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>读取可选字符串字段，并把 manifest 侧的类型错误转为统一校验异常。</zh-CN>
+        /// <en>Reads an optional string field and converts manifest-side type errors into a consistent validation exception.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="manifest">
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
+        /// </param>
+        /// <param name="propertyName">
+        /// <l>
+        ///   <zh-CN>需要读取的属性名。</zh-CN>
+        ///   <en>Property name to read.</en>
+        /// </l>
+        /// </param>
+        /// <param name="maximumLength">
+        /// <l>
+        ///   <zh-CN>允许的最大字符数。</zh-CN>
+        ///   <en>Maximum allowed character count.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>字段不存在时返回空字符串，否则返回 trim 后的值。</zh-CN>
+        ///   <en>Empty string when the field is absent; otherwise the trimmed value.</en>
+        /// </l>
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>字段类型不符或超过长度限制时抛出。</zh-CN>
+        ///   <en>Thrown when the field type is invalid or the value is too long.</en>
+        /// </l>
+        /// </exception>
+        private static string ReadOptionalString(JObject manifest, string propertyName, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>按属性名读取原始 JSON token；缺失或 null 明确回退为空字符串，不伪造默认业务值。</zh-CN>
+            //   <en>Read the raw JSON token by property name; missing or null values explicitly fall back to an empty string without fabricating a business default.</en>
+            // </lang>
+            JToken token = manifest[propertyName];
+            if (token == null || token.Type == JTokenType.Null)
+            {
+                return string.Empty;
+            }
+
+            if (token.Type != JTokenType.String)
+            {
+                throw new InvalidOperationException("Manifest string value is invalid.");
+            }
+
+            // <lang>
+            //   <zh-CN>类型确认后去除首尾空白，再按 manifest 字段上限拒绝过长值。</zh-CN>
+            //   <en>After confirming the type, trim surrounding whitespace and reject values beyond the manifest field limit.</en>
+            // </lang>
+            string value = token.Value<string>().Trim();
+            if (value.Length > maximumLength)
+            {
+                throw new InvalidOperationException("Manifest string value is too long.");
+            }

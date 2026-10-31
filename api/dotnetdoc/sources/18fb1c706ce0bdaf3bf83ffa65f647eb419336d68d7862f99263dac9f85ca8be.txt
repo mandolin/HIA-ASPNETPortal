@@ -1,0 +1,79 @@
+        protected void AddModuleToPane_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>新增事件重新解析请求和 Tab 快照，防止陈旧页面状态绕过布局门禁。</zh-CN>
+            //   <en>Re-resolve the request and Tab snapshot for creation so stale page state cannot bypass the layout gate.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>模块定义标识和标题是新增的两个受控输入；定义必须来自当前可用白名单。</zh-CN>
+            //   <en>The definition id and title are the two controlled creation inputs; the definition must come from the current eligible allowlist.</en>
+            // </lang>
+            int moduleDefinitionId;
+            string title;
+            if (moduleType.SelectedItem == null ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(moduleType.SelectedItem.Value, out moduleDefinitionId) ||
+                FindEligibleModuleDefinition(moduleDefinitionId) == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>标题先做单行和长度归一化，失败时不调用模块数据服务。</zh-CN>
+            //   <en>Normalize the title as a bounded single line before calling the module data service.</en>
+            // </lang>
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(moduleTitle.Text, 150, out title))
+            {
+                ShowMessage(lang.Admin_TabLayout_MessageInvalidModuleName);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>以固定内容窗格、顺序、角色和移动端默认值创建模块，再重载并重新排序当前 Tab。</zh-CN>
+                //   <en>Create the module with fixed pane, order, role, and mobile defaults, then reload and reorder the current Tab.</en>
+                // </lang>
+                int moduleId = ModulesConfig.AddModule(
+                    tabId,
+                    999,
+                    ContentPaneName,
+                    title,
+                    moduleDefinitionId,
+                    0,
+                    PortalRoleNames.Administrators,
+                    false);
+                ReloadCurrentTab();
+                OrderModules(GetModules(ContentPaneName));
+                // <lang>
+                //   <zh-CN>只有创建、重载和排序完成后才记录成功审计并回到当前布局。</zh-CN>
+                //   <en>Record success and return to the current layout only after creation, reload, and ordering complete.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Create",
+                    "Module",
+                    moduleId.ToString(),
+                    "Created module instance in the content pane.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>新增失败写入统一诊断并向页面返回事件编号，不泄漏数据层异常。</zh-CN>
+                //   <en>Record creation failures through shared diagnostics and return only an event id without exposing data-layer exceptions.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.AddModule",
+                    "Adding a module instance failed. TabId=" + tabId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleCreateFailed, eventId));
+            }
+        }

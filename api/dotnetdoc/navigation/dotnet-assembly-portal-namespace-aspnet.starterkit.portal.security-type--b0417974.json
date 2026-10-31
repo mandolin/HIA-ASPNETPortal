@@ -1,0 +1,60 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:interface:t-system.web.ihttphandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:interface:t-system.web.sessionstate.irequiressessionstate",
+      "kind": "relation",
+      "label": "Interface: System.Web.SessionState.IRequiresSessionState",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:entry:hia-document:dotnet-p-aspnet.starterkit.portal.security.loginpasswordkey.isreusable",
+      "kind": "entry",
+      "label": "IsReusable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.security.loginpasswordkey.isreusable",
+      "sourcePath": "src/Portal/Security/LoginPasswordKey.ashx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.security.loginpasswordkey.isreusable",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.security.loginpasswordkey-de8ffdf1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:entry:hia-document:dotnet-m-aspnet.starterkit.portal.security.loginpasswordkey.processrequest-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ProcessRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.security.loginpasswordkey.processrequest-system.web.httpcontext",
+      "sourcePath": "src/Portal/Security/LoginPasswordKey.ashx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.security.loginpasswordkey.processrequest-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.security.loginpasswordkey-64f2e6fc.html"
+    }
+  ]
+}

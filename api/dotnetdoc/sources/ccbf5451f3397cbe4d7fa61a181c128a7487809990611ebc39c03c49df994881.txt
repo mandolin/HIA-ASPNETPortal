@@ -1,0 +1,1 @@
+        public DbSet<ModuleSettingItem> Settings { get; set; }

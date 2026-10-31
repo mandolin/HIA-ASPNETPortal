@@ -1,0 +1,9 @@
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>新筛选从第一页开始；BindEntries 仍负责日期和审计存储可用性边界。</zh-CN>
+            //   <en>New filters start at page one; BindEntries remains responsible for date and audit-store availability boundaries.</en>
+            // </lang>
+            CurrentPage = 0;
+            BindEntries();
+        }

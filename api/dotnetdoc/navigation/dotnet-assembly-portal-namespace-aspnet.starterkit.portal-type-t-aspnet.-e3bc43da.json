@@ -1,0 +1,29 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemptystaterenderer",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemptystaterenderer:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemptystaterenderer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalemptystaterenderer.render-system.nullable-system.int32-system.string-system.int32",
+      "kind": "entry",
+      "label": "Render",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalemptystaterenderer.render-system.nullable-system.int32-system.string-system.int32",
+      "sourcePath": "src/Portal/Components/PortalEmptyStateRenderer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalemptystaterenderer.render-system.nullable-system.int32-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalemptystaterenderer.-d9c3093d.html"
+    }
+  ]
+}

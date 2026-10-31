@@ -1,0 +1,96 @@
+        protected void RecentItemsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>列表命令重新解析当前身份并校验命令参数，防止匿名或无效事项标识进入动作服务。</zh-CN>
+            //   <en>Re-resolve identity and validate the command argument before list actions so anonymous or invalid item identifiers never reach the action service.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (userId <= 0 || !IsCurrentUserAuthenticated())
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredAction);
+                BindModule();
+                return;
+            }
+
+            long itemId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageInvalidItemId);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅允许显式支持的评论和重提动作；未知动作走统一提示并重新绑定列表。</zh-CN>
+            //   <en>Only explicit comment and resubmission actions are supported; unknown actions use the common message and rebind the list.</en>
+            // </lang>
+            string commandName = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            if (string.Equals(commandName, "AddParticipantComment", StringComparison.Ordinal))
+            {
+                // <lang>
+                //   <zh-CN>评论限定为事项参与者可见范围，并保留服务层返回的失败信息。</zh-CN>
+                //   <en>Comments are written to the item-participant visibility scope while preserving the service failure message.</en>
+                // </lang>
+                TextBox commentBox = e.Item.FindControl("ParticipantCommentTextBox") as TextBox;
+                string comment = commentBox == null ? string.Empty : commentBox.Text;
+                CollaborationItemCommentResult commentResult = CollaborationItemDb.AddComment(
+                    new CollaborationItemCommentCreateRequest
+                    {
+                        ItemId = itemId,
+                        Comment = comment,
+                        VisibilityScope = PortalCollaborationItemVisibilityScopes.ItemParticipants,
+                        ActorUserId = userId,
+                        ActorName = GetCurrentUserName(),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+                if (!commentResult.Succeeded)
+                {
+                    ShowMessage(commentResult.Message);
+                    BindModule();
+                    return;
+                }
+
+                RecordCommentAudit(commentResult, PortalCollaborationItemVisibilityScopes.ItemParticipants, comment);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageCommentAdded);
+                BindModule();
+                return;
+            }
+
+            if (string.Equals(commandName, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                // <lang>
+                //   <zh-CN>重提动作成功后重新读取本人事项，再补建后台待办并记录动作审计。</zh-CN>
+                //   <en>After resubmission succeeds, reload the user's item, recreate the handling work item, and record the action audit.</en>
+                // </lang>
+                CollaborationItemResult result = CollaborationItemDb.ApplyAction(
+                    new CollaborationItemActionRequest
+                    {
+                        ItemId = itemId,
+                        ActionKey = PortalCollaborationItemActions.Resubmit,
+                        ActorUserId = userId,
+                        ActorName = GetCurrentUserName(),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+                if (!result.Succeeded)
+                {
+                    ShowMessage(result.Message);
+                    BindModule();
+                    return;
+                }
+
+                CollaborationItemInfo item = CollaborationItemDb.GetRecentItemsForUser(userId, RecentItemLimit)
+                    .FirstOrDefault(candidate => candidate.ItemId == result.ItemId);
+                if (item != null)
+                {
+                    TryEnsureWorkItem(item.ItemId, item.ItemCode, item.Title, item.Summary, item.DueUtc);
+                }
+
+                RecordActionAudit(result);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageResubmitted);
+                BindModule();
+                return;
+            }
+
+            ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageUnsupportedAction);
+            BindModule();
+        }

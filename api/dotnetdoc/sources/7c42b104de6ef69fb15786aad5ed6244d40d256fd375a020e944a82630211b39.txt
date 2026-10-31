@@ -1,0 +1,9 @@
+        private static bool LooksLikeUnsafeLocation(string value)
+        {
+            // <lang>
+            //   <zh-CN>去除外围空白后统一识别盘符、UNC、Unix 绝对路径和 URL 前缀。</zh-CN>
+            //   <en>Trim surrounding whitespace before uniformly recognizing drive, UNC, Unix-absolute, and URL prefixes.</en>
+            // </lang>
+            string trimmed = value.Trim();
+            return Regex.IsMatch(trimmed, @"^[A-Za-z]:[\\/]|^\\\\|^/|^[A-Za-z][A-Za-z0-9+.-]*://");
+        }

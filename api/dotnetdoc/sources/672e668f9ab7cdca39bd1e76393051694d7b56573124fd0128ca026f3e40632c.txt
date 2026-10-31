@@ -1,0 +1,8 @@
+        public static PortalPasswordPolicyOptions CreateDefault()
+        {
+            return new PortalPasswordPolicyOptions(
+                PortalPasswordPolicy.MinimumLength,
+                PortalPasswordPolicy.RequiredCategoryCount,
+                true,
+                true);
+        }

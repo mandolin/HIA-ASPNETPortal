@@ -1,0 +1,85 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ibusinessapplicationdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ibusinessapplicationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.getadminapplications-system.string-system.int32",
+      "kind": "entry",
+      "label": "GetAdminApplications",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.getadminapplications-system.string-system.int32",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.getadminapplications-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.ge-20ae0a02.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ibusinessapplicationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.getrecentapplicationsforuser-system.int32-system.int32",
+      "kind": "entry",
+      "label": "GetRecentApplicationsForUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.getrecentapplicationsforuser-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.getrecentapplicationsforuser-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.ge-7ed4eefb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ibusinessapplicationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.is-8da59df3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ibusinessapplicationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.resubmitapplication-system.int64-system.int32-system.string",
+      "kind": "entry",
+      "label": "ResubmitApplication",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.resubmitapplication-system.int64-system.int32-system.string",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.resubmitapplication-system.int64-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.re-6c504e8c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ibusinessapplicationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.reviewapplication-aspnet.starterkit.portal.businessapplicationreviewrequest",
+      "kind": "entry",
+      "label": "ReviewApplication",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.reviewapplication-aspnet.starterkit.portal.businessapplicationreviewrequest",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.reviewapplication-aspnet.starterkit.portal.businessapplicationreviewrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.re-ecde7467.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ibusinessapplicationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
+      "kind": "entry",
+      "label": "SubmitApplication",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.su-22ec01af.html"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>这些字段承载 Tab 元数据、角色授权和移动端可见性；变更事件仍交由 code-behind 处理并由服务器决定最终状态。</zh-CN>
+                        <en>These fields carry tab metadata, role authorization, and mobile visibility; change events remain handled by the code-behind, with the server deciding the final state.</en>
+                    </lang>
+                --%>

@@ -1,0 +1,9 @@
+        private void ShowValidationMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>校验提示固定来自服务器端分支，避免把不合规 URL 或排序输入回显为错误详情。</zh-CN>
+            //   <en>The validation notice comes from fixed server-side branches, avoiding echoing rejected URLs or ordering input as error details.</en>
+            // </lang>
+            ValidationMessage.Text = message;
+            ValidationMessage.Visible = true;
+        }

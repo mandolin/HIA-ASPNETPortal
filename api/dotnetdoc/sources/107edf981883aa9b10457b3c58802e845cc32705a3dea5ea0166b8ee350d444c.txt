@@ -1,0 +1,87 @@
+        private static void CleanupExpiredLogs(string logDirectory, DateTime currentUtcDate)
+        {
+            // <lang>
+            //   <zh-CN>同一进程每个 UTC 日期最多尝试一次保留清理；即使本次失败也保留既有“当日不重试”语义，避免写入路径反复触发删除扫描。</zh-CN>
+            //   <en>Attempt retention cleanup at most once per UTC date in the process; even a failure retains the established no-retry-that-day behavior so the write path does not repeatedly trigger deletion scanning.</en>
+            // </lang>
+            if (_lastRetentionCleanupUtcDate == currentUtcDate)
+            {
+                return;
+            }
+
+            _lastRetentionCleanupUtcDate = currentUtcDate;
+
+            // <lang>
+            //   <zh-CN>读取受控保留天数；该值由运行期整数范围门禁约束。</zh-CN>
+            //   <en>Read the controlled retention-day value, bounded by runtime integer validation.</en>
+            // </lang>
+            int retentionDays = PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.DiagnosticsRetentionDays);
+
+            // <lang>
+            //   <zh-CN>计算删除截止 UTC 日期，早于该日期的受管日志才具备候选资格。</zh-CN>
+            //   <en>Compute the cutoff UTC date; only managed logs older than it become deletion candidates.</en>
+            // </lang>
+            DateTime cutoffUtcDate = currentUtcDate.AddDays(-retentionDays);
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>仅枚举受控目录顶层的 portal JSONL 名称；不能解析为受管 UTC 日期或仍在保留窗口内的候选绝不删除。</zh-CN>
+                //   <en>Enumerate only portal JSONL names at the controlled directory top level; candidates that cannot parse as managed UTC dates or remain in the retention window are never deleted.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>逐个枚举受控目录顶层文件，路径仅用于当前清理调用并不返回给业务调用方。</zh-CN>
+                //   <en>Enumerate top-level files in the controlled directory; paths live only for this cleanup and are not returned to business callers.</en>
+                // </lang>
+                foreach (string filePath in Directory.EnumerateFiles(logDirectory, "portal-*.jsonl", SearchOption.TopDirectoryOnly))
+                {
+                    // <lang>
+                    //   <zh-CN>承接受管文件名解析出的日期，格式无效时保持失败值并跳过删除。</zh-CN>
+                    //   <en>Receive the date parsed from a managed filename; invalid formats retain failure state and skip deletion.</en>
+                    // </lang>
+                    DateTime fileDate;
+                    if (!TryGetManagedLogDate(Path.GetFileName(filePath), out fileDate) || fileDate >= cutoffUtcDate)
+                    {
+                        continue;
+                    }
+
+                    try
+                    {
+                        // <lang>
+                        //   <zh-CN>删除仅作用于已通过受管文件名和截止日期检查的完整候选路径；本批只说明既有行为，不执行该操作。</zh-CN>
+                        //   <en>Deletion applies only to the complete candidate path that passed managed-filename and cutoff-date checks; this batch documents the existing behavior and does not execute it.</en>
+                        // </lang>
+                        File.Delete(filePath);
+                    }
+                    // <lang>
+                    //   <zh-CN>隔离单文件删除异常，保留其它候选清理机会。</zh-CN>
+                    //   <en>Isolate one-file deletion exceptions while preserving cleanup opportunities for other candidates.</en>
+                    // </lang>
+                    catch (Exception exception)
+                    {
+                        // <lang>
+                        //   <zh-CN>单文件删除失败不阻断其它候选；告警仅公开文件名和已净化、截断的异常摘要，不记录完整路径。</zh-CN>
+                        //   <en>One file-deletion failure does not block other candidates; the warning exposes only the file name and a sanitized, truncated exception summary, never the full path.</en>
+                        // </lang>
+                        Trace.TraceWarning(
+                            "Portal diagnostics retention cleanup could not delete '{0}'. Error={1}",
+                            Path.GetFileName(filePath),
+                            PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 500));
+                    }
+                }
+            }
+            // <lang>
+            //   <zh-CN>隔离目录枚举或整体清理异常，避免保留维护路径覆盖当前日志写入。</zh-CN>
+            //   <en>Isolate directory-enumeration or whole-cleanup exceptions so retention maintenance cannot override current log writing.</en>
+            // </lang>
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>枚举或整体清理失败仅写入已净化、截断的摘要；诊断保留故障不得影响当前业务请求或日志追加的上层回退。</zh-CN>
+                //   <en>An enumeration or whole-cleanup failure logs only a sanitized, truncated summary; a diagnostics-retention fault must not affect the current business request or the upper append fallback.</en>
+                // </lang>
+                Trace.TraceWarning(
+                    "Portal diagnostics retention cleanup failed. Error={0}",
+                    PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 500));
+            }
+        }

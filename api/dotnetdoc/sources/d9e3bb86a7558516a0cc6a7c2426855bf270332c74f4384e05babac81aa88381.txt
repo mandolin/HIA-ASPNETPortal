@@ -1,0 +1,26 @@
+        private void ShowPreflight(PortalModulePackage package)
+        {
+            // <lang>
+            //   <zh-CN>预检重新匹配旧定义，不复用可能已过期的 GridView 行状态。</zh-CN>
+            //   <en>Preflight rematches the legacy definition instead of trusting possibly stale GridView row state.</en>
+            // </lang>
+            IModuleDefinitionItem definition = FindDefinition(
+                ModuleDefConfig.GetModuleDefinitions().ToList(),
+                package.DesktopEntry);
+            if (definition == null)
+            {
+                ResultLabel.Text = lang.Admin_ModuleCatalog_MessageNoLegacyDefinition;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>引用计数只用于阻止危险删除提示，预检本身不写入定义、实例或物理目录。</zh-CN>
+            //   <en>The reference count only informs the dangerous-delete warning; preflight itself writes neither definitions, instances, nor physical directories.</en>
+            // </lang>
+            int instanceCount = ModulesConfig.GetModulesByModuleDefId(definition.ModuleDefId).Count();
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_ModuleCatalog_MessagePreflight,
+                definition.ModuleDefId.ToString(CultureInfo.InvariantCulture),
+                instanceCount);
+        }

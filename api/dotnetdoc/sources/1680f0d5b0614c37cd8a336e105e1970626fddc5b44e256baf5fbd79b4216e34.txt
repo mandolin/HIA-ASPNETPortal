@@ -1,0 +1,8 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>所有页面提示经过 HtmlEncode，避免业务消息成为客户端标记。</zh-CN>
+            //   <en>HTML-encode every page message so business text cannot become client-side markup.</en>
+            // </lang>
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

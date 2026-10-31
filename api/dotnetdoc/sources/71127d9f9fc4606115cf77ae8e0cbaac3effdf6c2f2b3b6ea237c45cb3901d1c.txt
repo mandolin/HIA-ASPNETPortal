@@ -1,0 +1,8 @@
+        private static string ResolveTarget(PortalNavigationEntry entry)
+        {
+            // <lang>
+            //   <zh-CN>目标以仓库相对路径登记，渲染时统一加 ~/ 交给 WebForms 解析，避免硬编码站点路径。</zh-CN>
+            //   <en>Targets are registered as repository-relative paths and are rendered with a leading ~/ so WebForms resolves them, avoiding hardcoded site paths.</en>
+            // </lang>
+            return VirtualPathUtility.ToAbsolute("~/" + entry.Target.TrimStart('~', '/'));
+        }

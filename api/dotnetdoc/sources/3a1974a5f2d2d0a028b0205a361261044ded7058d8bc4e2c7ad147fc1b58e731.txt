@@ -1,0 +1,6 @@
+<%--
+  <lang>
+    <zh-CN>`ManageUsers.aspx` 用于创建、审核和维护门户账号，并作为角色成员关系维护的入口。</zh-CN>
+    <en>`ManageUsers.aspx` creates, reviews, and maintains portal accounts and also acts as the role-membership maintenance entry.</en>
+  </lang>
+--%>

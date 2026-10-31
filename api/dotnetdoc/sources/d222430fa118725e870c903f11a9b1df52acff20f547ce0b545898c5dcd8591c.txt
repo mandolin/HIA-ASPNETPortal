@@ -1,0 +1,26 @@
+        public static IList<string> BuildParticipantLines(IList<CollaborationItemParticipantInfo> participants)
+        {
+            if (participants == null || participants.Count == 0)
+            {
+                return new[] { lang.Common_NonePlaceholder };
+            }
+
+            List<string> lines = new List<string>(participants.Count);
+            foreach (CollaborationItemParticipantInfo participant in participants)
+            {
+                string userName = participant == null || string.IsNullOrWhiteSpace(participant.UserName)
+                    ? lang.Common_NonePlaceholder
+                    : participant.UserName.Trim();
+                string roleText = participant == null
+                    ? string.Empty
+                    : GetRoleDisplayText(participant.ParticipantRoleKey);
+
+                lines.Add(string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Collaboration_ParticipantDisplayFormat,
+                    userName,
+                    roleText));
+            }
+
+            return lines;
+        }

@@ -1,0 +1,1 @@
+        IEnumerable<IAnnouncementItem> GetAnnouncements(int moduleId);

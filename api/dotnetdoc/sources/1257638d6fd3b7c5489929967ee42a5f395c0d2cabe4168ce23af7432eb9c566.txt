@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>表格字段只呈现服务器提供的包、模块、放置、主题范围和渲染时间诊断值，不把它们当作客户端可修改配置。</zh-CN>
+            <en>The table only presents server-provided package, module, placement, theme-scope, and render-time diagnostics; these values are not client-editable configuration.</en>
+        </lang>
+    --%>

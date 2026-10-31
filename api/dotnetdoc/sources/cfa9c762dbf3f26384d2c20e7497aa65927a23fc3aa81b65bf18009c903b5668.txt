@@ -1,0 +1,4 @@
+        public int Size
+        {
+            get { return ContentSize ?? 0; }
+        }

@@ -1,0 +1,26 @@
+    public static class PortalUserRegistrationStatuses
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已批准，在注册审核元数据可读取时允许登录。</zh-CN>
+        ///   <en>Approved and allowed to sign in when registration-review metadata is available.</en>
+        /// </lang>
+        /// </summary>
+        public const string Approved = "Approved";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>等待管理员审核，不允许登录。</zh-CN>
+        ///   <en>Waiting for administrator approval and not allowed to sign in.</en>
+        /// </lang>
+        /// </summary>
+        public const string PendingApproval = "PendingApproval";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已拒绝，不允许登录；管理员之后仍可批准以恢复访问。</zh-CN>
+        ///   <en>Rejected and not allowed to sign in; an administrator may approve later to restore access.</en>
+        /// </lang>
+        /// </summary>
+        public const string Rejected = "Rejected";
+    }

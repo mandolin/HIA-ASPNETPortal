@@ -1,0 +1,14 @@
+        public static bool TryDecryptSubmittedPassword(
+            HttpContext context,
+            string encryptedPassword,
+            out string password,
+            out string failureCode,
+            out string eventId)
+        {
+            return PortalLoginPasswordCrypto.TryDecryptSubmittedPassword(
+                context,
+                encryptedPassword,
+                out password,
+                out failureCode,
+                out eventId);
+        }

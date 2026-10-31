@@ -1,0 +1,5 @@
+        public PortalWorkItemQueryResult(bool succeeded, IList<PortalWorkItemInfo> items)
+        {
+            Succeeded = succeeded;
+            Items = items ?? (IList<PortalWorkItemInfo>)new List<PortalWorkItemInfo>();
+        }

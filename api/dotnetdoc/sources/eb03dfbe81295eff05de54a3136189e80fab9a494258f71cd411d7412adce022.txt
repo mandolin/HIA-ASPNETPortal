@@ -1,0 +1,8 @@
+        public static string Unhandled(Exception exception, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>未处理路径固定分类和对外摘要，避免把异常文本作为调用方消息直接传播到输出链。</zh-CN>
+            //   <en>The unhandled path fixes category and external summary so exception text is not propagated as a caller message directly into the output pipeline.</en>
+            // </lang>
+            return Write("Error", "UnhandledException", "Unhandled portal exception.", exception, context);
+        }

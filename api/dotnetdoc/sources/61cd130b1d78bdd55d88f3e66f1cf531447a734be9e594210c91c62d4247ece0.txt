@@ -1,0 +1,8 @@
+        private string EncodeDisplayText(string value)
+        {
+            // <lang>
+            //   <zh-CN>显示路径先解码历史实体再重新编码，统一处理旧数据和本次提交的新文本。</zh-CN>
+            //   <en>The display path decodes historical entities before encoding again, treating legacy rows and newly submitted text consistently.</en>
+            // </lang>
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
+        }

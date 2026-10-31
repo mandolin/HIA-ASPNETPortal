@@ -1,0 +1,20 @@
+        private void BindData()
+        {
+            // <lang>
+            //   <zh-CN>把已验证快照投影到控件，并从当前门户读取可配置角色；不在绑定阶段执行写入。</zh-CN>
+            //   <en>Project the verified snapshot into controls and read configurable roles from the current Portal; binding performs no writes.</en>
+            // </lang>
+            moduleTitle.Text = currentModule.ModuleTitle;
+            cacheTime.Text = currentModule.CacheTime.ToString();
+            showMobile.Checked = currentModule.ShowMobile;
+
+            // <lang>
+            //   <zh-CN>回填多语言列；数据库为 NULL 时显示空串，管理员看到的是"未配置"而不是 "null"。</zh-CN>
+            //   <en>Backfill the multilingual columns; a NULL in the database renders as an empty string so administrators see "not configured" rather than "null".</en>
+            // </lang>
+            moduleTitleEn.Text = currentModule.ModuleTitleEn ?? string.Empty;
+            moduleTitleLocalizedJson.Text = currentModule.ModuleTitleLocalizedJson ?? string.Empty;
+            PopulateRoleList(
+                PortalRoleParser.Parse(currentModule.AuthorizedEditRoles),
+                RolesDb.GetPortalRoles(PortalContext.GetPortalSettings().PortalId));
+        }

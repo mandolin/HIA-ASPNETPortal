@@ -1,0 +1,11 @@
+        public bool IsSchemaAvailable()
+        {
+            // <lang>
+            //   <zh-CN>资料更正模块依赖请求、员工、绑定和旧用户表；任一表缺失都返回不可用，页面据此显示低敏提示。</zh-CN>
+            //   <en>The correction module depends on request, employee, binding and legacy user tables; any missing table makes the module unavailable and lets the page show a low-sensitivity message.</en>
+            // </lang>
+            return HasTable(RequestTableName) &&
+                   HasTable(EmployeeTableName) &&
+                   HasTable(BindingTableName) &&
+                   HasTable(UserTableName);
+        }

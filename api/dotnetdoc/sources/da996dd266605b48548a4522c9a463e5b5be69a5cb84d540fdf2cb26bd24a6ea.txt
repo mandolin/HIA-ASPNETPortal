@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每次生命周期复核运维健康查看权限，拒绝时不执行健康检查或绑定。</zh-CN>
+            //   <en>Recheck operations-health-view permission on every lifecycle entry so rejection runs no health check or binding.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.OpsHealthView))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅首次请求读取快照，回发由显式刷新动作决定是否重新检查。</zh-CN>
+            //   <en>Read the snapshot only on the initial request; postbacks rerun the check only through the explicit refresh action.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindHealthSnapshot();
+            }
+        }

@@ -1,0 +1,26 @@
+        private static bool TryParseDueUtc(string value, out DateTime? dueUtc)
+        {
+            // <lang>
+            //   <zh-CN>先把输出初始化为 null，保证空值和失败路径不会复用旧解析结果。</zh-CN>
+            //   <en>Initialize the output to null so blank and failure paths cannot reuse a previous parse result.</en>
+            // </lang>
+            dueUtc = null;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return true;
+            }
+
+            DateTime parsed;
+            if (!DateTime.TryParseExact(
+                value.Trim(),
+                new[] { "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd" },
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                out parsed))
+            {
+                return false;
+            }
+
+            dueUtc = parsed;
+            return true;
+        }

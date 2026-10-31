@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>角色成员区将可选角色和当前成员作为回发命令载体；角色身份、去重、授权和审计仍由 code-behind 在写入前重新判断。</zh-CN>
+            <en>The role-membership section carries selected roles and current members through postback commands; code-behind rechecks role identity, duplication, authorization, and audit requirements before writing.</en>
+          </lang>
+        --%>

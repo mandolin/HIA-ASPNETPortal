@@ -1,0 +1,25 @@
+        private void BindFilterLists()
+        {
+            // <lang>
+            //   <zh-CN>重建员工状态筛选项，保留稳定的“全部”空值和批准状态常量，不信任回发标记层自行扩展。</zh-CN>
+            //   <en>Rebuild employee-status filters with a stable “all” empty value and approved status constants instead of trusting postback markup to extend them.</en>
+            // </lang>
+            EmployeeStatusList.Items.Clear();
+            EmployeeStatusList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            EmployeeStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Active, PortalEmployeeStatuses.Active));
+            EmployeeStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Pending, PortalEmployeeStatuses.Pending));
+            EmployeeStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Suspended, PortalEmployeeStatuses.Suspended));
+            EmployeeStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Left, PortalEmployeeStatuses.Left));
+
+            // <lang>
+            //   <zh-CN>绑定状态筛选与员工状态使用同一固定选项策略，并默认只显示有效绑定。</zh-CN>
+            //   <en>Apply the same fixed-option strategy to binding status and default to active bindings only.</en>
+            // </lang>
+            BindingStatusList.Items.Clear();
+            BindingStatusList.Items.Add(new ListItem(lang.Admin_EmployeeDirectory_OptionBindingActive, PortalUserEmployeeBindingStatuses.Active));
+            BindingStatusList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            BindingStatusList.Items.Add(new ListItem(PortalUserEmployeeBindingStatuses.Pending, PortalUserEmployeeBindingStatuses.Pending));
+            BindingStatusList.Items.Add(new ListItem(PortalUserEmployeeBindingStatuses.Disabled, PortalUserEmployeeBindingStatuses.Disabled));
+            BindingStatusList.Items.Add(new ListItem(PortalUserEmployeeBindingStatuses.Ended, PortalUserEmployeeBindingStatuses.Ended));
+            BindingStatusList.SelectedValue = PortalUserEmployeeBindingStatuses.Active;
+        }

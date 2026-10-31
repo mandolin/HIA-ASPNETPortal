@@ -1,0 +1,11 @@
+        private static UserEmployeeBindingSaveRequest NormalizeSaveRequest(UserEmployeeBindingSaveRequest request)
+        {
+            request = request ?? new UserEmployeeBindingSaveRequest();
+            return new UserEmployeeBindingSaveRequest
+            {
+                UserId = request.UserId,
+                EmployeeCode = NormalizeOptional(request.EmployeeCode),
+                Reason = NormalizeReason(request.Reason),
+                ActorName = NormalizeActor(request.ActorName)
+            };
+        }

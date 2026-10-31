@@ -1,0 +1,1 @@
+        bool TryGetActiveItems(string referenceSetKey, out IList<ReferenceDataItem> items);

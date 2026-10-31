@@ -1,0 +1,20 @@
+        private void TryEnsureResubmittedWorkItem(long itemId)
+        {
+            // <lang>
+            //   <zh-CN>重提查询仅用于最小待办载荷，不把列表结果当作新的授权来源。</zh-CN>
+            //   <en>The resubmission lookup supplies only the minimal work-item payload and is not treated as a new authorization source.</en>
+            // </lang>
+            if (CollaborationItemDb == null || itemId <= 0)
+            {
+                return;
+            }
+
+            CollaborationItemInfo item = CollaborationItemDb.GetAdminItems(string.Empty, 200)
+                .FirstOrDefault(candidate => candidate.ItemId == itemId);
+            if (item == null)
+            {
+                return;
+            }
+
+            TryEnsureWorkItem(item.ItemId, item.ItemCode, item.Title, item.Summary, item.OwnerRoleKey, item.DueUtc);
+        }

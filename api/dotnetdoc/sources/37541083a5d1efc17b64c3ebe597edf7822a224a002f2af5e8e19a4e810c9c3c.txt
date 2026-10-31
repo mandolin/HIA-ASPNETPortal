@@ -1,0 +1,8 @@
+        public IEnumerable<int> GetModulesByModuleDefId(int moduleDefId)
+        {
+            // <lang>
+            //   <zh-CN>模块定义删除前会调用该查询判断是否仍有实例引用。</zh-CN>
+            //   <en>This query is used before deleting module definitions to detect remaining instance references.</en>
+            // </lang>
+            return _items.Where(i => i.ModuleDefId == moduleDefId).Select(i => i.ModuleId);
+        }

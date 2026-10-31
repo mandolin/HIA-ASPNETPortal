@@ -1,0 +1,18 @@
+        private bool HasTable(string tableName)
+        {
+            try
+            {
+                // <lang>
+                //   <zh-CN>表名不接受用户输入；OBJECT_ID 元数据失败按不可用处理，调用方决定是否走兼容路径。</zh-CN>
+                //   <en>Table names accept no user input; OBJECT_ID metadata failures are treated as unavailable and callers decide whether to use compatibility paths.</en>
+                // </lang>
+                string sql = string.Format(
+                    "SELECT CASE WHEN OBJECT_ID(N'[dbo].[{0}]', N'U') IS NULL THEN 0 ELSE 1 END",
+                    tableName);
+                return _context.Database.SqlQuery<int>(sql).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }

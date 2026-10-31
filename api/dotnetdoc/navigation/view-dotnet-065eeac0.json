@@ -1,0 +1,67 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "view:dotnet",
+  "children": [
+    {
+      "id": "dotnet:project:.net-project-structure",
+      "kind": "project",
+      "label": ".NET Project Structure",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-project-.net-project-structure-b0f076b3.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces",
+      "kind": "surface",
+      "label": "ASP.NET Surfaces",
+      "entryCount": 318,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-c8522b04.json"
+    },
+    {
+      "id": "dotnet:assembly:portal",
+      "kind": "assembly",
+      "label": "Portal",
+      "entryCount": 3114,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal-5d78ce85.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components",
+      "kind": "assembly",
+      "label": "Portal.Components",
+      "entryCount": 1295,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-efb84e4d.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data",
+      "kind": "assembly",
+      "label": "Portal.Components.Data",
+      "entryCount": 21,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data-584c9089.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1",
+      "kind": "assembly",
+      "label": "Portal.Components.Data1",
+      "entryCount": 767,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data1-b887d1a8.json"
+    }
+  ]
+}

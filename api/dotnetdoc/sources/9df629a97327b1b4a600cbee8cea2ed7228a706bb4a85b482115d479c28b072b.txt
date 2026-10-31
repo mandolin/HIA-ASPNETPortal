@@ -1,0 +1,12 @@
+        public IEnumerable<IUserItem> GetRoleMembers(int roleId)
+        {
+            // <lang>
+            //   <zh-CN>旧 EF 导航集合在某些运行路径中可能未初始化；显式读取中间表更稳定。</zh-CN>
+            //   <en>The legacy EF navigation collection can be uninitialized in some runtime paths; reading the join table explicitly is more stable.</en>
+            // </lang>
+            var userIds = GetRoleMemberIds(roleId);
+            return _context.Users
+                .Where(user => userIds.Contains(user.UserId))
+                .OrderBy(user => user.Name)
+                .ToList<IUserItem>();
+        }

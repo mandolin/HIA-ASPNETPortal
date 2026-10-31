@@ -1,0 +1,139 @@
+        protected void UpdateUser_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
+            {
+                return;
+            }
+
+            string email;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(Email.Text, 256, out email))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidEmail, true);
+                return;
+            }
+
+            string loginName;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(LoginName.Text, 100, out loginName))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidLoginName, true);
+                return;
+            }
+
+            string displayName;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(DisplayName.Text, 150, out displayName))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidDisplayName, true);
+                return;
+            }
+
+            string nickname;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(Nickname.Text, 100, out nickname))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidNickName, true);
+                return;
+            }
+
+            bool passwordResetSubmitted = HasPasswordResetSubmission();
+            if (passwordResetSubmitted && !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersResetPassword))
+            {
+                return;
+            }
+
+            string password;
+            string confirmPassword;
+            bool shouldResetPassword;
+            if (!TryResolvePasswordResetSubmission(
+                passwordResetSubmitted,
+                out password,
+                out confirmPassword,
+                out shouldResetPassword))
+            {
+                ClearSubmittedPasswordFields();
+                return;
+            }
+
+            ClearSubmittedPasswordFields();
+
+            if (shouldResetPassword && !string.Equals(password, confirmPassword, StringComparison.Ordinal))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessagePasswordMismatch, true);
+                return;
+            }
+
+            PortalPasswordRejection passwordRejection;
+            if (shouldResetPassword && !PortalPasswordPolicy.TryValidate(
+                password,
+                BuildPasswordPolicyContextTerms(loginName, displayName, nickname, email),
+                out passwordRejection))
+            {
+                // <lang>
+                //   <zh-CN>密码策略失败时按原因码显示对应本地化文案，不记录密码或完整上下文词项。</zh-CN>
+                //   <en>On password-policy failure, show the localized text for the rejection code and never log the password or full context terms.</en>
+                // </lang>
+                switch (passwordRejection)
+                {
+                    case PortalPasswordRejection.BelowComplexityPolicy:
+                        PortalPasswordPolicyOptions passwordPolicyOptions = PortalPasswordPolicy.GetEffectiveOptions();
+                        ShowRegistrationMessage(
+                            string.Format(lang.Common_PasswordMessageComplexityPolicy, passwordPolicyOptions.MinimumLength, passwordPolicyOptions.RequiredCategoryCount),
+                            true);
+                        break;
+                    case PortalPasswordRejection.WeakDictionaryMatch:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageWeakDictionaryMatch, true);
+                        break;
+                    case PortalPasswordRejection.ContainsAccountContextTerm:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageContainsAccountContextTerm, true);
+                        break;
+                    default:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageRejected, true);
+                        break;
+                }
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>数据服务负责资料和凭据持久化；本页随后分别记录资料/密码审计，不在审计调用中传递密码或资料原文。</zh-CN>
+                //   <en>The data service owns profile and credential persistence; this page records separate profile/password audits afterward without passing passwords or raw profile values.</en>
+                // </lang>
+                IUserProfileInfo profileBefore = UsersDB.GetUserProfileInfo(userId);
+                UsersDB.UpdateUserProfile(
+                    userId,
+                    loginName,
+                    displayName,
+                    nickname,
+                    email,
+                    shouldResetPassword ? password : string.Empty,
+                    GetCurrentActor());
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    PortalOperationAuditEvents.ProfileUpdated,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    BuildProfileAuditSummary(profileBefore, loginName, displayName, nickname, email),
+                    Context);
+                if (shouldResetPassword)
+                {
+                    PortalOperationAudit.Record(
+                        PortalOperationAuditEvents.SecurityCredentialsCategory,
+                        PortalOperationAuditEvents.PasswordReset,
+                        PortalOperationAuditEvents.UserTargetType,
+                        userId.ToString(),
+                        "User credential reset by administrator.",
+                        Context);
+                }
+
+                RedirectToCurrentUser();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.UpdateUser",
+                    "Updating user profile failed. UserId=" + userId,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageProfileUpdateFailed, eventId), true);
+            }
+        }

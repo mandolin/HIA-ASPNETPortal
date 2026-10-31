@@ -1,0 +1,13 @@
+        private static PortalPasswordPolicyOptions NormalizeOptions(PortalPasswordPolicyOptions options)
+        {
+            if (options == null)
+            {
+                return PortalPasswordPolicyOptions.CreateDefault();
+            }
+
+            return new PortalPasswordPolicyOptions(
+                Math.Max(MinimumLength, options.MinimumLength),
+                Math.Max(RequiredCategoryCount, Math.Min(4, options.RequiredCategoryCount)),
+                options.WeakDictionaryEnabled,
+                options.DisallowContextTerms);
+        }

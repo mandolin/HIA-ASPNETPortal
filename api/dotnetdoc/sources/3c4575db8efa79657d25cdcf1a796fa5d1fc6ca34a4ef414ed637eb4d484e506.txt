@@ -1,0 +1,23 @@
+        private static void SelectListValue(DropDownList list, string value)
+        {
+            // <lang>
+            //   <zh-CN>按稳定值查找父级选项，不用显示名称参与选择匹配。</zh-CN>
+            //   <en>Find the parent option by stable value rather than using display names for matching.</en>
+            // </lang>
+            ListItem item = list.Items.FindByValue(value ?? string.Empty);
+            if (item == null)
+            {
+                // <lang>
+                //   <zh-CN>候选集中没有该值时保持现状，不动态添加未经服务端验证的父级。</zh-CN>
+                //   <en>Keep the current state when the candidate set lacks the value instead of adding an unverified parent.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>清除旧选择后只选中匹配项，保持单选控件状态唯一。</zh-CN>
+            //   <en>Clear the old selection and mark only the match so the single-select state remains unique.</en>
+            // </lang>
+            list.ClearSelection();
+            item.Selected = true;
+        }

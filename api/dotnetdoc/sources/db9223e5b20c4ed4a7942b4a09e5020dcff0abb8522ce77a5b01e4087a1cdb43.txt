@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>提交按钮只进入 SubmitButton_Click 回发流程；它不直接修改员工主数据，当前身份、员工绑定、字段白名单和写入结果均由服务器重新确认。</zh-CN>
+                    <en>The submit button only enters the SubmitButton_Click postback flow; it does not modify employee master data directly, because the server rechecks identity, employee binding, field allowlist, and write result.</en>
+                </lang>
+            --%>

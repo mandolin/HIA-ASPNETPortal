@@ -1,0 +1,5 @@
+        internal static string PortalBanner_Subtitle {
+            get {
+                return ResourceManager.GetString("PortalBanner_Subtitle", resourceCulture);
+            }
+        }

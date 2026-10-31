@@ -1,0 +1,18 @@
+        private static void SelectReferenceValue(DropDownList list, string valueKey)
+        {
+            // <lang>
+            //   <zh-CN>列表或目标值缺失时保持当前状态，不人为插入不存在的选项。</zh-CN>
+            //   <en>Leave the current state unchanged when the list or target value is missing; do not invent an absent option.</en>
+            // </lang>
+            if (list == null)
+            {
+                return;
+            }
+
+            ListItem item = list.Items.FindByValue(valueKey);
+            if (item != null)
+            {
+                list.ClearSelection();
+                item.Selected = true;
+            }
+        }

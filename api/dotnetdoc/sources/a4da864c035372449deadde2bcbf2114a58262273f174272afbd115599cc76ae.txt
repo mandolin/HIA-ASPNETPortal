@@ -1,0 +1,1 @@
+        public const string DiagnosticsMaxFileBytes = "Portal.Diagnostics.MaxFileBytes";

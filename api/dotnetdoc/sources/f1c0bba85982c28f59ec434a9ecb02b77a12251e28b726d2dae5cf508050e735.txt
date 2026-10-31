@@ -1,0 +1,10 @@
+        private bool HasActiveBindingForEmployee(int employeeId)
+        {
+            return ScalarInt(
+                @"
+SELECT COUNT(*)
+FROM [dbo].[PortalBiz_UserEmployeeBindings]
+WHERE [EmployeeId] = @EmployeeId
+  AND [BindingStatus] = N'Active';",
+                IntParameter("@EmployeeId", employeeId)) > 0;
+        }

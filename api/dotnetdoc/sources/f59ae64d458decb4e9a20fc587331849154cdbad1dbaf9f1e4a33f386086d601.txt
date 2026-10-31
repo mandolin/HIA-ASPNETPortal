@@ -1,0 +1,11 @@
+        private bool EmployeeCodeExists(string employeeCode, int excludingEmployeeId)
+        {
+            return ScalarInt(
+                @"
+SELECT COUNT(*)
+FROM [dbo].[PortalBiz_Employees]
+WHERE [EmployeeCode] = @EmployeeCode
+  AND [EmployeeId] <> @EmployeeId;",
+                TextParameter("@EmployeeCode", employeeCode),
+                IntParameter("@EmployeeId", Math.Max(0, excludingEmployeeId))) > 0;
+        }

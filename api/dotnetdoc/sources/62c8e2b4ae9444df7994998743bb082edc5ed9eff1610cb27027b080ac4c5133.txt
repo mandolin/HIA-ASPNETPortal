@@ -1,0 +1,34 @@
+        private static string ExportSubjectPublicKeyInfoPem(RSAParameters parameters)
+        {
+            // <lang>
+            //   <zh-CN>先得到完整 DER，再转换为 Base64；PEM 只承载公钥，不接触私钥参数。</zh-CN>
+            //   <en>Build complete DER first and then convert it to Base64; PEM carries public key material only and never touches private parameters.</en>
+            // </lang>
+            byte[] publicKeyDer = EncodeSubjectPublicKeyInfo(parameters);
+
+            // <lang>
+            //   <zh-CN>Base64 是页面协议载体，内容只来自公钥 DER 字节。</zh-CN>
+            //   <en>Base64 is the page-protocol carrier and is derived only from public-key DER bytes.</en>
+            // </lang>
+            string base64 = Convert.ToBase64String(publicKeyDer);
+
+            // <lang>
+            //   <zh-CN>使用 StringBuilder 组装标准 PEM 头、分行内容和尾部，避免隐式格式差异。</zh-CN>
+            //   <en>Use StringBuilder to assemble the standard PEM header, wrapped content, and footer without implicit formatting differences.</en>
+            // </lang>
+            var builder = new StringBuilder();
+            builder.AppendLine("-----BEGIN PUBLIC KEY-----");
+
+            for (int index = 0; index < base64.Length; index += 64)
+            {
+                // <lang>
+                //   <zh-CN>每行最多 64 个 Base64 字符，保持既有 PEM 文本兼容格式。</zh-CN>
+                //   <en>Keep each line to at most 64 Base64 characters for compatibility with the existing PEM text format.</en>
+                // </lang>
+                int length = Math.Min(64, base64.Length - index);
+                builder.AppendLine(base64.Substring(index, length));
+            }
+
+            builder.AppendLine("-----END PUBLIC KEY-----");
+            return builder.ToString();
+        }

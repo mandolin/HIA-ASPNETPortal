@@ -1,0 +1,5 @@
+        internal static string Admin_DiagnosticsLogs_LabelLevel {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticsLogs_LabelLevel", resourceCulture);
+            }
+        }

@@ -1,0 +1,1 @@
+        public string ItemCode { get; private set; }

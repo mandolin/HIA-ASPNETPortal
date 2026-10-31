@@ -1,0 +1,57 @@
+        protected void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除前复用统一初始化和选中项校验，并阻止删除受保护的核心后台 Tab。</zh-CN>
+            //   <en>Reuse centralized initialization and selection validation before deletion, and block deletion of the protected administration Tab.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            TabSettings selectedTab;
+            if (!TryGetSelectedTab(out selectedTab))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(selectedTab.TabName, selectedTab.NavigationKey))
+            {
+                ShowMessage(lang.Admin_Tabs_MessageCoreTabProtected);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>先统计关联模块实例，再执行 Tab 删除、列表重排和低敏审计，保持操作语义可追踪。</zh-CN>
+                //   <en>Count related module instances before deleting the Tab, reordering the list, and recording a traceable low-sensitivity audit.</en>
+                // </lang>
+                int moduleCount = ModulesConfig.GetModulesByTab(selectedTab.TabId).Count();
+                TabsConfig.DeleteTab(selectedTab.TabId);
+                PortalTabs.Remove(selectedTab);
+                OrderTabs();
+                PortalOperationAudit.Record(
+                    "TabAdministration",
+                    "Delete",
+                    "Tab",
+                    selectedTab.TabId.ToString(),
+                    "Deleted Tab and " + moduleCount + " module instance(s).",
+                    Context);
+                RedirectToPortalHome();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>删除失败不吞异常，向用户仅返回事件编号。</zh-CN>
+                //   <en>Do not swallow deletion failures; return only the event identifier to the user.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Tabs.Delete",
+                    "Deleting a Tab failed. TabId=" + selectedTab.TabId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Tabs_MessageDeleteFailed, eventId));
+            }
+        }

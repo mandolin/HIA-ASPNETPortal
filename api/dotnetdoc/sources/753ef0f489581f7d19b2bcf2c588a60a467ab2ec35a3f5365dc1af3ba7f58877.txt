@@ -1,0 +1,14 @@
+        private bool HasTable(string tableName)
+        {
+            try
+            {
+                string sql = string.Format(
+                    "SELECT CASE WHEN OBJECT_ID(N'[dbo].[{0}]', N'U') IS NULL THEN 0 ELSE 1 END",
+                    tableName);
+                return _context.Database.SqlQuery<int>(sql).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }

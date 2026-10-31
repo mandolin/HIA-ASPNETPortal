@@ -1,0 +1,31 @@
+        public IUserProfileInfo GetUserProfileInfo(int userId)
+        {
+            UserItem user = _context.Users.AsNoTracking().SingleOrDefault(i => i.UserId == userId);
+            if (user == null)
+            {
+                return null;
+            }
+
+            if (!HasUserProfileTable())
+            {
+                return CreateLegacyProfileInfo(user, false, "LegacyNoProfileTable");
+            }
+
+            UserProfileItem profile = _context.UserProfiles.AsNoTracking().SingleOrDefault(i => i.UserId == userId);
+            if (profile == null)
+            {
+                return CreateLegacyProfileInfo(user, true, "ProfileMissingLegacyFallback");
+            }
+
+            return new UserProfileInfo(
+                user.UserId,
+                SafeName(user.Name),
+                SafeName(profile.LoginName),
+                SafeName(profile.DisplayName),
+                SafeName(profile.Nickname),
+                SafeName(profile.PreferredEmail),
+                NormalizeProfileStatus(profile.Status),
+                SafeName(profile.StatusReason),
+                true,
+                "UserProfile");
+        }

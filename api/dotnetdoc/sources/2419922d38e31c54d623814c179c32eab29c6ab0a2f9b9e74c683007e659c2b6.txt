@@ -1,0 +1,10 @@
+        protected void DesktopSrcPathValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            // <lang>
+            //   <zh-CN>保留验证器契约并复用统一路径策略；即使当前控件停用，也不恢复任意路径写入。</zh-CN>
+            //   <en>Keep the validator contract while reusing the shared path policy; a disabled control must not restore arbitrary path writes.</en>
+            // </lang>
+            string normalizedSource;
+            string errorMessage;
+            args.IsValid = PortalModulePathValidator.TryNormalizeDesktopSource(args.Value, out normalizedSource, out errorMessage);
+        }

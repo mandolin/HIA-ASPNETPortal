@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_ButtonResubmit {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ButtonResubmit", resourceCulture);
+            }
+        }

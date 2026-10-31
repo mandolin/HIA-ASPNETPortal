@@ -1,0 +1,118 @@
+    public sealed class EmployeeDirectoryRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从员工数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from an employee data object.</en>
+        /// </lang>
+        /// </summary>
+        internal EmployeeDirectoryRow(IEmployeeInfo employee)
+        {
+            // <lang>
+            //   <zh-CN>投影只复制目录展示所需的低敏字段；账号安全版本、凭据和绑定写入不在此模型中。</zh-CN>
+            //   <en>Project only low-sensitivity fields needed for directory display; credentials, security versions and binding writes are outside this model.</en>
+            // </lang>
+            EmployeeId = employee.EmployeeId;
+            EmployeeCode = employee.EmployeeCode;
+            DisplayName = employee.DisplayName;
+            PreferredName = employee.PreferredName;
+            WorkEmail = employee.WorkEmail;
+            // <lang>
+            //   <zh-CN>组织显示优先使用已联接名称，缺失时回退到稳定组织标识或空字符串，不臆造名称。</zh-CN>
+            //   <en>Prefer the joined organization name, then fall back to the stable organization identifier or empty text without inventing a name.</en>
+            // </lang>
+            OrganizationText = string.IsNullOrEmpty(employee.OrganizationDisplayName)
+                ? employee.OrganizationUnitId.HasValue
+                    ? "#" + employee.OrganizationUnitId.Value.ToString(CultureInfo.InvariantCulture)
+                    : string.Empty
+                : employee.OrganizationDisplayName;
+            EmploymentStatus = employee.EmploymentStatus;
+            SourceSystem = employee.SourceSystem;
+            // <lang>
+            //   <zh-CN>两个动作地址都固定为站内维护页，分别表达员工编辑与绑定维护，不在只读页执行动作。</zh-CN>
+            //   <en>Both action URLs point to fixed in-application maintenance pages, representing employee editing and binding maintenance without executing actions here.</en>
+            // </lang>
+            EditUrl = "EmployeeEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
+            BindUrl = "UserEmployeeBindingEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工标识。</zh-CN>
+        ///   <en>Employee identifier.</en>
+        /// </lang>
+        /// </summary>
+        public int EmployeeId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </lang>
+        /// </summary>
+        public string EmployeeCode { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工显示名。</zh-CN>
+        ///   <en>Employee display name.</en>
+        /// </lang>
+        /// </summary>
+        public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>偏好称呼。</zh-CN>
+        ///   <en>Preferred name.</en>
+        /// </lang>
+        /// </summary>
+        public string PreferredName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>工作邮箱。</zh-CN>
+        ///   <en>Work email.</en>
+        /// </lang>
+        /// </summary>
+        public string WorkEmail { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织展示文本。</zh-CN>
+        ///   <en>Organization display text.</en>
+        /// </lang>
+        /// </summary>
+        public string OrganizationText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工状态。</zh-CN>
+        ///   <en>Employee status.</en>
+        /// </lang>
+        /// </summary>
+        public string EmploymentStatus { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>来源系统。</zh-CN>
+        ///   <en>Source system.</en>
+        /// </lang>
+        /// </summary>
+        public string SourceSystem { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑页站内地址。</zh-CN>
+        ///   <en>Current-application edit-page URL.</en>
+        /// </lang>
+        /// </summary>
+        public string EditUrl { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号员工绑定维护页站内地址。</zh-CN>
+        ///   <en>Current-application user-employee binding URL.</en>
+        /// </lang>
+        /// </summary>
+        public string BindUrl { get; private set; }
+    }

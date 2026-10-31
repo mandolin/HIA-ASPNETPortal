@@ -1,0 +1,33 @@
+        public long GetSecurityVersionByUserId(int userId)
+        {
+            // <lang>
+            //   <zh-CN>安全版本读取只接受正数标识；缺少状态行时尝试幂等创建初始版本，任何数据库异常按 0 回退。</zh-CN>
+            //   <en>Security-version reads accept only positive identifiers; a missing state row is idempotently initialized when possible, and database errors fall back to zero.</en>
+            // </lang>
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return 0;
+            }
+
+            try
+            {
+                var versions = _context.Database.SqlQuery<long>(
+                    "SELECT [SecurityVersion] FROM [dbo].[Portal_UserSecurityStates] WHERE [UserId] = @p0",
+                    userId).ToList();
+                if (versions.Count > 0)
+                {
+                    return versions[0];
+                }
+
+                EnsureSecurityState(userId, "AutoCreateSecurityState");
+                // <lang>
+                //   <zh-CN>创建请求只保证尝试补齐状态；当前方法返回稳定的初始版本，不把插入结果扩大为用户存在或登录授权证明。</zh-CN>
+                //   <en>The create request only attempts to fill the state; return the stable initial version without treating insertion as proof of user existence or sign-in authorization.</en>
+                // </lang>
+                return InitialSecurityVersion;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }

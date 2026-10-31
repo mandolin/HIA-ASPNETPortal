@@ -1,0 +1,13 @@
+        private string BuildPortalReturnUrl()
+        {
+            // <lang>
+            //   <zh-CN>只有正 Tab 标识才构造桌面页返回地址，其他情况回到固定门户首页。</zh-CN>
+            //   <en>Build a desktop-page return URL only for a positive Tab id; otherwise return to the fixed portal home page.</en>
+            // </lang>
+            if (tabId > 0)
+            {
+                return ResolveUrl("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+            }
+
+            return ResolveUrl("~/Default.aspx");
+        }

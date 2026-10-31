@@ -1,0 +1,18 @@
+        private static byte[] EncodeTag(byte tag, byte[] value)
+        {
+            // <lang>
+            //   <zh-CN>长度字段必须先于缓冲区分配确定，以便一次分配完整 TLV。</zh-CN>
+            //   <en>Determine the length field before allocating so the complete TLV can be allocated once.</en>
+            // </lang>
+            byte[] length = EncodeLength(value.Length);
+
+            // <lang>
+            //   <zh-CN>缓冲区布局为 tag、length、value，严格保持 DER 的 TLV 顺序。</zh-CN>
+            //   <en>Lay out the buffer as tag, length, and value, preserving DER TLV order exactly.</en>
+            // </lang>
+            byte[] encoded = new byte[1 + length.Length + value.Length];
+            encoded[0] = tag;
+            Buffer.BlockCopy(length, 0, encoded, 1, length.Length);
+            Buffer.BlockCopy(value, 0, encoded, 1 + length.Length, value.Length);
+            return encoded;
+        }

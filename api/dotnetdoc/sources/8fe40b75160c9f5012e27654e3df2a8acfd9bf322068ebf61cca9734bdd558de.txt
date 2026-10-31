@@ -1,0 +1,2 @@
+<%@ Page CodeBehind="Default.aspx.cs" Language="c#" 
+AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.CDefault" MasterPageFile="~/Default.master" %>

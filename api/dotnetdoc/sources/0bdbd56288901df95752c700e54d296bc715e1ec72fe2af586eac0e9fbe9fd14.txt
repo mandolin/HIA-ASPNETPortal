@@ -1,0 +1,17 @@
+        internal PortalCapabilityDefinition(
+            string capabilityId,
+            string layer,
+            string lifecycleState,
+            string primaryModuleId,
+            string permissionKeyPrefix,
+            string displayNameZh,
+            string displayNameEn)
+        {
+            CapabilityId = capabilityId ?? string.Empty;
+            Layer = layer ?? string.Empty;
+            LifecycleState = lifecycleState ?? string.Empty;
+            PrimaryModuleId = primaryModuleId ?? string.Empty;
+            PermissionKeyPrefix = permissionKeyPrefix ?? string.Empty;
+            DisplayNameZh = displayNameZh ?? string.Empty;
+            DisplayNameEn = displayNameEn ?? string.Empty;
+        }

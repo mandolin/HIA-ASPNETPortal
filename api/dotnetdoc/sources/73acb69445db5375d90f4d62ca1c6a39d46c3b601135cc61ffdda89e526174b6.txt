@@ -1,0 +1,4 @@
+        private static SqlParameter TextParameter(string name, string value)
+        {
+            return new SqlParameter(name, SqlDbType.NVarChar) { Value = string.IsNullOrEmpty(value) ? (object)DBNull.Value : value };
+        }

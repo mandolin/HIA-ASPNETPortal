@@ -1,0 +1,1 @@
+        public string OwnerRoleKey { get; set; }

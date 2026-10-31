@@ -1,0 +1,32 @@
+        public static string GetRoleDisplayText(string participantRoleKey)
+        {
+            // <lang>
+            //   <zh-CN>先做去空白与空值判定，避免把仅含空格的键当成"未知角色"而回退成一个不可读的空白高亮。</zh-CN>
+            //   <en>Trim and check for blank first so a whitespace-only key is not treated as an unknown role and echoed back as unreadable whitespace.</en>
+            // </lang>
+            string roleKey = participantRoleKey == null ? string.Empty : participantRoleKey.Trim();
+            if (roleKey.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>已知角色按封闭词表匹配并取共享资源键；比较使用 Ordinal，避免区域性规则把不同键视为相等。</zh-CN>
+            //   <en>Known roles match the closed vocabulary and resolve to shared resource keys; comparison is ordinal so culture rules cannot equate distinct keys.</en>
+            // </lang>
+            if (string.Equals(roleKey, PortalCollaborationItemParticipantRoles.Collaborator, StringComparison.Ordinal))
+            {
+                return lang.Collaboration_ParticipantRole_Collaborator;
+            }
+
+            if (string.Equals(roleKey, PortalCollaborationItemParticipantRoles.Watcher, StringComparison.Ordinal))
+            {
+                return lang.Collaboration_ParticipantRole_Watcher;
+            }
+
+            // <lang>
+            //   <zh-CN>未知角色一律回退原始键，不臆造译文：数据层若引入新角色，界面至少仍显示其真实标识而不是错误的角色名。</zh-CN>
+            //   <en>An unknown role always falls back to the raw key instead of inventing a translation: if the data layer introduces a new role, the UI at least shows its real identifier rather than a wrong role name.</en>
+            // </lang>
+            return roleKey;
+        }

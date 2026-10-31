@@ -1,0 +1,80 @@
+        public List<IDiscussionItem> GetThreadMessages(string parent)
+        {
+            // <lang>
+            //   <zh-CN>输出列表只在本次线程读取内累积，保持和顶级主题查询一致的已物化返回契约。</zh-CN>
+            //   <en>The output list accumulates only within this thread read, keeping the same materialized return contract as the top-level topic query.</en>
+            // </lang>
+            var list = new List<IDiscussionItem>();
+
+            // <lang>
+            //   <zh-CN>连接和命令作用域限定到一次线程查询；父路径解释继续由旧存储过程完成。</zh-CN>
+            //   <en>The connection and command scopes are limited to one thread query; parent-path interpretation remains with the legacy stored procedure.</en>
+            // </lang>
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand("Portal_GetThreadMessages", connection))
+            {
+                // <lang>
+                //   <zh-CN>明确使用存储过程执行模式，保持旧 SQL 契约和执行计划边界。</zh-CN>
+                //   <en>Use stored-procedure execution mode explicitly to preserve the legacy SQL contract and execution-plan boundary.</en>
+                // </lang>
+                command.CommandType = CommandType.StoredProcedure;
+
+                // <lang>
+                //   <zh-CN>父级 DisplayOrder 路径最大长度沿用旧过程定义；null 显式转为数据库空值以表达根/缺省语义。</zh-CN>
+                //   <en>The parent DisplayOrder path length follows the legacy procedure definition; null is explicitly converted to database null to express root/default semantics.</en>
+                // </lang>
+                SqlParameter param = new SqlParameter("@Parent", SqlDbType.NVarChar, 750);
+                param.Value = parent ?? (object)DBNull.Value;
+                command.Parameters.Add(param);
+
+                // <lang>
+                //   <zh-CN>参数配置完成后才打开连接，避免在本地参数准备阶段占用 SQL 连接。</zh-CN>
+                //   <en>Open the connection only after parameters are configured so local parameter preparation does not hold a SQL connection.</en>
+                // </lang>
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // <lang>
+                    //   <zh-CN>回复线程过程会返回 ModuleID；这里以数据库值为准，方便调用方在详情页继续做模块归属判断。</zh-CN>
+                    //   <en>The reply-thread procedure returns ModuleID; this method keeps the database value so callers can continue module-ownership checks on detail pages.</en>
+                    // </lang>
+                    int idxItemID = reader.GetOrdinal("ItemID");
+                    int idxModuleID = reader.GetOrdinal("ModuleID");
+                    int idxTitle = reader.GetOrdinal("Title");
+                    int idxCreatedDate = reader.GetOrdinal("CreatedDate");
+                    int idxBody = reader.GetOrdinal("Body");
+                    int idxDisplayOrder = reader.GetOrdinal("DisplayOrder");
+                    int idxCreatedByUser = reader.GetOrdinal("CreatedByUser");
+
+                    while (reader.Read())
+                    {
+                        // <lang>
+                        //   <zh-CN>每条回复使用数据库返回的 ModuleID，以便调用方后续按真实归属复核安全边界。</zh-CN>
+                        //   <en>Each reply uses the ModuleID returned by the database so callers can later re-check safety boundaries against true ownership.</en>
+                        // </lang>
+                        var item = new DiscussionItem
+                        {
+                            ItemID = reader.GetInt32(idxItemID),
+                            ModuleID = reader.GetInt32(idxModuleID),
+                            Title = reader.IsDBNull(idxTitle) ? null : reader.GetString(idxTitle),
+                            CreatedDate = reader.IsDBNull(idxCreatedDate) ? (DateTime?)null : reader.GetDateTime(idxCreatedDate),
+                            Body = reader.IsDBNull(idxBody) ? null : reader.GetString(idxBody),
+                            DisplayOrder = reader.IsDBNull(idxDisplayOrder) ? null : reader.GetString(idxDisplayOrder),
+                            CreatedByUser = reader.IsDBNull(idxCreatedByUser) ? null : reader.GetString(idxCreatedByUser)
+                        };
+
+                        // <lang>
+                        //   <zh-CN>按存储过程返回顺序追加，保留 DisplayOrder 线程排序。</zh-CN>
+                        //   <en>Append in stored-procedure return order, preserving DisplayOrder thread ordering.</en>
+                        // </lang>
+                        list.Add(item);
+                    }
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>返回已物化回复列表；未找到子线程时保持空列表，便于页面安全展示“无回复”。</zh-CN>
+            //   <en>Return the materialized reply list; when no child thread is found, keep an empty list so pages can safely display “no replies”.</en>
+            // </lang>
+            return list;
+        }

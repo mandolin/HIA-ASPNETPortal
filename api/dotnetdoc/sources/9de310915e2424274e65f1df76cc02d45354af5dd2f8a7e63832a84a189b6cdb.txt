@@ -1,0 +1,1 @@
+        void UpdateRole(int roleId, string roleName);

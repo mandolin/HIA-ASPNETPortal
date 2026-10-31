@@ -1,0 +1,5 @@
+        internal static string BusinessApplicationRequest_LabelCategory {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_LabelCategory", resourceCulture);
+            }
+        }

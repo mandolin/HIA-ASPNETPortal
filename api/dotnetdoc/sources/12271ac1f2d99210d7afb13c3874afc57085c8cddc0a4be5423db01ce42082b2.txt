@@ -1,0 +1,39 @@
+        private static void WriteAudit(
+            SqlConnection connection,
+            SqlTransaction transaction,
+            string settingKey,
+            string changeType,
+            string oldValue,
+            string newValue,
+            HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>审计命令绑定与业务变更相同的事务；任何审计写入失败都会阻止外层提交，避免形成不可追溯的在线变化。</zh-CN>
+            //   <en>Bind the audit command to the same transaction as the business change; any audit-write failure prevents outer commit, avoiding an untraceable online change.</en>
+            // </lang>
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.Transaction = transaction;
+                command.CommandText = @"
+INSERT INTO [dbo].[PortalCfg_SystemSettingAudits]
+    ([SettingKey], [ChangeType], [OldValue], [NewValue], [ChangedBy], [ChangedUtc],
+     [ChangeReason], [ClientIp], [UserAgent], [CorrelationId])
+VALUES
+    (@SettingKey, @ChangeType, @OldValue, @NewValue, @ChangedBy, @ChangedUtc,
+     NULL, @ClientIp, @UserAgent, NULL);";
+
+                // <lang>
+                //   <zh-CN>设置键、固定变更类型、旧/新值和受限请求事实均使用参数；ChangeReason 与 CorrelationId 保持数据库 NULL，不从任意请求内容拼接 SQL。</zh-CN>
+                //   <en>Use parameters for setting key, controlled change type, old/new values, and restricted request facts; ChangeReason and CorrelationId remain database NULL and no arbitrary request content is concatenated into SQL.</en>
+                // </lang>
+                AddTextParameter(command, "@SettingKey", 200, settingKey, string.Empty);
+                AddTextParameter(command, "@ChangeType", 20, changeType, "Update");
+                AddUnlimitedTextParameter(command, "@OldValue", oldValue);
+                AddUnlimitedTextParameter(command, "@NewValue", newValue);
+                AddTextParameter(command, "@ChangedBy", 100, GetActorUserName(context), "(anonymous)");
+                command.Parameters.Add("@ChangedUtc", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+                AddTextParameter(command, "@ClientIp", 64, GetClientIp(context), string.Empty);
+                AddTextParameter(command, "@UserAgent", 400, GetUserAgent(context), string.Empty);
+                command.ExecuteNonQuery();
+            }
+        }

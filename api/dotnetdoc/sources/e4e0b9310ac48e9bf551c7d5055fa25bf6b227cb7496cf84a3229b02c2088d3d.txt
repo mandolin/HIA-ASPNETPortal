@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleDefinitions_ValidationDesktopSourcePath {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ValidationDesktopSourcePath", resourceCulture);
+            }
+        }

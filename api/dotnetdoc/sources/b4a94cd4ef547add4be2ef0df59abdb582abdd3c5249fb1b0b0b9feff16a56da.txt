@@ -1,0 +1,17 @@
+        private void BindFieldList()
+        {
+            // <lang>
+            //   <zh-CN>清空控件状态后重新写入固定选项，避免重复绑定在回发或控件重建时累加条目。</zh-CN>
+            //   <en>Clear the control state before writing the fixed options so rebinding cannot accumulate duplicate entries.</en>
+            // </lang>
+            FieldNameList.Items.Clear();
+
+            // <lang>
+            //   <zh-CN>以下四项是当前允许更正的低敏字段；新增字段必须同时审查数据访问、审计和输出边界。</zh-CN>
+            //   <en>These four entries are the currently permitted low-sensitivity fields; any new field requires a joint review of data access, audit, and output boundaries.</en>
+            // </lang>
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelName, "DisplayName"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelSalutation, "PreferredName"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelWorkEmail, "WorkEmail"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelOrganization, "OrganizationDisplayName"));
+        }

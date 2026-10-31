@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>宽高字段可选但必须按服务器约束解释为非负整数；空值、范围和保存结果不由客户端或 CSS 决定。</zh-CN>
+                        <en>Width and height are optional but must be interpreted by the server as non-negative integers; empty values, ranges, and save results are not decided by the client or CSS.</en>
+                    </lang>
+                --%>

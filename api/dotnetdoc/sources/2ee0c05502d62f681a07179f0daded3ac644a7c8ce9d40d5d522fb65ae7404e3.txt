@@ -1,0 +1,66 @@
+    public sealed class PortalHiaPeripheralEnvelope
+    {
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>契约稳定名称。</zh-CN>
+        ///   <en>Stable contract name.</en>
+        /// </l>
+        /// </summary>
+        public string Contract { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>契约草案或稳定版本。</zh-CN>
+        ///   <en>Draft or stable contract version.</en>
+        /// </l>
+        /// </summary>
+        public string ContractVersion { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>部署级非敏感门户实例标识。</zh-CN>
+        ///   <en>Deployment-level non-sensitive portal instance identifier.</en>
+        /// </l>
+        /// </summary>
+        public string PortalInstanceId { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>产生当前描述的门户 producer。</zh-CN>
+        ///   <en>Portal producer that created the current descriptor.</en>
+        /// </l>
+        /// </summary>
+        public PortalHiaProducerDescriptor Producer { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>受支持的能力类型。</zh-CN>
+        ///   <en>Supported capability kind.</en>
+        /// </l>
+        /// </summary>
+        public string Kind { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>ISO 8601 round-trip UTC 时间文本。</zh-CN>
+        ///   <en>ISO 8601 round-trip UTC timestamp text.</en>
+        /// </l>
+        /// </summary>
+        public string OccurredUtc { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>对应 kind 的受限能力描述。</zh-CN>
+        ///   <en>Restricted capability descriptor for the selected kind.</en>
+        /// </l>
+        /// </summary>
+        public IDictionary<string, object> Payload { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>可忽略的实现追踪 metadata。</zh-CN>
+        ///   <en>Optional, ignorable implementation-tracing metadata.</en>
+        /// </l>
+        /// </summary>
+        public IDictionary<string, object> Metadata { get; set; }
+    }

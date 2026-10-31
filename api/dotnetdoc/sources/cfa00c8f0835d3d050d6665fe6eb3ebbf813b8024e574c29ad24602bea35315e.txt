@@ -1,0 +1,5 @@
+        internal static string EditXml_SectionDeploymentResources {
+            get {
+                return ResourceManager.GetString("EditXml_SectionDeploymentResources", resourceCulture);
+            }
+        }

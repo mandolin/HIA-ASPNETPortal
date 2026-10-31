@@ -1,0 +1,4 @@
+        public static string FormatSecurityVersion(long securityVersion)
+        {
+            return SecurityVersionPrefix + Math.Max(0, securityVersion);
+        }

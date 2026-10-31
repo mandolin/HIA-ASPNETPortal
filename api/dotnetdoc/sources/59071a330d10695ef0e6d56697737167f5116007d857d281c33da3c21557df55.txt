@@ -1,0 +1,4 @@
+        public PortalWorkItemDb(PortalBizDbContext context)
+        {
+            this.context = context;
+        }

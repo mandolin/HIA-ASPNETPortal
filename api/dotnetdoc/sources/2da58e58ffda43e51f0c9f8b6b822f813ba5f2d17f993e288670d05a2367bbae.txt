@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>健康检查 Repeater 以编码绑定展示类别、摘要、详情和事件 ID；详情是诊断输出，不应被页面层当作可执行命令。</zh-CN>
+                  <en>The health-check Repeater displays category, summary, detail, and event ID through encoded bindings; detail is diagnostic output and must not be treated as an executable command by the page layer.</en>
+                </lang>
+                --%>

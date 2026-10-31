@@ -1,0 +1,8 @@
+        private string EncodeDisplay(string value)
+        {
+            // <lang>
+            //   <zh-CN>资料字段属于用户可变数据，即使来源于数据库也必须在标记输出边界再次编码。</zh-CN>
+            //   <en>Profile fields are user-controlled data and must be encoded again at the markup boundary even when they came from the database.</en>
+            // </lang>
+            return Server.HtmlEncode(value ?? string.Empty);
+        }

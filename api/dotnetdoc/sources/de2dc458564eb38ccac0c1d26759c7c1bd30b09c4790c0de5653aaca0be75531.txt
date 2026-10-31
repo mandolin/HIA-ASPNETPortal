@@ -1,0 +1,8 @@
+        private static byte[] EncodeSequence(byte[] value)
+        {
+            // <lang>
+            //   <zh-CN>SEQUENCE helper 不改变内容，仅追加结构标签和 DER 长度。</zh-CN>
+            //   <en>The SEQUENCE helper preserves content and adds only the structural tag and DER length.</en>
+            // </lang>
+            return EncodeTag(0x30, value);
+        }

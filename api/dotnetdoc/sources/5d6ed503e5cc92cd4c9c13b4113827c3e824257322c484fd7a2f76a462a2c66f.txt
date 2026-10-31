@@ -1,0 +1,13 @@
+        private PortalLoginIdentifierResolution ResolveEmployeeCode(string normalizedInput)
+        {
+            return ResolveSingle(
+                @"
+SELECT TOP (2) [Binding].[UserId]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+WHERE [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active'
+  AND [Employee].[EmployeeCode] = @p0",
+                normalizedInput);
+        }

@@ -1,0 +1,1 @@
+        public string RejectedBy { get; private set; }

@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_ColumnRecentComment {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ColumnRecentComment", resourceCulture);
+            }
+        }

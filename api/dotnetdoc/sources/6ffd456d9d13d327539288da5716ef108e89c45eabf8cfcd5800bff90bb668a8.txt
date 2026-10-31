@@ -1,0 +1,5 @@
+        private void EnsureUserAndRoleExist(int roleId, int userId)
+        {
+            _context.Users.Single(user => user.UserId == userId);
+            _context.Roles.Single(role => role.RoleId == roleId);
+        }

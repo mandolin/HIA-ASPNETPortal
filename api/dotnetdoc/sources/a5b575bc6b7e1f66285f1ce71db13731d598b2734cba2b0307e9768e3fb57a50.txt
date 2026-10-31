@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_LabelName {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelName", resourceCulture);
+            }
+        }

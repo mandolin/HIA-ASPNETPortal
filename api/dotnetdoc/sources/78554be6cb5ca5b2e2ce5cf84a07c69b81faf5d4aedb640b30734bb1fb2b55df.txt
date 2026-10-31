@@ -1,0 +1,4 @@
+        public UsersDb(PortalSecurityDbContext context)
+        {
+            _context = context;
+        }

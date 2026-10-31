@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>ActiveBindingId 只是服务端状态的回发载体，客户端可修改其值；绑定结束和版本校验不能信任该隐藏字段。</zh-CN>
+            <en>ActiveBindingId is only a postback carrier for server state and can be modified by the client; unbinding and version checks must not trust this hidden field.</en>
+          </lang>
+        --%>

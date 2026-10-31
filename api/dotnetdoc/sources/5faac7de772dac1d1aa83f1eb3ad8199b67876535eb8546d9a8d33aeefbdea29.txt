@@ -1,0 +1,5 @@
+        internal static string EditHtml_LabelDesktopHtml {
+            get {
+                return ResourceManager.GetString("EditHtml_LabelDesktopHtml", resourceCulture);
+            }
+        }

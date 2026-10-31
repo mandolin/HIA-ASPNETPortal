@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_CreatedBy {
+            get {
+                return ResourceManager.GetString("LegacyEdit_CreatedBy", resourceCulture);
+            }
+        }

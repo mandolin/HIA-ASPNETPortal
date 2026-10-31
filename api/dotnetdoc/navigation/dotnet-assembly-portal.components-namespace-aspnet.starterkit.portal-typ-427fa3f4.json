@@ -1,0 +1,98 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.cancelownrequest-system.int32-system.int64-system.string",
+      "kind": "entry",
+      "label": "CancelOwnRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.cancelownrequest-system.int32-system.int64-system.string",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.cancelownrequest-system.int32-system.int64-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-0252396e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getadminrequests-system.string-system.int32",
+      "kind": "entry",
+      "label": "GetAdminRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getadminrequests-system.string-system.int32",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getadminrequests-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-0ba51985.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getcurrentprofileforuser-system.int32",
+      "kind": "entry",
+      "label": "GetCurrentProfileForUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getcurrentprofileforuser-system.int32",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getcurrentprofileforuser-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-ba73fa77.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getrecentrequestsforuser-system.int32-system.int32",
+      "kind": "entry",
+      "label": "GetRecentRequestsForUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getrecentrequestsforuser-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getrecentrequestsforuser-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-97a3bf9c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-a10f08d3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.reviewrequest-aspnet.starterkit.portal.employeeprofilecorrectionreviewrequest",
+      "kind": "entry",
+      "label": "ReviewRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.reviewrequest-aspnet.starterkit.portal.employeeprofilecorrectionreviewrequest",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.reviewrequest-aspnet.starterkit.portal.employeeprofilecorrectionreviewrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-03a6f5db.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.submitrequest-aspnet.starterkit.portal.employeeprofilecorrectionsubmitrequest",
+      "kind": "entry",
+      "label": "SubmitRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.submitrequest-aspnet.starterkit.portal.employeeprofilecorrectionsubmitrequest",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.submitrequest-aspnet.starterkit.portal.employeeprofilecorrectionsubmitrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-a3420deb.html"
+    }
+  ]
+}

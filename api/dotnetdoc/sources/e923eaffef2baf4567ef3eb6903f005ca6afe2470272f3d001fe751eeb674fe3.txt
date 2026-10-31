@@ -1,0 +1,34 @@
+    public sealed class RolePermissionEntry
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>角色数值标识。</zh-CN>
+        ///   <en>Numeric role identifier.</en>
+        /// </lang>
+        /// </summary>
+        public int RoleId { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>角色名（取自旧角色表，用于矩阵列标题）。</zh-CN>
+        ///   <en>Role name taken from the legacy role table and used as the matrix column title.</en>
+        /// </lang>
+        /// </summary>
+        public string RoleName { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>稳定权限键名。</zh-CN>
+        ///   <en>Stable permission key.</en>
+        /// </lang>
+        /// </summary>
+        public string PermissionKey { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>该映射是否生效；false 表示映射存在但被禁用，展示时必须与"未授权"区分。</zh-CN>
+        ///   <en>Whether the mapping is effective; false means the mapping exists but is disabled, and rendering must distinguish it from "not granted".</en>
+        /// </lang>
+        /// </summary>
+        public bool IsEnabled { get; set; }
+    }

@@ -1,0 +1,5 @@
+        internal static string EditHtml_LabelMobileSummary {
+            get {
+                return ResourceManager.GetString("EditHtml_LabelMobileSummary", resourceCulture);
+            }
+        }

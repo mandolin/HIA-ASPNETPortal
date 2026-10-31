@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition DiagnosticsDetailedErrors =
+            new PortalSettingDefinition(
+                PortalSettingKeys.DiagnosticsDetailedErrors,
+                "详细错误输出",
+                "控制是否允许详细错误输出；本阶段只显示状态，不允许在线修改。",
+                PortalSettingValueType.Boolean,
+                "false",
+                false,
+                true,
+                "Admins",
+                "Diagnostics");

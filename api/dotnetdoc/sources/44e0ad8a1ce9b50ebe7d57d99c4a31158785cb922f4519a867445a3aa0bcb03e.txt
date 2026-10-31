@@ -1,0 +1,122 @@
+        private void BindDirectory()
+        {
+            // <lang>
+            //   <zh-CN>没有只读服务时转入统一不可用状态，清空结果而不是继续访问空依赖。</zh-CN>
+            //   <en>When the read-only service is missing, enter the shared unavailable state and clear results instead of using a null dependency.</en>
+            // </lang>
+            if (EmployeeDirectoryDb == null)
+            {
+                ShowUnavailable(lang.Admin_EmployeeDirectory_MessageServiceNotRegistered);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>schema 可用性是只读查询的总门禁；不可用时展示固定提示，不泄露连接或 SQL 细节。</zh-CN>
+            //   <en>Schema availability is the top-level gate for read-only queries; when unavailable, show a fixed message without exposing connection or SQL details.</en>
+            // </lang>
+            bool schemaAvailable = EmployeeDirectoryDb.IsSchemaAvailable();
+            if (!schemaAvailable)
+            {
+                ShowUnavailable(lang.Admin_EmployeeDirectory_MessageSchemaUnavailable);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>公共查询对象只承载页面筛选和 50 行上限，分别复制到三类读取请求，避免跨列表共享可变状态。</zh-CN>
+            //   <en>The common query carries only page filters and the 50-row cap; each of the three read requests copies those values to avoid shared mutable state.</en>
+            // </lang>
+            EmployeeDirectoryQuery commonQuery = CreateCommonQuery();
+            // <lang>
+            //   <zh-CN>组织列表作为父级名称映射来源，保持同一批读取结果内的低敏显示一致。</zh-CN>
+            //   <en>The organization list becomes the parent-name lookup source, keeping low-sensitivity display consistent within the same read batch.</en>
+            // </lang>
+            IList<IOrganizationUnitInfo> organizations = EmployeeDirectoryDb.GetOrganizationUnits(new EmployeeDirectoryQuery
+            {
+                Keyword = commonQuery.Keyword,
+                IncludeInactiveOrganizations = commonQuery.IncludeInactiveOrganizations,
+                Take = PageSize
+            }).ToList();
+
+            // <lang>
+            //   <zh-CN>按稳定组织标识建立名称索引；重复主键由数据层事实暴露为异常，不在页面层静默覆盖。</zh-CN>
+            //   <en>Build a name index by stable organization identifier; duplicate keys remain a data-layer fact and are not silently overwritten by the page.</en>
+            // </lang>
+            IDictionary<int, string> organizationNames = organizations.ToDictionary(
+                organization => organization.OrganizationUnitId,
+                organization => organization.DisplayName);
+
+            // <lang>
+            //   <zh-CN>员工读取只带当前关键字、状态和固定上限；页面不把工作邮箱等字段扩展为额外查询条件。</zh-CN>
+            //   <en>Employee reads carry only the current keyword, status and fixed cap; the page does not expand work-email or other fields into extra filters.</en>
+            // </lang>
+            IList<IEmployeeInfo> employees = EmployeeDirectoryDb.GetEmployees(new EmployeeDirectoryQuery
+            {
+                Keyword = commonQuery.Keyword,
+                Status = EmployeeStatusList.SelectedValue,
+                Take = PageSize
+            }).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定读取使用独立状态筛选，保持账号员工关系的可见性不被员工状态误合并。</zh-CN>
+            //   <en>Binding reads use an independent status filter so account-employee relationship visibility is not conflated with employee status.</en>
+            // </lang>
+            IList<IUserEmployeeBindingInfo> bindings = EmployeeDirectoryDb.GetUserEmployeeBindings(new EmployeeDirectoryQuery
+            {
+                Keyword = commonQuery.Keyword,
+                Status = BindingStatusList.SelectedValue,
+                Take = PageSize
+            }).ToList();
+
+            // <lang>
+            //   <zh-CN>投影层只生成低敏展示行和固定站内编辑地址，不把原始数据对象直接交给标记层。</zh-CN>
+            //   <en>The projection creates only low-sensitivity display rows and fixed in-application edit URLs instead of passing raw data objects to markup.</en>
+            // </lang>
+            List<OrganizationDirectoryRow> organizationRows = organizations
+                .Select(organization => new OrganizationDirectoryRow(organization, GetParentText(organization, organizationNames)))
+                .ToList();
+
+            // <lang>
+            //   <zh-CN>三个列表各自记录绑定前的行数：标记层在各自表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Each of the three lists records its pre-bind row count: the markup renders the empty-state row in each footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            organizationsEmptyStateRowCount = organizationRows.Count;
+
+            OrganizationsRepeater.DataSource = organizationRows;
+            OrganizationsRepeater.DataBind();
+
+            // <lang>
+            //   <zh-CN>员工展示行集中处理组织回退、状态和编辑/绑定地址，保持标记层只消费已约束字段。</zh-CN>
+            //   <en>Employee display rows centralize organization fallback, status and edit/binding URLs so markup consumes only constrained fields.</en>
+            // </lang>
+            List<EmployeeDirectoryRow> employeeRows = employees
+                .Select(employee => new EmployeeDirectoryRow(employee)).ToList();
+            employeesEmptyStateRowCount = employeeRows.Count;
+
+            EmployeesRepeater.DataSource = employeeRows;
+            EmployeesRepeater.DataBind();
+
+            // <lang>
+            //   <zh-CN>绑定展示行只输出账号、员工和非敏感原因摘要，不在页面层启用绑定或改变关系状态。</zh-CN>
+            //   <en>Binding rows expose only account, employee and non-sensitive reason summaries; the page does not enable binding or change relationship state.</en>
+            // </lang>
+            List<UserEmployeeBindingDirectoryRow> bindingRows = bindings
+                .Select(binding => new UserEmployeeBindingDirectoryRow(binding)).ToList();
+            bindingsEmptyStateRowCount = bindingRows.Count;
+
+            BindingsRepeater.DataSource = bindingRows;
+            BindingsRepeater.DataBind();
+
+            // <lang>
+            //   <zh-CN>成功绑定后清除旧提示，并以固定文化格式显示每个分区的数量事实。</zh-CN>
+            //   <en>After successful binding, clear stale messages and display each section's count using invariant formatting.</en>
+            // </lang>
+            MessageLabel.Text = string.Empty;
+            SchemaStatusLabel.Text = lang.Admin_EmployeeDirectory_MessageSchemaAvailableReadOnly;
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_EmployeeDirectory_MessagePageInfo,
+                PageSize,
+                organizations.Count,
+                employees.Count,
+                bindings.Count);
+        }

@@ -1,0 +1,400 @@
+    public static class PortalSystemSettingsStore
+    {
+        // <lang>
+        //   <zh-CN>当前数据库覆盖值表的固定受控名称；仅由本类的私有 SQL helper 使用，不接受请求、配置或设置键作为表名。</zh-CN>
+        //   <en>Fixed controlled name of the current database-override table; used only by this class's private SQL helpers and never accepts a request, configuration, or setting key as a table name.</en>
+        // </lang>
+        private const string SettingsTableName = "PortalCfg_SystemSettings";
+
+        // <lang>
+        //   <zh-CN>设置变更审计表的固定受控名称；写入和删除要求该表同时可用，避免在线变化失去可追溯性。</zh-CN>
+        //   <en>Fixed controlled name of the setting-change audit table; writes and deletes require it to be available with the settings table so online changes do not lose traceability.</en>
+        // </lang>
+        private const string AuditsTableName = "PortalCfg_SystemSettingAudits";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取一个数据库运行级设置覆盖值，并将不可用状态与可用但未命中状态分开返回。</zh-CN>
+        ///   <en>Reads one database runtime-setting override and returns unavailable separately from available-but-not-found.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="settingKey">
+        /// <l>
+        ///   <zh-CN>调用方提供的稳定设置键；本方法只拒绝空白键，不验证 registry 或访问授权。</zh-CN>
+        ///   <en>Stable setting key supplied by the caller; this method rejects only blank keys and does not validate the registry or access authorization.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>仅在异常诊断时使用的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context used only for exception diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>表/读取可用状态、命中状态、原始值和数据库值类型；不可用时调用方必须回退，命中值仍须按定义校验。</zh-CN>
+        ///   <en>Table/read availability, match state, raw value, and database value type; callers must fall back when unavailable and still validate a found value against its definition.</en>
+        /// </l>
+        /// </returns>
+        public static PortalSystemSettingReadResult Read(string settingKey, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>空白键既不映射为“未命中”也不进入数据库；返回不可用状态，避免调用方把无效请求当作某个设置没有覆盖值。本方法不实施 registry 校验或页面/用户授权。</zh-CN>
+            //   <en>A blank key is neither treated as not found nor sent to the database; return unavailable so callers do not mistake an invalid request for a setting without an override. This method does not implement registry validation or page/user authorization.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(settingKey))
+            {
+                return new PortalSystemSettingReadResult(false, false, string.Empty, string.Empty);
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>连接只由受控容器路径创建并在 using 结束时释放；缺少容器或连接串时保持不可用结果，不把配置细节公开给读取调用方。</zh-CN>
+                //   <en>Create the connection only through the controlled container path and release it at the end of the using block; when the container or connection string is unavailable, retain the unavailable result without exposing configuration detail to the read caller.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalSystemSettingReadResult(false, false, string.Empty, string.Empty);
+                    }
+
+                    // <lang>
+                    //   <zh-CN>先确认固定设置表存在再执行查询；迁移未完成或表不存在时不能把基础设施状态误报为某个键未命中。</zh-CN>
+                    //   <en>Confirm that the fixed settings table exists before querying; an incomplete migration or missing table must not be reported as a key that simply was not found.</en>
+                    // </lang>
+                    connection.Open();
+                    if (!IsTableAvailable(connection, SettingsTableName))
+                    {
+                        return new PortalSystemSettingReadResult(false, false, string.Empty, string.Empty);
+                    }
+
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        // <lang>
+                        //   <zh-CN>查询只选择固定表中的当前值和类型；设置键作为参数传入，既不允许动态 SQL，也不在此按注册定义转换或接受该值。</zh-CN>
+                        //   <en>The query selects only current value and type from the fixed table; pass the setting key as a parameter, allow no dynamic SQL, and neither convert nor accept the value against a registered definition here.</en>
+                        // </lang>
+                        command.CommandText = @"
+SELECT [SettingValue], [ValueType]
+FROM [dbo].[PortalCfg_SystemSettings]
+WHERE [SettingKey] = @SettingKey;";
+                        AddTextParameter(command, "@SettingKey", 200, settingKey, string.Empty);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            // <lang>
+                            //   <zh-CN>表已确认可用但没有对应行时保留 IsAvailable=true、IsFound=false；运行时解析器可据此继续其它受控来源，而不是按数据库失败处理。</zh-CN>
+                            //   <en>When the table is available but no row matches, retain IsAvailable=true and IsFound=false; the runtime resolver can continue to other controlled sources rather than treating this as a database failure.</en>
+                            // </lang>
+                            if (!reader.Read())
+                            {
+                                return new PortalSystemSettingReadResult(true, false, string.Empty, string.Empty);
+                            }
+
+                            // <lang>
+                            //   <zh-CN>行存在性由 IsFound 表示；数据库 NULL 文本归一为空字符串而不改变命中事实，值和类型仍由上层定义校验后才能采用。</zh-CN>
+                            //   <en>IsFound carries row existence; normalize database-null text to empty strings without changing that fact, and upper definitions must still validate value and type before adoption.</en>
+                            // </lang>
+                            string value = reader.IsDBNull(0) ? string.Empty : reader.GetString(0);
+                            string valueType = reader.IsDBNull(1) ? string.Empty : reader.GetString(1);
+                            return new PortalSystemSettingReadResult(true, true, value, valueType);
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>诊断层接收异常和可选上下文以保留受限运营证据；调用方只得到不可用状态，不接收连接串、SQL 或异常详情，并应触发既有回退。</zh-CN>
+                //   <en>The diagnostic layer receives the exception and optional context for restricted operational evidence; the caller receives only unavailable status, never connection-string, SQL, or exception detail, and should trigger its established fallback.</en>
+                // </lang>
+                PortalDiagnostics.Error(
+                    "SystemSettings.Read",
+                    "Reading a database runtime setting failed.",
+                    exception,
+                    context);
+                return new PortalSystemSettingReadResult(false, false, string.Empty, string.Empty);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>写入一个允许在线管理的非敏感设置覆盖值，并在同一事务记录设置审计。</zh-CN>
+        ///   <en>Writes one non-sensitive setting override allowed for online management and records setting audit data in the same transaction.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>已登记且允许在线编辑的非敏感设置定义。</zh-CN>
+        ///   <en>Registered non-sensitive setting definition that allows online editing.</en>
+        /// </l>
+        /// </param>
+        /// <param name="settingValue">
+        /// <l>
+        ///   <zh-CN>候选文本值；存储前会再次按定义校验和规范化。</zh-CN>
+        ///   <en>Candidate text value; it is validated and normalized against the definition again before storage.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于审计和受限诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for auditing and restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果，不包含连接串或 SQL 细节。</zh-CN>
+        ///   <en>Write result without connection-string or SQL details.</en>
+        /// </l>
+        /// </returns>
+        public static PortalSystemSettingWriteResult SaveOverride(
+            PortalSettingDefinition definition,
+            string settingValue,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>先准备稳定失败输出并通过同一运行时规范化门禁验证候选值；该变量只在通过定义、安全性和类型/范围检查后参与数据库参数。</zh-CN>
+            //   <en>Prepare a stable failure output and validate the candidate through the same runtime-normalization gate; this variable enters database parameters only after definition, sensitivity, type, and range checks pass.</en>
+            // </lang>
+            string normalizedValue;
+            if (!CanWrite(definition, settingValue, out normalizedValue))
+            {
+                // <lang>
+                //   <zh-CN>存储层拒绝未登记、不可在线编辑、敏感或无效的值，但不自行执行页面/用户授权；返回固定消息而不回显候选设置文本。</zh-CN>
+                //   <en>The store rejects unregistered, non-online-editable, sensitive, or invalid values but does not perform page or user authorization itself; return a fixed message without echoing candidate setting text.</en>
+                // </lang>
+                return new PortalSystemSettingWriteResult(false, "This setting cannot be saved online.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>连接由受控 Unity/外置连接串路径创建并在 using 结束时释放；本方法不记录连接串，也不把缺失连接串转换为异常详情。</zh-CN>
+                //   <en>Create the connection through the controlled Unity/external-connection-string path and release it at the end of the using block; this method does not record the connection string or turn a missing connection string into exception detail.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalSystemSettingWriteResult(false, "The runtime settings database is unavailable.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>只有当前值表和审计表均存在才允许变更，防止在部分迁移状态写出无法审计的覆盖值。</zh-CN>
+                    //   <en>Allow a change only when both the current-value and audit tables exist, preventing an override from being written in a partial migration state without auditability.</en>
+                    // </lang>
+                    connection.Open();
+                    if (!IsTableAvailable(connection, SettingsTableName) ||
+                        !IsTableAvailable(connection, AuditsTableName))
+                    {
+                        return new PortalSystemSettingWriteResult(false, "Run the system-settings migration before changing this setting.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>当前值读取、更新/插入与审计共用一个事务；任一步失败由 using/异常路径阻止成功结果，提交只发生在所有写入完成之后。</zh-CN>
+                    //   <en>Current-value read, update/insert, and audit share one transaction; any failure prevents a success result through the using/exception path, and commit occurs only after every write completes.</en>
+                    // </lang>
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // <lang>
+                        //   <zh-CN>保存锁定读取到的旧值以形成审计前值；它不离开事务，也不进入成功/失败消息。</zh-CN>
+                        //   <en>Keep the locked old value for the audit before-image; it does not leave the transaction or enter success/failure messages.</en>
+                        // </lang>
+                        string oldValue;
+
+                        // <lang>
+                        //   <zh-CN>存在标志决定使用更新还是插入 SQL，避免以竞态下的预先普通读取推断分支。</zh-CN>
+                        //   <en>The existence flag selects update versus insert SQL, avoiding a branch inferred from a prior unlocked read under concurrency.</en>
+                        // </lang>
+                        bool exists;
+
+                        // <lang>
+                        //   <zh-CN>保存路径保留锁定行的删除保护输出以维持 helper 契约，但不据此改变已有覆盖值的更新资格。</zh-CN>
+                        //   <en>The save path retains the locked row's deletion-protection output to preserve the helper contract but does not use it to change update eligibility for an existing override.</en>
+                        // </lang>
+                        bool ignoredCanDelete;
+                        ReadCurrentValueForUpdate(
+                            connection,
+                            transaction,
+                            definition.Key,
+                            out exists,
+                            out oldValue,
+                            out ignoredCanDelete);
+
+                        // <lang>
+                        //   <zh-CN>同一事务中的参数化命令只在已存在行更新规范化值和元数据，否则以固定 SourceLevel/CanDelete 默认值插入；设置键和所有可变值均为参数。</zh-CN>
+                        //   <en>The parameterized command in the same transaction updates normalized value and metadata only for an existing row; otherwise it inserts with fixed SourceLevel/CanDelete defaults, while the setting key and every variable value remain parameters.</en>
+                        // </lang>
+                        using (SqlCommand command = connection.CreateCommand())
+                        {
+                            command.Transaction = transaction;
+                            command.CommandText = exists
+                                ? @"
+UPDATE [dbo].[PortalCfg_SystemSettings]
+SET [SettingValue] = @SettingValue,
+    [ValueType] = @ValueType,
+    [UpdatedBy] = @UpdatedBy,
+    [UpdatedUtc] = @UpdatedUtc
+WHERE [SettingKey] = @SettingKey;"
+                                : @"
+INSERT INTO [dbo].[PortalCfg_SystemSettings]
+    ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+VALUES
+    (@SettingKey, @SettingValue, @ValueType, N'Database', 1, @UpdatedBy, @UpdatedUtc);";
+                            AddTextParameter(command, "@SettingKey", 200, definition.Key, string.Empty);
+                            AddUnlimitedTextParameter(command, "@SettingValue", normalizedValue);
+                            AddTextParameter(command, "@ValueType", 50, definition.ValueType.ToString(), string.Empty);
+                            AddTextParameter(command, "@UpdatedBy", 100, GetActorUserName(context), "(anonymous)");
+                            command.Parameters.Add("@UpdatedUtc", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+                            command.ExecuteNonQuery();
+                        }
+
+                        // <lang>
+                        //   <zh-CN>审计记录旧/新值、固定变更类型和受限请求事实，随后才提交；审计插入失败不会留下已提交而无审计的设置变化。</zh-CN>
+                        //   <en>Record old/new values, controlled change type, and restricted request facts before committing; an audit-insert failure cannot leave a committed setting change without audit.</en>
+                        // </lang>
+                        WriteAudit(
+                            connection,
+                            transaction,
+                            definition.Key,
+                            exists ? "Update" : "Insert",
+                            oldValue,
+                            normalizedValue,
+                            context);
+                        transaction.Commit();
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>成功消息只说明结果，不包含设置值、连接串、SQL 或审计数据。</zh-CN>
+                //   <en>The success message states only the outcome and contains no setting value, connection string, SQL, or audit data.</en>
+                // </lang>
+                return new PortalSystemSettingWriteResult(true, "The runtime setting was saved.");
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>异常交给既有净化诊断链，调用方仅收到固定可展示失败消息；不把数据库或候选值细节泄露到管理界面。</zh-CN>
+                //   <en>Send exceptions to the existing sanitized diagnostics chain while the caller receives only a fixed display-safe failure message; do not leak database or candidate-value detail to the administration UI.</en>
+                // </lang>
+                PortalDiagnostics.Error(
+                    "SystemSettings.Save",
+                    "Writing a database runtime setting failed.",
+                    exception,
+                    context);
+                return new PortalSystemSettingWriteResult(false, "The runtime setting could not be saved. Check diagnostics for the event id.");
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>删除允许删除的数据库运行级覆盖值，使设置回退至 appSettings 或代码默认值，并写入审计。</zh-CN>
+        ///   <en>Deletes a deletable database runtime override so the setting falls back to appSettings or code defaults, and writes audit data.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>已登记且允许在线编辑的非敏感设置定义。</zh-CN>
+        ///   <en>Registered non-sensitive setting definition that allows online editing.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于审计和受限诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for auditing and restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>删除结果，或不存在覆盖值时的成功结果。</zh-CN>
+        ///   <en>Deletion result, or a successful result when no override exists.</en>
+        /// </l>
+        /// </returns>
+        public static PortalSystemSettingWriteResult DeleteOverride(
+            PortalSettingDefinition definition,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>删除同样只允许已登记、可在线编辑且非敏感的定义；该门禁不替代页面授权，也不会从空定义推断任何默认键。</zh-CN>
+            //   <en>Deletion likewise permits only a registered, online-editable, non-sensitive definition; this gate does not replace page authorization and never infers a default key from a null definition.</en>
+            // </lang>
+            if (definition == null || !definition.CanEditOnline || definition.IsSensitive)
+            {
+                return new PortalSystemSettingWriteResult(false, "This setting cannot be reset online.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>连接生命周期与保存路径一致：缺失连接串以受控可展示结果回退，连接对象始终由 using 释放。</zh-CN>
+                //   <en>The connection lifecycle matches the save path: a missing connection string falls back to a controlled display-safe result and the connection object is always released by using.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalSystemSettingWriteResult(false, "The runtime settings database is unavailable.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>删除同样要求当前值和审计表同时存在；不在迁移不完整的环境删除覆盖值，以保持审计与回退事实一致。</zh-CN>
+                    //   <en>Deletion also requires both current-value and audit tables; do not remove an override in an incomplete migration environment so audit and fallback facts remain consistent.</en>
+                    // </lang>
+                    connection.Open();
+                    if (!IsTableAvailable(connection, SettingsTableName) ||
+                        !IsTableAvailable(connection, AuditsTableName))
+                    {
+                        return new PortalSystemSettingWriteResult(false, "Run the system-settings migration before resetting this setting.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>锁定读取、保护检查、删除和审计被包裹在一个事务中，防止并发修改使审计前值或可删除性与实际删除脱节。</zh-CN>
+                    //   <en>Wrap locked read, protection check, delete, and audit in one transaction so concurrent changes cannot detach the audit before-image or deletability from the actual deletion.</en>
+                    // </lang>
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // <lang>
+                        //   <zh-CN>旧值仅用于该事务的 Delete 审计；不会出现在返回消息或诊断摘要中。</zh-CN>
+                        //   <en>The old value is used only for the transaction's Delete audit and does not appear in a return message or diagnostics summary.</en>
+                        // </lang>
+                        string oldValue;
+
+                        // <lang>
+                        //   <zh-CN>存在标志区分“无需删除”的幂等成功与真实删除；它来自同一锁定读取，而不是独立查询。</zh-CN>
+                        //   <en>The existence flag distinguishes idempotent success with nothing to delete from a real deletion; it comes from the same locked read rather than a separate query.</en>
+                        // </lang>
+                        bool exists;
+
+                        // <lang>
+                        //   <zh-CN>删除保护标志由数据库行事实决定，不能由调用方请求、页面参数或定义覆盖。</zh-CN>
+                        //   <en>The deletion-protection flag is determined by the database-row fact and cannot be overridden by a caller request, page parameter, or definition.</en>
+                        // </lang>
+                        bool canDelete;
+                        ReadCurrentValueForUpdate(connection, transaction, definition.Key, out exists, out oldValue, out canDelete);
+                        if (!exists)
+                        {
+                            // <lang>
+                            //   <zh-CN>不存在覆盖值时仍提交只读事务并返回既有幂等成功；不虚构 Delete 审计，因为没有发生数据变化。</zh-CN>
+                            //   <en>When no override exists, commit the read-only transaction and return established idempotent success; do not fabricate a Delete audit because no data change occurred.</en>
+                            // </lang>
+                            transaction.Commit();
+                            return new PortalSystemSettingWriteResult(true, "No database override was present.");
+                        }
+
+                        if (!canDelete)
+                        {
+                            // <lang>
+                            //   <zh-CN>受保护行明确回滚并返回固定消息；不尝试删除、绕过标记或暴露行内容。</zh-CN>
+                            //   <en>Explicitly roll back a protected row and return a fixed message; do not attempt deletion, bypass the flag, or expose row content.</en>
+                            // </lang>
+                            transaction.Rollback();
+                            return new PortalSystemSettingWriteResult(false, "This database override is protected and cannot be deleted.");
+                        }
+
+                        // <lang>
+                        //   <zh-CN>删除命令只以参数化稳定键定位锁定行，并绑定同一事务；不会接受动态表名或 SQL 片段。</zh-CN>
+                        //   <en>The delete command locates the locked row only by parameterized stable key and binds the same transaction; it accepts no dynamic table name or SQL fragment.</en>
+                        // </lang>
+                        using (SqlCommand command = connection.CreateCommand())

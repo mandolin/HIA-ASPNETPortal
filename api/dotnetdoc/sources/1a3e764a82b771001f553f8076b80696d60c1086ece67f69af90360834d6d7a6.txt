@@ -1,0 +1,8 @@
+        private string EncodeDisplayText(string value)
+        {
+            // <lang>
+            //   <zh-CN>历史创建人等字段可能已经实体化；显示前先解码再编码，避免重复实体显示。</zh-CN>
+            //   <en>Historical creator and similar fields may already be entity-encoded; decode before encoding to avoid repeated entity display.</en>
+            // </lang>
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
+        }

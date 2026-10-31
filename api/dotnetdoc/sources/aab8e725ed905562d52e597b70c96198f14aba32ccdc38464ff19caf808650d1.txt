@@ -1,0 +1,81 @@
+        protected void WorkItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
+            {
+                return;
+            }
+
+            PortalWorkItemInfo item = e.Item.DataItem as PortalWorkItemInfo;
+            if (item == null)
+            {
+                return;
+            }
+
+            Label kindLabel = e.Item.FindControl("KindLabel") as Label;
+            Label titleLabel = e.Item.FindControl("ItemTitleLabel") as Label;
+            HyperLink itemLink = e.Item.FindControl("ItemLink") as HyperLink;
+            Label unavailableLabel = e.Item.FindControl("UnavailableLabel") as Label;
+            Label dueLabel = e.Item.FindControl("DueLabel") as Label;
+            Label overdueLabel = e.Item.FindControl("OverdueLabel") as Label;
+
+            if (kindLabel != null)
+            {
+                kindLabel.Text = LocalizeBusinessKind(item.BusinessKind);
+            }
+
+            if (titleLabel != null)
+            {
+                titleLabel.Text = Server.HtmlEncode(item.Title ?? string.Empty);
+            }
+
+            if (dueLabel != null)
+            {
+                dueLabel.Text = item.DueUtc.HasValue
+                    ? item.DueUtc.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                    : GetResource("Common_NonePlaceholder");
+            }
+
+            // <lang>
+            //   <zh-CN>超期除样式外必须带文本标记，使状态不依赖颜色传达（可访问性约束）。</zh-CN>
+            //   <en>Overdue state must carry a text marker in addition to styling so the state does not rely on color alone (accessibility constraint).</en>
+            // </lang>
+            if (overdueLabel != null && item.DueUtc.HasValue && item.DueUtc.Value < DateTime.UtcNow)
+            {
+                TimeSpan overdue = DateTime.UtcNow - item.DueUtc.Value;
+                int days = overdue.Days < 1 ? 1 : overdue.Days;
+                overdueLabel.Text = " " + string.Format(
+                    CultureInfo.CurrentCulture,
+                    GetResource("MyWorkItems_OverdueDays"),
+                    days.ToString(CultureInfo.InvariantCulture));
+                overdueLabel.Visible = true;
+            }
+
+            // <lang>
+            //   <zh-CN>T3 已确证：三类业务对象在前台均没有详情页，办理入口是后台 Admin 页，普通用户跳转会被拒绝；因此不渲染链接，改为呈现"暂无在线办理入口"提示。</zh-CN>
+            //   <en>T3 is confirmed: none of the three business kinds has a front-end detail page; processing happens on administration pages that a normal user cannot open. No link is rendered and the "no online processing entry" hint is shown instead.</en>
+            // </lang>
+            string targetUrl = ResolveItemUrl(item);
+            if (itemLink != null)
+            {
+                itemLink.Visible = !string.IsNullOrEmpty(targetUrl);
+                if (itemLink.Visible)
+                {
+                    itemLink.NavigateUrl = targetUrl;
+                    itemLink.Text = Server.HtmlEncode(item.Title ?? string.Empty);
+                }
+            }
+
+            if (titleLabel != null)
+            {
+                titleLabel.Visible = string.IsNullOrEmpty(targetUrl);
+            }
+
+            // <lang>
+            //   <zh-CN>不可达时给出明确提示而不是静默无链接，避免用户以为界面缺失；提示文本不含内部路径或异常细节。</zh-CN>
+            //   <en>When unreachable, an explicit hint is shown instead of a silent missing link so users do not think the UI is broken; the hint carries no internal path or exception detail.</en>
+            // </lang>
+            if (unavailableLabel != null)
+            {
+                unavailableLabel.Visible = string.IsNullOrEmpty(targetUrl);
+            }
+        }

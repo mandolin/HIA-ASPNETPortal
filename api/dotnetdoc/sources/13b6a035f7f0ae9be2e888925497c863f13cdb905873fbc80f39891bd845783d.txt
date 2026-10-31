@@ -1,0 +1,1 @@
+        public readonly List<ITabItem> DesktopTabs = new List<ITabItem>();

@@ -1,0 +1,5 @@
+        internal static string Admin_CapabilityPermissionMatrix_ColumnPermissionKey {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_ColumnPermissionKey", resourceCulture);
+            }
+        }

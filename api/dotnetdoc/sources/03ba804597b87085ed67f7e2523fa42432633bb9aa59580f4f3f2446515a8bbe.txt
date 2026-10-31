@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_LabelUploadOption {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelUploadOption", resourceCulture);
+            }
+        }

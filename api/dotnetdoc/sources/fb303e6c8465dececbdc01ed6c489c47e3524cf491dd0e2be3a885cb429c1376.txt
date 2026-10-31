@@ -1,0 +1,7 @@
+        private bool EnsureCanHandleItems()
+        {
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessCollaborationHandle,
+                PortalPermissionKeys.BusinessCollaborationAdmin);
+        }

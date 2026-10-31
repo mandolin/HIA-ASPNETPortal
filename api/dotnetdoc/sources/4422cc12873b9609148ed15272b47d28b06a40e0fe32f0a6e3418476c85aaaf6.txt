@@ -1,0 +1,66 @@
+        public static ExternalConnectionStringLoadResult LoadPortalConnectionString(string environmentName)
+        {
+            // <lang>
+            //   <zh-CN>把调用方传入的环境名称收敛为文件路径使用的稳定片段，生命周期仅覆盖本次启动读取。</zh-CN>
+            //   <en>Reduce the caller-supplied environment name to a stable path segment whose lifetime is limited to this startup read.</en>
+            // </lang>
+            string env = NormalizeEnvironmentName(environmentName);
+
+            // <lang>
+            //   <zh-CN>解析外置配置根目录；该目录来自受控 appSettings 或进程用户目录，不从连接串内容推导。</zh-CN>
+            //   <en>Resolve the external configuration root from controlled appSettings or the process user profile, never from connection-string content.</en>
+            // </lang>
+            string configRoot = ResolveExternalConfigRoot();
+
+            // <lang>
+            //   <zh-CN>组合当前环境的固定 XML 文件路径，后续文件结构校验和敏感值读取都以此为唯一来源。</zh-CN>
+            //   <en>Compose the fixed XML path for the current environment; subsequent structure checks and sensitive-value reads use this single source.</en>
+            // </lang>
+            string configFile = Path.Combine(configRoot, env, ConnectionStringsFileName);
+
+            // <lang>
+            //   <zh-CN>先读取并校验当前唯一外置 XML 中的敏感连接串；即使稍后用环境变量覆盖敏感值，也必须先通过文件存在、根节点、逻辑名称和非空值契约。</zh-CN>
+            //   <en>Read and validate the sensitive connection string from the only supported external XML first; even if an environment variable later overrides the sensitive value, file existence, root element, logical name, and non-empty value contracts must pass.</en>
+            // </lang>
+            string connectionString = ReadConnectionString(configFile, LogicalConnectionStringName);
+
+            // <lang>
+            //   <zh-CN>读取并固定 provider invariant，确保环境变量覆盖只能替换敏感值而不能切换数据库 provider。</zh-CN>
+            //   <en>Read and fix the provider invariant so an environment-variable override can replace only the sensitive value, not the database provider.</en>
+            // </lang>
+            string providerInvariantName = ReadProviderInvariantName(configFile, LogicalConnectionStringName);
+            ValidatePrimaryPortalProvider(providerInvariantName, configFile);
+
+            // <lang>
+            //   <zh-CN>读取可选敏感环境变量；该值不参与根目录或文件名选择，空白时回退到外置文件。</zh-CN>
+            //   <en>Read the optional sensitive environment variable; it cannot choose the root or file name, and blank values fall back to the external file.</en>
+            // </lang>
+            string environmentOverride = Environment.GetEnvironmentVariable(EnvironmentVariableName);
+
+            if (!string.IsNullOrWhiteSpace(environmentOverride))
+            {
+                // <lang>
+                //   <zh-CN>环境变量只作为敏感值覆盖来源，方便部署平台注入真实连接串。</zh-CN>
+                //   <en>The environment variable overrides only the sensitive value, allowing deployment platforms to inject the real connection string.</en>
+                // </lang>
+                return new ExternalConnectionStringLoadResult(
+                    environmentOverride,
+                    providerInvariantName,
+                    configRoot,
+                    configFile,
+                    "environment variable " + EnvironmentVariableName,
+                    env);
+            }
+
+            // <lang>
+            //   <zh-CN>没有环境变量覆盖时，来源记录为已验证 XML 文件路径；调用方仍只能使用结果对象，不得记录或展示敏感连接串本身。</zh-CN>
+            //   <en>When there is no environment-variable override, record the validated XML file path as the source; callers still consume only the result object and must not log or display the sensitive connection string itself.</en>
+            // </lang>
+            return new ExternalConnectionStringLoadResult(
+                connectionString,
+                providerInvariantName,
+                configRoot,
+                configFile,
+                configFile,
+                env);
+        }

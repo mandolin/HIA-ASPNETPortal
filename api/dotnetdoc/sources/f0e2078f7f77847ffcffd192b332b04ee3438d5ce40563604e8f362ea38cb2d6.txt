@@ -1,0 +1,6 @@
+        public EmployeeProfileCorrectionRequestResult(bool succeeded, long requestId, string message)
+        {
+            Succeeded = succeeded;
+            RequestId = requestId;
+            Message = message ?? string.Empty;
+        }

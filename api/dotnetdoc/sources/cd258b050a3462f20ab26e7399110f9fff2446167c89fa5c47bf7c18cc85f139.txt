@@ -1,0 +1,1 @@
+        IEnumerable<ILinkItem> GetLinks(int moduleId);

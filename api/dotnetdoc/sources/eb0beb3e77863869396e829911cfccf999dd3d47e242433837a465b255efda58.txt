@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>统一初始化负责权限、导航参数和当前门户 Tab 快照，避免各事件处理器形成不同门禁。</zh-CN>
+            //   <en>Centralized initialization owns permission, navigation parameters, and the current portal Tab snapshot so event handlers share one gate.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅首次请求绑定列表，保留回发时的选中项和控件状态。</zh-CN>
+            //   <en>Bind the list only on the initial request, preserving the selected item and control state during postback.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                tabList.DataBind();
+            }
+        }

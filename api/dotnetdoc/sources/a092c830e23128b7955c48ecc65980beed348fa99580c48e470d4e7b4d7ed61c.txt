@@ -1,0 +1,1 @@
+        public PortalHealthStatus Status { get; private set; }

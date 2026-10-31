@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_LabelCorrectionFields {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelCorrectionFields", resourceCulture);
+            }
+        }

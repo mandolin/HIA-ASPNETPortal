@@ -1,0 +1,13 @@
+        protected void AddDef_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>新增入口使用目录查看权限，并只导航到受信模块目录，不恢复手填路径创建。</zh-CN>
+            //   <en>Use catalog-view permission and navigate only to the trusted module catalog without restoring hand-entered path creation.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleCatalogView) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/Admin/ModuleCatalog.aspx"));
+        }

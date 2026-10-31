@@ -1,0 +1,137 @@
+    public sealed class CollaborationItemAdminRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把协同事项和管理员可见事件转换为只读后台展示模型。</zh-CN>
+        ///   <en>Converts a collaboration item and administrator-visible events into a read-only administration display model.</en>
+        /// </lang>
+        /// </summary>
+        internal CollaborationItemAdminRow(
+            CollaborationItemInfo item,
+            IList<CollaborationItemEventInfo> visibleEvents,
+            IList<CollaborationItemParticipantInfo> participants)
+        {
+            // <lang>
+            //   <zh-CN>展示行保留稳定主键和必要低敏字段，并将空值统一为占位文本。</zh-CN>
+            //   <en>The display row keeps the stable key and required low-sensitivity fields while normalizing empty values to placeholders.</en>
+            // </lang>
+            ItemId = item.ItemId;
+            ItemCode = item.ItemCode;
+            ItemTypeKey = EmptyToNone(item.ItemTypeKey);
+            Title = EmptyToNone(item.Title);
+            Summary = EmptyToNone(item.Summary);
+            Description = EmptyToNone(item.Description);
+            ItemStatus = item.IsOverdue ? item.ItemStatus + lang.Common_OverdueSuffix : item.ItemStatus;
+            PriorityKey = EmptyToNone(item.PriorityKey);
+            OwnerText = GetOwnerText(item);
+            LastActionUtcText = item.LastActionUtc.HasValue
+                ? item.LastActionUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
+                : lang.Common_NonePlaceholder;
+            LastActionComment = EmptyToNone(item.LastActionComment);
+            // <lang>
+            //   <zh-CN>最新评论按时间和事件号稳定选择，事件集合已由数据服务按管理员可见范围裁剪。</zh-CN>
+            //   <en>Select the latest comment deterministically by time and event identifier; the data service already scopes events to administrator visibility.</en>
+            // </lang>
+            CollaborationItemEventInfo latestComment = (visibleEvents ?? new List<CollaborationItemEventInfo>())
+                .Where(itemEvent => string.Equals(itemEvent.EventType, PortalCollaborationItemEventTypes.Comment, StringComparison.Ordinal))
+                .OrderByDescending(itemEvent => itemEvent.OccurredUtc)
+                .ThenByDescending(itemEvent => itemEvent.EventId)
+                .FirstOrDefault();
+            LatestVisibleComment = latestComment == null ? lang.Common_NonePlaceholder : EmptyToNone(latestComment.Comment);
+            // <lang>
+            //   <zh-CN>层级与参与人只作为展示事实：子项（有父项）在列表里缩进呈现，参与人集合由数据层提供并按角色标注。</zh-CN>
+            //   <en>Hierarchy and participants are display facts only: children (those with a parent) render indented, and the participant set comes from the data layer with role labels.</en>
+            // </lang>
+            HasParentItem = item.ParentItemId.HasValue;
+            // <lang>
+            //   <zh-CN>P74.4 起参与人文本走共享渲染器，与前台工作台共用同一套角色词表与占位文案，避免两处独立实现再次漂移。</zh-CN>
+            //   <en>Since P74.4 participant text goes through the shared renderer, sharing one role vocabulary and placeholder with the front-end workbench so the two implementations cannot drift apart again.</en>
+            // </lang>
+            ParticipantsText = PortalCollaborationParticipantText.BuildParticipantsText(participants);
+            ParticipantLines = PortalCollaborationParticipantText.BuildParticipantLines(participants);
+        }
+
+        /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
+        public long ItemId { get; private set; }
+
+        /// <summary><lang><zh-CN>协同事项编号。</zh-CN><en>Collaboration-item code.</en></lang></summary>
+        public string ItemCode { get; private set; }
+
+        /// <summary><lang><zh-CN>事项类型键。</zh-CN><en>Item type key.</en></lang></summary>
+        public string ItemTypeKey { get; private set; }
+
+        /// <summary><lang><zh-CN>事项标题。</zh-CN><en>Item title.</en></lang></summary>
+        public string Title { get; private set; }
+
+        /// <summary><lang><zh-CN>低敏摘要。</zh-CN><en>Low-sensitivity summary.</en></lang></summary>
+        public string Summary { get; private set; }
+
+        /// <summary><lang><zh-CN>事项说明。</zh-CN><en>Item description.</en></lang></summary>
+        public string Description { get; private set; }
+
+        /// <summary><lang><zh-CN>事项状态。</zh-CN><en>Item status.</en></lang></summary>
+        public string ItemStatus { get; private set; }
+
+        /// <summary><lang><zh-CN>优先级键。</zh-CN><en>Priority key.</en></lang></summary>
+        public string PriorityKey { get; private set; }
+
+        /// <summary><lang><zh-CN>负责人展示文本。</zh-CN><en>Owner display text.</en></lang></summary>
+        public string OwnerText { get; private set; }
+
+        /// <summary><lang><zh-CN>最近动作 UTC 展示文本。</zh-CN><en>Latest action UTC display text.</en></lang></summary>
+        public string LastActionUtcText { get; private set; }
+
+        /// <summary><lang><zh-CN>最近办理意见。</zh-CN><en>Latest handling comment.</en></lang></summary>
+        public string LastActionComment { get; private set; }
+
+        /// <summary><lang><zh-CN>当前管理员可见的最新评论。</zh-CN><en>Latest comment visible to the current administrator.</en></lang></summary>
+        public string LatestVisibleComment { get; private set; }
+
+        /// <summary><lang><zh-CN>是否为子事项（存在父项），用于列表缩进呈现。</zh-CN><en>Whether this is a child item (has a parent), used for list indentation.</en></lang></summary>
+        public bool HasParentItem { get; private set; }
+
+        /// <summary><lang><zh-CN>参与人集合的只读展示文本。</zh-CN><en>Read-only display text for the participant set.</en></lang></summary>
+        public string ParticipantsText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>参与人的**逐人一行**展示序列。保留逗号串 <see cref="ParticipantsText"/> 用于摘要场景；
+        ///   两者由同一条格式串产出，不会漂移。</zh-CN>
+        ///   <en>The **one line per person** display sequence for participants. The comma-joined
+        ///   <see cref="ParticipantsText"/> is kept for summary contexts; both come from the same format string and cannot
+        ///   drift apart.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> ParticipantLines { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将负责人用户或角色信息转换为后台展示文本。</zh-CN>
+        ///   <en>Converts owner user or role information into administration display text.</en>
+        /// </lang>
+        /// </summary>
+        private static string GetOwnerText(CollaborationItemInfo item)
+        {
+            // <lang>
+            //   <zh-CN>优先显示负责人用户标识和名称，否则回退到负责人角色键。</zh-CN>
+            //   <en>Prefer the owner user identifier and name, falling back to the owner role key otherwise.</en>
+            // </lang>
+            if (item.OwnerUserId.HasValue)
+            {
+                return item.OwnerUserId.Value.ToString(CultureInfo.InvariantCulture) + " / " + EmptyToNone(item.OwnerUserName);
+            }
+
+            return EmptyToNone(item.OwnerRoleKey);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把空白后台展示字段转换为本地化占位文本。</zh-CN>
+        ///   <en>Converts blank administration display fields to the localized placeholder.</en>
+        /// </lang>
+        /// </summary>
+        private static string EmptyToNone(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
+        }
+    }

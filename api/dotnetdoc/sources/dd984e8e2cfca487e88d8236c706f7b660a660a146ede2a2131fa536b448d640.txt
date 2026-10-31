@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>登录标识由服务器控件接收并进入既有认证流程；页面不在客户端判断账号是否存在或具备权限。</zh-CN>
+                <en>The server control receives the login identifier and passes it to the existing authentication flow; the page does not decide account existence or authorization on the client.</en>
+            </lang>
+        --%>

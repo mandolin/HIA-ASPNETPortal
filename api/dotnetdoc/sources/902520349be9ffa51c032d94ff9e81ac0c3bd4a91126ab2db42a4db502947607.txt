@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_EmptyNoItems", resourceCulture);
+            }
+        }

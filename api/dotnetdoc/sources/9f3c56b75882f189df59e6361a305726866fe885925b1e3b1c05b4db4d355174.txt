@@ -1,0 +1,1 @@
+        int AddMessage(int moduleId, int parentId, string userName, string title, string body);

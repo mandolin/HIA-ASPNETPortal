@@ -1,0 +1,4 @@
+        public EmployeeProfileConfirmationDb(PortalBizDbContext context)
+        {
+            this.context = context;
+        }

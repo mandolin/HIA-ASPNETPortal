@@ -1,0 +1,4 @@
+        protected int? EmployeesEmptyStateRowCount
+        {
+            get { return employeesEmptyStateRowCount; }
+        }

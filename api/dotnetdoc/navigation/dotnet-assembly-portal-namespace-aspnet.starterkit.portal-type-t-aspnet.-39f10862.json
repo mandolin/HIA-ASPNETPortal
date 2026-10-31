@@ -1,0 +1,244 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:base:t-system.web.httpapplication",
+      "kind": "relation",
+      "label": "Base: System.Web.HttpApplication",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-aspnet.starterkit.portal.icontaineraccessor",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IContainerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.componentmodel.icomponent",
+      "kind": "relation",
+      "label": "Interface: System.ComponentModel.IComponent",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.ihttpasynchandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpAsyncHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.ihttphandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.irequestcompletednotifier",
+      "kind": "relation",
+      "label": "Interface: System.Web.IRequestCompletedNotifier",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.util.isynccontext",
+      "kind": "relation",
+      "label": "Interface: System.Web.Util.ISyncContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-p-aspnet.starterkit.portal.global.aspnet-starterkit-portal-icontaineraccessor-container",
+      "kind": "entry",
+      "label": "ASPNET#StarterKit#Portal#IContainerAccessor#Container",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.global.aspnet-starterkit-portal-icontaineraccessor-container",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.global.aspnet-starterkit-portal-icontaineraccessor-container",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.global.aspnet-starterkit--0ec5d4fe.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.application_authenticaterequest-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Application_AuthenticateRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.application_authenticaterequest-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.application_authenticaterequest-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.application_authen-d2fb5dd2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.application_beginrequest-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Application_BeginRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.application_beginrequest-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.application_beginrequest-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.application_beginr-59946e5a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.application_end-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Application_End",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.application_end-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.application_end-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.application_end-sy-c2107dbb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.application_error-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Application_Error",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.application_error-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.application_error-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.application_error--40c0c25e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.application_start-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Application_Start",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.application_start-system.object-system.eventargs",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.application_start-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.application_start--c706cffc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.builditemwithcurrentcontext-1-system.web.ui.control",
+      "kind": "entry",
+      "label": "BuildItemWithCurrentContext``1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.builditemwithcurrentcontext-1-system.web.ui.control",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.builditemwithcurrentcontext-1-system.web.ui.control",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.builditemwithcurre-ef310c2d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-p-aspnet.starterkit.portal.global.container",
+      "kind": "entry",
+      "label": "Container",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.global.container",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.global.container",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.global.container-71ba9431.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.getapplicationpath-system.web.httprequest",
+      "kind": "entry",
+      "label": "GetApplicationPath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.getapplicationpath-system.web.httprequest",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.getapplicationpath-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.getapplicationpath-0d853edf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.isgenericerrorpagerequest-system.web.httprequest",
+      "kind": "entry",
+      "label": "IsGenericErrorPageRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.isgenericerrorpagerequest-system.web.httprequest",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.isgenericerrorpagerequest-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.isgenericerrorpage-1fc03503.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.registerpassworditerationpolicyprovider",
+      "kind": "entry",
+      "label": "RegisterPasswordIterationPolicyProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.registerpassworditerationpolicyprovider",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.registerpassworditerationpolicyprovider",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.registerpasswordit-d8e91f5d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:entry:hia-document:dotnet-m-aspnet.starterkit.portal.global.registerpasswordpolicyoptionsprovider",
+      "kind": "entry",
+      "label": "RegisterPasswordPolicyOptionsProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.registerpasswordpolicyoptionsprovider",
+      "sourcePath": "src/Portal/Global.asax.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.global.registerpasswordpolicyoptionsprovider",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.registerpasswordpo-c534d810.html"
+    }
+  ]
+}

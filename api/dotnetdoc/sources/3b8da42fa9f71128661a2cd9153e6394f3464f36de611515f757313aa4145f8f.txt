@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>详情面板默认隐藏并由 code-behind 控制可见性；标记层不自行打开包含异常、路径、IP 和 User-Agent 的敏感事件数据。</zh-CN>
+            <en>The detail panel is hidden by default and its visibility is controlled by code-behind; the markup must not open sensitive event data containing exception, path, IP, or User-Agent fields by itself.</en>
+          </lang>
+        --%>

@@ -1,0 +1,1 @@
+        void UpdatePortalInfo(int portalId, string portalName, bool alwaysShow);

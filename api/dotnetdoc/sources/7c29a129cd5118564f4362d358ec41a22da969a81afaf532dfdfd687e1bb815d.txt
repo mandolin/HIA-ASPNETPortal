@@ -1,0 +1,1 @@
+        int RoleId { get; set; }

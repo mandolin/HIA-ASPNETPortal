@@ -1,0 +1,25 @@
+    public sealed class ExpenseReimbursementInfo
+    {
+        /// <summary><lang><zh-CN>报销主键。</zh-CN><en>Reimbursement identity key.</en></lang></summary>
+        public long RequestId { get; set; }
+        /// <summary><lang><zh-CN>申请人门户用户标识（后台审核展示用）。</zh-CN><en>Submitting Portal user identifier (for admin review display).</en></lang></summary>
+        public int UserId { get; set; }
+        /// <summary><lang><zh-CN>费用类别（差旅/餐饮/办公/其他）。</zh-CN><en>Expense category (travel/meal/office/other).</en></lang></summary>
+        public string Category { get; set; }
+        /// <summary><lang><zh-CN>报销金额。</zh-CN><en>Reimbursement amount.</en></lang></summary>
+        public decimal Amount { get; set; }
+        /// <summary><lang><zh-CN>费用事由。</zh-CN><en>Expense reason.</en></lang></summary>
+        public string Reason { get; set; }
+        /// <summary><lang><zh-CN>发票/附件文件名。</zh-CN><en>Invoice/attachment file name.</en></lang></summary>
+        public string AttachmentName { get; set; }
+        /// <summary><lang><zh-CN>审批状态（如 Pending/Approved/Rejected）。</zh-CN><en>Approval status (e.g. Pending/Approved/Rejected).</en></lang></summary>
+        public string Status { get; set; }
+        /// <summary><lang><zh-CN>创建时间（UTC）。</zh-CN><en>Creation time (UTC).</en></lang></summary>
+        public DateTime CreatedUtc { get; set; }
+        /// <summary><lang><zh-CN>审核时间（UTC，后台审核写入后为非空）。</zh-CN><en>Review time (UTC; non-null after an admin review).</en></lang></summary>
+        public DateTime? ReviewedUtc { get; set; }
+        /// <summary><lang><zh-CN>审核人门户用户标识。</zh-CN><en>Reviewer Portal user identifier.</en></lang></summary>
+        public int? ReviewedByUserId { get; set; }
+        /// <summary><lang><zh-CN>审核意见。</zh-CN><en>Review comment.</en></lang></summary>
+        public string ReviewComment { get; set; }
+    }

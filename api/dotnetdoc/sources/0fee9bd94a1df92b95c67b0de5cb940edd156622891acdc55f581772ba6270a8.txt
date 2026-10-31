@@ -1,0 +1,24 @@
+        private void TryEnsureWorkItem(long itemId, string itemCode, string title, string summary, DateTime? dueUtc)
+        {
+            // <lang>
+            //   <zh-CN>待办只是后台处理入口投影；提交事实和事件已经写入后，待办失败不应回滚用户提交。</zh-CN>
+            //   <en>The work item is only an administration handling-entry projection; after the submission fact and event are written, work-item failure must not roll back the user's submission.</en>
+            // </lang>
+            if (WorkItemDb == null || itemId <= 0)
+            {
+                return;
+            }
+
+            WorkItemDb.EnsureWorkItem(
+                new PortalWorkItemCreateRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.CollaborationItem,
+                    BusinessId = itemId.ToString(CultureInfo.InvariantCulture),
+                    Title = "Collaboration item " + itemCode + ": " + NormalizeInput(title, 160),
+                    Summary = NormalizeInput(summary, 500),
+                    AssignedRoleKey = PortalPermissionKeys.BusinessCollaborationHandle,
+                    CreatedUtc = DateTime.UtcNow,
+                    CreatedBy = GetCurrentUserName(),
+                    DueUtc = dueUtc
+                });
+        }

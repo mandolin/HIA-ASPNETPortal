@@ -1,0 +1,400 @@
+    public partial class EmployeeEdit : PortalPage<EmployeeEdit>
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>页面层接受的日期时间输入格式；解析后统一转换为 UTC，不改变数据层时间戳契约。</zh-CN>
+        ///   <en>Date-time formats accepted by the page; parsed values are normalized to UTC without changing the data-layer timestamp contract.</en>
+        /// </lang>
+        /// </summary>
+        private static readonly string[] DateTimeFormats = new[]
+        {
+            "yyyy-MM-dd",
+            "yyyy-MM-dd HH:mm:ss",
+            "yyyy-MM-dd HH:mm:ss 'UTC'",
+            "yyyy-MM-ddTHH:mm:ss",
+            "yyyy-MM-ddTHH:mm:ssZ",
+            "O"
+        };
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工组织后台写入服务。</zh-CN>
+        ///   <en>Employee-directory administration write service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IEmployeeDirectoryAdminDb EmployeeDirectoryAdminDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工组织只读目录服务，用于组织下拉框。</zh-CN>
+        ///   <en>Read-only employee-directory service used by the organization selector.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IEmployeeDirectoryDb EmployeeDirectoryDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化员工维护页。</zh-CN>
+        ///   <en>Initializes the employee maintenance page.</en>
+        /// </lang>
+        /// </summary>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>后台页先做统一权限门禁；权限失败时 helper 已负责跳转，剩余初始化不再继续执行。</zh-CN>
+            //   <en>The admin page starts with the shared permission gate; when authorization fails, the helper redirects and the remaining initialization is skipped.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在首次请求绑定表单，避免回发时覆盖管理员已输入但尚未保存的值。</zh-CN>
+            //   <en>Bind the form only on the initial request so postbacks do not overwrite administrator input that has not been saved.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindForm();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>保存员工新增或编辑结果。</zh-CN>
+        ///   <en>Saves employee creation or editing changes.</en>
+        /// </lang>
+        /// </summary>
+        protected void SaveButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存动作再次复核权限，避免用户在页面加载后被撤权仍能通过旧表单提交。</zh-CN>
+            //   <en>The save action checks permission again so a user whose permission changed after page load cannot submit an old form successfully.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>保存前要求写入服务和 schema 同时可用；不可用时只显示固定提示，不触发半完成写入。</zh-CN>
+            //   <en>Require both the write service and its schema before saving; when unavailable, show a fixed message without attempting a partial write.</en>
+            // </lang>
+            if (EmployeeDirectoryAdminDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
+            {
+                ShowMessage(lang.Admin_Common_MessageP63SchemaUnavailable);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>请求对象只在所有页面级输入校验通过后生成；失败消息保持低敏且不回显原始正文。</zh-CN>
+            //   <en>Create the request only after all page-level input checks pass; validation messages stay low-sensitivity and do not echo raw content.</en>
+            // </lang>
+            EmployeeSaveRequest request;
+            string validationMessage;
+            if (!TryCreateSaveRequest(out request, out validationMessage))
+            {
+                ShowMessage(validationMessage);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>用请求标识区分新增和更新，供审计事件选择；不在页面层自行生成数据库标识。</zh-CN>
+            //   <en>Use the request identifier to distinguish creation from update for audit selection; the page does not generate database identifiers.</en>
+            // </lang>
+            bool isNew = request.EmployeeId <= 0;
+            try
+            {
+                // <lang>
+                //   <zh-CN>数据层负责唯一性、并发时间戳和状态规则；页面只根据低敏结果显示提示并写入运营审计。</zh-CN>
+                //   <en>The data layer owns uniqueness, concurrency timestamp and status rules; the page only displays low-sensitivity results and records operational audit.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>保存结果承载数据层的低敏成功/失败事实和实体标识，页面不推断唯一性或并发语义。</zh-CN>
+                //   <en>The write result carries the data layer's low-sensitivity success/failure fact and entity identifier; the page does not infer uniqueness or concurrency semantics.</en>
+                // </lang>
+                EmployeeDirectoryWriteResult result = EmployeeDirectoryAdminDb.SaveEmployee(request);
+                if (!result.Succeeded)
+                {
+                    // <lang>
+                    //   <zh-CN>失败时保留数据层提示并停留在当前页，避免审计成功事件或错误回跳。</zh-CN>
+                    //   <en>On failure, retain the data-layer message on the current page and avoid recording a success audit or redirecting.</en>
+                    // </lang>
+                    ShowMessage(result.Message);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>只有持久化成功后才写入创建/更新审计，并使用稳定实体类型和不变文化标识。</zh-CN>
+                //   <en>Record the create/update audit only after persistence succeeds, using a stable entity type and invariant-culture identifier.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.EnterpriseDirectoryCategory,
+                    isNew
+                        ? PortalOperationAuditEvents.EmployeeCreated
+                        : PortalOperationAuditEvents.EmployeeUpdated,
+                    PortalOperationAuditEvents.EmployeeTargetType,
+                    result.EntityId.ToString(CultureInfo.InvariantCulture),
+                    isNew ? "Created employee master data." : "Updated employee master data.",
+                    Context);
+                RedirectToDirectory();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>异常详情进入结构化诊断日志；页面只展示事件编号，避免把数据库或路径细节暴露给浏览器。</zh-CN>
+                //   <en>Exception details go to structured diagnostics; the page shows only the event id so database or path details are not exposed to the browser.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>事件编号是浏览器可见的低敏关联值，不承载异常正文或连接细节。</zh-CN>
+                //   <en>The event id is a low-sensitivity correlation value visible to the browser and carries no exception body or connection detail.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.EmployeeEdit.Save",
+                    "Saving employee failed. EmployeeId=" + request.EmployeeId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_EmployeeEdit_MessageSaveFailed, eventId));
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定员工编辑表单的初始状态。</zh-CN>
+        ///   <en>Binds the initial state of the employee edit form.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此方法同时处理新增和编辑两条路径：新增时填入安全默认值；编辑时加载现有员工和并发时间戳。</zh-CN>
+        ///   <en>This method handles both creation and editing paths: creation fills safe defaults, while editing loads the existing employee and concurrency timestamp.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindForm()
+        {
+            if (EmployeeDirectoryAdminDb == null || EmployeeDirectoryDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
+            {
+                DisableForm("P6.3 schema is unavailable. Run the employee organization SQL scripts before editing.");
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>员工标识来自站内请求参数；helper 统一处理缺失、新增、非法值和拒绝回跳。</zh-CN>
+            //   <en>The employee identifier comes from an internal request parameter; the helper handles missing, creation, invalid values and denial redirect consistently.</en>
+            // </lang>
+            int employeeId;
+            if (!TryReadEmployeeId(out employeeId))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先绑定候选组织和稳定状态，再根据新增/编辑分支填充当前实体，保持选择器与表单值顺序稳定。</zh-CN>
+            //   <en>Bind organization candidates and stable statuses before filling the current entity, keeping selector and form-value ordering stable for both paths.</en>
+            // </lang>
+            BindOrganizationList();
+            BindStatusList();
+            if (employeeId <= 0)
+            {
+                // <lang>
+                //   <zh-CN>新增员工时不生成工号或姓名默认值，避免页面层创造业务标识；实际内容由管理员明确输入。</zh-CN>
+                //   <en>New employees do not receive generated employee-code or name defaults at the page layer; administrators must enter business identifiers explicitly.</en>
+                // </lang>
+                TitleLabel.Text = lang.Admin_EmployeeEdit_TitleNew;
+                EmployeeIdField.Value = "0";
+                OriginalUpdatedUtcField.Value = string.Empty;
+                SourceSystemTextBox.Text = "Portal";
+                SelectListValue(EmploymentStatusList, PortalEmployeeStatuses.Active);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>编辑路径把 `UpdatedUtc` 以 round-trip 格式写入隐藏域，保存时用于数据层并发保护。</zh-CN>
+            //   <en>The edit path writes `UpdatedUtc` into a hidden field in round-trip format so the data layer can enforce concurrency protection during save.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>读取单个员工只用于低敏表单回填；不存在时禁用表单，不根据缺失记录创造新实体。</zh-CN>
+            //   <en>Read the single employee only for low-sensitivity form hydration; when absent, disable the form instead of creating an entity from a missing record.</en>
+            // </lang>
+            IEmployeeInfo employee = EmployeeDirectoryAdminDb.GetEmployeeById(employeeId);
+            if (employee == null)
+            {
+                DisableForm("Employee was not found.");
+                return;
+            }
+
+            TitleLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_EmployeeEdit_TitleEdit, Server.HtmlEncode(employee.DisplayName));
+            EmployeeIdField.Value = employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
+            OriginalUpdatedUtcField.Value = FormatRoundTripUtc(employee.UpdatedUtc);
+            EmployeeCodeTextBox.Text = employee.EmployeeCode;
+            DisplayNameTextBox.Text = employee.DisplayName;
+            PreferredNameTextBox.Text = employee.PreferredName;
+            WorkEmailTextBox.Text = employee.WorkEmail;
+            SelectListValue(
+                OrganizationUnitList,
+                employee.OrganizationUnitId.HasValue
+                    ? employee.OrganizationUnitId.Value.ToString(CultureInfo.InvariantCulture)
+                    : string.Empty);
+            SelectListValue(EmploymentStatusList, employee.EmploymentStatus);
+            JoinedUtcTextBox.Text = FormatOptionalUtc(employee.JoinedUtc);
+            LeftUtcTextBox.Text = FormatOptionalUtc(employee.LeftUtc);
+            SourceSystemTextBox.Text = string.IsNullOrWhiteSpace(employee.SourceSystem) ? "Portal" : employee.SourceSystem;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定组织下拉框。</zh-CN>
+        ///   <en>Binds the organization selector.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>后台维护允许选择停用组织，以便修复历史员工记录；列表限制为 500 条，避免旧 Web Forms 控件过重。</zh-CN>
+        ///   <en>Administration allows inactive organizations so historical employee records can be repaired; the list is capped at 500 items to keep the legacy Web Forms control light.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindOrganizationList()
+        {
+            // <lang>
+            //   <zh-CN>清空旧选项并保留空值哨兵，明确“无组织归属”与任意组织标识的区别。</zh-CN>
+            //   <en>Clear old options and retain an empty sentinel so “no organization” is distinct from any organization identifier.</en>
+            // </lang>
+            OrganizationUnitList.Items.Clear();
+            OrganizationUnitList.Items.Add(new ListItem(lang.Admin_EmployeeEdit_OptionNone, string.Empty));
+
+            // <lang>
+            //   <zh-CN>查询包含停用组织但限制最多 500 条；这是修复历史记录的候选集，不是权限或循环校验。</zh-CN>
+            //   <en>Query inactive organizations with a 500-item cap; this is a historical-repair candidate set, not an authorization or cycle check.</en>
+            // </lang>
+            IList<IOrganizationUnitInfo> organizations = EmployeeDirectoryDb.GetOrganizationUnits(new EmployeeDirectoryQuery
+            {
+                IncludeInactiveOrganizations = true,
+                Take = 500
+            }).ToList();
+
+            foreach (IOrganizationUnitInfo organization in organizations)
+            {
+                // <lang>
+                //   <zh-CN>显示名称供管理员识别，值使用不变文化格式的稳定主键，避免本地化文本参与提交。</zh-CN>
+                //   <en>Use the display name for administrator recognition and the stable key formatted invariantly as the submitted value, keeping localized text out of the identifier.</en>
+                // </lang>
+                OrganizationUnitList.Items.Add(new ListItem(
+                    organization.DisplayName + " (#" + organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture) + ")",
+                    organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture)));
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定员工状态下拉框。</zh-CN>
+        ///   <en>Binds the employee-status selector.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>状态值使用稳定常量，保持数据库、权限判断和审计展示一致。</zh-CN>
+        ///   <en>Status values use stable constants so database records, permission decisions and audit display stay aligned.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindStatusList()
+        {
+            // <lang>
+            //   <zh-CN>重建状态选项而非依赖页面标记层，确保回发/模板变化不会引入未批准的状态值。</zh-CN>
+            //   <en>Rebuild the status options instead of trusting markup, preventing postbacks or template changes from introducing unapproved status values.</en>
+            // </lang>
+            EmploymentStatusList.Items.Clear();
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Active, PortalEmployeeStatuses.Active));
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Pending, PortalEmployeeStatuses.Pending));
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Suspended, PortalEmployeeStatuses.Suspended));
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Left, PortalEmployeeStatuses.Left));
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从表单输入创建员工保存请求。</zh-CN>
+        ///   <en>Creates an employee save request from form input.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>校验通过时输出的保存请求。</zh-CN>
+        ///   <en>Save request emitted when validation succeeds.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>校验失败时可展示给管理员的低敏提示。</zh-CN>
+        ///   <en>Low-sensitivity message displayable to administrators when validation fails.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>输入可转换为保存请求时返回 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when input can be converted into a save request.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>页面层只做格式和基本范围校验；业务唯一性、员工状态组合和并发冲突由数据层统一处理。</zh-CN>
+        ///   <en>The page layer validates only format and basic ranges; business uniqueness, employee-status combinations and concurrency conflicts are handled by the data layer.</en>
+        /// </lang>
+        /// </remarks>
+        private bool TryCreateSaveRequest(out EmployeeSaveRequest request, out string message)
+        {
+            // <lang>
+            //   <zh-CN>先清空输出，保证任何失败路径都不会把旧请求或旧提示泄漏给调用者。</zh-CN>
+            //   <en>Clear outputs first so every failure path cannot leak a request or message from a previous invocation.</en>
+            // </lang>
+            request = null;
+            message = string.Empty;
+
+            // <lang>
+            //   <zh-CN>员工标识只接受非负不变整数；0 保留给新增，正数表示已有实体。</zh-CN>
+            //   <en>Accept only a non-negative invariant integer for the employee identifier; zero denotes creation and a positive value an existing entity.</en>
+            // </lang>
+            int employeeId;
+            if (!int.TryParse(EmployeeIdField.Value, NumberStyles.None, CultureInfo.InvariantCulture, out employeeId) ||
+                employeeId < 0)
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidEmployeeId;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>组织下拉框的空值映射为 null，正整数才进入保存请求，避免伪造负数或非数字归属。</zh-CN>
+            //   <en>Map an empty organization selector to null and allow only positive integers into the request, rejecting forged negative or non-numeric ownership.</en>
+            // </lang>
+            int? organizationUnitId;
+            if (!TryReadOptionalListInt32(OrganizationUnitList.SelectedValue, out organizationUnitId))
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidOrganizationId;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>入职和离职时间按统一 helper 解析为 UTC，页面不把本地时间假设写入请求。</zh-CN>
+            //   <en>Parse joined and left times through the shared UTC helper so the page does not write local-time assumptions into the request.</en>
+            // </lang>
+            DateTime? joinedUtc;
+            if (!TryReadOptionalUtc(JoinedUtcTextBox.Text, out joinedUtc))
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidJoinedUtc;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>离职时间与入职时间使用同一格式边界，业务上的先后关系由数据层继续负责。</zh-CN>
+            //   <en>Use the same format boundary for the leaving time; the data layer remains responsible for business ordering rules.</en>
+            // </lang>
+            DateTime? leftUtc;
+            if (!TryReadOptionalUtc(LeftUtcTextBox.Text, out leftUtc))
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidLeftUtc;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>编辑时间戳来自隐藏域，仅用于并发保护；新增路径允许为空。</zh-CN>
+            //   <en>The edit timestamp comes from a hidden field only for concurrency protection; creation allows it to be empty.</en>

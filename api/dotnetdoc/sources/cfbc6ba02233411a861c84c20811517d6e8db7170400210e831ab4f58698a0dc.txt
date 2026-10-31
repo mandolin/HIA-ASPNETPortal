@@ -1,0 +1,1 @@
+        private static readonly object OptionsProviderLock = new object();

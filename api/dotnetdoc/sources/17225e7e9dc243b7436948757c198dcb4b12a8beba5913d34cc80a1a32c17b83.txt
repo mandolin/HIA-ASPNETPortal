@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>P7.4 主壳层已改为 div 结构；仍保留单一 server form 与 Web Forms postback，避免破坏旧控件生命周期。</zh-CN>
+          <en>P7.4 moved the shell to div markup while retaining the single server form and Web Forms postback, preserving the legacy control lifecycle.</en>
+        </lang>
+        --%>

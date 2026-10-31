@@ -1,0 +1,26 @@
+        private bool IsSchemaAvailable()
+        {
+            try
+            {
+                // <lang>
+                //   <zh-CN>表名来自内部常量而非用户输入，拼接 SQL 仅用于 SQL Server 的 OBJECT_ID schema 探测。</zh-CN>
+                //   <en>The table name comes from an internal constant rather than user input, so string SQL is used only for SQL Server OBJECT_ID schema probing.</en>
+                // </lang>
+                string sql = string.Format(
+                    "SELECT CASE WHEN OBJECT_ID(N'[dbo].[{0}]', N'U') IS NULL THEN 0 ELSE 1 END",
+                    ReferenceDataTableName);
+                // <lang>
+                //   <zh-CN>探测结果按单个整数读取，保持目录表不可用与空目录集合之间的语义区分。</zh-CN>
+                //   <en>The probe result is read as one integer, preserving the semantic distinction between an unavailable catalog table and an empty catalog set.</en>
+                // </lang>
+                return context.Database.SqlQuery<int>(sql).Single() == 1;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>schema 探测失败时关闭数据库目录路径，由调用方使用明确的兼容回退或返回失败。</zh-CN>
+                //   <en>When schema probing fails, close the database catalog path so callers can use the explicit compatibility fallback or report failure.</en>
+                // </lang>
+                return false;
+            }
+        }

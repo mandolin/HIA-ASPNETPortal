@@ -1,0 +1,35 @@
+        private static string NormalizeCssSegment(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return "default";
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符构造 ASCII 安全 class 片段，任何非允许字符统一降级为连字符。</zh-CN>
+            //   <en>Build an ASCII-safe class segment character by character, degrading every disallowed character to a hyphen.</en>
+            // </lang>
+            var builder = new StringBuilder();
+
+            // <lang>
+            //   <zh-CN>遍历已去除外围空白的输入；循环不保留原始 Unicode 字符。</zh-CN>
+            //   <en>Traverse the trimmed input; the loop does not retain raw Unicode characters.</en>
+            // </lang>
+            foreach (char character in value.Trim())
+            {
+                if ((character >= 'A' && character <= 'Z') ||
+                    (character >= 'a' && character <= 'z') ||
+                    (character >= '0' && character <= '9') ||
+                    character == '-' ||
+                    character == '_')
+                {
+                    builder.Append(char.ToLowerInvariant(character));
+                }
+                else
+                {
+                    builder.Append('-');
+                }
+            }
+
+            return builder.Length == 0 ? "default" : builder.ToString();
+        }

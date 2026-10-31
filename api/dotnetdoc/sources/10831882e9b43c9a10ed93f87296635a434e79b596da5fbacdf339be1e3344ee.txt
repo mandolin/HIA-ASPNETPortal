@@ -1,0 +1,28 @@
+        public static string Render(int? rowCount, string message, int columnCount)
+        {
+            // <lang>
+            //   <zh-CN>三态一次判完：null = 抑制（失败路径），> 0 = 有数据，二者都不输出空态。</zh-CN>
+            //   <en>All three states resolve here: null means suppressed (failure path) and a positive count means data exists; neither emits an empty state.</en>
+            // </lang>
+            if (!rowCount.HasValue || rowCount.Value > 0)
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>列数下限保护：colspan 小于 1 会产生非法单元格并可能破坏整张表的解析。</zh-CN>
+            //   <en>Floor the column count: a colspan below 1 produces an invalid cell and can break parsing of the whole table.</en>
+            // </lang>
+            int safeColumnCount = columnCount < 1 ? 1 : columnCount;
+
+            // <lang>
+            //   <zh-CN>文案一律编码后输出，避免资源文件内容被当作标记解释。</zh-CN>
+            //   <en>Always encode the wording before output so resource content is never interpreted as markup.</en>
+            // </lang>
+            string encodedMessage = string.IsNullOrWhiteSpace(message)
+                ? string.Empty
+                : HttpUtility.HtmlEncode(message.Trim());
+
+            return "<tr><td colspan=\"" + safeColumnCount.ToString(CultureInfo.InvariantCulture) +
+                "\"><div class=\"portal-empty-state\">" + encodedMessage + "</div></td></tr>";
+        }

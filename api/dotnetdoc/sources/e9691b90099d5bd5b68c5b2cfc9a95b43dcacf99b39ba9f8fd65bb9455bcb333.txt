@@ -1,0 +1,28 @@
+        public IEnumerable<string> GetPermissionKeysByUserName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name) || !HasRolePermissionsTable())
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            return _context.Database.SqlQuery<string>(
+                @"
+SELECT DISTINCT [RolePermissions].[PermissionKey]
+FROM [dbo].[PortalCfg_RolePermissions] AS [RolePermissions]
+INNER JOIN [dbo].[Portal_Roles] AS [Roles]
+    ON [Roles].[RoleID] = [RolePermissions].[RoleId]
+LEFT JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+    ON [UserRoles].[RoleID] = [RolePermissions].[RoleId]
+LEFT JOIN [dbo].[Portal_Users] AS [Users]
+    ON [Users].[UserID] = [UserRoles].[UserID]
+WHERE [RolePermissions].[IsEnabled] = 1
+  AND
+  (
+      [Roles].[RoleName] = @p1
+      OR [Users].[Name] = @p0
+      OR [Users].[Email] = @p0
+  )
+ORDER BY [RolePermissions].[PermissionKey]",
+                name.Trim(),
+                PortalRoleNames.AllUsers).ToList();
+        }

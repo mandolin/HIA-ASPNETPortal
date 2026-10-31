@@ -1,0 +1,18 @@
+        private bool HasTable(string tableName)
+        {
+            try
+            {
+                // <lang>
+                //   <zh-CN>表名仅来自本类常量，拼接 OBJECT_ID 查询不会接受外部输入；任何异常都按架构不可用处理。</zh-CN>
+                //   <en>Table names come only from constants in this class, so the OBJECT_ID query does not accept external input; any exception is treated as unavailable schema.</en>
+                // </lang>
+                string sql = string.Format(
+                    "SELECT CASE WHEN OBJECT_ID(N'[dbo].[{0}]', N'U') IS NULL THEN 0 ELSE 1 END",
+                    tableName);
+                return context.Database.SqlQuery<int>(sql).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }

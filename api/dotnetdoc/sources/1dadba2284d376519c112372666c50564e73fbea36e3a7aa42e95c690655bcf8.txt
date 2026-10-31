@@ -1,0 +1,5 @@
+        internal static string Announcements_readMore {
+            get {
+                return ResourceManager.GetString("Announcements_readMore", resourceCulture);
+            }
+        }

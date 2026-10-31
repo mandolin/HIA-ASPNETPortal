@@ -1,0 +1,34 @@
+        private static void WarnDatabaseFallback(string key, string reason, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>去重键由稳定设置键和调用方提供的受控原因组成，不附加数据库值、连接串或 HTTP 内容。</zh-CN>
+            //   <en>The deduplication key consists of the stable setting key and caller-supplied controlled reason, with no database value, connection string, or HTTP content appended.</en>
+            // </lang>
+            string warningKey = key + "|" + reason;
+            lock (WarningLock)
+            {
+                if (WarnedDatabaseFallbacks.Contains(warningKey))
+                {
+                    // <lang>
+                    //   <zh-CN>同一键/原因已记录时静默返回，避免持续故障在高频读取路径放大为日志噪声。</zh-CN>
+                    //   <en>Return silently when the same key/reason was recorded, preventing a persistent fault from amplifying into log noise on a high-frequency read path.</en>
+                    // </lang>
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>在写入诊断前先标记为已告警，保留既有“诊断接收器失败也不无限重试”语义。</zh-CN>
+                //   <en>Mark as warned before writing diagnostics, retaining the established behavior that a diagnostics-sink failure is not retried without bound.</en>
+                // </lang>
+                WarnedDatabaseFallbacks.Add(warningKey);
+            }
+
+            // <lang>
+            //   <zh-CN>告警消息只包含稳定设置键和受控原因；PortalDiagnostics 继续负责请求上下文净化、长度限制和接收器隔离。</zh-CN>
+            //   <en>The warning message contains only stable setting key and controlled reason; PortalDiagnostics continues to own request-context sanitization, length caps, and sink isolation.</en>
+            // </lang>
+            PortalDiagnostics.Warn(
+                "RuntimeSettings",
+                "Setting '" + key + "' fell back from database override. " + reason,
+                context);
+        }

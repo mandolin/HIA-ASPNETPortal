@@ -1,0 +1,400 @@
+    public partial class UserEmployeeBindingEdit : PortalPage<UserEmployeeBindingEdit>
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定写入服务。</zh-CN>
+        ///   <en>Binding write service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IUserEmployeeBindingAdminDb BindingAdminDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工目录只读服务。</zh-CN>
+        ///   <en>Employee-directory read service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IEmployeeDirectoryDb EmployeeDirectoryDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工主数据维护服务。</zh-CN>
+        ///   <en>Employee master-data maintenance service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IEmployeeDirectoryAdminDb EmployeeAdminDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户用户服务。</zh-CN>
+        ///   <en>Portal user service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IUsersDb UsersDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>授权并加载初始绑定上下文。</zh-CN>
+        ///   <en>Authorizes the request and loads the initial binding context.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryBind))
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                BindInitialState();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>建立当前有效绑定。</zh-CN>
+        ///   <en>Creates the current active binding.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该回发先复核绑定权限和正数用户标识，再调用绑定写入；随后递增安全版本并记录审计。三步不共享本页声明的跨服务事务，异常处理保留已发生的部分完成事实。</zh-CN>
+        ///   <en>This postback rechecks binding permission and a positive user identifier before the bind write, then increments the security version and records audit. The three steps do not share a cross-service transaction claimed by this page, and exception handling preserves the fact that earlier steps may already have completed.</en>
+        /// </lang>
+        /// </remarks>
+        protected void BindButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryBind))
+            {
+                return;
+            }
+
+            int userId;
+            if (!TryReadUserId(out userId))
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>绑定写入只接收员工号和操作原因，账号标识来自已校验的后台输入，操作者来自当前登录身份。</zh-CN>
+                //   <en>The bind write accepts only the employee code and operation reason; the account identifier comes from validated administration input and the actor comes from the current identity.</en>
+                // </lang>
+                EmployeeDirectoryWriteResult result = BindingAdminDb.BindUserToEmployee(new UserEmployeeBindingSaveRequest
+                {
+                    UserId = userId,
+                    EmployeeCode = EmployeeCodeTextBox.Text,
+                    Reason = ReasonTextBox.Text,
+                    ActorName = GetCurrentActor()
+                });
+
+                if (!result.Succeeded)
+                {
+                    // <lang>
+                    //   <zh-CN>绑定服务返回失败时不递增安全版本、不记录成功审计，刷新当前状态以反映服务端事实。</zh-CN>
+                    //   <en>When the binding service reports failure, do not increment the security version or record success audit; refresh the current state to reflect the server fact.</en>
+                    // </lang>
+                    ShowMessage(result.Message, true);
+                    RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>绑定成功后递增安全版本，让目标用户旧票据在后续请求自然失效。</zh-CN>
+                //   <en>After a successful bind, increment the security version so the target user's old tickets expire naturally on later requests.</en>
+                // </lang>
+                UsersDb.IncrementSecurityVersion(userId, "EmployeeBindingChanged");
+                // <lang>
+                //   <zh-CN>安全版本递增与绑定写入已是连续调用；若递增异常，绑定事实可能已经持久化，不能把 catch 后提示误写成回滚完成。</zh-CN>
+                //   <en>The security-version increment is a sequential call after binding persistence; if it throws, the binding fact may already be durable, so the catch message must not be read as a completed rollback.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.EnterpriseDirectoryCategory,
+                    PortalOperationAuditEvents.UserEmployeeBound,
+                    PortalOperationAuditEvents.UserEmployeeBindingTargetType,
+                    result.EntityId.ToString(CultureInfo.InvariantCulture),
+                    "Bound user id " + userId.ToString(CultureInfo.InvariantCulture) + " to employee code.",
+                    Context);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBoundSaved, false);
+                RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.UserEmployeeBindingEdit.Bind",
+                    "Binding user to employee failed. UserId=" + userId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_UserEmployeeBindingEdit_MessageBindFailed, eventId), true);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>结束当前有效绑定。</zh-CN>
+        ///   <en>Ends the current active binding.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>解绑先解析隐藏域中的正数绑定标识并重新读取当前记录，再执行结束写入；成功后同样递增用户安全版本并审计。隐藏域不是授权凭据，最终权限仍由回发门禁和数据服务共同约束。</zh-CN>
+        ///   <en>Unbinding parses a positive binding id from the hidden field and reloads the current row before ending it; success then increments the user security version and records audit. The hidden field is not an authorization credential; the postback gate and data service together constrain the final operation.</en>
+        /// </lang>
+        /// </remarks>
+        protected void EndBindingButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryBind))
+            {
+                return;
+            }
+
+            int bindingId;
+            if (!int.TryParse(ActiveBindingId.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out bindingId) ||
+                bindingId <= 0)
+            {
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageNoActiveBindingToEnd, true);
+                return;
+            }
+
+            IUserEmployeeBindingInfo binding = BindingAdminDb.GetBindingById(bindingId);
+            if (binding == null)
+            {
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBindingGone, true);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>解绑使用当前隐藏域记录的绑定标识，并在写入前重新读取绑定，避免对已删除或已变化记录继续操作。</zh-CN>
+                //   <en>Unbinding uses the binding identifier stored in the hidden field and reloads the binding before writing so deleted or changed rows are not processed blindly.</en>
+                // </lang>
+                EmployeeDirectoryWriteResult result = BindingAdminDb.EndBinding(new UserEmployeeBindingEndRequest
+                {
+                    BindingId = bindingId,
+                    Reason = ReasonTextBox.Text,
+                    ActorName = GetCurrentActor()
+                });
+
+                if (!result.Succeeded)
+                {
+                    // <lang>
+                    //   <zh-CN>解绑服务失败时保留当前绑定摘要并返回，不递增安全版本或记录成功审计。</zh-CN>
+                    //   <en>When the unbind service fails, retain the current binding summary and return without incrementing the security version or recording success audit.</en>
+                    // </lang>
+                    ShowMessage(result.Message, true);
+                    RefreshCurrentState(binding.UserId, binding.EmployeeCode);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>解绑同样递增目标用户安全版本，因为员工身份绑定会影响后续权限和资料上下文。</zh-CN>
+                //   <en>Unbinding also increments the target user's security version because employee identity binding affects later permissions and profile context.</en>
+                // </lang>
+                UsersDb.IncrementSecurityVersion(binding.UserId, "EmployeeBindingChanged");
+                // <lang>
+                //   <zh-CN>解绑写入、安全版本递增和审计仍是连续步骤；后续异常不代表前一步写入已自动回滚。</zh-CN>
+                //   <en>Unbind persistence, security-version increment, and audit remain sequential steps; a later exception does not mean the earlier write was automatically rolled back.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.EnterpriseDirectoryCategory,
+                    PortalOperationAuditEvents.UserEmployeeUnbound,
+                    PortalOperationAuditEvents.UserEmployeeBindingTargetType,
+                    bindingId.ToString(CultureInfo.InvariantCulture),
+                    "Ended employee binding for user id " + binding.UserId.ToString(CultureInfo.InvariantCulture) + ".",
+                    Context);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBindingEnded, false);
+                RefreshCurrentState(binding.UserId, binding.EmployeeCode);
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.UserEmployeeBindingEdit.End",
+                    "Ending user employee binding failed. BindingId=" + bindingId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_UserEmployeeBindingEdit_MessageUnbindFailed, eventId), true);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>加载页面首次显示所需的服务状态、请求参数和当前绑定摘要。</zh-CN>
+        ///   <en>Loads service state, request parameters, and current binding summaries needed for the first page display.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该方法不创建或修改绑定；它只根据可选的绑定、用户和员工参数预填后台表单，并在 P6.3 表不可用时禁用写入按钮。</zh-CN>
+        ///   <en>This method does not create or modify bindings; it only pre-fills the administration form from optional binding, user, and employee parameters, and disables write buttons when the P6.3 schema is unavailable.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindInitialState()
+        {
+            if (BindingAdminDb == null || EmployeeDirectoryDb == null || EmployeeAdminDb == null || UsersDb == null)
+            {
+                ShowUnavailable(lang.Admin_UserEmployeeBindingEdit_MessageServiceNotRegistered);
+                return;
+            }
+
+            if (!BindingAdminDb.IsSchemaAvailable() || !EmployeeDirectoryDb.IsSchemaAvailable())
+            {
+                ShowUnavailable(lang.Admin_UserEmployeeBindingEdit_MessageSchemaUnavailable);
+                return;
+            }
+
+            int bindingId;
+            if (TryReadOptionalPositiveParameter("bindingId", out bindingId) && bindingId > 0)
+            {
+                IUserEmployeeBindingInfo binding = BindingAdminDb.GetBindingById(bindingId);
+                if (binding != null)
+                {
+                    UserIdTextBox.Text = binding.UserId.ToString(CultureInfo.InvariantCulture);
+                    EmployeeCodeTextBox.Text = binding.EmployeeCode;
+                    RefreshCurrentState(binding.UserId, binding.EmployeeCode);
+                    return;
+                }
+            }
+
+            int userId;
+            TryReadOptionalPositiveParameter("userId", out userId);
+            if (userId > 0)
+            {
+                UserIdTextBox.Text = userId.ToString(CultureInfo.InvariantCulture);
+            }
+
+            int employeeId;
+            if (TryReadOptionalPositiveParameter("employeeId", out employeeId) && employeeId > 0)
+            {
+                IEmployeeInfo employee = EmployeeAdminDb.GetEmployeeById(employeeId);
+                if (employee != null)
+                {
+                    EmployeeCodeTextBox.Text = employee.EmployeeCode;
+                }
+            }
+
+            RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>刷新用户摘要、员工摘要和当前有效绑定摘要。</zh-CN>
+        ///   <en>Refreshes the user summary, employee summary, and current active binding summary.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>门户用户标识；小于等于 0 时不显示用户摘要。</zh-CN>
+        ///   <en>Portal user identifier; values less than or equal to 0 suppress the user summary.</en>
+        /// </l>
+        /// </param>
+        /// <param name="employeeCode">
+        /// <l>
+        ///   <zh-CN>员工号，可为空。</zh-CN>
+        ///   <en>Employee code, optionally empty.</en>
+        /// </l>
+        /// </param>
+        private void RefreshCurrentState(int userId, string employeeCode)
+        {
+            BindUserSummary(userId);
+            BindEmployeeSummary(employeeCode);
+            BindCurrentBinding(userId, employeeCode);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示指定门户用户的低敏摘要和用户管理链接。</zh-CN>
+        ///   <en>Displays a low-sensitivity summary and management link for the specified Portal user.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>门户用户标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </l>
+        /// </param>
+        private void BindUserSummary(int userId)
+        {
+            if (userId <= 0)
+            {
+                UserSummaryText.Text = string.Empty;
+                ManageUserLink.Visible = false;
+                return;
+            }
+
+            IUserItem user = UsersDb.FindUserById(userId);
+            if (user == null)
+            {
+                UserSummaryText.Text = lang.Admin_UserEmployeeBindingEdit_MessageUserNotFound;
+                ManageUserLink.Visible = false;
+                return;
+            }
+
+            UserSummaryText.Text = Server.HtmlEncode(user.Name + " / " + user.Email);
+            ManageUserLink.NavigateUrl = ResolveUrl("~/Admin/ManageUsers.aspx?userId=" + userId.ToString(CultureInfo.InvariantCulture));
+            ManageUserLink.Visible = true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示指定员工号对应的低敏员工摘要。</zh-CN>
+        ///   <en>Displays a low-sensitivity employee summary for the specified employee code.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="employeeCode">
+        /// <l>
+        ///   <zh-CN>员工号，可为空。</zh-CN>
+        ///   <en>Employee code, optionally empty.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>查询只使用目录读取接口，不在摘要区暴露更高敏资料；员工不存在时只显示通用提示。</zh-CN>
+        ///   <en>The lookup uses only the directory read contract and does not expose more sensitive data in the summary area; a missing employee shows a generic message.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindEmployeeSummary(string employeeCode)
+        {
+            string normalizedCode = Normalize(employeeCode);

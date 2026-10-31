@@ -1,0 +1,5 @@
+        internal static string Portal_Title {
+            get {
+                return ResourceManager.GetString("Portal_Title", resourceCulture);
+            }
+        }

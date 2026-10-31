@@ -1,0 +1,19 @@
+        public IUserEmployeeBindingInfo GetActiveBindingByUserId(int userId)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return null;
+            }
+
+            try
+            {
+                var row = _context.Database.SqlQuery<UserEmployeeBindingProjection>(
+                    GetActiveBindingSql("[Binding].[UserId] = @p0"),
+                    userId).SingleOrDefault();
+                return row == null ? null : CreateBindingInfo(row);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }

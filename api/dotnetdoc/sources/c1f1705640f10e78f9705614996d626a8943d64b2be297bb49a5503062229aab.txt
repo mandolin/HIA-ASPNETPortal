@@ -1,0 +1,39 @@
+        protected void UserRoles_ItemCommand(object sender, DataListCommandEventArgs e)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) ||
+                !string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            int roleId;
+            if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= userRoles.DataKeys.Count ||
+                !int.TryParse(userRoles.DataKeys[e.Item.ItemIndex].ToString(), out roleId) || roleId < 0)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            IRoleItem role = FindCurrentPortalRole(roleId);
+            if (role == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>角色移除已通过当前门户角色复核；删除和审计仍是连续调用，DataList 行索引不作为授权依据。</zh-CN>
+            //   <en>The role removal has been revalidated against current Portal roles; deletion and audit remain sequential calls, and the DataList row index is not an authorization basis.</en>
+            // </lang>
+            RolesDB.DeleteUserRole(role.RoleId, userId);
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.UserAdministrationCategory,
+                PortalOperationAuditEvents.RoleRemoved,
+                PortalOperationAuditEvents.UserTargetType,
+                userId.ToString(),
+                "Removed role id " + role.RoleId + " from user.",
+                Context);
+            userRoles.EditItemIndex = -1;
+            BindData();
+        }

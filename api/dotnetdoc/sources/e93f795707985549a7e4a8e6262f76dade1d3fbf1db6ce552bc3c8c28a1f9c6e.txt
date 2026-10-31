@@ -1,0 +1,8 @@
+        protected string EncodeText(object value)
+        {
+            // <lang>
+            //   <zh-CN>文档标题、类别和描述等普通字段统一作为文本节点输出，缺失值折叠为空字符串。</zh-CN>
+            //   <en>Ordinary fields such as document title, category, and description are emitted as text nodes, with missing values folded into an empty string.</en>
+            // </lang>
+            return Server.HtmlEncode(value == null ? string.Empty : Convert.ToString(value));
+        }

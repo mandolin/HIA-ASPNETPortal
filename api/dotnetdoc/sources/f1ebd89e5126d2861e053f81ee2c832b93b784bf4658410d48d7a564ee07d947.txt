@@ -1,0 +1,37 @@
+        private static string RenderCell(
+            Dictionary<string, RolePermissionEntry> grantLookup,
+            string roleName,
+            string permissionKey,
+            Func<string, string> text)
+        {
+            // <lang>
+            //   <zh-CN>未找到映射：输出"未授权"态，与"已禁用"必须视觉可区分。</zh-CN>
+            //   <en>No mapping found: emit the not-granted state, which must be visually distinguishable from disabled.</en>
+            // </lang>
+            RolePermissionEntry grant;
+            if (!grantLookup.TryGetValue(BuildCellKey(roleName, permissionKey), out grant))
+            {
+                return "<td class=\"portal-capability-matrix-cell portal-capability-matrix-none\" title=\"" +
+                    HttpUtility.HtmlAttributeEncode(text("StateNotGranted")) + "\">" +
+                    HttpUtility.HtmlEncode(text("MarkNotGranted")) + "</td>";
+            }
+
+            // <lang>
+            //   <zh-CN>映射存在且生效：输出"已授权"态。</zh-CN>
+            //   <en>Mapping exists and is effective: emit the granted state.</en>
+            // </lang>
+            if (grant.IsEnabled)
+            {
+                return "<td class=\"portal-capability-matrix-cell portal-capability-matrix-granted\" title=\"" +
+                    HttpUtility.HtmlAttributeEncode(text("StateGranted")) + "\">" +
+                    HttpUtility.HtmlEncode(text("MarkGranted")) + "</td>";
+            }
+
+            // <lang>
+            //   <zh-CN>映射存在但被禁用：输出"已禁用"态并带 aria-disabled，避免被读作"未授权"或可点击。</zh-CN>
+            //   <en>Mapping exists but is disabled: emit the disabled state with aria-disabled so it is neither read as not-granted nor treated as clickable.</en>
+            // </lang>
+            return "<td class=\"portal-capability-matrix-cell portal-capability-matrix-disabled\" aria-disabled=\"true\" title=\"" +
+                HttpUtility.HtmlAttributeEncode(text("StateDisabled")) + "\">" +
+                HttpUtility.HtmlEncode(text("MarkDisabled")) + "</td>";
+        }

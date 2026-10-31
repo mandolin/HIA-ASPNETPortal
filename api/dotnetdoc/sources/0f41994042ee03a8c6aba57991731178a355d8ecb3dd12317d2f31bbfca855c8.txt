@@ -1,0 +1,34 @@
+        public static IList<ReferenceDataItem> GetFallbackItems(string referenceSetKey)
+        {
+            // <lang>
+            //   <zh-CN>每次调用都创建独立列表，调用方可以绑定、排序或追加占位项，而不会污染全局兼容种子。</zh-CN>
+            //   <en>Each call creates an independent list so callers may bind, sort, or append placeholder items without mutating the global compatibility seeds.</en>
+            // </lang>
+            var items = new List<ReferenceDataItem>();
+            // <lang>
+            //   <zh-CN>协同事项类型回退只保留 P22 已接受的低敏业务类别，供目录表未部署时维持表单可用。</zh-CN>
+            //   <en>The collaboration-item type fallback keeps only the low-sensitivity business categories accepted by P22, preserving form availability while the catalog table is undeployed.</en>
+            // </lang>
+            if (string.Equals(referenceSetKey, CollaborationItemType, StringComparison.Ordinal))
+            {
+                items.Add(CreateItem(CollaborationItemType, GeneralItemType, "通用协同", 10));
+                items.Add(CreateItem(CollaborationItemType, "Content", "资料/内容协同", 20));
+                items.Add(CreateItem(CollaborationItemType, "Operations", "资源/运维协同", 30));
+                items.Add(CreateItem(CollaborationItemType, "Workflow", "业务流程协同", 40));
+            }
+            // <lang>
+            //   <zh-CN>优先级回退保持最小集合，避免在目录治理尚不可读时引入未审计的业务级别。</zh-CN>
+            //   <en>The priority fallback keeps the smallest set, avoiding unaudited business levels while catalog governance is not yet readable.</en>
+            // </lang>
+            else if (string.Equals(referenceSetKey, CollaborationPriority, StringComparison.Ordinal))
+            {
+                items.Add(CreateItem(CollaborationPriority, NormalPriority, "普通", 10));
+                items.Add(CreateItem(CollaborationPriority, "Important", "重要", 20));
+            }
+
+            // <lang>
+            //   <zh-CN>未知集合返回空副本，由调用方按业务上下文决定是否拒绝或展示无可选值。</zh-CN>
+            //   <en>Unknown sets return an empty copy, leaving callers to reject the value or show no choices according to their business context.</en>
+            // </lang>
+            return items;
+        }

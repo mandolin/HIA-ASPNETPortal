@@ -1,0 +1,1 @@
+        public bool Succeeded { get; private set; }

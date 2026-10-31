@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>公告的 Read More 链接及移动端变体只是导航数据；目标地址和协议安全不能由文本输入或标记层自行放宽。</zh-CN>
+                        <en>The announcement Read More link and mobile variant are navigation data; target and scheme safety cannot be relaxed by text input or markup.</en>
+                    </lang>
+                --%>

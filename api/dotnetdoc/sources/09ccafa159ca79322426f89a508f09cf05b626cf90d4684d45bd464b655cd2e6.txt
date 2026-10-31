@@ -1,0 +1,40 @@
+        private void TryAddComment(long itemId, string commandName, string comment)
+        {
+            // <lang>
+            //   <zh-CN>可见范围由受支持的命令名映射，不接受请求方自定义范围键。</zh-CN>
+            //   <en>Map visibility scope from supported command names and do not accept a caller-defined scope key.</en>
+            // </lang>
+            string visibilityScope = string.Equals(commandName, "AddAdministratorComment", StringComparison.Ordinal)
+                ? PortalCollaborationItemVisibilityScopes.Administrators
+                : PortalCollaborationItemVisibilityScopes.ItemParticipants;
+            CollaborationItemCommentResult result = CollaborationItemDb.AddComment(
+                new CollaborationItemCommentCreateRequest
+                {
+                    ItemId = itemId,
+                    Comment = comment,
+                    VisibilityScope = visibilityScope,
+                    ActorUserId = GetCurrentUserId(),
+                    ActorName = GetCurrentUserName(),
+                    OccurredUtc = DateTime.UtcNow
+                });
+            if (!result.Succeeded)
+            {
+                MessageLabel.Text = result.Message;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>评论审计只保留事项、事件、范围和长度，降低评论正文泄露风险。</zh-CN>
+            //   <en>Comment audit retains only item, event, scope, and length metadata to reduce comment-body exposure.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemCommentAdded,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item comment added. EventId=" + result.EventId.ToString(CultureInfo.InvariantCulture) +
+                "; VisibilityScope=" + visibilityScope +
+                "; Length=" + NormalizeInput(comment, 1000).Length.ToString(CultureInfo.InvariantCulture),
+                Context);
+            MessageLabel.Text = lang.Admin_CollaborationItems_MessageCommentAdded;
+        }

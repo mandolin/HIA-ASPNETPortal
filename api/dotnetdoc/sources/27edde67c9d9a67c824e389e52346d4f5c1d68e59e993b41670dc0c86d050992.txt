@@ -1,0 +1,5 @@
+        internal static string ModuleTitle_EditToolTipFormat {
+            get {
+                return ResourceManager.GetString("ModuleTitle_EditToolTipFormat", resourceCulture);
+            }
+        }

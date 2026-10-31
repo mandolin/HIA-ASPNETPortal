@@ -1,0 +1,23 @@
+        private static SqlConnection CreateConnection()
+        {
+            // <lang>
+            //   <zh-CN>容器尚未建立通常表示启动早期或受限测试宿主；此处不自行构建容器，避免越过应用组合根。</zh-CN>
+            //   <en>An absent container normally means early startup or a constrained test host; do not construct one here, avoiding bypass of the application composition root.</en>
+            // </lang>
+            if (Global.Container == null)
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>连接串只短暂保存在局部变量中以创建 SqlConnection；不得记录、格式化或向调用方暴露其内容。</zh-CN>
+            //   <en>The connection string remains in a local variable only long enough to create SqlConnection; do not log, format, or expose its content to callers.</en>
+            // </lang>
+            string connectionString = Global.Container.Resolve<string>(ExternalConnectionStringLoader.UnityConnectionStringName);
+
+            // <lang>
+            //   <zh-CN>空白连接串与未配置等价，返回 null 让上层稳定降级，而不是让 provider 产生环境细节异常。</zh-CN>
+            //   <en>A blank connection string is equivalent to missing configuration; return null for stable upper-layer degradation rather than letting the provider emit an environment-detail exception.</en>
+            // </lang>
+            return string.IsNullOrWhiteSpace(connectionString) ? null : new SqlConnection(connectionString);
+        }

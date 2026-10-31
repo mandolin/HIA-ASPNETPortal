@@ -1,0 +1,34 @@
+    public class Tab : TabSettings
+    {
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>该 Tab 在当前导航集合中的索引。</zh-CN>
+        ///   <en>Index of this tab in the current navigation collection.</en>
+        /// </l>
+        /// </summary>
+        public int TabIndex { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>基于数据访问层 Tab 项创建可绑定导航 Tab。</zh-CN>
+        ///   <en>Creates a bindable navigation tab from a data-access tab item.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tabIndex">
+        /// <l>
+        ///   <zh-CN>当前导航集合中的索引。</zh-CN>
+        ///   <en>Index in the current navigation collection.</en>
+        /// </l>
+        /// </param>
+        /// <param name="tab">
+        /// <l>
+        ///   <zh-CN>旧门户 Tab 数据项。</zh-CN>
+        ///   <en>Legacy portal tab data item.</en>
+        /// </l>
+        /// </param>
+        public Tab(int tabIndex, ITabItem tab)
+            : base(tab)
+        {
+            TabIndex = tabIndex;
+        }
+    }

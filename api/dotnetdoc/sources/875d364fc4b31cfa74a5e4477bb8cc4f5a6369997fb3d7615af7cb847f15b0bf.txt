@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>联系人编辑页仅替换表现层外壳，保留既有 WebForms 事件和数据流。</zh-CN>
+            <en>The contact edit page only replaces the presentation shell while preserving existing WebForms events and data flow.</en>
+        </lang>
+    --%>

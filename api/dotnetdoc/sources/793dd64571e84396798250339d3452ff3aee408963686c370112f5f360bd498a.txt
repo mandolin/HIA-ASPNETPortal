@@ -1,0 +1,25 @@
+        public static bool IsLegalTransition(string fromStatus, string actionKey)
+        {
+            if (string.IsNullOrEmpty(fromStatus) || string.IsNullOrEmpty(actionKey))
+            {
+                return false;
+            }
+
+            foreach (PortalBusinessApplicationTransition transition in All)
+            {
+                if (!string.Equals(transition.ActionKey, actionKey, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                foreach (string allowed in transition.FromStatuses)
+                {
+                    if (string.Equals(allowed, fromStatus, StringComparison.Ordinal))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }

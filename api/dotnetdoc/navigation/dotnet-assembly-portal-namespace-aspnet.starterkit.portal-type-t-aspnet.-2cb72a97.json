@@ -1,0 +1,68 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordsubmissioncrypto",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordsubmissioncrypto:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordsubmissioncrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.isencryptedsubmissionrequired",
+      "kind": "entry",
+      "label": "IsEncryptedSubmissionRequired",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.isencryptedsubmissionrequired",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordsubmissioncrypto.isencryptedsubmissionrequired",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissionc-c5557db9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordsubmissioncrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.issuepasswordsubmissionkey-system.web.httpcontext",
+      "kind": "entry",
+      "label": "IssuePasswordSubmissionKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.issuepasswordsubmissionkey-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordsubmissioncrypto.issuepasswordsubmissionkey-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissionc-877cdfd0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordsubmissioncrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryDecryptSubmittedPassword",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissionc-acc72c55.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordsubmissioncrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryDecryptSubmittedPasswords",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissionc-806de052.html"
+    }
+  ]
+}

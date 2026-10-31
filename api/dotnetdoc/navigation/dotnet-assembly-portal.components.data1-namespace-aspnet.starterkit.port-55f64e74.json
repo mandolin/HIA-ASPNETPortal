@@ -1,0 +1,108 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:base:t-system.data.entity.dbcontext",
+      "kind": "relation",
+      "label": "Base: System.Data.Entity.DbContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:interface:t-system.data.entity.infrastructure.iobjectcontextadapter",
+      "kind": "relation",
+      "label": "Interface: System.Data.Entity.Infrastructure.IObjectContextAdapter",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.-ctor-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.-ctor-system.string",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbizdbcontext.-ctor-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.-ctor--1c9b1f0a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.employees",
+      "kind": "entry",
+      "label": "Employees",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.employees",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalbizdbcontext.employees",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.employ-d867a1a8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.onmodelcreating-system.data.entity.dbmodelbuilder",
+      "kind": "entry",
+      "label": "OnModelCreating",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.onmodelcreating-system.data.entity.dbmodelbuilder",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbizdbcontext.onmodelcreating-system.data.entity.dbmodelbuilder",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.onmode-b858055c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.organizationunits",
+      "kind": "entry",
+      "label": "OrganizationUnits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.organizationunits",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalbizdbcontext.organizationunits",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.organi-ac0598f3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.useremployeebindings",
+      "kind": "entry",
+      "label": "UserEmployeeBindings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.useremployeebindings",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalbizdbcontext.useremployeebindings",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.userem-882e039e.html"
+    }
+  ]
+}

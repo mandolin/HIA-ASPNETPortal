@@ -1,0 +1,68 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopbanner",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopbanner:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopbanner:entry:hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.culture",
+      "kind": "entry",
+      "label": "Culture",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.culture",
+      "sourcePath": "src/Portal/DesktopBanner.Designer.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.desktopbanner.culture",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.desktopbanner.culture-8b58e20f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopbanner:entry:hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.logoff",
+      "kind": "entry",
+      "label": "Logoff",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.logoff",
+      "sourcePath": "src/Portal/DesktopBanner.Designer.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.desktopbanner.logoff",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.desktopbanner.logoff-3f34be64.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopbanner:entry:hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.resourcemanager",
+      "kind": "entry",
+      "label": "ResourceManager",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.resourcemanager",
+      "sourcePath": "src/Portal/DesktopBanner.Designer.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.desktopbanner.resourcemanager",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.desktopbanner.resourceman-b31fb992.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopbanner:entry:hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.welcomemessage",
+      "kind": "entry",
+      "label": "WelcomeMessage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.desktopbanner.welcomemessage",
+      "sourcePath": "src/Portal/DesktopBanner.Designer.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.desktopbanner.welcomemessage",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.desktopbanner.welcomemess-c1b0577c.html"
+    }
+  ]
+}

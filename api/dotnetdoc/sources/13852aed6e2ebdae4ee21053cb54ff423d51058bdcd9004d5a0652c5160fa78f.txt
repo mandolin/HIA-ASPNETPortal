@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>允许受信任管理员输入原始 HTML；这里必须保持普通请求验证关闭，否则旧 Web Forms 回发无法保存真实 HTML 片段。</zh-CN>
+                  <en>Allows trusted administrators to enter raw HTML. Ordinary request validation must remain disabled here, otherwise the legacy Web Forms postback cannot save real HTML fragments.</en>
+                </lang>
+                --%>

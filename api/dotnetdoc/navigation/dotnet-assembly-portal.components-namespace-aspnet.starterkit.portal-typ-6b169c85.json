@@ -1,0 +1,81 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemployeestatuses",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemployeestatuses:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemployeestatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.active",
+      "kind": "entry",
+      "label": "Active",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.active",
+      "sourcePath": "src/Portal.Components/PortalEmployeeStatuses.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalemployeestatuses.active",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.ac-3971a36f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemployeestatuses:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalemployeestatuses.isknown-system.string",
+      "kind": "entry",
+      "label": "IsKnown",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalemployeestatuses.isknown-system.string",
+      "sourcePath": "src/Portal.Components/PortalEmployeeStatuses.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalemployeestatuses.isknown-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalemployeestatuses.is-eec8d2d4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemployeestatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.left",
+      "kind": "entry",
+      "label": "Left",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.left",
+      "sourcePath": "src/Portal.Components/PortalEmployeeStatuses.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalemployeestatuses.left",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.le-a456c0b0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemployeestatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.pending",
+      "kind": "entry",
+      "label": "Pending",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.pending",
+      "sourcePath": "src/Portal.Components/PortalEmployeeStatuses.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalemployeestatuses.pending",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.pe-4e721f7c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemployeestatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.suspended",
+      "kind": "entry",
+      "label": "Suspended",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.suspended",
+      "sourcePath": "src/Portal.Components/PortalEmployeeStatuses.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalemployeestatuses.suspended",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalemployeestatuses.su-049394e2.html"
+    }
+  ]
+}

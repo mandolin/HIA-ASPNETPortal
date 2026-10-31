@@ -1,0 +1,16 @@
+        private IUserRegistrationInfo BindRegistrationInfo(int currentUserId)
+        {
+            IUserRegistrationInfo registration = UsersDB.GetRegistrationInfo(currentUserId);
+            RegistrationStatus.Text = EncodeDisplay(registration.Status);
+            RegistrationSource.Text = EncodeDisplay(registration.Source);
+            EmployeeCodeText.Text = EncodeDisplay(EmptyToNone(registration.EmployeeCode));
+            InviteCodeText.Text = EncodeDisplay(EmptyToNone(registration.InviteCode));
+            RegisteredUtcText.Text = EncodeDisplay(FormatUtc(registration.RegisteredUtc));
+            ApprovedUtcText.Text = EncodeDisplay(FormatUtc(registration.ApprovedUtc));
+            ApproveRegistrationBtn.Visible =
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal) ||
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal);
+            RejectRegistrationBtn.Visible =
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal);
+            return registration;
+        }

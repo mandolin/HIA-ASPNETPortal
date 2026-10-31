@@ -1,0 +1,4 @@
+        public static IEnumerable<PortalPermissionDefinition> Definitions
+        {
+            get { return DefinitionArray; }
+        }

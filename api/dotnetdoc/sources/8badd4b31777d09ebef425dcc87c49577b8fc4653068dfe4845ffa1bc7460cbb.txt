@@ -1,0 +1,5 @@
+        internal static string Admin_OrganizationUnitEdit_LabelSortOrder {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_LabelSortOrder", resourceCulture);
+            }
+        }

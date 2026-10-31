@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>文档列表由当前模块数据服务绑定并关闭 ViewState；文件名、所有者和分类按安全文本规则输出，不把客户端值当作下载来源。</zh-CN>
+        <en>The current module data service binds the document list with ViewState disabled; file name, owner, and category follow safe-text output rules, and client values are not trusted as download sources.</en>
+    </lang>
+--%>

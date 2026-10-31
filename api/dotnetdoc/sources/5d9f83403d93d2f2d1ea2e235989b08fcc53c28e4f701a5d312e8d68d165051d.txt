@@ -1,0 +1,5 @@
+        internal static string Contacts_EmptyNoContacts {
+            get {
+                return ResourceManager.GetString("Contacts_EmptyNoContacts", resourceCulture);
+            }
+        }

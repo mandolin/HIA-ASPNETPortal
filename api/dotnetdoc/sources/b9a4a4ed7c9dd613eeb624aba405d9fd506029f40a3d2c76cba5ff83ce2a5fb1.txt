@@ -1,0 +1,7 @@
+        public BusinessApplicationResult(bool succeeded, long applicationId, string applicationCode, string message)
+        {
+            Succeeded = succeeded;
+            ApplicationId = applicationId;
+            ApplicationCode = applicationCode ?? string.Empty;
+            Message = message ?? string.Empty;
+        }

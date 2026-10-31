@@ -1,0 +1,4 @@
+        private static SqlParameter IntParameter(string name, int value)
+        {
+            return new SqlParameter(name, SqlDbType.Int) { Value = value };
+        }

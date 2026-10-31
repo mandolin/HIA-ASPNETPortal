@@ -1,0 +1,1 @@
+        public bool DisallowContextTerms { get; private set; }

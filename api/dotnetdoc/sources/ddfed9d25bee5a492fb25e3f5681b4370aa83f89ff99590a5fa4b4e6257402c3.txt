@@ -1,0 +1,5 @@
+        internal static string DiscussDetails_LabelSubject {
+            get {
+                return ResourceManager.GetString("DiscussDetails_LabelSubject", resourceCulture);
+            }
+        }

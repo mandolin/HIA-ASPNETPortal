@@ -1,0 +1,1 @@
+        public IList<PortalSettingHealthInfo> Settings { get; private set; }

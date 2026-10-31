@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_SectionRecentRequests {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_SectionRecentRequests", resourceCulture);
+            }
+        }

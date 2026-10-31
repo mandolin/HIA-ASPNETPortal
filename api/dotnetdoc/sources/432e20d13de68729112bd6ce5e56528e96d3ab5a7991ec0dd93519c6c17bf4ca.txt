@@ -1,0 +1,4 @@
+        public static string GetTabBlockedReason(string tabName, PortalNavigationVisibilityContext context)
+        {
+            return GetTabBlockedReason(tabName, null, context);
+        }

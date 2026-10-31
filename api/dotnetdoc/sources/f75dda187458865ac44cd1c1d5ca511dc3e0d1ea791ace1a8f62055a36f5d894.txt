@@ -1,0 +1,8 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>提示写入前统一 HTML 编码，避免服务层或异常摘要形成标记注入。</zh-CN>
+            //   <en>HTML-encode every message before rendering so service text or exception summaries cannot become markup injection.</en>
+            // </lang>
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

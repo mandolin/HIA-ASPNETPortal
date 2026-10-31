@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>共享模块标题控件承载事件编辑入口和主题化标题；动作是否可见由服务器编辑上下文决定。</zh-CN>
+        <en>The shared module-title control hosts the event-edit entry and themed title; action visibility is decided by the server edit context.</en>
+    </lang>
+--%>

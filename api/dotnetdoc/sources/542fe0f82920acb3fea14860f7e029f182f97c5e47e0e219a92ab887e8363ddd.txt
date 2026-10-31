@@ -1,0 +1,13 @@
+        private void RedirectToDirectory()
+        {
+            // <lang>
+            //   <zh-CN>保存成功后只回到固定目录路径，不把请求参数或用户输入拼入回跳地址。</zh-CN>
+            //   <en>After a successful save, return only to the fixed directory path without incorporating request parameters or user input into the redirect.</en>
+            // </lang>
+            Response.Redirect("EmployeeDirectory.aspx", false);
+            // <lang>
+            //   <zh-CN>完成当前请求而不触发 Response.End 的线程中止异常。</zh-CN>
+            //   <en>Complete the request without triggering the thread-abort exception associated with Response.End.</en>
+            // </lang>
+            Context.ApplicationInstance.CompleteRequest();
+        }

@@ -1,0 +1,18 @@
+        private static EmployeeDirectoryQuery NormalizeQuery(EmployeeDirectoryQuery query)
+        {
+            var normalized = query ?? new EmployeeDirectoryQuery();
+            int take = normalized.Take <= 0 ? DefaultPageSize : normalized.Take;
+            if (take > MaxPageSize)
+            {
+                take = MaxPageSize;
+            }
+
+            return new EmployeeDirectoryQuery
+            {
+                Keyword = Normalize(normalized.Keyword),
+                Status = Normalize(normalized.Status),
+                Skip = normalized.Skip < 0 ? 0 : normalized.Skip,
+                Take = take,
+                IncludeInactiveOrganizations = normalized.IncludeInactiveOrganizations
+            };
+        }

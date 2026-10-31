@@ -1,0 +1,14 @@
+        private void ClearCreateForm()
+        {
+            // <lang>
+            //   <zh-CN>清空用户输入，处理角色恢复为固定权限键而不是沿用任意旧值。</zh-CN>
+            //   <en>Clear user input and restore the handling role to a fixed permission key rather than retaining an arbitrary old value.</en>
+            // </lang>
+            TitleTextBox.Text = string.Empty;
+            SummaryTextBox.Text = string.Empty;
+            DescriptionTextBox.Text = string.Empty;
+            DueUtcTextBox.Text = string.Empty;
+            SelectReferenceValue(PriorityList, PortalReferenceDataSets.NormalPriority);
+            SelectReferenceValue(ItemTypeList, PortalReferenceDataSets.GeneralItemType);
+            OwnerRoleKeyTextBox.Text = PortalPermissionKeys.BusinessCollaborationHandle;
+        }

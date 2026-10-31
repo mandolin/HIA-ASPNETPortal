@@ -1,0 +1,12 @@
+        private string BuildEmptyStateText(string noItemsText, string noMatchesText, params string[] filterValues)
+        {
+            foreach (string value in filterValues)
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    return noMatchesText;
+                }
+            }
+
+            return noItemsText;
+        }

@@ -1,0 +1,4 @@
+        public EmployeeDirectoryDb(PortalBizDbContext context)
+        {
+            _context = context;
+        }

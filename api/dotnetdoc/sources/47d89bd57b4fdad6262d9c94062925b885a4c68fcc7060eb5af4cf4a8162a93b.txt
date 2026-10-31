@@ -1,0 +1,5 @@
+        internal static string GenericError_EventIdNotProvided {
+            get {
+                return ResourceManager.GetString("GenericError_EventIdNotProvided", resourceCulture);
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string Admin_UserEmployeeBindingEdit_SectionBindingOperation {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_SectionBindingOperation", resourceCulture);
+            }
+        }

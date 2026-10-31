@@ -1,0 +1,8 @@
+    public static class PortalCollaborationItemParticipantRoles
+    {
+        /// <summary><lang><zh-CN>协办，参与办理事项，并被纳入可见性与参与人集合。</zh-CN><en>Collaborator who helps handle the item and is included in visibility and the participant set.</en></lang></summary>
+        public const string Collaborator = "Collaborator";
+
+        /// <summary><lang><zh-CN>关注，被纳入可见性与参与人集合；通知（如需呈现）由工作项（待办）投影承担，本角色不构成独立通知通道。</zh-CN><en>Watcher who is included in visibility and the participant set; any notification (if surfaced) is carried by the work-item projection, and this role is not an independent notification channel.</en></lang></summary>
+        public const string Watcher = "Watcher";
+    }

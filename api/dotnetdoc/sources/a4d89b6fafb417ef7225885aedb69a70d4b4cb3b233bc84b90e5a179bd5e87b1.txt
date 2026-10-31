@@ -1,0 +1,23 @@
+        private static bool IsTableAvailable(SqlConnection connection)
+        {
+            // <lang>
+            //   <zh-CN>命令只在 helper 生命周期内使用；表名来自私有常量，拼入 OBJECT_ID 前不接受外部输入或动态 SQL 片段。</zh-CN>
+            //   <en>The command is used only for this helper's lifetime; the table name comes from a private constant and accepts no external input or dynamic SQL fragment before placement in OBJECT_ID.</en>
+            // </lang>
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                // <lang>
+                //   <zh-CN>存在性查询只回答迁移前置是否满足；不会创建表、修复 schema 或把缺失表视为可写状态。</zh-CN>
+                //   <en>The existence query answers only whether the migration prerequisite is met; it does not create a table, repair schema, or treat a missing table as writable state.</en>
+                // </lang>
+                command.CommandText =
+                    "SELECT CASE WHEN OBJECT_ID(N'[dbo].[" + TableName + "]', N'U') IS NULL THEN 0 ELSE 1 END;";
+
+                // <lang>
+                //   <zh-CN>数据库标量结果只映射为布尔部署事实；null 或非 1 均安全视为不可用，随后由公开写入路径返回迁移提示。</zh-CN>
+                //   <en>Map the database scalar result only to a boolean deployment fact; null or a value other than 1 safely means unavailable, after which the public write path returns migration guidance.</en>
+                // </lang>
+                object value = command.ExecuteScalar();
+                return value != null && Convert.ToInt32(value) == 1;
+            }
+        }

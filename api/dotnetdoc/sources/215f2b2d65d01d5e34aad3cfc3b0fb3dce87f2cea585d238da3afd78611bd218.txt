@@ -1,0 +1,1 @@
+        public bool IsRegistered { get; private set; }

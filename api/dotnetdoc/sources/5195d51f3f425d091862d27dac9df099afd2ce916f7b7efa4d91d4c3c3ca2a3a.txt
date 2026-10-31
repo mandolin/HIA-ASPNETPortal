@@ -1,0 +1,1 @@
+        private readonly IDictionary<string, int> degradationReasonCounts = new Dictionary<string, int>(StringComparer.Ordinal);

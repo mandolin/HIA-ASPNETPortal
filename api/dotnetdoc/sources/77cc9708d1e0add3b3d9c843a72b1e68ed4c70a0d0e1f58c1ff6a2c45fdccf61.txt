@@ -1,0 +1,35 @@
+        public static bool EnsureAnyPermission(HttpContext context, params string[] permissionKeys)
+        {
+            // <lang>
+            //   <zh-CN>统一当前上下文，保证空键、拒绝和跳转的边界一致。</zh-CN>
+            //   <en>Normalize the current context once so empty-key handling, denial, and redirect share one boundary.</en>
+            // </lang>
+            context = context ?? HttpContext.Current;
+            // <lang>
+            //   <zh-CN>只允许已登记、规范化后的键参与任一权限检查；空集合直接拒绝。</zh-CN>
+            //   <en>Allow only registered, normalized keys into the any-permission check; an empty set is denied directly.</en>
+            // </lang>
+            string[] normalizedKeys;
+            if (!TryNormalizePermissionKeys(permissionKeys, context, out normalizedKeys) ||
+                normalizedKeys.Length == 0)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(context);
+                return false;
+            }
+
+            if (normalizedKeys.Any(HasPermission))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>任一键均未获权时记录规范键集合并跳转，不将失败当作管理员回退。</zh-CN>
+            //   <en>When no key is granted, record the normalized set and redirect; failure is never treated as an administrator fallback.</en>
+            // </lang>
+            PortalDiagnostics.Warn(
+                "Authorization.PermissionDenied",
+                "Permission denied. PermissionKeys=" + string.Join(",", normalizedKeys),
+                context);
+            PortalNavigationPolicy.RedirectToEditAccessDenied(context);
+            return false;
+        }

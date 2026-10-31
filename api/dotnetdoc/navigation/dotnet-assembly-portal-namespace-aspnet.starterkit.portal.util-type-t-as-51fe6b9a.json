@@ -1,0 +1,198 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.connectionstringsfilename",
+      "kind": "entry",
+      "label": "ConnectionStringsFileName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.connectionstringsfilename",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.util.externalconnectionstringloader.connectionstringsfilename",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.util.externalconnectionst-f1e7d1b5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.environmentvariablename",
+      "kind": "entry",
+      "label": "EnvironmentVariableName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.environmentvariablename",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.util.externalconnectionstringloader.environmentvariablename",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.util.externalconnectionst-0edfb574.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.externalcfgpathsettingname",
+      "kind": "entry",
+      "label": "ExternalCfgPathSettingName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.externalcfgpathsettingname",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.util.externalconnectionstringloader.externalcfgpathsettingname",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.util.externalconnectionst-9cdf4e2d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.loadportalconnectionstring-system.string",
+      "kind": "entry",
+      "label": "LoadPortalConnectionString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.loadportalconnectionstring-system.string",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.loadportalconnectionstring-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-3c30c085.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.logicalconnectionstringname",
+      "kind": "entry",
+      "label": "LogicalConnectionStringName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.logicalconnectionstringname",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.util.externalconnectionstringloader.logicalconnectionstringname",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.util.externalconnectionst-206025b3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.normalizeenvironmentname-system.string",
+      "kind": "entry",
+      "label": "NormalizeEnvironmentName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.normalizeenvironmentname-system.string",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.normalizeenvironmentname-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-ad13b7ad.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.normalizepath-system.string",
+      "kind": "entry",
+      "label": "NormalizePath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.normalizepath-system.string",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.normalizepath-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-20bc5fc4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.projectname",
+      "kind": "entry",
+      "label": "ProjectName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.projectname",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.util.externalconnectionstringloader.projectname",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.util.externalconnectionst-06e0041c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.readconnectionstring-system.string-system.string",
+      "kind": "entry",
+      "label": "ReadConnectionString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.readconnectionstring-system.string-system.string",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.readconnectionstring-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-aab35d7a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.readconnectionstringentry-system.string-system.string",
+      "kind": "entry",
+      "label": "ReadConnectionStringEntry",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.readconnectionstringentry-system.string-system.string",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.readconnectionstringentry-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-72d34842.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.readproviderinvariantname-system.string-system.string",
+      "kind": "entry",
+      "label": "ReadProviderInvariantName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.readproviderinvariantname-system.string-system.string",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.readproviderinvariantname-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-f5591339.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.resolveexternalconfigroot",
+      "kind": "entry",
+      "label": "ResolveExternalConfigRoot",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.resolveexternalconfigroot",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.resolveexternalconfigroot",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-00774ac0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.unityconnectionstringname",
+      "kind": "entry",
+      "label": "UnityConnectionStringName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.util.externalconnectionstringloader.unityconnectionstringname",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.util.externalconnectionstringloader.unityconnectionstringname",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.util.externalconnectionst-072e9255.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.externalconnectionstringloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.validateprimaryportalprovider-system.string-system.string",
+      "kind": "entry",
+      "label": "ValidatePrimaryPortalProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.externalconnectionstringloader.validateprimaryportalprovider-system.string-system.string",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.externalconnectionstringloader.validateprimaryportalprovider-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.externalconnectionst-4dca073e.html"
+    }
+  ]
+}

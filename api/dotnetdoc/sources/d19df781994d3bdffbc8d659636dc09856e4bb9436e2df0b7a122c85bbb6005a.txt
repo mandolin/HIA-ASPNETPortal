@@ -1,0 +1,24 @@
+        private static string MapWorkItemEventType(string actionKey)
+        {
+            // <lang>
+            //   <zh-CN>拒绝、取消、关闭和退回保持既有待办事件语义，其余支持动作回退为完成事件。</zh-CN>
+            //   <en>Preserve existing work-item semantics for reject, cancel, close, and return; supported actions otherwise fall back to completed.</en>
+            // </lang>
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Rejected;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Cancel, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Close, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Cancelled;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Commented;
+            }
+
+            return PortalWorkItemEventTypes.Completed;
+        }

@@ -1,0 +1,1 @@
+        IHtmlTextItem GetHtmlText(int moduleId);

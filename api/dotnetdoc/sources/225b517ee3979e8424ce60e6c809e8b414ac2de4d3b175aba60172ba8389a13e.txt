@@ -1,0 +1,35 @@
+        protected void RejectRegistration_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>拒绝状态写入成功后才记录审核审计；后续异常不代表拒绝事实已自动回滚。</zh-CN>
+                //   <en>Registration rejection audit follows a successful state write; a later exception does not mean the rejection fact was automatically rolled back.</en>
+                // </lang>
+                UsersDB.RejectUser(userId, GetCurrentActor());
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    PortalOperationAuditEvents.RegistrationRejected,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    "Registration rejected.",
+                    Context);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRegistrationRejected, false);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.RejectRegistration",
+                    "Rejecting user registration failed. UserId=" + userId,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageRejectionFailed, eventId), true);
+            }
+        }

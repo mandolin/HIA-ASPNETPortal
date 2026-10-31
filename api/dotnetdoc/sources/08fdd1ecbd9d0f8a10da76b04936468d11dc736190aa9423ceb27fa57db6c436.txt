@@ -1,0 +1,8 @@
+        public static IReadOnlyList<string> AllowedFromStatuses(string actionKey)
+        {
+            return All
+                .Where(candidate => string.Equals(candidate.ActionKey, actionKey, StringComparison.Ordinal))
+                .Select(candidate => candidate.FromStatus)
+                .Distinct()
+                .ToList();
+        }

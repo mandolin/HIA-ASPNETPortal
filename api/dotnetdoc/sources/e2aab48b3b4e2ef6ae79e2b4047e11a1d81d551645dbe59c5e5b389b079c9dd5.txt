@@ -1,0 +1,1 @@
+        public bool NotFound { get; private set; }

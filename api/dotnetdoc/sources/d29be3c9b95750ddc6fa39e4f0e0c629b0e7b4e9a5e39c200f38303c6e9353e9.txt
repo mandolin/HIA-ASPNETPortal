@@ -1,0 +1,400 @@
+    public partial class TabLayout : PortalPage<TabLayout>
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>左侧布局窗格的规范名称。</zh-CN>
+        ///   <en>Canonical name of the left layout pane.</en>
+        /// </lang>
+        /// </summary>
+        private const string LeftPaneName = "LeftPane";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>主内容布局窗格的规范名称。</zh-CN>
+        ///   <en>Canonical name of the main content layout pane.</en>
+        /// </lang>
+        /// </summary>
+        private const string ContentPaneName = "ContentPane";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>右侧布局窗格的规范名称。</zh-CN>
+        ///   <en>Canonical name of the right layout pane.</en>
+        /// </lang>
+        /// </summary>
+        private const string RightPaneName = "RightPane";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定到内容主栏的模块列表，供 WebForms 标记层直接枚举。</zh-CN>
+        ///   <en>Module list bound to the main content pane and enumerated directly by the WebForms markup.</en>
+        /// </lang>
+        /// </summary>
+        protected List<ModuleSettings> contentList;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定到左侧栏的模块列表，保持旧页面三栏布局编辑语义。</zh-CN>
+        ///   <en>Module list bound to the left pane, preserving the legacy page's three-column layout-editing semantics.</en>
+        /// </lang>
+        /// </summary>
+        protected List<ModuleSettings> leftList;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定到右侧栏的模块列表，和排序/移动操作共同维护 Tab 布局状态。</zh-CN>
+        ///   <en>Module list bound to the right pane and maintained together with ordering and move operations.</en>
+        /// </lang>
+        /// </summary>
+        protected List<ModuleSettings> rightList;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>通过权限、导航和当前门户上下文校验的 Tab 标识。</zh-CN>
+        ///   <en>The Tab identifier verified by permission, navigation, and current-Portal context.</en>
+        /// </lang>
+        /// </summary>
+        private int tabId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求使用的门户设置快照。</zh-CN>
+        ///   <en>The Portal-settings snapshot used by the current request.</en>
+        /// </lang>
+        /// </summary>
+        private PortalSettings currentPortalSettings;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已通过 ActiveTab 归属校验的当前 Tab 快照。</zh-CN>
+        ///   <en>The current Tab snapshot after ActiveTab ownership validation.</en>
+        /// </lang>
+        /// </summary>
+        private Tab currentTab;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>角色数据访问依赖。</zh-CN>
+        ///   <en>Role data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IRolesDb RolesDB { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块实例数据访问依赖。</zh-CN>
+        ///   <en>Module-instance data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IModulesDb ModulesConfig { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 数据访问依赖。</zh-CN>
+        ///   <en>Tab data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public ITabsDb TabsConfig { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块定义数据访问依赖。</zh-CN>
+        ///   <en>Module-definition data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IModuleDefsDb ModuleDefConfig { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户全局设置数据访问依赖。</zh-CN>
+        ///   <en>Portal global-settings data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IGlobalsDb PortalConfig { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>授权并验证当前 Tab，在首次请求加载布局数据。</zh-CN>
+        ///   <en>Authorizes and validates the current Tab, then loads layout data on the initial request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每次请求先验证模块编辑权限和 Tab 归属，避免未验证上下文进入布局读写。</zh-CN>
+            //   <en>Validate module-edit permission and Tab ownership on every request before layout reads or writes use the context.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>首次请求绑定 Tab 设置、角色和窗格列表；回发保留用户当前选择。</zh-CN>
+            //   <en>Bind Tab settings, roles, and pane lists only on the initial request, preserving postback selections.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>向当前 Tab 的主内容窗格添加一个允许的新模块实例。</zh-CN>
+        ///   <en>Adds an allowed new module instance to the current Tab's content pane.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void AddModuleToPane_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>新增事件重新解析请求和 Tab 快照，防止陈旧页面状态绕过布局门禁。</zh-CN>
+            //   <en>Re-resolve the request and Tab snapshot for creation so stale page state cannot bypass the layout gate.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>模块定义标识和标题是新增的两个受控输入；定义必须来自当前可用白名单。</zh-CN>
+            //   <en>The definition id and title are the two controlled creation inputs; the definition must come from the current eligible allowlist.</en>
+            // </lang>
+            int moduleDefinitionId;
+            string title;
+            if (moduleType.SelectedItem == null ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(moduleType.SelectedItem.Value, out moduleDefinitionId) ||
+                FindEligibleModuleDefinition(moduleDefinitionId) == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>标题先做单行和长度归一化，失败时不调用模块数据服务。</zh-CN>
+            //   <en>Normalize the title as a bounded single line before calling the module data service.</en>
+            // </lang>
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(moduleTitle.Text, 150, out title))
+            {
+                ShowMessage(lang.Admin_TabLayout_MessageInvalidModuleName);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>以固定内容窗格、顺序、角色和移动端默认值创建模块，再重载并重新排序当前 Tab。</zh-CN>
+                //   <en>Create the module with fixed pane, order, role, and mobile defaults, then reload and reorder the current Tab.</en>
+                // </lang>
+                int moduleId = ModulesConfig.AddModule(
+                    tabId,
+                    999,
+                    ContentPaneName,
+                    title,
+                    moduleDefinitionId,
+                    0,
+                    PortalRoleNames.Administrators,
+                    false);
+                ReloadCurrentTab();
+                OrderModules(GetModules(ContentPaneName));
+                // <lang>
+                //   <zh-CN>只有创建、重载和排序完成后才记录成功审计并回到当前布局。</zh-CN>
+                //   <en>Record success and return to the current layout only after creation, reload, and ordering complete.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Create",
+                    "Module",
+                    moduleId.ToString(),
+                    "Created module instance in the content pane.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>新增失败写入统一诊断并向页面返回事件编号，不泄漏数据层异常。</zh-CN>
+                //   <en>Record creation failures through shared diagnostics and return only an event id without exposing data-layer exceptions.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.AddModule",
+                    "Adding a module instance failed. TabId=" + tabId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleCreateFailed, eventId));
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在同一窗格内调整所选模块的显示顺序。</zh-CN>
+        ///   <en>Adjusts the display order of the selected module inside the same pane.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void UpDown_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>排序事件重做权限和上下文检查，避免跨 Tab 操作模块顺序。</zh-CN>
+            //   <en>Repeat authorization and context checks for ordering so module order cannot be changed across Tabs.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>按钮命令只允许 up/down，窗格名称通过规范化 helper 映射到受控控件。</zh-CN>
+            //   <en>Allow only up/down commands and map the pane name to a controlled list box through the normalization helper.</en>
+            // </lang>
+            LinkButton button = sender as LinkButton;
+            string pane;
+            ListBox listBox;
+            if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
+                (button.CommandName != "up" && button.CommandName != "down"))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>从当前窗格按稳定顺序读取模块，并验证列表选中项与数据键一致。</zh-CN>
+            //   <en>Read modules from the current pane in stable order and verify that the selected list item matches its data key.</en>
+            // </lang>
+            List<ModuleSettings> modules = GetModules(pane);
+            ModuleSettings selectedModule;
+            // <lang>
+            //   <zh-CN>没有有效选中模块时只回到当前布局，不写入任何排序变化。</zh-CN>
+            //   <en>Return to the current layout without writing when no valid module is selected.</en>
+            // </lang>
+            if (!TryGetSelectedModule(listBox, modules, out selectedModule))
+            {
+                RedirectToCurrentLayout();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>用有间隔的临时顺序表达方向，随后由 OrderModules 统一归一化。</zh-CN>
+            //   <en>Use a spaced temporary order to express direction, then normalize all orders through OrderModules.</en>
+            // </lang>
+            selectedModule.ModuleOrder += button.CommandName == "down" ? 3 : -3;
+            try
+            {
+                // <lang>
+                //   <zh-CN>排序 helper 负责持久化窗格内完整顺序；成功后记录单个模块审计并安全回跳。</zh-CN>
+                //   <en>The ordering helper persists the complete pane order; on success audit the module and navigate back safely.</en>
+                // </lang>
+                OrderModules(modules);
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Order",
+                    "Module",
+                    selectedModule.ModuleId.ToString(),
+                    "Changed module order within a pane.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>排序失败沿用统一诊断和低敏提示。</zh-CN>
+                //   <en>Ordering failures use shared diagnostics and low-sensitivity feedback.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.OrderModule",
+                    "Ordering a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleReorderFailed, eventId));
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将所选模块移动到另一个允许的布局窗格。</zh-CN>
+        ///   <en>Moves the selected module to another allowed layout pane.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void RightLeft_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>移动事件重新验证当前 Tab，并要求来源和目标窗格均为不同的受控名称。</zh-CN>
+            //   <en>Revalidate the current Tab and require distinct controlled source and target pane names for a move.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>按钮属性只用于选择受控窗格控件；目标控件仅验证存在，不直接信任请求文本。</zh-CN>
+            //   <en>Button attributes select controlled pane controls; the target control is validated for existence rather than trusted as request text.</en>
+            // </lang>
+            LinkButton button = sender as LinkButton;
+            string sourcePane;
+            string targetPane;
+            ListBox sourceBox;
+            ListBox ignoredTargetBox;
+            if (button == null ||
+                !TryGetPaneListBox(button.Attributes["sourcepane"], out sourcePane, out sourceBox) ||
+                !TryGetPaneListBox(button.Attributes["targetpane"], out targetPane, out ignoredTargetBox) ||
+                string.Equals(sourcePane, targetPane, StringComparison.Ordinal))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>在来源窗格中校验选中模块，空选中仅回跳而不写入移动。</zh-CN>

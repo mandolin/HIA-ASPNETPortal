@@ -1,0 +1,176 @@
+    public class TabSettings : IComparable<TabSettings>
+    {
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>与该 Tab 关联的模块设置集合。</zh-CN>
+        ///   <en>Module settings associated with this tab.</en>
+        /// </l>
+        /// </summary>
+        public readonly List<ModuleSettings> Modules = new List<ModuleSettings>();
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>Tab 在同级导航中的排序值。</zh-CN>
+        ///   <en>Sort value of the tab within sibling navigation items.</en>
+        /// </l>
+        /// </summary>
+        public int TabOrder { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>桌面端显示的 Tab 名称；多语言体系下为中文列兼默认回退列，永不置空。</zh-CN>
+        ///   <en>Tab name displayed on desktop navigation; within the multilingual scheme it is the Chinese column and default
+        ///   fallback, never blank.</en>
+        /// </l>
+        /// </summary>
+        public string TabName { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>Tab 名称的英文列；为空时渲染回退到中文列。</zh-CN>
+        ///   <en>English column for the tab name; rendering falls back to the Chinese column when it is blank.</en>
+        /// </l>
+        /// </summary>
+        public string TabNameEn { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>Tab 名称的其它语言列，取值为以文化名为键的 JSON 文本。</zh-CN>
+        ///   <en>Other-languages column for the tab name, holding culture-keyed JSON text.</en>
+        /// </l>
+        /// </summary>
+        public string TabNameLocalizedJson { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>导航门控稳定键；为空时门控回退到 `TabName`。它与显示名解耦，使显示名可自由本地化。</zh-CN>
+        ///   <en>Navigation gate stable key; the gate falls back to `TabName` when it is blank. It is decoupled from the display
+        ///   name so the display name can be localized freely.</en>
+        /// </l>
+        /// </summary>
+        public string NavigationKey { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>旧门户 Tab 主键。</zh-CN>
+        ///   <en>Legacy portal tab primary key.</en>
+        /// </l>
+        /// </summary>
+        public int TabId { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>允许访问该 Tab 的旧分号角色串。</zh-CN>
+        ///   <en>Legacy semicolon-delimited role string allowed to access this tab.</en>
+        /// </l>
+        /// </summary>
+        public string AuthorizedRoles { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>历史移动端显示名称；当前保留为旧数据兼容字段，多语言体系下为中文列兼默认回退列。</zh-CN>
+        ///   <en>Historical mobile display name; currently retained as a legacy-data compatibility field, and the Chinese column
+        ///   plus default fallback within the multilingual scheme.</en>
+        /// </l>
+        /// </summary>
+        public string MobileTabName { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>移动端显示名称的英文列；为空时回退到中文列。</zh-CN>
+        ///   <en>English column for the mobile display name; falls back to the Chinese column when blank.</en>
+        /// </l>
+        /// </summary>
+        public string MobileTabNameEn { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>移动端显示名称的其它语言列，取值形态与 `TabNameLocalizedJson` 相同。</zh-CN>
+        ///   <en>Other-languages column for the mobile display name, with the same shape as `TabNameLocalizedJson`.</en>
+        /// </l>
+        /// </summary>
+        public string MobileTabNameLocalizedJson { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>历史移动端可见标志；当前不驱动新的移动端展示方案。</zh-CN>
+        ///   <en>Historical mobile visibility flag; it does not drive the new mobile presentation approach.</en>
+        /// </l>
+        /// </summary>
+        public bool ShowMobile { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从旧门户 Tab 数据项创建运行期设置快照。</zh-CN>
+        ///   <en>Creates a runtime settings snapshot from a legacy portal tab data item.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="item">
+        /// <l>
+        ///   <zh-CN>旧门户 Tab 数据项。</zh-CN>
+        ///   <en>Legacy portal tab data item.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>调用方仍需保证 `item` 来自可信数据访问层；本构造函数只做字段投影，不额外执行授权判断。</zh-CN>
+        ///   <en>The caller must still ensure `item` comes from a trusted data-access layer; this constructor only projects fields and does not perform authorization checks.</en>
+        /// </lang>
+        /// </remarks>
+        public TabSettings(ITabItem item)
+        {
+            AuthorizedRoles            = item.AccessRoles;
+            MobileTabName              = item.MobileTabName;
+            MobileTabNameEn            = item.MobileTabNameEn;
+            MobileTabNameLocalizedJson = item.MobileTabNameLocalizedJson;
+            ShowMobile                 = item.ShowMobile.Value;
+            TabId                      = item.TabId;
+            TabName                    = item.TabName;
+            TabNameEn                  = item.TabNameEn;
+            TabNameLocalizedJson       = item.TabNameLocalizedJson;
+            NavigationKey              = item.NavigationKey;
+            TabOrder                   = item.TabOrder.Value;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按 `TabOrder` 比较两个 Tab 设置快照。</zh-CN>
+        ///   <en>Compares two tab settings snapshots by `TabOrder`.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="other">
+        /// <l>
+        ///   <zh-CN>另一个 Tab 设置快照；为空时当前对象排在其后。</zh-CN>
+        ///   <en>Another tab settings snapshot; when null, the current object sorts after it.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>与 `IComparable` 契约一致的排序比较结果。</zh-CN>
+        ///   <en>Sort comparison result following the `IComparable` contract.</en>
+        /// </l>
+        /// </returns>
+        public int CompareTo(TabSettings other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+
+            // <lang>
+            //   <zh-CN>旧门户只按 `TabOrder` 排序；同序值保持相等，由调用侧集合稳定性决定最终显示顺序。</zh-CN>
+            //   <en>The legacy portal sorts only by `TabOrder`; equal values remain equal and the caller collection decides final display order stability.</en>
+            // </lang>
+            if (TabOrder == other.TabOrder)
+            {
+                return 0;
+            }
+
+            if (TabOrder < other.TabOrder)
+            {
+                return -1;
+            }
+
+            return 1;
+        }
+    }

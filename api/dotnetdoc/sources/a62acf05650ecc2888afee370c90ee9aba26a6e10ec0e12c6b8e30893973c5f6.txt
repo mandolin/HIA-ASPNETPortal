@@ -1,0 +1,1 @@
+        public string BusinessId { get; set; }

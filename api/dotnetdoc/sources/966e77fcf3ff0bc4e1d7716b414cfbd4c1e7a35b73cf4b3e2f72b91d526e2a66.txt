@@ -1,0 +1,70 @@
+        private void BindForm()
+        {
+            if (EmployeeDirectoryAdminDb == null || EmployeeDirectoryDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
+            {
+                DisableForm("P6.3 schema is unavailable. Run the employee organization SQL scripts before editing.");
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>员工标识来自站内请求参数；helper 统一处理缺失、新增、非法值和拒绝回跳。</zh-CN>
+            //   <en>The employee identifier comes from an internal request parameter; the helper handles missing, creation, invalid values and denial redirect consistently.</en>
+            // </lang>
+            int employeeId;
+            if (!TryReadEmployeeId(out employeeId))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先绑定候选组织和稳定状态，再根据新增/编辑分支填充当前实体，保持选择器与表单值顺序稳定。</zh-CN>
+            //   <en>Bind organization candidates and stable statuses before filling the current entity, keeping selector and form-value ordering stable for both paths.</en>
+            // </lang>
+            BindOrganizationList();
+            BindStatusList();
+            if (employeeId <= 0)
+            {
+                // <lang>
+                //   <zh-CN>新增员工时不生成工号或姓名默认值，避免页面层创造业务标识；实际内容由管理员明确输入。</zh-CN>
+                //   <en>New employees do not receive generated employee-code or name defaults at the page layer; administrators must enter business identifiers explicitly.</en>
+                // </lang>
+                TitleLabel.Text = lang.Admin_EmployeeEdit_TitleNew;
+                EmployeeIdField.Value = "0";
+                OriginalUpdatedUtcField.Value = string.Empty;
+                SourceSystemTextBox.Text = "Portal";
+                SelectListValue(EmploymentStatusList, PortalEmployeeStatuses.Active);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>编辑路径把 `UpdatedUtc` 以 round-trip 格式写入隐藏域，保存时用于数据层并发保护。</zh-CN>
+            //   <en>The edit path writes `UpdatedUtc` into a hidden field in round-trip format so the data layer can enforce concurrency protection during save.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>读取单个员工只用于低敏表单回填；不存在时禁用表单，不根据缺失记录创造新实体。</zh-CN>
+            //   <en>Read the single employee only for low-sensitivity form hydration; when absent, disable the form instead of creating an entity from a missing record.</en>
+            // </lang>
+            IEmployeeInfo employee = EmployeeDirectoryAdminDb.GetEmployeeById(employeeId);
+            if (employee == null)
+            {
+                DisableForm("Employee was not found.");
+                return;
+            }
+
+            TitleLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_EmployeeEdit_TitleEdit, Server.HtmlEncode(employee.DisplayName));
+            EmployeeIdField.Value = employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
+            OriginalUpdatedUtcField.Value = FormatRoundTripUtc(employee.UpdatedUtc);
+            EmployeeCodeTextBox.Text = employee.EmployeeCode;
+            DisplayNameTextBox.Text = employee.DisplayName;
+            PreferredNameTextBox.Text = employee.PreferredName;
+            WorkEmailTextBox.Text = employee.WorkEmail;
+            SelectListValue(
+                OrganizationUnitList,
+                employee.OrganizationUnitId.HasValue
+                    ? employee.OrganizationUnitId.Value.ToString(CultureInfo.InvariantCulture)
+                    : string.Empty);
+            SelectListValue(EmploymentStatusList, employee.EmploymentStatus);
+            JoinedUtcTextBox.Text = FormatOptionalUtc(employee.JoinedUtc);
+            LeftUtcTextBox.Text = FormatOptionalUtc(employee.LeftUtc);
+            SourceSystemTextBox.Text = string.IsNullOrWhiteSpace(employee.SourceSystem) ? "Portal" : employee.SourceSystem;
+        }

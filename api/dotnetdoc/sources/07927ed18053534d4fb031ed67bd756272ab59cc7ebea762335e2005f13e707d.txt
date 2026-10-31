@@ -1,0 +1,8 @@
+        protected string EncodeDisplayText(object value)
+        {
+            // <lang>
+            //   <zh-CN>先解码再编码可以兼容已编码历史行，同时避免把新输入重复编码后显示为实体文本。</zh-CN>
+            //   <en>Decoding before encoding supports historically encoded rows while avoiding newly entered text being double-encoded into entity text.</en>
+            // </lang>
+            return Server.HtmlEncode(Server.HtmlDecode(Convert.ToString(value) ?? string.Empty));
+        }

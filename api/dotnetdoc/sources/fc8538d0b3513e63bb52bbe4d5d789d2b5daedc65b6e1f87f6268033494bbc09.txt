@@ -1,0 +1,1 @@
+        internal bool Ambiguous { get; private set; }

@@ -1,0 +1,4 @@
+        protected int RecentApplicationCount
+        {
+            get { return recentApplicationRowCount; }
+        }

@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>ExpireField 的日期校验表达当前页面格式契约；日期解释、时区、过期策略和保存结果仍由服务器决定。</zh-CN>
+                        <en>ExpireField validators express the page format contract; date interpretation, time zone, expiry policy, and save result remain server-decided.</en>
+                    </lang>
+                --%>

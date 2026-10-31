@@ -1,0 +1,81 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersecuritystateitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersecuritystateitem:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersecuritystateitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.changereason",
+      "kind": "entry",
+      "label": "ChangeReason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.changereason",
+      "sourcePath": "src/Portal.Components.Data1/UserSecurityStateItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usersecuritystateitem.changereason",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.cha-de6de036.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersecuritystateitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.changedutc",
+      "kind": "entry",
+      "label": "ChangedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.changedutc",
+      "sourcePath": "src/Portal.Components.Data1/UserSecurityStateItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usersecuritystateitem.changedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.cha-cdc67c00.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersecuritystateitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.rowversion",
+      "kind": "entry",
+      "label": "RowVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.rowversion",
+      "sourcePath": "src/Portal.Components.Data1/UserSecurityStateItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usersecuritystateitem.rowversion",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.row-0d3b3556.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersecuritystateitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.securityversion",
+      "kind": "entry",
+      "label": "SecurityVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.securityversion",
+      "sourcePath": "src/Portal.Components.Data1/UserSecurityStateItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usersecuritystateitem.securityversion",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.sec-deba71d4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersecuritystateitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.userid",
+      "sourcePath": "src/Portal.Components.Data1/UserSecurityStateItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usersecuritystateitem.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usersecuritystateitem.use-f8a5bbcc.html"
+    }
+  ]
+}

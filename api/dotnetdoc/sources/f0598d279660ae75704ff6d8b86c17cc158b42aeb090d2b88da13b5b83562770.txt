@@ -1,0 +1,5 @@
+        internal static string Admin_CollaborationItems_LabelSummary {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelSummary", resourceCulture);
+            }
+        }

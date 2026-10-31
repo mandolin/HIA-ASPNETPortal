@@ -1,0 +1,50 @@
+    public enum PortalSettingValueType
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>布尔开关值。</zh-CN>
+        ///   <en>Boolean switch value.</en>
+        /// </lang>
+        /// </summary>
+        Boolean,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>32 位整数值，可受定义的范围限制。</zh-CN>
+        ///   <en>32-bit integer value that can be constrained by the definition's range.</en>
+        /// </lang>
+        /// </summary>
+        Integer,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>普通文本值。</zh-CN>
+        ///   <en>Ordinary text value.</en>
+        /// </lang>
+        /// </summary>
+        String,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>来自预定义候选集的文本值。</zh-CN>
+        ///   <en>Text value selected from a predefined candidate set.</en>
+        /// </lang>
+        /// </summary>
+        Enum,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>文件系统或应用相对路径值。</zh-CN>
+        ///   <en>File-system or application-relative path value.</en>
+        /// </lang>
+        /// </summary>
+        Path,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>持续时间或保留期等时间长度值。</zh-CN>
+        ///   <en>Duration value, such as a retention period.</en>
+        /// </lang>
+        /// </summary>
+        Duration
+    }

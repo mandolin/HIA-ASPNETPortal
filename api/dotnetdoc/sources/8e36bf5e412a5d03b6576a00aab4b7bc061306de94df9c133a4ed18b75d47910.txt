@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleCatalog_ColumnState {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnState", resourceCulture);
+            }
+        }

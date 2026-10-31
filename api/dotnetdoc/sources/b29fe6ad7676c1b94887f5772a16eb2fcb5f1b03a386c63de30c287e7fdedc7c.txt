@@ -1,0 +1,23 @@
+        protected void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除路径重新读取请求并校验归属，避免直接用 ItemId 删除其他模块事件。</zh-CN>
+            //   <en>The delete path rereads the request and validates ownership, avoiding deletion of another module's event by ItemId.</en>
+            // </lang>
+            IEventItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (itemId != 0)
+            {
+                // <lang>
+                //   <zh-CN>新增路径没有持久化事件可删；既有事件通过归属检查后才进入数据层删除。</zh-CN>
+                //   <en>The creation path has no persisted event to delete; existing events reach the data-layer delete only after ownership checks.</en>
+                // </lang>
+                EventsDB.DeleteEvent(itemId);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

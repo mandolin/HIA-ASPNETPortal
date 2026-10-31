@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_FilterAll {
+            get {
+                return ResourceManager.GetString("MyWorkItems_FilterAll", resourceCulture);
+            }
+        }

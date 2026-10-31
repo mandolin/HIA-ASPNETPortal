@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>标题由服务器控件保留为样例落地页标识；该页不加载未实现模块，也不执行链接携带的业务命令。</zh-CN>
+          <en>The server control keeps the title as the sample landing-page identifier; this page does not load an unimplemented module or execute a business command carried by the link.</en>
+        </lang>
+        --%>

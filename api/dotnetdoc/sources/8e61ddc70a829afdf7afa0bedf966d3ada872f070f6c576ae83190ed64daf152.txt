@@ -1,0 +1,8 @@
+        private static string ReadNullableString(SqlDataReader reader, int ordinal)
+        {
+            // <lang>
+            //   <zh-CN>对可空审计上下文字段显式检查 DBNull，避免 GetString 在合法旧记录上抛出异常并使整页查询失败。</zh-CN>
+            //   <en>Explicitly check DBNull for nullable audit-context fields, preventing GetString from throwing on valid legacy records and failing the whole page query.</en>
+            // </lang>
+            return reader.IsDBNull(ordinal) ? string.Empty : reader.GetString(ordinal);
+        }

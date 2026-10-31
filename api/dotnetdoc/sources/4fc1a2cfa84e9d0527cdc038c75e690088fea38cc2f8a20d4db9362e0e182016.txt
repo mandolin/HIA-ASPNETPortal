@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>P6.2 显示名用于后台列表和低敏展示，不作为登录凭据。</zh-CN>
+                    <en>The P6.2 display name is used by Admin lists and low-sensitivity display surfaces, not as a login credential.</en>
+                  </lang>
+                --%>

@@ -1,0 +1,83 @@
+        public CollaborationItemParticipantResult AddParticipant(CollaborationItemParticipantCreateRequest request)
+        {
+            if (request == null)
+            {
+                return new CollaborationItemParticipantResult(false, "Participant request is missing.");
+            }
+
+            long itemId = request.ItemId;
+            int userId = request.UserId;
+            string roleKey = NormalizeOptionalText(request.ParticipantRoleKey, 20);
+
+            if (itemId <= 0 || userId <= 0)
+            {
+                return new CollaborationItemParticipantResult(false, "A valid item and user are required.");
+            }
+
+            if (!string.Equals(roleKey, PortalCollaborationItemParticipantRoles.Collaborator, StringComparison.Ordinal) &&
+                !string.Equals(roleKey, PortalCollaborationItemParticipantRoles.Watcher, StringComparison.Ordinal))
+            {
+                return new CollaborationItemParticipantResult(false, "Participant role is not allowed.");
+            }
+
+            if (!HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return new CollaborationItemParticipantResult(false, "Participant schema is unavailable.");
+            }
+
+            // <lang>
+            //   <zh-CN>服务端重新校验操作者授权：发起人、负责人或协同事项管理员方可管理参与人。</zh-CN>
+            //   <en>Revalidate actor authorization on the server: only the initiator, owner, or collaboration-item administrator may manage participants.</en>
+            // </lang>
+            CollaborationItemInfo item = FindItem(itemId);
+            if (item == null)
+            {
+                return new CollaborationItemParticipantResult(false, "Collaboration item was not found.");
+            }
+
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(request.ActorUserId, out actor))
+            {
+                return new CollaborationItemParticipantResult(false, "A signed-in portal user is required.");
+            }
+
+            if (!actor.IsAdministrator &&
+                item.InitiatorUserId != actor.ActorUserId &&
+                !(item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId))
+            {
+                return new CollaborationItemParticipantResult(false, "The current user is not allowed to manage participants.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>参与人必须是真实用户；重复添加按既有语义拒绝，不覆盖角色。</zh-CN>
+                //   <en>The participant must be a real user; a duplicate add is rejected per existing semantics and does not overwrite the role.</en>
+                // </lang>
+                if (usersDb == null || usersDb.FindUserById(userId) == null)
+                {
+                    return new CollaborationItemParticipantResult(false, "Participant user was not found.");
+                }
+
+                if (IsParticipant(itemId, userId))
+                {
+                    return new CollaborationItemParticipantResult(false, "The user is already a participant.");
+                }
+
+                context.Database.ExecuteSqlCommand(@"
+INSERT INTO [dbo].[PortalBiz_CollaborationItemParticipants]
+    ([ItemId], [UserId], [ParticipantRoleKey], [CreatedUtc], [CreatedBy])
+VALUES
+    (@ItemId, @UserId, @RoleKey, SYSUTCDATETIME(), @CreatedBy);",
+                    new SqlParameter("@ItemId", itemId),
+                    new SqlParameter("@UserId", userId),
+                    new SqlParameter("@RoleKey", roleKey),
+                    new SqlParameter("@CreatedBy", actor.ActorName ?? "system"));
+
+                return new CollaborationItemParticipantResult(true, "Participant added.");
+            }
+            catch (Exception)
+            {
+                return new CollaborationItemParticipantResult(false, "Participant add failed.");
+            }
+        }

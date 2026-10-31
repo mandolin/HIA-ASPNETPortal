@@ -1,0 +1,59 @@
+        public bool TryGetActiveItems(string referenceSetKey, out IList<ReferenceDataItem> items)
+        {
+            // <lang>
+            //   <zh-CN>输出集合先初始化为空列表，确保任何早退或异常路径都不会泄露上一轮调用结果。</zh-CN>
+            //   <en>The output collection starts as an empty list so any early-return or exception path cannot leak results from a previous call.</en>
+            // </lang>
+            items = new List<ReferenceDataItem>();
+            // <lang>
+            //   <zh-CN>集合键来自页面或业务服务输入，先按数据库列宽裁剪，作为后续参数化查询的唯一值。</zh-CN>
+            //   <en>The set key comes from page or business-service input and is trimmed to the database column width before becoming the only value for the parameterized query.</en>
+            // </lang>
+            string normalizedReferenceSetKey = NormalizeKey(referenceSetKey, 80);
+            // <lang>
+            //   <zh-CN>空集合键或目录表不可用都视为“目录读取失败”，调用方据此决定是否使用受限兼容回退。</zh-CN>
+            //   <en>An empty set key or unavailable catalog table is treated as a catalog-read failure, allowing callers to decide whether the restricted compatibility fallback applies.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(normalizedReferenceSetKey) || !IsSchemaAvailable())
+            {
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>目录查询只投影低敏字段并限制为已启用值，避免把停用目录项重新用于新业务事实。</zh-CN>
+                //   <en>The catalog query projects only low-sensitivity fields and restricts results to active values so deactivated catalog items are not reused for new business facts.</en>
+                // </lang>
+                items = context.Database.SqlQuery<ReferenceDataItem>(
+                    @"
+SELECT
+    [ReferenceDataId],
+    [ReferenceSetKey],
+    [ValueKey],
+    [DisplayName],
+    [Description],
+    [SortOrder],
+    [IsActive],
+    [IsSystemSeed]
+FROM [dbo].[PortalBiz_ReferenceData]
+WHERE [ReferenceSetKey] = @ReferenceSetKey
+  AND [IsActive] = 1
+ORDER BY [SortOrder] ASC, [ValueKey] ASC;",
+                    new SqlParameter("@ReferenceSetKey", normalizedReferenceSetKey)).ToList();
+                // <lang>
+                //   <zh-CN>能到达这里表示表存在且查询已完成；即使集合为空，也代表目录可读而不是需要回退。</zh-CN>
+                //   <en>Reaching this point means the table exists and the query completed; even an empty set means the catalog is readable rather than requiring fallback.</en>
+                // </lang>
+                return true;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>读取异常转换为空结果和失败标志，避免目录问题中断协同页面，同时不吞入半成品列表。</zh-CN>
+                //   <en>Read exceptions become an empty result and failure flag so catalog issues do not break collaboration pages and no partial list is retained.</en>
+                // </lang>
+                items = new List<ReferenceDataItem>();
+                return false;
+            }
+        }

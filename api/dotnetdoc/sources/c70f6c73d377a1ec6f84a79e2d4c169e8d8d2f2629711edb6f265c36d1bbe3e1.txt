@@ -1,0 +1,27 @@
+        private void TryCompleteWorkItem(long requestId, string actionKey, string reviewNote)
+        {
+            if (WorkItemDb == null || requestId <= 0)
+            {
+                return;
+            }
+
+            try
+            {
+                WorkItemDb.CompleteBusinessWorkItem(
+                    new PortalWorkItemCompletionRequest
+                    {
+                        BusinessKind = PortalWorkItemBusinessKinds.LeaveRequest,
+                        BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                        EventType = MapWorkItemEventType(actionKey),
+                        TargetStatus = PortalWorkItemStatuses.Completed,
+                        ActorName = GetCurrentUserName(),
+                        Comment = NormalizeInput(reviewNote, 1000),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError(
+                    "请假申请审核通过后待办投影失败（已降级，不影响审核结果）：" + ex);
+            }
+        }

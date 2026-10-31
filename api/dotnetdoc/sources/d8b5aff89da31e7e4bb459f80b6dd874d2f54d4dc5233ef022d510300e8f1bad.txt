@@ -1,0 +1,6 @@
+<%@ Page
+    Language="c#"
+    CodeBehind="DiagnosticsLogs.aspx.cs"
+    AutoEventWireup="True"
+    Inherits="ASPNET.StarterKit.Portal.DiagnosticsLogs"
+    MasterPageFile="~/Default.master" %>

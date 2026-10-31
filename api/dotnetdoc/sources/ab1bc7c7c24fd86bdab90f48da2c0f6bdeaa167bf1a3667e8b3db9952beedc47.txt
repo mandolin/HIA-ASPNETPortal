@@ -1,0 +1,39 @@
+        internal ModuleCatalogRow(
+            PortalModulePackage package,
+            bool isEnabled,
+            bool isProfileAllowed,
+            string activeProfile,
+            PortalModulePackageStateReadResult stateResult,
+            IModuleDefinitionItem definition,
+            int instanceCount)
+        {
+            // <lang>
+            //   <zh-CN>以下字段只复制受控包和服务投影，避免标记层持有可变数据访问对象。</zh-CN>
+            //   <en>The fields below copy only controlled package and service projections so markup never holds mutable data-access objects.</en>
+            // </lang>
+            PackageId = package.PackageId;
+            DisplayName = package.DisplayName;
+            Version = package.Version;
+            DesktopEntry = package.DesktopEntry;
+            IsEnabled = isEnabled;
+            IsProfileAllowed = isProfileAllowed;
+            IsRegistered = definition != null;
+            DefinitionText = definition == null
+                ? "Not registered"
+                : definition.ModuleDefId.ToString(CultureInfo.InvariantCulture);
+            InstanceCount = instanceCount;
+            // <lang>
+            //   <zh-CN>Profile 文本与状态文本分别说明能力集阻断和状态表默认值，避免把两种原因合并。</zh-CN>
+            //   <en>Keep Profile text and state text separate so capability blocking is not confused with a state-table default.</en>
+            // </lang>
+            ProfileText = isProfileAllowed
+                ? "Allowed by " + activeProfile
+                : "Blocked by " + activeProfile;
+            StateText = !isProfileAllowed
+                ? "Profile blocked"
+                : !stateResult.IsAvailable
+                ? "Enabled (state table unavailable)"
+                : stateResult.State == null || !stateResult.State.IsConfigured
+                    ? "Enabled (default)"
+                    : isEnabled ? "Enabled" : "Disabled";
+        }

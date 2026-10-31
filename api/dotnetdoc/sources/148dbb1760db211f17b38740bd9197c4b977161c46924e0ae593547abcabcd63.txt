@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_LabelStoreInDatabase {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelStoreInDatabase", resourceCulture);
+            }
+        }

@@ -1,0 +1,14 @@
+        public void DeleteUserRole(int roleId, int userId)
+        {
+            EnsureUserAndRoleExist(roleId, userId);
+            if (!HasUserRole(roleId, userId))
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                "DELETE FROM [dbo].[Portal_UserRoles] WHERE [UserID] = @p0 AND [RoleID] = @p1",
+                userId,
+                roleId);
+            IncrementSecurityVersion(userId, "RoleMembershipRemoved");
+        }

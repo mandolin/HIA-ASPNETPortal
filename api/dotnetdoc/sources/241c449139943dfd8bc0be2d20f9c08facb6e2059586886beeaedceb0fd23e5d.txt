@@ -1,0 +1,2 @@
+        [Dependency]
+        public IContactsDb ContactsDB { private get; set; }

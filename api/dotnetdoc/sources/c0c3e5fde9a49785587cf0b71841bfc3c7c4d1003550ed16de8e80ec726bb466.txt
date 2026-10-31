@@ -1,0 +1,4 @@
+        public ContactsDb(PortalDbContext context)
+        {
+            _context = context;
+        }

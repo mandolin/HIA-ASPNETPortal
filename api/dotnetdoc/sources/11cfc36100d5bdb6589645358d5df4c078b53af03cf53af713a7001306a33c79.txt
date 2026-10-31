@@ -1,0 +1,10 @@
+        public bool IsSchemaAvailable()
+        {
+            // <lang>
+            //   <zh-CN>资料确认模块横跨员工、绑定和确认快照三张表；任一表缺失时页面应安全降级，而不是局部执行写入。</zh-CN>
+            //   <en>The profile-confirmation module spans employee, binding and confirmation snapshot tables; if any table is missing, the page should degrade safely instead of partially writing data.</en>
+            // </lang>
+            return HasTable(ConfirmationTableName) &&
+                   HasTable(EmployeeTableName) &&
+                   HasTable(BindingTableName);
+        }

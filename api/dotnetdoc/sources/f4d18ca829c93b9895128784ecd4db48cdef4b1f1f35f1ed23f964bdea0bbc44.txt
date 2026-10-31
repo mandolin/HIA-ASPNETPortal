@@ -1,0 +1,15 @@
+    public sealed class LeaveRequestReviewRequest
+    {
+        /// <summary><lang><zh-CN>申请主键。</zh-CN><en>Request identity key.</en></lang></summary>
+        public long RequestId { get; set; }
+        /// <summary><lang><zh-CN>审核动作键（Approve/Reject/Return）。</zh-CN><en>Review action key (Approve/Reject/Return).</en></lang></summary>
+        public string ActionKey { get; set; }
+        /// <summary><lang><zh-CN>审核意见（已归一化）。</zh-CN><en>Review comment (normalized).</en></lang></summary>
+        public string ReviewComment { get; set; }
+        /// <summary><lang><zh-CN>审核人用户标识。</zh-CN><en>Reviewer user identifier.</en></lang></summary>
+        public int ReviewedByUserId { get; set; }
+        /// <summary><lang><zh-CN>审核人名称。</zh-CN><en>Reviewer name.</en></lang></summary>
+        public string ReviewedBy { get; set; }
+        /// <summary><lang><zh-CN>审核时间（UTC）。</zh-CN><en>Review time (UTC).</en></lang></summary>
+        public DateTime ReviewedUtc { get; set; }
+    }

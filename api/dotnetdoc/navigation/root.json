@@ -1,0 +1,17 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "root",
+  "children": [
+    {
+      "id": "view:dotnet",
+      "kind": "view",
+      "label": ".NET",
+      "entryCount": 5521,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/view-dotnet-065eeac0.json"
+    }
+  ]
+}

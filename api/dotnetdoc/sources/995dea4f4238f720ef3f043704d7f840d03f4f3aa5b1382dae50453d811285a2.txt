@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>选中主题与普通主题使用相同编码和站内链接策略，只在外层 CSS 类中体现选中状态。</zh-CN>
+                  <en>The selected thread uses the same encoding and in-site link policy as normal rows; selection is expressed only through the outer CSS class.</en>
+                </lang>
+                --%>

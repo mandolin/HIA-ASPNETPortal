@@ -1,0 +1,13 @@
+        private static string NormalizeKey(string value, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>空引用按空字符串处理，避免目录读取路径把 null 与未部署 schema 混成异常。</zh-CN>
+            //   <en>A null reference is treated as an empty string so the catalog-read path does not turn null into an exception confused with an undeployed schema.</en>
+            // </lang>
+            string normalized = (value ?? string.Empty).Trim();
+            // <lang>
+            //   <zh-CN>长度裁剪与数据库列宽保持一致，后续参数化查询不会因过长键值失败。</zh-CN>
+            //   <en>Length trimming stays aligned with the database column width so the later parameterized query does not fail because of an overlong key.</en>
+            // </lang>
+            return normalized.Length <= maximumLength ? normalized : normalized.Substring(0, maximumLength);
+        }

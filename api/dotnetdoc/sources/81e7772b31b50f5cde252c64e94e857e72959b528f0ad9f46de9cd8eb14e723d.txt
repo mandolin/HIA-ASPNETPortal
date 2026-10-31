@@ -1,0 +1,80 @@
+        public EmployeeDirectoryWriteResult SaveOrganizationUnit(OrganizationUnitSaveRequest request)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return EmployeeDirectoryWriteResult.Failed("P6.3 schema is unavailable.");
+            }
+
+            OrganizationUnitSaveRequest normalized = NormalizeOrganizationRequest(request);
+            string validationMessage;
+            if (!TryValidateOrganizationRequest(normalized, out validationMessage))
+            {
+                return EmployeeDirectoryWriteResult.Failed(validationMessage);
+            }
+
+            // <lang>
+            //   <zh-CN>新增组织不依赖 EF change tracking，直接执行参数化 SQL 并返回数据库生成的主键，便于与旧存储过程风格保持一致。</zh-CN>
+            //   <en>New organization units bypass EF change tracking and execute parameterized SQL directly, returning the database-generated key to stay aligned with the legacy stored-procedure style.</en>
+            // </lang>
+            if (normalized.OrganizationUnitId <= 0)
+            {
+                int newId = _context.Database.SqlQuery<int>(
+                    @"
+INSERT INTO [dbo].[PortalBiz_OrganizationUnits]
+    ([ParentOrganizationUnitId], [OrganizationCode], [DisplayName], [SortOrder], [IsActive], [CreatedBy], [UpdatedBy])
+VALUES
+    (@ParentOrganizationUnitId, @OrganizationCode, @DisplayName, @SortOrder, @IsActive, @ActorName, @ActorName);
+SELECT CAST(SCOPE_IDENTITY() AS int);",
+                    NullableIntParameter("@ParentOrganizationUnitId", normalized.ParentOrganizationUnitId),
+                    TextParameter("@OrganizationCode", normalized.OrganizationCode),
+                    TextParameter("@DisplayName", normalized.DisplayName),
+                    IntParameter("@SortOrder", normalized.SortOrder),
+                    BoolParameter("@IsActive", normalized.IsActive),
+                    TextParameter("@ActorName", normalized.ActorName)).Single();
+
+                return EmployeeDirectoryWriteResult.Success(newId, "Organization unit saved.");
+            }
+
+            // <lang>
+            //   <zh-CN>更新组织时必须带上加载时的 UTC 更新时间；它是当前最小并发令牌，避免覆盖其他管理员刚保存的变更。</zh-CN>
+            //   <en>Organization updates must include the UTC update timestamp read during load; it is the current minimal concurrency token and prevents overwriting another administrator's recent save.</en>
+            // </lang>
+            if (!normalized.OriginalUpdatedUtc.HasValue)
+            {
+                return EmployeeDirectoryWriteResult.Failed("The organization unit was not loaded with an update timestamp.");
+            }
+
+            int affectedRows = _context.Database.ExecuteSqlCommand(
+                @"
+UPDATE [dbo].[PortalBiz_OrganizationUnits]
+SET [ParentOrganizationUnitId] = @ParentOrganizationUnitId,
+    [OrganizationCode] = @OrganizationCode,
+    [DisplayName] = @DisplayName,
+    [SortOrder] = @SortOrder,
+    [IsActive] = @IsActive,
+    [UpdatedUtc] = SYSUTCDATETIME(),
+    [UpdatedBy] = @ActorName
+WHERE [OrganizationUnitId] = @OrganizationUnitId
+  AND [UpdatedUtc] = @OriginalUpdatedUtc;",
+                NullableIntParameter("@ParentOrganizationUnitId", normalized.ParentOrganizationUnitId),
+                TextParameter("@OrganizationCode", normalized.OrganizationCode),
+                TextParameter("@DisplayName", normalized.DisplayName),
+                IntParameter("@SortOrder", normalized.SortOrder),
+                BoolParameter("@IsActive", normalized.IsActive),
+                TextParameter("@ActorName", normalized.ActorName),
+                IntParameter("@OrganizationUnitId", normalized.OrganizationUnitId),
+                DateTime2Parameter("@OriginalUpdatedUtc", normalized.OriginalUpdatedUtc.Value));
+
+            if (affectedRows == 1)
+            {
+                return EmployeeDirectoryWriteResult.Success(normalized.OrganizationUnitId, "Organization unit saved.");
+            }
+
+            // <lang>
+            //   <zh-CN>零行受影响不一定代表记录缺失，也可能是并发版本已变化；这里再读一次存在性，以便给页面更准确的提示。</zh-CN>
+            //   <en>Zero affected rows can mean either a missing row or a changed concurrency token; this rechecks existence so the page can show a more precise message.</en>
+            // </lang>
+            return OrganizationExists(normalized.OrganizationUnitId)
+                ? EmployeeDirectoryWriteResult.ConcurrencyConflict("The organization unit was changed by another request. Reload before saving again.")
+                : EmployeeDirectoryWriteResult.Missing("The organization unit no longer exists.");
+        }

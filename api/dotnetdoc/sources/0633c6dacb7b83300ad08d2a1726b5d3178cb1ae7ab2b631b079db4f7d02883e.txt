@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>编辑权限拒绝页复用统一消息块，并保留原有资源文案。</zh-CN>
+        <en>The edit-access-denied page reuses the shared message block while preserving the existing resource text.</en>
+      </lang>
+    --%>

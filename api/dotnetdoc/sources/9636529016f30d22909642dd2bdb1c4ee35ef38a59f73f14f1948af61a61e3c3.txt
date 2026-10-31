@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>Description 和 ViewOrder 维持旧显示模型；整数验证只限制表单格式，排序范围和持久化冲突仍由服务器处理。</zh-CN>
+                        <en>Description and ViewOrder preserve the legacy display model; integer validation limits form shape, while order range and persistence conflicts remain server-side.</en>
+                    </lang>
+                --%>

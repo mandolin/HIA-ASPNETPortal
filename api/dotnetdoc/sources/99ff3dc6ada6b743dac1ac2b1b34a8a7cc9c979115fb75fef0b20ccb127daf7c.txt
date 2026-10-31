@@ -1,0 +1,46 @@
+        public CollaborationItemParticipantResult RemoveParticipant(long itemId, int userId, int actorUserId)
+        {
+            if (itemId <= 0 || userId <= 0)
+            {
+                return new CollaborationItemParticipantResult(false, "A valid item and user are required.");
+            }
+
+            if (!HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return new CollaborationItemParticipantResult(false, "Participant schema is unavailable.");
+            }
+
+            CollaborationItemInfo item = FindItem(itemId);
+            if (item == null)
+            {
+                return new CollaborationItemParticipantResult(false, "Collaboration item was not found.");
+            }
+
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(actorUserId, out actor))
+            {
+                return new CollaborationItemParticipantResult(false, "A signed-in portal user is required.");
+            }
+
+            if (!actor.IsAdministrator &&
+                item.InitiatorUserId != actor.ActorUserId &&
+                !(item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId))
+            {
+                return new CollaborationItemParticipantResult(false, "The current user is not allowed to manage participants.");
+            }
+
+            try
+            {
+                context.Database.ExecuteSqlCommand(@"
+DELETE FROM [dbo].[PortalBiz_CollaborationItemParticipants]
+WHERE [ItemId] = @ItemId AND [UserId] = @UserId;",
+                    new SqlParameter("@ItemId", itemId),
+                    new SqlParameter("@UserId", userId));
+
+                return new CollaborationItemParticipantResult(true, "Participant removed.");
+            }
+            catch (Exception)
+            {
+                return new CollaborationItemParticipantResult(false, "Participant remove failed.");
+            }
+        }

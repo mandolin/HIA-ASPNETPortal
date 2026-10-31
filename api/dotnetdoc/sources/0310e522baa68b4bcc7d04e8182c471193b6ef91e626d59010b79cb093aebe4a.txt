@@ -1,0 +1,18 @@
+        private static string NormalizeFilter(string value, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>空白输入代表"未筛选"，统一为空字符串以配合 SQL 中受参数控制的精确可选条件。</zh-CN>
+            //   <en>Blank input represents "not filtered" and is normalized to the empty string to match the parameter-controlled exact optional SQL conditions.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>局部文本只保存去除首尾空白后的值；随后按最大长度截断而不是抛出异常，避免管理筛选输入成为拒绝服务入口。</zh-CN>
+            //   <en>The local text holds only the trimmed value; it is then bounded rather than rejected, preventing administration filter input from becoming a denial-of-service entry point.</en>
+            // </lang>
+            string normalized = value.Trim();
+            return normalized.Substring(0, Math.Min(normalized.Length, maximumLength));
+        }

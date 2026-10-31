@@ -1,0 +1,25 @@
+        private bool WouldCreateOrganizationCycle(int organizationUnitId, int parentOrganizationUnitId)
+        {
+            if (organizationUnitId <= 0)
+            {
+                return false;
+            }
+
+            int? currentId = parentOrganizationUnitId;
+            var visited = new HashSet<int>();
+            while (currentId.HasValue)
+            {
+                // <lang>
+                //   <zh-CN>沿父链向上查找，既检测目标节点本身，也防止异常数据形成无限循环。</zh-CN>
+                //   <en>Walks upward through the parent chain, checking both the target node and abnormal existing loops to avoid infinite traversal.</en>
+                // </lang>
+                if (currentId.Value == organizationUnitId || !visited.Add(currentId.Value))
+                {
+                    return true;
+                }
+
+                currentId = GetParentOrganizationUnitId(currentId.Value);
+            }
+
+            return false;
+        }

@@ -1,0 +1,7 @@
+        public static int RegistrationInviteDefaultExpiryDays
+        {
+            get
+            {
+                return PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.RegistrationInviteDefaultExpiryDays);
+            }
+        }

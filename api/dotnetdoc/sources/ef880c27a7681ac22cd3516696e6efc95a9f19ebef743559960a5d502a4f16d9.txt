@@ -1,0 +1,6 @@
+        private void RefreshCurrentState(int userId, string employeeCode)
+        {
+            BindUserSummary(userId);
+            BindEmployeeSummary(employeeCode);
+            BindCurrentBinding(userId, employeeCode);
+        }

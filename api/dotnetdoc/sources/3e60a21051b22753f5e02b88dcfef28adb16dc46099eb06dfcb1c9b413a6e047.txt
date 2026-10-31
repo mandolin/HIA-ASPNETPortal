@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_ErrorLoadFailed {
+            get {
+                return ResourceManager.GetString("MyWorkItems_ErrorLoadFailed", resourceCulture);
+            }
+        }

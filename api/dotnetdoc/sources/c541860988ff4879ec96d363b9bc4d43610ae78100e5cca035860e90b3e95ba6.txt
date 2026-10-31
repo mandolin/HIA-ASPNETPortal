@@ -1,0 +1,5 @@
+        internal static string Admin_EditAccessDenied_EditAccessDenied {
+            get {
+                return ResourceManager.GetString("Admin_EditAccessDenied_EditAccessDenied", resourceCulture);
+            }
+        }

@@ -1,0 +1,142 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:interface:t-aspnet.starterkit.portal.icontactitem",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IContactItem",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.contact1",
+      "kind": "entry",
+      "label": "Contact1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.contact1",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.contact1",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.contact1-e85e04cf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.contact2",
+      "kind": "entry",
+      "label": "Contact2",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.contact2",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.contact2",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.contact2-e95e0662.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.createdbyuser",
+      "kind": "entry",
+      "label": "CreatedByUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.createdbyuser",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.createdbyuser",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.createdbyuser-bc3227d2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.createddate",
+      "kind": "entry",
+      "label": "CreatedDate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.createddate",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.createddate",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.createddate-b3c7ab1c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.email",
+      "kind": "entry",
+      "label": "Email",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.email",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.email",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.email-0b40db60.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.itemid",
+      "kind": "entry",
+      "label": "ItemId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.itemid",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.itemid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.itemid-fce3396a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.moduleid",
+      "kind": "entry",
+      "label": "ModuleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.moduleid",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.moduleid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.moduleid-6527544d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.name",
+      "kind": "entry",
+      "label": "Name",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.name",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.name",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.name-cbf98c7b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.role",
+      "kind": "entry",
+      "label": "Role",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contactitem.role",
+      "sourcePath": "src/Portal.Components.Data1/ContactItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contactitem.role",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contactitem.role-1cd383a8.html"
+    }
+  ]
+}

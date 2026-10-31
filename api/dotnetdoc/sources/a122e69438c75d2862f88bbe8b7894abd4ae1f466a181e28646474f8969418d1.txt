@@ -1,0 +1,9 @@
+        protected void TabList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeView))
+            {
+                return;
+            }
+
+            BindTabStatus();
+        }

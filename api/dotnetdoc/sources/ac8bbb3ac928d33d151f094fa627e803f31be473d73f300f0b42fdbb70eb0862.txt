@@ -1,0 +1,18 @@
+        private bool TryNormalizeOptionalBrowseUrl(string value, out string normalizedUrl)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                // <lang>
+                //   <zh-CN>图片地址允许清空；空输入保存为空字符串并关闭预览。</zh-CN>
+                //   <en>The image URL may be cleared; blank input persists as an empty string and disables preview.</en>
+                // </lang>
+                normalizedUrl = string.Empty;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非空地址必须通过统一浏览 URL 策略，避免设置页绕过前台图片渲染限制。</zh-CN>
+            //   <en>Non-empty addresses must pass the shared browse-URL policy so the settings page cannot bypass front-end image rendering constraints.</en>
+            // </lang>
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(value, Request, out normalizedUrl);
+        }

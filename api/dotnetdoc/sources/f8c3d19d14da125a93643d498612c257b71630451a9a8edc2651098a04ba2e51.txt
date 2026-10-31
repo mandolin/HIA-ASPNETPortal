@@ -1,0 +1,14 @@
+        private bool VerifyLegacyPassword(UserItem item, string password)
+        {
+            if (item == null || string.IsNullOrEmpty(item.Password))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>只在内存中生成兼容摘要并做序号比较，不输出摘要或原始密码。</zh-CN>
+            //   <en>Generate the compatibility digest only in memory and compare ordinally; expose neither digest nor raw password.</en>
+            // </lang>
+            string legacyDigest = PortalSecurity.Encrypt(password);
+            return string.Equals(item.Password, legacyDigest, StringComparison.Ordinal);
+        }

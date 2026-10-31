@@ -1,0 +1,5 @@
+        internal static string Admin_OrganizationUnitEdit_MessageInvalidSortOrder {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageInvalidSortOrder", resourceCulture);
+            }
+        }

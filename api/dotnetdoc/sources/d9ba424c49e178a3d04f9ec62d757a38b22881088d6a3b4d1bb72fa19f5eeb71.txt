@@ -1,0 +1,34 @@
+        private static bool TryReadOptionalUtc(string value, out DateTime? parsedValue)
+        {
+            // <lang>
+            //   <zh-CN>空文本代表可选时间未设置，输出保持 null。</zh-CN>
+            //   <en>Empty text means the optional time is unset, so the output remains null.</en>
+            // </lang>
+            parsedValue = null;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>局部时间变量只承载格式化结果，后续明确标记为 UTC 再放入请求。</zh-CN>
+            //   <en>The local variable carries only the parsed format result; it is explicitly marked UTC before entering the request.</en>
+            // </lang>
+            DateTime dateTime;
+            if (!DateTime.TryParseExact(
+                value.Trim(),
+                DateTimeFormats,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                out dateTime))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>统一时间种类，避免下游把解析结果误当作本地时间。</zh-CN>
+            //   <en>Normalize the kind so downstream code cannot mistake the parsed value for local time.</en>
+            // </lang>
+            parsedValue = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+            return true;
+        }

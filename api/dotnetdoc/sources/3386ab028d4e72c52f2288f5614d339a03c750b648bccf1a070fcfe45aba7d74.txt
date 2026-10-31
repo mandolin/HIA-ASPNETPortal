@@ -1,0 +1,5 @@
+        public string Login(string emailOrName, string password)
+        {
+            PortalSignInResult result = SignIn(emailOrName, password);
+            return result.Succeeded ? result.UserName : string.Empty;
+        }

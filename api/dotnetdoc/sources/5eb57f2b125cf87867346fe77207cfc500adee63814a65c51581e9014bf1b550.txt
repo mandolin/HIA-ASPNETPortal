@@ -1,0 +1,6 @@
+        public static string Build(string applicationPath, int tabIndex, int tabId)
+        {
+            return (applicationPath ?? string.Empty) + "/DesktopDefault.aspx?tabindex=" +
+                tabIndex.ToString(CultureInfo.InvariantCulture) + "&tabid=" +
+                tabId.ToString(CultureInfo.InvariantCulture);
+        }

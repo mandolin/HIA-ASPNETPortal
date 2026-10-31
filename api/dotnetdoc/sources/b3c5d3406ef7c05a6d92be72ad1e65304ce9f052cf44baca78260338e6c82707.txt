@@ -1,0 +1,90 @@
+        public static PortalTabThemeOverrideWriteResult Save(int tabId, string themeName, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>保存受信部署主题包，确保写入值来自通过 manifest 校验的本地主题。</zh-CN>
+            //   <en>Hold the trusted deployed theme package so the stored value comes from a locally manifest-validated theme.</en>
+            // </lang>
+            PortalThemePackage package;
+
+            // <lang>
+            //   <zh-CN>接收主题校验失败原因但不回显给管理员；对外只返回固定安全消息。</zh-CN>
+            //   <en>Receive the theme-validation failure reason without echoing it to administrators; expose only a fixed safe message.</en>
+            // </lang>
+            string validationReason;
+            if (tabId <= 0 || !PortalThemeCatalog.TryGetTrustedPackage(themeName, out package, out validationReason))
+            {
+                return new PortalTabThemeOverrideWriteResult(false, "Select a validated deployed theme.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>创建短生命周期 SQL 连接；缺失运行期存储时保持管理员可理解的固定失败结果。</zh-CN>
+                //   <en>Create a short-lived SQL connection; when runtime storage is absent, retain an administrator-understandable fixed failure result.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalTabThemeOverrideWriteResult(false, "The runtime settings database is unavailable.");
+                    }
+
+                    connection.Open();
+                    if (!IsTableAvailable(connection))
+                    {
+                        return new PortalTabThemeOverrideWriteResult(false, "Run the tab-theme migration before saving an override.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>开始写入事务，使存在性检查与 INSERT/UPDATE 选择保持同一并发边界。</zh-CN>
+                    //   <en>Begin the write transaction so existence checking and INSERT/UPDATE selection share one concurrency boundary.</en>
+                    // </lang>
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // <lang>
+                        //   <zh-CN>在更新锁事务中确认当前 Tab 是否已有行，避免并发保存时错误选择 INSERT 或 UPDATE。</zh-CN>
+                        //   <en>Check whether the tab already has a row under an update-lock transaction so concurrent saves do not choose INSERT or UPDATE incorrectly.</en>
+                        // </lang>
+                        bool exists = ExistsForUpdate(connection, transaction, tabId);
+                        // <lang>
+                        //   <zh-CN>创建绑定当前事务的参数化写入命令；文本均经长度限制后作为参数提供。</zh-CN>
+                        //   <en>Create a parameterized write command bound to the current transaction; all text is length-limited before being provided as parameters.</en>
+                        // </lang>
+                        using (SqlCommand command = connection.CreateCommand())
+                        {
+                            command.Transaction = transaction;
+                            command.CommandText = exists
+                                ? @"
+UPDATE [dbo].[PortalCfg_TabThemeOverrides]
+SET [ThemeName] = @ThemeName,
+    [UpdatedBy] = @UpdatedBy,
+    [UpdatedUtc] = @UpdatedUtc
+WHERE [TabId] = @TabId;"
+                                : @"
+INSERT INTO [dbo].[PortalCfg_TabThemeOverrides]
+    ([TabId], [ThemeName], [UpdatedBy], [UpdatedUtc])
+VALUES
+    (@TabId, @ThemeName, @UpdatedBy, @UpdatedUtc);";
+                            command.Parameters.Add("@TabId", SqlDbType.Int).Value = tabId;
+                            AddTextParameter(command, "@ThemeName", 64, package.Name, string.Empty);
+                            AddTextParameter(command, "@UpdatedBy", 100, GetActorUserName(context), "(anonymous)");
+                            command.Parameters.Add("@UpdatedUtc", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+                            command.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                    }
+                }
+
+                return new PortalTabThemeOverrideWriteResult(true, "The tab theme override was saved.");
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>记录受限诊断并返回固定失败消息，不暴露 SQL、路径、连接串或主题 manifest 细节。</zh-CN>
+                //   <en>Record restricted diagnostics and return a fixed failure message without exposing SQL, paths, connection strings, or theme-manifest details.</en>
+                // </lang>
+                PortalDiagnostics.Error("Theme.TabOverride.Save", "Saving a tab theme override failed.", exception, context);
+                return new PortalTabThemeOverrideWriteResult(false, "The tab theme override could not be saved. Check diagnostics for the event id.");
+            }
+        }

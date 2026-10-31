@@ -1,0 +1,2 @@
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        int PortalId { get; set; }

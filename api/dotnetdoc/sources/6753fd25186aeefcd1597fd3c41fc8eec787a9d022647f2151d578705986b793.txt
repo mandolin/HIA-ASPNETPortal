@@ -1,0 +1,2 @@
+        [StringLength(500)]
+        public string ReviewNote { get; set; }

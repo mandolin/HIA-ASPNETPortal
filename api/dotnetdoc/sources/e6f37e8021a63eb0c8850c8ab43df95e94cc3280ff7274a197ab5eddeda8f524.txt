@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>页签主题应用/清除按钮只触发 code-behind 命令；回退策略、权限、审计和持久化事务不由标记层实现。</zh-CN>
+                    <en>Tab-theme apply/clear buttons only trigger code-behind commands; fallback policy, authorization, auditing, and persistence transactions are not implemented by markup.</en>
+                  </lang>
+                --%>

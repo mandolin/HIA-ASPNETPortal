@@ -1,0 +1,34 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>仅在首次请求建立字段选项和资料快照；回发由控件状态保留用户输入，避免覆盖尚未提交的值。</zh-CN>
+            //   <en>Build field options and the profile snapshot only on the first request; postbacks retain control state so unsubmitted values are not overwritten.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>先固定可提交字段白名单，再绑定资料和最近请求，保证展示与提交使用同一组字段语义。</zh-CN>
+                //   <en>Establish the submit-field allowlist before binding the profile and recent requests so display and submission share one field vocabulary.</en>
+                // </lang>
+                BindFieldList();
+                BindProfile();
+            }
+
+            // <lang>
+            //   <zh-CN>W69：渲染期门禁——只有持有提交或管理权限的用户才启用提交入口；按钮状态只是界面提示，真正的授权判定在提交时由服务端再次执行。</zh-CN>
+            //   <en>W69 render-time gate: only users holding the submit or administration permission get an enabled submit entry; the button state is a UI hint only, and the real authorization decision is repeated server-side on submit.</en>
+            // </lang>
+            bool canSubmit = IsCurrentUserAuthenticated() && PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+
+            SubmitButton.Enabled = canSubmit;
+            if (!canSubmit)
+            {
+                // <lang>
+                //   <zh-CN>禁用入口并给出低敏说明：避免用户填完表单才发现无法提交，也不泄露具体角色或权限配置。</zh-CN>
+                //   <en>Disable the entry and show a low-sensitivity explanation so users do not discover the restriction only after filling the form, without leaking role or permission configuration.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoPermission);
+            }
+        }

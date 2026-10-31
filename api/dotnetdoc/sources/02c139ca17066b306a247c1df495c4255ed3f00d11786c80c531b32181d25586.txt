@@ -1,0 +1,29 @@
+        private IList<string> ResolveHeldPermissionKeys(string userName)
+        {
+            IList<string> keys = new List<string>();
+            if (string.IsNullOrWhiteSpace(userName) || RolesDb == null)
+            {
+                return keys;
+            }
+
+            try
+            {
+                foreach (string key in RolesDb.GetPermissionKeysByUserName(userName))
+                {
+                    if (!string.IsNullOrWhiteSpace(key))
+                    {
+                        keys.Add(key);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>解析失败时退化为仅按本人指派查询，不扩大可见范围；异常细节不回显给用户。</zh-CN>
+                //   <en>On resolution failure the query degrades to user-assigned items only and never widens visibility; exception details are not echoed to the user.</en>
+                // </lang>
+                return new List<string>();
+            }
+
+            return keys;
+        }

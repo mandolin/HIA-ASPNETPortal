@@ -1,0 +1,13 @@
+        private static BusinessApplicationReviewRequest NormalizeReviewRequest(BusinessApplicationReviewRequest request)
+        {
+            request = request ?? new BusinessApplicationReviewRequest();
+            return new BusinessApplicationReviewRequest
+            {
+                ApplicationId = request.ApplicationId,
+                ActionKey = NormalizeText(request.ActionKey, 40),
+                ReviewComment = NormalizeOptionalText(request.ReviewComment, 1000),
+                ReviewedByUserId = request.ReviewedByUserId.HasValue && request.ReviewedByUserId.Value > 0 ? request.ReviewedByUserId : null,
+                ReviewedBy = string.IsNullOrWhiteSpace(request.ReviewedBy) ? "system" : NormalizeText(request.ReviewedBy, 100),
+                ReviewedUtc = request.ReviewedUtc ?? DateTime.UtcNow
+            };
+        }

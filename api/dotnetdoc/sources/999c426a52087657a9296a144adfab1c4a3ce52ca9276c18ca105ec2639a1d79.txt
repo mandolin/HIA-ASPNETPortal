@@ -1,0 +1,48 @@
+        private static IEnumerable<FileInfo> GetLogFiles(string logDirectory, DateTime startUtc, DateTime endUtcExclusive)
+        {
+            // <lang>
+            //   <zh-CN>只枚举调用方已解析的日志目录顶层 portal JSONL 模式；不递归、不接受用户路径且不读取文件内容。</zh-CN>
+            //   <en>Enumerate only the top-level portal JSONL pattern in the caller-resolved log directory; do not recurse, accept user paths, or read file content.</en>
+            // </lang>
+            var files = new List<FileInfo>();
+
+            // <lang>
+            //   <zh-CN>逐个读取候选文件名文本，仅用于格式、日期和序号校验，不打开文件。</zh-CN>
+            //   <en>Read each candidate filename only for format, date, and sequence validation without opening the file.</en>
+            // </lang>
+            foreach (string path in Directory.EnumerateFiles(logDirectory, "portal-*.jsonl", SearchOption.TopDirectoryOnly))
+            {
+                // <lang>
+                //   <zh-CN>承接文件名解析出的日期和滚动序号；序号用于完整格式验证但不影响日期范围。</zh-CN>
+                //   <en>Receive the parsed file date and rolling sequence; sequence validates the full format but does not alter the date range.</en>
+                // </lang>
+                DateTime fileDate;
+
+                // <lang>
+                //   <zh-CN>保存三位序号解析结果，仅在当前候选判断中短暂使用。</zh-CN>
+                //   <en>Keep the three-digit sequence parse result only for the current candidate decision.</en>
+                // </lang>
+                int sequence;
+                if (!TryGetFileParts(Path.GetFileName(path), out fileDate, out sequence) ||
+                    fileDate < startUtc.Date ||
+                    fileDate >= endUtcExclusive.Date)
+                {
+                    // <lang>
+                    //   <zh-CN>拒绝不符合受控文件名或日期窗口的候选，避免任意同目录文件进入诊断扫描。</zh-CN>
+                    //   <en>Reject candidates outside the controlled filename format or date window so arbitrary sibling files cannot enter diagnostic scanning.</en>
+                    // </lang>
+                    continue;
+                }
+
+                files.Add(new FileInfo(path));
+            }
+
+            // <lang>
+            //   <zh-CN>按文件名倒序稳定排序并取固定上限，限制单次查询可打开的候选文件数。</zh-CN>
+            //   <en>Order stably by filename descending and take the fixed cap, limiting candidate files a single query may open.</en>
+            // </lang>
+            return files
+                .OrderByDescending(item => item.Name, StringComparer.OrdinalIgnoreCase)
+                .Take(MaximumScannedFiles)
+                .ToList();
+        }

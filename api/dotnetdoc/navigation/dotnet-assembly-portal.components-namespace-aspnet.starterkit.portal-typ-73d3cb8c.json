@@ -1,0 +1,81 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.buildcellkey-system.string-system.string",
+      "kind": "entry",
+      "label": "BuildCellKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.buildcellkey-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalCapabilityPermissionMatrixRenderer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.buildcellkey-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissio-7205feca.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.iscategorylayerregistered-system.string",
+      "kind": "entry",
+      "label": "IsCategoryLayerRegistered",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.iscategorylayerregistered-system.string",
+      "sourcePath": "src/Portal.Components/PortalCapabilityPermissionMatrixRenderer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.iscategorylayerregistered-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissio-47436937.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.render-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalpermissiondefinition-system.collections.generic.ienumerable-aspnet.starterkit.portal.rolepermissionentry-system.func-system.string-system.string",
+      "kind": "entry",
+      "label": "Render",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.render-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalpermissiondefinition-system.collections.generic.ienumerable-aspnet.starterkit.portal.rolepermissionentry-system.func-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalCapabilityPermissionMatrixRenderer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.render-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalpermissiondefinition-system.collections.generic.ienumerable-aspnet.starterkit.portal.rolepermissionentry-system.func-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissio-d3361380.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.rendercell-system.collections.generic.dictionary-system.string-aspnet.starterkit.portal.rolepermissionentry-system.string-system.string-system.func-system.string-system.string",
+      "kind": "entry",
+      "label": "RenderCell",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.rendercell-system.collections.generic.dictionary-system.string-aspnet.starterkit.portal.rolepermissionentry-system.string-system.string-system.func-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalCapabilityPermissionMatrixRenderer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.rendercell-system.collections.generic.dictionary-system.string-aspnet.starterkit.portal.rolepermissionentry-system.string-system.string-system.func-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissio-5844f61c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.resolvecapabilitylayer-system.string",
+      "kind": "entry",
+      "label": "ResolveCapabilityLayer",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.resolvecapabilitylayer-system.string",
+      "sourcePath": "src/Portal.Components/PortalCapabilityPermissionMatrixRenderer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer.resolvecapabilitylayer-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcapabilitypermissio-c1409a83.html"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>旧链接模块每次请求都重新绑定，保持编辑回跳后能立即看到最新排序、标题和地址策略结果。</zh-CN>
+            //   <en>The legacy Links module binds on every request so edits show the latest ordering, title and URL-policy result immediately after returning.</en>
+            // </lang>
+            myDataList.DataSource = LinkDB.GetLinks(ModuleId);
+            myDataList.DataBind();
+        }

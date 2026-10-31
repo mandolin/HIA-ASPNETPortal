@@ -1,0 +1,64 @@
+        private bool TryInitializeRequest()
+        {
+            // <lang>
+            //   <zh-CN>模块定义编辑权限是本页所有读取、修改和删除操作的共同门禁。</zh-CN>
+            //   <en>The module-definition edit permission is the shared gate for every read, update, and delete operation on this page.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>Tab 参数只用于受控返回地址；任一参数非法都不允许继续处理定义。</zh-CN>
+            //   <en>Tab parameters are used only for a controlled return URL; any invalid value prevents further definition processing.</en>
+            // </lang>
+            if (!TryReadOptionalPositiveParameter("tabid", out tabId) ||
+                !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>从 Request.Params 读取兼容查询参数，以支持既有链接同时覆盖查询串和表单参数。</zh-CN>
+            //   <en>Read the compatibility parameter from Request.Params so existing links can use either query-string or form input.</en>
+            // </lang>
+            string rawDefinitionId = Request.Params["defid"];
+            if (string.IsNullOrWhiteSpace(rawDefinitionId))
+            {
+                // <lang>
+                //   <zh-CN>缺少定义标识时回到模块目录，不把空标识解释为新建或默认对象。</zh-CN>
+                //   <en>Return to the module catalog when the definition id is missing instead of treating an empty id as a create or default object.</en>
+                // </lang>
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/Admin/ModuleCatalog.aspx"));
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>正整数解析同时约束编辑对象范围，非法输入统一导向拒绝页。</zh-CN>
+            //   <en>Positive-integer parsing constrains the editable object range, and invalid input is routed to the common access-denied page.</en>
+            // </lang>
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(rawDefinitionId, out defId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>只从当前定义集合匹配快照，避免直接信任请求标识或跨租户读取不存在对象。</zh-CN>
+            //   <en>Match a snapshot only from the current definition set, avoiding trust in the request id or reads of a non-existent object across boundaries.</en>
+            // </lang>
+            currentDefinition = ModuleDefConfig.GetModuleDefinitions()
+                .FirstOrDefault(item => item.ModuleDefId == defId);
+            if (currentDefinition != null)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>已解析但不存在的定义同样视为不可编辑，防止后续保存或删除使用陈旧标识。</zh-CN>
+            //   <en>A parsed but missing definition is also treated as non-editable, preventing later updates or deletes from using a stale id.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }

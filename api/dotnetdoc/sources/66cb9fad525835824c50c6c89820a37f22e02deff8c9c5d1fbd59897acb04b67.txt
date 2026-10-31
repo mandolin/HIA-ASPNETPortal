@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>诊断日志页只重构后台展示结构，查询范围、分页和权限仍由 code-behind 控制。</zh-CN>
+        <en>The diagnostic log page only rebuilds the Admin presentation structure; query scope, paging, and authorization remain controlled by code-behind.</en>
+      </lang>
+    --%>

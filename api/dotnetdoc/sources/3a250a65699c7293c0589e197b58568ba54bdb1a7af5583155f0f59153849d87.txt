@@ -1,0 +1,5 @@
+        internal PortalSystemSettingWriteResult(bool succeeded, string message)
+        {
+            Succeeded = succeeded;
+            Message = message ?? string.Empty;
+        }

@@ -1,0 +1,2 @@
+        int AddAnnouncement(int moduleId, string userName, string title, DateTime expireDate,
+                            string description, string moreLink, string mobileMoreLink);

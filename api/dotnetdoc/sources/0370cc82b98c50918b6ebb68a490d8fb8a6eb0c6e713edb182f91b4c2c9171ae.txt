@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>浏览地址是路径/协议安全边界的输入；标记层只收集文本，服务器必须验证站内相对地址和 http/https 目标。</zh-CN>
+                  <en>The browse address is a path and scheme security boundary; markup only collects text, while the server must validate local-relative and http/https targets.</en>
+                </lang>
+                --%>

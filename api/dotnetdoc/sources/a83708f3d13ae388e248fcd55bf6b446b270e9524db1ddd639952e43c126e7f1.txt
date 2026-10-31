@@ -1,0 +1,38 @@
+        private static bool ContainsProhibitedFieldName(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>去除字段名分隔符并转为 invariant 小写，以便大小写/命名风格变化不能绕过敏感片段识别。</zh-CN>
+            //   <en>Remove field-name separators and use invariant lowercase so casing or naming style cannot bypass sensitive-fragment detection.</en>
+            // </lang>
+            string normalized = key.Replace("_", string.Empty).Replace("-", string.Empty).ToLowerInvariant();
+
+            // <lang>
+            //   <zh-CN>保存会触发拒绝的身份、凭据、路径、审计和异常片段；列表本身不包含运行时秘密。</zh-CN>
+            //   <en>Store identity, credential, path, audit, and exception fragments that trigger rejection; the list contains no runtime secrets.</en>
+            // </lang>
+            string[] prohibitedFragments =
+            {
+                "password", "secret", "token", "cookie", "connectionstring", "requestbody",
+                "physicalpath", "absolutepath", "filepath", "clientip", "ipaddress", "useragent",
+                "username", "userid", "email", "role", "audit", "stacktrace", "exceptiondetail"
+            };
+
+            // <lang>
+            //   <zh-CN>逐个匹配受限片段，命中任一项即 fail-closed。</zh-CN>
+            //   <en>Match each restricted fragment and fail closed when any fragment is found.</en>
+            // </lang>
+            foreach (string fragment in prohibitedFragments)
+            {
+                if (normalized.Contains(fragment))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }

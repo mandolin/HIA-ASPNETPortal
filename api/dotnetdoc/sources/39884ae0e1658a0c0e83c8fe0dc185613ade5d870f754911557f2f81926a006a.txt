@@ -1,0 +1,8 @@
+        public IDocumentItemDetails GetDocumentContent(int itemId)
+        {
+            // <lang>
+            //   <zh-CN>详情读取复用同一实体集，但返回包含二进制内容的接口；调用方必须避免把内容展开到列表、日志或诊断输出。</zh-CN>
+            //   <en>The detail read uses the same entity set but returns the interface that includes binary content; callers must avoid expanding that content into lists, logs, or diagnostics.</en>
+            // </lang>
+            return _context.Documents.SingleOrDefault(item => item.ItemId == itemId);
+        }

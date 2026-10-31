@@ -1,0 +1,1 @@
+        <%-- <lang><zh-CN>主内容模块容器，是多数旧模块和业务模块的默认落点。</zh-CN><en>Main content pane, the default target for most legacy and business modules.</en></lang> --%>

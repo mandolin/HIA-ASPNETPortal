@@ -1,0 +1,58 @@
+    public sealed class PortalDiagnosticQuery
+    {
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>查询起始 UTC 时间，包含该边界。</zh-CN>
+        /// <en>UTC query start time, inclusive of this boundary.</en>
+        /// </lang>
+        /// </summary>
+        public DateTime StartUtc { get; set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>查询结束 UTC 时间，不包含该边界；与起始时间组成半开区间。</zh-CN>
+        /// <en>UTC query end time, exclusive of this boundary; together with start time it forms a half-open interval.</en>
+        /// </lang>
+        /// </summary>
+        public DateTime EndUtcExclusive { get; set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>可选日志级别筛选；空值语义由查询服务定义。</zh-CN>
+        /// <en>Optional log-level filter; the query service defines empty-value semantics.</en>
+        /// </lang>
+        /// </summary>
+        public string Level { get; set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>可选日志分类筛选；DTO 不将其解释为授权范围。</zh-CN>
+        /// <en>Optional log-category filter; the DTO does not interpret it as an authorization scope.</en>
+        /// </lang>
+        /// </summary>
+        public string Category { get; set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>可选精确事件编号筛选；服务负责格式、长度和可见性控制。</zh-CN>
+        /// <en>Optional exact event-identifier filter; the service controls format, length, and visibility.</en>
+        /// </lang>
+        /// </summary>
+        public string EventId { get; set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>从零开始的请求页码；边界限制由查询服务实施。</zh-CN>
+        /// <en>Zero-based requested page number; the query service enforces bounds.</en>
+        /// </lang>
+        /// </summary>
+        public int Page { get; set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>请求页大小；服务可对其进行限制以保护诊断扫描成本。</zh-CN>
+        /// <en>Requested page size; the service may limit it to protect diagnostic scanning cost.</en>
+        /// </lang>
+        /// </summary>
+        public int PageSize { get; set; }
+    }

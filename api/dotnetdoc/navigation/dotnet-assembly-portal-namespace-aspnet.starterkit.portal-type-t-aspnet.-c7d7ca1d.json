@@ -1,0 +1,207 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:interface:t-system.icomparable-aspnet.starterkit.portal.tabsettings",
+      "kind": "relation",
+      "label": "Interface: System.IComparable{ASPNET.StarterKit.Portal.TabSettings}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsettings.-ctor-aspnet.starterkit.portal.itabitem",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsettings.-ctor-aspnet.starterkit.portal.itabitem",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsettings.-ctor-aspnet.starterkit.portal.itabitem",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsettings.-ctor-aspnet.-e9a61c3d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.authorizedroles",
+      "kind": "entry",
+      "label": "AuthorizedRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.authorizedroles",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.authorizedroles",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.authorizedrol-4cbaabff.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsettings.compareto-aspnet.starterkit.portal.tabsettings",
+      "kind": "entry",
+      "label": "CompareTo",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsettings.compareto-aspnet.starterkit.portal.tabsettings",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsettings.compareto-aspnet.starterkit.portal.tabsettings",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsettings.compareto-asp-9a69c303.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabname",
+      "kind": "entry",
+      "label": "MobileTabName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabname",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.mobiletabname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabname-25ea9de7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabnameen",
+      "kind": "entry",
+      "label": "MobileTabNameEn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabnameen",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.mobiletabnameen",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabname-054ec3d8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabnamelocalizedjson",
+      "kind": "entry",
+      "label": "MobileTabNameLocalizedJson",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabnamelocalizedjson",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.mobiletabnamelocalizedjson",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.mobiletabname-8d3c89ae.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabsettings.modules",
+      "kind": "entry",
+      "label": "Modules",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabsettings.modules",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabsettings.modules",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabsettings.modules-b4fd47aa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.navigationkey",
+      "kind": "entry",
+      "label": "NavigationKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.navigationkey",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.navigationkey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.navigationkey-a718db3c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.showmobile",
+      "kind": "entry",
+      "label": "ShowMobile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.showmobile",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.showmobile",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.showmobile-46789d98.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabid",
+      "kind": "entry",
+      "label": "TabId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabid",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.tabid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.tabid-b53fb3c7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabname",
+      "kind": "entry",
+      "label": "TabName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabname",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.tabname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.tabname-cd7dcf11.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabnameen",
+      "kind": "entry",
+      "label": "TabNameEn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabnameen",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.tabnameen",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.tabnameen-6a5fe5f6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabnamelocalizedjson",
+      "kind": "entry",
+      "label": "TabNameLocalizedJson",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.tabnamelocalizedjson",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.tabnamelocalizedjson",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.tabnamelocali-3284a930.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsettings:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.taborder",
+      "kind": "entry",
+      "label": "TabOrder",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabsettings.taborder",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabsettings.taborder",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabsettings.taborder-3f2bd762.html"
+    }
+  ]
+}

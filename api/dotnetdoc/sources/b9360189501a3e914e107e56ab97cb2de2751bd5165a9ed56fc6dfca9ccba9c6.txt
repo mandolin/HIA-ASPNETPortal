@@ -1,0 +1,4 @@
+        private void ShowMessage(string message)
+        {
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

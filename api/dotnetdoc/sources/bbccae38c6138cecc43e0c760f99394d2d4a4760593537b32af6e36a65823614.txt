@@ -1,0 +1,1 @@
+        public string PermissionKeyPrefix { get; private set; }

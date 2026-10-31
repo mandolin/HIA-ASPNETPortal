@@ -1,0 +1,1 @@
+        IEnumerable<IAnnouncementItem> GetGuestVisibleAnnouncements(int moduleId);

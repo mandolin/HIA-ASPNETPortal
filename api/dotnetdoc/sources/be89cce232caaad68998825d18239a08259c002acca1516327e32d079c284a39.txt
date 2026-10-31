@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition PasswordWeakDictionaryEnabled =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordWeakDictionaryEnabled,
+                "启用弱口令字典",
+                "控制是否拒绝常见弱口令和单字符重复密码；默认启用。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");

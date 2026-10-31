@@ -1,0 +1,1 @@
+        IEnumerable<int> GetModuleIdsByDefinitionId(int definitionId);

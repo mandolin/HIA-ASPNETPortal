@@ -1,0 +1,9 @@
+        protected string EmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(StatusFilterList.SelectedValue)
+                    ? lang.Admin_EmployeeProfileCorrectionRequests_EmptyNoItems
+                    : lang.Admin_EmployeeProfileCorrectionRequests_EmptyNoMatches;
+            }
+        }

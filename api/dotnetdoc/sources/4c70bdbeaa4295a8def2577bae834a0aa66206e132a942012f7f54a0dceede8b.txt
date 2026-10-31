@@ -1,0 +1,16 @@
+        private static bool ContainsControlCharacter(string value)
+        {
+            // <lang>
+            //   <zh-CN>逐字符检查候选值，生命周期只覆盖当前地址校验。</zh-CN>
+            //   <en>Inspect the candidate one character at a time; the value is used only for the current URL check.</en>
+            // </lang>
+            foreach (char character in value)
+            {
+                if (char.IsControl(character))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }

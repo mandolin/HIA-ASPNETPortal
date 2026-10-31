@@ -1,0 +1,1 @@
+        IList<LeaveRequestInfo> GetAdminRequests(string statusFilter, int limit);

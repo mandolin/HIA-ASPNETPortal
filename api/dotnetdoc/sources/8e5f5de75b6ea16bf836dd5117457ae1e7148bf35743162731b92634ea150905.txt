@@ -1,0 +1,5 @@
+        internal static string EditDocs_MessageUploadSelected {
+            get {
+                return ResourceManager.GetString("EditDocs_MessageUploadSelected", resourceCulture);
+            }
+        }

@@ -1,0 +1,48 @@
+        public static IList<PortalModulePackage> GetTrustedPackages()
+        {
+            // <lang>
+            //   <zh-CN>先在内存收集逐包验证成功的候选；在遍历完成前不向调用方暴露任何部分可信集合。</zh-CN>
+            //   <en>First collect per-package validation successes in memory; do not expose a partially trusted set to callers before traversal completes.</en>
+            // </lang>
+            var packages = new List<PortalModulePackage>();
+            string rootPath = HostingEnvironment.MapPath(ModuleRootVirtualPath);
+            if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
+            {
+                // <lang>
+                //   <zh-CN>应用未映射模块根或根目录不存在时安全地返回空集合；不从其它磁盘位置、请求路径或默认目录继续发现。</zh-CN>
+                //   <en>When the application does not map the module root or the root is absent, safely return an empty set; do not continue discovery from another disk location, request path, or default directory.</en>
+                // </lang>
+                return packages.AsReadOnly();
+            }
+
+            foreach (DirectoryInfo directory in new DirectoryInfo(rootPath).GetDirectories())
+            {
+                // <lang>
+                //   <zh-CN>每个直接子目录必须独立通过目录、manifest、入口和资源检查；一个失败候选不会使其它有效包或整个门户失败。</zh-CN>
+                //   <en>Each immediate child directory must independently pass directory, manifest, entry, and resource checks; one failed candidate does not fail other valid packages or the whole portal.</en>
+                // </lang>
+                PortalModulePackage package;
+                string reason;
+                if (TryReadPackage(directory.Name, out package, out reason))
+                {
+                    packages.Add(package);
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>重复 PackageId 会让状态表、审计和缓存身份失去唯一归属，因此整组包都不作为可信包返回。</zh-CN>
+            //   <en>A duplicate PackageId makes state rows, audit records, and cache identity ambiguous, so no package in that duplicate group is returned as trusted.</en>
+            // </lang>
+            return packages
+                // <lang>
+                //   <zh-CN>对稳定标识按不区分大小写分组后只保留唯一组；排序仅稳定目录展示和调用方枚举，不改变包的受信任结论。</zh-CN>
+                //   <en>After grouping stable identifiers case-insensitively, retain only unique groups; sorting only stabilizes catalog display and caller enumeration and does not change a package's trusted conclusion.</en>
+                // </lang>
+                .GroupBy(item => item.PackageId, StringComparer.OrdinalIgnoreCase)
+                .Where(group => group.Count() == 1)
+                .Select(group => group.Single())
+                .OrderBy(item => item.DisplayName, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.PackageId, StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }

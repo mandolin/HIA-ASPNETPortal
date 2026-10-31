@@ -1,0 +1,1 @@
+        IList<CollaborationItemParticipantInfo> GetParticipants(long itemId);

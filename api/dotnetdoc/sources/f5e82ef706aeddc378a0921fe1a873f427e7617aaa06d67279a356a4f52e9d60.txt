@@ -1,0 +1,65 @@
+        public IList<CollaborationItemEventInfo> GetVisibleEvents(long itemId, int actorUserId)
+        {
+            // <lang>
+            //   <zh-CN>无效标识或不完整 schema 直接返回空集合，避免在无法安全读取事件时继续触及数据访问层。</zh-CN>
+            //   <en>Return an empty collection for an invalid identifier or incomplete schema rather than reaching the data layer when events cannot be read safely.</en>
+            // </lang>
+            if (itemId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<CollaborationItemEventInfo>();
+            }
+
+            // <lang>
+            //   <zh-CN>先取得事项事实，再按当前用户重新计算动作人授权；事项不存在、身份无效和无参与权共用空结果，避免向调用方区分这些内部状态。</zh-CN>
+            //   <en>Load the item fact first, then recompute actor authorization for the current user; item absence, invalid identity, and missing participation share an empty result so callers cannot distinguish those internal states.</en>
+            // </lang>
+            CollaborationItemInfo item = FindItem(itemId);
+            CollaborationItemActorAuthorization actor;
+            if (item == null || !TryGetActorAuthorization(actorUserId, out actor) || !CanParticipate(item, actor) || !CanView(item, actor))
+            {
+                return new List<CollaborationItemEventInfo>();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>仅管理员可省略额外可见性条件；普通参与者仍可看到工作流动作和参与者范围事件。拼接片段为内部固定文本，不接受请求值。</zh-CN>
+                //   <en>Only administrators may omit the additional visibility predicate; ordinary participants still see workflow actions and participant-scope events. The concatenated fragment is fixed internal text and accepts no request value.</en>
+                // </lang>
+                string visibilityClause = actor.IsAdministrator
+                    ? string.Empty
+                    : @"
+  AND ([Event].[EventType] = N'WorkflowAction' OR [Event].[VisibilityScope] = N'ItemParticipants')";
+
+                // <lang>
+                //   <zh-CN>只读取时间线显示所需字段，并将事项标识作为 SQL 参数；排序同时使用 UTC 发生时间和稳定事件标识，确保相同时间的顺序可预测。</zh-CN>
+                //   <en>Read only fields needed for timeline display and pass the item identifier as a SQL parameter; order by UTC occurrence time and stable event identifier so equal-time events remain predictable.</en>
+                // </lang>
+                return context.Database.SqlQuery<CollaborationItemEventInfo>(
+                    @"
+SELECT
+    [Event].[EventId],
+    [Event].[ItemId],
+    [Event].[EventType],
+    [Event].[ActionKey],
+    [Event].[VisibilityScope],
+    [Event].[ActorUserId],
+    [Event].[ActorName],
+    [Event].[OccurredUtc],
+    [Event].[FromStatus],
+    [Event].[ToStatus],
+    [Event].[Comment]
+FROM [dbo].[PortalBiz_CollaborationItemEvents] AS [Event]
+WHERE [Event].[ItemId] = @ItemId" + visibilityClause + @"
+ORDER BY [Event].[OccurredUtc] ASC, [Event].[EventId] ASC;",
+                    new SqlParameter("@ItemId", itemId)).ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>读取失败时维持不可见的空结果，不向页面泄露 SQL、连接或异常细节。</zh-CN>
+                //   <en>Keep the non-disclosing empty result on read failure and do not expose SQL, connection, or exception detail to the page.</en>
+                // </lang>
+                return new List<CollaborationItemEventInfo>();
+            }
+        }

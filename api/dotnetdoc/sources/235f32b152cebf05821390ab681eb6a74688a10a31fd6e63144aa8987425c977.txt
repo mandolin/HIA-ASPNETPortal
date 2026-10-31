@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_LabelEmployeeCode {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelEmployeeCode", resourceCulture);
+            }
+        }

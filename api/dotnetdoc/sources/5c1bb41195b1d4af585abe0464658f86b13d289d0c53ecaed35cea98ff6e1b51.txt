@@ -1,0 +1,101 @@
+        public static void Record(
+            string category,
+            string action,
+            string targetType,
+            string targetId,
+            string summary,
+            HttpContext context = null,
+            string relatedEventId = null,
+            string outcome = "Success")
+        {
+            // <lang>
+            //   <zh-CN>审计失败不得影响已经成功的主业务动作；整个写入路径因此保持尽力而为并仅在 catch 中记录诊断。</zh-CN>
+            //   <en>An audit failure must not affect an already-successful primary business action, so the entire write path remains best-effort and records diagnostics only in catch.</en>
+            // </lang>
+            try
+            {
+                // <lang>
+                //   <zh-CN>连接由当前 Unity 外置配置解析；返回 null 代表当前实例不具备可安全使用的审计连接。</zh-CN>
+                //   <en>The connection is resolved from the current Unity external configuration; null means this instance has no audit connection safe to use.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    // <lang>
+                    //   <zh-CN>不在缺失连接时尝试构造替代连接或猜测配置，直接静默降级以避免将审计路径变成可用性故障源。</zh-CN>
+                    //   <en>Do not construct a fallback connection or guess configuration when it is missing; degrade directly so the audit path cannot become an availability-failure source.</en>
+                    // </lang>
+                    if (connection == null)
+                    {
+                        return;
+                    }
+
+                    // <lang>
+                    //   <zh-CN>先打开连接并确认 table 已部署，避免对旧 schema 执行 INSERT 后把兼容缺口升级为业务异常。</zh-CN>
+                    //   <en>Open the connection and confirm the table is deployed before INSERT, preventing a legacy-schema gap from escalating into a business exception.</en>
+                    // </lang>
+                    connection.Open();
+                    if (!IsAuditTableAvailable(connection))
+                    {
+                        return;
+                    }
+
+                    // <lang>
+                    //   <zh-CN>命令只在已验证连接生命周期内存在；所有调用方值都通过受长度约束的参数传入，不拼接到 SQL 文本。</zh-CN>
+                    //   <en>The command exists only within the verified connection lifetime; every caller value is supplied through a length-bounded parameter rather than interpolated into SQL text.</en>
+                    // </lang>
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        // <lang>
+                        //   <zh-CN>固定 INSERT 列表使审计 schema、参数命名和低敏字段边界可审查；Outcome 由调用方以受长度约束的参数提供，默认成功，安全类必需事件可传失败。</zh-CN>
+                        //   <en>The fixed INSERT column list keeps the audit schema, parameter naming, and low-sensitivity field boundary reviewable; Outcome is supplied by the caller through a length-bounded parameter, defaulting to success while security-critical required events may pass failure.</en>
+                        // </lang>
+                        command.CommandText = @"
+INSERT INTO [dbo].[PortalCfg_OperationAudits]
+    ([OccurredUtc], [Category], [Action], [Outcome], [ActorUserName], [TargetType], [TargetId],
+     [Summary], [RelatedEventId], [ClientIp], [UserAgent], [CorrelationId])
+VALUES
+    (@OccurredUtc, @Category, @Action, @Outcome, @ActorUserName, @TargetType, @TargetId,
+     @Summary, @RelatedEventId, @ClientIp, @UserAgent, @CorrelationId);";
+
+                        // <lang>
+                        //   <zh-CN>发生时间在写入点以 UTC 取得，避免调用方本地时区或页面渲染时间改变审计顺序。</zh-CN>
+                        //   <en>The occurrence time is taken in UTC at the write point, preventing caller-local time zones or page-render time from changing audit ordering.</en>
+                        // </lang>
+                        command.Parameters.Add("@OccurredUtc", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+
+                        // <lang>
+                        //   <zh-CN>下列文本参数统一净化、截断并在空值时采用稳定回退；动作人、客户端元数据和摘要绝不以原始未受限文本写入。</zh-CN>
+                        //   <en>The following text parameters are uniformly sanitized, truncated, and assigned stable fallbacks when empty; actor, client metadata, and summary are never written as unrestricted raw text.</en>
+                        // </lang>
+                        AddTextParameter(command, "@Category", 80, category, "General");
+                        AddTextParameter(command, "@Action", 80, action, "Update");
+                        AddTextParameter(command, "@Outcome", 40, outcome, "Success");
+                        AddTextParameter(command, "@ActorUserName", 100, GetActorUserName(context), "(anonymous)");
+                        AddTextParameter(command, "@TargetType", 80, targetType, "Unknown");
+                        AddTextParameter(command, "@TargetId", 200, targetId, string.Empty);
+                        AddTextParameter(command, "@Summary", 500, summary, string.Empty);
+                        AddTextParameter(command, "@RelatedEventId", 64, relatedEventId, string.Empty);
+                        AddTextParameter(command, "@ClientIp", 64, GetClientIp(context), string.Empty);
+                        AddTextParameter(command, "@UserAgent", 400, GetUserAgent(context), string.Empty);
+                        AddTextParameter(command, "@CorrelationId", 64, string.Empty, string.Empty);
+                        // <lang>
+                        //   <zh-CN>执行单条审计 INSERT；未引入与业务事务的反向依赖，因此执行失败由外层降级处理。</zh-CN>
+                        //   <en>Execute one audit INSERT; no reverse dependency on the business transaction is introduced, so an execution failure is handled by the outer degradation path.</en>
+                        // </lang>
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>异常只进入运行时诊断，消息仅保留分类和动作稳定键；不要再尝试写审计表，以避免失败路径递归。</zh-CN>
+                //   <en>The exception goes only to runtime diagnostics, whose message retains just stable category and action keys; do not retry writing the audit table, avoiding recursive failure paths.</en>
+                // </lang>
+                PortalDiagnostics.Error(
+                    "OperationAudit.Write",
+                    "Writing an operation audit record failed. Category=" + category + "; Action=" + action,
+                    exception,
+                    context);
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ButtonSubmit", resourceCulture);
+            }
+        }

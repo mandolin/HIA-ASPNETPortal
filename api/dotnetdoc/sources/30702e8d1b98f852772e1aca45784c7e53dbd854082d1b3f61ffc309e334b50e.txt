@@ -1,0 +1,10 @@
+        private static string FormatOptionalUtc(DateTime? value)
+        {
+            // <lang>
+            //   <zh-CN>编辑表单只显示固定 UTC 文本格式；空值保持空字符串以匹配可选输入契约。</zh-CN>
+            //   <en>Render the edit form with one fixed UTC text format; keep null as an empty string to match the optional-input contract.</en>
+            // </lang>
+            return value.HasValue
+                ? value.Value.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                : string.Empty;
+        }

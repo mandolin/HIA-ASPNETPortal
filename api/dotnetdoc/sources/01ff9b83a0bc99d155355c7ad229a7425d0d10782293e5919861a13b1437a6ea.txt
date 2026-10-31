@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>员工资料控件的 MaxLength 只是输入上限；员工代码唯一性、邮箱格式、组织/状态组合、日期关系和来源系统策略仍由服务端校验。</zh-CN>
+                <en>MaxLength on employee fields is only an input ceiling; the server still validates code uniqueness, email format, organization/status combinations, date relationships, and source-system policy.</en>
+              </lang>
+            --%>

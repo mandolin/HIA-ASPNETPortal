@@ -1,0 +1,5 @@
+        internal static string Admin_ThemeSettings_LabelOverrideTheme {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_LabelOverrideTheme", resourceCulture);
+            }
+        }

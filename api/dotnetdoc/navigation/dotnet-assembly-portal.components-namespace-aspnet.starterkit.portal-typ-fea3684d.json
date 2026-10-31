@@ -1,0 +1,38 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldbconnectionfactory",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldbconnectionfactory:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldbconnectionfactory:interface:t-aspnet.starterkit.portal.iportaldbconnectionfactory",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IPortalDbConnectionFactory",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldbconnectionfactory:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldbconnectionfactory.createconnection-aspnet.starterkit.portal.portaldatabaseprofile",
+      "kind": "entry",
+      "label": "CreateConnection",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldbconnectionfactory.createconnection-aspnet.starterkit.portal.portaldatabaseprofile",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldbconnectionfactory.createconnection-aspnet.starterkit.portal.portaldatabaseprofile",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldbconnectionfactory-9400a063.html"
+    }
+  ]
+}

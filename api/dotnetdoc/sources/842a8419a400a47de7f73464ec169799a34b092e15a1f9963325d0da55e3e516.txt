@@ -1,0 +1,4 @@
+        public PortalCfgDbContext(string connectionString) :
+            base(connectionString)
+        {
+        }

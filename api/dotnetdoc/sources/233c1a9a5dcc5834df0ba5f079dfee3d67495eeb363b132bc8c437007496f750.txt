@@ -1,0 +1,9 @@
+        private void RedirectToCurrentUser()
+        {
+            string url = ResolveUrl(
+                "~/Admin/ManageUsers.aspx?userId=" + userId +
+                "&username=" + Uri.EscapeDataString(currentUser.Name ?? string.Empty) +
+                "&tabindex=" + tabIndex +
+                "&tabid=" + tabId);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, url);
+        }

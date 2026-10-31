@@ -1,0 +1,6 @@
+                    <%--
+                        <lang>
+                            <zh-CN>文档链接地址由服务器根据数据库内容大小选择受控下载入口或校验后的旧链接；原始路径不直接进入页面输出。</zh-CN>
+                            <en>The server chooses a controlled download endpoint or a validated legacy link from the database-content size; raw paths do not enter page output directly.</en>
+                        </lang>
+                    --%>

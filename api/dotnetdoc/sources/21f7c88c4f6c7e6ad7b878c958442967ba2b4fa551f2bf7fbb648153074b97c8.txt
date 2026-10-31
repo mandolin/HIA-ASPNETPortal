@@ -1,0 +1,23 @@
+        public static bool TryGetTrustedPackage(
+            string packageId,
+            out PortalModulePackage package,
+            out string reason)
+        {
+            package = null;
+            reason = string.Empty;
+            if (!IsValidPackageId(packageId))
+            {
+                reason = "Module package identifier is invalid.";
+                return false;
+            }
+
+            package = GetTrustedPackages().FirstOrDefault(item =>
+                string.Equals(item.PackageId, packageId.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (package == null)
+            {
+                reason = "Module package is not deployed or its manifest is invalid.";
+                return false;
+            }
+
+            return true;
+        }

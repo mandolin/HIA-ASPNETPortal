@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_FilterOverdue {
+            get {
+                return ResourceManager.GetString("MyWorkItems_FilterOverdue", resourceCulture);
+            }
+        }

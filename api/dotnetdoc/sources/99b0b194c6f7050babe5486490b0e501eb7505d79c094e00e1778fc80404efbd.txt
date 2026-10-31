@@ -1,0 +1,26 @@
+        public int AddTab(int portalId, string tabName, int tabOrder)
+        {
+            // <lang>
+            //   <zh-CN>旧门户新增 Tab 默认给 `All Users` 访问，之后由后台页面再调整角色串。</zh-CN>
+            //   <en>Legacy portal Tabs are created with `All Users` access by default; the admin page can adjust the role string afterwards.</en>
+            // </lang>
+            var newRow = new TabItem
+            {
+                TabName = tabName,
+                TabOrder = tabOrder,
+                MobileTabName = String.Empty,
+                ShowMobile = true,
+                AccessRoles = PortalRoleNames.AllUsers + ";"
+            };
+
+            _context.Tabs.Add(newRow);
+
+            // <lang>
+            //   <zh-CN>保存后立即刷新本地快照，使返回的 `TabId` 和之后的读取来自同一持久化状态。</zh-CN>
+            //   <en>The local snapshot is refreshed right after saving so the returned `TabId` and later reads reflect the same persisted state.</en>
+            // </lang>
+            _context.SaveChanges();
+            _tabs = _context.Tabs.ToList();
+
+            return newRow.TabId;
+        }

@@ -1,0 +1,6 @@
+<%--
+  <lang>
+    <zh-CN>P12.3 轻量待办后台入口：第一版只读集中查看，不提供流程设计器或转办；P21.3 起同时承接协同事项待办投影。</zh-CN>
+    <en>P12.3 lightweight work-item Admin entry: the first version is a read-only central view without workflow designer or reassignment; P21.3 also projects collaboration-item work entries here.</en>
+  </lang>
+--%>

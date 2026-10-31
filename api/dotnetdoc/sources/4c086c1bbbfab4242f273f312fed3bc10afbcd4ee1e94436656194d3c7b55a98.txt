@@ -1,0 +1,8 @@
+        public static IDictionary<string, string> GetLegacyPackageMappings()
+        {
+            // <lang>
+            //   <zh-CN>返回独立副本而非内部可变字典，调用方的枚举或修改不能影响当前进程的 Profile 决策。</zh-CN>
+            //   <en>Return an independent copy rather than the mutable internal dictionary so caller enumeration or mutation cannot affect Profile decisions in the current process.</en>
+            // </lang>
+            return new Dictionary<string, string>(LegacyPackagesBySource, StringComparer.OrdinalIgnoreCase);
+        }

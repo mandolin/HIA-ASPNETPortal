@@ -1,0 +1,14 @@
+        private static void ValidatePrimaryPortalProvider(string providerInvariantName, string configFile)
+        {
+            if (!string.Equals(providerInvariantName, PortalDatabaseProviderNames.SqlServer, StringComparison.OrdinalIgnoreCase))
+            {
+                // <lang>
+                //   <zh-CN>P3.3 proof 使用独立 profile；主门户启动路径对非 SQL Server provider 仍必须 fail-closed，避免把 proof provider 误当成生产支持。</zh-CN>
+                //   <en>The P3.3 proof uses a separate profile; the primary Portal startup path must still fail closed for non-SQL Server providers so a proof provider is not mistaken for production support.</en>
+                // </lang>
+                throw new ConfigurationErrorsException(
+                    "The primary Portal connection currently supports only '" +
+                    PortalDatabaseProviderNames.SqlServer + "'. Configured provider: '" +
+                    providerInvariantName + "'. File: " + configFile);
+            }
+        }

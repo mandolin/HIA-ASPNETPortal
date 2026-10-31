@@ -1,0 +1,12 @@
+        public static bool ShouldRevokeForSecurityVersionMismatch(
+            long ticketSecurityVersion,
+            long databaseSecurityVersion,
+            bool ticketSecurityVersionReadable)
+        {
+            // <lang>
+            //   <zh-CN>票据不可读（无有效票据）时必然签退；票据可读时仅当数据库版本可确定（>0）且与票据不符才签退。</zh-CN>
+            //   <en>An unreadable ticket always revokes; a readable ticket revokes only when the database version is determinable (>0) and differs.</en>
+            // </lang>
+            return !ticketSecurityVersionReadable ||
+                   (databaseSecurityVersion > 0 && ticketSecurityVersion != databaseSecurityVersion);
+        }

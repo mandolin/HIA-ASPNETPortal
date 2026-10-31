@@ -1,0 +1,12 @@
+        private static void EnsureValueType(PortalSettingDefinition definition, PortalSettingValueType expectedType)
+        {
+            // <lang>
+            //   <zh-CN>读取入口不得把错误类型定义静默转换；异常只描述稳定键和元数据类型，不包含实际设置内容。</zh-CN>
+            //   <en>A read entry point must not silently convert a definition of the wrong type; the exception describes only stable key and metadata types, never actual setting content.</en>
+            // </lang>
+            if (definition.ValueType != expectedType)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Setting '{0}' is '{1}', not '{2}'.", definition.Key, definition.ValueType, expectedType));
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleDefinitions_ValidationDesktopSourceRequired {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ValidationDesktopSourceRequired", resourceCulture);
+            }
+        }

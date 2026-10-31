@@ -1,0 +1,6 @@
+<%@ Page
+    Language="c#"
+    CodeBehind="OperationAudits.aspx.cs"
+    AutoEventWireup="True"
+    Inherits="ASPNET.StarterKit.Portal.OperationAudits"
+    MasterPageFile="~/Default.master" %>

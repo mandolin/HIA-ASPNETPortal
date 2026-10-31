@@ -1,0 +1,87 @@
+    public sealed class PortalModulePackageState
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个模块包运行状态快照。</zh-CN>
+        ///   <en>Creates a runtime state snapshot for a module package.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="packageId"><l zh-CN="与该快照关联的稳定包标识；空值归一为稳定空文本，不在此重新验证部署。" en="Stable package identifier associated with this snapshot; null is normalized to stable empty text and deployment is not revalidated here." /></param>
+        /// <param name="isEnabled"><l zh-CN="状态表返回的显式启停值，或缺行时的兼容默认值；它不越过其它模块门禁。" en="Explicit enabled value returned by the state table, or the compatibility default for a missing row; it does not bypass other module gates." /></param>
+        /// <param name="isConfigured"><l zh-CN="是否已有显式状态行；false 与不可用状态表不同，后者不创建本快照。" en="Whether an explicit state row exists; false differs from an unavailable table, which does not create this snapshot." /></param>
+        /// <param name="updatedUtc"><l zh-CN="显式行的最近 UTC 时间；默认快照使用既有哨兵值。" en="Latest UTC time from an explicit row; the default snapshot uses the existing sentinel value." /></param>
+        /// <param name="updatedBy"><l zh-CN="显式行的操作人文本；空值归一为稳定空文本。" en="Actor text from an explicit row; null is normalized to stable empty text." /></param>
+        /// <param name="note"><l zh-CN="显式行的可选备注文本；空值归一为稳定空文本。" en="Optional note text from an explicit row; null is normalized to stable empty text." /></param>
+        internal PortalModulePackageState(
+            string packageId,
+            bool isEnabled,
+            bool isConfigured,
+            DateTime updatedUtc,
+            string updatedBy,
+            string note)
+        {
+            // <lang>
+            //   <zh-CN>该内部投影不读取数据库、不验证受信任部署，也不执行 Profile 或授权判断；调用方已决定此处是显式行还是兼容默认快照。</zh-CN>
+            //   <en>This internal projection neither reads the database nor validates trusted deployment, profile, or authorization; its caller has already decided whether this is an explicit row or a compatibility-default snapshot.</en>
+            // </lang>
+            PackageId = packageId ?? string.Empty;
+            IsEnabled = isEnabled;
+            IsConfigured = isConfigured;
+            UpdatedUtc = updatedUtc;
+
+            // <lang>
+            //   <zh-CN>可选元数据以空文本而非 null 暴露，保持读取消费者的稳定展示契约；这不净化、记录或传播底层异常详情。</zh-CN>
+            //   <en>Expose optional metadata as empty text rather than null to preserve a stable display contract for read consumers; this neither sanitizes, logs, nor propagates underlying exception detail.</en>
+            // </lang>
+            UpdatedBy = updatedBy ?? string.Empty;
+            Note = note ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>与状态快照关联的稳定包标识。</zh-CN>
+        ///   <en>Stable package identifier associated with this state snapshot.</en>
+        /// </lang>
+        /// </summary>
+        public string PackageId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>状态存储给出的启用事实，可能为缺显式行时的兼容默认值。</zh-CN>
+        ///   <en>Enabled fact provided by the state store, which may be the compatibility default when no explicit row exists.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsEnabled { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>数据库是否存在显式状态行；false 表示可读状态表中没有该包行，而非状态表不可用。</zh-CN>
+        ///   <en>Whether the database has an explicit state row; false means the readable table has no row for this package, not that the table is unavailable.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsConfigured { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显式状态行的最近更新时间；默认快照保留既有 UTC 哨兵值。</zh-CN>
+        ///   <en>Latest update time from an explicit state row; default snapshots retain the existing UTC sentinel value.</en>
+        /// </lang>
+        /// </summary>
+        public DateTime UpdatedUtc { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显式状态行的最近操作人文本；缺失数据库文本归一为稳定空值。</zh-CN>
+        ///   <en>Latest actor text from an explicit state row; missing database text is normalized to stable empty text.</en>
+        /// </lang>
+        /// </summary>
+        public string UpdatedBy { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显式状态行的可选备注文本；缺失数据库文本归一为稳定空值。</zh-CN>
+        ///   <en>Optional note text from an explicit state row; missing database text is normalized to stable empty text.</en>
+        /// </lang>
+        /// </summary>
+        public string Note { get; private set; }
+    }

@@ -1,0 +1,284 @@
+    public partial class WorkItems : PortalPage<WorkItems>
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>后台列表一次读取和展示的固定上限。</zh-CN>
+        ///   <en>Fixed maximum number of work items read and displayed per administration request.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该上限同时传给数据服务并用于摘要文本，避免管理页在没有分页控件时无界读取；它不是数据服务、授权或状态写入策略。</zh-CN>
+        ///   <en>The limit is passed to the data service and reused in the summary text so the administration page cannot read an unbounded result without paging controls; it is not a data-service, authorization, or state-write policy.</en>
+        /// </lang>
+        /// </remarks>
+        private const int PageSize = 50;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务。</zh-CN>
+        ///   <en>Lightweight work-item data service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化待办后台页。</zh-CN>
+        ///   <en>Initializes the work-item administration page.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>页面允许具备待办查看权限或历史兼容管理权限的用户进入。拒绝请求在读取筛选、访问待办服务或绑定页面前结束；首次加载才初始化筛选和列表，postback 保留用户提交的筛选状态。</zh-CN>
+        ///   <en>The page allows users holding the work-item view permission or the legacy-compatible administration permission. A denied request ends before reading filters, accessing the work-item service, or binding the page; only the initial load initializes the filter and list, while postback preserves the user-submitted filter state.</en>
+        /// </lang>
+        /// </remarks>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>查看权限是最小访问门槛，管理权限作为历史兼容的替代门槛；任一权限均可进入只读后台列表。</zh-CN>
+            //   <en>The view permission is the minimum access gate, while the administration permission is a legacy-compatible alternative; either permission may enter the read-only administration list.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessWorkItemsView,
+                PortalPermissionKeys.BusinessWorkItemsAdmin))
+            {
+                // <lang>
+                //   <zh-CN>授权组件已处理拒绝响应；此处立即结束，确保未授权请求不会触及筛选控件、服务或绑定结果。</zh-CN>
+                //   <en>The authorization component has handled the denial response; end immediately so an unauthorized request cannot touch filters, services, or bound results.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅在首次请求建立默认状态筛选并加载列表；postback 保留已提交筛选，交由搜索事件重新读取。</zh-CN>
+            //   <en>Establish the default status filter and load the list only on the initial request; postback retains the submitted filter for the search event to reload.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindStatusFilter();
+                BindWorkItems();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前筛选条件重新读取待办列表。</zh-CN>
+        ///   <en>Reloads work items using the current filter.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>postback 回调在重新读取列表前重复执行与首次加载相同的查看/管理兼容权限门禁；拒绝时不访问数据服务。筛选控件的已提交值由 Web Forms 生命周期保留，随后交由 <see cref="BindWorkItems"/> 处理。</zh-CN>
+        ///   <en>The postback callback repeats the same view-or-administration compatibility permission gate as the initial load before reloading the list; it does not access the data service when denied. The submitted filter value is retained by the Web Forms lifecycle and is then handled by <see cref="BindWorkItems"/>.</en>
+        /// </lang>
+        /// </remarks>
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>事件回调不能仅依赖首次加载的授权结果；每次提交均重新确认查看权限或兼容管理权限。</zh-CN>
+            //   <en>An event callback cannot rely only on authorization from the initial load; re-confirm the view permission or compatible administration permission on every submission.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessWorkItemsView,
+                PortalPermissionKeys.BusinessWorkItemsAdmin))
+            {
+                // <lang>
+                //   <zh-CN>授权组件已处理拒绝响应；立即返回，避免未授权 postback 使用其提交的筛选值触发任何数据绑定。</zh-CN>
+                //   <en>The authorization component has handled the denial response; return immediately so an unauthorized postback cannot use its submitted filter value to trigger any data binding.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>复用当前控件状态刷新列表，不重置筛选默认值；默认值初始化仍仅属于首次加载路径。</zh-CN>
+            //   <en>Refresh the list from current control state without resetting the filter default; default initialization remains solely on the initial-load path.</en>
+            // </lang>
+            BindWorkItems();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化待办状态筛选项。</zh-CN>
+        ///   <en>Initializes work-item status filter options.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>筛选值为 <see cref="PortalWorkItemStatuses"/> 定义的固定契约，并保留空值的“全部”选项；首次加载时默认选中 <c>Open</c>，后续回发不调用此方法，以免覆盖用户已提交的筛选条件。</zh-CN>
+        ///   <en>The filter values form a fixed contract defined by <see cref="PortalWorkItemStatuses"/>, with an empty-value “All” option retained. Initial load selects <c>Open</c>; subsequent postbacks do not call this method so a user-submitted filter is not overwritten.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindStatusFilter()
+        {
+            // <lang>
+            //   <zh-CN>先清空控件项，保证初始化路径可重入且不会因生命周期重复执行累积重复筛选项。</zh-CN>
+            //   <en>Clear existing items first so the initialization path is re-entrant and repeated lifecycle execution cannot accumulate duplicate filters.</en>
+            // </lang>
+            StatusFilterList.Items.Clear();
+
+            // <lang>
+            //   <zh-CN>仅暴露稳定状态契约及空值“全部”选项；列表顺序和值同时构成当前 UI 与后端筛选的兼容边界。</zh-CN>
+            //   <en>Expose only the stable status contract and the empty-value “All” option; their order and values together form the current UI-to-backend filtering compatibility boundary.</en>
+            // </lang>
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Open, PortalWorkItemStatuses.Open));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.InProgress, PortalWorkItemStatuses.InProgress));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Completed, PortalWorkItemStatuses.Completed));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Cancelled, PortalWorkItemStatuses.Cancelled));
+            StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Expired, PortalWorkItemStatuses.Expired));
+
+            // <lang>
+            //   <zh-CN>此默认值仅经首次加载路径设置；搜索回发保留控件当前选择，避免静默回退到待处理状态。</zh-CN>
+            //   <en>This default is set only through the initial-load path; search postbacks retain the control's current selection instead of silently reverting to Open.</en>
+            // </lang>
+            StatusFilterList.SelectedValue = PortalWorkItemStatuses.Open;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前状态筛选读取后台待办列表。</zh-CN>
+        ///   <en>Reads the administration work-item list using the current status filter.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此方法假定调用入口已通过待办查看或管理权限门禁。数据服务或 schema 不可用时清空旧展示并给出部署提示；成功时只绑定受限页大小的展示模型，不执行待办状态写入。</zh-CN>
+        ///   <en>This method assumes its caller has passed the work-item view or administration permission gate. When the data service or schema is unavailable, it clears stale display and gives a deployment hint; on success, it binds only a page-size-limited display model and performs no work-item state write.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindWorkItems()
+        {
+            // <lang>
+            //   <zh-CN>依赖注入失败时不能继续访问数据层；清空此前绑定内容以避免页面展示过期管理信息。</zh-CN>
+            //   <en>Do not continue to the data layer when dependency injection fails; clear previously bound content so the page cannot display stale administration information.</en>
+            // </lang>
+            if (WorkItemDb == null)
+            {
+                ShowUnavailable(lang.Admin_WorkItems_MessageServiceNotRegistered);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>待办和事件 schema 是列表投影的最小前置条件；缺失时返回可操作的迁移提示而不执行部分查询。</zh-CN>
+            //   <en>The work-item and event schema is the minimum prerequisite for list projection; when missing, return an actionable migration hint rather than attempting a partial query.</en>
+            // </lang>
+            if (!WorkItemDb.IsSchemaAvailable())
+            {
+                ShowUnavailable(lang.Admin_WorkItems_MessageSchemaUnavailable);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>使用由筛选控件提供的状态和固定页大小读取后台视图；服务层负责保持状态筛选的既有受控契约。</zh-CN>
+            //   <en>Read the administration view with the status supplied by the filter control and a fixed page size; the service layer preserves the established controlled status-filter contract.</en>
+            // </lang>
+            IList<PortalWorkItemInfo> workItems = WorkItemDb.GetAdminWorkItems(
+                StatusFilterList.SelectedValue,
+                PageSize);
+
+            // <lang>
+            //   <zh-CN>将数据对象映射为页面专用展示行，使业务入口 URL、空值占位、分派文字和 UTC 时间格式在受控投影中生成。</zh-CN>
+            //   <en>Map data objects to page-specific display rows so business-entry URLs, empty-value placeholders, assignment text, and UTC formatting are produced in a controlled projection.</en>
+            // </lang>
+            List<PortalWorkItemAdminRow> rows = workItems
+                .Select(item => new PortalWorkItemAdminRow(item)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            workItemsEmptyStateRowCount = rows.Count;
+
+            WorkItemsRepeater.DataSource = rows;
+            WorkItemsRepeater.DataBind();
+
+            // <lang>
+            //   <zh-CN>用不随服务器区域设置变化的数字格式报告固定上限与实际计数，避免管理页摘要产生文化相关歧义。</zh-CN>
+            //   <en>Report the fixed limit and actual count with culture-invariant number formatting so the administration summary has no server-locale ambiguity.</en>
+            // </lang>
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_WorkItems_MessagePageInfo,
+                PageSize,
+                workItems.Count);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示待办数据不可用提示，并清空列表。</zh-CN>
+        ///   <en>Displays work-item data unavailable messages and clears the list.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此方法只负责受控的页面呈现，不重新授权或访问数据服务。调用方只能传入已审查的操作提示，不能传入异常、连接或其他敏感实现细节；无论消息是否为空，均会清理旧摘要和列表，避免不可用状态下保留陈旧管理数据。</zh-CN>
+        ///   <en>This method only performs controlled page presentation; it neither reauthorizes nor accesses the data service. Callers may supply only reviewed operational guidance, not exception, connection, or other sensitive implementation details; whether the message is empty or not, it clears the old summary and list so unavailable state cannot retain stale administration data.</en>
+        /// </lang>
+        /// </remarks>
+        private void ShowUnavailable(string message)
+        {
+            // <lang>
+            //   <zh-CN>将空消息规范为空文本；调用方提供的是已审查的操作提示，而非直接暴露的底层异常内容。</zh-CN>
+            //   <en>Normalize a null message to empty text; callers supply reviewed operational guidance rather than directly exposed lower-level exception content.</en>
+            // </lang>
+            MessageLabel.Text = message ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>清除成功路径的统计摘要，使不可用提示不与先前查询结果并存。</zh-CN>
+            //   <en>Clear the successful-path summary so the unavailable notice cannot coexist with a previous query result.</en>
+            // </lang>
+            ResultLabel.Text = string.Empty;
+
+            // <lang>
+            //   <zh-CN>绑定固定的空展示行集合以撤销旧列表；不在故障呈现路径重新查询或写入待办数据。</zh-CN>
+            //   <en>Bind a fixed empty display-row collection to remove the old list; the failure-presentation path does not requery or write work-item data.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>显式抑制空态：本页失败时表格仍然可见，若再渲染"暂无待办"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state explicitly: this page keeps the table visible on failure, so rendering "no work items" would contradict the error message shown above.</en>
+            // </lang>
+            workItemsEmptyStateRowCount = null;
+            WorkItemsRepeater.DataSource = Enumerable.Empty<PortalWorkItemAdminRow>();
+            WorkItemsRepeater.DataBind();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态行数：有数据为正数、零条为 0、失败或不可用为 <c>null</c>（抑制空态，避免把故障说成"暂无"）。</zh-CN>
+        ///   <en>Empty-state row count: positive when rows exist, zero when the result set is empty, and <c>null</c> on failure and unavailable paths, which suppress the empty state so a fault is not presented as "nothing here".</en>
+        /// </lang>
+        /// </summary>
+        protected int? EmptyStateRowCount
+        {
+            get { return workItemsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：筛选值为空（"全部"）时用"无数据"，否则用"筛选无结果"。本页默认选中"待处理"，因此默认即筛选态。</zh-CN>
+        ///   <en>Empty-state wording: "no data" when the filter value is empty ("all") and "no matches" otherwise. This page preselects the open status, so its default view is already filtered.</en>
+        /// </lang>
+        /// </summary>
+        protected string EmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(StatusFilterList.SelectedValue)
+                    ? lang.Admin_WorkItems_EmptyNoItems
+                    : lang.Admin_WorkItems_EmptyNoMatches;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>待办列表的空态行数；由 <c>BindWorkItems</c> 在绑定前写入，失败路径置为 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the work-item list; written by <c>BindWorkItems</c> before binding and set to <c>null</c> on failure paths.</en>
+        /// </lang>
+        /// </summary>
+        private int? workItemsEmptyStateRowCount;
+    }

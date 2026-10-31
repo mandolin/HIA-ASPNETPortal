@@ -1,0 +1,6 @@
+                            <%--
+                              <lang>
+                                <zh-CN>注册字段和验证器只构造一次性账号申请；唯一性、邀请员工号策略、规范化和账户写入仍由服务器完成。</zh-CN>
+                                <en>Registration fields and validators construct a one-time account request; uniqueness, invited employee-code policy, normalization, and account persistence remain server-side.</en>
+                              </lang>
+                            --%>
