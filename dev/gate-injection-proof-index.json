@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-03T11:06:40",
+  "generatedAt": "2026-11-03T12:20:12",
   "note": "门禁注入法双向证明覆盖索引：proved = 至少有一条「注入即红、还原即绿」的真实记录；notDetected = 夹具存在但注入后门禁仍绿（假证明，需重做注入点）；other = 基线不绿 / 还原后仍红 / 夹具错误；neverTouched = 尚无任何注入夹具。统计口径只认证明记录，不认「夹具里出现过门禁名」。",
   "registeredCount": 78,
-  "provedCount": 47,
+  "provedCount": 48,
   "notDetectedCount": 3,
-  "otherCount": 2,
-  "neverTouchedCount": 26,
+  "otherCount": 4,
+  "neverTouchedCount": 23,
   "proved": [
     "Build-Solution.ps1",
     "Invoke-PortalTests.ps1",
@@ -22,6 +22,7 @@
     "Test-PortalDataProvider.ps1",
     "Test-PortalDefaultCredentialRisk.ps1",
     "Test-PortalDocumentationReadiness.ps1",
+    "Test-PortalEvidenceCoverage.ps1",
     "Test-PortalExtensionSmoke.ps1",
     "Test-PortalFrontendContracts.ps1",
     "Test-PortalGateCoverageMap.ps1",
@@ -63,7 +64,9 @@
   ],
   "other": [
     "Invoke-PortalModuleRuntimeGate.ps1",
-    "Test-PortalPlaceholderEvidence.mjs"
+    "Test-PortalLocalizationLeakEvidence.mjs",
+    "Test-PortalPlaceholderEvidence.mjs",
+    "Test-PortalResourceContractEvidence.mjs"
   ],
   "neverTouched": [
     "Test-PortalAdminListUiEvidence.mjs",
@@ -73,11 +76,9 @@
     "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalDependencyVulnerabilityBaseline.ps1",
     "Test-PortalDocumentationExamples.ps1",
-    "Test-PortalEvidenceCoverage.ps1",
     "Test-PortalHandwrittenPageFreshness.ps1",
     "Test-PortalI18nContentParity.ps1",
     "Test-PortalIeModeReadiness.ps1",
-    "Test-PortalLocalizationLeakEvidence.mjs",
     "Test-PortalLocalizedNameGate.ps1",
     "Test-PortalLocalizedNameRuntimeEvidence.ps1",
     "Test-PortalModuleCache.ps1",
@@ -85,7 +86,6 @@
     "Test-PortalP77SupplementEvidence.mjs",
     "Test-PortalPerformanceBaseline.mjs",
     "Test-PortalPlatformEmptyStateEvidence.mjs",
-    "Test-PortalResourceContractEvidence.mjs",
     "Test-PortalRopCommentBaseline.ps1",
     "Test-PortalRuntimeGatePackageSet.ps1",
     "Test-PortalRuntimeScreenshotBaseline.ps1",

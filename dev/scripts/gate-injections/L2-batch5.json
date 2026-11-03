@@ -1,0 +1,38 @@
+[
+  {
+    "gate": "Test-PortalResourceContractEvidence.mjs",
+    "note": "只在中性 resx 增加一个键（四方一致：中文 resx / 英文 resx / designer / 中性 resx 必须同步）",
+    "env": { "PORTAL_PLAYWRIGHT_MODULE": "%REPO%\\temp\\node_modules\\playwright" },
+    "patches": [
+      {
+        "file": "src/Portal/App_GlobalResources/lang.resx",
+        "mode": "replace",
+        "old": "</root>",
+        "content": "  <data name=\"ZzGateInjectionProbe\" xml:space=\"preserve\">\n    <value>probe</value>\n  </data>\n</root>"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalEvidenceCoverage.ps1",
+    "note": "新增一个未登记进证据台账的后台功能页（台账对静态面做双向 default-deny：源码存在但台账未分类即 Fail）",
+    "patches": [
+      {
+        "file": "src/Portal/Admin/ZzGateInjectionProbe.aspx",
+        "mode": "create",
+        "content": "<%@ Page Language=\"C#\" AutoEventWireup=\"true\" %>\n<asp:Content ID=\"c1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n  <div>probe</div>\n</asp:Content>\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalLocalizationLeakEvidence.mjs",
+    "note": "在前台模块标记层注入硬编码中文（英文界面下泄漏中文必须被抓住）",
+    "env": { "PORTAL_PLAYWRIGHT_MODULE": "%REPO%\\temp\\node_modules\\playwright" },
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
+        "mode": "append",
+        "content": "\n<div>中文硬编码泄漏探针</div>\n"
+      }
+    ]
+  }
+]
