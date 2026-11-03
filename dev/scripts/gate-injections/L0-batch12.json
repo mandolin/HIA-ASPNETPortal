@@ -1,0 +1,26 @@
+[
+  {
+    "gate": "Test-PortalNavigationShape.ps1",
+    "note": "把快速上手指南里的「我的信息」改成「个人信息」（种子定义不变 → 文档与种子不再一致）",
+    "patches": [
+      {
+        "file": "docs/first-use-portal.md",
+        "mode": "replace",
+        "old": "- 我的信息 —— 员工资料的确认和更正",
+        "content": "- 个人信息 —— 员工资料的确认和更正"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalGateCoverageMap.ps1",
+    "note": "把覆盖地图里登记的门禁名改成磁盘上不存在的门禁（M2：地图不得漂移，phantom 即 Fail）",
+    "patches": [
+      {
+        "file": "dev/gate-coverage-map.json",
+        "mode": "replace",
+        "old": "\"gate\": \"Test-PortalNavigationShape.ps1\"",
+        "content": "\"gate\": \"Test-PortalZzPhantomGate.ps1\""
+      }
+    ]
+  }
+]

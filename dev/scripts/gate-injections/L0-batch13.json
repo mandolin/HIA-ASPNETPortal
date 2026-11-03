@@ -1,0 +1,38 @@
+[
+  {
+    "gate": "Test-PortalReleaseReadiness.ps1",
+    "note": "把 README 的中文当前版本声明改成与锚点不符的版本号（封版前检查须发现版本锚点漂移；用 -DailySelfCheck 走日常自检模式，避免 F3/F4/F6 因缺目标版本与过期产物而 INCOMPLETE）",
+    "args": [ "-DailySelfCheck" ],
+    "patches": [
+      {
+        "file": "README.md",
+        "mode": "replace",
+        "old": "当前版本：**v2.1.1**",
+        "content": "当前版本：**v2.9.9**"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalModuleDocPages.ps1",
+    "note": "把模块文档页的八节之一改掉（八节必须齐备且标题与注册表一致）",
+    "patches": [
+      {
+        "file": "docs/modules/announcements.md",
+        "mode": "replace",
+        "old": "## 权限\n\n",
+        "content": "## 权限与角色\n\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "在标记层注入没有 alt 的 img（门禁作者自述的注入用例：img 无 alt 必须 Fail）",
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/LeaveRequest/LeaveRequest.ascx",
+        "mode": "append",
+        "content": "\n<img src=\"zz-gate-injection-probe.png\" />\n"
+      }
+    ]
+  }
+]

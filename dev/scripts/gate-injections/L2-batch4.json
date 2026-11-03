@@ -1,0 +1,25 @@
+[
+  {
+    "gate": "Test-PortalModulePackageContract.ps1",
+    "note": "把模块包的 packageId 改成未登记的值（M3：每个 module.json 的 packageId 必须被 Profile 并集 / Enabled / notMounted 之一覆盖）",
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/ModuleProbe/module.json",
+        "mode": "replace",
+        "old": "\"packageId\": \"HIA.ModuleProbe\",",
+        "content": "\"packageId\": \"HIA.ZzUnregisteredPackage\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalModuleSkinCoverage.ps1",
+    "note": "在已追踪模块的样式里写裸颜色字面量（硬规则：模块自带 Styles/<Module>.css 不得出现 var(...) 之外的裸颜色，深色皮肤下会形成浅块；新建未追踪目录会被跳过，故须打已追踪文件）",
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/LeaveRequest/Styles/LeaveRequest.css",
+        "mode": "append",
+        "content": "\n.zz-gate-injection-probe { color: #333333; }\n"
+      }
+    ]
+  }
+]
