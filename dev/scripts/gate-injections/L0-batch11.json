@@ -1,12 +1,12 @@
 [
   {
     "gate": "Test-PortalAuditRetentionDeclaration.ps1",
-    "note": "在产品源码里注入针对审计表的 DELETE（A2：生产路径不得删除审计数据；标记刻意不用探针字样，避免被门禁的自我排除规则命中）",
+    "note": "在 dev/scripts 的门禁脚本里新增一个审计表删除点（A3：仓库内审计表删除点必须在显式豁免清单中，default-deny；src/Setup 的数据加载脚本疑似按文件豁免，改打未豁免的 dev/scripts）",
     "patches": [
       {
-        "file": "src/Portal.Components/PortalDatabaseProfile.cs",
+        "file": "dev/scripts/Invoke-PortalGateSuite.ps1",
         "mode": "append",
-        "content": "\n        string qx7MarkerA = \"DELETE FROM PortalCfg_OperationAudits;\";\n        string qx7MarkerB = \"TRUNCATE TABLE PortalCfg_OperationAudits;\";\n        string qx7MarkerC = \"DELETE FROM [PortalCfg_OperationAudits];\";\n"
+        "content": "\n# zz gate injection probe: DELETE FROM PortalCfg_OperationAudits;\n"
       }
     ]
   },

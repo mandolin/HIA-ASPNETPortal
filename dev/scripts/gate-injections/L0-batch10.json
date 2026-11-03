@@ -25,12 +25,12 @@
   },
   {
     "gate": "Test-PortalSiteTranslationFreshness.ps1",
-    "note": "在中文源文档追加一个含 ASCII 锚点、且英文译本没有对应标题行的小节（锚点只从标题里的 ASCII 标识符提取，纯中文标题提不出锚点，测不到）",
+    "note": "在中文源文档追加一个「标题含全角括号、括号内有 ASCII 标识符」且英文译本没有对应标题的小节（锚点只从中文标题的全角括号内提取，裸 ASCII 标题提不出锚点，测不到）",
     "patches": [
       {
         "file": "docs/user-guide.md",
         "mode": "append",
-        "content": "\n### Qx7MarkerSection\n\n本小节只存在于中文源文档，用于验证译本新鲜度门禁能否发现缺失的标题级对应。\n"
+        "content": "\n## 注入探针小节（Qx7MarkerProbe）\n\n本小节只存在于中文源文档，标题括号内含 ASCII 标识符，用于验证译本新鲜度门禁的锚点提取与英文对应检查。\n"
       }
     ]
   }
