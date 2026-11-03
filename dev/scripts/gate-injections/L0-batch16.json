@@ -1,0 +1,35 @@
+[
+  {
+    "gate": "Test-PortalDocumentationExamples.ps1",
+    "note": "在公开文档里追加占位符式示例路径（YourXxx 形态是非法示例模式：读者无法照做，文档示例必须可执行）",
+    "patches": [
+      {
+        "file": "docs/user-guide.md",
+        "mode": "append",
+        "content": "\n示例：查询 YourTableName 表中的 YourColumnName 字段。\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalContentModuleDocs.ps1",
+    "note": "往内容模块文档追加一个源码中不存在的字段行（字段表与源码按词边界核对，虚构字段必须被拦下）",
+    "patches": [
+      {
+        "file": "docs/modules/announcements.md",
+        "mode": "append",
+        "content": "\n| ZzGateInjectionProbeField | 文本 | - | 注入探针字段，源码中不存在 |\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalRopCommentBaseline.ps1",
+    "note": "新增一个高风险名脚本且不带 HIA 双语标记（HighRiskMissingHiaLanguageMarkers 必须保持 0，实时扫描应发现新增缺失）",
+    "patches": [
+      {
+        "file": "dev/scripts/Install-ZzGateProbe.ps1",
+        "mode": "create",
+        "content": "# probe script without HIA bilingual markers\nWrite-Output 'probe'\n"
+      }
+    ]
+  }
+]
