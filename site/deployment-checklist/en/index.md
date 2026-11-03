@@ -94,6 +94,13 @@ external configuration.
  deployment time**; both are idempotent (`IF NOT EXISTS` / `IF COL_LENGTH ... IS NULL`) and do not affect existing data.
 - [ ] `machineKey`, Cookie `Secure` / `SameSite` and the HTTPS policy have been confirmed against the target environment;
  real keys must never enter the repository.
+- [ ] `Portal_NavigationSeed.sql` (first-level navigation seed) **must be executed at deployment time, after
+ `Portal_LoadData.sql`**. It aligns navigation with the product shape (Home / Help / My Work Items / Leave & Expense /
+ Business Requests / My Profile, plus Enterprise Capability Workbench and Platform Admin for administrators) and registers
+ the product module definitions and mounting those tabs need. Without it a freshly installed database keeps the starter-kit
+ demo navigation (`Home` / `Employee Info` / `Product Info` / `Discussions` / `About the Portal` / `Admin`), which does not
+ match the public "First time on this portal" page. The script is idempotent and re-runnable, changes only navigation and
+ module mounting, never deletes business data, and prints a reconciliation result to check the tab count and order.
 
 ## Profile layering
 
@@ -132,4 +139,4 @@ external configuration.
 - [ ] Application rollback, configuration rollback and database recovery steps are all executable.
 - [ ] Real IIS re-test results, known limitations and deferred items are recorded.
 
-<!-- build-stamp: 676E1F5285CF -->
+<!-- build-stamp: 1DEF14B57A50 -->

@@ -295,6 +295,7 @@ $gateLayers = [ordered]@{
         #   Classified L0: only source, SQL, and resource files are read — no database, no site start-up, no configuration writes.</en>
         # </lang>
         @{ File = 'Test-PortalLocalizedNameGate.ps1';         Runner = 'ps1'; Kind = '多语言链路齐备'; Args = @() }
+@{ File = 'Test-PortalNavigationShape.ps1';           Runner = 'ps1'; Kind = '导航与文档一致性'; Args = @() }
         # <lang>
         #   <zh-CN>`C-anp-P26`（`W-anp-P140`）新增：**运行期证据覆盖台账**门禁（L0 静态）。
         #   把"覆盖面说不清、人工翻台账"变成每次运行自动产出「已覆盖/总数」与未覆盖清单：台账

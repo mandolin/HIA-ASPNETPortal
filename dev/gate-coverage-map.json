@@ -312,6 +312,14 @@
       "gate": "Test-PortalPlanLedgerConsistency.ps1"
     },
     {
+      "id": "navigation-shape-consistency",
+      "name": "导航形态一致性（建库导航种子定义的一级导航 ↔ 快速上手指南的三处叙述）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明「建库导航种子定义的目标页签」与「中文快速上手指南的三处叙述（匿名可见两项、登录后六项含顺序、管理员额外两项）」在页签名、顺序与可见性上一致；不证明运行期数据库里实际就是该形态（由运行期走查承载），不证明英文版叙述一致（由译本新鲜度门禁承载），不判断该页签集合本身是否是合理的产品决策。",
+      "gate": "Test-PortalNavigationShape.ps1"
+    },
+    {
       "id": "handwritten-page-freshness",
       "name": "手写页面（首页/营销三页/分区页）与导航数据一致、中英成对、分区页 H1 正确",
       "layer": "L0",
@@ -485,7 +493,7 @@
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
-    { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）验证工具，按需手工执行，不进日常编排。" },
+    { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）双向证明工具，按需手工执行，不进日常编排：四步（基线 exit 0 → 施加注入 → 注入后非 0 → 还原后 0），任一步不符即判证明不成立。2026-11-03（`W-anp-P267`）修复了两处工具缺陷——夹具未声明 args 时会把空字符串当参数传给门禁（使声明 `param()` 空参的门禁基线必红、被误判为不可证明），以及空数组在 PowerShell 输出流被丢弃成 `$null` 的取参路径；并把覆盖口径从「夹具里出现过门禁名」改为「存在 `verdict = proved` 的真实证明记录」，覆盖索引见 `dev/gate-injection-proof-index.json`（39 项真已证明 / 3 项假证明 / 3 项基线不绿 / 33 项尚无夹具）。" },
     { "id": "Invoke-PortalPublishedSiteCheckInjection.ps1", "basis": "发布后线上复核门禁的**本地注入轨**（按需手工执行，不进日常编排）：起本地静态服务承载由镜像合成的模拟发布页，用同一门禁指向它，逐项注入并断言——基线 + I1 C4 + I2 C2 + I3 C3 + I4 C1 + I5 INCOMPLETE + I6 构建戳变旧 + I7 全部无戳 + 还原后，共 9 例，每次字节级还原。证明的是门禁的判定逻辑，不访问外网、不动真实线上站点（模拟页由镜像合成，不等价于 Jekyll 真实渲染）。入口：pwsh -File dev/scripts/Invoke-PortalPublishedSiteCheckInjection.ps1。Local injection track for the live re-check gate (manual, not orchestrated): hosts simulated pages synthesised from mirrors on a local static server, points the same gate at them, injects and asserts case by case — baseline + I1 C4 + I2 C2 + I3 C3 + I4 C1 + I5 INCOMPLETE + I6 stale build stamp + I7 no stamps + restored, 9 cases, byte-level restore each time. Proves the gate decision logic; never reaches the network and never touches the real live site." },
 
     { "id": "Invoke-PortalTargetEnvironmentEvidencePack.ps1", "basis": "L7 目标环境证据一键出证工具（W-anp-P155），按台账逐项采集证据；不是门禁（自身正确性由其产物与 Test-PortalTargetEnvironmentEvidenceMap.ps1 的台账核对承载）。" },

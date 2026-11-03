@@ -55,6 +55,7 @@ title: 发布与兼容检查清单
 - [ ] `PortalCfg_RolePermissions` 已包含 `Admins` 兼容权限映射；后续非管理员权限映射需有审计或变更记录。
 - [ ] `PortalCfg_RolePermissions.sql` 中新增的 `EnterpriseCapability.*` 分层键种子映射**必须在部署时执行**——该脚本是部署动作、应用启动**不会**自动执行；未执行时新键对非管理员完全不可用（仅 `Admins` 因管理员短路可用）。
 - [ ] `PortalBiz_CollaborationItems.sql`（为父项列 `ParentItemId` 幂等补列）与 `PortalBiz_CollaborationItemParticipants.sql`（新表）迁移脚本**必须在部署时执行**；两者均幂等（`IF NOT EXISTS` / `IF COL_LENGTH ... IS NULL`），不影响既有数据。
+- [ ] `Portal_NavigationSeed.sql`（一级导航种子）**必须在部署时执行，且在 `Portal_LoadData.sql` 之后**。它把导航对齐到产品形态（首页 / 帮助 / 我的待办 / 请假与报销 / 业务办理 / 我的信息，管理员另加企业能力工作台与平台管理），并注册这些页签所需的产品模块定义与挂载。未执行时新建库会停留在入门套件演示导航（`Home` / `Employee Info` / `Product Info` / `Discussions` / `About the Portal` / `Admin`），与公开的《第一次使用本站》描述不一致。脚本幂等、可重复执行，只改导航与模块挂载，不删除业务数据；执行后以脚本末尾的对账结果核对页签数量与顺序。
 - [ ] `machineKey`、Cookie `Secure` / `SameSite` 和 HTTPS 策略已按目标环境确认；真实密钥不得进入仓库。
 
 ## Profile 分层
@@ -87,4 +88,4 @@ title: 发布与兼容检查清单
 - [ ] 应用回滚、配置回滚和数据库恢复步骤均可执行。
 - [ ] 真实 IIS 复测结果、已知限制和延期项已记录留存。
 
-<!-- build-stamp: 1F29FB199787 -->
+<!-- build-stamp: 77375F63481E -->
