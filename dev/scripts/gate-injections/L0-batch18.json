@@ -1,0 +1,25 @@
+[
+  {
+    "gate": "Test-PortalDocumentationExamples.ps1",
+    "note": "在公开文档里引用一个不存在的脚本路径（E1/E2：文档中提到的 dev/scripts/*.ps1 或 src/Setup/*.sql 必须存在；注意 YourXxx / <>{} 形式会被占位豁免，故用不含豁免标记的真实形态路径 ZzGateProbeDne）",
+    "patches": [
+      {
+        "file": "docs/user-guide.md",
+        "mode": "append",
+        "content": "\n示例：运行 `pwsh -NoProfile -File dev/scripts/ZzGateProbeDne.ps1` 完成探针初始化。\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalRopCommentBaseline.ps1",
+    "note": "破坏一个已追踪高风险脚本的 HIA 双语标记（HighRiskMissingHiaLanguageMarkers 必须保持 0；inventory 只扫 Git 已追踪脚本，故必须打已追踪文件；把 Get-PortalMigrationManifest.ps1 的 <lang> 开标签改成 <zzlang>）",
+    "patches": [
+      {
+        "file": "dev/scripts/Get-PortalMigrationManifest.ps1",
+        "mode": "replace",
+        "old": "<lang>",
+        "content": "<zzlang>"
+      }
+    ]
+  }
+]
