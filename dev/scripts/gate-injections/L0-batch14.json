@@ -1,0 +1,37 @@
+[
+  {
+    "gate": "Test-PortalLocalizedNameGate.ps1",
+    "note": "把中文资源文件改坏（门禁声明「内容为空即失败」，XML 解析失败同样不可渲染，多语言链路必须报红）",
+    "patches": [
+      {
+        "file": "src/Portal/App_GlobalResources/lang.zh-cn.resx",
+        "mode": "append",
+        "content": "\nZZ-GATE-INJECTION-PROBE-NOT-XML\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalCodeDocs.ps1",
+    "note": "把官网 jsdoc 快照清单里的源指纹改掉（A2：源指纹不一致即失败，探测「源码变了快照没刷」形态）",
+    "patches": [
+      {
+        "file": "site/api/jsdoc/code-docs-manifest.json",
+        "mode": "replace",
+        "old": "\"8023706dda21fc465e26e890727881138450bb33f6d9617cf8e7d756b06a2081\"",
+        "content": "\"0000000dda21fc465e26e890727881138450bb33f6d9617cf8e7d756b06a2081\""
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalRuntimeGatePackageSet.ps1",
+    "note": "把切档位时写入 Enabled 的「基线并集 ∪ 被测包」表达式改成固定只含被测包（U 组静态判据：并集不得被整体替换）",
+    "patches": [
+      {
+        "file": "dev/scripts/Invoke-PortalGateSuite.ps1",
+        "mode": "replace",
+        "old": "\"Portal.ModulePackages.Enabled\": \"' + $l2EnabledPackages + '\"",
+        "content": "\"Portal.ModulePackages.Enabled\": \"HIA.ModuleProbe\""
+      }
+    ]
+  }
+]
