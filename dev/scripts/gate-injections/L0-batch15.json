@@ -1,0 +1,14 @@
+[
+  {
+    "gate": "Test-PortalLocalizedNameGate.ps1",
+    "note": "把页头渲染点的 PortalDisplayNameResolver.Resolve 改成不经统一解析器的直接调用（L1：页头与模块标题控件必须经解析器解析，不得直接输出单列值）",
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx.cs",
+        "mode": "replace",
+        "old": "string displayName = PortalDisplayNameResolver.Resolve(",
+        "content": "string displayName = ResolveDisplayNameDirect("
+      }
+    ]
+  }
+]

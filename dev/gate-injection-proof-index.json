@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-03T19:15:00",
+  "generatedAt": "2026-11-03T19:16:42",
   "note": "门禁注入法双向证明覆盖索引：proved = 至少有一条「注入即红、还原即绿」的真实记录；notDetected = 夹具存在但注入后门禁仍绿（注入点与门禁观察面不匹配，需重做）；other = 基线不绿 / 还原后仍红 / 夹具错误；neverTouched = 尚无任何注入夹具。统计口径只认证明记录，不认「夹具里出现过门禁名」。",
   "registeredCount": 78,
-  "provedCount": 52,
-  "notDetectedCount": 4,
+  "provedCount": 53,
+  "notDetectedCount": 3,
   "otherCount": 2,
   "neverTouchedCount": 20,
   "proved": [
@@ -32,6 +32,7 @@
     "Test-PortalL7CriteriaRegistry.ps1",
     "Test-PortalLandingStats.ps1",
     "Test-PortalLegacyCssCompatibility.ps1",
+    "Test-PortalLocalizedNameGate.ps1",
     "Test-PortalLogMaintenance.ps1",
     "Test-PortalModuleDocPages.ps1",
     "Test-PortalModulePackageContract.ps1",
@@ -63,7 +64,6 @@
   ],
   "notDetected": [
     "Test-PortalLocalizationLeakEvidence.mjs",
-    "Test-PortalLocalizedNameGate.ps1",
     "Test-PortalResourceContractEvidence.mjs",
     "Test-PortalSqlCompatibility.ps1"
   ],
