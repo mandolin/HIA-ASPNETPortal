@@ -1,0 +1,37 @@
+[
+  {
+    "gate": "Test-PortalLandingStats.ps1",
+    "note": "把 landing 页的文档篇数统计改成与可计算真值不符的数字（M0 default-deny：每个统计块都必须被核对）",
+    "patches": [
+      {
+        "file": "site/index.md",
+        "mode": "replace",
+        "old": "<div class=\"oc-stat-val\">59</div><div class=\"oc-stat-label\">篇文档</div>",
+        "content": "<div class=\"oc-stat-val\">9999</div><div class=\"oc-stat-label\">篇文档</div>"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalL7CriteriaRegistry.ps1",
+    "note": "把 T1 判据的 status 改成非法取值（A1：status 只能取 met-dev-side / needs-target-env / not-met）",
+    "patches": [
+      {
+        "file": "dev/l7-criteria-registry.json",
+        "mode": "replace",
+        "old": "\"requirement\": \"新密码不写 MD5，旧账号有可验证升级/重置路径\",\n      \"status\": \"met-dev-side\",",
+        "content": "\"requirement\": \"新密码不写 MD5，旧账号有可验证升级/重置路径\",\n      \"status\": \"zz-gate-injection-probe\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSiteTranslationFreshness.ps1",
+    "note": "在中文源文档追加一个含 ASCII 锚点、且英文译本没有对应标题行的小节（锚点只从标题里的 ASCII 标识符提取，纯中文标题提不出锚点，测不到）",
+    "patches": [
+      {
+        "file": "docs/user-guide.md",
+        "mode": "append",
+        "content": "\n### Qx7MarkerSection\n\n本小节只存在于中文源文档，用于验证译本新鲜度门禁能否发现缺失的标题级对应。\n"
+      }
+    ]
+  }
+]

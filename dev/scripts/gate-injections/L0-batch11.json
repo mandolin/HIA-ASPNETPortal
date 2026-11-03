@@ -1,0 +1,46 @@
+[
+  {
+    "gate": "Test-PortalAuditRetentionDeclaration.ps1",
+    "note": "在产品源码里注入针对审计表的 DELETE（A2：生产路径不得删除审计数据；标记刻意不用探针字样，避免被门禁的自我排除规则命中）",
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalDatabaseProfile.cs",
+        "mode": "append",
+        "content": "\n        string qx7MarkerA = \"DELETE FROM PortalCfg_OperationAudits;\";\n        string qx7MarkerB = \"TRUNCATE TABLE PortalCfg_OperationAudits;\";\n        string qx7MarkerC = \"DELETE FROM [PortalCfg_OperationAudits];\";\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalApprovalBoundaryDocs.ps1",
+    "note": "在请假模块代码里注入 Approve 动作方法（A2：审批动作不得存在于本模块内）",
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/LeaveRequest/LeaveRequest.ascx.cs",
+        "mode": "append",
+        "content": "\n        // zz gate injection probe\n        protected void ZzGateInjectionProbe_Approve(object sender, EventArgs e) { }\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSiteMirrorConsistency.ps1",
+    "note": "在中文镜像页加入裸相对链接（A2：镜像须是构建产物形状，构建会重写链接，裸相对链接说明该页未经构建）",
+    "patches": [
+      {
+        "file": "site/deployment-checklist/index.md",
+        "mode": "append",
+        "content": "\n[qx7 marker link](relative/path.md)\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSiteMirrorFreshness.ps1",
+    "note": "改动仓库内的英文镜像页（仓库内 site/ 必须与一次真实构建逐字节一致）",
+    "patches": [
+      {
+        "file": "site/deployment-checklist/en/index.md",
+        "mode": "append",
+        "content": "\n<!-- zz gate injection probe: mirror freshness drift -->\n"
+      }
+    ]
+  }
+]

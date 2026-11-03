@@ -1,0 +1,48 @@
+[
+  {
+    "gate": "Test-PortalPublicDocContentApplicability.ps1",
+    "note": "在已上架公开文档中写入内部工作项编号（公开面不得出现 W-anp-P* / C-anp-P*）",
+    "patches": [
+      {
+        "file": "docs/README.md",
+        "mode": "append",
+        "content": "\n内部工作项编号 W-anp-P999 用于注入夹具验证公开面洁净。\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSitePublicSurface.ps1",
+    "note": "在已上架 Markdown 中引用内部计划目录路径（S4：不得引用 work-zone/dev/plans；该门禁只扫 Markdown，不扫 html 模板）",
+    "patches": [
+      {
+        "file": "site/index.md",
+        "mode": "append",
+        "content": "\n内部计划路径：work-zone/dev/plans/internal-note\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalWorkItemNumbering.ps1",
+    "note": "在另一个已收口周期的「## 二、W 工作包」节里声明已被本周期占用的 W 号（占用集合用 HashSet 收集，同文件内重复会被去重吞掉，只有跨周期重复占用才是真冲突）",
+    "patches": [
+      {
+        "file": "work-zone/dev/plans/cycles/C-anp-P46.md",
+        "mode": "replace",
+        "old": "| `W-anp-P263` | 遗留分类登记与测试账号清理 |",
+        "content": "| `W-anp-P263` | 遗留分类登记与测试账号清理 |\n| `W-anp-P264` | 注入夹具跨周期重复占用 | 注入验证号段唯一性 | 待开始 |"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalPlanLedgerConsistency.ps1",
+    "note": "把状态总表里的周期号改成不存在的号（状态块 / 状态总表 / 编号登记册三处必须一致）",
+    "patches": [
+      {
+        "file": "work-zone/dev/plans/cycle-status.md",
+        "mode": "replace",
+        "old": "{ \"id\": \"P46\", \"state\": \"closed\", \"trigger\": \"品牌统一与发布一致性收口\", \"seal\": \"v2.1.1\", \"closeout\": \"C-anp-P46-closeout.md\" },",
+        "content": "{ \"id\": \"P96\", \"state\": \"closed\", \"trigger\": \"品牌统一与发布一致性收口\", \"seal\": \"v2.1.1\", \"closeout\": \"C-anp-P46-closeout.md\" },"
+      }
+    ]
+  }
+]

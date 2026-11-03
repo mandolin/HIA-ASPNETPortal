@@ -89,9 +89,21 @@ function Invoke-GateRun {
     #   <zh-CN>夹具参数支持 %ENV% 占位（如 %USERPROFILE%），由脚手架展开，避免把本机绝对路径写进版本库。</zh-CN>
     #   <en>Fixture arguments support %ENV% placeholders (for example %USERPROFILE%), expanded by the harness so machine-specific absolute paths never enter the repository.</en>
     # </lang>
+    # <lang>
+    #   <zh-CN>夹具未声明 args 时，PowerShell 会把空数组在输出流里丢弃成 $null；`@($GateArgs)` 又把 $null 还原成
+    #   一个元素，于是这里会产出一个空字符串参数并被原样传给门禁。声明为 `param()`（无参）的门禁会因此报
+    #   "找不到接受自变量 '' 的位置参数"而基线必红——门禁被误判成"不可证明"。因此显式跳过 null 与空串。</zh-CN>
+    #   <en>When a fixture declares no args, PowerShell drops the empty array from the output stream as $null;
+    #   ` @($GateArgs) ` turns $null back into one element, so an empty-string argument is produced and passed to the gate.
+    #   A gate declaring `param()` (no parameters) then fails the baseline with "a positional parameter cannot be found
+    #   that accepts argument ''" and gets misjudged as unprovable. Therefore null and empty strings are skipped.</en>
+    # </lang>
     $expandedArgs = @()
     foreach ($argument in @($GateArgs)) {
-        $expandedArgs += [System.Environment]::ExpandEnvironmentVariables([string]$argument)
+        if ($null -eq $argument) { continue }
+        $expanded = [System.Environment]::ExpandEnvironmentVariables([string]$argument)
+        if ([string]::IsNullOrEmpty($expanded)) { continue }
+        $expandedArgs += $expanded
     }
 
     $argumentList = if ($GateFile -like '*.mjs') {
@@ -202,6 +214,8 @@ foreach ($fixture in $fixtures) {
     $gate = $fixture.gate
     $note = if ($fixture.PSObject.Properties.Name -contains 'note') { $fixture.note } else { '' }
     $gateArgs = if ($fixture.PSObject.Properties.Name -contains 'args') { @($fixture.args) } else { @() }
+    # <lang><zh-CN>显式兜底成空数组：上面那个 if 语句在 PowerShell 输出流里会丢空数组，赋值结果可能是 $null。</zh-CN><en>Coerce to an empty array explicitly: the if statement above drops an empty array from the output stream, so the assignment may be $null.</en></lang>
+    if ($null -eq $gateArgs) { $gateArgs = @() }
     $patches = @($fixture.patches)
 
     $safeName = ($gate -replace '\.ps1$', '') -replace '[^A-Za-z0-9_.-]', '_'

@@ -26,12 +26,13 @@
   },
   {
     "gate": "Test-PortalVersionConsistency.ps1",
-    "note": "在 CHANGELOG 顶部伪造一个更新的版本段，与程序集/tag 版本脱钩",
+    "note": "把 CHANGELOG 里第一个正式版本条目改成与程序集/tag 脱钩的版本号（旧注入追加到文件末尾，而门禁读的是第一个条目，故注入从未被读到）",
     "patches": [
       {
         "file": "CHANGELOG.md",
-        "mode": "append",
-        "content": "\n## [9.9.9] - 2026-10-12\n\n### 注入夹具\n\n- zz gate injection probe：本段不存在于程序集版本与 tag。\n"
+        "mode": "replace",
+        "old": "## [v2.1.1] - 2026-10-29",
+        "content": "## [v2.9.9] - 2026-10-29"
       }
     ]
   },
