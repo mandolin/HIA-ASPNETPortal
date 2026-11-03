@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-03T19:16:42",
-  "note": "门禁注入法双向证明覆盖索引：proved = 至少有一条「注入即红、还原即绿」的真实记录；notDetected = 夹具存在但注入后门禁仍绿（注入点与门禁观察面不匹配，需重做）；other = 基线不绿 / 还原后仍红 / 夹具错误；neverTouched = 尚无任何注入夹具。统计口径只认证明记录，不认「夹具里出现过门禁名」。",
+  "generatedAt": "2026-11-04T06:01:23",
+  "note": "门禁注入法双向证明覆盖索引：proved = 至少有一条「注入即红、还原即绿」的真实记录；notDetected = 夹具存在但注入后门禁仍绿（假证明，需重做注入点）；other = 基线不绿 / 还原后仍红 / 夹具错误；neverTouched = 尚无任何注入夹具。统计口径只认证明记录，不认「夹具里出现过门禁名」。",
   "registeredCount": 78,
-  "provedCount": 53,
-  "notDetectedCount": 3,
+  "provedCount": 55,
+  "notDetectedCount": 5,
   "otherCount": 2,
-  "neverTouchedCount": 20,
+  "neverTouchedCount": 16,
   "proved": [
     "Build-Solution.ps1",
     "Invoke-PortalTests.ps1",
@@ -21,6 +21,7 @@
     "Test-PortalCodeDocs.ps1",
     "Test-PortalCollaborationWorkflowSmoke.ps1",
     "Test-PortalComplianceBaseline.ps1",
+    "Test-PortalContentModuleDocs.ps1",
     "Test-PortalDataProvider.ps1",
     "Test-PortalDefaultCredentialRisk.ps1",
     "Test-PortalDocumentationReadiness.ps1",
@@ -29,6 +30,7 @@
     "Test-PortalFrontendContracts.ps1",
     "Test-PortalGateCoverageMap.ps1",
     "Test-PortalHiaBoundary.ps1",
+    "Test-PortalI18nContentParity.ps1",
     "Test-PortalL7CriteriaRegistry.ps1",
     "Test-PortalLandingStats.ps1",
     "Test-PortalLegacyCssCompatibility.ps1",
@@ -63,8 +65,10 @@
     "Test-PortalXmlDocumentation.ps1"
   ],
   "notDetected": [
+    "Test-PortalDocumentationExamples.ps1",
     "Test-PortalLocalizationLeakEvidence.mjs",
     "Test-PortalResourceContractEvidence.mjs",
+    "Test-PortalRopCommentBaseline.ps1",
     "Test-PortalSqlCompatibility.ps1"
   ],
   "other": [
@@ -74,12 +78,9 @@
   "neverTouched": [
     "Test-PortalAdminListUiEvidence.mjs",
     "Test-PortalCollaborationLayoutEvidence.mjs",
-    "Test-PortalContentModuleDocs.ps1",
     "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalDependencyVulnerabilityBaseline.ps1",
-    "Test-PortalDocumentationExamples.ps1",
     "Test-PortalHandwrittenPageFreshness.ps1",
-    "Test-PortalI18nContentParity.ps1",
     "Test-PortalIeModeReadiness.ps1",
     "Test-PortalLocalizedNameRuntimeEvidence.ps1",
     "Test-PortalModuleCache.ps1",
@@ -87,7 +88,6 @@
     "Test-PortalP77SupplementEvidence.mjs",
     "Test-PortalPerformanceBaseline.mjs",
     "Test-PortalPlatformEmptyStateEvidence.mjs",
-    "Test-PortalRopCommentBaseline.ps1",
     "Test-PortalRuntimeScreenshotBaseline.ps1",
     "Test-PortalSemanticMarkupEvidence.mjs",
     "Test-PortalTargetEnvironmentEvidenceMap.ps1",

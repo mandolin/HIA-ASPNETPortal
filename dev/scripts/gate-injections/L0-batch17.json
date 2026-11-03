@@ -1,0 +1,26 @@
+[
+  {
+    "gate": "Test-PortalContentModuleDocs.ps1",
+    "note": "把 user-guide 里「公告」模块小节标题改成「通告」（A2：模块文档小节标题须与注册表按词边界一致，改名后不再匹配）",
+    "patches": [
+      {
+        "file": "docs/user-guide.md",
+        "mode": "replace",
+        "old": "### 公告（Announcements）",
+        "content": "### 通告（Announcements）"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalI18nContentParity.ps1",
+    "note": "在 zh-cn.resx 某值里塞入 neutral 没有的占位符 {9}（A1：共享键的 {n} 占位符集合在三份 resx 间必须一致，破坏后该键不一致）",
+    "patches": [
+      {
+        "file": "src/Portal/App_GlobalResources/lang.zh-cn.resx",
+        "mode": "replace",
+        "old": "<value>第 {0} 页；条目数：{1}。</value>",
+        "content": "<value>第 {0} 页；条目数：{1}。{9}</value>"
+      }
+    ]
+  }
+]
