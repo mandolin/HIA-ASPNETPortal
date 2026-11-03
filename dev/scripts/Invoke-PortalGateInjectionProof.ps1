@@ -113,9 +113,44 @@ function Invoke-GateRun {
         @('-NoProfile', '-NoLogo', '-File', $gatePath) + $expandedArgs
     }
 
-    $output = & $runner @argumentList 2>&1
+    # <lang>
+    #   <zh-CN>参数必须以「直接展开数组变量」的方式传给 runner（& $runner $argumentList），不能写成
+    #   splatting（& $runner @argumentList）。实测（2026-11-03，PowerShell 7.6.9）：在同样的上下文里，
+    #   splatting 单元素数组会把 node 的入口参数截断成盘符字母「K」，报 Cannot find module 'K:\…\K'；
+    #   而直接展开同一变量则完整传递（用 node -e 让 node 自报 argv 双向核实过：harness 认为传的与
+    #   node 实际收到的都是完整路径，唯独 splatting 主调用会失败）。ps1 门禁历史上两种写法都正常，
+    #   统一改为直接展开以消除这条隐性差异。</zh-CN>
+    #   <en>Arguments must be passed to the runner by directly expanding the array variable
+    #   (& $runner $argumentList), not via splatting (& $runner @argumentList). Measured on 2026-11-03
+    #   (PowerShell 7.6.9): in the very same context, splatting a single-element array truncates the
+    #   node entry argument to the drive letter "K", producing Cannot find module 'K:\…\K'; directly
+    #   expanding the same variable passes it intact (verified both ways with a node -e probe that makes
+    #   node report its own argv). Gates run via pwsh worked with either form, but both now use direct
+    #   expansion to remove this hidden divergence.</en>
+    # </lang>
+    $output = & $runner $argumentList 2>&1
     $exitCode = $LASTEXITCODE
-    $text = ($output | Out-String).Trim()
+    # <lang>
+    #   <zh-CN>把实际执行的命令行与相关环境变量一并写进证据日志：门禁判定出问题时，第一手要核对的就是
+    #   「到底用什么命令、带了哪些参数、在什么环境变量下跑的」。没有这行，证据日志只能看到门禁自己的输出，
+    #   无法区分「门禁判红」与「调用链把参数/环境弄丢了」。</zh-CN>
+    #   <en>Write the actual command line and the relevant environment variables into the evidence log: when a gate
+    #   misbehaves, the first thing to check is which command ran, with which arguments, under which environment.
+    #   Without this line the log only shows the gate's own output and cannot tell a red verdict apart from a
+    #   harness that lost an argument or an environment variable.</en>
+    # </lang>
+    $envTrace = @()
+    foreach ($envName in @('PORTAL_PLAYWRIGHT_MODULE')) {
+        $envValue = [System.Environment]::GetEnvironmentVariable($envName)
+        if ($envValue) { $envTrace += ($envName + '=' + $envValue) }
+    }
+    $argTrace = @()
+    foreach ($single in @($argumentList)) {
+        $argTrace += ('len=' + ([string]$single).Length + ' [' + ([string]$single) + ']')
+    }
+    $commandTrace = '[harness] ps=' + $PSVersionTable.PSVersion.ToString() + ' runner=' + $runner + ' (len=' + ([string]$runner).Length + ') | argc=' + @($argumentList).Count + ' | args: ' + ($argTrace -join ' ; ')
+    if ($envTrace.Count -gt 0) { $commandTrace += ' | env: ' + ($envTrace -join ' ; ') }
+    $text = (($commandTrace + "`n" + ($output | Out-String)).Trim())
     [System.IO.File]::WriteAllText($LogPath, $text, $utf8NoBom)
     return [PSCustomObject]@{
         ExitCode = $exitCode
