@@ -1,0 +1,12 @@
+{
+  "gate": "Test-PortalHandwrittenPageFreshness.ps1",
+  "note": "破坏手写分区页与 _data/navigation.yml 的契约（S1：分区页 title 必须等于导航分区名）。把 site/sections/changes/index.md 的 title: 变更 改成不在导航中文名里的「变更探针」——双向 S1 都会失败（既查『分区页标题∈导航名』，也反向查『导航名都有对应分区页』），且该页 H1「变更」≠ title 还会顺带触发 S3。门禁是 L0 静态（扫 site/ 下 index.md，不依赖站点运行），破坏即红、还原即绿。",
+  "patches": [
+    {
+      "file": "site/sections/changes/index.md",
+      "mode": "replace",
+      "old": "title: 变更",
+      "content": "title: 变更探针"
+    }
+  ]
+}

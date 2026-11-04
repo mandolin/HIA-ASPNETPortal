@@ -1,0 +1,12 @@
+{
+  "gate": "Test-PortalTargetEnvironmentEvidenceMap.ps1",
+  "note": "破坏 A5 可发现性：运维文档 docs/operations-runbook.md 必须点名一键证据包 Invoke-PortalTargetEnvironmentEvidencePack.ps1（门禁正则 Invoke-PortalTargetEnvironmentEvidencePack\\.ps1）。把 L149 的点名去掉 .ps1 后缀，使文档不再点名该文件名，A5 失败（有工具没人知道 = 没交付）。门禁是 L0 静态（读 docs/operations-runbook.md 与 dev/target-environment-evidence.json），不依赖站点运行；仅改文档点名，不动台账结构（A2/A3/A4 不受影响）。",
+  "patches": [
+    {
+      "file": "docs/operations-runbook.md",
+      "mode": "replace",
+      "old": "& 'dev\\scripts\\Invoke-PortalTargetEnvironmentEvidencePack.ps1'",
+      "content": "& 'dev\\scripts\\Invoke-PortalTargetEnvironmentEvidencePack'"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "gate": "Test-PortalDependencyVulnerabilityBaseline.ps1",
+  "note": "破坏 A1 清单对齐（default-deny：登记表↔现实 packages.config 必须一致）。把 docs/third-party-dependencies.md 里 System.Data.SQLite.Core 的锁定版本 1.0.119.0 改成现实中不存在的 1.0.999.0——版本漂移触发 A1 Fail（门禁 SYNOPSIS 明示 version drift → must Fail）。门禁是 L0 静态，不依赖站点运行；仅改登记表版本字段，不动 dev/dependency-baseline.json 与 packages.config。",
+  "patches": [
+    {
+      "file": "docs/third-party-dependencies.md",
+      "mode": "replace",
+      "old": "| `System.Data.SQLite.Core` | `1.0.119.0` |",
+      "content": "| `System.Data.SQLite.Core` | `1.0.999.0` |"
+    }
+  ]
+}
