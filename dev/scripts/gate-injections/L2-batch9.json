@@ -1,0 +1,12 @@
+{
+  "gate": "Test-PortalRuntimeScreenshotBaseline.ps1",
+  "note": "静态注入（此门禁实为 L0，校验截图采集工具是否固化可复现规范 + 清单一致，无需站点/登录）：把采集工具 Capture-PortalRuntimeScreenshots.mjs 的 viewport-only 规范 fullPage: false 改为 fullPage: true，破坏门禁 A1 的正则匹配 fullPage:\\s*false，应使 A1 失败→exit 1；还原即绿。此门禁此前被索引误归为运行期（未触及），实为静态可注入。",
+  "patches": [
+    {
+      "file": "dev/scripts/Capture-PortalRuntimeScreenshots.mjs",
+      "mode": "replace",
+      "old": "fullPage: false,",
+      "content": "fullPage: true,"
+    }
+  ]
+}
