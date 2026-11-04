@@ -1,0 +1,22 @@
+{
+  "gate": "Test-PortalSemanticMarkupEvidence.mjs",
+  "note": "真实运行期注入：去掉 EnterpriseCapabilityWorkbench 模块表格首个 <th> 的 scope=\"col\" 属性，使前台 workbench 页面（tabid 1010，front-workbench，SemanticMarkupEvidence 检查项，运行时渲染 th=7 且全部带 scope）出现一个无 scope 的 th；门禁 after 档断言整页 th 必须带 scope，应抓到该缺陷。同时改 src/Portal 与 Web 两个副本（th 行一致）以命中运行站点物理路径 src/Portal；ASP.NET 在改动 .ascx 标记后会自动重编译该文件。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright",
+    "PORTAL_P82_PHASE": "after"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "mode": "replace",
+      "old": "<th scope=\"col\"><%= lang.EnterpriseCapabilityWorkbench_ColumnUtc %></th>",
+      "content": "<th><%= lang.EnterpriseCapabilityWorkbench_ColumnUtc %></th>"
+    },
+    {
+      "file": "Web/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "mode": "replace",
+      "old": "<th scope=\"col\"><%= lang.EnterpriseCapabilityWorkbench_ColumnUtc %></th>",
+      "content": "<th><%= lang.EnterpriseCapabilityWorkbench_ColumnUtc %></th>"
+    }
+  ]
+}
