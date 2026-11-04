@@ -1,0 +1,23 @@
+{
+  "gate": "Test-PortalModuleRuntimeEvidence.mjs",
+  "note": "未触及转正：该门禁对 4 个模块 target 用 record.facts.modulePresent = html.includes(target.moduleSelector.slice(1)) 判定模块根是否渲染（L216），workbench 的 selector 是 .enterprise-workbench，缺失即置 Fail（L227-229）。注入：用 replaceAll 把渲染源 EnterpriseCapabilityWorkbench.ascx 里所有 enterprise-workbench 串改成 zz-workbench（该串在源码出现 20+ 处，必须全部替换才能让 html.includes 为 false）；.ascx 改动热更生效后 workbench 页 HTML 不再含该串 → modulePresent=false → status=Fail → exit 1；还原即绿。手动预检基线为 4 个 Pass / EXIT=0。同时改 src/Portal 与 Web 两份副本以命中运行站点物理路径。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "mode": "replace",
+      "old": "enterprise-workbench",
+      "content": "zz-workbench",
+      "replaceAll": true
+    },
+    {
+      "file": "Web/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "mode": "replace",
+      "old": "enterprise-workbench",
+      "content": "zz-workbench",
+      "replaceAll": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "gate": "Test-PortalAdminListUiEvidence.mjs",
+  "note": "未触及转正：该门禁以管理员登录逐页采集 5 个后台列表页，其中 rawRoleKeyLeak 断言为 page.locator('body').innerText() 出现 /(Collaborator|Watcher)/ 即置 Fail（L176-179，内部角色键泄漏检测）。注入：在 src/Portal/Admin/WorkItems.aspx 的 <asp:Content> 内插入可见文本 (Collaborator)，.aspx 改动热更生效后该页 innerText 含该串 → rawRoleKeyLeak=true → status=Fail → exit 1；其余 4 页不受影响仍 Pass，但 results.some(status!=='Pass') 已使退出码 1；还原即绿。同时改 Web 副本以命中运行站点物理路径。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/Admin/WorkItems.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n    <div>(Collaborator)</div>"
+    },
+    {
+      "file": "Web/Admin/WorkItems.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n    <div>(Collaborator)</div>"
+    }
+  ]
+}

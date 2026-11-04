@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-04T14:03:17",
+  "generatedAt": "2026-11-04T17:50:21",
   "note": "门禁注入法双向证明覆盖索引：proved = 至少有一条「注入即红、还原即绿」的真实记录；notDetected = 夹具存在但注入后门禁仍绿（假证明，需重做注入点）；other = 基线不绿 / 还原后仍红 / 夹具错误；neverTouched = 尚无任何注入夹具。统计口径只认证明记录，不认「夹具里出现过门禁名」。",
   "registeredCount": 78,
-  "provedCount": 66,
+  "provedCount": 68,
   "notDetectedCount": 1,
-  "otherCount": 1,
-  "neverTouchedCount": 10,
+  "otherCount": 2,
+  "neverTouchedCount": 7,
   "proved": [
     "Build-Solution.ps1",
     "Invoke-PortalTests.ps1",
@@ -43,10 +43,12 @@
     "Test-PortalLogMaintenance.ps1",
     "Test-PortalModuleDocPages.ps1",
     "Test-PortalModulePackageContract.ps1",
+    "Test-PortalModuleRuntimeEvidence.mjs",
     "Test-PortalModuleSkinCoverage.ps1",
     "Test-PortalNavigationShape.ps1",
     "Test-PortalNewModuleReadiness.ps1",
     "Test-PortalOperationsReadiness.ps1",
+    "Test-PortalPerformanceBaseline.mjs",
     "Test-PortalPlaceholderEvidence.mjs",
     "Test-PortalPlanLedgerConsistency.ps1",
     "Test-PortalProductionHardening.ps1",
@@ -79,17 +81,15 @@
     "Test-PortalSqlCompatibility.ps1"
   ],
   "other": [
-    "Invoke-PortalModuleRuntimeGate.ps1"
+    "Invoke-PortalModuleRuntimeGate.ps1",
+    "Test-PortalAdminListUiEvidence.mjs"
   ],
   "neverTouched": [
-    "Test-PortalAdminListUiEvidence.mjs",
     "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalIeModeReadiness.ps1",
     "Test-PortalLocalizedNameRuntimeEvidence.ps1",
     "Test-PortalModuleCache.ps1",
-    "Test-PortalModuleRuntimeEvidence.mjs",
     "Test-PortalP77SupplementEvidence.mjs",
-    "Test-PortalPerformanceBaseline.mjs",
     "Test-PortalPlatformEmptyStateEvidence.mjs",
     "Test-PortalWorkItemReachabilityEvidence.mjs"
   ]

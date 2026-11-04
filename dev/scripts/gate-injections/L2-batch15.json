@@ -1,0 +1,15 @@
+{
+  "gate": "Test-PortalPerformanceBaseline.mjs",
+  "note": "未触及转正：该门禁含纯静态断言 A2——扫描 src/Portal/DesktopModules 与 src/Portal/Admin 下所有 .cs，用正则 private const int (\\w*(?:Limit|PageSize)) = (\\d+) 收集行数上限常量，任一 value > CAP_MAX(100) 即置 Fail（L234-258）。注入：把 src/Portal/DesktopModules/MyWorkItems/MyWorkItems.ascx.cs 的 private const int WorkItemLimit = 20 改成 999 → A2 命中 → exit 1；还原即绿。.cs 改动不影响运行期（站点运行 bin 里已编译 DLL，msbuild 不重编），故门禁的运行期 TTFB 测量部分保持稳定。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/MyWorkItems/MyWorkItems.ascx.cs",
+      "mode": "replace",
+      "old": "private const int WorkItemLimit = 20;",
+      "content": "private const int WorkItemLimit = 999;"
+    }
+  ]
+}
