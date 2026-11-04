@@ -1,0 +1,21 @@
+{
+  "gate": "Test-PortalResourceContractEvidence.mjs",
+  "note": "假证明转正：该门禁从 src/Portal/App_GlobalResources/lang.{zh-cn,en-us}.resx 现读 Signin_EmailOrName 作为期望值，与页面 label[for*=EmailOrName] 的渲染文本比对（resx 值必须真的渲染出来）。旧夹具往 lang.resx 加一个未被引用的键（判据错位，故 not-detected）。正确注入是把运行站点 Signin.ascx 的 <%=lang.Signin_EmailOrName%> 改成硬编码探针文本——.ascx 改动热更生效后页面文本变为探针串、而 resx 期望值不变，zh-CN 与 en-US 两个 locale 的 matches 都变 false → status=Fail → exit 1；还原即绿。同时改 src/Portal 与 Web 两份副本以命中运行站点物理路径。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/Signin.ascx",
+      "mode": "replace",
+      "old": "<%=lang.Signin_EmailOrName%>",
+      "content": "zz-resource-contract-probe"
+    },
+    {
+      "file": "Web/DesktopModules/Signin.ascx",
+      "mode": "replace",
+      "old": "<%=lang.Signin_EmailOrName%>",
+      "content": "zz-resource-contract-probe"
+    }
+  ]
+}

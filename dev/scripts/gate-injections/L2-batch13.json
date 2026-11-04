@@ -1,0 +1,15 @@
+{
+  "gate": "Test-PortalCollaborationLayoutEvidence.mjs",
+  "note": "未触及转正：该门禁除运行期断言外还有纯静态回归——readCommandNames() 从 src/Portal/Admin/CollaborationItems.aspx 源码扫描全部 CommandName=\"...\" 生成序列，与 expectedCommandNames（11 项固定序列）逐项 JSON 比对，不一致则把所有 record 置 Fail（L621-632）。注入：把唯一的 CommandName=\"AddAdministratorComment\" 改为 CommandName=\"ZzAddAdministratorComment\"（CommandName 本身不进 HTML，不干扰运行期按钮断言），静态序列即刻失配 → exit 1；还原即绿。门禁只读 src/Portal 一份 markup，故只改该份。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/Admin/CollaborationItems.aspx",
+      "mode": "replace",
+      "old": "CommandName=\"AddAdministratorComment\"",
+      "content": "CommandName=\"ZzAddAdministratorComment\""
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "gate": "Test-PortalPlaceholderEvidence.mjs",
+  "note": "其它类转正：该门禁对运行站点 9 个目标页（后台 5 + 前台 4）用 page.content() 全页扫描残留占位字面量，zh-CN 扫 (none)/' / Overdue'/(not reviewed)/—，en-US 扫后三者；任一命中即 Fail。此前因站点未在线判为其它，站点在线后基线可绿。注入：在运行站点外壳页 DesktopDefault.aspx 的 <asp:Content> 内插入硬编码 (not reviewed) 元素——前台 4 个 target 均经该外壳页，.aspx 改动热更生效后两个 locale 的 html.includes('(not reviewed)') 都为真 → foundLiterals 非空 → status=Fail → exit 1；还原即绿。同时改 src/Portal 与 Web 两份副本以命中运行站点物理路径。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/DesktopDefault.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n      <div>(not reviewed)</div>"
+    },
+    {
+      "file": "Web/DesktopDefault.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n      <div>(not reviewed)</div>"
+    }
+  ]
+}

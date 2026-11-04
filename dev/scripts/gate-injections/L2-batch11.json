@@ -1,0 +1,21 @@
+{
+  "gate": "Test-PortalLocalizationLeakEvidence.mjs",
+  "note": "假证明转正：该门禁登录后访问 context.tabUrl，取 .employee-profile-correction 区域的 innerText，在 en-US locale 下若含 CJK 字符即 Fail（硬编码中文泄漏到英文界面）。旧夹具把中文 div append 到 ascx 文件末尾（落在 .employee-profile-correction 区域之外），区域文本不含它 → not-detected。正确注入是在该区域内部（标题 div 之后）插入硬编码中文 div——.ascx 改动热更生效后 en-US 的 regionText 含中文 → containsCjk=true → status=Fail → exit 1；zh-CN 档本来允许中文，仍 Pass；还原即绿。同时改 src/Portal 与 Web 两份副本以命中运行站点物理路径。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
+      "mode": "replace",
+      "old": "<div class=\"employee-profile-correction-title\" role=\"heading\" aria-level=\"1\"><%= lang.EmployeeProfileCorrectionRequest_Heading %></div>",
+      "content": "<div class=\"employee-profile-correction-title\" role=\"heading\" aria-level=\"1\"><%= lang.EmployeeProfileCorrectionRequest_Heading %></div>\n  <div>中文硬编码泄漏探针</div>"
+    },
+    {
+      "file": "Web/DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
+      "mode": "replace",
+      "old": "<div class=\"employee-profile-correction-title\" role=\"heading\" aria-level=\"1\"><%= lang.EmployeeProfileCorrectionRequest_Heading %></div>",
+      "content": "<div class=\"employee-profile-correction-title\" role=\"heading\" aria-level=\"1\"><%= lang.EmployeeProfileCorrectionRequest_Heading %></div>\n  <div>中文硬编码泄漏探针</div>"
+    }
+  ]
+}
