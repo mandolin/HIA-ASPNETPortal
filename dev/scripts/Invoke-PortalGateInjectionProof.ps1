@@ -167,7 +167,8 @@ function Apply-Patch {
         [Parameter(Mandatory = $true)][string] $RelativePath,
         [Parameter(Mandatory = $true)][string] $Mode,
         [string] $Content,
-        [string] $Old
+        [string] $Old,
+        [bool] $ReplaceAll = $false
     )
 
     $fullPath = Join-Path $repositoryRoot $RelativePath
@@ -222,11 +223,23 @@ function Apply-Patch {
         }
         'replace' {
             if ([string]::IsNullOrEmpty($normalizedOld)) { throw ("replace patch for $RelativePath is missing 'old'") }
-            $occurrences = ([regex]::Matches($original, [regex]::Escape($normalizedOld))).Count
-            if ($occurrences -ne 1) {
-                throw ("replace patch for $RelativePath matched $occurrences times; exactly one match is required")
+            if ($ReplaceAll) {
+                # <lang>
+                #   <zh-CN>replaceAll：破坏文件中多处相同的标记（如某脚本里出现多次的 &lt;lang&gt; 标签）。字符串 .Replace 会替换全部出现；
+                #   0 次匹配时不抛错——「确保文件里没有这种标记」本就在 0 次时已经满足（某类标记可能在该脚本里本来就不存在）。</zh-CN>
+                #   <en>replaceAll: break a marker that appears many times in a file (e.g. &lt;lang&gt; tags). String .Replace replaces
+                #   every occurrence; 0 matches is not an error — "make sure this marker is gone" is already satisfied when it never
+                #   appeared (a marker type may simply be absent from that script).</en>
+                # </lang>
+                [System.IO.File]::WriteAllText($fullPath, $original.Replace($normalizedOld, $normalizedContent), $utf8NoBom)
             }
-            [System.IO.File]::WriteAllText($fullPath, $original.Replace($normalizedOld, $normalizedContent), $utf8NoBom)
+            else {
+                $occurrences = ([regex]::Matches($original, [regex]::Escape($normalizedOld))).Count
+                if ($occurrences -ne 1) {
+                    throw ("replace patch for $RelativePath matched $occurrences times; exactly one match is required")
+                }
+                [System.IO.File]::WriteAllText($fullPath, $original.Replace($normalizedOld, $normalizedContent), $utf8NoBom)
+            }
         }
         default { throw ("unsupported patch mode: $Mode") }
     }
@@ -314,7 +327,8 @@ foreach ($fixture in $fixtures) {
             $patchContent = $null
             if ($patch.PSObject.Properties.Name -contains 'old') { $patchOld = $patch.old }
             if ($patch.PSObject.Properties.Name -contains 'content') { $patchContent = $patch.content }
-            Apply-Patch -RelativePath $patch.file -Mode $patch.mode -Content $patchContent -Old $patchOld
+            $patchReplaceAll = ($patch.PSObject.Properties.Name -contains 'replaceAll') -and ($patch.replaceAll -eq $true)
+            Apply-Patch -RelativePath $patch.file -Mode $patch.mode -Content $patchContent -Old $patchOld -ReplaceAll $patchReplaceAll
         }
 
         $injected = Invoke-GateRun -GateFile $gate -GateArgs $gateArgs -LogPath (Join-Path $EvidenceDir ($safeName + '.2-injected.log'))

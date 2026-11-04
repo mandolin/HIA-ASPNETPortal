@@ -12,13 +12,35 @@
   },
   {
     "gate": "Test-PortalRopCommentBaseline.ps1",
-    "note": "破坏一个已追踪高风险脚本的 HIA 双语标记（HighRiskMissingHiaLanguageMarkers 必须保持 0；inventory 只扫 Git 已追踪脚本，故必须打已追踪文件；把 Get-PortalMigrationManifest.ps1 的 <lang> 开标签改成 <zzlang>）",
+    "note": "破坏一个已追踪 High 风险脚本（Initialize-PortalTestDatabase 在 inventory 的 highNamePattern 精确列表里，属 RiskLevel=High）的全部 HIA 标记信号：<lang> 标准块、<zh-CN>/<en> locale 标签、.LANG legacy 表面（HasAnyHiaLanguageMarkers = 三者任一存在；破坏全部才能让该脚本判定缺失，使 HighRiskMissingHiaLanguageMarkers 从 0 变 1）。Get-PortalMigrationManifest 名含 Migration 但不在 highNamePattern，属 Medium，故无效。",
     "patches": [
       {
-        "file": "dev/scripts/Get-PortalMigrationManifest.ps1",
+        "file": "dev/scripts/Initialize-PortalTestDatabase.ps1",
+        "mode": "replace",
+        "old": "<zh-CN>",
+        "content": "<zz-CN>",
+        "replaceAll": true
+      },
+      {
+        "file": "dev/scripts/Initialize-PortalTestDatabase.ps1",
+        "mode": "replace",
+        "old": "<en>",
+        "content": "<zzn>",
+        "replaceAll": true
+      },
+      {
+        "file": "dev/scripts/Initialize-PortalTestDatabase.ps1",
         "mode": "replace",
         "old": "<lang>",
-        "content": "<zzlang>"
+        "content": "<zzlang>",
+        "replaceAll": true
+      },
+      {
+        "file": "dev/scripts/Initialize-PortalTestDatabase.ps1",
+        "mode": "replace",
+        "old": ".LANG ",
+        "content": ".ZLANG ",
+        "replaceAll": true
       }
     ]
   }
