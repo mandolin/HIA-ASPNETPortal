@@ -23,8 +23,13 @@
      中英双语的「证明边界 / Proof boundary」小节——把散落在工作文档里的 caveat 变成机器核对的不变量。
      硬断言只针对该清单（本周期七个新门禁 + 今后新增）；既有老门禁未声明者**只作软指标上报**，
      避免一刀切把 L0 打红并掩盖真实缺陷信号（收编路径见软指标输出）。
+  M7 注入证明索引不漂移（新增）：`dev\gate-injection-proof-index.json` 的 proved / notDetected / other / neverTouched
+     四类清单里的每个门禁名，都必须在编排集合中且磁盘文件存在；登记项总数必须等于已接入门禁数。
+     起因是 `W-anp-P267` 曾按错误前缀（`Test-` vs `Invoke-`）搜漏，把确实存在的编排门禁误记为「幽灵门禁 / 文件缺失 /
+     永远无法证明」——索引是覆盖结论的唯一机器事实源，一旦出现不存在的名字或漏项，结论就会静默失真。
+     M7 让这类名字错配在产生当场即被拦住，而不是等到人工复盘才发现。
 
-  证明边界：只证明"地图与门禁集一致、缺口登记质量达标"；**不证明每个门禁的断言强度足够**
+  证明边界：只证明"地图与门禁集一致、缺口登记质量达标、注入证明索引的名字与门禁集一致"；**不证明每个门禁的断言强度足够**
   （强度由各门禁自身的负向测试与证明边界声明承载，本门禁只管"有没有、登记没登记"）。
 
   用法（仓库根目录）：& 'dev\scripts\Test-PortalGateCoverageMap.ps1'
@@ -32,7 +37,7 @@
   退出码：0 全过；1 任一违规。
   有效性验证（注入法，沿用 W83/W87/P112 惯例）：删掉某面的门禁引用（使编排门禁未登记）→ M1 Fail；
   清空某 uncovered 面的 owner → M3 Fail；清空某 partial 面的 boundary → M4 Fail；
-  地图引用幽灵门禁名 → M2 Fail；还原 → Pass。</zh-CN>
+  地图引用幽灵门禁名 → M2 Fail；注入证明索引写入不存在的门禁名或漏项 → M7 Fail；还原 → Pass。</zh-CN>
   <en>`C-anp-P27` (`W-anp-P147`) deliverable: turns "unstateable gate coverage" from prose into a **machine-checkable map**.
   The map file `dev\gate-coverage-map.json` is the human-curated source of truth; this gate keeps it **drift-free and complete**:
 
@@ -59,7 +64,8 @@
   Exit codes: 0 all pass; 1 any violation.
   Effectiveness proof (injection, per the W83/W87/P112 convention): remove a surface's gate reference (leaving a wired gate
   unregistered) → M1 fails; clear an uncovered surface's owner → M3 fails; clear a partial surface's boundary → M4 fails;
-  reference a phantom gate name → M2 fails; restore → Pass.</en>
+  reference a phantom gate name → M2 fails; write a non-existent gate name or drop an entry in the injection-proof index →
+  M7 fails; restore → Pass.</en>
 </lang>
 .EXAMPLE
 <lang>
@@ -197,6 +203,41 @@ foreach ($gate in $wired) {
     if (-not ($text.Contains('证明边界') -or $text.Contains('Proof boundary'))) { $boundaryDebt += $gate }
 }
 
+# <lang>
+#   <zh-CN>M7：注入证明索引是覆盖结论的唯一机器事实源，其四类清单里的每个名字都必须是真实已接入的门禁。
+#   起因是 W-anp-P267 按错误前缀搜漏，把确实存在的 `Invoke-PortalModuleRuntimeGate.ps1` 误记为幽灵门禁；
+#   同时校验"四类清单去重后总数 == wired 总数"，防止漏项让某项门禁静默从覆盖结论里消失。
+#   索引文件缺失直接判 Fail（结论无源），而非软跳过。</zh-CN>
+#   <en>M7: the injection-proof index is the sole machine source of truth for coverage conclusions, so every name in its
+#   four lists must be a real wired gate. Motivation: W-anp-P267 searched with the wrong prefix and mislabelled the
+#   existing `Invoke-PortalModuleRuntimeGate.ps1` as a phantom gate. Also assert that the union of the four lists equals
+#   the wired count, so a dropped entry cannot silently remove a gate from the conclusion. A missing index fails outright
+#   (conclusions without a source), rather than being softly skipped.</en>
+# </lang>
+$indexPath = Join-Path $repoRoot 'dev\gate-injection-proof-index.json'
+$indexGateCount = 0
+if (-not (Test-Path -LiteralPath $indexPath)) {
+    $failures += "M7 注入证明索引不存在：$indexPath（覆盖结论无机器事实源）。"
+}
+else {
+    $proofIndex = Get-Content -LiteralPath $indexPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $indexNames = @()
+    foreach ($listName in @('proved', 'notDetected', 'other', 'neverTouched')) {
+        foreach ($name in @($proofIndex.$listName)) {
+            $indexNames += [string]$name
+        }
+    }
+    $indexNames = @($indexNames | Sort-Object -Unique)
+    $indexGateCount = $indexNames.Count
+    foreach ($name in $indexNames) {
+        if ($wired -notcontains $name) { $failures += "M7 注入证明索引引用的门禁未接入编排：$name。" }
+        if (-not (Test-Path -LiteralPath (Join-Path $scriptsDir $name))) { $failures += "M7 注入证明索引引用的门禁文件不存在：$name。" }
+    }
+    foreach ($gate in $wired) {
+        if ($indexNames -notcontains $gate) { $failures += "M7 已接入门禁未出现在注入证明索引四类清单中：$gate（覆盖结论漏项）。" }
+    }
+}
+
 # ---------------------------------------------------------------------------
 # 统计落盘 + 输出
 # ---------------------------------------------------------------------------
@@ -218,6 +259,7 @@ $report = [pscustomobject]@{
     tooling = @($map.tooling).Count
     boundaryRequired = @($requiredBoundary).Count
     boundaryDebt = $boundaryDebt
+    injectionProofIndexGates = $indexGateCount
     failures = $failures
 }
 [System.IO.File]::WriteAllText($StatsPath, ($report | ConvertTo-Json -Depth 6), [System.Text.UTF8Encoding]::new($false))
@@ -230,6 +272,7 @@ foreach ($id in @($byCoverage.uncovered)) {
     Write-Host ("    未覆盖：{0}（所有者：{1}）" -f $id, $s.owner)
 }
 Write-Host ("证明边界：清单内 {0} 个均已声明；清单外既有门禁未声明 {1} 个（软指标，逐步收编）" -f @($requiredBoundary).Count, @($boundaryDebt).Count)
+Write-Host ("注入证明索引：四类清单去重 {0} 个 / 已接入门禁 {1} 个（M7 双向核对名字与文件）" -f $indexGateCount, $wired.Count)
 Write-Host ("统计已写入：$StatsPath")
 
 if ($failures.Count -gt 0) {

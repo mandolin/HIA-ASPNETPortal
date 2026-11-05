@@ -1,0 +1,18 @@
+{
+  "gate": "Invoke-PortalModuleRuntimeGate.ps1",
+  "note": "其它类转正（长期方案：修门禁根因后验证检出能力）。该门禁是 P83.3 运行期编排层，从数据库自动发现全部启用模块、逐档位验证运行期可加载；此前基线恒红，根因是 Get-ModuleSelector 从 ASCX 推导模块根 selector 时未排除 Visible=false 的服务器容器，选中了 BusinessApplicationRequest.ascx 隐藏 RequestPanel 内的 .business-application-actions（服务端不渲染）。根因修复见 dev/scripts/Invoke-PortalModuleRuntimeGate.ps1：推导前用栈按标签位置剔除隐藏容器子树（支持嵌套），实测 24 个已部署 ASCX 中仅该模块 selector 变化（改为恒渲染的 .business-application-request），其余 23 个不变；修复后基线 Pass（51 实例 / 16 URL / 未覆盖 0）。注入：在 EnterpriseCapabilityWorkbench.ascx 标记层插入未定义符号 <%= ZzUndefinedGateProbe %>，造成该模块**运行期编译失败**并回落到通用错误页——这正是门禁设计要抓的缺陷类型（其注释 L40-44 明说 msbuild 测不到 ASCX 标记层，只在真实站点加载时暴露）；内层 Test-PortalModuleRuntimeEvidence.mjs 的 errorPage 正则命中 → status=Fail → 编排层 exit 1；还原即绿。注意 selector 推导与页面渲染读同一份 src/Portal ASCX，故单纯改 class 会同步改变推导结果而无效（实测 not-detected），必须注入真正的运行期加载缺陷。",
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "mode": "replace",
+      "old": "<div class=\"enterprise-workbench\">",
+      "content": "<div class=\"enterprise-workbench\">\n    <div><%= ZzUndefinedGateProbe %></div>"
+    },
+    {
+      "file": "Web/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "mode": "replace",
+      "old": "<div class=\"enterprise-workbench\">",
+      "content": "<div class=\"enterprise-workbench\">\n    <div><%= ZzUndefinedGateProbe %></div>"
+    }
+  ]
+}

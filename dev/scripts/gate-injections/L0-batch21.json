@@ -1,0 +1,12 @@
+{
+  "gate": "Test-PortalGateCoverageMap.ps1",
+  "note": "M7 防复发有效性证明（注入法）：往注入证明索引的 neverTouched 清单加入一个不存在的门禁名 Test-PortalModuleRuntimeGate.ps1（正是 W-anp-P267 当初按错误前缀误判为幽灵门禁的名字）。M7 会同时报「未接入编排」「文件不存在」以及「漏项/总数不符」方向上的不一致 → exit 1；还原即绿。这从机制上保证：今后只要索引里出现错名或漏项，L0 当场拦住，不必等人工复盘。",
+  "patches": [
+    {
+      "file": "dev/gate-injection-proof-index.json",
+      "mode": "replace",
+      "old": "\"neverTouched\": [",
+      "content": "\"neverTouched\": [\n    \"Test-PortalModuleRuntimeGate.ps1\","
+    }
+  ]
+}

@@ -88,12 +88,19 @@ const userName = context.adminUserName;
 
 // <lang>
 //   <zh-CN>目标页与期望：`expectEmptyState=true` 要求渲染空态；`false` 要求**不得**渲染空态（失败抑制）；
-//   `null` 表示只采集事实不断言（该页数据量随夹具变化）。</zh-CN>
+//   `null` 表示只采集事实不断言（该页数据量随夹具变化）；`auto` 按本次采集到的实际行数判定空态契约
+//   —— 零条必须渲染空态、有数据不得渲染空态。
+//   `admin-workitems` 的列表默认按 Open 筛选，行数随开发库业务数据变化，早先写死 `true` 会在有数据时
+//   把正常页面误判为回归；改为 `auto` 后门禁不再依赖具体数据集，且比固定期望多覆盖"有数据不得误报空态"一侧。</zh-CN>
 //   <en>Targets and expectations: `expectEmptyState=true` requires a rendered empty state; `false` requires that no empty state renders (failure suppression);
-//   `null` collects facts without asserting because the row count depends on fixtures.</en>
+//   `null` collects facts without asserting because the row count depends on fixtures; `auto` judges the empty-state contract
+//   from the row count actually observed — zero rows must render the empty state, and rows present must not.
+//   `admin-workitems` lists the default Open filter, so its row count changes with dev-database business data; the previous
+//   hard-coded `true` misreported a healthy page as a regression whenever rows existed. `auto` removes that data dependency
+//   and additionally covers the "rows present must not falsely show an empty state" side.</en>
 // </lang>
 const targets = [
-  { id: 'admin-workitems', url: 'Admin/WorkItems.aspx', expectEmptyState: true, expectSuppressed: false },
+  { id: 'admin-workitems', url: 'Admin/WorkItems.aspx', expectEmptyState: 'auto', expectSuppressed: false },
   { id: 'admin-businessapplications', url: 'Admin/BusinessApplications.aspx', expectEmptyState: false, expectSuppressed: true },
   { id: 'admin-correctionrequests', url: 'Admin/EmployeeProfileCorrectionRequests.aspx', expectEmptyState: null, expectSuppressed: false },
   { id: 'admin-collaborationitems', url: 'Admin/CollaborationItems.aspx', expectEmptyState: null, expectSuppressed: false },
@@ -163,6 +170,28 @@ try {
         if (record.facts.emptyMarkers.length === 0) {
           record.status = 'Fail';
           record.notes.push('Expected an empty-state wording but no marker matched.');
+        }
+      }
+      // <lang>
+      //   <zh-CN>数据态自适应空态契约：行数由本次页面 HTML 实测，不与任何具体数据集绑定。
+      //   零条时要求空态容器与文案都出现；有数据时要求空态容器不出现（误报空态也是回归）。
+      //   这样门禁在开发库增删业务数据后无需改动仍能给出确定结论。</zh-CN>
+      //   <en>Data-adaptive empty-state contract: the row count comes from this run's page HTML, so no particular dataset is assumed.
+      //   At zero rows both the empty-state container and its wording must appear; with rows present the container must not appear
+      //   (a false empty state is also a regression). The gate therefore keeps a deterministic verdict as dev data changes.</en>
+      // </lang>
+      if (target.expectEmptyState === 'auto') {
+        if (record.facts.dataRowCount === 0 && !record.facts.hasEmptyStateClass) {
+          record.status = 'Fail';
+          record.notes.push('Zero rows but no portal-empty-state container rendered.');
+        }
+        if (record.facts.dataRowCount === 0 && record.facts.emptyMarkers.length === 0) {
+          record.status = 'Fail';
+          record.notes.push('Zero rows but no empty-state wording matched.');
+        }
+        if (record.facts.dataRowCount > 0 && record.facts.hasEmptyStateClass) {
+          record.status = 'Fail';
+          record.notes.push('Rows present but an empty-state container also rendered.');
         }
       }
       if (target.expectEmptyState === false && record.facts.hasEmptyStateClass) {

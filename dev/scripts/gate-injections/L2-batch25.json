@@ -1,15 +1,9 @@
 {
   "gate": "Test-PortalAdminListUiEvidence.mjs",
-  "note": "其它类转正（授权可逆数据库调整）：门禁对 Admin/WorkItems.aspx 硬编码 expectEmptyState: true，而该页默认筛选 Open（WorkItems.aspx.cs 的 BindStatusFilter），开发库有一条正式业务待办 WorkItemId=204/status=Open/by=system 使基线恒红。setup 用 New-PortalAdminListUiStateFixture.ps1 -Action Hide 把它改为 InProgress（CHECK 约束允许、完成字段保持 NULL，不删行、不改完成事实），默认视图即零条 → 空态渲染 → 基线绿；teardown 用 -Action Restore 精确改回 Open。注入：在两份 Admin/WorkItems.aspx 的 <asp:Content> 内插入可见文本 (Collaborator)，门禁 rawRoleKeyLeak 正则 /\\((Collaborator|Watcher)\\)/ 命中 → status=Fail → exit 1；还原即绿。",
+  "note": "其它类转正（长期方案：只修门禁根因，不改任何数据）。门禁此前对 admin-workitems 写死 expectEmptyState: true，而该页默认按 Open 筛选、行数随开发库业务数据变化，有正常业务数据时基线恒红。根因修复见 dev/scripts/Test-PortalAdminListUiEvidence.mjs：改为 expectEmptyState: 'auto'，按本次采集到的 dataRowCount 判定空态契约（零条必须有空态容器与文案、有数据不得误报空态），比固定期望多覆盖一侧且与具体数据集解耦。注入：在两份 Admin/WorkItems.aspx 的 <asp:Content> 内插入可见文本 (Collaborator)，门禁 rawRoleKeyLeak 正则 /\\((Collaborator|Watcher)\\)/ 命中 → status=Fail → exit 1；还原即绿。无需 setup/teardown、无需改数据库。",
   "env": {
     "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
   },
-  "setup": [
-    { "script": "New-PortalAdminListUiStateFixture.ps1", "args": ["-Action", "Hide"] }
-  ],
-  "teardown": [
-    { "script": "New-PortalAdminListUiStateFixture.ps1", "args": ["-Action", "Restore"] }
-  ],
   "patches": [
     {
       "file": "src/Portal/Admin/WorkItems.aspx",

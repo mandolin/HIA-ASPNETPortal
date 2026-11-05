@@ -217,9 +217,45 @@ function Get-ModuleSelector([string] $sourceFile) {
     #   be selected — the assertion then weakens from "the module root exists" to "the module rendered content", which is
     #   still better than no assertion.</en>
     # </lang>
+    # <lang>
+    #   <zh-CN>先从推导输入中剔除 `Visible="false"` 的服务器容器子树：`Visible=false` 的 Panel 及其内容在服务端
+    #   根本不会进入响应，从其中推导出的 class 必然 `html.includes` 找不到，会把健康模块误判为"模块根未渲染"。
+    #   实测 `BusinessApplicationRequest.ascx` 的 `.business-application-actions` 就位于隐藏的 RequestPanel 内，
+    #   而真正的模块根 `.business-application-request` 恒渲染。用栈按标签位置扫描而非简单正则，可正确处理
+    #   嵌套 Panel；只拼接当前不处于隐藏子树内的片段，其余推导逻辑（含 W87 的 legacy 兼容）保持不变。</zh-CN>
+    #   <en>First remove `Visible="false"` server-container subtrees from the derivation input: a hidden Panel and its
+    #   children never reach the response, so a class derived from them can never satisfy `html.includes` and would
+    #   misreport a healthy module as "root not rendered". Measured case: `.business-application-actions` in
+    #   `BusinessApplicationRequest.ascx` sits inside the hidden RequestPanel, while the real root
+    #   `.business-application-request` always renders. A position-ordered stack scan (not a flat regex) handles
+    #   nested Panels; only fragments outside hidden subtrees are concatenated, and the rest of the derivation
+    #   (including the W87 legacy compatibility) is unchanged.</en>
+    # </lang>
+    $visibleBuilder = New-Object System.Text.StringBuilder
+    $panelStack = New-Object 'System.Collections.Generic.Stack[bool]'
+    $hiddenDepth = 0
+    $cursor = 0
+    foreach ($tag in [regex]::Matches($markup, '(?i)<asp:Panel\b[^>]*>|</asp:Panel>')) {
+        # <lang><zh-CN>仅在当前可见时拼接标签之前的片段，隐藏子树内的文本整段丢弃。</zh-CN><en>Only append the fragment before the tag while currently visible; text inside hidden subtrees is dropped wholesale.</en></lang>
+        if ($hiddenDepth -eq 0) {
+            [void]$visibleBuilder.Append($markup.Substring($cursor, $tag.Index - $cursor))
+        }
+        if ($tag.Value -match '(?i)^</') {
+            if ($panelStack.Count -gt 0 -and $panelStack.Pop()) { $hiddenDepth-- }
+        }
+        else {
+            $isHidden = $tag.Value -match '(?i)\bVisible\s*=\s*"false"'
+            $panelStack.Push($isHidden)
+            if ($isHidden) { $hiddenDepth++ }
+        }
+        $cursor = $tag.Index + $tag.Length
+    }
+    if ($hiddenDepth -eq 0) { [void]$visibleBuilder.Append($markup.Substring($cursor)) }
+    $visibleMarkup = $visibleBuilder.ToString()
+
     $counts = @{}
     $shellClasses = @('portal-module-header', 'portal-module-title-wrap', 'portal-module-actions')
-    foreach ($cm in [regex]::Matches($markup, 'class="([^"]+)"')) {
+    foreach ($cm in [regex]::Matches($visibleMarkup, 'class="([^"]+)"')) {
         foreach ($token in ($cm.Groups[1].Value -split '\s+')) {
             if (-not $token -or $shellClasses -contains $token) { continue }
             if (-not $counts.ContainsKey($token)) { $counts[$token] = 0 }
