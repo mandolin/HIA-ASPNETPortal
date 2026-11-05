@@ -1,0 +1,33 @@
+{
+  "gate": "Test-PortalP77SupplementEvidence.mjs",
+  "note": "环境前置补齐尝试：套件 L847-854 声明三类临时 fixture——ReachabilityFixture Seed（造三条待办行）、SupplementFixture DarkTheme（我的待办页签切深色）、MultiInstance（两个额外承载页签各挂一个工作台实例），结束后逆序 MultiInstanceOff / DarkThemeOff / Remove。注入证明工具按 setup 顺序执行、触发应用域回收、teardown 逆序清理。注入：replaceAll 把两份 MyWorkItems.ascx 里 my-work-items 串改成 zz-items，dark-skin-contrast 的 record.facts.modulePresent = html.includes('my-work-items') 变 false → Fail → exit 1；还原即绿。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "setup": [
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Seed"] },
+    { "script": "New-PortalP77SupplementFixture.ps1", "args": ["-Action", "DarkTheme"] },
+    { "script": "New-PortalP77SupplementFixture.ps1", "args": ["-Action", "MultiInstance"] }
+  ],
+  "teardown": [
+    { "script": "New-PortalP77SupplementFixture.ps1", "args": ["-Action", "MultiInstanceOff"] },
+    { "script": "New-PortalP77SupplementFixture.ps1", "args": ["-Action", "DarkThemeOff"] },
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Remove"] }
+  ],
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/MyWorkItems/MyWorkItems.ascx",
+      "mode": "replace",
+      "old": "my-work-items",
+      "content": "zz-items",
+      "replaceAll": true
+    },
+    {
+      "file": "Web/DesktopModules/MyWorkItems/MyWorkItems.ascx",
+      "mode": "replace",
+      "old": "my-work-items",
+      "content": "zz-items",
+      "replaceAll": true
+    }
+  ]
+}

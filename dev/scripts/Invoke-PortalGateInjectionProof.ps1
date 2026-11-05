@@ -246,6 +246,67 @@ function Apply-Patch {
     return $original
 }
 
+# <lang>
+#   <zh-CN>运行期门禁的临时夹具支持（对齐 Invoke-PortalGateSuite.ps1 的 Fixture 编排）：P77 补充证据、
+#   默认主题视觉基线等门禁只在「专用 fixture 已应用」时基线才绿。夹具声明在注入夹具 JSON 的 setup / teardown
+#   数组里，每项形如 { "script": "New-PortalXxxFixture.ps1", "args": ["-Action","Seed"] }；setup 在基线之前
+#   按序执行，teardown 在还原门禁之后按序执行（顺序不能颠倒：还原门禁仍需夹具在场才绿）。</zh-CN>
+#   <en>Temporary-fixture support for runtime gates (mirroring the suite's Fixture orchestration): gates such as the
+#   P77 supplement and the default-theme visual baseline are green only while their dedicated fixtures are applied.
+#   A fixture is declared in the injection-proof JSON as setup / teardown arrays with entries like
+#   { "script": "New-PortalXxxFixture.ps1", "args": ["-Action","Seed"] }; setup runs in order before the baseline,
+#   teardown in order after the restored run (order matters: the restored run still needs the fixture to be green).</en>
+# </lang>
+function Invoke-FixtureStep {
+    param(
+        [Parameter(Mandatory = $true)][string] $Script,
+        [string[]] $StepArgs,
+        [Parameter(Mandatory = $true)][string] $LogPath
+    )
+
+    $scriptPath = Join-Path $gateDirectory $Script
+    if (-not (Test-Path -LiteralPath $scriptPath)) {
+        throw ("fixture script not found: $Script")
+    }
+
+    # <lang>
+    #   <zh-CN>与 Invoke-GateRun 同口径展开 %ENV% 占位并跳过空参数，避免把空串当位置参数传给夹具脚本。</zh-CN>
+    #   <en>Expand %ENV% placeholders and skip empty arguments exactly like Invoke-GateRun, so an empty string is
+    #   never passed to a fixture script as a positional parameter.</en>
+    # </lang>
+    $expandedArgs = @()
+    foreach ($argument in @($StepArgs)) {
+        if ($null -eq $argument) { continue }
+        $expanded = [System.Environment]::ExpandEnvironmentVariables([string]$argument)
+        if ([string]::IsNullOrEmpty($expanded)) { continue }
+        $expandedArgs += $expanded
+    }
+
+    $argumentList = @('-NoProfile', '-NoLogo', '-File', $scriptPath) + $expandedArgs
+    $output = & 'pwsh' $argumentList 2>&1
+    $exitCode = $LASTEXITCODE
+    # <lang><zh-CN>夹具输出单独落盘：基线不绿时第一手要核对的是夹具是否成功 Seed/Apply，而非门禁自身输出。</zh-CN><en>Log fixture output separately: when the baseline is red, check first whether the fixture seeded/applied successfully, not the gate's own output.</en></lang>
+    [System.IO.File]::WriteAllText($LogPath, ('[fixture] ' + $Script + ' ' + ($expandedArgs -join ' ') + "`n" + ($output | Out-String)).Trim(), $utf8NoBom)
+    if ($exitCode -ne 0) {
+        throw ("fixture step failed (exit $exitCode): $Script $($expandedArgs -join ' '); see $LogPath")
+    }
+}
+
+# <lang>
+#   <zh-CN>以完全相同的字节重写 Web.config 触发应用域回收：数据层在构造时把页签/模块实例读入内存快照，
+#   新插入的 fixture 行在回收前对站点不可见（套件实测口径）。内容零变化，故 git diff 为空。</zh-CN>
+#   <en>Rewrite Web.config with byte-identical content to trigger an application-domain recycle: the data layer
+#   snapshots tabs/module instances at construction, so freshly inserted fixture rows stay invisible until a recycle
+#   (measured by the suite). Content is unchanged, so git diff stays empty.</en>
+# </lang>
+function Invoke-PortalAppDomainRecycle {
+    $configPath = Join-Path $repositoryRoot 'src\Portal\Web.config'
+    if (Test-Path -LiteralPath $configPath) {
+        [System.IO.File]::WriteAllBytes($configPath, [System.IO.File]::ReadAllBytes($configPath))
+        Start-Sleep -Seconds 5
+    }
+}
+
 $fixtures = @(Get-Content -LiteralPath $FixturePath -Raw -Encoding UTF8 | ConvertFrom-Json)
 if ($GateFilter) {
     $fixtures = @($fixtures | Where-Object { $GateFilter -contains $_.gate })
@@ -265,6 +326,17 @@ foreach ($fixture in $fixtures) {
     # <lang><zh-CN>显式兜底成空数组：上面那个 if 语句在 PowerShell 输出流里会丢空数组，赋值结果可能是 $null。</zh-CN><en>Coerce to an empty array explicitly: the if statement above drops an empty array from the output stream, so the assignment may be $null.</en></lang>
     if ($null -eq $gateArgs) { $gateArgs = @() }
     $patches = @($fixture.patches)
+    # <lang>
+    #   <zh-CN>setup / teardown 为可选字段：未声明时显式兜底成空数组，避免 PowerShell 把空数组丢成 $null
+    #   后被 @() 还原成一个空元素，进而把空脚本名传给夹具执行器。</zh-CN>
+    #   <en>setup / teardown are optional: coerce to an empty array explicitly, because PowerShell drops an empty
+    #   array into $null and @() would resurrect it as one empty element, passing a blank script name to the runner.</en>
+    # </lang>
+    $setupSteps = if ($fixture.PSObject.Properties.Name -contains 'setup') { @($fixture.setup) } else { @() }
+    if ($null -eq $setupSteps) { $setupSteps = @() }
+    $teardownSteps = if ($fixture.PSObject.Properties.Name -contains 'teardown') { @($fixture.teardown) } else { @() }
+    if ($null -eq $teardownSteps) { $teardownSteps = @() }
+    $setupStarted = $false
 
     $safeName = ($gate -replace '\.ps1$', '') -replace '[^A-Za-z0-9_.-]', '_'
     Write-Host ('--- ' + $gate + ' :: ' + $note)
@@ -313,6 +385,24 @@ foreach ($fixture in $fixtures) {
             }
         }
 
+        # <lang>
+        #   <zh-CN>夹具必须在基线之前应用：这类门禁在 fixture 缺席时基线恒红（实测 P77Supplement / WorkItemReachability），
+        #   注入证明无从建立。应用后统一触发一次应用域回收，让新插入的数据库行对站点可见。</zh-CN>
+        #   <en>Fixtures must be applied before the baseline: these gates are permanently red without their fixture
+        #   (measured for P77Supplement / WorkItemReachability), so no injection proof can be established. A single
+        #   application-domain recycle follows so the newly inserted database rows become visible to the site.</en>
+        # </lang>
+        if ($setupSteps.Count -gt 0) {
+            $setupStarted = $true
+            $setupIndex = 0
+            foreach ($step in $setupSteps) {
+                $setupIndex++
+                $stepArgs = if ($step.PSObject.Properties.Name -contains 'args') { @($step.args) } else { @() }
+                Invoke-FixtureStep -Script $step.script -StepArgs $stepArgs -LogPath (Join-Path $EvidenceDir ($safeName + '.0-setup-' + $setupIndex + '.log'))
+            }
+            Invoke-PortalAppDomainRecycle
+        }
+
         if (-not $SkipBaseline) {
             $baseline = Invoke-GateRun -GateFile $gate -GateArgs $gateArgs -LogPath (Join-Path $EvidenceDir ($safeName + '.1-baseline.log'))
             if ($baseline.ExitCode -ne 0) {
@@ -343,10 +433,15 @@ foreach ($fixture in $fixtures) {
         if ($verdict -eq 'proved') { $verdict = 'harness-error' }
     }
     finally {
-        foreach ($name in $savedEnv.Keys) {
-            [System.Environment]::SetEnvironmentVariable($name, $savedEnv[$name])
-        }
-
+        # <lang>
+        #   <zh-CN>环境变量必须在本夹具的**所有门禁运行与 teardown 之后**才还原：还原门禁（第 3 步）与注入门禁、
+        #   基线门禁必须在同一档位下比较，否则像 PORTAL_SUPPLEMENT_MODES=multi 这类分模式门禁，在还原阶段
+        #   会退回默认双模式而恒红，被误判成 restore-failed（实测 2026-11-05）。</zh-CN>
+        #   <en>Environment variables must be restored only **after all gate runs and teardown for this fixture**:
+        #   the restored run (step 3) must be compared under the same mode as the baseline and injected runs,
+        #   otherwise a mode-selecting gate (e.g. PORTAL_SUPPLEMENT_MODES=multi) falls back to its default
+        #   dual mode at restore time, turns permanently red, and is misreported as restore-failed (measured 2026-11-05).</en>
+        # </lang>
         foreach ($file in $backups.Keys) {
             $fullPath = Join-Path $repositoryRoot $file
             if ($null -eq $backups[$file]) {
@@ -376,6 +471,38 @@ foreach ($fixture in $fixtures) {
                 $verdict = 'restore-failed'
                 $detail = '还原后门禁仍未通过，说明失败并非仅由注入引起（环境残留或还原不完整）'
             }
+        }
+
+        # <lang>
+        #   <zh-CN>teardown 必须在还原门禁**之后**：还原阶段仍需 fixture 在场才绿。即使中途抛错（baseline-failed
+        #   或 setup 失败）也必须清理，避免临时数据库行/主题设置污染后续门禁与开发库。清理失败记为 restore-failed，
+        #   因为残留夹具会让后续证明失真。</zh-CN>
+        #   <en>Teardown must run **after** the restored gate (which still needs the fixture to be green). It also runs
+        #   after any error (baseline-failed or a failed setup) so temporary database rows / theme settings never
+        #   pollute later gates or the development database. A failed teardown is recorded as restore-failed because
+        #   leftover fixtures would distort subsequent proofs.</en>
+        # </lang>
+        if ($setupStarted -and $teardownSteps.Count -gt 0) {
+            $teardownIndex = 0
+            foreach ($step in $teardownSteps) {
+                $teardownIndex++
+                $stepArgs = if ($step.PSObject.Properties.Name -contains 'args') { @($step.args) } else { @() }
+                try {
+                    Invoke-FixtureStep -Script $step.script -StepArgs $stepArgs -LogPath (Join-Path $EvidenceDir ($safeName + '.4-teardown-' + $teardownIndex + '.log'))
+                }
+                catch {
+                    if ($verdict -eq 'proved') {
+                        $verdict = 'restore-failed'
+                        $detail = '夹具清理失败，可能污染后续门禁：' + $_.Exception.Message
+                    }
+                }
+            }
+            Invoke-PortalAppDomainRecycle
+        }
+
+        # <lang><zh-CN>证明闭环后才还原调用方环境变量；无论中途抛错与否都执行，避免污染后续夹具。</zh-CN><en>Restore the caller's environment variables only after the proof closes; this runs on every path, including errors, so later fixtures are unaffected.</en></lang>
+        foreach ($name in $savedEnv.Keys) {
+            [System.Environment]::SetEnvironmentVariable($name, $savedEnv[$name])
         }
     }
 

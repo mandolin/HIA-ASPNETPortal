@@ -1,0 +1,15 @@
+{
+  "gate": "Test-PortalPlatformEmptyStateEvidence.mjs",
+  "note": "未触及转正（基线本就绿，手动实测 11 记录 0 failed）：该门禁的 probeFilteredList 用历史日期区间自行制造零条态，无需外部 fixture；零条态断言 emptyStateCells>0 且空态文案至少匹配一个 emptyStateKeys 的 resx 值（L324-327），期望值由 readResxValue 从 src/Portal/App_GlobalResources/lang.zh-cn.resx 现读。注入：把 Admin_OperationAudits_EmptyNoEntries 的 <value> 改成探针串——门禁期望值变，而页面渲染的是编译进 bin 程序集的资源（resx 源文件改动不触发站点重编译），实际文本不变 → matchedExpected 为空 → status=Fail → exit 1；还原即绿。与已 proved 的 ResourceContract 同一机制（现读源 vs 运行期实际渲染）。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/App_GlobalResources/lang.zh-cn.resx",
+      "mode": "replace",
+      "old": "<value>暂无操作审计记录</value>",
+      "content": "<value>zz-empty-state-probe</value>"
+    }
+  ]
+}

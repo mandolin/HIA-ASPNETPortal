@@ -1,0 +1,20 @@
+{
+  "gate": "Test-PortalDefaultThemeVisualBaseline.mjs",
+  "note": "环境前置补齐后转正：该门禁 A0 要求每个采样页 body 带 portal-theme-default class，依赖 New-PortalDefaultThemeFixture.ps1 -Action Apply 临时切到 Default 回退主题（套件 L928-931 的编排，结束后 Remove 按快照恢复）。注入证明工具新增 setup/teardown 后，Apply 在基线前、Remove 在还原门禁后。注入：用 remove 模式删除基线图 dev/default-theme-visual-baseline.json；门禁 L360-363 明确「基线图不存在 → 观测写入 temp 但不自动放行 → exit 1」（A1 缺失即失败，且 L282 的 continue 只跳过逐页比对，不豁免最终的 exit 1）；还原后基线绿。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "setup": [
+    { "script": "New-PortalDefaultThemeFixture.ps1", "args": ["-Action", "Apply"] }
+  ],
+  "teardown": [
+    { "script": "New-PortalDefaultThemeFixture.ps1", "args": ["-Action", "Remove"] }
+  ],
+  "patches": [
+    {
+      "file": "dev/default-theme-visual-baseline.json",
+      "mode": "remove",
+      "content": ""
+    }
+  ]
+}

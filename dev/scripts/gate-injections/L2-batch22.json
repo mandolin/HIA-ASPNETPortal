@@ -1,0 +1,21 @@
+{
+  "gate": "Test-PortalPlatformEmptyStateEvidence.mjs",
+  "note": "未触及转正（基线本就绿，手动实测 11 记录 0 failed）：门禁靠 td .portal-empty-state 选择器数空态单元格，A 态（有数据）与 C 态（输入无效）都断言 emptyStateCells 必须为 0（L215-217、L305-306），B 态（零条）断言必须 >0。上一版 L2-batch21 改 resx 期望值无效，实测 ASP.NET Web Site 模式会热更重编译 App_GlobalResources，页面文本与期望值同步变化仍匹配。正确注入：在 OperationAudits.aspx 的 <asp:Content> 内插入一个恒渲染的 <table><tr><td><div class=portal-empty-state> 元素，使 A 态与 C 态也出现空态单元格 → 两处 Fail → exit 1；还原即绿。同时改 Web 副本以命中运行站点物理路径。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/Admin/OperationAudits.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n    <table><tr><td><div class=\"portal-empty-state\">zz-probe</div></td></tr></table>"
+    },
+    {
+      "file": "Web/Admin/OperationAudits.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n    <table><tr><td><div class=\"portal-empty-state\">zz-probe</div></td></tr></table>"
+    }
+  ]
+}

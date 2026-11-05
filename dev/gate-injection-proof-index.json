@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-04T17:50:21",
+  "generatedAt": "2026-11-05T08:42:20",
   "note": "门禁注入法双向证明覆盖索引：proved = 至少有一条「注入即红、还原即绿」的真实记录；notDetected = 夹具存在但注入后门禁仍绿（假证明，需重做注入点）；other = 基线不绿 / 还原后仍红 / 夹具错误；neverTouched = 尚无任何注入夹具。统计口径只认证明记录，不认「夹具里出现过门禁名」。",
   "registeredCount": 78,
-  "provedCount": 68,
-  "notDetectedCount": 1,
-  "otherCount": 2,
-  "neverTouchedCount": 7,
+  "provedCount": 72,
+  "notDetectedCount": 0,
+  "otherCount": 3,
+  "neverTouchedCount": 3,
   "proved": [
     "Build-Solution.ps1",
     "Invoke-PortalTests.ps1",
@@ -25,6 +25,7 @@
     "Test-PortalContentModuleDocs.ps1",
     "Test-PortalDataProvider.ps1",
     "Test-PortalDefaultCredentialRisk.ps1",
+    "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalDependencyVulnerabilityBaseline.ps1",
     "Test-PortalDocumentationExamples.ps1",
     "Test-PortalDocumentationReadiness.ps1",
@@ -48,9 +49,11 @@
     "Test-PortalNavigationShape.ps1",
     "Test-PortalNewModuleReadiness.ps1",
     "Test-PortalOperationsReadiness.ps1",
+    "Test-PortalP77SupplementEvidence.mjs",
     "Test-PortalPerformanceBaseline.mjs",
     "Test-PortalPlaceholderEvidence.mjs",
     "Test-PortalPlanLedgerConsistency.ps1",
+    "Test-PortalPlatformEmptyStateEvidence.mjs",
     "Test-PortalProductionHardening.ps1",
     "Test-PortalPublicDocContentApplicability.ps1",
     "Test-PortalPublicDocumentation.ps1",
@@ -69,6 +72,7 @@
     "Test-PortalSitePublicSurface.ps1",
     "Test-PortalSiteTranslationFreshness.ps1",
     "Test-PortalSmoke.ps1",
+    "Test-PortalSqlCompatibility.ps1",
     "Test-PortalSqlVersionMatrix.ps1",
     "Test-PortalTargetEnvironmentEvidenceMap.ps1",
     "Test-PortalThemeResolution.ps1",
@@ -77,20 +81,15 @@
     "Test-PortalWorkItemSmoke.ps1",
     "Test-PortalXmlDocumentation.ps1"
   ],
-  "notDetected": [
-    "Test-PortalSqlCompatibility.ps1"
-  ],
+  "notDetected": [],
   "other": [
     "Invoke-PortalModuleRuntimeGate.ps1",
-    "Test-PortalAdminListUiEvidence.mjs"
+    "Test-PortalAdminListUiEvidence.mjs",
+    "Test-PortalWorkItemReachabilityEvidence.mjs"
   ],
   "neverTouched": [
-    "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalIeModeReadiness.ps1",
     "Test-PortalLocalizedNameRuntimeEvidence.ps1",
-    "Test-PortalModuleCache.ps1",
-    "Test-PortalP77SupplementEvidence.mjs",
-    "Test-PortalPlatformEmptyStateEvidence.mjs",
-    "Test-PortalWorkItemReachabilityEvidence.mjs"
+    "Test-PortalModuleCache.ps1"
   ]
 }

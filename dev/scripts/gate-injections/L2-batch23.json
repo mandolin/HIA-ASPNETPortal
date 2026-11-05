@@ -1,0 +1,15 @@
+{
+  "gate": "Test-PortalSqlCompatibility.ps1",
+  "note": "假证明转正：旧夹具往 Portal_UserCredentials.sql 注入非法 SQL 无效，因迁移脚本只在 -ApplyP5Migrations 开关下才被 Invoke-MigrationFile 读取。正确注入：args 带 -ApplyP5Migrations -Confirm:$false（ConfirmImpact=High 需显式免确认）与 %USERPROFILE% 展开的外置连接串；patch 在该脚本顶部注入独立的 GO 2 行。Get-SqlBatches（L311）正则 ^\\s*GO\\s+\\d+ 命中即在解析阶段 throw 'SQL batch repeat counts are not supported'，而 foreach 枚举前会完整求值 Get-SqlBatches，故抛错发生在任何 ExecuteNonQuery 之前——注入本身对数据库零变更（迁移均为幂等）。baseline 实测 24 检查 0 failed / EXIT=0；注入后 throw → 非零退出；还原即绿。",
+  "args": [
+    "-ConnectionStringsConfigPath", "%USERPROFILE%\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config",
+    "-ApplyP5Migrations", "-Confirm:$false"
+  ],
+  "patches": [
+    {
+      "file": "src/Setup/Portal_UserCredentials.sql",
+      "mode": "append",
+      "content": "\nGO 2\n"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "gate": "Test-PortalWorkItemReachabilityEvidence.mjs",
+  "note": "环境前置补齐后转正：该门禁需 P77 专用造数（三条待办行），套件 L886 声明 New-PortalP77ReachabilityFixture.ps1 -Action Seed / Remove。注入证明工具新增 setup/teardown 编排后，setup 在基线前 Seed 并触发应用域回收，teardown 在还原门禁后 Remove。注入：用 replaceAll 把两份 MyWorkItems.ascx 里 7 处 my-work-items 串改成 zz-items（新串不含原串，html.includes('my-work-items') 才为假）→ modulePresent=false → admin-three-states 判 Fail → exit 1；还原即绿。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "setup": [
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Seed"] }
+  ],
+  "teardown": [
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Remove"] }
+  ],
+  "patches": [
+    {
+      "file": "src/Portal/DesktopModules/MyWorkItems/MyWorkItems.ascx",
+      "mode": "replace",
+      "old": "my-work-items",
+      "content": "zz-items",
+      "replaceAll": true
+    },
+    {
+      "file": "Web/DesktopModules/MyWorkItems/MyWorkItems.ascx",
+      "mode": "replace",
+      "old": "my-work-items",
+      "content": "zz-items",
+      "replaceAll": true
+    }
+  ]
+}
