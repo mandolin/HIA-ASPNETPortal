@@ -112,23 +112,74 @@ function Invoke-PortalQuery {
 }
 
 # <lang>
-#   <zh-CN>三条夹具记录的标题与证据脚本的断言一一对应，改标题必须同时改证据脚本。</zh-CN>
-#   <en>The three fixture titles map one-to-one onto the evidence-script assertions, so a title change requires an evidence change.</en>
+#   <zh-CN>三条夹具记录的标题与证据脚本的断言一一对应，改标题必须同时改证据脚本。
+#   `Summary` 只描述造数意图，**不写任何具体模块定义 ID 或承载页签 ID**：这些是部署事实，会随产品演进变化，
+#   早先写死的「1013 → 1010」「1012 → 1009」「业务申请无模块定义行」在 1012 双挂载与 1067 上线后全部过时，
+#   把过时结论留在造数文本里比没有文本更误导。证据脚本按 `W-anp-P77.1-benchmark.md` L43 的三态契约不变量断言，
+#   不再依赖这些描述。</zh-CN>
+#   <en>The three fixture titles map one-to-one onto the evidence-script assertions, so a title change requires an evidence
+#   change. The `Summary` describes seeding intent only and **contains no module-definition or hosting-tab ids**: those are
+#   deployment facts that evolve. The previously hard-coded "1013 -> 1010", "1012 -> 1009" and "business application has
+#   no module definition" all went stale once 1012 was mounted twice and 1067 went live; leaving stale conclusions in
+#   seeded text is more misleading than having none. The evidence script asserts the three-state invariant per
+#   `W-anp-P77.1-benchmark.md` L43 and no longer depends on these descriptions.</en>
 # </lang>
 $fixtureRows = @(
-    @('CollaborationItem', 'P77-RUNTIME-COLLAB-1', 'P77 运行期验证：协同事项', '可办理目标：协同工作台（模块定义 1013 → 承载页签 1010）', 7),
-    @('EmployeeProfileCorrectionRequest', 'P77-RUNTIME-CORR-1', 'P77 运行期验证：资料更正', '可办理目标：资料更正（模块定义 1012 → 承载页签 1009），且已超期', -2),
-    @('BusinessApplication', 'P77-RUNTIME-BAPP-1', 'P77 运行期验证：业务申请', '不可办理：该业务无模块定义行，反查应降级为提示', 3)
+    @('CollaborationItem', 'P77-RUNTIME-COLLAB-1', 'P77 运行期验证：协同事项', '造数：协同事项待办，用于验证解析器按当前注册事实给出可达链接或降级提示', 7),
+    @('EmployeeProfileCorrectionRequest', 'P77-RUNTIME-CORR-1', 'P77 运行期验证：资料更正', '造数：资料更正待办且已超期，用于验证超期标记与三态契约', -2),
+    @('BusinessApplication', 'P77-RUNTIME-BAPP-1', 'P77 运行期验证：业务申请', '造数：业务申请待办，用于验证解析器按当前注册事实给出可达链接或降级提示', 3)
 )
+
+# <lang>
+#   <zh-CN>权限事实快照：证据脚本是 Node（无 SQL 驱动），而本夹具已持有数据库连接，故由夹具把"当前部署里
+#   非管理员是否该看到待办"这一**权威事实**写成 JSON，证据脚本读取后推导"无权限用户"态的期望。
+#   这样权限配置演进（例如 All Users 被授予 View）后两个脚本都无需改动，且不会把配置决策误报成产品缺陷
+#   （W-anp-P139 口径：环境前置/部署事实 ≠ 代码缺陷）。快照落在 gitignore 的 temp 下，Remove 时一并清理。</zh-CN>
+#   <en>Permission-fact snapshot: the evidence script is Node (no SQL driver) while this fixture already holds a DB
+#   connection, so the fixture writes the **authoritative fact** "should a non-administrator see work items in the current
+#   deployment" to JSON; the evidence script reads it to derive the expectation for the "user without permission" state.
+#   Permission-configuration changes (e.g. All Users being granted View) then require no change to either script, and a
+#   deployment decision is never misreported as a product defect (W-anp-P139: environment/deployment facts are not code
+#   defects). The snapshot lives under gitignored temp and is removed together with the seeded rows.</en>
+# </lang>
+$repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+$factsPath = Join-Path $repoRoot 'temp\p77\reachability\permission-facts.json'
 
 try {
     if ($Action -eq 'Remove') {
         $removed = Invoke-PortalStatement ("DELETE FROM PortalBiz_WorkItems WHERE CreatedBy = N'" + $fixtureMarker + "' AND BusinessId LIKE N'" + $fixtureIdPrefix + "%'")
+        if (Test-Path -LiteralPath $factsPath) { Remove-Item -LiteralPath $factsPath -Force }
         Write-Output ('REMOVED=' + $removed)
         return
     }
 
     if ($Action -eq 'Seed') {
+        # <lang><zh-CN>查询 All Users 角色是否持有待办查看/管理权限：门户把该角色授予所有已登录用户，故它一旦持有，
+        # "无权限用户"在当前部署下就不存在，证据脚本应期望该账号可见（而非期望被挡）。</zh-CN>
+        # <en>Check whether the All Users role holds a work-item view/admin permission: the portal grants that role to
+        # every signed-in user, so once it holds one, a "user without permission" does not exist in this deployment and
+        # the evidence script should expect the account to see the list (rather than expect it to be hidden).</en></lang>
+        $permissionQuery = @'
+SELECT COUNT(*)
+FROM PortalCfg_RolePermissions p
+JOIN Portal_Roles r ON r.RoleID = p.RoleId
+WHERE r.RoleName = N'All Users'
+  AND p.IsEnabled = 1
+  AND (p.PermissionKey = N'Business.WorkItems.View' OR p.PermissionKey = N'Business.WorkItems.Admin');
+'@
+        $allUsersHasPermission = [int](Invoke-PortalQuery $permissionQuery)[0] -gt 0
+        $factsDir = Split-Path -Parent $factsPath
+        if (-not (Test-Path -LiteralPath $factsDir)) { New-Item -ItemType Directory -Force -Path $factsDir | Out-Null }
+        $facts = [pscustomobject]@{
+            generatedUtc = (Get-Date).ToUniversalTime().ToString('o')
+            allUsersHoldsWorkItemPermission = $allUsersHasPermission
+            # <lang><zh-CN>由权限事实直接推导的期望：true 表示非管理员应能看到待办列表。</zh-CN><en>Expectation derived from the permission fact: true means a non-administrator should see the work-item list.</en></lang>
+            nonAdminShouldSeeWorkItems = $allUsersHasPermission
+            basis = 'PortalCfg_RolePermissions x Portal_Roles (All Users), IsEnabled=1, Business.WorkItems.View|Admin'
+        }
+        [System.IO.File]::WriteAllText($factsPath, ($facts | ConvertTo-Json -Depth 4), [System.Text.UTF8Encoding]::new($false))
+        Write-Output ('FACTS nonAdminShouldSeeWorkItems=' + $allUsersHasPermission)
+
         # <lang>
         #   <zh-CN>先清理同标记的历史记录：活动业务对象唯一索引只允许同一业务对象有一个开放/处理中待办，重复执行否则会冲突。</zh-CN>
         #   <en>Clear prior rows with the same marker first, because the active-business unique index allows one open or in-progress work item per business object and a repeated run would otherwise conflict.</en>

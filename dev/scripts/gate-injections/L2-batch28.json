@@ -1,0 +1,21 @@
+{
+  "gate": "Test-PortalLocalizedNameRuntimeEvidence.ps1",
+  "note": "未触及转正（长期方案：修门禁根因后验证检出能力）。门禁此前把 `测试页`/`Test Page`/`首页`/`Home` 等页签名写死在断言里，切到 BusinessWorkflow 档位后导航只渲染该 Profile 允许页签，4 项断言恒红；而门禁自己的证明边界（文件头 L43-45）只要求页签名取对应语言列、不串档，并不要求某个特定页签出现，硬编码本就超出证明边界。根因修复：从 PortalCfg_Tabs 的 (TabName, TabNameEn) 读全部语言列对，按页面实际渲染选出探测目标，断言 zh 命中 TabName 列 / en 命中 TabNameEn 列 / zh 不泄漏 en 页渲染出的英文列值（共享标题页同理）。修复后基线 16 检查 0 failed / EXIT=0，且不写死任何页签名。注入：在两份 Default.master 的 </body> 前插入恒渲染的英文页签名 `Employee Information`（数据库 TabNameEn 列真实值，且 zh 列值为 `员工信息`），使 zh 页面泄漏英文列值 → RT3-ZH-NO-EN-LEAK 失败 → exit 1；还原即绿。这验证了根因修复后本地化串档缺陷仍被抓到。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "patches": [
+    {
+      "file": "src/Portal/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<div>Employee Information</div>\n</body>"
+    },
+    {
+      "file": "Web/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<div>Employee Information</div>\n</body>"
+    }
+  ]
+}

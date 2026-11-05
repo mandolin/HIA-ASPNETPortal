@@ -1,0 +1,27 @@
+{
+  "gate": "Test-PortalWorkItemReachabilityEvidence.mjs",
+  "note": "其它类转正（长期方案：修门禁根因后验证检出能力）。门禁此前把部署事实写死（tabid=1009 / 业务申请必须降级 / 非管理员必被挡），产品演进后基线恒红。根因修复：按 W-anp-P77.1-benchmark.md L43 的设计原文，改为三态契约不变量——每行必须渲染、有链接则每条链接都必须真实可达且不得同时显示降级提示、无链接则必须有降级提示；并让 New-PortalP77ReachabilityFixture.ps1 产出权限事实快照，门禁据此推导 non-admin 态期望（All Users 持有 View 时改验权限门正确放行，并通过 [GATE-NOTE] 显式上报配置漂移而非静默通过）。修复后基线 EXIT=0（三条链接实测可达）。注入：在两份 Default.master 的 </body> 前注入恒渲染的『拒绝访问』文本，使 visitLink 的可达性正则命中 → 所有链接判不可达 → status=Fail → exit 1；还原即绿。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "setup": [
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Seed"] }
+  ],
+  "teardown": [
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Remove"] }
+  ],
+  "patches": [
+    {
+      "file": "src/Portal/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<div>拒绝访问 / Access Denied</div>\n</body>"
+    },
+    {
+      "file": "Web/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<div>拒绝访问 / Access Denied</div>\n</body>"
+    }
+  ]
+}

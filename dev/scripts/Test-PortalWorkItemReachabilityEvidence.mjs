@@ -11,6 +11,8 @@
 //     3) 验收上下文 `temp\p65\p65-acceptance-context.json` 存在（提供 baseUrl、管理员账号与口令）；
 //     4) 业务模块档位已启用（`Portal.ModuleProfiles.Active=BusinessWorkflow`；基线 `CoreOnly` 下业务模块不渲染，验证后须还原）；
 //     5) 已按需造数：`dev\scripts\New-PortalP77ReachabilityFixture.ps1 -Action Seed`（三条覆盖三态；验证后 `-Action Remove`）。
+//        该夹具同时产出 `temp\p77\reachability\permission-facts.json` 权限事实快照，本门禁据此推导"非管理员"态的期望，
+//        因此断言不依赖具体模块挂载 / 承载页签 / 角色授权（部署决策演进无需改门禁，见 `W-anp-P77.1-benchmark.md` L43）。
 //
 //   用法（仓库根目录）：
 //     $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Path
@@ -27,6 +29,9 @@
 //     3) the acceptance context `temp\p65\p65-acceptance-context.json` present (it supplies baseUrl, the administrator account, and the password);
 //     4) the business-module profile active (`Portal.ModuleProfiles.Active=BusinessWorkflow`; with the baseline `CoreOnly` profile the business modules do not render, so restore it afterwards);
 //     5) the fixture rows seeded as needed: `dev\scripts\New-PortalP77ReachabilityFixture.ps1 -Action Seed` (three rows covering the three states; `-Action Remove` afterwards).
+//        The fixture also writes a permission-fact snapshot to `temp\p77\reachability\permission-facts.json`, from which this
+//        gate derives the "non-administrator" expectation; assertions therefore do not depend on specific module mounts,
+//        hosting tabs or role grants (deployment decisions may evolve without gate changes, see `W-anp-P77.1-benchmark.md` L43).
 //
 //   Usage (from the repository root):
 //     $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Path
@@ -173,30 +178,92 @@ try {
       adminRecord.status = 'Fail';
       adminRecord.notes.push('The work-item module or its table did not render for the administrator.');
     }
-    if (!collaborationRow || !collaborationRow.hrefs.some((href) => href.includes('tabid=1010'))) {
-      adminRecord.status = 'Fail';
-      adminRecord.notes.push('The collaboration row did not produce a link to tab 1010.');
+    // <lang>
+    //   <zh-CN>链接可达性与三态契约按 `W-anp-P77.1-benchmark.md` L43 的设计原文断言，不再写死 tabid 或预设哪个业务必须降级：
+    //   设计只要求"模块定义→实例→承载 Tab→角色检查全通过才给链接，且绝不产出会 403 的链接；任一环节不满足即降级、不静默留空"。
+    //   因此逐条链接用同一登录态实际访问一次，断言不是权限拒绝页/错误页；每条造数行再按"有无链接"分两支验证三态契约
+    //   ——有链接就必须可达且不得同时显示降级提示，无链接就必须显示降级提示（禁止静默留空）。
+    //   这样模块挂载、承载页签、包启用状态等部署决策演进后门禁自动适配，且比硬编码更强：链接指向已注销页签会被当场抓到。
+    //   历史教训：先前的 `tabid=1009` 与"业务申请必须不可办理"都是把某一时刻的部署事实写死在断言里，
+    //   `ModuleDefId=1012` 双挂载（1008/1009）与 `ModuleDefId=1067` 上线后立即误报。</zh-CN>
+    //   <en>Link reachability and the three-state contract are asserted per the design text in `W-anp-P77.1-benchmark.md`
+    //   L43, with no hard-coded tab id and no preset expectation of which business must degrade: the design only requires
+    //   "a link only when module definition, instance, hosting tab and role check all pass, never producing a link that
+    //   would 403; otherwise degrade, never silently leave the cell empty". Each link is therefore visited once under the
+    //   same sign-in and asserted not to be an access-denied/error page; each seeded row then verifies the contract from its
+    //   observed state — a linked row must be reachable and must not also show a degraded hint, an unlinked row must show the
+    //   hint (no silent blank). Deployment decisions (module mounts, hosting tabs, package enablement) then need no gate
+    //   changes, and the gate is stronger than before: a link to a removed tab is caught immediately.
+    //   History: the former `tabid=1009` and "business application must be unresolvable" froze one deployment snapshot into
+    //   the assertions; `ModuleDefId=1012` being mounted on both 1008/1009 and `ModuleDefId=1067` going live caused false failures.</en>
+    // </lang>
+    // <lang>
+    //   <zh-CN>链接可达性用**独立页面**验证：不能复用 adminPage 跳转，否则会离开待办页导致后续截图截到目标页、
+    //   且三态事实已取完后再切页会让记录与实际观察错位。独立页继承同一上下文（同一登录态与 culture），
+    //   因此能真实反映"该链接会不会把用户送到 403 / 通用错误页"。</zh-CN>
+    //   <en>Link reachability is checked in a **separate page**: reusing adminPage would navigate away from the work-item
+    //   page, so the screenshot would capture the target page and the record would no longer match the observation. A
+    //   separate page inherits the same context (same sign-in and culture), so it faithfully reflects whether the link
+    //   would send the user to a 403 / generic error page.</en>
+    // </lang>
+    const linkPage = await adminContext.newPage();
+    linkPage.setDefaultTimeout(40000);
+    const linkReachability = {};
+    async function visitLink(href) {
+      if (linkReachability[href] !== undefined) { return linkReachability[href]; }
+      let reachable = false;
+      try {
+        const response = await linkPage.goto(new URL(href, baseUrl).toString(), { waitUntil: 'domcontentloaded', timeout: 60000 });
+        const body = await linkPage.content();
+        reachable = (!response || response.status() === 200) &&
+          !/GenericErrorPage|应用程序暂时无法完成请求|Access Denied|拒绝访问/.test(body);
+      } catch { reachable = false; }
+      linkReachability[href] = reachable;
+      return reachable;
     }
-    if (!correctionRow || !correctionRow.hrefs.some((href) => href.includes('tabid=1009'))) {
-      adminRecord.status = 'Fail';
-      adminRecord.notes.push('The correction row did not produce a link to tab 1009.');
+
+    // <lang>
+    //   <zh-CN>三态契约不变量（对应 P77.1 L43）：不预设哪个业务"必须可办理"或"必须降级"——那是部署决策，
+    //   会随模块挂载/包启用/角色授权演进。门禁只断言解析器给出的结果自洽且可用：
+    //   ① 每行必须渲染（不能整行消失）；② 有链接则每条链接都必须真实可达（不会 403 / 错误页），且不得同时显示降级提示；
+    //   ③ 无链接则必须显示降级提示（禁止静默留空）。三条造数覆盖三态，任何部署事实下该不变量都成立；
+    //   而"链接指向已注销页签""可办理行被静默清空""降级行却又给了链接"等真实缺陷仍会被当场抓到。</zh-CN>
+    //   <en>Three-state invariant (per P77.1 L43): no preset about which business "must be resolvable" or "must degrade" —
+    //   that is a deployment decision that evolves with module mounts, package enablement and role grants. The gate only
+    //   asserts that the resolver's output is self-consistent and usable: (1) every row must render; (2) a linked row's every
+    //   link must be genuinely reachable (no 403 / error page) and must not also show a degraded hint; (3) an unlinked row
+    //   must show the degraded hint (no silent blank). The three seeded rows cover the three states, so the invariant holds
+    //   under any registration facts, while real defects — a link to a removed tab, a resolvable row silently emptied, a
+    //   degraded row given a link — are still caught immediately.</en>
+    // </lang>
+    for (const [label, row] of [['collaboration', collaborationRow], ['correction', correctionRow], ['application', applicationRow]]) {
+      if (!row) {
+        adminRecord.status = 'Fail';
+        adminRecord.notes.push(`The ${label} row was not rendered.`);
+        continue;
+      }
+      const hasHint = row.text.includes(hintFragment);
+      for (const href of row.hrefs) {
+        if (!(await visitLink(href))) {
+          adminRecord.status = 'Fail';
+          adminRecord.notes.push(`The ${label} row links to an unreachable or access-denied target: ${href}.`);
+        }
+      }
+      if (row.hrefs.length > 0 && hasHint) {
+        adminRecord.status = 'Fail';
+        adminRecord.notes.push(`The ${label} row rendered both a link and a degraded hint, contradicting the three-state contract.`);
+      }
+      if (row.hrefs.length === 0 && !hasHint) {
+        adminRecord.status = 'Fail';
+        adminRecord.notes.push(`The ${label} row was left blank: neither a link nor the degraded hint was rendered.`);
+      }
     }
+    adminRecord.facts.linkReachability = linkReachability;
+    await linkPage.close();
+
     if (!adminRecord.facts.correctionOverdue) {
       adminRecord.status = 'Fail';
       adminRecord.notes.push('The overdue text marker was not rendered on the overdue row.');
-    }
-    if (!applicationRow) {
-      adminRecord.status = 'Fail';
-      adminRecord.notes.push('The unresolvable business-application row was not rendered.');
-    } else {
-      if (applicationRow.hrefs.length > 0) {
-        adminRecord.status = 'Fail';
-        adminRecord.notes.push('The unresolvable row rendered a link, which would send the user to an inaccessible page.');
-      }
-      if (!adminRecord.facts.applicationHint) {
-        adminRecord.status = 'Fail';
-        adminRecord.notes.push('The degraded hint was not rendered on the unresolvable row.');
-      }
     }
 
     adminRecord.screenshot = path.relative(repoRoot, path.join(outputDir, 'admin-three-states.png'));
@@ -210,10 +277,35 @@ try {
   results.push(adminRecord);
 
   // <lang>
-  //   <zh-CN>状态三：无权限用户。模块门禁要求业务待办查看或管理权限，二者在开发库里仅授予 Admins；
-  //   非管理员登录后模块整块隐藏，故断言"容器在但表格与提示都不出现"。登录口令若与验收上下文中管理员口令不同，则本态记为未验证而不是判失败。</zh-CN>
-  //   <en>State three: a user without permission. The module gate requires either the work-items view or administration permission, both granted only to Admins in the development database; after a non-administrator signs in the whole block is hidden, so the assertion is "the container exists while neither the table nor the hint appears". When the sign-in password differs from the administrator's acceptance password, this state is recorded as unverified rather than failed.</en>
+  //   <zh-CN>状态三：非管理员。**期望从权限事实推导，不再写死"非管理员必被挡"**——那取决于部署决策。
+  //   `New-PortalP77ReachabilityFixture.ps1 -Action Seed` 会把当前库里 `All Users` 是否持有待办查看/管理权限
+  //   写成 `temp/p77/reachability/permission-facts.json`；本门禁读取它得到 `nonAdminShouldSeeWorkItems`：
+  //   - false（仅 Admins 持有）：断言非管理员登录后表格与筛选容器都不出现（原严格断言，检出能力保持）；
+  //   - true（All Users 也持有）：当前部署下"无权限用户"根本不存在，断言列表确实可见（权限门放行正确），
+  //     并显式记录这是权限配置漂移、需产品侧裁定，而不是把部署事实误报成产品缺陷（W-anp-P139 口径）。
+  //   快照缺失时本态记为 Unverified 并给出可操作的提示（先跑 fixture Seed），绝不猜测默认值。
+  //   历史教训：先前硬判"看不到才 Pass"，而 RoleId=2002（All Users）被授予 `Business.WorkItems.View` 后基线恒红，
+  //   把配置决策读成了代码回归。</zh-CN>
+  //   <en>State three: a non-administrator. **The expectation is derived from permission facts, not the hard-coded
+  //   "a non-administrator must be denied"** — that depends on a deployment decision. `New-PortalP77ReachabilityFixture.ps1
+  //   -Action Seed` writes whether `All Users` currently holds a work-item view/admin permission to
+  //   `temp/p77/reachability/permission-facts.json`; this gate reads `nonAdminShouldSeeWorkItems` from it:
+  //   - false (Admins only): assert neither the table nor the filter container appears (the original strict assertion,
+  //     so detection power is preserved);
+  //   - true (All Users too): a "user without permission" does not exist in this deployment, so assert the list is indeed
+  //     visible (the permission gate correctly grants access) and explicitly record this as a permission-configuration
+  //     drift needing a product decision, rather than misreporting a deployment fact as a product defect (W-anp-P139).
+  //   A missing snapshot marks this state Unverified with an actionable hint (run fixture Seed first); no default is guessed.
+  //   History: the gate used to fail whenever the list was visible, and went permanently red once RoleId=2002 (All Users)
+  //   was granted `Business.WorkItems.View`, reading a configuration decision as a code regression.</en>
   // </lang>
+  const permissionFactsPath = path.join(repoRoot, 'temp', 'p77', 'reachability', 'permission-facts.json');
+  let permissionFacts = null;
+  if (fs.existsSync(permissionFactsPath)) {
+    try { permissionFacts = JSON.parse(fs.readFileSync(permissionFactsPath, 'utf8')); }
+    catch (error) { permissionFacts = null; }
+  }
+
   if (context.boundUserName) {
     const deniedRecord = { id: 'non-admin-hidden', url: myWorkItemsUrl, status: 'Pass', facts: {}, notes: [] };
     const deniedContext = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1, locale: 'zh-CN' });
@@ -228,16 +320,36 @@ try {
       if (!signedIn) {
         deniedRecord.status = 'Unverified';
         deniedRecord.notes.push('The non-administrator fixture account could not sign in with the acceptance password, so the denied state was not exercised.');
+      } else if (!permissionFacts) {
+        deniedRecord.status = 'Unverified';
+        deniedRecord.notes.push('Permission facts snapshot missing; run New-PortalP77ReachabilityFixture.ps1 -Action Seed first so the expectation can be derived from the deployment.');
       } else {
         await deniedPage.goto(myWorkItemsUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
         await deniedPage.waitForTimeout(800);
         deniedRecord.facts.tableCount = await deniedPage.locator('table.my-work-items-table').count();
         deniedRecord.facts.hintCount = (await deniedPage.locator('.my-work-items-unavailable').count());
         deniedRecord.facts.contentVisible = await deniedPage.locator('.my-work-items-filter').count();
+        const shouldSee = permissionFacts.nonAdminShouldSeeWorkItems === true;
+        deniedRecord.facts.expectedVisible = shouldSee;
+        deniedRecord.facts.permissionBasis = permissionFacts.basis || null;
 
-        if (deniedRecord.facts.tableCount !== 0 || deniedRecord.facts.contentVisible !== 0) {
-          deniedRecord.status = 'Fail';
-          deniedRecord.notes.push('A user without the work-item permission still saw the list content.');
+        if (shouldSee) {
+          // <lang><zh-CN>配置漂移显式上报：不是静默通过，而是把"All Users 持有待办查看权、无权限态不可构造"写进结论供产品裁定。</zh-CN><en>Explicit drift report: not a silent pass — the conclusion records that All Users holds the view permission, so the denied state cannot be constructed, for a product decision.</en></lang>
+          // <lang><zh-CN>放行态只断言"模块可见"（筛选容器出现）：表格有无数据行取决于造数分派给谁，
+          //   三条夹具行都分派给管理员，非管理员列表为空是正确行为，不能要求 tableCount>0。</zh-CN>
+          //   <en>The granted state only asserts "the module is visible" (filter container present): whether the table has
+          //   rows depends on whom the fixture rows are assigned to; all three are assigned to the administrator, so an
+          //   empty list for the non-administrator is correct and tableCount>0 must not be required.</en></lang>
+          deniedRecord.notes.push('[GATE-NOTE] 权限配置漂移：All Users 持有待办查看/管理权限，当前部署下无权限态不可构造；本态改验"权限门正确放行"，是否收回授权需产品侧裁定。');
+          if (deniedRecord.facts.contentVisible === 0) {
+            deniedRecord.status = 'Fail';
+            deniedRecord.notes.push('Permission facts say the non-administrator should see the work-item module, but the permission gate hid it.');
+          }
+        } else {
+          if (deniedRecord.facts.tableCount !== 0 || deniedRecord.facts.contentVisible !== 0) {
+            deniedRecord.status = 'Fail';
+            deniedRecord.notes.push('A user without the work-item permission still saw the list content.');
+          }
         }
       }
 

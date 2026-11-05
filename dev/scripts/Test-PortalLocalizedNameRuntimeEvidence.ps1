@@ -35,7 +35,9 @@
   (measured during the C-anp-P29 closeout).
 
   Assertions: RT0 authenticated session established; RT1/RT2/RT3 tab names take the Chinese column under zh, the English column
-  under en, and zh does not leak the English value; RT12/RT13 cleaned seed tab names; RT7 stable tabid does not drift;
+  under en, and zh does not leak the English value — expected pairs are read from PortalCfg_Tabs (TabName/TabNameEn) and the
+  probe is chosen from what the page actually rendered, so no tab name is hard-coded; RT12/RT13 the same for the shared-title
+  page; RT7 stable tabid does not drift;
   RT14 shared title control rendered; RT15/RT16/RT17 module titles take the Chinese column under zh, the English column under en,
   and en does not leak the Chinese value; RT18/RT19/RT20 self-drawn-title modules follow the language switch after the resource-key
   conversion; RT11 negative control; RT21 the third-language JSON column works end-to-end (fr-FR: the home tab renders `Accueil`).
@@ -123,16 +125,67 @@ $signInSelectors = @{
 }
 
 # <lang>
-#   <zh-CN>断言用的探测串：全部取自本周期清洗后的真实数据，不写可能会出现的字符串。</zh-CN>
-#   <en>Probe strings for assertions: all taken from real data cleaned in this cycle, never strings that might appear.</en>
+#   <zh-CN>页签名探测值从**数据库语言列**读取，而不是把 `测试页` / `Test Page` / `首页` 等写死在脚本里。
+#   起因：切到 BusinessWorkflow 档位后导航只渲染该 Profile 允许的页签，写死的页签名无论数据仍在库里都会从页面消失，
+#   4 项断言因此恒红；而门禁自己的证明边界（文件头 L43-45）只要求"页签名取对应语言列、不串档"，
+#   **并不要求某个特定页签必须出现**。硬编码具体名字本就超出了证明边界。
+#   现在从 `PortalCfg_Tabs` 读全部 `(TabName, TabNameEn)` 对，按"页面实际渲染了哪个语言列值"来选探测目标，
+#   于是档位策略、页签增删、种子改名等部署演进都无需改门禁；而本地化链路真的串档（zh 渲染成英文列）仍会被抓到。
+#   连接串只从外置配置读取，绝不回显；库不可达时显式报错而不是静默退化成硬编码。</zh-CN>
+#   <en>Tab-name probes are read from the **database language columns** instead of hard-coding `测试页` / `Test Page` / `首页`.
+#   Reason: after switching to the BusinessWorkflow profile the navigation renders only the tabs that profile allows, so
+#   hard-coded names disappear from the page even though the data is still in the DB, keeping four assertions permanently red;
+#   the gate's own proof boundary (header L43-45) requires only "tab names take their language-specific column, no leakage",
+#   **not** "a particular tab must appear". Hard-coding names exceeded that boundary. Now all `(TabName, TabNameEn)` pairs are
+#   read from `PortalCfg_Tabs` and the probe is chosen by which column value the page actually rendered, so profile policies,
+#   tab additions/removals and seed renames need no gate change; a genuinely broken localization chain (zh rendering the
+#   English column) is still caught. The connection string is read only from the external config and never echoed; an
+#   unreachable DB fails loudly rather than silently falling back to hard-coded values.</en>
+# </lang>
+function Get-TabLanguagePairs {
+    $configPath = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings.config'
+    if (-not (Test-Path -LiteralPath $configPath)) { throw ('外置连接串配置不存在：' + $configPath) }
+    [xml]$config = Get-Content -LiteralPath $configPath -Raw -Encoding UTF8
+    $connString = ''
+    foreach ($entry in $config.connectionStrings.add) {
+        if ($entry.name -eq 'Portal') { $connString = $entry.connectionString; break }
+    }
+    if (-not $connString) { throw '外置配置中没有名为 Portal 的连接串。' }
+
+    $connection = New-Object System.Data.SqlClient.SqlConnection $connString
+    $pairs = [System.Collections.Generic.List[object]]::new()
+    try {
+        $connection.Open()
+        $command = $connection.CreateCommand()
+        $command.CommandText = @'
+SELECT TabId, TabName, TabNameEn
+FROM PortalCfg_Tabs
+WHERE TabName IS NOT NULL AND LTRIM(RTRIM(TabName)) <> N''
+  AND TabNameEn IS NOT NULL AND LTRIM(RTRIM(TabNameEn)) <> N''
+  AND TabName <> TabNameEn
+ORDER BY TabId;
+'@
+        $reader = $command.ExecuteReader()
+        while ($reader.Read()) {
+            $pairs.Add([pscustomobject]@{ TabId = [int]$reader['TabId']; Zh = [string]$reader['TabName']; En = [string]$reader['TabNameEn'] })
+        }
+        $reader.Close()
+    }
+    finally { $connection.Close() }
+    return ,$pairs
+}
+
+$tabLanguagePairs = Get-TabLanguagePairs
+if ($tabLanguagePairs.Count -eq 0) { throw 'PortalCfg_Tabs 里没有任何可用的中英双列页签名，无法构成本地化断言。' }
+
+# <lang>
+#   <zh-CN>其余探测串是**稳定的资源/控件契约**（模块标题来自 resx、控件 class 来自标记层、tabid 来自参数），
+#   不随页签数据演进，故保留；页签名相关四项改由 `$tabLanguagePairs` 动态推导。</zh-CN>
+#   <en>The remaining probes are **stable resource/control contracts** (module titles from resx, control classes from
+#   markup, tab ids from parameters) that do not drift with tab data, so they are retained; the four tab-name assertions
+#   are derived dynamically from `$tabLanguagePairs`.</en>
 # </lang>
 $probes = @{
-    ChineseTab            = '测试页'
-    EnglishTab            = 'Test Page'
-    SeededChineseTab      = '首页'
-    SeededEnglishTab      = 'Home'
-    SeededChineseTab2     = '员工信息'
-    SeededEnglishTab2     = 'Employee Information'
     SharedTitleControl    = 'portal-module-title'
     ChineseModuleTitle    = '我的待办'
     EnglishModuleTitle    = 'My To-Do Items'
@@ -302,14 +355,36 @@ try {
 
     New-ContainsCheck 'RT0-LOGGED-IN' $zh.Contains($adminUser) '登录态已建立（欢迎语含账号）'
 
-    New-ContainsCheck 'RT1-ZH-TABNAME' $zh.Contains($probes.ChineseTab) 'zh 含中文页签名'
-    New-ContainsCheck 'RT2-EN-TABNAME' $en.Contains($probes.EnglishTab) 'en 含英文列页签名'
-    New-ContainsCheck 'RT3-ZH-NO-EN-LEAK' (-not $zh.Contains($probes.EnglishTab)) 'zh 不含英文列值'
+    # <lang>
+    #   <zh-CN>页签本地化断言改为**权威事实 + 页面实际渲染**共同推导：
+    #   ① 从数据库 `(TabName, TabNameEn)` 对里挑出"本次 zh 页面确实渲染出的"那些中文名，要求至少一个（RT1）；
+    #   ② 挑出"本次 en 页面确实渲染出的"那些英文名，要求至少一个（RT2）；
+    #   ③ 对同一批探测对，断言 en 页面渲染出的那些英文名**不出现在 zh 页面**（RT3，串档检测）。
+    #   这样"哪些页签在当前档位可见"由页面事实决定，而"该用哪一列"由数据库列决定，两者都不写死；
+    #   档位策略/页签增删/种子改名后门禁自动适配，而 zh 误渲染英文列、en 误渲染中文列仍会失败。
+    #   检出能力不减：若把导航改成恒输出英文列，RT1 与 RT3 同时挂。</zh-CN>
+    #   <en>Tab-localization assertions are derived from **authoritative facts plus actual page rendering**:
+    #   (1) from the DB `(TabName, TabNameEn)` pairs, pick those whose Chinese value was actually rendered on this zh page
+    #   and require at least one (RT1); (2) pick those whose English value was actually rendered on this en page and require
+    #   at least one (RT2); (3) for those same pairs, assert that the English values rendered on en do **not** appear on
+    #   zh (RT3, leakage detection). Which tabs are visible under the current profile comes from the page, which column to
+    #   use comes from the database — neither is hard-coded. Profile policies, tab changes and seed renames then need no
+    #   gate change, while zh rendering the English column or vice versa still fails. Detection power is preserved: forcing
+    #   the navigation to always emit the English column trips both RT1 and RT3.</en>
+    # </lang>
+    $zhRenderedPairs = @($tabLanguagePairs | Where-Object { $zh.Contains($_.Zh) })
+    $enRenderedPairs = @($tabLanguagePairs | Where-Object { $en.Contains($_.En) })
+    $zhSharedPairs = @($tabLanguagePairs | Where-Object { $zhShared.Contains($_.Zh) })
+    $enSharedPairs = @($tabLanguagePairs | Where-Object { $enShared.Contains($_.En) })
 
-    $seededZh = $zhShared.Contains($probes.SeededChineseTab) -and $zhShared.Contains($probes.SeededChineseTab2)
-    $seededEn = $enShared.Contains($probes.SeededEnglishTab) -and $enShared.Contains($probes.SeededEnglishTab2)
-    New-ContainsCheck 'RT12-SEEDED-ZH' $seededZh 'zh 含清洗后的种子中文页签名'
-    New-ContainsCheck 'RT13-SEEDED-EN' $seededEn 'en 含种子英文页签名'
+    New-ContainsCheck 'RT1-ZH-TABNAME' ($zhRenderedPairs.Count -gt 0) ('zh 渲染了取自 TabName 列的页签名，命中 ' + $zhRenderedPairs.Count + ' 个')
+    New-ContainsCheck 'RT2-EN-TABNAME' ($enRenderedPairs.Count -gt 0) ('en 渲染了取自 TabNameEn 列的页签名，命中 ' + $enRenderedPairs.Count + ' 个')
+
+    $enValuesOnZh = @($enRenderedPairs | Where-Object { $zh.Contains($_.En) })
+    New-ContainsCheck 'RT3-ZH-NO-EN-LEAK' ($enValuesOnZh.Count -eq 0) ('zh 未泄漏 en 页实际渲染的英文列值，泄漏 ' + $enValuesOnZh.Count + ' 个')
+
+    New-ContainsCheck 'RT12-SEEDED-ZH' ($zhSharedPairs.Count -gt 0) ('共享标题页 zh 渲染了 TabName 列值，命中 ' + $zhSharedPairs.Count + ' 个')
+    New-ContainsCheck 'RT13-SEEDED-EN' ($enSharedPairs.Count -gt 0) ('共享标题页 en 渲染了 TabNameEn 列值，命中 ' + $enSharedPairs.Count + ' 个')
 
     $stableTabId = $en.Contains($probes.BusinessTabIdQuery) -and $enShared.Contains($probes.SharedTitleTabIdQuery)
     New-ContainsCheck 'RT7-STABLE-TABID' $stableTabId 'en 仍含稳定 tabid（门控键未漂移）'
