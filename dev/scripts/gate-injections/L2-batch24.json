@@ -1,0 +1,21 @@
+{
+  "gate": "Test-PortalModuleCache.ps1",
+  "note": "未触及转正（连库 + 启隔离 IIS 站点，但门禁自包含：自己启停端口 40004 的独立站点、写临时模块/定义行与包状态、finally 全部清理，手动实测基线 EXIT=0）。该门禁以 Invoke-WebRequest 取原始 HTML，L497 断言「停用包」状态不得再出现 DesktopModules/ModuleProbe/Styles/ModuleProbe.css。注入：在恒渲染的母版页 Default.master 的 </body> 前插入含该串的 HTML 注释——首次渲染的 Assert-Contains（L463）仍通过，但禁用态 disabledHtml 也含该串 → Assert-DoesNotContain 抛错 → exit 1；还原即绿。注入对数据库零变更（门禁自己写的临时状态由它自己的 finally 清理）。同时改 src/Portal 与 Web 两份副本以命中运行站点物理路径。注意 args 需带 %USERPROFILE% 展开的外置连接串（套件 L802 同口径）。",
+  "args": [
+    "-ConnectionStringsConfigPath", "%USERPROFILE%\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config"
+  ],
+  "patches": [
+    {
+      "file": "src/Portal/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<!-- DesktopModules/ModuleProbe/Styles/ModuleProbe.css -->\n</body>"
+    },
+    {
+      "file": "Web/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<!-- DesktopModules/ModuleProbe/Styles/ModuleProbe.css -->\n</body>"
+    }
+  ]
+}
