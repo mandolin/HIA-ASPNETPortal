@@ -23,8 +23,10 @@
      中英双语的「证明边界 / Proof boundary」小节——把散落在工作文档里的 caveat 变成机器核对的不变量。
      硬断言只针对该清单（本周期七个新门禁 + 今后新增）；既有老门禁未声明者**只作软指标上报**，
      避免一刀切把 L0 打红并掩盖真实缺陷信号（收编路径见软指标输出）。
-  M7 注入证明索引不漂移（新增）：`dev\gate-injection-proof-index.json` 的 proved / notDetected / other / neverTouched
-     四类清单里的每个门禁名，都必须在编排集合中且磁盘文件存在；登记项总数必须等于已接入门禁数。
+  M7 注入证明索引不漂移：`dev\gate-injection-proof-index.json` 的 proved / notDetected / other / neverTouched /
+     notApplicable **五类**清单里的每个门禁名，都必须在编排集合中且磁盘文件存在；去重总数必须等于已接入门禁数。
+     `notApplicable`（已评估并裁定不适用）必须与事实源台账 `dev\gate-injection-proof-not-applicable.json` 逐项一致且带依据，
+     且不得同时出现在 proved 或 neverTouched 中——防止把某门禁悄悄标成"不适用"来抬高覆盖率。
      起因是 `W-anp-P267` 曾按错误前缀（`Test-` vs `Invoke-`）搜漏，把确实存在的编排门禁误记为「幽灵门禁 / 文件缺失 /
      永远无法证明」——索引是覆盖结论的唯一机器事实源，一旦出现不存在的名字或漏项，结论就会静默失真。
      M7 让这类名字错配在产生当场即被拦住，而不是等到人工复盘才发现。
@@ -215,18 +217,30 @@ foreach ($gate in $wired) {
 #   (conclusions without a source), rather than being softly skipped.</en>
 # </lang>
 $indexPath = Join-Path $repoRoot 'dev\gate-injection-proof-index.json'
+$ledgerPath = Join-Path $repoRoot 'dev\gate-injection-proof-not-applicable.json'
 $indexGateCount = 0
+$notApplicableCount = 0
 if (-not (Test-Path -LiteralPath $indexPath)) {
     $failures += "M7 注入证明索引不存在：$indexPath（覆盖结论无机器事实源）。"
 }
 else {
     $proofIndex = Get-Content -LiteralPath $indexPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    # <lang>
+    #   <zh-CN>五类清单：proved / notDetected / other / neverTouched 是覆盖结论的四种状态，
+    #   `notApplicable` 是「已评估并裁定不适用」——它也是结论的一种，必须纳入并集核对，
+    #   否则这类门禁会被误报成"覆盖结论漏项"。同时不能把 notApplicable 混进 proved 去凑覆盖率。</zh-CN>
+    #   <en>Five lists: proved / notDetected / other / neverTouched are the four coverage states, while `notApplicable`
+    #   means "evaluated and adjudicated not applicable" — also a conclusion, so it must join the union check, otherwise
+    #   such a gate is misreported as a dropped entry. It must never be mixed into proved to inflate coverage.</en>
+    # </lang>
     $indexNames = @()
-    foreach ($listName in @('proved', 'notDetected', 'other', 'neverTouched')) {
-        foreach ($name in @($proofIndex.$listName)) {
-            $indexNames += [string]$name
-        }
+    $byList = [ordered]@{}
+    foreach ($listName in @('proved', 'notDetected', 'other', 'neverTouched', 'notApplicable')) {
+        $names = @(@($proofIndex.$listName) | ForEach-Object { [string]$_ })
+        $byList[$listName] = $names
+        foreach ($name in $names) { $indexNames += $name }
     }
+    $notApplicableCount = @($byList['notApplicable']).Count
     $indexNames = @($indexNames | Sort-Object -Unique)
     $indexGateCount = $indexNames.Count
     foreach ($name in $indexNames) {
@@ -234,7 +248,41 @@ else {
         if (-not (Test-Path -LiteralPath (Join-Path $scriptsDir $name))) { $failures += "M7 注入证明索引引用的门禁文件不存在：$name。" }
     }
     foreach ($gate in $wired) {
-        if ($indexNames -notcontains $gate) { $failures += "M7 已接入门禁未出现在注入证明索引四类清单中：$gate（覆盖结论漏项）。" }
+        if ($indexNames -notcontains $gate) { $failures += "M7 已接入门禁未出现在注入证明索引五类清单中：$gate（覆盖结论漏项）。" }
+    }
+    if ($indexNames.Count -ne $wired.Count) {
+        $failures += ("M7 注入证明索引五类清单去重 {0} 个 ≠ 已接入门禁 {1} 个（重复或漏项）。" -f $indexNames.Count, $wired.Count)
+    }
+    foreach ($name in @($byList['notApplicable'])) {
+        if ($byList['proved'] -contains $name) { $failures += "M7 已裁定不适用的门禁同时出现在 proved 中：$name（不得计入覆盖）。" }
+        if ($byList['neverTouched'] -contains $name) { $failures += "M7 已裁定不适用的门禁同时出现在 neverTouched 中：$name（结论自相矛盾）。" }
+    }
+
+    # <lang>
+    #   <zh-CN>索引的 notApplicable 必须与事实源台账逐项一致，且台账条目带非空依据。
+    #   这样「已裁定不适用」不是索引里的一句自述，而是可追溯到裁定依据的机器核对结论；
+    #   后续批次不能悄悄把某门禁标成不适用来抬高覆盖率。</zh-CN>
+    #   <en>The index's notApplicable list must match the fact-source ledger entry by entry, and each ledger entry must
+    #   carry a non-empty basis. "Adjudicated not applicable" is then not a self-declaration in the index but a
+    #   machine-checked conclusion traceable to its rationale; later batches cannot quietly mark a gate not-applicable
+    #   to inflate coverage.</en>
+    # </lang>
+    $ledgerNames = @()
+    if (-not (Test-Path -LiteralPath $ledgerPath)) {
+        if ($notApplicableCount -gt 0) { $failures += 'M7 索引声明了 notApplicable，但事实源台账不存在：' + $ledgerPath }
+    }
+    else {
+        $ledger = Get-Content -LiteralPath $ledgerPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        foreach ($entry in @($ledger.entries)) {
+            $name = [string]$entry.gate
+            $ledgerNames += $name
+            if ([string]::IsNullOrWhiteSpace([string]$entry.basis)) { $failures += "M7 notApplicable 台账条目缺依据 basis：$name。" }
+            if ($wired -notcontains $name) { $failures += "M7 notApplicable 台账条目不在已接入门禁集中：$name。" }
+            if ($byList['notApplicable'] -notcontains $name) { $failures += "M7 notApplicable 台账条目未出现在索引中：$name。" }
+        }
+        foreach ($name in @($byList['notApplicable'])) {
+            if ($ledgerNames -notcontains $name) { $failures += "M7 索引里的 notApplicable 条目缺台账依据：$name。" }
+        }
     }
 }
 
@@ -260,6 +308,7 @@ $report = [pscustomobject]@{
     boundaryRequired = @($requiredBoundary).Count
     boundaryDebt = $boundaryDebt
     injectionProofIndexGates = $indexGateCount
+    injectionProofNotApplicable = $notApplicableCount
     failures = $failures
 }
 [System.IO.File]::WriteAllText($StatsPath, ($report | ConvertTo-Json -Depth 6), [System.Text.UTF8Encoding]::new($false))
@@ -272,7 +321,7 @@ foreach ($id in @($byCoverage.uncovered)) {
     Write-Host ("    未覆盖：{0}（所有者：{1}）" -f $id, $s.owner)
 }
 Write-Host ("证明边界：清单内 {0} 个均已声明；清单外既有门禁未声明 {1} 个（软指标，逐步收编）" -f @($requiredBoundary).Count, @($boundaryDebt).Count)
-Write-Host ("注入证明索引：四类清单去重 {0} 个 / 已接入门禁 {1} 个（M7 双向核对名字与文件）" -f $indexGateCount, $wired.Count)
+Write-Host ("注入证明索引：五类清单去重 {0} 个 / 已接入门禁 {1} 个｜已裁定不适用 {2} 个（M7 核对名字、文件与台账依据）" -f $indexGateCount, $wired.Count, $notApplicableCount)
 Write-Host ("统计已写入：$StatsPath")
 
 if ($failures.Count -gt 0) {

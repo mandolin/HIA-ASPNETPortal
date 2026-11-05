@@ -16,7 +16,7 @@ title: 第三方依赖审计
 | --- | --- | --- | --- | --- |
 | `System.Data.SQLite.Core` | `1.0.119.0` | 用于验证 .NET Framework 4.8 下 SQLite ADO.NET 能力。 | package 元数据链接至 SQLite Public Domain 版权声明；其 net46 build target 也声明为 Public Domain。 | 仅由独立 proof 项目使用，不进入门户主业务运行路径。 |
 | `Stub.System.Data.SQLite.Core.NetFramework` | `1.0.119.0` | 上一行的同族安装期 stub（net48 target 的 native 运行时安放辅助），与主包同版本锁定。 | 与主包同源：SQLite Public Domain 版权声明。 | 仅随 proof 项目恢复，不进入门户主业务运行路径。 |
-| `playwright` | `1.62.1` | L2 运行期证据/基线门禁（模块运行期、性能基线等）的浏览器自动化运行时。 | Apache-2.0（package.json 声明）。 | **开发期依赖、不入库**：位于 `temp/node_modules/playwright`，经 `PORTAL_PLAYWRIGHT_MODULE` 指向；不进入站点 `bin`、发布包或任何运行路径。 |
+| `playwright` | `1.64.1` | L2 运行期证据/基线门禁（模块运行期、性能基线等）的浏览器自动化运行时。 | Apache-2.0（package.json 声明）。 | **开发期依赖、不入库**：位于 `temp/node_modules/playwright`，经 `PORTAL_PLAYWRIGHT_MODULE` 指向；不进入站点 `bin`、发布包或任何运行路径。 |
 
 ## 机器可读基线与变更铁律
 
@@ -34,4 +34,4 @@ title: 第三方依赖审计
 1. [System.Data.SQLite.Core 1.0.119 NuGet 包页](https://www.nuget.org/packages/System.Data.SQLite.Core/1.0.119)
 2. [SQLite 版权与许可说明](https://www.sqlite.org/copyright.html)
 
-<!-- build-stamp: 4E2B3E73243B -->
+<!-- build-stamp: 4FA65C5CDD0B -->

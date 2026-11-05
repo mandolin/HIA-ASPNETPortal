@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "note": "注入证明「已评估并裁定不适用」事实源：这些门禁不是遗漏（neverTouched），而是经查证后确认在「只改仓库文件」的注入证明范式下没有可用的注入面。裁定与依据集中在此，避免后续批次反复重新评估或为凑覆盖数去改产品语义。新增/移除条目必须连同依据一起改，并由 Test-PortalGateCoverageMap.ps1 的 M7 机器核对：条目必须在套件 wired 集合中且磁盘文件存在。统计口径：notApplicable 不计入 proved，也不计入 neverTouched。",
+  "entries": [
+    {
+      "gate": "Test-PortalIeModeReadiness.ps1",
+      "basis": "只读本机 Edge 安装路径、PATH 中的 msedgedriver/IEDriverServer、以及 Edge 注册表策略（HKLM/HKCU Policies\\Microsoft\\Edge）的报告型门禁，默认 exit 0；全部判据在本机外部，仓库内无注入面。实测两档：默认档 EXIT=0（ReadyForIeModeAutomation=False / ReadyForEnterpriseSiteList=False / EdgeFound=True，其余全 False，并通过 [GATE-NOTE] 显式上报）；-FailWhenNotReady 档 EXIT=1。套件 L1402-1415 已有 [GATE-NOTE] 机制承载「通过但值得注意」的结论，V3 明确裁定不计入 L10 首发硬性判定。属注入证明方法的适用边界，不是门禁缺陷；为该门禁造注册表/驱动注入或降低默认退出码语义都属不可逆本机变更或弱化产品语义，不做。",
+      "decidedBy": "W-anp-P267 注入证明批次",
+      "decidedOn": "2026-11-05",
+      "reEntry": "若将来扩展注入证明范式以纳入可逆的进程级/本机状态注入（例如受控 PATH 覆盖 + -FailWhenNotReady 档位），可重新评估；否则保持不适用。"
+    }
+  ]
+}

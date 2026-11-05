@@ -1,0 +1,12 @@
+{
+  "gate": "Test-PortalGateCoverageMap.ps1",
+  "note": "M7 扩展判据有效性证明：往注入证明索引的 proved 清单里加入 `Test-PortalIeModeReadiness.ps1`（它同时已在 notApplicable 台账/清单里），模拟有人把「已裁定不适用」的门禁又计入 proved 以抬高覆盖率。M7 应报「已裁定不适用的门禁同时出现在 proved 中」及去重总数不符 → exit 1；还原即绿。这保证 notApplicable 是真正机器核对的结论，而不是索引里一句可随意改的自述。",
+  "patches": [
+    {
+      "file": "dev/gate-injection-proof-index.json",
+      "mode": "replace",
+      "old": "\"proved\": [",
+      "content": "\"proved\": [\n    \"Test-PortalIeModeReadiness.ps1\","
+    }
+  ]
+}
