@@ -7,7 +7,13 @@
       "basis": "只读本机 Edge 安装路径、PATH 中的 msedgedriver/IEDriverServer、以及 Edge 注册表策略（HKLM/HKCU Policies\\Microsoft\\Edge）的报告型门禁，默认 exit 0；全部判据在本机外部，仓库内无注入面。实测两档：默认档 EXIT=0（ReadyForIeModeAutomation=False / ReadyForEnterpriseSiteList=False / EdgeFound=True，其余全 False，并通过 [GATE-NOTE] 显式上报）；-FailWhenNotReady 档 EXIT=1。套件 L1402-1415 已有 [GATE-NOTE] 机制承载「通过但值得注意」的结论，V3 明确裁定不计入 L10 首发硬性判定。属注入证明方法的适用边界，不是门禁缺陷；为该门禁造注册表/驱动注入或降低默认退出码语义都属不可逆本机变更或弱化产品语义，不做。",
       "decidedBy": "W-anp-P267 注入证明批次",
       "decidedOn": "2026-11-05",
-      "reEntry": "若将来扩展注入证明范式以纳入可逆的进程级/本机状态注入（例如受控 PATH 覆盖 + -FailWhenNotReady 档位），可重新评估；否则保持不适用。"
+      "reEntry": "若将来扩展注入证明范式以纳入可逆的进程级/本机状态注入（例如受控 PATH 覆盖 + -FailWhenNotReady 档位），可重新评估；否则保持不适用。",
+      "assessment": {
+        "evaluatedOn": "2026-11-05",
+        "decision": "维持 notApplicable，不扩展",
+        "reason": "① 该门禁是报告型，默认 exit 0 且用 [GATE-NOTE] 上报结论，是 V3 明确裁定（不计入 L10 硬性判定）；注入证明要证明的是「门禁能抓到缺陷」，而它设计上就不判红。② 用 -FailWhenNotReady 建立证明必须先让就绪判据可被仓库文件可逆控制：本机 IEDriverServer 不在 PATH，可行解只有造一个名为 IEDriverServer.exe 的伪 driver 文件（需把 .exe 提交进仓库，违背纯文本资产原则且可能触发安全扫描）或改注册表/持久 PATH（不可逆本机变更），两者都是为凑覆盖数改变证明语义。③ 即使做成，证明的是严格档位下「就绪判据变化会抛错」，与套件日常语义不同，78/78 的边际价值低于维护成本与语义混淆风险。④ 真正触发重新设计的是 IE 模式自动化落地（P9 站点清单 / driver 部署 / 企业策略启用），届时由该工作包连同门禁语义一并重新设计，而不是由注入证明包单独扩范式。",
+        "reEvaluatedOnlyWhen": "IE 模式自动化成为实际交付能力，或门禁语义从报告型改为阻断型"
+      }
     }
   ]
 }

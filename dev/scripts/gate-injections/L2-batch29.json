@@ -1,0 +1,30 @@
+{
+  "gate": "Test-PortalP77SupplementEvidence.mjs",
+  "note": "验证根因修复后 dark 对比度断言仍有检出能力。历史：dark 模式原断言写死要求业务申请行渲染 .my-work-items-unavailable 降级提示（ModuleDefId=1067 上线后该行渲染链接，hint=null 导致恒红），旧夹具只能用 PORTAL_SUPPLEMENT_MODES=multi 绕过 dark。现按设计原文（文件头 L30/L49-51，深色皮肤下实际渲染元素须达 WCAG AA 4.5:1）改为按实际形态测量（链接优先、否则降级提示），任一静默留空或对比度不足判 Fail。本夹具只跑 dark 模式，注入：在两份 Default.master 的 </body> 前插入一段 CSS，把待办表格链接与降级提示的前景色改成实测链接背景色 rgb(18, 34, 49)（对比度约 1.0，远低于 4.5）→ measurement.link 与 measurement.resolved 均仍测到但 contrast 不足 → dark-skin-contrast 判 Fail → exit 1；还原即绿。这直接证明「按实际渲染形态测量」的新断言能抓到对比度回归，而不是只靠模块消失类缺陷。setup 造数 + dark 皮肤覆盖，teardown 逆序清理。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright",
+    "PORTAL_SUPPLEMENT_MODES": "dark"
+  },
+  "setup": [
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Seed"] },
+    { "script": "New-PortalP77SupplementFixture.ps1", "args": ["-Action", "DarkTheme"] }
+  ],
+  "teardown": [
+    { "script": "New-PortalP77SupplementFixture.ps1", "args": ["-Action", "DarkThemeOff"] },
+    { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Remove"] }
+  ],
+  "patches": [
+    {
+      "file": "src/Portal/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<style id=\"p267-contrast-probe\">.my-work-items-table a, .my-work-items-unavailable { color: rgb(18, 34, 49) !important; }</style>\n</body>"
+    },
+    {
+      "file": "Web/Default.master",
+      "mode": "replace",
+      "old": "</body>",
+      "content": "<style id=\"p267-contrast-probe\">.my-work-items-table a, .my-work-items-unavailable { color: rgb(18, 34, 49) !important; }</style>\n</body>"
+    }
+  ]
+}

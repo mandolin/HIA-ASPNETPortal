@@ -1,9 +1,8 @@
 {
   "gate": "Test-PortalP77SupplementEvidence.mjs",
-  "note": "环境前置补齐 + 合法档位转正：该门禁支持 PORTAL_SUPPLEMENT_MODES 分模式（L90，默认 dark,multi）。当前开发库正式注册了 ModuleDefId=1067 业务申请模块（挂在 TabId=1103），使 P77 fixture 造数注释所假设的「业务申请无模块定义行→降级为提示」不再成立，dark 模式恒红；而 multi-instance-selection 模式在补齐三类 fixture 后实测 Pass。故用门禁自带的合法档位 PORTAL_SUPPLEMENT_MODES=multi 只跑多实例取舍证明（不删正式注册、不弱化断言），注入：replaceAll 消除两份 MyWorkItems.ascx 的 my-work-items 串 → 该模式依赖的 table.my-work-items-table tbody tr 选择器找不到行 → collaborationLinks 为 null → status=Fail → exit 1；还原即绿。诚实边界：本证明只覆盖 multi 模式，dark 模式因产品注册状态演进需产品侧裁定后再验。",
+  "note": "根因修复后升级为默认双模式证明（原先的诚实边界已消除）。历史：该门禁支持 PORTAL_SUPPLEMENT_MODES 分模式（L90，默认 dark,multi）；因 ModuleDefId=1067 业务申请模块已注册，业务申请行渲染可办理链接而非降级提示，而 dark 模式断言写死要求 hint 元素存在，导致 dark 恒红——旧夹具只能用合法档位 PORTAL_SUPPLEMENT_MODES=multi 证明 multi 模式。长期修法：按 W-anp-P77.1 L43 与门禁自身证明边界（文件头 L30/L49-51，只要求深色皮肤下实际渲染元素达到 WCAG AA 4.5:1），把 dark 断言改为按实际渲染形态测量（链接优先、否则降级提示），两者任一静默留空或对比度不足都判 Fail，不预设业务申请必须降级。修复后完整 L2 套件 18 门禁 0 失败。本夹具去掉 modes 限制，跑默认 dark,multi 双模式；注入：replaceAll 消除两份 MyWorkItems.ascx 的 my-work-items 串 → dark 模式 modulePresent=false、multi 模式 table.my-work-items-table tbody tr 无行 → 两个 record 都 Fail → exit 1；还原即绿。这证明修完根因后双模式仍能抓到真实缺陷，且不删正式注册、不弱化断言。setup 三类 fixture（造数 + dark 皮肤覆盖 + 多实例），teardown 逆序清理。",
   "env": {
-    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright",
-    "PORTAL_SUPPLEMENT_MODES": "multi"
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
   },
   "setup": [
     { "script": "New-PortalP77ReachabilityFixture.ps1", "args": ["-Action", "Seed"] },

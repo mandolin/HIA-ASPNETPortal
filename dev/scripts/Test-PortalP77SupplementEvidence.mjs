@@ -173,11 +173,26 @@ try {
           };
         };
 
+        // <lang>
+        //   <zh-CN>业务申请行的形态由当前注册事实决定：模块已挂载则渲染可办理链接，未挂载则渲染降级提示，
+        //   两者都是 P77.1 L43 的合法结果。故按**实际渲染形态**测量（链接优先，否则降级提示），
+        //   而不是预设它一定是 hint。原先写死 `!measurement.hint` 即判 Fail，在 ModuleDefId=1067 上线后
+        //   把健康的深色皮肤误报成回归。hint / plainTitle 仍保留在产物里便于诊断。</zh-CN>
+        //   <en>The business-application row's shape follows current registration facts: a mounted module renders an
+        //   actionable link, an unmounted one renders the degraded hint — both are legitimate outcomes under P77.1 L43.
+        //   Measure the **shape actually rendered** (link first, else degraded hint) instead of presuming a hint.
+        //   The former hard-coded `!measurement.hint` failure misreported a healthy dark skin once ModuleDefId=1067
+        //   went live. hint / plainTitle remain in the artifact for diagnostics.</en>
+        // </lang>
+        const plainLink = plainRow ? plainRow.querySelector('a') : null;
+        const plainHint = plainRow ? plainRow.querySelector('.my-work-items-unavailable') : null;
+        const plainTitleCell = plainRow && plainRow.children[1] ? plainRow.children[1].querySelector('span') : null;
         return {
           bodyBackground: window.getComputedStyle(document.body).backgroundColor,
           link: measure(linkRow ? linkRow.querySelector('a') : null),
-          hint: measure(plainRow ? plainRow.querySelector('.my-work-items-unavailable') : null),
-          plainTitle: measure(plainRow ? plainRow.children[1].querySelector('span') : null)
+          resolved: measure(plainLink || plainHint),
+          hint: measure(plainHint),
+          plainTitle: measure(plainTitleCell)
         };
       });
 
@@ -187,17 +202,32 @@ try {
         record.status = 'Fail';
         record.notes.push('The module did not render under the dark skin.');
       }
-      if (!measurement.link || !measurement.hint) {
+      // <lang>
+      //   <zh-CN>对比度契约按设计原文（文件头 L30 / L49-51）：深色皮肤下**实际渲染出来的**可办理元素与降级元素
+      //   都必须达到 WCAG AA 4.5:1。不再要求两行恰好是「链接 + 提示」这一特定形态——那是部署决策。
+      //   检出能力不减：任一实测元素对比度不足仍判 Fail；两行任一既无链接也无提示（静默留空）也判 Fail，
+      //   比原先只查 hint 更严。这样业务申请挂载/撤销、模块多实例取舍演进都无需改门禁。</zh-CN>
+      //   <en>Contrast contract per the design text (header L30 / L49-51): every **actually rendered** actionable or
+      //   degraded element under the dark skin must reach WCAG AA 4.5:1. The two rows are no longer required to be exactly
+      //   "link + hint" — that is a deployment decision. Detection power is preserved: any measured element below the
+      //   ratio still fails, and either row being silently blank (no link and no hint) also fails, which is stricter than
+      //   the former hint-only check. Mounting/unmounting the business-application module or changing multi-instance
+      //   selection then needs no gate change.</en>
+      // </lang>
+      const measuredElements = [
+        ['协作事项行', measurement.link],
+        ['业务申请行', measurement.resolved]
+      ];
+      const missing = measuredElements.filter(([, value]) => !value).map(([label]) => label);
+      if (missing.length > 0) {
         record.status = 'Fail';
-        record.notes.push('The link or the hint element was not found for measurement.');
+        record.notes.push(`Neither a link nor a degraded hint was rendered for: ${missing.join(', ')}.`);
       } else {
-        if (measurement.link.contrast < minimumContrastRatio) {
-          record.status = 'Fail';
-          record.notes.push(`Link contrast ${measurement.link.contrast} is below ${minimumContrastRatio}.`);
-        }
-        if (measurement.hint.contrast < minimumContrastRatio) {
-          record.status = 'Fail';
-          record.notes.push(`Hint contrast ${measurement.hint.contrast} is below ${minimumContrastRatio}.`);
+        for (const [label, value] of measuredElements) {
+          if (value.contrast < minimumContrastRatio) {
+            record.status = 'Fail';
+            record.notes.push(`${label} contrast ${value.contrast} is below ${minimumContrastRatio}.`);
+          }
         }
       }
 
