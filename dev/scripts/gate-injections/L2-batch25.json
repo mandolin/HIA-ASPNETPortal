@@ -1,0 +1,27 @@
+{
+  "gate": "Test-PortalAdminListUiEvidence.mjs",
+  "note": "其它类转正（授权可逆数据库调整）：门禁对 Admin/WorkItems.aspx 硬编码 expectEmptyState: true，而该页默认筛选 Open（WorkItems.aspx.cs 的 BindStatusFilter），开发库有一条正式业务待办 WorkItemId=204/status=Open/by=system 使基线恒红。setup 用 New-PortalAdminListUiStateFixture.ps1 -Action Hide 把它改为 InProgress（CHECK 约束允许、完成字段保持 NULL，不删行、不改完成事实），默认视图即零条 → 空态渲染 → 基线绿；teardown 用 -Action Restore 精确改回 Open。注入：在两份 Admin/WorkItems.aspx 的 <asp:Content> 内插入可见文本 (Collaborator)，门禁 rawRoleKeyLeak 正则 /\\((Collaborator|Watcher)\\)/ 命中 → status=Fail → exit 1；还原即绿。",
+  "env": {
+    "PORTAL_PLAYWRIGHT_MODULE": "%REPO%/temp/node_modules/playwright"
+  },
+  "setup": [
+    { "script": "New-PortalAdminListUiStateFixture.ps1", "args": ["-Action", "Hide"] }
+  ],
+  "teardown": [
+    { "script": "New-PortalAdminListUiStateFixture.ps1", "args": ["-Action", "Restore"] }
+  ],
+  "patches": [
+    {
+      "file": "src/Portal/Admin/WorkItems.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n    <div>(Collaborator)</div>"
+    },
+    {
+      "file": "Web/Admin/WorkItems.aspx",
+      "mode": "replace",
+      "old": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">",
+      "content": "<asp:Content ID=\"Content1\" ContentPlaceHolderID=\"MainContent\" runat=\"server\">\n    <div>(Collaborator)</div>"
+    }
+  ]
+}
