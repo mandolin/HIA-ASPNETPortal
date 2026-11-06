@@ -132,6 +132,66 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 
 包状态表中不存在记录时，已验证包按启用处理，兼容尚未配置状态行的部署。状态表缺失或不可读时，前台同样保持默认启用，但后台状态写入会提示先执行迁移。
 
+## 装配态、环境开关与离线校验（受控调试态）
+
+模块的**装配态（assembly mode）** 描述源码在站点中的编译承载方式。平台面向 Web Application Project（WAP）路线：生产默认恒为 `CodeBehind`（源码随构建进入 `bin/`），另有受控的 `CodeFile` 调试态（源码置于站点目录由 ASP.NET 即时编译）仅用于本地受信任调试。装配态**不写入** `module.json`（manifest 只描述包形态），而是记录在独立的**部署侧台账** `src/Portal/Config/module-assembly-state.json`。台账无条目即表示全部模块缺省 `CodeBehind`。
+
+### 两值封闭、fail-closed
+
+`assemblyMode` 只接受 `CodeBehind` 与 `CodeFile` 两个值。未知值、缺省、坏 JSON、未知字段整体按 `CodeBehind` 处理（fail-closed），不允许任何第三态。以下情况均属合规默认：
+
+- 台账不存在或为空；
+- 某条目缺 `assemblyMode` 字段；
+- `assemblyMode` 取 `CodeBehind`。
+
+### 环境开关
+
+`Portal.ModuleAssembly.AllowCodeFile` 是部署级开关，**缺省 `false`**，并标记 `canEditOnline=false` 与 `isSensitive=true`（数据库后台无法覆盖它）。`Web.config`、`appSettings.json` 与三套环境模板都显式写 `false`，不依赖"键不存在"来表达关闭。任何想把生产态改为 `CodeFile` 的企图都会被门禁在封版前拦截。
+
+### 与包启用 / 能力 / Profile 三系统严格分离
+
+装配态台账与以下三套系统**互不读取、互不混用**：
+
+1. 包启用状态（`PortalCfg_ModulePackageStates`）；
+2. 能力注册（`PortalCapabilityRegistry`）；
+3. Profile gate（`Portal.ModuleProfiles.*`）。
+
+任何业务代码、权限判断、能力解析、Profile 判定都**不得**读取装配态台账来决定启用 / 能力 / Profile。台账只由一个只读解析类读取，且不被 `PortalModulePackage.cs` 的 manifest 解析链读写——装配态是独立的部署事实，不是包形态的一部分。
+
+### 离线校验工具
+
+`dev/scripts/Invoke-PortalModuleAssemblyCheck.ps1` 是**离线**工具（非运行期、非在线）：
+
+- 校验台账形状与封闭词表、受信任包解析、`App_Code` 不存在、designer 齐备、`.csproj` 登记、部署级开关两处显式 `false`；
+- 做受控备份、源文件哈希前后比对、六要素记录、回滚演练；
+- 支持 `-WhatIf` 预演，幂等；
+- 只作用于受信任包，**不切换装配态、不进入 `CodeFile` 调试态、不改写页头、不生成 designer、不被 Portal 运行时调用**。
+
+它以既有范式生成**可审阅的参数化 INSERT SQL** 但不连库、不执行；真正的审计写入由运行期在审批通过后完成。
+
+### 回滚（演练口径）
+
+回滚以**演练**口径提供，三种情形各有可复跑证据：
+
+- 校验失败；
+- 备份损坏；
+- 复核点未通过。
+
+还原使用备份，要求与偏离前逐字节一致、零残留。演练只证明快照可还原，不表示真实回滚已发生。
+
+### 封版前复核点
+
+封版前检查会自动拦截：若台账里仍含未收敛的 `CodeFile` 条目，封版判定为不通过；日常自检则放行但显式点名这些条目，提醒在封版前收敛回 `CodeBehind` 或显式登记为放行项。
+
+### 当前边界（诚实声明，避免误读）
+
+为避免把"平台就绪"误读为"功能补齐"，明确以下本周期**未实现**的项：
+
+- **调试态生命周期未实现**：进入 `CodeFile` → 修复 → 同步回源码 → 回 `CodeBehind` 的闭环本周期不做（工具只校验、不切换）。
+- **逐模块双向装配态切换未实现**：微软官方明确"整项目级转换不切实际"，本周期不提供逐模块双向切换。
+- **基于时间的超期告警未实现**：本周期无常驻调试态，固定小时数阈值无对象可判；改为在封版前 / 部署前 / 工具运行前以事件驱动复核点覆盖。
+- **在线编译 / 在线上传 ZIP / 外部 URL 模块加载 / 自动脚本** 仍然是不放宽的 A/B 级边界。
+
 ## 冒烟门禁与硬约束
 
 每个新模块都应接入门禁编排，并单独通过冒烟检查：
@@ -224,4 +284,4 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 - [ ] 新增接入编排：把该模块的冒烟检查与就绪检查加入 `dev/scripts/Invoke-PortalGateSuite.ps1`（L1 冒烟 / L0 就绪）
 - [ ] 门禁套件全绿：`Invoke-PortalGateSuite.ps1`
 
-<!-- build-stamp: C7A7500A9EE0 -->
+<!-- build-stamp: 5DA4D6757E82 -->

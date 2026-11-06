@@ -172,6 +172,66 @@ When the package state table has no record for a package, a verified package is 
 deployments that have not configured state rows. When the state table is missing or unreadable, the front end likewise keeps
 the default enabled state, but back-office state writes will prompt for the migration to be run first.
 
+## Assembly state, environment switch and offline verification (controlled debug state)
+
+The module's **assembly mode** describes how source is hosted and compiled in the site. The platform follows the Web Application Project (WAP) route: production defaults to `CodeBehind` (source compiled into `bin/` by the build), with a controlled `CodeFile` debug state (source placed under the site directory for ASP.NET just-in-time compilation) reserved for trusted local debugging. Assembly state is **not written into** `module.json` (the manifest only describes package shape); it is recorded in a separate **deployment-side ledger** `src/Portal/Config/module-assembly-state.json`. An empty ledger (no entries) means every module defaults to `CodeBehind`.
+
+### Two closed values, fail-closed
+
+`assemblyMode` accepts only `CodeBehind` and `CodeFile`. Unknown values, missing fields, malformed JSON, and unknown fields are all treated as `CodeBehind` (fail-closed); no third state is permitted. The following are all compliant defaults:
+
+- The ledger does not exist or is empty;
+- An entry has no `assemblyMode` field;
+- `assemblyMode` is `CodeBehind`.
+
+### Environment switch
+
+`Portal.ModuleAssembly.AllowCodeFile` is a deployment-level switch, **default `false`**, and is marked `canEditOnline=false` and `isSensitive=true` (the database back office cannot override it). `Web.config`, `appSettings.json`, and the three environment templates all write `false` explicitly, never relying on "key absent" to express off. Any attempt to flip production to `CodeFile` is blocked by the gate before release.
+
+### Strict separation from package-enable / capability / Profile systems
+
+The assembly-state ledger is **never read by, and never mixed with**, these three systems:
+
+1. Package-enable state (`PortalCfg_ModulePackageStates`);
+2. Capability registry (`PortalCapabilityRegistry`);
+3. Profile gate (`Portal.ModuleProfiles.*`).
+
+No business code, permission check, capability resolution, or Profile judgment may read the assembly-state ledger to decide enable/capability/Profile. The ledger is read only by a single read-only parser class and is not read or written by the `PortalModulePackage.cs` manifest-parse chain—assembly state is an independent deployment fact, not part of package shape.
+
+### Offline verification tool
+
+`dev/scripts/Invoke-PortalModuleAssemblyCheck.ps1` is an **offline** tool (not runtime, not online):
+
+- verifies ledger shape and closed vocabulary, trusted-package resolution, `App_Code` absence, designer completeness, `.csproj` registration, and two explicit `false` deployment switches;
+- performs a controlled backup, source-file hash before/after comparison, six-element record, and rollback drill;
+- supports `-WhatIf` dry runs and is idempotent;
+- acts only on trusted packages, **does not switch assembly state, does not enter `CodeFile` debug state, does not rewrite page headers, does not generate designers, and is never called by the Portal runtime**.
+
+It generates **reviewable parameterized INSERT SQL** in the established pattern but does not connect to or execute against the database; the actual audit write happens at runtime after approval.
+
+### Rollback (drill scope)
+
+Rollback is provided at **drill** scope, with reproducible evidence for three cases:
+
+- validation failure;
+- backup corruption;
+- checkpoint not passed.
+
+Restoration uses the backup and must be byte-for-byte identical to the pre-divergence state with zero residue. A drill only proves the snapshot is restorable; it does not imply a real rollback occurred.
+
+### Pre-release checkpoint
+
+The pre-release check automatically blocks: if the ledger still contains an unconverged `CodeFile` entry, the release judgement fails; a daily self-check passes but explicitly names those entries, reminding to converge them back to `CodeBehind` or register them as explicit exceptions before sealing.
+
+### Current boundaries (honest notice, to avoid misreading)
+
+To avoid reading "platform ready" as "feature complete", the following are explicitly **not implemented** this cycle:
+
+- **Debug-state lifecycle not implemented**: the loop enter `CodeFile` → fix → resync to source → revert to `CodeBehind` is not built this cycle (the tool only verifies, it does not switch).
+- **Per-module bidirectional assembly switching not implemented**: Microsoft's official docs state the project-type conversion is "not practical"; per-module bidirectional switching is not provided this cycle.
+- **Time-based expiry alert not implemented**: there is no resident debug state this cycle, so a fixed-hour threshold has no object to judge; coverage is provided by event-driven checkpoints before sealing / before deployment / before tool runs.
+- **Online compilation / ZIP upload / external-URL module loading / auto-script** remain non-relaxed A/B-grade boundaries.
+
 ## Smoke gate and hard constraints
 
 Every new module should be wired into the gate orchestration and pass the smoke check individually:
