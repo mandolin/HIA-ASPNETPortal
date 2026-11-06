@@ -284,6 +284,16 @@ $gateLayers = [ordered]@{
         # </lang>
         @{ File = 'Test-PortalModulePackageContract.ps1';     Runner = 'ps1'; Kind = '模块包契约覆盖'; Args = @() }
         # <lang>
+        #   <zh-CN>W-anp-P274（定稿 §二.2 / §四.1）新增：模块装配态契约门禁。校验台账 packageId 可解析、assemblyMode 两值
+        #   fail-closed、装配态与包启用/能力/Profile 三系统四分离、台账不被 manifest 解析链读写、部署开关显式缺省关闭；
+        #   并作为封版前复核点（发布就绪 F9）的支撑门禁。归类为 L0：只读配置与清单，不连库、不起站点。</zh-CN>
+        #   <en>W-anp-P274 (ruling §2.2 / §4.1): module-assembly-state contract gate. Verifies ledger packageId resolvable, assemblyMode
+        #   fail-closed to two values, four-separation from package-enable/capability/profile systems, ledger not read/written by the
+        #   manifest-parse chain, and the deployment switch explicitly default-off; also backs the pre-seal checkpoint (release F9).
+        #   Classified L0: reads config and manifests only, no DB, no site start.</en>
+        # </lang>
+        @{ File = 'Test-PortalModuleAssemblyContract.ps1';     Runner = 'ps1'; Kind = '模块装配态契约'; Args = @() }
+        # <lang>
         #   <zh-CN>`C-anp-P29`（`W-anp-P164`）新增：**页签名与模块标题多语言链路**门禁。
         #   防的是一条编译期完全无声、直到界面上出现半中半英才被发现的链路断裂：渲染点没接解析器、保存链路断一环、
         #   迁移脚本没登记、资源键三处不同步、门控键跟着显示名漂移。六项检查（L1–L6）均为只读取证。

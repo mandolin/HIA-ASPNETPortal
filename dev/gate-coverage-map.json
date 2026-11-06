@@ -128,7 +128,8 @@
         "Test-PortalModuleSkinCoverage.ps1",
         "Test-PortalRuntimeGatePackageSet.ps1",
         "Test-PortalModulePackageContract.ps1",
-        "Test-PortalNewModuleReadiness.ps1"
+        "Test-PortalNewModuleReadiness.ps1",
+        "Test-PortalModuleAssemblyContract.ps1"
       ]
     },
     {
@@ -464,6 +465,7 @@
     "Test-PortalLocalizedNameRuntimeEvidence.ps1",
     "Test-PortalLogMaintenance.ps1",
     "Test-PortalModulePackageContract.ps1",
+    "Test-PortalModuleAssemblyContract.ps1",
     "Test-PortalModuleRuntimeEvidence.mjs",
     "Test-PortalModuleSkinCoverage.ps1",
     "Test-PortalNewModuleReadiness.ps1",
@@ -505,6 +507,8 @@
     { "id": "Build-PortalJsdocPilot.ps1", "basis": "JSDoc 试点生成工具，非质量门禁。" },
     { "id": "Test-PortalD23ReviewEvidence.mjs", "basis": "D23 运行期审批证据脚本（W-anp-P111 同法）：登录管理员实际审批一条请假/报销并断言写入持久化 + 截图；依赖运行中的 IIS Express + LocalDB，按需手工执行，不进日常 L0/L1/L2 编排。D23 runtime review-evidence script (same approach as W-anp-P111): signs in as admin, actually approves one leave/expense request, asserts the write persisted and keeps screenshots; needs a running IIS Express + LocalDB, run manually on demand, not wired into daily L0/L1/L2 orchestration." },
     { "id": "Invoke-PortalModuleAssemblyCheck.ps1", "basis": "装配态离线校验与记录工具（C-anp-P48 / W-anp-P272，B+F+I 裁定的 F 规格）：只读校验台账/WAP 形态/部署开关，生成哈希清单、六要素审计载荷与可审阅的参数化 SQL 产物，**不执行 SQL、不连库、不改写任何产品文件、-WhatIf 零副作用、产物幂等**。它不是质量门禁而是按需手工执行的离线工具，故不接入日常 L0/L1/L2 编排；其有效性由同名 Regression 脚本四步注入证明（基线绿 / 四类注入非 0 / 还原绿且字节洁净）。Offline assembly-state check and recording tool: read-only checks plus reviewable artifacts, never a gate, not wired into daily orchestration; effectiveness is proven by the four-step injection regression." },
-    { "id": "Invoke-PortalModuleAssemblyCheckRegression.ps1", "basis": "装配态离线校验工具的四步注入回归脚手架（C-anp-P48 / W-anp-P272）：基线绿 → 四类注入（未知装配态/开关关闭时 CodeFile/未知根字段/包标识腐化）均非 0 且点名对应判据 → 逐字节还原后回绿，finally 兜底杜绝半改状态。**证明边界**：只证明工具能抓到这四类注入缺陷与仓库洁净，不证明覆盖全部缺陷类别、运行期加载或审计已入库。按需手工执行、不进日常编排。Four-step injection regression scaffold: proves the check tool detects four injected defect classes and restores byte-clean; run manually on demand, not wired into daily orchestration." }
+    { "id": "Invoke-PortalModuleAssemblyCheckRegression.ps1", "basis": "装配态离线校验工具的四步注入回归脚手架（C-anp-P48 / W-anp-P272）：基线绿 → 四类注入（未知装配态/开关关闭时 CodeFile/未知根字段/包标识腐化）均非 0 且点名对应判据 → 逐字节还原后回绿，finally 兜底杜绝半改状态。**证明边界**：只证明工具能抓到这四类注入缺陷与仓库洁净，不证明覆盖全部缺陷类别、运行期加载或审计已入库。按需手工执行、不进日常编排。Four-step injection regression scaffold: proves the check tool detects four injected defect classes and restores byte-clean; run manually on demand, not wired into daily orchestration." },
+    { "id": "Test-PortalModuleAssemblyContractInjection.ps1", "basis": "W-anp-P274 装配态契约门禁的注入回归（非门禁本身，按需手工执行、不进日常编排）：对真实台账施加 A1+A2 违规与 A5 开关开启两类注入，断言门禁非 0 且点名对应判据，finally 兜底还原字节洁净；证明的是门禁判定逻辑而非运行期加载。Injection regression for the assembly-state contract gate (not a gate itself, manual on demand, not wired into daily orchestration): injects A1+A2 and A5 violations into the real ledger, asserts the gate exits non-zero and names the criteria, with a finally block restoring byte-clean; proves the gate decision logic, not runtime loading." },
+    { "id": "Test-PortalModuleAssemblyE2E.ps1", "basis": "W-anp-P274 校验→备份→回滚端到端证据脚本（非门禁本身，按需手工执行、不进日常编排）：以正式契约门禁为校验器，对受治理台账做字节级备份、注入可抓回的偏离态、用备份逐字节还原并比对 SHA256 证明零残留，证据写入 work-zone/dev/evidence/module-assembly-e2e/。Verify→backup→rollback end-to-end evidence script (not a gate, manual on demand, not wired into daily orchestration): uses the contract gate as verifier, byte-level backups the governed ledger, injects a catchable divergence, restores byte-by-byte from backup and compares SHA256 to prove zero residue; evidence written to work-zone/dev/evidence/module-assembly-e2e/." }
   ]
 }

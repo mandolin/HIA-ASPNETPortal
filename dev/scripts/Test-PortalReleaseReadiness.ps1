@@ -158,7 +158,7 @@ function Add-Result {
     }
 }
 
-Write-Host ('[INFO] 封版前检查：模式=' + $(if ($DailySelfCheck) { '日常自检（F1/F2/F7/F8）' } else { '封版前（F1-F8）' }) + '｜目标版本=' + $(if ($TargetVersion) { $TargetVersion } else { '（未指定）' }))
+Write-Host ('[INFO] 封版前检查：模式=' + $(if ($DailySelfCheck) { '日常自检（F1/F2/F7/F8/F9）' } else { '封版前（F1-F9）' }) + '｜目标版本=' + $(if ($TargetVersion) { $TargetVersion } else { '（未指定）' }))
 
 # ---------- 公共：CHANGELOG 最新已发布版本 ----------
 $changelogPath = Join-Path $RepoRoot 'CHANGELOG.md'
@@ -339,8 +339,57 @@ else {
     }
 }
 
+# ---------- F9 装配态复核（复用 F7 两模式，定稿 §四.1） ----------
+# <lang>
+#   <zh-CN>定稿 §四.1：每次封版前的装配态复核点——台账中不得存在未收敛的 CodeFile 条目（存在即拦封版）；
+#   日常自检下判 PASS 但显式点名这些条目。判定沿用 F7 两模式范式。台账缺省为 {}（无条目），故两模式均 PASS。
+#   读取用 -AsHashtable + 普通哈希表塌缩 + 「键 -in $ht.Keys」（规避本环境 PowerShell 7 的 ContainsKey DLR 歧义与只读 $PID 变量冲突）。</zh-CN>
+#   <en>Ruling §4.1: a pre-seal assembly-state checkpoint — the ledger must not contain any unconverged CodeFile entry (existence blocks the
+#   seal); in a daily self-check it still PASSes but names those entries. The judgement reuses the F7 two-mode pattern. The ledger
+#   defaults to {} (no entries), so both modes PASS. Reading uses -AsHashtable + plain-hashtable collapse + "key -in $ht.Keys"
+#   (avoiding this PowerShell 7 build's ContainsKey DLR ambiguity and the read-only $PID variable collision).</en>
+# </lang>
+$ledgerPath = Join-Path $RepoRoot 'src\Portal\Config\module-assembly-state.json'
+$codeFileEntries = @()
+if (-not (Test-Path -LiteralPath $ledgerPath)) {
+    Add-Result 'F9' 'INCOMPLETE' '找不到模块装配态台账 src/Portal/Config/module-assembly-state.json——无法核对 CodeFile 收敛态'
+}
+else {
+    try {
+        $raw = [System.IO.File]::ReadAllText($ledgerPath, $utf8) | ConvertFrom-Json -AsHashtable
+        $ledgerMap = @{}
+        if ($raw -is [System.Collections.IDictionary]) { foreach ($k in $raw.Keys) { $ledgerMap[$k] = $raw[$k] } }
+        if (-not ('entries' -in $ledgerMap.Keys) -or $ledgerMap['entries'] -isnot [System.Collections.IDictionary]) {
+            Add-Result 'F9' 'FAIL' '台账缺少 entries 对象'
+        }
+        else {
+            $entries = $ledgerMap['entries']
+            $entryMap = @{}
+            if ($entries -is [System.Collections.IDictionary]) { foreach ($k in $entries.Keys) { $entryMap[$k] = $entries[$k] } }
+            foreach ($key in $entryMap.Keys) {
+                $entry = $entryMap[$key]
+                $mode = $null
+                if ($entry -is [System.Collections.IDictionary] -and ('assemblyMode' -in $entry.Keys)) { $mode = [string]$entry['assemblyMode'] }
+                if ($mode -eq 'CodeFile') { $codeFileEntries += $key }
+            }
+            if ($codeFileEntries.Count -eq 0) {
+                Add-Result 'F9' 'PASS' '台账中无未收敛的 CodeFile 条目（默认 CodeBehind 收敛态）'
+            }
+            elseif ($DailySelfCheck) {
+                Add-Result 'F9' 'PASS' ('台账有 ' + $codeFileEntries.Count + ' 条 CodeFile 条目待封版前收敛（' + ($codeFileEntries -join '、') + '）——日常自检不判红，封版前检查会判红')
+            }
+            else {
+                Add-Result 'F9' 'FAIL' ('台账有 ' + $codeFileEntries.Count + ' 条未收敛的 CodeFile 条目（' + ($codeFileEntries -join '、') + '）——封版前必须收敛为 CodeBehind 或显式登记为放行项')
+            }
+        }
+    }
+    catch {
+        Add-Result 'F9' 'INCOMPLETE' ('台账解析失败：' + $_.Exception.Message)
+    }
+}
+
 # ---------- 汇总 ----------
-Write-Host ('[INFO] 判定汇总：PASS ' + (8 - $failures.Count - $incomplete.Count - $notes.Count) + '｜FAIL ' + $failures.Count + '｜INCOMPLETE ' + $incomplete.Count + '｜SKIP ' + $notes.Count)
+Write-Host ('[INFO] 判定汇总：PASS ' + (9 - $failures.Count - $incomplete.Count - $notes.Count) + '｜FAIL ' + $failures.Count + '｜INCOMPLETE ' + $incomplete.Count + '｜SKIP ' + $notes.Count)
 if ($failures.Count -gt 0) { Write-Host ('[FAIL] 封版前检查未就绪：' + $failures.Count + ' 项不通过。'); exit 1 }
 if ($incomplete.Count -gt 0) { Write-Host ('[INCOMPLETE] 封版前检查有 ' + $incomplete.Count + ' 项未确认——不当作通过；请补齐新鲜产物后重试。'); exit 2 }
 Write-Host '[PASS] 封版前检查就绪。'
