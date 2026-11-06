@@ -136,15 +136,20 @@ Invoke-AnchorEdit -FilePath $changelogPath -DisplayLabel 'A1 CHANGELOG' -FindPat
 }
 
 # <lang>
-#   <zh-CN>A3 — 5 个 AssemblyInfo.cs：AssemblyVersion / AssemblyFileVersion → X.Y.Z.0。</zh-CN>
-#   <en>A3 — the 5 AssemblyInfo.cs files: AssemblyVersion / AssemblyFileVersion → X.Y.Z.0.</en>
+#   <zh-CN>A3 — 5 个 AssemblyInfo.cs：AssemblyVersion / AssemblyFileVersion / AssemblyInformationalVersion 三字段一律 → X.Y.Z.0。
+#     写侧必须覆盖全部三字段：docs/versioning.md 明文要求三者一致，而旧正则只匹配前两字段，导致 AssemblyInformationalVersion
+#     自 v1.3.0 起长期漂移、每次封版只能人工补齐（一次性兜底）。此处把第三字段并入同一条幂等替换，使"写全"成为机制而非人工步骤。</zh-CN>
+#   <en>A3 — the 5 AssemblyInfo.cs files: all three of AssemblyVersion / AssemblyFileVersion / AssemblyInformationalVersion → X.Y.Z.0.
+#     The write side must cover all three: docs/versioning.md explicitly requires them to agree, but the old regex matched only
+#     the first two, so AssemblyInformationalVersion drifted since v1.3.0 and every release needed a manual one-off patch. Folding
+#     the third field into the same idempotent replacement makes "write them all" a mechanism rather than a manual step.</en>
 # </lang>
 $assemblyFiles = Get-ChildItem -LiteralPath $RepoRoot -Recurse -Filter 'AssemblyInfo.cs' -ErrorAction SilentlyContinue |
     Where-Object { $_.FullName -notmatch '\\temp\\' }
 foreach ($af in $assemblyFiles) {
     Invoke-AnchorEdit -FilePath $af.FullName -DisplayLabel ('A3 ' + $af.Name) -FindPattern 'AssemblyVersion' -Transform {
         param($t)
-        $t -replace '(AssemblyVersion|AssemblyFileVersion)\("\d+\.\d+\.\d+\.\d+"\)', ('$1("' + $assemblyVersion + '")')
+        $t -replace '(AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)\("\d+\.\d+\.\d+\.\d+"\)', ('$1("' + $assemblyVersion + '")')
     }
 }
 

@@ -6,19 +6,17 @@
 
 ## [Unreleased]
 
-**首页布局改为「上二下一」**：按产品草图把首页内容区从"三栏并排"改为"第一行账户登录 + 门户公告、第二行帮助与说明通栏"，并同步重拍文档站首页截图。
-
+## [v2.2.0] - 2026-11-06
+**请假与报销「重新提交」与首页布局改为「上二下一」**：被退回 / 已拒绝的申请可在原记录上修改后再次提交；首页内容区按产品草图从"三栏并排"改为"第一行账户登录 + 门户公告、第二行帮助与说明通栏"，并同步重拍文档站首页截图。
 ### 变更
-
+- **请假与报销「重新提交」**（临时规划 `T-anp-Resubmit-P1`）：被退回或已拒绝的请假 / 报销申请，申请人可在原记录上修改后再次提交，无需新建一条。数据层新增 `Returned`（退回）状态与 `ResubmitRequest` / `ResubmitReimbursement` 受保护更新（校验记录归属、清空上次审核结论、保留退回意见），并修正原 `Return` 状态映射错误；界面在申请列表加「操作」列与「重新提交」按钮（仅退回 / 已拒绝状态可见），后台筛选器增加「退回」。审批边界由共享助手 `PortalStatusLocalizer` 隔离，新增 9 个界面资源键（中 / 英 / 中性）。运行期已按真实点击链路端到端验证；期间修复一处标记层 CS0103（共享助手改用完全限定名）。
 - **首页布局（上二下一）**：原布局把三个窗格排成同一行（账户登录 260px｜门户公告 300px｜帮助与说明），公告与帮助两张卡内容都短，右侧长期留白、首页显得空。现改为第一行「账户登录（58%）+ 门户公告（40%）」并排、第二行「帮助与说明」通栏。改动落在 6 套主题 CSS（Enterprise / StateClassic / Oa 的 Light + Dark），实现口径 IE9 安全（`float` + `clear`，**不用 Grid / Flexbox** —— 主题包约束明令禁止），并且只影响首页：作用域限定 `body.portal-tab-1`（真实 TabId=1），其它页签通常只有一个模块，套用两列浮动会被挤到 40% 宽，故仍保持原三栏等高表格布局。
 - **文档站首页截图同步重拍**：8 张实拍图（中文 / 英文各 4 张）在新布局下重拍，临时账号拍完即删（残留 0）。
 - **第一行两卡等高**：按产品意见"增加登录区的高度达成一致、公告区适当拉宽并降低"，登录卡两个字段由并排改为**纵排**（卡片自然加高）、**登录按钮贴卡片底部**（表单呼吸区留在中部）、公告卡宽度 40% → **44%** 并收紧条目内距与行高。实测两卡高度**精确一致（354px = 354px）**；`min-height` 作用在内容盒，公告条数变化后需复核该值（已在主题 CSS 注释中写明）。
 - **登录卡增加一行提示**：`忘记口令？请联系平台管理员重置。`（英文界面为对应英文文案）。该提示只陈述既有事实——帮助模块本就写着"忘记密码请联系平台管理员重置"——不含任何请求参数或动态内容；文案由新资源键 `Signin_forgotPasswordHint` 提供（中 / 英 / 中性三份），界面语言切换时随之切换。
 - **登录卡底部归拢为一行**：「记住登录状态」靠左、登录按钮靠右，同一行底对齐；两行移出正常流后，字段与提示行留在上方，中部留白成为表单的呼吸区。纯 CSS 改动（6 套主题同步），两卡等高不受影响（实测仍为 354px = 354px）。
 - **文档站首页截图改用视口截图**：侧栏是 `position: fixed` 定位，浏览器渲染**整页截图**时只按一屏绘制 fixed 元素 —— 图上会出现"侧栏在页面中部断掉"的假象（实站侧栏是通底的：`position: fixed; top: 0; bottom: 0`）。截图产线因此改为视口截图，首页图视口高 1200px。
-
 ### 修复
-
 - **文本节点位置不能用资源表达式**：把 `<%$ Resources:lang, X %>` 直接写在标记文本里会抛 `HttpParseException`（页面整体 500 跳错误页）；资源表达式只允许出现在**服务器控件属性**中，故改由 `asp:Literal` 承载。
 - **运行时编译的全局资源有影子拷贝缓存**：`App_GlobalResources/*.resx` 是 Content（运行时编译），其编译产物缓存在 ASP.NET 影子拷贝目录（本次为 10/07 的旧程序集）；只换 resx 而不清理影子拷贝，新键在运行期取不到（**静默失败**：界面空白、日志无痕）。本次回收应用后资源程序集重建（15:45:40，新哈希名），新键才生效。
 - **学习轨补 3 条端到端任务路径 + 运营者手册，参考轨补模块运作总纲**：新增《业务申请：从提交到办结》《请假与报销：从填写到出现在待办里》《员工资料：确认与更正》《运营者手册：把门户用起来》《模块运作与二次开发》五篇（中英同构）。`p12-sample-business-flow.md` 保留为**实施与回归**视角并移入参考分区，避免与使用者路径复述。
@@ -26,12 +24,9 @@
 - **更正（续 2026-10-30）**：上条「无宿主页 → 后台入口不可达」的判定**前提有误**。这些控件虽无独立 `.aspx`，但作为模块实例挂载在 **TabId=6「后台管理」**页签下、由 `DesktopDefault.aspx` 动态加载，访问 `~/DesktopDefault.aspx?tabid=6` 即可打开；数据库已确认挂载（moduleId 28–32 对应这 5 个控件），且站点对该 URL 返回 200。故"门户名与页签排序只能部署侧改"应改为"经『后台管理』页签可达，但导航未暴露（Target 为 `.ascx` 被可见性判定排除），且已运行期验证（以管理员登录访问 tabid=6 渲染出五个旧版模块，站点设置含可编辑『站点标题』输入框）；后台导航本就有「后台管理」入口（`Tab.Admin`，指向 tabid=6）可进入该页签。运营者手册已据实改写，D22 备忘改判。
 - **新登记 D23（2026-10-30）→ 已实现（2026-10-30）**：写审核侧文档时核实——**请假与报销原先没有后台审核入口**：`/Admin/WorkItems.aspx` 只读、其业务 URL 白名单只认资料更正 / 业务申请 / 协同事项三种，请假（`LeaveRequest`）与报销（`ExpenseReimbursement`）落到 `/Admin/NotImplemented.aspx`，`src/Portal/Admin/` 下没有 `LeaveRequests.aspx` / `ExpenseReimbursements.aspx`。现**已补齐**：新增 `Admin/LeaveRequests.aspx` 与 `Admin/ExpenseReimbursements.aspx` 两个后台审核页（照搬 `BusinessApplications.aspx` 模板：列表 / 状态筛选 / 批准-退回-拒绝 + 工作项投影旁路，并按 W-anp-P111 同法隔离失败降级）；登记导航入口 `Admin.Capability.LeaveRequests` / `Admin.Capability.ExpenseReimbursements`；`WorkItems.aspx.cs` 白名单增收请假 / 报销业务类型路由到这两页。数据层 `LeaveRequestDb` / `ExpenseReimbursementDb` 补 `GetAdminRequests` / `ReviewRequest` 及审核列迁移脚本（见基础提交 `5fbb329a5`）。资源键补 `Admin_LeaveRequests_*` / `Admin_ExpenseReimbursements_*`（中性 resx 为英文、中文在 zh-cn，满足资源契约 [C3]/[C5]）。门禁：L1 9/9、L0 54/0/0 全绿。**运行期审批验证已完成**：以管理员登录运行中的站点，对请假与报销后台审核页各实际审批一条待审批申请——待审批计数各减 1、成功提示「业务申请状态已更新。」出现、审核意见落库（`ReviewComment` 写入）并随已批准行重绑定后在列表中显示；审批前后整页截图见 `temp/p74/d23-review/`，可复跑证据脚本 `dev/scripts/Test-PortalD23ReviewEvidence.mjs`。运行期验证时补做两项修复：①`Portal.csproj` 此前未登记新页 `aspx`/`cs`（导致 `bin/Portal.dll` 不含新类型、页面报「未能加载类型」），已补 `Content`+`Compile` 登记；②`LeaveRequestDb`/`ExpenseReimbursementDb` 的 `GetAdminRequests` 原漏选审核列 `ReviewedUtc`/`ReviewedByUserId`/`ReviewComment`，导致审核后虽状态变更、行内仍显示「未审核」、审核意见不展示，已补选。该证据脚本已登记进 `dev/gate-coverage-map.json` 的 `tooling` 与 `boundaryRequiredGates`（满足 M5/M6）。权限键暂复用 `BusinessApplicationReview`/`Admin`（专用键含迁移+ADR 为后续项）。详见《请假与报销：审核侧现状》。
 - **闭合 W-anp-P111（2026-10-30）**：资料更正审核页的待办旁路（`TryCompleteWorkItem` → `WorkItemDb.CompleteBusinessWorkItem`）原不捕获异常，待办服务失败会向上抛出、可能回滚已成功的审核主流程。现已用 try/catch 隔离：失败仅记录 `System.Diagnostics.Trace` 诊断日志并降级，请求状态更新（主流程）照常提交。补齐异常路径单测（`EmployeeProfileCorrectionRequestsSidecarTests`）锁定"旁路抛错不回滚审核"契约。已将同法应用到 `CollaborationItems.aspx.cs` 与 `BusinessApplications.aspx.cs`，并补对应异常路径单测（见 `WorkItemSidecarIsolationTests.cs`）。至此三处旧版审核页的待办旁路均已隔离。
-
 ### 验证
-
 - 实站计算样式实测：`.portal-dashboard-layout` = `display: block` / 960px；登录卡 `float: left` 557px（58%）；公告卡 `float: right` 384px（40%）；帮助卡 `clear: both` **960px 通栏**。
 - L0 54 项全绿；站点发布 0 失败。
-
 ## [v2.1.1] - 2026-10-29
 **品牌一致性与发布一致性收口**：把门户品牌统一为 **HIA Enterprise Portal**，并修掉两处"看起来做了、实际没生效"的机制问题。对应 `C-anp-P46`（W-anp-P259–W-anp-P263）。
 ### 变更

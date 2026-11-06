@@ -75,27 +75,37 @@ function Get-LatestTagVersion {
 
 # <lang>
 #   <zh-CN>C-anp-P16 / B1（W95，2026-10-07）：同时读取所有 AssemblyInfo.cs 中的 AssemblyVersion 与
-#   AssemblyFileVersion，并核对单个文件内两者是否一致。返回去重后的两个集合，供主逻辑与 CHANGELOG 比对。</zh-CN>
+#   AssemblyFileVersion，并核对单个文件内两者是否一致。返回去重后的两个集合，供主逻辑与 CHANGELOG 比对。
+#   v2.2.0 扩面（根因修复）：加入 AssemblyInformationalVersion 第三个集合。此前写侧同步脚本与读侧门禁都只覆盖
+#   前两字段，导致第三字段自 v1.3.0 起长期漂移而门禁全绿；现读侧一并校验，使三字段漂移可被机器发现、防止复发。</zh-CN>
 #   <en>C-anp-P16 / B1 (W95, 2026-10-07): reads both AssemblyVersion and AssemblyFileVersion from every
 #   AssemblyInfo.cs and checks intra-file agreement, returning two de-duplicated sets for the main logic to
-#   compare against CHANGELOG.</en>
+#   compare against CHANGELOG.
+#   v2.2.0 extension (root-cause fix): adds the AssemblyInformationalVersion set. Both the writer and this gate
+#   previously covered only the first two fields, so the third drifted since v1.3.0 while every gate stayed green;
+#   the reader now checks it too, making three-field drift machine-detectable and preventing recurrence.</en>
 # </lang>
 function Get-AssemblyVersionSets {
     param([string]$Root)
 
     $files = Get-ChildItem -Path (Join-Path $Root 'src') -Recurse -Filter 'AssemblyInfo.cs' -File -ErrorAction SilentlyContinue
-    $av = @(); $fv = @()
+    $av = @(); $fv = @(); $iv = @()
     foreach ($file in $files) {
         $content = Get-Content -LiteralPath $file.FullName -Raw
         $mAv = [regex]::Match($content, 'AssemblyVersion\("(\d+\.\d+\.\d+)\.\d+"\)')
         $mFv = [regex]::Match($content, 'AssemblyFileVersion\("(\d+\.\d+\.\d+)\.\d+"\)')
+        $mIv = [regex]::Match($content, 'AssemblyInformationalVersion\("(\d+\.\d+\.\d+)\.\d+"\)')
         if ($mAv.Success) { $av += $mAv.Groups[1].Value }
         if ($mFv.Success) { $fv += $mFv.Groups[1].Value }
+        if ($mIv.Success) { $iv += $mIv.Groups[1].Value }
         if ($mAv.Success -and $mFv.Success -and $mAv.Groups[1].Value -ne $mFv.Groups[1].Value) {
             Write-Host ('  note: ' + $file.Name + ' AssemblyVersion=' + $mAv.Groups[1].Value + ' 与 AssemblyFileVersion=' + $mFv.Groups[1].Value + ' 不一致（文件内漂移）')
         }
+        if ($mAv.Success -and $mIv.Success -and $mAv.Groups[1].Value -ne $mIv.Groups[1].Value) {
+            Write-Host ('  note: ' + $file.Name + ' AssemblyVersion=' + $mAv.Groups[1].Value + ' 与 AssemblyInformationalVersion=' + $mIv.Groups[1].Value + ' 不一致（文件内漂移）')
+        }
     }
-    return @{ AV = @($av | Sort-Object -Unique); FV = @($fv | Sort-Object -Unique) }
+    return @{ AV = @($av | Sort-Object -Unique); FV = @($fv | Sort-Object -Unique); IV = @($iv | Sort-Object -Unique) }
 }
 
 $changelog = Get-LatestChangelogVersion -Root $RepoRoot
@@ -103,6 +113,7 @@ $tag = Get-LatestTagVersion -Root $RepoRoot
 $sets = Get-AssemblyVersionSets -Root $RepoRoot
 $assemblies = $sets.AV
 $fileVersions = $sets.FV
+$informationalVersions = $sets.IV
 
 Write-Output ('CHANGELOG latest : ' + $(if ($changelog) { $changelog } else { '<none>' }))
 Write-Output ('Git tag latest   : ' + $(if ($tag) { $tag } else { '<none>' }))
@@ -131,6 +142,24 @@ if ($assemblies.Count -gt 0 -and $fileVersions.Count -eq 0) {
 foreach ($fv in $fileVersions) {
     if ($changelog -and $fv -ne $changelog) {
         $problems += ('程序集文件版本 AssemblyFileVersion ' + $fv + ' 与 CHANGELOG 版本 ' + $changelog + ' 不一致')
+    }
+}
+
+# <lang>
+#   <zh-CN>**B1 扩面（v2.2.0 根因修复）**：AssemblyInformationalVersion 同口径校验。缺失即报 R6 缺口，
+#   值不等于 CHANGELOG 最新版即报漂移。此前该字段只在文档里被要求"三者一致"却无机器断言，
+#   是 `1.3.0.0` 长期漂移无人发现的原因；写侧同步脚本已同时扩面，读侧此处补齐形成闭环。</zh-CN>
+#   <en>**B1 extension (v2.2.0 root-cause fix)**: AssemblyInformationalVersion is checked on the same basis.
+#   Absence is reported as an R6 gap; a value differing from the latest CHANGELOG version is reported as drift.
+#   This field was required to agree only in prose, with no machine assertion, which is why `1.3.0.0` drifted
+#   unnoticed for so long; the writer script has been extended the same way, closing the loop on the read side.</en>
+# </lang>
+if ($assemblies.Count -gt 0 -and $informationalVersions.Count -eq 0) {
+    $problems += 'AssemblyInfo.cs 缺少 AssemblyInformationalVersion（版本锚点未同步，R6 缺口）'
+}
+foreach ($iv in $informationalVersions) {
+    if ($changelog -and $iv -ne $changelog) {
+        $problems += ('程序集信息版本 AssemblyInformationalVersion ' + $iv + ' 与 CHANGELOG 版本 ' + $changelog + ' 不一致')
     }
 }
 

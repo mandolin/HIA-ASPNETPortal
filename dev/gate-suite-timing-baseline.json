@@ -1,76 +1,76 @@
 {
-  "generatedUtc": "2026-11-06T03:18:16.0533213Z",
+  "generatedUtc": "2026-11-06T04:46:23.9873929Z",
   "entries": {
-    "Test-PortalSmoke.ps1|L2|": {
-      "durationMs": 2420,
-      "status": "Pass"
-    },
-    "Test-PortalLocalizedNameRuntimeEvidence.ps1|L2|": {
-      "durationMs": 59420,
-      "status": "Pass"
-    },
-    "Test-PortalP77SupplementEvidence.mjs|L2|": {
-      "durationMs": 10065,
-      "status": "Pass"
-    },
-    "Test-PortalCollaborationLayoutEvidence.mjs|L2|": {
-      "durationMs": 16511,
-      "status": "Pass"
-    },
-    "Test-PortalWorkItemReachabilityEvidence.mjs|L2|": {
-      "durationMs": 16164,
-      "status": "Pass"
-    },
-    "Test-PortalAdminListUiEvidence.mjs|L2|": {
-      "durationMs": 11322,
-      "status": "Pass"
-    },
-    "Test-PortalResourceContractEvidence.mjs|L2|": {
-      "durationMs": 3412,
-      "status": "Pass"
-    },
     "Test-PortalModuleCache.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
-      "durationMs": 24095,
-      "status": "Pass"
-    },
-    "Test-PortalPlatformEmptyStateEvidence.mjs|L2|": {
-      "durationMs": 22486,
-      "status": "Pass"
-    },
-    "Test-PortalLocalizationLeakEvidence.mjs|L2|": {
-      "durationMs": 13747,
-      "status": "Pass"
-    },
-    "Test-PortalSqlCompatibility.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
-      "durationMs": 689,
-      "status": "Pass"
-    },
-    "Test-PortalModuleRuntimeEvidence.mjs|L2|": {
-      "durationMs": 130872,
-      "status": "Pass"
-    },
-    "Test-PortalPerformanceBaseline.mjs|L2|": {
-      "durationMs": 10494,
-      "status": "Pass"
-    },
-    "Invoke-PortalModuleRuntimeGate.ps1|L2|": {
-      "durationMs": 251514,
-      "status": "Pass"
-    },
-    "Test-PortalPlaceholderEvidence.mjs|L2|": {
-      "durationMs": 27188,
+      "durationMs": 23192,
       "status": "Pass"
     },
     "Test-PortalDefaultThemeVisualBaseline.mjs|L2|": {
-      "durationMs": 11934,
+      "durationMs": 11841,
       "status": "Pass"
     },
-    "Test-PortalExtensionSmoke.ps1|L2|": {
-      "durationMs": 73221,
+    "Test-PortalSqlCompatibility.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
+      "durationMs": 670,
+      "status": "Pass"
+    },
+    "Test-PortalSmoke.ps1|L2|": {
+      "durationMs": 2372,
       "status": "Pass"
     },
     "Test-PortalSemanticMarkupEvidence.mjs|L2|": {
-      "durationMs": 13160,
+      "durationMs": 12998,
+      "status": "Pass"
+    },
+    "Test-PortalCollaborationLayoutEvidence.mjs|L2|": {
+      "durationMs": 16030,
+      "status": "Pass"
+    },
+    "Test-PortalPerformanceBaseline.mjs|L2|": {
+      "durationMs": 11269,
+      "status": "Pass"
+    },
+    "Test-PortalLocalizedNameRuntimeEvidence.ps1|L2|": {
+      "durationMs": 58826,
+      "status": "Pass"
+    },
+    "Invoke-PortalModuleRuntimeGate.ps1|L2|": {
+      "durationMs": 252279,
+      "status": "Pass"
+    },
+    "Test-PortalPlatformEmptyStateEvidence.mjs|L2|": {
+      "durationMs": 22434,
+      "status": "Pass"
+    },
+    "Test-PortalModuleRuntimeEvidence.mjs|L2|": {
+      "durationMs": 130416,
+      "status": "Pass"
+    },
+    "Test-PortalLocalizationLeakEvidence.mjs|L2|": {
+      "durationMs": 14257,
+      "status": "Pass"
+    },
+    "Test-PortalWorkItemReachabilityEvidence.mjs|L2|": {
+      "durationMs": 15344,
+      "status": "Pass"
+    },
+    "Test-PortalPlaceholderEvidence.mjs|L2|": {
+      "durationMs": 26363,
+      "status": "Pass"
+    },
+    "Test-PortalResourceContractEvidence.mjs|L2|": {
+      "durationMs": 3371,
+      "status": "Pass"
+    },
+    "Test-PortalAdminListUiEvidence.mjs|L2|": {
+      "durationMs": 11061,
+      "status": "Pass"
+    },
+    "Test-PortalExtensionSmoke.ps1|L2|": {
+      "durationMs": 40581,
+      "status": "Pass"
+    },
+    "Test-PortalP77SupplementEvidence.mjs|L2|": {
+      "durationMs": 10180,
       "status": "Pass"
     }
   }
