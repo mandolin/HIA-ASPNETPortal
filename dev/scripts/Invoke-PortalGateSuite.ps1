@@ -1251,6 +1251,8 @@ try {
             status = 'Pass'
             exitCode = 0
             note = ''
+            durationMs = $null
+            durationSec = $null
         }
 
         if (-not (Test-Path $gatePath)) {
@@ -1373,13 +1375,21 @@ try {
                 }
                 $gateArgs = @($gatePath)
                 if ($invokeArgs.Count -gt 0) { $gateArgs += $invokeArgs }
+                $sw = [System.Diagnostics.Stopwatch]::StartNew()
                 $raw = & $nodeExe @gateArgs 2>&1
+                $sw.Stop()
             } else {
                 $gateArgs = @('-NoProfile', '-File', $gatePath)
                 if ($invokeArgs.Count -gt 0) { $gateArgs += $invokeArgs }
+                $sw = [System.Diagnostics.Stopwatch]::StartNew()
                 $raw = & $pwsh @gateArgs 2>&1
+                $sw.Stop()
             }
             $exit = $LASTEXITCODE
+            if ($sw -and -not $sw.IsRunning) {
+                $record.durationMs = $sw.ElapsedMilliseconds
+                $record.durationSec = [math]::Round($sw.ElapsedMilliseconds / 1000.0, 3)
+            }
             $text = ($raw | Out-String)
             $record.exitCode = $exit
             if ($exit -eq 2) {
@@ -1525,6 +1535,125 @@ try {
 #     prerequisite missing / success) and any exception go through one cleanup — **there is only one copy of the cleanup
 #     logic, so it cannot be missed**.</en>
 # </lang>
+# <lang>
+#   <zh-CN>W-anp-P268（门禁耗时基线固化）：每个 record 的 durationMs/durationSec 由调用处用 Stopwatch 测量；跳过（脚本不存在 /
+#   playwright 前置缺失 / exit 2 前置缺失）与异常路径未启动计时器，保持 $null——满足"耗时缺失须显式报缺，不静默记 0"。
+#   此处汇总总计/分层耗时，并建立/对比耗时基线：超绝对阈值（60s）或超基线 1.8 倍即点名，但只报告、不把门禁判红
+#   （C-anp-P47.md L51：耗时口径暂不进 L0 硬门禁，先建可比数字与点名机制）。</zh-CN>
+#   <en>W-anp-P268 (gate timing baseline): each record's durationMs/durationSec is measured by a Stopwatch at the invocation site;
+#   skip (script missing / playwright prereq missing / exit 2 prereq) and exception paths never start the timer, staying $null —
+#   satisfying "missing timing must be reported explicitly, never silently as 0". Here we aggregate total / per-layer timings and
+#   build/compare a timing baseline: over an absolute threshold (60s) or over 1.8x the baseline names the gate, but only reports —
+#   it does not fail the suite (C-anp-P47.md L51: timing stays out of the L0 hard gate for now; build comparable numbers first).</en>
+# </lang>
+$timedRecords = $results | Where-Object { $null -ne $_.durationMs }
+$untimedRecords = $results | Where-Object { $null -eq $_.durationMs }
+$timedGateCount = $timedRecords.Count
+$untimedGateCount = $untimedRecords.Count
+$totalDurationMs = if ($timedGateCount -gt 0) { ($timedRecords | Measure-Object -Property durationMs -Sum).Sum } else { $null }
+$totalDurationSec = if ($timedGateCount -gt 0) { [math]::Round($totalDurationMs / 1000.0, 3) } else { $null }
+$layerDurations = @{}
+foreach ($r in $results) {
+    if (-not $layerDurations.ContainsKey($r.layer)) {
+        $layerDurations[$r.layer] = [pscustomobject]@{ durationMs = 0; durationSec = 0; timedGateCount = 0; untimedGateCount = 0 }
+    }
+    if ($null -ne $r.durationMs) {
+        $layerDurations[$r.layer].durationMs += $r.durationMs
+        $layerDurations[$r.layer].timedGateCount++
+    } else {
+        $layerDurations[$r.layer].untimedGateCount++
+    }
+}
+foreach ($k in @($layerDurations.Keys)) {
+    if ($layerDurations[$k].timedGateCount -gt 0) {
+        $layerDurations[$k].durationSec = [math]::Round($layerDurations[$k].durationMs / 1000.0, 3)
+    } else {
+        $layerDurations[$k].durationMs = $null
+        $layerDurations[$k].durationSec = $null
+    }
+}
+
+# <lang>
+#   <zh-CN>耗时基线：把本次"已测量"门禁按 gate|layer|args 存盘，下一次运行与之对比。仅当本次运行干净（无失败、无未测量）才覆盖基线，
+#   避免坏运行污染基线。对比只点名超阈值者，并区分"硬失败（门禁本身已 Fail，耗时只是上下文）"与"慢/抖动（Pass 但超阈值，仅点名不判红）"。</zh-CN>
+#   <en>Timing baseline: persist this run's measured gates keyed by gate|layer|args; the next run compares against it. The baseline is
+#   overwritten only when this run is clean (no failures, no unmeasured gates) so a broken run cannot poison it. Comparison only names
+#   over-threshold gates and distinguishes "hard-failure (gate already Failed, timing is context)" from "slowdown/jitter (Pass but over
+#   threshold — named, not failed)".</en>
+# </lang>
+$baselinePath = Join-Path $repoRoot 'dev\gate-suite-timing-baseline.json'
+$absoluteThresholdMs = 60000
+$ratioThreshold = 1.8
+$baselineExists = (Test-Path -LiteralPath $baselinePath)
+$baselineMap = $null
+if ($baselineExists) {
+    try { $baselineMap = (Get-Content -LiteralPath $baselinePath -Raw -Encoding UTF8 | ConvertFrom-Json).entries } catch { $baselineMap = $null }
+}
+$regressions = @()
+foreach ($r in $timedRecords) {
+    $key = ($r.gate + '|' + $r.layer + '|' + $r.args)
+    $base = $null
+    if ($baselineMap -and $baselineMap.PSObject.Properties.Name -contains $key) {
+        $base = $baselineMap.PSObject.Properties.Item($key).Value.durationMs
+    }
+    $isRegression = $false
+    $ratio = $null
+    $category = $null
+    if ($null -ne $base) {
+        $ratio = [math]::Round($r.durationMs / $base, 3)
+        if (($r.durationMs -gt $absoluteThresholdMs) -or ($r.durationMs -gt ($base * $ratioThreshold))) {
+            $isRegression = $true
+            $category = if ($r.status -eq 'Fail') { 'hard-failure' } else { 'slowdown-or-jitter' }
+        }
+    } elseif ($r.durationMs -gt $absoluteThresholdMs) {
+        $isRegression = $true
+        $category = if ($r.status -eq 'Fail') { 'hard-failure' } else { 'slowdown-or-jitter' }
+    }
+    if ($isRegression) {
+        $regressions += [pscustomobject]@{
+            gate = $r.gate
+            layer = $r.layer
+            args = $r.args
+            status = $r.status
+            currentMs = $r.durationMs
+            baselineMs = $base
+            ratio = $ratio
+            category = $category
+        }
+    }
+}
+$runClean = ((($results | Where-Object { $_.status -eq 'Fail' }).Count -eq 0) -and ($untimedGateCount -eq 0))
+$baselineUpdated = $false
+$baselineNotes = @()
+if ($runClean) {
+    $newBaseline = [pscustomobject]@{ generatedUtc = (Get-Date).ToUniversalTime().ToString('o'); entries = @{} }
+    foreach ($r in $timedRecords) {
+        $key = ($r.gate + '|' + $r.layer + '|' + $r.args)
+        $newBaseline.entries[$key] = [pscustomobject]@{ durationMs = $r.durationMs; status = $r.status }
+    }
+    $baselineDir = Split-Path -Parent $baselinePath
+    if (-not (Test-Path -LiteralPath $baselineDir)) { New-Item -ItemType Directory -Force -Path $baselineDir | Out-Null }
+    ($newBaseline | ConvertTo-Json -Depth 4) | Set-Content -Path $baselinePath -Encoding UTF8
+    $baselineUpdated = $true
+    $baselineNotes += 'baseline written/updated (run clean)'
+} else {
+    $baselineNotes += 'baseline NOT updated: run not clean (has Fail or unmeasured gates)'
+}
+if ($untimedGateCount -gt 0) {
+    $baselineNotes += ('{0} gate(s) had no timing captured (skip/prereq/exception) — recorded as null, not 0' -f $untimedGateCount)
+}
+if ($regressions.Count -eq 0) { $baselineNotes += 'no timing regressions vs baseline' }
+$timingReport = [pscustomobject]@{
+    enabled = $true
+    baselinePath = $baselinePath
+    baselineExists = $baselineExists
+    absoluteThresholdMs = $absoluteThresholdMs
+    ratioThreshold = $ratioThreshold
+    baselineUpdated = $baselineUpdated
+    regressions = $regressions
+    notes = $baselineNotes
+}
+
 $summary = [pscustomobject]@{
     phase = 'W-anp-P85 gate suite'
     generatedUtc = (Get-Date).ToUniversalTime().ToString('o')
@@ -1534,10 +1663,17 @@ $summary = [pscustomobject]@{
     failedCount = ($results | Where-Object { $_.status -eq 'Fail' }).Count
     skippedCount = ($results | Where-Object { $_.status -eq 'Skip' }).Count
     prereqMissing = $prereqMissing
+    totalDurationMs = $totalDurationMs
+    totalDurationSec = $totalDurationSec
+    timedGateCount = $timedGateCount
+    untimedGateCount = $untimedGateCount
+    layerDurations = $layerDurations
+    timingReport = $timingReport
     results = $results
 }
 $summaryPath = Join-Path $EvidenceDir 'gate-suite-summary.json'
 ($summary | ConvertTo-Json -Depth 6) | Set-Content -Path $summaryPath -Encoding UTF8
+Write-Step ("耗时：总计 {0}ms（测量 {1} 个，未测量 {2} 个）；基线 {3}，回归点名 {4} 项" -f $(if ($null -ne $totalDurationMs) { [string]$totalDurationMs } else { 'null' }), $timedGateCount, $untimedGateCount, $(if ($timingReport.baselineUpdated) { '已更新' } else { '未更新' }), $regressions.Count)
 
 Write-Host ''
 Write-Step ("结果：{0}｜门禁 {1} 个，失败 {2}，跳过 {3}" -f $summary.result, $summary.gateCount, $summary.failedCount, $summary.skippedCount)

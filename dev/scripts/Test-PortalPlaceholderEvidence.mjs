@@ -77,7 +77,7 @@ const targets = [
   { id: 'admin-work-items', url: new URL('Admin/WorkItems.aspx', baseUrl).toString() },
   { id: 'admin-collaboration-items', url: new URL('Admin/CollaborationItems.aspx', baseUrl).toString() },
   { id: 'front-workbench', url: new URL('DesktopDefault.aspx?tabindex=21&tabid=1010', baseUrl).toString() },
-  { id: 'front-correction', url: new URL('DesktopDefault.aspx?tabindex=20&tabid=1009', baseUrl).toString() },
+  { id: 'front-correction', url: new URL('DesktopDefault.aspx?tabindex=11&tabid=1008', baseUrl).toString() },
   { id: 'front-confirm', url: new URL('DesktopDefault.aspx?tabindex=20&tabid=1008', baseUrl).toString() },
   { id: 'front-myworkitems', url: new URL('DesktopDefault.aspx?tabindex=23&tabid=1011', baseUrl).toString() }
 ];

@@ -139,7 +139,7 @@ function discoverTabOrders() {
 
 const tabTargets = [
   { id: 'front-workbench', tabId: 1010, expectAriaLevel: '1' },
-  { id: 'front-correction', tabId: 1009, expectAriaLevel: '1' },
+  { id: 'front-correction', tabId: 1008, expectAriaLevel: '1' },
   { id: 'front-confirm', tabId: 1008, expectAriaLevel: '1' },
   { id: 'front-myworkitems', tabId: 1011, expectAriaLevel: '1' },
   { id: 'legacy-contacts', tabId: 2, expectAriaLevel: '1', moduleMarkerKey: 'Contacts_LabelName' },
