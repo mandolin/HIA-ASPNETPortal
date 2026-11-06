@@ -1,0 +1,21 @@
+        internal PortalModulePackage(
+            string directoryName,
+            string packageId,
+            string displayName,
+            string version,
+            string minimumPortalVersion,
+            string desktopEntry,
+            IList<string> resources,
+            string capabilityId,
+            string capabilityRole)
+        {
+            DirectoryName = directoryName ?? string.Empty;
+            PackageId = packageId ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            Version = version ?? string.Empty;
+            MinimumPortalVersion = minimumPortalVersion ?? string.Empty;
+            DesktopEntry = desktopEntry ?? string.Empty;
+            Resources = new List<string>(resources ?? new List<string>()).AsReadOnly();
+            CapabilityId = capabilityId ?? string.Empty;
+            CapabilityRole = capabilityRole ?? string.Empty;
+        }

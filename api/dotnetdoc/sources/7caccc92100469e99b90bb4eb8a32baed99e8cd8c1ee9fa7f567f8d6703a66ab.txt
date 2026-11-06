@@ -1,0 +1,76 @@
+        public static string GetBlockedReason(PortalNavigationEntry entry, PortalNavigationVisibilityContext context)
+        {
+            // <lang>
+            //   <zh-CN>空入口或空上下文一律不可见：调用方缺失上下文时宁可不显示，也不放行。</zh-CN>
+            //   <en>A missing entry or context is not visible: when the caller lacks context, prefer hiding over granting access.</en>
+            // </lang>
+            if (entry == null || context == null)
+            {
+                return ReasonVisibilityMode;
+            }
+
+            // <lang>
+            //   <zh-CN>第一步：生命周期。只有 Active 进入普通导航，Legacy 仅兼容视图，草稿与废弃不显示。</zh-CN>
+            //   <en>Step 1: lifecycle. Only Active enters ordinary navigation; Legacy belongs to compatibility views, while Draft and Deprecated never show.</en>
+            // </lang>
+            if (entry.LifecycleState != PortalNavigationLifecycleState.Active)
+            {
+                return ReasonLifecycle;
+            }
+
+            // <lang>
+            //   <zh-CN>第二步：可见性策略。诊断专用入口不进普通导航；管理员专属入口对非管理员隐藏。</zh-CN>
+            //   <en>Step 2: visibility policy. Diagnostics-only entries stay out of ordinary navigation; admin-only entries hide from non-administrators.</en>
+            // </lang>
+            if (entry.VisibilityMode == PortalNavigationVisibilityMode.DiagnosticOnly)
+            {
+                return ReasonVisibilityMode;
+            }
+
+            if (entry.VisibilityMode == PortalNavigationVisibilityMode.AdminOnly && !context.IsAdministrator)
+            {
+                return ReasonRole;
+            }
+
+            // <lang>
+            //   <zh-CN>第三步：角色依赖。声明为空表示不限制；否则命中任一声明角色即视为满足（角色是可选关系）。</zh-CN>
+            //   <en>Step 3: role dependencies. An empty declaration means no restriction; otherwise matching any declared role satisfies it (roles are alternatives).</en>
+            // </lang>
+            if (entry.RequiredRoles.Count > 0 &&
+                !entry.RequiredRoles.Any(role => context.RoleNames.Contains(role)))
+            {
+                return ReasonRole;
+            }
+
+            // <lang>
+            //   <zh-CN>第四步：权限键依赖。权限是叠加要求，必须全部满足。</zh-CN>
+            //   <en>Step 4: permission-key dependencies. Permissions are cumulative and must all be satisfied.</en>
+            // </lang>
+            if (entry.RequiredPermissionKeys.Count > 0 &&
+                !entry.RequiredPermissionKeys.All(key => context.PermissionKeys.Contains(key)))
+            {
+                return ReasonPermission;
+            }
+
+            // <lang>
+            //   <zh-CN>第五步：部署包依赖。核心包始终可用；其余包必须在当前 Profile 允许列表中。</zh-CN>
+            //   <en>Step 5: deployment-package dependencies. The core package is always available; other packages must appear in the Profile allow list.</en>
+            // </lang>
+            if (entry.RequiredPackageIds.Count > 0 &&
+                !entry.RequiredPackageIds.All(package => IsPackageAllowed(package, context)))
+            {
+                return ReasonPackage;
+            }
+
+            // <lang>
+            //   <zh-CN>第六步：Profile 依赖。声明为空表示不限制；否则当前 Profile 或其传递包含的 Profile 命中即满足。</zh-CN>
+            //   <en>Step 6: Profile dependencies. An empty declaration means no restriction; otherwise the active Profile or any transitively included Profile must match.</en>
+            // </lang>
+            if (entry.RequiredProfiles.Count > 0 &&
+                !entry.RequiredProfiles.Any(profile => IsProfileActive(profile, context)))
+            {
+                return ReasonProfile;
+            }
+
+            return null;
+        }

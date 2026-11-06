@@ -1,0 +1,399 @@
+    public static class PortalModuleCatalog
+    {
+        // <lang>
+        //   <zh-CN>仅接受当前受控 manifest schema；版本不匹配时整包不会进入可信目录，不能用宽松解析猜测未来字段语义。</zh-CN>
+        //   <en>Accept only the current controlled manifest schema; a version mismatch keeps the whole package out of the trusted catalog rather than using permissive parsing to guess future field semantics.</en>
+        // </lang>
+        private const int ManifestSchemaVersion = 2;
+
+        // <lang>
+        //   <zh-CN>模块发现只能从应用内固定虚拟根开始；manifest、目录名或请求值都不能替换此根。</zh-CN>
+        //   <en>Module discovery starts only from this fixed application-local virtual root; no manifest, directory name, or request value can replace it.</en>
+        // </lang>
+        private const string ModuleRootVirtualPath = "~/DesktopModules";
+
+        // <lang>
+        //   <zh-CN>稳定包标识限于受控 ASCII 形式，供状态表、审计和缓存身份共同引用；显示名称不能替代它。</zh-CN>
+        //   <en>The stable package identifier is limited to a controlled ASCII form shared by state rows, audit, and cache identity; a display name cannot substitute for it.</en>
+        // </lang>
+        private static readonly Regex PackageIdPattern = new Regex(
+            @"^[A-Za-z][A-Za-z0-9_.-]{0,99}$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        // <lang>
+        //   <zh-CN>物理包目录名使用更窄的受控形式；在组合根内路径之前先拒绝点号、分隔符和其它逃逸表达。</zh-CN>
+        //   <en>Physical package-directory names use a narrower controlled form; reject dots, separators, and other escape expressions before combining a path under the root.</en>
+        // </lang>
+        private static readonly Regex DirectoryNamePattern = new Regex(
+            @"^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取所有通过受信任部署目录与 manifest 校验的模块包。</zh-CN>
+        ///   <en>Gets every module package that passes trusted-deployment directory and manifest validation.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns><l zh-CN="按显示名和稳定包标识排序的只读可信包列表；目录/manifest 无效或稳定标识重复的包不会出现。" en="Read-only trusted-package list ordered by display name and stable package identifier; packages with invalid directory/manifest data or duplicate stable identifiers are absent." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该方法只发现与验证候选部署包，不读取模块状态表、不解析 Profile、不授予页面访问，也不加载控件或资源。</zh-CN>
+        ///   <en>This method only discovers and validates candidate deployment packages; it does not read the module-state table, resolve profiles, grant page access, or load controls or resources.</en>
+        /// </lang>
+        /// </remarks>
+        public static IList<PortalModulePackage> GetTrustedPackages()
+        {
+            // <lang>
+            //   <zh-CN>先在内存收集逐包验证成功的候选；在遍历完成前不向调用方暴露任何部分可信集合。</zh-CN>
+            //   <en>First collect per-package validation successes in memory; do not expose a partially trusted set to callers before traversal completes.</en>
+            // </lang>
+            var packages = new List<PortalModulePackage>();
+            string rootPath = HostingEnvironment.MapPath(ModuleRootVirtualPath);
+            if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
+            {
+                // <lang>
+                //   <zh-CN>应用未映射模块根或根目录不存在时安全地返回空集合；不从其它磁盘位置、请求路径或默认目录继续发现。</zh-CN>
+                //   <en>When the application does not map the module root or the root is absent, safely return an empty set; do not continue discovery from another disk location, request path, or default directory.</en>
+                // </lang>
+                return packages.AsReadOnly();
+            }
+
+            foreach (DirectoryInfo directory in new DirectoryInfo(rootPath).GetDirectories())
+            {
+                // <lang>
+                //   <zh-CN>每个直接子目录必须独立通过目录、manifest、入口和资源检查；一个失败候选不会使其它有效包或整个门户失败。</zh-CN>
+                //   <en>Each immediate child directory must independently pass directory, manifest, entry, and resource checks; one failed candidate does not fail other valid packages or the whole portal.</en>
+                // </lang>
+                PortalModulePackage package;
+                string reason;
+                if (TryReadPackage(directory.Name, out package, out reason))
+                {
+                    packages.Add(package);
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>重复 PackageId 会让状态表、审计和缓存身份失去唯一归属，因此整组包都不作为可信包返回。</zh-CN>
+            //   <en>A duplicate PackageId makes state rows, audit records, and cache identity ambiguous, so no package in that duplicate group is returned as trusted.</en>
+            // </lang>
+            return packages
+                // <lang>
+                //   <zh-CN>对稳定标识按不区分大小写分组后只保留唯一组；排序仅稳定目录展示和调用方枚举，不改变包的受信任结论。</zh-CN>
+                //   <en>After grouping stable identifiers case-insensitively, retain only unique groups; sorting only stabilizes catalog display and caller enumeration and does not change a package's trusted conclusion.</en>
+                // </lang>
+                .GroupBy(item => item.PackageId, StringComparer.OrdinalIgnoreCase)
+                .Where(group => group.Count() == 1)
+                .Select(group => group.Single())
+                .OrderBy(item => item.DisplayName, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.PackageId, StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }
+
+        /// <summary>
+        /// 按稳定包标识读取一个已验证部署模块包。
+        /// Reads one validated deployment module package by stable package identifier.
+        /// </summary>
+        /// <param name="packageId">模块包标识。Module package identifier.</param>
+        /// <param name="package">成功时返回已验证模块包。Validated module package when successful.</param>
+        /// <param name="reason">失败时返回不含物理路径的原因。Failure reason without physical paths.</param>
+        /// <returns>是否找到并验证该模块包。Whether the module package was found and validated.</returns>
+        public static bool TryGetTrustedPackage(
+            string packageId,
+            out PortalModulePackage package,
+            out string reason)
+        {
+            package = null;
+            reason = string.Empty;
+            if (!IsValidPackageId(packageId))
+            {
+                reason = "Module package identifier is invalid.";
+                return false;
+            }
+
+            package = GetTrustedPackages().FirstOrDefault(item =>
+                string.Equals(item.PackageId, packageId.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (package == null)
+            {
+                reason = "Module package is not deployed or its manifest is invalid.";
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从模块实例设置解析受控桌面入口、包状态和缓存身份。</zh-CN>
+        ///   <en>Resolves controlled desktop entry, package state, and cache identity from module-instance settings.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="moduleSettings"><l zh-CN="当前已读取的模块实例设置；本方法只消费其桌面源路径。" en="Current module-instance settings already read by the caller; this method consumes only its desktop-source path." /></param>
+        /// <param name="context"><l zh-CN="可选 HTTP 上下文，仅传给后续 Profile/状态解析边界。" en="Optional HTTP context passed only to later profile/state-resolution boundaries." /></param>
+        /// <param name="descriptor"><l zh-CN="可进入后续流程时返回受控描述；已禁用包也返回描述符。" en="Returns a controlled descriptor when it may enter later processing; disabled packages also return a descriptor." /></param>
+        /// <param name="reason"><l zh-CN="解析失败或禁用时的受控非敏感原因。" en="Controlled non-sensitive reason when resolution fails or the package is disabled." /></param>
+        /// <returns><l zh-CN="路径/Profile/部署边界通过时为 true；true 不等同于已加载或当前用户已获授权。" en="True when path, profile, and deployment boundaries pass; true does not mean loaded or authorized for the current user." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>这是运行时组合入口，不重做 manifest 校验、状态表实现或页面授权。它先规范化实例路径，再委托桌面入口解析，以保持页面加载、后台挂载与其它调用方的同一解析顺序。</zh-CN>
+        ///   <en>This is the runtime-composition entry and does not reimplement manifest validation, state-table implementation, or page authorization. It normalizes the instance path first and then delegates to desktop-entry resolution so page loading, admin mounting, and other callers preserve the same resolution order.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool TryResolveModule(
+            ModuleSettings moduleSettings,
+            HttpContext context,
+            out PortalModuleRuntimeDescriptor descriptor,
+            out string reason)
+        {
+            descriptor = null;
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>缺少实例设置时没有可验证的原始入口，立即失败而不猜测默认控件、包或缓存身份。</zh-CN>
+            //   <en>Without instance settings there is no raw entry to validate, so fail immediately rather than guessing a default control, package, or cache identity.</en>
+            // </lang>
+            if (moduleSettings == null)
+            {
+                reason = "Module settings are unavailable.";
+                return false;
+            }
+
+            string source;
+            try
+            {
+                // <lang>
+                //   <zh-CN>定义表中的原始桌面路径不是加载许可；先由共享路径校验器规范化，才能进入 Core/包/Legacy 分支。</zh-CN>
+                //   <en>The raw desktop path from the definition table is not loading permission; normalize it through the shared path validator before entering Core/package/Legacy branches.</en>
+                // </lang>
+                source = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(moduleSettings.DesktopSrc);
+            }
+            catch (InvalidOperationException exception)
+            {
+                // <lang>
+                //   <zh-CN>路径校验失败只以截断净化后的原因返回；不回显原始定义、物理路径或异常堆栈。</zh-CN>
+                //   <en>A path-validation failure returns only a truncated sanitized reason; do not echo the raw definition, physical path, or exception stack.</en>
+                // </lang>
+                reason = PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 200);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>统一委托桌面入口解析，避免模块实例入口与后台候选入口使用不同的 Profile/状态顺序。</zh-CN>
+            //   <en>Delegate uniformly to desktop-entry resolution so module-instance entries and admin candidate entries do not use different profile/state ordering.</en>
+            // </lang>
+            return TryResolveDesktopSource(source, context, out descriptor, out reason);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按桌面入口解析模块运行描述，并应用启动期 Profile gate。</zh-CN>
+        ///   <en>Resolves a module runtime descriptor by desktop entry and applies the startup Profile gate.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此方法供页面加载和后台新增模块共同使用，避免“运行时禁止但后台仍可新增”的不一致。它依次组合路径、Core/Legacy/受信任部署分类、Profile 与状态事实；它不加载控件、不注入样式，也不实施页面授权。</zh-CN>
+        ///   <en>This method is shared by page loading and admin module creation so the system does not allow creation of entries that runtime would later block. It composes path, Core/Legacy/validated-deployment classification, profile, and state facts in sequence; it does not load a control, inject styles, or enforce page authorization.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="desktopSource">
+        /// <l zh-CN="旧定义表或模块实例中的桌面控件路径；必须先通过共享路径规范化。" en="Desktop control path from the legacy definition table or module instance; it must first pass shared path normalization." />
+        /// </param>
+        /// <param name="context">
+        /// <l zh-CN="仅传给 Profile/状态解析边界的可选 HTTP 上下文；它不是授权结论。" en="Optional HTTP context passed only to profile/state-resolution boundaries; it is not an authorization conclusion." />
+        /// </param>
+        /// <param name="descriptor">
+        /// <l zh-CN="路径与 Profile/部署边界通过时的受控运行描述；已禁用包仍返回描述。" en="Controlled runtime descriptor when path and profile/deployment boundaries pass; disabled packages still return a descriptor." />
+        /// </param>
+        /// <param name="reason">
+        /// <l zh-CN="失败或禁用时的受控非敏感原因，不含物理路径、连接或异常细节。" en="Controlled non-sensitive reason when failed or disabled, with no physical path, connection, or exception detail." />
+        /// </param>
+        /// <returns>
+        /// <l zh-CN="入口通过路径/Profile/部署边界时为 true；true 不表示已加载或已授权。" en="True when the entry passes path/profile/deployment boundaries; true does not mean loaded or authorized." />
+        /// </returns>
+        public static bool TryResolveDesktopSource(
+            string desktopSource,
+            HttpContext context,
+            out PortalModuleRuntimeDescriptor descriptor,
+            out string reason)
+        {
+            descriptor = null;
+            reason = string.Empty;
+
+            string source;
+            try
+            {
+                // <lang>
+                //   <zh-CN>即使调用方已经规范化路径，也在公共入口重新使用同一校验器，避免不同调用点以字符串表示差异绕过受控模块分支。</zh-CN>
+                //   <en>Even when a caller has normalized the path, reuse the same validator at this public entry so representation differences across call sites cannot bypass controlled module branches.</en>
+                // </lang>
+                source = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(desktopSource);
+            }
+            catch (InvalidOperationException exception)
+            {
+                // <lang>
+                //   <zh-CN>失败原因经过净化和长度限制后才交给 UI/调用方；不把原始路径或异常细节变成可探测信息。</zh-CN>
+                //   <en>Sanitize and length-limit the failure reason before it reaches UI/callers; do not turn raw paths or exception detail into probeable information.</en>
+                // </lang>
+                reason = PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 200);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>Profile 快照是当前环境允许范围的输入；它不是用户权限，并且 Core 分支不会用它拒绝恢复性基础模块。</zh-CN>
+            //   <en>The profile snapshot supplies the current environment's allowed scope; it is not user permission, and the Core branch does not use it to reject recoverability-critical base modules.</en>
+            // </lang>
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(context);
+            if (PortalModuleProfileResolver.IsCoreDesktopSource(source))
+            {
+                // <lang>
+                //   <zh-CN>Core 路径在路径已规范化后获得硬保护：它不伪装为 manifest 包、不读取状态表，缓存身份只绑定受控入口。</zh-CN>
+                //   <en>After path normalization, a Core path receives hard protection: it is not disguised as a manifest package, does not read the state table, and has a cache identity bound only to the controlled entry.</en>
+                // </lang>
+                descriptor = new PortalModuleRuntimeDescriptor(
+                    source,
+                    "Core",
+                    false,
+                    true,
+                    true,
+                    null,
+                    "core|" + source.ToLowerInvariant());
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>仅从已验证部署包集合按已规范化入口精确匹配；这里消费前批 manifest 信任事实，不重读或放宽文件校验。</zh-CN>
+            //   <en>Match only from the validated deployment-package set by normalized entry; consume the earlier manifest-trust fact here without rereading or loosening file validation.</en>
+            // </lang>
+            PortalModulePackage package = GetTrustedPackages().FirstOrDefault(item =>
+                string.Equals(item.DesktopEntry, source, StringComparison.OrdinalIgnoreCase));
+            if (package == null)
+            {
+                if (HasManifestCandidate(source))
+                {
+                    // <lang>
+                    //   <zh-CN>位于带 manifest 候选目录却未进入可信集合时必须拒绝，不能回退为 Legacy；否则无效 manifest 可绕过受信任部署边界。</zh-CN>
+                    //   <en>When an entry lies in a candidate directory with a manifest but did not enter the trusted set, reject it rather than falling back to Legacy; otherwise an invalid manifest could bypass the trusted-deployment boundary.</en>
+                    // </lang>
+                    reason = "Module package manifest is invalid or does not declare the requested entry.";
+                    return false;
+                }
+
+                string legacyPackageId;
+                if (!PortalModuleProfileResolver.TryGetLegacyPackageId(source, out legacyPackageId))
+                {
+                    // <lang>
+                    //   <zh-CN>Legacy 兼容只接受内置路径到虚拟包标识的固定映射；未映射路径不会因为不是 manifest 包就自动允许。</zh-CN>
+                    //   <en>Legacy compatibility accepts only fixed mappings from built-in paths to virtual package identifiers; an unmapped path is not automatically allowed merely because it is not a manifest package.</en>
+                    // </lang>
+                    reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                             " Legacy module path is not mapped to a package profile.";
+                    return false;
+                }
+
+                if (!profile.IsPackageAllowed(legacyPackageId))
+                {
+                    // <lang>
+                    //   <zh-CN>Legacy 虚拟包同样必须通过当前 Profile；这里仍不判定用户角色、权限或页面访问。</zh-CN>
+                    //   <en>A Legacy virtual package must also pass the current profile; this still does not decide user role, permission, or page access.</en>
+                    // </lang>
+                    reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                             " Package '" + legacyPackageId + "' is not allowed by active profile '" +
+                             profile.ActiveProfile + "'.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>Legacy 经过路径和 Profile 允许后不依赖状态表；缓存身份区分虚拟包与规范入口，但不把它称为物理部署包。</zh-CN>
+                //   <en>After passing path and profile gates, Legacy does not depend on the state table; its cache identity distinguishes virtual package and normalized entry without calling it a physical deployment package.</en>
+                // </lang>
+                descriptor = new PortalModuleRuntimeDescriptor(
+                    source,
+                    legacyPackageId,
+                    false,
+                    true,
+                    true,
+                    null,
+                    "legacy|" + legacyPackageId.ToLowerInvariant() + "|" + source.ToLowerInvariant());
+                return true;
+            }
+
+            if (!profile.IsPackageAllowed(package.PackageId))
+            {
+                // <lang>
+                //   <zh-CN>已验证部署包先受 Profile 环境边界限制，再考虑状态表；显式启用状态不能越过未允许的 Profile。</zh-CN>
+                //   <en>A validated deployment package is constrained by the profile environment boundary before considering the state table; an explicit enabled state cannot bypass a disallowed profile.</en>
+                // </lang>
+                reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                         " Package '" + package.PackageId + "' is not allowed by active profile '" +
+                         profile.ActiveProfile + "'.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>仅在 Profile 已允许的受信任部署包上读取状态。读取不可用或无状态快照时按 ADR 既有兼容规则默认启用；这不改变 manifest/Profile 结论。</zh-CN>
+            //   <en>Read state only for a profile-allowed validated deployment package. When the read is unavailable or lacks a snapshot, default enabled under the existing ADR compatibility rule; this does not change manifest or profile conclusions.</en>
+            // </lang>
+            PortalModulePackageStateReadResult stateResult = PortalModulePackageStates.Read(package.PackageId, context);
+            bool isEnabled = stateResult.IsAvailable && stateResult.State != null
+                ? stateResult.State.IsEnabled
+                : true;
+
+            // <lang>
+            //   <zh-CN>缓存修订只采用可用显式状态行的 UTC tick；缺行与不可用均使用稳定 default，避免把失败详情或不受控时间进入缓存键。</zh-CN>
+            //   <en>Cache revision uses UTC ticks only from an available explicit state row; both missing and unavailable states use stable default, preventing failure detail or uncontrolled time from entering the cache key.</en>
+            // </lang>
+            string stateRevision = stateResult.IsAvailable && stateResult.State != null && stateResult.State.IsConfigured
+                ? stateResult.State.UpdatedUtc.Ticks.ToString()
+                : "default";
+            descriptor = new PortalModuleRuntimeDescriptor(
+                source,
+                package.PackageId,
+                true,
+                isEnabled,
+                stateResult.IsAvailable,
+                package,
+                "package|" + package.PackageId.ToLowerInvariant() + "|" + package.Version + "|" + stateRevision + "|" + source.ToLowerInvariant());
+            if (!isEnabled)
+            {
+                // <lang>
+                //   <zh-CN>显式禁用不是解析失败：保留描述符与受控原因，使页面/样式消费方可以跳过后续加载并给出稳定诊断。</zh-CN>
+                //   <en>Explicit disablement is not resolution failure: retain descriptor and controlled reason so page/style consumers can skip later loading and provide stable diagnostics.</en>
+                // </lang>
+                reason = "Module package is disabled.";
+            }
+
+            // <lang>
+            //   <zh-CN>true 只表示解析链已产生受控描述；调用方仍须检查 IsEnabled 并在各自页面边界实施加载与授权。</zh-CN>
+            //   <en>True means only that the resolution chain produced a controlled descriptor; callers still must check IsEnabled and enforce loading and authorization at their own page boundary.</en>
+            // </lang>
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取当前前台门户 Tab 中已启用受信任模块包的 CSS 候选。</zh-CN>
+        ///   <en>Gets CSS candidates for enabled trusted module packages in the current front-end portal Tab.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context"><l zh-CN="可选 HTTP 上下文；未提供时使用当前上下文，二者均不可用时返回空只读集合。" en="Optional HTTP context; the current context is used when omitted, and an empty read-only collection is returned when neither is available." /></param>
+        /// <returns><l zh-CN="按活动 Tab 顺序保留首次出现项、大小写无关去重的站内 CSS 候选只读集合；后台请求、无活动 Tab 或解析期间受控异常可能返回空集合，受控异常发生前已累计的候选会被保留。" en="Read-only site-local CSS candidates that retain first occurrence in active-Tab order and are de-duplicated case-insensitively; administration requests, no active Tab, or a controlled resolution exception can return an empty collection, while candidates accumulated before a controlled exception are retained." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法消费已完成路径、Profile 和状态 gate 的运行描述符，只输出受信任且已启用包的 manifest CSS 资源候选。它不重新校验 manifest、不注入 link 标记、不加载控件、不实施导航或页面授权；实际 Head 注入由 Master Page 的独立边界负责。</zh-CN>
+        ///   <en>This method consumes runtime descriptors that have already passed path, Profile, and state gates, and outputs candidates only for manifest CSS resources of trusted enabled packages. It does not revalidate manifests, inject link markup, load controls, enforce navigation, or enforce page authorization; actual Head injection belongs to the Master Page's separate boundary.</en>
+        /// </lang>
+        /// </remarks>
+        public static IList<PortalModuleStyleResource> GetActiveStyleResources(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>保持按 Tab 顺序的可变候选容器，直到所有受控过滤完成后才作为只读集合交给调用方。</zh-CN>
+            //   <en>Keep a mutable candidate container in Tab order until all controlled filtering completes, then expose it to the caller as a read-only collection.</en>
+            // </lang>
+            var resources = new List<PortalModuleStyleResource>();
+
+            // <lang>
+            //   <zh-CN>优先使用显式上下文以支持受控调用；仅在其缺失时回退到当前 HTTP 上下文，不持久化请求对象。</zh-CN>
+            //   <en>Prefer the explicit context for controlled callers; fall back to the current HTTP context only when it is absent, without retaining a request object.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;

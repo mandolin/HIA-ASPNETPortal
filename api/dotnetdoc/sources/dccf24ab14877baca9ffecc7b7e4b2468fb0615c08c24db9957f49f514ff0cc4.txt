@@ -1,0 +1,14 @@
+        private static bool IsAdminRequest(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>仅提取当前执行文件的应用相对路径；Request 不存在时使用空字符串，使该轻量边界保持为前台样式输出判定而非路由或授权解析。</zh-CN>
+            //   <en>Read only the app-relative path of the current execution file; use an empty string when Request is absent so this lightweight boundary remains a front-end style-output decision rather than routing or authorization parsing.</en>
+            // </lang>
+            string path = context.Request == null ? string.Empty : context.Request.AppRelativeCurrentExecutionFilePath;
+
+            // <lang>
+            //   <zh-CN>以大小写无关的固定应用路径前缀排除后台页面；不规范化、重写或验证 URL，保留宿主既有请求路径语义。</zh-CN>
+            //   <en>Exclude administration pages using a case-insensitive fixed app-path prefix; do not normalize, rewrite, or validate the URL, preserving the host's existing request-path semantics.</en>
+            // </lang>
+            return path.StartsWith("~/Admin/", StringComparison.OrdinalIgnoreCase);
+        }

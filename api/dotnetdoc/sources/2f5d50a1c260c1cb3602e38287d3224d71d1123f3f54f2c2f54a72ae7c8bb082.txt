@@ -1,0 +1,14 @@
+        protected override void OnInit(EventArgs e) // 重写初始化事件
+        {
+            // <lang>
+            //   <zh-CN>保留标准 UserControl 初始化顺序和事件语义，再执行门户专用成员注入。</zh-CN>
+            //   <en>Preserve standard UserControl initialization order and event semantics before portal-specific member injection.</en>
+            // </lang>
+            base.OnInit(e); // 调用基类的初始化方法
+
+            // <lang>
+            //   <zh-CN>动态加载绕过常规容器构造，因此使用当前请求容器按具体 T 向现有控件实例注入 [Dependency] 成员；不替换控件实例。</zh-CN>
+            //   <en>Dynamic loading bypasses normal container construction, so use the current-request container and concrete T to inject [Dependency] members into the existing control instance without replacing it.</en>
+            // </lang>
+            Global.BuildItemWithCurrentContext<T>(this); // 动态注入依赖
+        }

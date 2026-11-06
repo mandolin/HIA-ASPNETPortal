@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>公告列表保留 DataList 数据绑定，输出改为主题化条目结构。</zh-CN>
+        <en>The announcements list keeps DataList binding while rendering through themed item markup.</en>
+    </lang>
+--%>

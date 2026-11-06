@@ -1,0 +1,4 @@
+        private bool IsCurrentUserAuthenticated()
+        {
+            return Context != null && Context.User != null && Context.User.Identity != null && Context.User.Identity.IsAuthenticated;
+        }

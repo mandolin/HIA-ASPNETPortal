@@ -1,0 +1,14 @@
+        public static string BuildTabEntryKey(string tabName, string navigationKey)
+        {
+            // <lang>
+            //   <zh-CN>只做去空白拼接，不做大小写折叠或字符替换：稳定键必须可被 registry 精确命中，任何隐式改写都会让登记与运行结果不一致。</zh-CN>
+            //   <en>Only trim and concatenate; no case folding or character replacement, because the stable key must be matched exactly by the registry and any implicit rewrite would desynchronize registration from runtime behaviour.</en>
+            // </lang>
+            string keySource = string.IsNullOrWhiteSpace(navigationKey) ? tabName : navigationKey;
+            if (string.IsNullOrWhiteSpace(keySource))
+            {
+                return string.Empty;
+            }
+
+            return TabEntryKeyPrefix + keySource.Trim();
+        }

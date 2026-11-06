@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.unityconfigloader",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.unityconfigloader:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.unityconfigloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
+      "kind": "entry",
+      "label": "LoadConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
+      "sourcePath": "src/Portal/Util/UnityConfigLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.lo-08c06a06.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.unityconfigloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadunityconfig-unity.iunitycontainer-system.string",
+      "kind": "entry",
+      "label": "LoadUnityConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadunityconfig-unity.iunitycontainer-system.string",
+      "sourcePath": "src/Portal/Util/UnityConfigLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.unityconfigloader.loadunityconfig-unity.iunitycontainer-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.lo-ac87b81f.html"
+    }
+  ]
+}

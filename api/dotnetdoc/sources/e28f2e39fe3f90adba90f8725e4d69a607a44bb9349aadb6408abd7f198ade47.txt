@@ -1,0 +1,22 @@
+        protected override void OnPreInit(EventArgs e)
+        {
+            /*
+             * <lang>
+             *   <zh-CN>先应用主题，再执行依赖注入；这里的先后顺序是 Web Forms 原生主题机制的硬约束。</zh-CN>
+             *   <en>Apply the theme before dependency injection; this ordering is a hard constraint of the native Web Forms theme mechanism.</en>
+             * </lang>
+             */
+            if (ShouldApplyPortalTheme)
+            {
+                PortalThemeResolver.ApplyTheme(this);
+            }
+
+            /*
+             * <lang>
+             *   <zh-CN>主题确定后再让 Unity 填充页面依赖，最后交还 ASP.NET 页面生命周期。</zh-CN>
+             *   <en>After the theme is fixed, let Unity populate page dependencies and then return to the ASP.NET page lifecycle.</en>
+             * </lang>
+             */
+            InjectDependencies();
+            base.OnPreInit(e);
+        }

@@ -1,0 +1,61 @@
+    public interface IPortalModuleTargetSource
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按模块包标识读取其已验证的桌面用户控件入口。</zh-CN>
+        ///   <en>Reads the validated desktop user-control entry of a module package by package identifier.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="packageId"><l><zh-CN>模块包标识，形如 <c>HIA.EnterpriseCapabilityWorkbench</c>。</zh-CN><en>The module package identifier, such as <c>HIA.EnterpriseCapabilityWorkbench</c>.</en></l></param>
+        /// <returns><l><zh-CN>桌面入口虚拟路径；包不存在或未声明时为空串。</zh-CN><en>The desktop entry virtual path, or an empty string when the package is absent or declares none.</en></l></returns>
+        string GetDesktopEntry(string packageId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前缓存中的全部模块定义。</zh-CN>
+        ///   <en>Reads all module definitions from the current cache.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns><l><zh-CN>模块定义集合，可能为空但不应为 <c>null</c>。</zh-CN><en>The module-definition collection, which may be empty but should not be <c>null</c>.</en></l></returns>
+        IEnumerable<IModuleDefinitionItem> GetModuleDefinitions();
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取引用指定模块定义的模块实例标识。</zh-CN>
+        ///   <en>Reads the module-instance identifiers that reference the specified module definition.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definitionId"><l><zh-CN>模块定义标识。</zh-CN><en>The module-definition identifier.</en></l></param>
+        /// <returns><l><zh-CN>模块实例标识集合，可能为空。</zh-CN><en>The module-instance identifier collection, which may be empty.</en></l></returns>
+        IEnumerable<int> GetModuleIdsByDefinitionId(int definitionId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按标识查找模块实例。</zh-CN>
+        ///   <en>Finds a module instance by identifier.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="moduleId"><l><zh-CN>模块实例标识。</zh-CN><en>The module-instance identifier.</en></l></param>
+        /// <returns><l><zh-CN>匹配的模块实例；不存在时为 <c>null</c>。</zh-CN><en>The matching module instance, or <c>null</c> when absent.</en></l></returns>
+        IModuleItem FindModuleById(int moduleId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按标识查找页签。</zh-CN>
+        ///   <en>Finds a tab by identifier.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tabId"><l><zh-CN>页签标识。</zh-CN><en>The tab identifier.</en></l></param>
+        /// <returns><l><zh-CN>匹配的页签；不存在时为 <c>null</c>。</zh-CN><en>The matching tab, or <c>null</c> when absent.</en></l></returns>
+        ITabItem FindTabById(int tabId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断当前请求是否满足给定的旧门户分号角色串。</zh-CN>
+        ///   <en>Determines whether the current request satisfies the given legacy semicolon-delimited role string.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="accessRoles"><l><zh-CN>页签的访问角色串。</zh-CN><en>The tab's access-role string.</en></l></param>
+        /// <returns><l><zh-CN>满足时为 <c>true</c>；无请求上下文时调用方应返回 <c>false</c>（fail-closed）。</zh-CN><en><c>true</c> when satisfied; with no request context the implementation should return <c>false</c> (fail-closed).</en></l></returns>
+        bool IsInRoles(string accessRoles);
+    }

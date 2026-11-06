@@ -1,0 +1,1 @@
+        public string SettingText { get; set; }

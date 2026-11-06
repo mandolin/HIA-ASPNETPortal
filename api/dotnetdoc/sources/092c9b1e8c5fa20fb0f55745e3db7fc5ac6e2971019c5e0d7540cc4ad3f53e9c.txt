@@ -1,0 +1,6 @@
+    <%--
+    <lang>
+      <zh-CN>后台页级布局样板保留服务器控件绑定和 Repeater 数据源，只重构页面壳、摘要卡片和表格语义，避免影响 code-behind 健康检查流程。</zh-CN>
+      <en>The admin page-level layout sample preserves server-control bindings and Repeater data sources, only rebuilding the page shell, summary cards, and table semantics so the code-behind health-check flow is not changed.</en>
+    </lang>
+    --%>

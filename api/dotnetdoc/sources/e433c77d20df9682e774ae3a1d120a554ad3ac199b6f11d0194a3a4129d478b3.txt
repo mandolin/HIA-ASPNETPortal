@@ -1,0 +1,1 @@
+        public const string AllowSelfRegistration = "Portal.Security.AllowSelfRegistration";

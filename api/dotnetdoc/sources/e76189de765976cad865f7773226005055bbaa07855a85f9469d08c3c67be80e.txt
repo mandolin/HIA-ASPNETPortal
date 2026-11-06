@@ -1,0 +1,34 @@
+    public static class PortalDatabaseProviderNames
+    {
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>SQL Server 的 .NET Framework ADO.NET provider invariant 名称。</zh-CN>
+        /// <en>The .NET Framework ADO.NET provider invariant name for SQL Server.</en>
+        /// </lang>
+        /// </summary>
+        public const string SqlServer = "System.Data.SqlClient";
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>SQLite ADO.NET provider invariant 名称。</zh-CN>
+        /// <en>The SQLite ADO.NET provider invariant name.</en>
+        /// </lang>
+        /// </summary>
+        public const string Sqlite = "System.Data.SQLite";
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>为 MySQL 保留的惯用 provider invariant 名称，不保证当前部署已注册对应工厂。</zh-CN>
+        /// <en>The conventional provider invariant name reserved for MySQL; it does not guarantee that the current deployment registered the corresponding factory.</en>
+        /// </lang>
+        /// </summary>
+        public const string MySql = "MySql.Data.MySqlClient";
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>为 PostgreSQL 保留的惯用 provider invariant 名称，不保证当前部署已注册对应工厂。</zh-CN>
+        /// <en>The conventional provider invariant name reserved for PostgreSQL; it does not guarantee that the current deployment registered the corresponding factory.</en>
+        /// </lang>
+        /// </summary>
+        public const string PostgreSql = "Npgsql";
+    }

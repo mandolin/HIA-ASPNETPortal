@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>用户栏中的欢迎文本、注销链接和门户入口由服务器上下文生成；页面不自行推断当前身份或会话状态。</zh-CN>
+                        <en>The server context generates the welcome text, logoff link, and portal entries in the user bar; the page does not infer identity or session state on its own.</en>
+                    </lang>
+                --%>

@@ -1,0 +1,1 @@
+        public const string SettingsView = "Settings.View";

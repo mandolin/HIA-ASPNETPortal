@@ -1,0 +1,107 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldatabaseprofile.-ctor-system.string-system.string-system.string-system.string-aspnet.starterkit.portal.portaldatabasepurpose",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldatabaseprofile.-ctor-system.string-system.string-system.string-system.string-aspnet.starterkit.portal.portaldatabasepurpose",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldatabaseprofile.-ctor-system.string-system.string-system.string-system.string-aspnet.starterkit.portal.portaldatabasepurpose",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldatabaseprofile.-ct-af5866d9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.connectionstring",
+      "kind": "entry",
+      "label": "ConnectionString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.connectionstring",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldatabaseprofile.connectionstring",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.con-dafbf934.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.environmentname",
+      "kind": "entry",
+      "label": "EnvironmentName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.environmentname",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldatabaseprofile.environmentname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.env-30809b61.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.logicalname",
+      "kind": "entry",
+      "label": "LogicalName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.logicalname",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldatabaseprofile.logicalname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.log-2ed4aa4f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.providerinvariantname",
+      "kind": "entry",
+      "label": "ProviderInvariantName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.providerinvariantname",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldatabaseprofile.providerinvariantname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.pro-0ecfa0ff.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.purpose",
+      "kind": "entry",
+      "label": "Purpose",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.purpose",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldatabaseprofile.purpose",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldatabaseprofile.pur-eefea9e1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprofile:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldatabaseprofile.usesprovider-system.string",
+      "kind": "entry",
+      "label": "UsesProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldatabaseprofile.usesprovider-system.string",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldatabaseprofile.usesprovider-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldatabaseprofile.use-3005da26.html"
+    }
+  ]
+}

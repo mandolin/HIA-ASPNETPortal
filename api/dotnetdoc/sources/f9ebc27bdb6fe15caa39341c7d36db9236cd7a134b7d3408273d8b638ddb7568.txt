@@ -1,0 +1,21 @@
+    public interface IExpenseReimbursementDb
+    {
+        /// <summary><lang><zh-CN>探测业务表是否可用。</zh-CN><en>Probe whether the business table is available.</en></lang></summary>
+        bool IsSchemaAvailable();
+        /// <summary><lang><zh-CN>创建一条费用报销。</zh-CN><en>Create an expense reimbursement.</en></lang></summary>
+        /// <param name="request"><l><zh-CN>创建请求。</zh-CN><en>Creation request.</en></l></param>
+        ExpenseReimbursementResult CreateRequest(ExpenseReimbursementCreateRequest request);
+        /// <summary><lang><zh-CN>取申请人的最近报销列表。</zh-CN><en>Get the applicant's recent reimbursements.</en></lang></summary>
+        /// <param name="userId"><l><zh-CN>用户标识。</zh-CN><en>User identifier.</en></l></param>
+        /// <param name="limit"><l><zh-CN>上限。</zh-CN><en>Limit.</en></l></param>
+        IReadOnlyList<ExpenseReimbursementInfo> GetRecentByUser(int userId, int limit);
+        /// <summary><lang><zh-CN>按状态筛选读取后台审核用费用报销列表（空筛选值表示全部）。</zh-CN><en>Reads the administration review list filtered by status (an empty filter means all).</en></lang></summary>
+        /// <param name="statusFilter"><l><zh-CN>状态筛选值。</zh-CN><en>Status filter value.</en></l></param>
+        /// <param name="limit"><l><zh-CN>上限。</zh-CN><en>Limit.</en></l></param>
+        IList<ExpenseReimbursementInfo> GetAdminRequests(string statusFilter, int limit);
+        /// <summary><lang><zh-CN>按动作键审核费用报销（更新状态与审核人信息）。</zh-CN><en>Reviews an expense reimbursement by action key (updates status and reviewer info).</en></lang></summary>
+        /// <param name="request"><l><zh-CN>审核请求。</zh-CN><en>Review request.</en></l></param>
+        ExpenseReimbursementReviewResult ReviewRequest(ExpenseReimbursementReviewRequest request);
+        /// <summary><lang><zh-CN>把退回或拒绝状态的报销申请重置为待审批，并清空审核身份列（保留退回意见作为历史）；工作项重开由调用方负责。</zh-CN><en>Resets a returned or rejected reimbursement to pending and clears the reviewer-identity columns (keeping the return comment as history); the caller reopens the work item.</en></lang></summary>
+        ExpenseReimbursementResubmitResult ResubmitReimbursement(ExpenseReimbursementResubmitRequest request);
+    }

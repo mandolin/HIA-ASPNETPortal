@@ -1,0 +1,5 @@
+        protected void AllFilterButton_Click(object sender, EventArgs e)
+        {
+            ShowOverdueOnly = false;
+            BindWorkItems();
+        }

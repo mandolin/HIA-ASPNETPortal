@@ -1,0 +1,5 @@
+        internal static string Admin_Users_MessageSelectValidUser {
+            get {
+                return ResourceManager.GetString("Admin_Users_MessageSelectValidUser", resourceCulture);
+            }
+        }

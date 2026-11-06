@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>快捷链接模块以紧凑链接组呈现，保留新增入口和原有数据绑定。</zh-CN>
+        <en>The quick-links module renders as a compact link group while preserving the add entry and existing data binding.</en>
+    </lang>
+--%>

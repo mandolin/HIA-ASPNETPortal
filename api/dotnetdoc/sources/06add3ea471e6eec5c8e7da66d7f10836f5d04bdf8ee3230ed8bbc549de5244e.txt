@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>登录按钮进入 LoginBtn_Click，注册链接仅在 code-behind 明确开放时显示；认证结果和跳转不能由标记层伪造。</zh-CN>
+                <en>The sign-in button enters LoginBtn_Click, while the registration link is shown only when the code-behind explicitly enables it; authentication results and redirects cannot be forged by the markup.</en>
+            </lang>
+        --%>

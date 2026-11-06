@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>讨论模块通过标题栏控件提供“新增主题”入口；是否可见由模块编辑权限和标题控件自身逻辑决定。</zh-CN>
+  <en>The discussion module exposes the "add new thread" entry through the title control; visibility is decided by module edit permissions and the title control itself.</en>
+</lang>
+--%>

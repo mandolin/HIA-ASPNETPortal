@@ -1,0 +1,5 @@
+        internal static string GenericError_EventIdLabel {
+            get {
+                return ResourceManager.GetString("GenericError_EventIdLabel", resourceCulture);
+            }
+        }

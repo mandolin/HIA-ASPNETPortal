@@ -1,0 +1,12 @@
+        private static IOrganizationUnitInfo CreateOrganizationInfo(OrganizationUnitProjection row)
+        {
+            return new OrganizationUnitInfo(
+                row.OrganizationUnitId,
+                row.ParentOrganizationUnitId,
+                row.OrganizationCode,
+                row.DisplayName,
+                row.SortOrder,
+                row.IsActive,
+                row.CreatedUtc,
+                row.UpdatedUtc);
+        }

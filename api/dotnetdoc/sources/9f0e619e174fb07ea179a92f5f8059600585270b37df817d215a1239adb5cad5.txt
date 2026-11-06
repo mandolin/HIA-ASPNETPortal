@@ -1,0 +1,5 @@
+        internal static string ModuleProbe_LabelRenderedUtc {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelRenderedUtc", resourceCulture);
+            }
+        }

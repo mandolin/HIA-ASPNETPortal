@@ -1,0 +1,6 @@
+        public CollaborationItemTransition(string fromStatus, string actionKey, string toStatus)
+        {
+            FromStatus = fromStatus;
+            ActionKey = actionKey;
+            ToStatus = toStatus;
+        }

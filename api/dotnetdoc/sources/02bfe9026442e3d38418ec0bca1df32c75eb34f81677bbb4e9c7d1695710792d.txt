@@ -1,0 +1,32 @@
+        public LeaveRequestResubmitResult ResubmitRequest(LeaveRequestResubmitRequest request)
+        {
+            if (request == null || request.RequestId <= 0)
+            {
+                return new LeaveRequestResubmitResult { Succeeded = false, Message = "InvalidRequest", RequestId = request == null ? 0 : request.RequestId };
+            }
+
+            try
+            {
+                int rows = context.Database.ExecuteSqlCommand(
+                    "UPDATE dbo.PortalBiz_LeaveRequests " +
+                    "SET Status = @Status, ReviewedUtc = NULL, ReviewedByUserId = NULL, ReviewedBy = NULL " +
+                    "WHERE RequestId = @RequestId AND UserId = @ApplicantUserId AND Status IN (@FromReturned, @FromRejected);",
+                    new SqlParameter("@Status", LeaveRequestStatuses.Pending),
+                    new SqlParameter("@RequestId", request.RequestId),
+                    new SqlParameter("@ApplicantUserId", request.ApplicantUserId),
+                    new SqlParameter("@FromReturned", LeaveRequestStatuses.Returned),
+                    new SqlParameter("@FromRejected", LeaveRequestStatuses.Rejected));
+
+                if (rows <= 0)
+                {
+                    return new LeaveRequestResubmitResult { Succeeded = false, Message = "NotFound", RequestId = request.RequestId };
+                }
+
+                return new LeaveRequestResubmitResult { Succeeded = true, RequestId = request.RequestId };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError("请假申请重新提交失败（RequestId=" + request.RequestId + "）：" + ex);
+                return new LeaveRequestResubmitResult { Succeeded = false, Message = "DbError", RequestId = request.RequestId };
+            }
+        }

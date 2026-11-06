@@ -1,0 +1,9 @@
+        private static void ClearLoginPasswordKey(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>同时移除私钥和签发时间，避免只删一项造成旧密钥状态残留。</zh-CN>
+            //   <en>Remove both the private key and issue time together so stale-key state cannot remain after deleting only one item.</en>
+            // </lang>
+            context.Session.Remove(PrivateKeySessionKey);
+            context.Session.Remove(IssuedUtcSessionKey);
+        }

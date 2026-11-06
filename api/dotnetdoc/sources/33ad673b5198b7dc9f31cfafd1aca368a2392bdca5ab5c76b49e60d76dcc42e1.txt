@@ -1,0 +1,1 @@
+        public string FallbackReason { get; private set; }

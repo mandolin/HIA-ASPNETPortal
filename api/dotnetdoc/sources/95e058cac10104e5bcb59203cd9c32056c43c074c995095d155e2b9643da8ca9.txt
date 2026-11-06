@@ -1,0 +1,42 @@
+    public sealed class PortalLoginPasswordPublicKey
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建公钥响应模型。</zh-CN>
+        ///   <en>Creates a public-key response model.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="publicKeyPem">
+        /// <l>
+        ///   <zh-CN>SubjectPublicKeyInfo PEM 公钥。</zh-CN>
+        ///   <en>SubjectPublicKeyInfo PEM public key.</en>
+        /// </l>
+        /// </param>
+        /// <param name="keySizeBits">
+        /// <l>
+        ///   <zh-CN>RSA 密钥位数。</zh-CN>
+        ///   <en>RSA key size in bits.</en>
+        /// </l>
+        /// </param>
+        public PortalLoginPasswordPublicKey(string publicKeyPem, int keySizeBits)
+        {
+            PublicKeyPem = publicKeyPem ?? string.Empty;
+            KeySizeBits = keySizeBits;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>PEM 格式公钥。</zh-CN>
+        ///   <en>PEM-format public key.</en>
+        /// </lang>
+        /// </summary>
+        public string PublicKeyPem { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>密钥位数。</zh-CN>
+        ///   <en>Key size in bits.</en>
+        /// </lang>
+        /// </summary>
+        public int KeySizeBits { get; private set; }
+    }

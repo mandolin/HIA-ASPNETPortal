@@ -1,0 +1,6 @@
+<%--
+  <lang>
+    <zh-CN>P6.4.3 员工资料更正请求后台处理页只处理请求状态，不直接修改员工主数据。</zh-CN>
+    <en>The P6.4.3 employee profile correction Admin page handles request status only and does not directly modify employee master data.</en>
+  </lang>
+--%>

@@ -1,0 +1,20 @@
+        public ExternalConnectionStringLoadResult(
+            string connectionString,
+            string providerInvariantName,
+            string configRoot,
+            string configFile,
+            string source,
+            string environmentName)
+        {
+            ConnectionString = connectionString;
+            ProviderInvariantName = providerInvariantName;
+            ConfigRoot = configRoot;
+            ConfigFile = configFile;
+            Source = source;
+            DatabaseProfile = new PortalDatabaseProfile(
+                ExternalConnectionStringLoader.LogicalConnectionStringName,
+                providerInvariantName,
+                connectionString,
+                environmentName,
+                PortalDatabasePurpose.PrimaryPortal);
+        }

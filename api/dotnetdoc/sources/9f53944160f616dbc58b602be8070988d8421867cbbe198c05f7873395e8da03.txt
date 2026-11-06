@@ -1,0 +1,4 @@
+        private void BindPriorityList()
+        {
+            BindReferenceDataList(PriorityList, PortalReferenceDataSets.CollaborationPriority);
+        }

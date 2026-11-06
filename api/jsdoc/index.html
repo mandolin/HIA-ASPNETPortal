@@ -1,0 +1,1779 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HIA JSDoc</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="hia-theme.css">
+</head>
+<body class="hia-skin hia-skin-classic" data-hia-skin="classic" style="--code-font-family: &quot;Cascadia Code&quot;, &quot;Cascadia Mono&quot;, Consolas, monospace; --code-font-size: 12px; --code-line-height: 1.55; --code-tab-size: 2">
+  <a class="skip-link" href="#hia-content" data-hia-label="skip.content">跳到内容</a>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow" data-hia-label="header.eyebrow">API 文档</p>
+      <h1>HIA JSDoc</h1>
+    </div>
+    <div class="site-actions">
+      <div class="language-controls" role="group" aria-label="语言" data-hia-label-aria="language.controls">
+<button type="button" class="language-button active" data-hia-locale-control="zh-CN" aria-pressed="true">zh-CN</button><button type="button" class="language-button" data-hia-locale-control="en" aria-pressed="false">en</button>
+</div>
+      <div class="summary-stat" data-hia-label="summary.symbols" data-hia-label-count="16">16 个符号</div>
+    </div>
+  </header>
+  <main class="layout">
+    <nav class="sidebar" aria-label="符号" data-hia-label-aria="nav.symbols">
+      <label class="search-label" for="hia-symbol-search" data-hia-label="search.label">搜索符号</label>
+      <input id="hia-symbol-search" class="search-input" type="search" placeholder="按名称、类型或摘要筛选" data-hia-label-placeholder="search.placeholder" autocomplete="off" aria-controls="hia-content">
+      <form class="code-controls" data-hia-code-controls aria-label="代码显示" data-hia-label-aria="code.controls">
+        <div class="code-controls-title" data-hia-label="code.controls">代码显示</div>
+        <label class="code-control">
+          <span data-hia-label="code.fontFamily">字体</span>
+          <select class="code-select" data-hia-code-font-family>
+            <option value="cascadia" selected>Cascadia</option><option value="consolas">Consolas</option><option value="mono">UI Mono</option><option value="system">Monospace</option>
+          </select>
+        </label>
+        <label class="code-control compact">
+          <span data-hia-label="code.fontSize">字号</span>
+          <input class="code-input" type="number" min="10" max="20" step="1" value="12" data-hia-code-font-size>
+        </label>
+        <label class="code-control compact">
+          <span data-hia-label="code.lineHeight">行高</span>
+          <input class="code-input" type="number" min="1.2" max="2.2" step="0.05" value="1.55" data-hia-code-line-height>
+        </label>
+        <label class="code-control compact">
+          <span data-hia-label="code.tabSize">缩进</span>
+          <input class="code-input" type="number" min="2" max="8" step="1" value="2" data-hia-code-tab-size>
+        </label>
+        <label class="code-toggle">
+          <input type="checkbox" data-hia-code-wrap>
+          <span data-hia-label="code.wrap">换行</span>
+        </label>
+        <button class="code-reset" type="button" data-hia-code-reset data-hia-label="code.reset">重置</button>
+      </form>
+      <section class="nav-group">
+  <h2><span data-hia-label="kind.module">模块</span> <span>2</span></h2>
+<a href="#module-module:portal-build">portal-build</a>
+<a href="#module-module:portal-login-password-encryption">portal-login-password-encryption</a>
+</section>
+<section class="nav-group">
+  <h2><span data-hia-label="kind.function">函数</span> <span>13</span></h2>
+<a href="#function-module:portal-build-closewatchers">closeWatchers</a>
+<a href="#function-module:portal-build-coffeejs">coffeejs</a>
+<a href="#function-module:portal-build-esjs">esjs</a>
+<a href="#function-module:portal-build-postcssprocessors">postcssProcessors</a>
+<a href="#function-module:portal-build-sasscss">sasscss</a>
+<a href="#function-module:portal-build-startwatch">startWatch</a>
+<a href="#function-module:portal-build-stopwatch">stopWatch</a>
+<a href="#function-module:portal-login-password-encryption-createrequest">createRequest</a>
+<a href="#function-module:portal-login-password-encryption-encryptpassword">encryptPassword</a>
+<a href="#function-module:portal-login-password-encryption-encryptpasswordfields">encryptPasswordFields</a>
+<a href="#function-module:portal-login-password-encryption-getbyid">getById</a>
+<a href="#function-module:portal-login-password-encryption-requestpublickey">requestPublicKey</a>
+<a href="#function-module:portal-login-password-encryption-setmessage">setMessage</a>
+</section>
+<section class="nav-group">
+  <h2><span data-hia-label="kind.constant">常量</span> <span>1</span></h2>
+<a href="#constant-module:portal-build-assetsbuild">assetsBuild</a>
+</section>
+    </nav>
+    <section class="content" id="hia-content" tabindex="-1">
+      <article class="doclet" id="module-module:portal-build" data-kind="module">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build</h2>
+<div class="badges"><span class="badge">module</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>portal-build</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>门户前端资源构建任务。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Portal front-end build tasks.</p>
+</div></div>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:5</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L5" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="13" data-hia-label-end="31">行 13-31</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="13"><span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="14"><span class="tok-comment">//   &lt;zh-CN&gt;这些导入共同组成旧 Web Forms 门户的前端资产管线；保持显式依赖，避免 Visual Studio Task Runner 与 VSCode 自动化走不同实现。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="15"><span class="tok-comment">//   &lt;en&gt;These imports form the legacy Web Forms portal asset pipeline; keeping dependencies explicit prevents Visual Studio Task Runner and VSCode automation from using divergent implementations.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="16"><span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="17"><span class="tok-keyword">import</span> gulp from 'gulp';</span>
+<span class="code-line" data-line="18"><span class="tok-keyword">import</span> changed from 'gulp-changed';</span>
+<span class="code-line" data-line="19"><span class="tok-keyword">import</span> gulpCoffee from 'gulp-coffee';</span>
+<span class="code-line" data-line="20"><span class="tok-keyword">import</span> gulpUglify from 'gulp-uglify';</span>
+<span class="code-line" data-line="21"><span class="tok-keyword">import</span> gulpRename from 'gulp-rename';</span>
+<span class="code-line" data-line="22"><span class="tok-keyword">import</span> sourcemaps from 'gulp-sourcemaps';</span>
+<span class="code-line" data-line="23"><span class="tok-keyword">import</span> cleanCSS from 'gulp-clean-css';</span>
+<span class="code-line" data-line="24"><span class="tok-keyword">import</span> postcss from 'gulp-postcss';</span>
+<span class="code-line" data-line="25"><span class="tok-keyword">import</span> gulpSass from 'gulp-sass';</span>
+<span class="code-line" data-line="26"><span class="tok-keyword">import</span> * as sass from 'sass';</span>
+<span class="code-line" data-line="27"><span class="tok-keyword">import</span> autoprefixer from 'autoprefixer';</span>
+<span class="code-line" data-line="28"><span class="tok-keyword">import</span> cssnano from 'cssnano';</span>
+<span class="code-line" data-line="29"><span class="tok-keyword">import</span> fs from 'fs';</span>
+<span class="code-line" data-line="30"><span class="tok-keyword">import</span> path from 'path';</span>
+<span class="code-line" data-line="31"><span class="tok-keyword">import</span> { fileURLToPath } from 'url';</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>module</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>portal-build</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:5</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>1</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="module-module:portal-login-password-encryption" data-kind="module">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-login-password-encryption</h2>
+<div class="badges"><span class="badge">module</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>portal-login-password-encryption</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>登录密码提交前加密助手；保留 IE6 级语法兼容，并只向页面暴露最小的加密入口。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Login-password pre-submit encryption helper; it keeps IE6-level syntax compatibility and exposes only the minimal encryption entry points to the page.</p>
+</div></div>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:1</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L1" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="8" data-hia-label-end="87">行 8-87</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="8">(<span class="tok-keyword">function</span> (window, document) {</span>
+<span class="code-line" data-line="9">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="10">    <span class="tok-comment">//   &lt;zh-CN&gt;旧浏览器可能没有 console；此兼容对象只吸收诊断调用，不改变加密或提交结果。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="11">    <span class="tok-comment">//   &lt;en&gt;Legacy browsers may not provide console; this compatibility object only absorbs diagnostics and does not change encryption or submission results.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="12">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="13">    <span class="tok-keyword">if</span> (!window.console) {</span>
+<span class="code-line" data-line="14">        window.console = {</span>
+<span class="code-line" data-line="15">            error: <span class="tok-keyword">function</span> () { },</span>
+<span class="code-line" data-line="16">            log: <span class="tok-keyword">function</span> () { }</span>
+<span class="code-line" data-line="17">        };</span>
+<span class="code-line" data-line="18">    }</span>
+<span class="code-line" data-line="19"> </span>
+<span class="code-line" data-line="20">    /**</span>
+<span class="code-line" data-line="21">     * Resolves a page element by its DOM id.</span>
+<span class="code-line" data-line="22">     *</span>
+<span class="code-line" data-line="23">     * @<span class="tok-keyword">function</span> getById</span>
+<span class="code-line" data-line="24">     * @param {string} id DOM id supplied by the page integration.</span>
+<span class="code-line" data-line="25">     * @returns {HTMLElement|null} The matching element, or null when the page does not contain it.</span>
+<span class="code-line" data-line="26">     * @lang zh-CN 按页面集成提供的 DOM id 查找元素；找不到时返回 null，不创建或修改元素。</span>
+<span class="code-line" data-line="27">     * @lang en Resolves the element identified by the page integration's DOM id; returns null when it is absent and never creates or mutates an element.</span>
+<span class="code-line" data-line="28">     */</span>
+<span class="code-line" data-line="29">    <span class="tok-keyword">function</span> getById(id) {</span>
+<span class="code-line" data-line="30">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="31">        <span class="tok-comment">//   &lt;zh-CN&gt;查询保持在调用方文档上下文内，缺失元素由上层流程决定是否报告为准备失败。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="32">        <span class="tok-comment">//   &lt;en&gt;Keep the lookup within the caller's document context; the higher-level flow decides whether a missing element is a preparation failure.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="33">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="34">        <span class="tok-keyword">return</span> document.getElementById(id);</span>
+<span class="code-line" data-line="35">    }</span>
+<span class="code-line" data-line="36"> </span>
+<span class="code-line" data-line="37">    /**</span>
+<span class="code-line" data-line="38">     * Writes a fixed login-preparation message into the page message element.</span>
+<span class="code-line" data-line="39">     *</span>
+<span class="code-line" data-line="40">     * @<span class="tok-keyword">function</span> setMessage</span>
+<span class="code-line" data-line="41">     * @param {string} messageElementId DOM id <span class="tok-keyword">of</span> the page-owned message element.</span>
+<span class="code-line" data-line="42">     * @param {string} text Message text selected by this helper.</span>
+<span class="code-line" data-line="43">     * @returns {void}</span>
+<span class="code-line" data-line="44">     * @lang zh-CN 将本助手选择的固定提示写入页面消息元素；不承担通用 HTML 净化或错误详情展示。</span>
+<span class="code-line" data-line="45">     * @lang en Writes the fixed message selected by this helper into the page message element; it is not a general HTML sanitizer or error-detail renderer.</span>
+<span class="code-line" data-line="46">     */</span>
+<span class="code-line" data-line="47">    <span class="tok-keyword">function</span> setMessage(messageElementId, text) {</span>
+<span class="code-line" data-line="48">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="49">        <span class="tok-comment">//   &lt;zh-CN&gt;消息元素是可选的；登录页缺少该元素时仍保持原有布尔失败语义，不因提示展示失败而抛出异常。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="50">        <span class="tok-comment">//   &lt;en&gt;The message element is optional; when the login page omits it, the existing Boolean failure semantics remain and message rendering does not throw.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="51">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="52">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="53">        <span class="tok-comment">//   &lt;zh-CN&gt;保存页面消息节点，用于避免重复查找并限定后续副作用范围。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="54">        <span class="tok-comment">//   &lt;en&gt;Resolve the page message node once to avoid repeated lookup and limit the scope of the following side effect.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="55">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="56">        <span class="tok-keyword">var</span> messageElement = getById(messageElementId);</span>
+<span class="code-line" data-line="57">        <span class="tok-keyword">if</span> (messageElement) {</span>
+<span class="code-line" data-line="58">            <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="59">            <span class="tok-comment">//   &lt;zh-CN&gt;提示文本由本文件的固定失败消息调用；这里只更新可见提示，不改变隐藏字段或密码值。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="60">            <span class="tok-comment">//   &lt;en&gt;The caller supplies this file's fixed failure message; update only the visible hint without changing hidden fields or password values.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="61">            <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="62">            messageElement.innerHTML = text;</span>
+<span class="code-line" data-line="63">        }</span>
+<span class="code-line" data-line="64">    }</span>
+<span class="code-line" data-line="65"> </span>
+<span class="code-line" data-line="66">    /**</span>
+<span class="code-line" data-line="67">     * Creates an XMLHttpRequest-compatible object <span class="tok-keyword">for</span> the current browser.</span>
+<span class="code-line" data-line="68">     *</span>
+<span class="code-line" data-line="69">     * @<span class="tok-keyword">function</span> createRequest</span>
+<span class="code-line" data-line="70">     * @returns {XMLHttpRequest|null} A native or ActiveX request object, or null when the browser exposes neither API.</span>
+<span class="code-line" data-line="71">     * @lang zh-CN 按现代接口、Msxml2.XMLHTTP、Microsoft.XMLHTTP 顺序创建请求对象；均不可用时返回 null。</span>
+<span class="code-line" data-line="72">     * @lang en Creates a request object in the order native API, Msxml2.XMLHTTP, then Microsoft.XMLHTTP; returns null when none is available.</span>
+<span class="code-line" data-line="73">     */</span>
+<span class="code-line" data-line="74">    <span class="tok-keyword">function</span> createRequest() {</span>
+<span class="code-line" data-line="75">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="76">        <span class="tok-comment">//   &lt;zh-CN&gt;优先使用标准 XMLHttpRequest，避免在支持标准接口的浏览器中触发旧版 ActiveX 分支。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="77">        <span class="tok-comment">//   &lt;en&gt;Prefer the standard XMLHttpRequest so browsers with the native API never enter the legacy ActiveX branches.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="78">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="79">        <span class="tok-keyword">if</span> (window.XMLHttpRequest) {</span>
+<span class="code-line" data-line="80">            <span class="tok-keyword">return</span> <span class="tok-keyword">new</span> window.XMLHttpRequest();</span>
+<span class="code-line" data-line="81">        }</span>
+<span class="code-line" data-line="82"> </span>
+<span class="code-line" data-line="83">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="84">        <span class="tok-comment">//   &lt;zh-CN&gt;仅在旧 IE 缺少标准接口时尝试 ActiveX；失败不向页面泄露 COM 细节，而是继续走受控的 null 回退。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="85">        <span class="tok-comment">//   &lt;en&gt;Try ActiveX only for old IE without the standard API; do not expose COM details to the page and fall back to the controlled null result.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="86">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="87">        <span class="tok-keyword">if</span> (window.ActiveXObject) {</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>module</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:1</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>1</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-build-closewatchers" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~closeWatchers</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>closeWatchers() -&gt; void</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>停止全部活动的 Gulp watcher，并清空对应的内存句柄。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Stops every active Gulp watcher and clears its in-memory handle.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>void</code></td>
+  <td>-</td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:270</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L270" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="278" data-hia-label-end="314">行 278-314</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="278"><span class="tok-keyword">const</span> closeWatchers = () =&gt; {</span>
+<span class="code-line" data-line="279">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="280">    <span class="tok-comment">//   &lt;zh-CN&gt;关闭 ES watcher 后立即清空句柄，确保后续 `startWatch` 能重新建立干净监听。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="281">    <span class="tok-comment">//   &lt;en&gt;Clear the ES watcher handle immediately after closing it so a later `startWatch` can create a clean listener.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="282">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="283">    <span class="tok-keyword">if</span> (esWatcher) {</span>
+<span class="code-line" data-line="284">        esWatcher.close();</span>
+<span class="code-line" data-line="285">        esWatcher = null;</span>
+<span class="code-line" data-line="286">    }</span>
+<span class="code-line" data-line="287"> </span>
+<span class="code-line" data-line="288">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="289">    <span class="tok-comment">//   &lt;zh-CN&gt;关闭 CoffeeScript watcher 时保持同样的幂等模式，避免重复 close 已释放资源。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="290">    <span class="tok-comment">//   &lt;en&gt;Use the same idempotent pattern for the CoffeeScript watcher to avoid closing an already released resource.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="291">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="292">    <span class="tok-keyword">if</span> (coffeeWatcher) {</span>
+<span class="code-line" data-line="293">        coffeeWatcher.close();</span>
+<span class="code-line" data-line="294">        coffeeWatcher = null;</span>
+<span class="code-line" data-line="295">    }</span>
+<span class="code-line" data-line="296"> </span>
+<span class="code-line" data-line="297">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="298">    <span class="tok-comment">//   &lt;zh-CN&gt;关闭 Sass watcher 后释放模块级引用，防止长驻 Task Runner 进程继续持有文件系统监听。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="299">    <span class="tok-comment">//   &lt;en&gt;Release the module-level reference after closing the Sass watcher so the long-lived Task Runner process stops holding file-system listeners.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="300">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="301">    <span class="tok-keyword">if</span> (sassWatcher) {</span>
+<span class="code-line" data-line="302">        sassWatcher.close();</span>
+<span class="code-line" data-line="303">        sassWatcher = null;</span>
+<span class="code-line" data-line="304">    }</span>
+<span class="code-line" data-line="305"> </span>
+<span class="code-line" data-line="306">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="307">    <span class="tok-comment">//   &lt;zh-CN&gt;退出信号 watcher 也属于同一资源生命周期；重启 watcher 前必须先解除旧信号监听。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="308">    <span class="tok-comment">//   &lt;en&gt;The exit-signal watcher shares the same resource lifetime and must be removed before the watcher set is restarted.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="309">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="310">    <span class="tok-keyword">if</span> (watcherSignWatcher) {</span>
+<span class="code-line" data-line="311">        watcherSignWatcher.close();</span>
+<span class="code-line" data-line="312">        watcherSignWatcher = null;</span>
+<span class="code-line" data-line="313">    }</span>
+<span class="code-line" data-line="314">};</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>closeWatchers</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~closeWatchers</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:270</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>1</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-build-coffeejs" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~coffeejs</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>coffeejs() -&gt; NodeJS.ReadWriteStream</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>构建 CoffeeScript 源文件，输出压缩后的 JavaScript 及 source map。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Builds CoffeeScript source files to minimized JavaScript with source maps.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>NodeJS.ReadWriteStream</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Gulp stream for the CoffeeScript build.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Gulp stream for the CoffeeScript build.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:166</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L166" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="174" data-hia-label-end="202">行 174-202</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="174"><span class="tok-keyword">const</span> coffeejs = () =&gt; {</span>
+<span class="code-line" data-line="175">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="176">    <span class="tok-comment">//   &lt;zh-CN&gt;CoffeeScript 管线只处理现有 `.coffee` 源文件，并以相邻 `.js` 作为增量输出目标。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="177">    <span class="tok-comment">//   &lt;en&gt;The CoffeeScript pipeline processes only existing `.coffee` sources and uses adjacent `.js` files as incremental output targets.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="178">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="179">    <span class="tok-comment">// &lt;lang&gt;&lt;zh-CN&gt;同 `esjs`：源目录不存在时跳过而非抛错；`js/` 不存在时上一条任务已返回。&lt;/zh-CN&gt;&lt;en&gt;As in `esjs`: skip rather than throw when the source folder is absent; if `js/` does not exist this pipeline has nothing to do.&lt;/en&gt;&lt;/lang&gt;</span></span>
+<span class="code-line" data-line="180">    <span class="tok-keyword">if</span> (!fs.existsSync('js/')) {</span>
+<span class="code-line" data-line="181">        console.log('coffeejs skipped: source folder js/ does not exist.');</span>
+<span class="code-line" data-line="182">        <span class="tok-keyword">return</span> Promise.resolve();</span>
+<span class="code-line" data-line="183">    }</span>
+<span class="code-line" data-line="184">    <span class="tok-keyword">return</span> gulp.src('js/**/*.coffee', { sourcemaps: true, allowEmpty: true })</span>
+<span class="code-line" data-line="185">        .pipe(changed('js/', { extension: '.js' }))</span>
+<span class="code-line" data-line="186">        .pipe(sourcemaps.init())</span>
+<span class="code-line" data-line="187">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="188">        <span class="tok-comment">//   &lt;zh-CN&gt;`bare: true` 保持旧脚本的全局/模块包装行为，不额外套 CoffeeScript 生成闭包。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="189">        <span class="tok-comment">//   &lt;en&gt;`bare: true` preserves legacy script global/module wrapping behavior instead of adding a CoffeeScript-generated closure.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="190">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="191">        .pipe(gulpCoffee({ bare: true }))</span>
+<span class="code-line" data-line="192">        .pipe(gulpUglify())</span>
+<span class="code-line" data-line="193">        .pipe(gulpRename((newPath) =&gt; {</span>
+<span class="code-line" data-line="194">            <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="195">            <span class="tok-comment">//   &lt;zh-CN&gt;无论输入后缀如何，运行时产物固定为 `.js`，匹配 Web Forms 页面和静态资源约定。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="196">            <span class="tok-comment">//   &lt;en&gt;Whatever the input suffix, runtime artifacts are fixed to `.js` to match Web Forms page and static-asset conventions.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="197">            <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="198">            newPath.extname = '.js';</span>
+<span class="code-line" data-line="199">        }))</span>
+<span class="code-line" data-line="200">        .pipe(sourcemaps.write(''))</span>
+<span class="code-line" data-line="201">        .pipe(gulp.dest('js/'));</span>
+<span class="code-line" data-line="202">};</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>coffeejs</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~coffeejs</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:166</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>2</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-build-esjs" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~esjs</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>esjs() -&gt; NodeJS.ReadWriteStream</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>构建 `*.src.js` ES 模块源码，输出压缩后的 JavaScript 及 source map。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Builds ES module source files from `*.src.js` to minimized JavaScript with source maps.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>NodeJS.ReadWriteStream</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Gulp stream for the ES module build.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Gulp stream for the ES module build.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:69</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L69" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="77" data-hia-label-end="82">行 77-82</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="77"><span class="tok-keyword">const</span> esjs = () =&gt; {</span>
+<span class="code-line" data-line="78">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="79">    <span class="tok-comment">//   &lt;zh-CN&gt;保留低成本控制台标记，方便 Task Runner 与命令行区分 ES 模块构建是否真正触发。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="80">    <span class="tok-comment">//   &lt;en&gt;Keep a low-cost console marker so Task Runner and command-line runs can tell whether the ES module build actually started.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="81">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="82">    console.log('esjs begin');</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>esjs</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~esjs</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:69</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>2</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-build-postcssprocessors" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~postcssProcessors</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>postcssProcessors() -&gt; Array.&amp;lt;function()&amp;gt;</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>创建 Sass 资源构建共用的 PostCSS 处理器链，负责补全浏览器前缀并压缩 CSS。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Creates the PostCSS processor chain shared by Sass asset builds.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>Array.&lt;function()&gt;</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>PostCSS processors used to add browser prefixes and minimize CSS.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>PostCSS processors used to add browser prefixes and minimize CSS.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:47</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L47" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="55" data-hia-label-end="67">行 55-67</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="55"><span class="tok-keyword">const</span> postcssProcessors = () =&gt; [</span>
+<span class="code-line" data-line="56">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="57">    <span class="tok-comment">//   &lt;zh-CN&gt;先补浏览器前缀再压缩，避免 cssnano 在最终输出阶段前移除仍需参与兼容转换的结构。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="58">    <span class="tok-comment">//   &lt;en&gt;Apply browser prefixes before minification so cssnano does not remove structures still needed for compatibility transforms.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="59">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="60">    autoprefixer(),</span>
+<span class="code-line" data-line="61"> </span>
+<span class="code-line" data-line="62">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="63">    <span class="tok-comment">//   &lt;zh-CN&gt;最后压缩 CSS，使 Visual Studio 和自动化任务得到相同的发布形态资源。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="64">    <span class="tok-comment">//   &lt;en&gt;Minify CSS last so Visual Studio and automation tasks produce the same release-shaped assets.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="65">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="66">    cssnano()</span>
+<span class="code-line" data-line="67">];</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>postcssProcessors</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~postcssProcessors</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:47</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>2</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-build-sasscss" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~sasscss</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>sasscss() -&gt; NodeJS.ReadWriteStream</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>构建 Sass 与 SCSS 源文件，输出补全前缀、压缩后的 CSS 及 source map。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Builds Sass and SCSS source files to prefixed and minimized CSS with source maps.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>NodeJS.ReadWriteStream</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Gulp stream for the Sass and SCSS build.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Gulp stream for the Sass and SCSS build.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:204</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L204" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="212" data-hia-label-end="244">行 212-244</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="212"><span class="tok-keyword">const</span> sasscss = () =&gt; {</span>
+<span class="code-line" data-line="213">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="214">    <span class="tok-comment">//   &lt;zh-CN&gt;`sassDealer` 绑定当前 Dart Sass 实现，并提供同一个错误记录器给本次 Sass 管线。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="215">    <span class="tok-comment">//   &lt;en&gt;`sassDealer` binds the current Dart Sass implementation and supplies the same error logger for this Sass pipeline.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="216">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="217">    <span class="tok-keyword">const</span> sassDealer = gulpSass(sass);</span>
+<span class="code-line" data-line="218"> </span>
+<span class="code-line" data-line="219">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="220">    <span class="tok-comment">//   &lt;zh-CN&gt;Sass/SCSS 共用同一输出目录与 source map 策略，避免主题 CSS 构建在两种语法间分叉。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="221">    <span class="tok-comment">//   &lt;en&gt;Sass and SCSS share the same output folder and source-map strategy so theme CSS builds do not diverge by syntax.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="222">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="223">    <span class="tok-comment">// &lt;lang&gt;&lt;zh-CN&gt;同 `esjs`：源目录不存在时跳过而非抛错，避免整条 `assets:build` 被 Sass 输入目录缺失打断。&lt;/zh-CN&gt;&lt;en&gt;As in `esjs`: skip rather than throw when the source folder is absent, so a missing Sass input folder cannot abort the whole `assets:build`.&lt;/en&gt;&lt;/lang&gt;</span></span>
+<span class="code-line" data-line="224">    <span class="tok-keyword">if</span> (!fs.existsSync('css/')) {</span>
+<span class="code-line" data-line="225">        console.log('sasscss skipped: source folder css/ does not exist.');</span>
+<span class="code-line" data-line="226">        <span class="tok-keyword">return</span> Promise.resolve();</span>
+<span class="code-line" data-line="227">    }</span>
+<span class="code-line" data-line="228">    <span class="tok-keyword">return</span> gulp.src(['css/**/*.scss', 'css/**/*.sass'], { sourcemaps: true, allowEmpty: true })</span>
+<span class="code-line" data-line="229">        .pipe(changed('css/', { extension: '.css' }))</span>
+<span class="code-line" data-line="230">        .pipe(sourcemaps.init())</span>
+<span class="code-line" data-line="231">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="232">        <span class="tok-comment">//   &lt;zh-CN&gt;Sass 编译错误交给插件日志器，保持 watcher 进程可诊断而不是在第一处样式错误后静默退出。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="233">        <span class="tok-comment">//   &lt;en&gt;Sass compilation errors go through the plugin logger so the watcher remains diagnosable instead of silently exiting on the first style error.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="234">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="235">        .pipe(sassDealer().on('error', sassDealer.logError))</span>
+<span class="code-line" data-line="236">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="237">        <span class="tok-comment">//   &lt;zh-CN&gt;PostCSS 统一执行兼容前缀和压缩前处理，然后再交给 cleanCSS 做最终压缩。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="238">        <span class="tok-comment">//   &lt;en&gt;PostCSS performs shared compatibility prefixing and pre-minification processing before cleanCSS applies final compression.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="239">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="240">        .pipe(postcss(postcssProcessors()))</span>
+<span class="code-line" data-line="241">        .pipe(cleanCSS())</span>
+<span class="code-line" data-line="242">        .pipe(sourcemaps.write(''))</span>
+<span class="code-line" data-line="243">        .pipe(gulp.dest('css/'));</span>
+<span class="code-line" data-line="244">};</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>sasscss</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~sasscss</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:204</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>2</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-build-startwatch" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~startWatch</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>startWatch(cb) -&gt; void</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>启动 Visual Studio Task Runner 使用的 watcher，不执行首次资源构建。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Starts the Visual Studio Task Runner watchers without performing an initial asset build.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.parameters">参数</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th data-hia-label="table.name">名称</th>
+          <th data-hia-label="table.type">类型</th>
+          <th data-hia-label="table.attributes">属性</th>
+          <th data-hia-label="table.description">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <th scope="row"><code>cb</code></th>
+  <td><code>function</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Gulp completion callback.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Gulp completion callback.</p></div></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>void</code></td>
+  <td>-</td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:316</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L316" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="325" data-hia-label-end="381">行 325-381</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="325"><span class="tok-keyword">const</span> startWatch = (cb) =&gt; {</span>
+<span class="code-line" data-line="326">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="327">    <span class="tok-comment">//   &lt;zh-CN&gt;仅在句柄为空时注册 ES watcher，避免 ProjectOpened 重入造成重复构建回调。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="328">    <span class="tok-comment">//   &lt;en&gt;Register the ES watcher only when its handle is empty so ProjectOpened re-entry does not duplicate build callbacks.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="329">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="330">    <span class="tok-keyword">if</span> (!esWatcher) {</span>
+<span class="code-line" data-line="331">        esWatcher = gulp.watch('js/**/*.src.js', { ignoreInitial: true, delay: 500 });</span>
+<span class="code-line" data-line="332">        esWatcher.on('all', esjs);</span>
+<span class="code-line" data-line="333">    }</span>
+<span class="code-line" data-line="334"> </span>
+<span class="code-line" data-line="335">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="336">    <span class="tok-comment">//   &lt;zh-CN&gt;CoffeeScript watcher 同样跳过初始构建，只响应后续文件变化以保护 Visual Studio 打开项目的速度。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="337">    <span class="tok-comment">//   &lt;en&gt;The CoffeeScript watcher also skips the initial build and reacts only to later changes to preserve Visual Studio project-open speed.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="338">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="339">    <span class="tok-keyword">if</span> (!coffeeWatcher) {</span>
+<span class="code-line" data-line="340">        coffeeWatcher = gulp.watch('js/**/*.coffee', { ignoreInitial: true, delay: 500 });</span>
+<span class="code-line" data-line="341">        coffeeWatcher.on('all', coffeejs);</span>
+<span class="code-line" data-line="342">    }</span>
+<span class="code-line" data-line="343"> </span>
+<span class="code-line" data-line="344">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="345">    <span class="tok-comment">//   &lt;zh-CN&gt;Sass watcher 同时覆盖 `.scss` 与缩进式 `.sass`，保持两类历史样式源的热构建入口一致。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="346">    <span class="tok-comment">//   &lt;en&gt;The Sass watcher covers both `.scss` and indented `.sass` sources so both legacy style formats share one hot-build entry.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="347">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="348">    <span class="tok-keyword">if</span> (!sassWatcher) {</span>
+<span class="code-line" data-line="349">        sassWatcher = gulp.watch(['css/**/*.scss', 'css/**/*.sass'], { ignoreInitial: true, delay: 500 });</span>
+<span class="code-line" data-line="350">        sassWatcher.on('all', sasscss);</span>
+<span class="code-line" data-line="351">    }</span>
+<span class="code-line" data-line="352"> </span>
+<span class="code-line" data-line="353">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="354">    <span class="tok-comment">//   &lt;zh-CN&gt;信号 watcher 只在缺失时创建，避免多个退出监听同时响应同一次 stopWatch 写入。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="355">    <span class="tok-comment">//   &lt;en&gt;Create the signal watcher only when absent so multiple exit listeners do not respond to one stopWatch write.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="356">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="357">    <span class="tok-keyword">if</span> (!watcherSignWatcher) {</span>
+<span class="code-line" data-line="358">        watcherSignWatcher = gulp.watch('Gulp/gulp-watcher-sign.cfg', { ignoreInitial: true });</span>
+<span class="code-line" data-line="359">        watcherSignWatcher.on('change', () =&gt; {</span>
+<span class="code-line" data-line="360">            <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="361">            <span class="tok-comment">//   &lt;zh-CN&gt;收到信号后先释放所有 watcher，确保退出前不再接收新的资产变更事件。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="362">            <span class="tok-comment">//   &lt;en&gt;After receiving the signal, release all watchers first so no new asset-change events are accepted before exit.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="363">            <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="364">            closeWatchers();</span>
+<span class="code-line" data-line="365"> </span>
+<span class="code-line" data-line="366">            <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="367">            <span class="tok-comment">//   &lt;zh-CN&gt;延迟退出给文件系统 close 事件留出短窗口，降低 Task Runner 看到异常退出的概率。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="368">            <span class="tok-comment">//   &lt;en&gt;Delay process exit briefly so file-system close events can settle and Task Runner is less likely to observe an abrupt termination.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="369">            <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="370">            setTimeout(() =&gt; {</span>
+<span class="code-line" data-line="371">                process.exit();</span>
+<span class="code-line" data-line="372">            }, 1000);</span>
+<span class="code-line" data-line="373">        });</span>
+<span class="code-line" data-line="374">    }</span>
+<span class="code-line" data-line="375"> </span>
+<span class="code-line" data-line="376">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="377">    <span class="tok-comment">//   &lt;zh-CN&gt;所有 watcher 注册完成后通知 Gulp；此回调不表示任何资产已经被重新构建。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="378">    <span class="tok-comment">//   &lt;en&gt;Notify Gulp after all watchers are registered; this callback does not mean any asset has been rebuilt.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="379">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="380">    cb();</span>
+<span class="code-line" data-line="381">};</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>startWatch</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~startWatch</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:316</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>2</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-build-stopwatch" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~stopWatch</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>stopWatch(cb) -&gt; void</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>写入 watcher 信号文件，使活动的 Visual Studio watcher 进程正常退出。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Writes the watcher signal file so the active Visual Studio watcher process exits gracefully.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.parameters">参数</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th data-hia-label="table.name">名称</th>
+          <th data-hia-label="table.type">类型</th>
+          <th data-hia-label="table.attributes">属性</th>
+          <th data-hia-label="table.description">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <th scope="row"><code>cb</code></th>
+  <td><code>function</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Gulp completion callback.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Gulp completion callback.</p></div></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>void</code></td>
+  <td>-</td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:383</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L383" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="392" data-hia-label-end="416">行 392-416</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="392"><span class="tok-keyword">const</span> stopWatch = (cb) =&gt; {</span>
+<span class="code-line" data-line="393">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="394">    <span class="tok-comment">//   &lt;zh-CN&gt;`filePath` 指向受控信号文件，不从用户输入或网络输入派生。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="395">    <span class="tok-comment">//   &lt;en&gt;`filePath` points to the controlled signal file and is not derived from user or network input.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="396">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="397">    <span class="tok-keyword">const</span> filePath = path.join(__dirname, 'Gulp/gulp-watcher-sign.cfg');</span>
+<span class="code-line" data-line="398"> </span>
+<span class="code-line" data-line="399">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="400">    <span class="tok-comment">//   &lt;zh-CN&gt;`dataToWrite` 只包含低敏 UTC 秒值，用作变化触发器而非审计记录。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="401">    <span class="tok-comment">//   &lt;en&gt;`dataToWrite` contains only a low-sensitivity UTC seconds value used as a change trigger rather than an audit record.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="402">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="403">    <span class="tok-keyword">const</span> dataToWrite = { Date: <span class="tok-keyword">new</span> Date().getUTCSeconds() };</span>
+<span class="code-line" data-line="404"> </span>
+<span class="code-line" data-line="405">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="406">    <span class="tok-comment">//   &lt;zh-CN&gt;同步写入确保 stop task 返回前信号已落盘；文件内容不包含凭据或本机路径。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="407">    <span class="tok-comment">//   &lt;en&gt;Synchronous writing ensures the signal is on disk before the stop task returns; the file content contains no credentials or local paths.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="408">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="409">    fs.writeFileSync(filePath, JSON.stringify(dataToWrite), 'utf8');</span>
+<span class="code-line" data-line="410"> </span>
+<span class="code-line" data-line="411">    <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="412">    <span class="tok-comment">//   &lt;zh-CN&gt;通知 Gulp stop task 已完成；实际 watcher 退出由另一个进程收到文件变化后完成。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="413">    <span class="tok-comment">//   &lt;en&gt;Notify Gulp that the stop task is complete; the actual watcher exits after the other process receives the file change.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="414">    <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="415">    cb();</span>
+<span class="code-line" data-line="416">};</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>stopWatch</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~stopWatch</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:383</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>2</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-login-password-encryption-createrequest" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-login-password-encryption~createRequest</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>createRequest() -&gt; XMLHttpRequest | null</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>按现代接口、Msxml2.XMLHTTP、Microsoft.XMLHTTP 顺序创建请求对象；均不可用时返回 null。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Creates a request object in the order native API, Msxml2.XMLHTTP, then Microsoft.XMLHTTP; returns null when none is available.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>XMLHttpRequest | null</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>A native or ActiveX request object, or null when the browser exposes neither API.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>A native or ActiveX request object, or null when the browser exposes neither API.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:66</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L66" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="74" data-hia-label-end="104">行 74-104</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="74">    <span class="tok-keyword">function</span> createRequest() {</span>
+<span class="code-line" data-line="75">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="76">        <span class="tok-comment">//   &lt;zh-CN&gt;优先使用标准 XMLHttpRequest，避免在支持标准接口的浏览器中触发旧版 ActiveX 分支。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="77">        <span class="tok-comment">//   &lt;en&gt;Prefer the standard XMLHttpRequest so browsers with the native API never enter the legacy ActiveX branches.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="78">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="79">        <span class="tok-keyword">if</span> (window.XMLHttpRequest) {</span>
+<span class="code-line" data-line="80">            <span class="tok-keyword">return</span> <span class="tok-keyword">new</span> window.XMLHttpRequest();</span>
+<span class="code-line" data-line="81">        }</span>
+<span class="code-line" data-line="82"> </span>
+<span class="code-line" data-line="83">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="84">        <span class="tok-comment">//   &lt;zh-CN&gt;仅在旧 IE 缺少标准接口时尝试 ActiveX；失败不向页面泄露 COM 细节，而是继续走受控的 null 回退。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="85">        <span class="tok-comment">//   &lt;en&gt;Try ActiveX only for old IE without the standard API; do not expose COM details to the page and fall back to the controlled null result.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="86">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="87">        <span class="tok-keyword">if</span> (window.ActiveXObject) {</span>
+<span class="code-line" data-line="88">            <span class="tok-keyword">try</span> {</span>
+<span class="code-line" data-line="89">                <span class="tok-keyword">return</span> <span class="tok-keyword">new</span> window.ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);</span>
+<span class="code-line" data-line="90">            } <span class="tok-keyword">catch</span> (ignoreMsxml) {</span>
+<span class="code-line" data-line="91">                <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="92">                <span class="tok-comment">//   &lt;zh-CN&gt;Msxml2 不可用时保留 Microsoft.XMLHTTP 兼容回退，异常本身不改变调用方的失败判定。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="93">                <span class="tok-comment">//   &lt;en&gt;Keep the Microsoft.XMLHTTP compatibility fallback when Msxml2 is unavailable; the exception itself does not alter the caller's failure decision.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="94">                <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="95">                <span class="tok-keyword">return</span> <span class="tok-keyword">new</span> window.ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span>
+<span class="code-line" data-line="96">            }</span>
+<span class="code-line" data-line="97">        }</span>
+<span class="code-line" data-line="98"> </span>
+<span class="code-line" data-line="99">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="100">        <span class="tok-comment">//   &lt;zh-CN&gt;浏览器没有可用请求实现时返回 null，由公钥读取流程统一转为空响应。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="101">        <span class="tok-comment">//   &lt;en&gt;Return null when the browser exposes no request implementation; the public-key flow converts it into an empty response.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="102">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="103">        <span class="tok-keyword">return</span> null;</span>
+<span class="code-line" data-line="104">    }</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>createRequest</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-login-password-encryption~createRequest</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:66</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>2</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-login-password-encryption-encryptpassword" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-login-password-encryption~encryptPassword</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>encryptPassword(passwordElementId, encryptedElementId, keyUrl, messageElementId) -&gt; boolean</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>将单个密码控件对适配到批量流程，保持单字段入口与多字段入口使用同一失败和明文清理语义。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Adapts one password-control pair to the batch flow so single-field and multi-field entry points share the same failure and plaintext-clearing semantics.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.parameters">参数</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th data-hia-label="table.name">名称</th>
+          <th data-hia-label="table.type">类型</th>
+          <th data-hia-label="table.attributes">属性</th>
+          <th data-hia-label="table.description">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <th scope="row"><code>passwordElementId</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>DOM id of the plaintext password input.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>DOM id of the plaintext password input.</p></div></td>
+</tr>
+<tr>
+  <th scope="row"><code>encryptedElementId</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>DOM id of the hidden ciphertext input.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>DOM id of the hidden ciphertext input.</p></div></td>
+</tr>
+<tr>
+  <th scope="row"><code>keyUrl</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Public-key endpoint selected by the server-rendered page.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Public-key endpoint selected by the server-rendered page.</p></div></td>
+</tr>
+<tr>
+  <th scope="row"><code>messageElementId</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>DOM id for the optional preparation-failure message.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>DOM id for the optional preparation-failure message.</p></div></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>boolean</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>The same success/failure result returned by encryptPasswordFields.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>The same success/failure result returned by encryptPasswordFields.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:303</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L303" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="315" data-hia-label-end="329">行 315-329</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="315">    <span class="tok-keyword">function</span> encryptPassword(passwordElementId, encryptedElementId, keyUrl, messageElementId) {</span>
+<span class="code-line" data-line="316">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="317">        <span class="tok-comment">//   &lt;zh-CN&gt;构造单项配置并复用批量实现，避免两个入口产生不同的安全边界。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="318">        <span class="tok-comment">//   &lt;en&gt;Build a single-item configuration and reuse the batch implementation so the two entry points cannot diverge in security behavior.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="319">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="320">        <span class="tok-keyword">return</span> encryptPasswordFields(</span>
+<span class="code-line" data-line="321">            [</span>
+<span class="code-line" data-line="322">                {</span>
+<span class="code-line" data-line="323">                    passwordElementId: passwordElementId,</span>
+<span class="code-line" data-line="324">                    encryptedElementId: encryptedElementId</span>
+<span class="code-line" data-line="325">                }</span>
+<span class="code-line" data-line="326">            ],</span>
+<span class="code-line" data-line="327">            keyUrl,</span>
+<span class="code-line" data-line="328">            messageElementId);</span>
+<span class="code-line" data-line="329">    }</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>encryptPassword</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-login-password-encryption~encryptPassword</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:303</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>6</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-login-password-encryption-encryptpasswordfields" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-login-password-encryption~encryptPasswordFields</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>encryptPasswordFields(fieldPairs, keyUrl, messageElementId) -&gt; boolean</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>校验成对字段、按需读取公钥并先完成整批加密，再一次性写入密文并清空明文；任一准备或加密失败都保留未提交的明文值供页面重试。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Validates field pairs, fetches the public key only when needed, encrypts the complete batch first, then commits ciphertext and clears plaintext; any preparation or encryption failure leaves uncommitted plaintext available for a page retry.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.parameters">参数</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th data-hia-label="table.name">名称</th>
+          <th data-hia-label="table.type">类型</th>
+          <th data-hia-label="table.attributes">属性</th>
+          <th data-hia-label="table.description">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <th scope="row"><code>fieldPairs</code></th>
+  <td><code>Array.&lt;{passwordElementId:string, encryptedElementId:string}&gt;</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Password/plaintext and ciphertext field id pairs.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Password/plaintext and ciphertext field id pairs.</p></div></td>
+</tr>
+<tr>
+  <th scope="row"><code>keyUrl</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Public-key endpoint selected by the server-rendered page.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Public-key endpoint selected by the server-rendered page.</p></div></td>
+</tr>
+<tr>
+  <th scope="row"><code>messageElementId</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>DOM id for the optional preparation-failure message.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>DOM id for the optional preparation-failure message.</p></div></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>boolean</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>True when no plaintext is present or every plaintext value is encrypted and committed; false otherwise.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>True when no plaintext is present or every plaintext value is encrypted and committed; false otherwise.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:153</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L153" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="164" data-hia-label-end="169">行 164-169</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="164">    <span class="tok-keyword">function</span> encryptPasswordFields(fieldPairs, keyUrl, messageElementId) {</span>
+<span class="code-line" data-line="165">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="166">        <span class="tok-comment">//   &lt;zh-CN&gt;失败提示使用固定文案，避免把请求、密钥或加密库细节写回页面。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="167">        <span class="tok-comment">//   &lt;en&gt;Use a fixed failure message so request, key, or library details never flow back into the page.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="168">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="169">        <span class="tok-keyword">var</span> failureMessage = &quot;密码加密准备失败，请刷新页面后重试。&quot;;</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>encryptPasswordFields</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-login-password-encryption~encryptPasswordFields</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:153</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>5</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-login-password-encryption-getbyid" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-login-password-encryption~getById</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>getById(id) -&gt; HTMLElement | null</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>按页面集成提供的 DOM id 查找元素；找不到时返回 null，不创建或修改元素。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Resolves the element identified by the page integration's DOM id; returns null when it is absent and never creates or mutates an element.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.parameters">参数</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th data-hia-label="table.name">名称</th>
+          <th data-hia-label="table.type">类型</th>
+          <th data-hia-label="table.attributes">属性</th>
+          <th data-hia-label="table.description">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <th scope="row"><code>id</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>DOM id supplied by the page integration.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>DOM id supplied by the page integration.</p></div></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>HTMLElement | null</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>The matching element, or null when the page does not contain it.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>The matching element, or null when the page does not contain it.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:20</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L20" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="29" data-hia-label-end="35">行 29-35</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="29">    <span class="tok-keyword">function</span> getById(id) {</span>
+<span class="code-line" data-line="30">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="31">        <span class="tok-comment">//   &lt;zh-CN&gt;查询保持在调用方文档上下文内，缺失元素由上层流程决定是否报告为准备失败。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="32">        <span class="tok-comment">//   &lt;en&gt;Keep the lookup within the caller's document context; the higher-level flow decides whether a missing element is a preparation failure.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="33">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="34">        <span class="tok-keyword">return</span> document.getElementById(id);</span>
+<span class="code-line" data-line="35">    }</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>getById</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-login-password-encryption~getById</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:20</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>3</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-login-password-encryption-requestpublickey" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-login-password-encryption~requestPublicKey</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>requestPublicKey(keyUrl) -&gt; string</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>以同步 GET 读取页面指定的公钥端点并加入时间戳避免缓存；本函数不验证 URL 来源，来源信任由页面集成负责。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Reads the page-selected public-key endpoint with a synchronous GET and cache-busting timestamp; URL-origin validation remains the responsibility of the page integration.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.parameters">参数</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th data-hia-label="table.name">名称</th>
+          <th data-hia-label="table.type">类型</th>
+          <th data-hia-label="table.attributes">属性</th>
+          <th data-hia-label="table.description">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <th scope="row"><code>keyUrl</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Public-key endpoint selected by the server-rendered page.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Public-key endpoint selected by the server-rendered page.</p></div></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>string</code></td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Response text for a 2xx response, otherwise an empty string.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Response text for a 2xx response, otherwise an empty string.</p></div></td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:106</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L106" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="115" data-hia-label-end="151">行 115-151</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="115">    <span class="tok-keyword">function</span> requestPublicKey(keyUrl) {</span>
+<span class="code-line" data-line="116">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="117">        <span class="tok-comment">//   &lt;zh-CN&gt;请求对象只在本次读取中使用；创建失败时不发起网络调用并立即返回空响应。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="118">        <span class="tok-comment">//   &lt;en&gt;Use the request object only for this read; when creation fails, make no network call and return an empty response immediately.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="119">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="120">        <span class="tok-keyword">var</span> request = createRequest();</span>
+<span class="code-line" data-line="121">        <span class="tok-keyword">if</span> (!request) {</span>
+<span class="code-line" data-line="122">            <span class="tok-keyword">return</span> &quot;&quot;;</span>
+<span class="code-line" data-line="123">        }</span>
+<span class="code-line" data-line="124"> </span>
+<span class="code-line" data-line="125">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="126">        <span class="tok-comment">//   &lt;zh-CN&gt;根据现有查询串选择连接符，时间戳仅用于抑制缓存，不改变服务端公钥参数。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="127">        <span class="tok-comment">//   &lt;en&gt;Choose the separator from the existing query string; the timestamp only suppresses caching and does not change server-side key parameters.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="128">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="129">        <span class="tok-keyword">var</span> separator = keyUrl.indexOf(&quot;?&quot;) &gt;= 0 ? &quot;&amp;&quot; : &quot;?&quot;;</span>
+<span class="code-line" data-line="130">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="131">        <span class="tok-comment">//   &lt;zh-CN&gt;同步 GET 保持旧登录提交链的顺序：调用方在加密前必须拿到同一轮公钥响应。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="132">        <span class="tok-comment">//   &lt;en&gt;The synchronous GET preserves the legacy login sequence: the caller must receive this public-key response before encryption.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="133">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="134">        request.open(&quot;GET&quot;, keyUrl + separator + &quot;t=&quot; + <span class="tok-keyword">new</span> Date().getTime(), false);</span>
+<span class="code-line" data-line="135">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="136">        <span class="tok-comment">//   &lt;zh-CN&gt;禁止中间缓存返回过期公钥；请求头不携带密码或其他凭据。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="137">        <span class="tok-comment">//   &lt;en&gt;Prevent intermediary caches from returning an expired public key; no password or other credential is sent in this request header.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="138">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="139">        request.setRequestHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;);</span>
+<span class="code-line" data-line="140">        request.send(null);</span>
+<span class="code-line" data-line="141"> </span>
+<span class="code-line" data-line="142">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="143">        <span class="tok-comment">//   &lt;zh-CN&gt;仅接受 2xx 响应正文；非成功状态或空正文返回空响应，底层 send 异常保持现有调用方异常路径。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="144">        <span class="tok-comment">//   &lt;en&gt;Accept only the response body from a 2xx status; non-success statuses or empty bodies return an empty response, while send exceptions remain on the existing caller exception path.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="145">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="146">        <span class="tok-keyword">if</span> (request.status &gt;= 200 &amp;&amp; request.status &lt; 300) {</span>
+<span class="code-line" data-line="147">            <span class="tok-keyword">return</span> request.responseText || &quot;&quot;;</span>
+<span class="code-line" data-line="148">        }</span>
+<span class="code-line" data-line="149"> </span>
+<span class="code-line" data-line="150">        <span class="tok-keyword">return</span> &quot;&quot;;</span>
+<span class="code-line" data-line="151">    }</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>requestPublicKey</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-login-password-encryption~requestPublicKey</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:106</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>3</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="function-module:portal-login-password-encryption-setmessage" data-kind="function">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-login-password-encryption~setMessage</h2>
+<div class="badges"><span class="badge">function</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>setMessage(messageElementId, text) -&gt; void</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>将本助手选择的固定提示写入页面消息元素；不承担通用 HTML 净化或错误详情展示。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>Writes the fixed message selected by this helper into the page message element; it is not a general HTML sanitizer or error-detail renderer.</p>
+</div></div>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.parameters">参数</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th data-hia-label="table.name">名称</th>
+          <th data-hia-label="table.type">类型</th>
+          <th data-hia-label="table.attributes">属性</th>
+          <th data-hia-label="table.description">描述</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <th scope="row"><code>messageElementId</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>DOM id of the page-owned message element.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>DOM id of the page-owned message element.</p></div></td>
+</tr>
+<tr>
+  <th scope="row"><code>text</code></th>
+  <td><code>string</code></td>
+  <td>-</td>
+  <td><div class="i18n-field" data-hia-locale="zh-CN"><p>Message text selected by this helper.</p></div>
+<div class="i18n-field" data-hia-locale="en" data-hia-fallback-from="zh-CN" hidden><p>Message text selected by this helper.</p></div></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.returns">返回值</h3></summary>
+  <div class="section-body">
+  <div class="table-wrap">
+    <table class="doc-table compact">
+      <thead><tr><th data-hia-label="table.type">类型</th><th data-hia-label="table.description">描述</th></tr></thead>
+      <tbody><tr>
+  <td><code>void</code></td>
+  <td>-</td>
+</tr></tbody>
+    </table>
+  </div>
+  </div>
+</details>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:37</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L37" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="47" data-hia-label-end="64">行 47-64</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="47">    <span class="tok-keyword">function</span> setMessage(messageElementId, text) {</span>
+<span class="code-line" data-line="48">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="49">        <span class="tok-comment">//   &lt;zh-CN&gt;消息元素是可选的；登录页缺少该元素时仍保持原有布尔失败语义，不因提示展示失败而抛出异常。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="50">        <span class="tok-comment">//   &lt;en&gt;The message element is optional; when the login page omits it, the existing Boolean failure semantics remain and message rendering does not throw.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="51">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="52">        <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="53">        <span class="tok-comment">//   &lt;zh-CN&gt;保存页面消息节点，用于避免重复查找并限定后续副作用范围。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="54">        <span class="tok-comment">//   &lt;en&gt;Resolve the page message node once to avoid repeated lookup and limit the scope of the following side effect.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="55">        <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="56">        <span class="tok-keyword">var</span> messageElement = getById(messageElementId);</span>
+<span class="code-line" data-line="57">        <span class="tok-keyword">if</span> (messageElement) {</span>
+<span class="code-line" data-line="58">            <span class="tok-comment">// &lt;lang&gt;</span></span>
+<span class="code-line" data-line="59">            <span class="tok-comment">//   &lt;zh-CN&gt;提示文本由本文件的固定失败消息调用；这里只更新可见提示，不改变隐藏字段或密码值。&lt;/zh-CN&gt;</span></span>
+<span class="code-line" data-line="60">            <span class="tok-comment">//   &lt;en&gt;The caller supplies this file's fixed failure message; update only the visible hint without changing hidden fields or password values.&lt;/en&gt;</span></span>
+<span class="code-line" data-line="61">            <span class="tok-comment">// &lt;/lang&gt;</span></span>
+<span class="code-line" data-line="62">            messageElement.innerHTML = text;</span>
+<span class="code-line" data-line="63">        }</span>
+<span class="code-line" data-line="64">    }</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>function</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>setMessage</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-login-password-encryption~setMessage</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-login-password-encryption</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js:37</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>3</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+<article class="doclet" id="constant-module:portal-build-assetsbuild" data-kind="constant">
+  <details class="doclet-details" open>
+    <summary class="doclet-summary collapse-summary">
+      <div class="doclet-summary-main">
+        <h2>module:portal-build~assetsBuild</h2>
+<div class="badges"><span class="badge">constant</span><span class="badge muted">inner</span><span class="badge hia">HIA</span></div>
+      </div>
+    </summary>
+    <div class="doclet-body">
+      <pre class="signature"><code>assetsBuild</code></pre>
+<div class="i18n-description-set"><div class="description i18n-description" data-hia-locale="zh-CN">
+<p>供 VSCode 与 AI 自动化使用的一次性资源构建任务；仅处理已有输入并在相邻目录写入输出，不创建输入目录，也不改变 Visual Studio 的 `startWatch` 绑定。</p>
+</div>
+<div class="description i18n-description" data-hia-locale="en" hidden>
+<p>One-time asset build task for VSCode and AI automation; it processes existing inputs and writes adjacent outputswithout creating input directories or changing the Visual Studio `startWatch` binding.</p>
+</div></div>
+<details class="doc-section source-section doclet-source collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.source">源码</h3></summary>
+  <div class="section-body">
+  <div class="source-reference primary-source">
+    <div class="source-caption"><span data-hia-label="source.definedIn">定义于</span> - src/Portal/gulpfile.js:432</div>
+  <div class="source-links"><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js" target="_blank" rel="noreferrer" data-hia-label="source.file">文件</a><a href="https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L432" target="_blank" rel="noreferrer" data-hia-label="source.lines">行</a></div>
+  <details class="source-preview">
+    <summary data-hia-label="source.lineRange" data-hia-label-start="432" data-hia-label-end="432">行 432-432</summary>
+    <pre class="code-block" data-language="javascript"><code class="language-javascript">
+<span class="code-line" data-line="432"><span class="tok-keyword">const</span> assetsBuild = gulp.parallel(esjs, coffeejs, sasscss);</span>
+    </code></pre>
+  </details>
+  </div>
+  </div>
+</details>
+<details class="doc-section metadata-section collapsible-section" open>
+  <summary class="section-summary collapse-summary"><h3 data-hia-label="section.metadata">元数据</h3></summary>
+  <div class="section-body">
+<dl class="meta-list">
+  <dt data-hia-label="meta.kind">类型</dt><dd>constant</dd>
+  <dt data-hia-label="meta.name">名称</dt><dd>assetsBuild</dd>
+  <dt data-hia-label="meta.longname">完整名称</dt><dd>module:portal-build~assetsBuild</dd>
+  <dt data-hia-label="meta.memberof">所属</dt><dd>module:portal-build</dd>
+  <dt data-hia-label="meta.definedIn">定义于</dt><dd>src/Portal/gulpfile.js:432</dd>
+  <dt data-hia-label="meta.hiaMetadata">HIA metadata</dt><dd data-hia-label="value.yes">是</dd>
+  <dt data-hia-label="meta.microPlugins">微插件</dt><dd>code-fragment, source-link, source-preview, doc-i18n, doclet-normalizer, diagnostics</dd>
+  <dt data-hia-label="meta.sourceRefs">源码引用数</dt><dd>0</dd>
+  <dt data-hia-label="meta.locales">语言</dt><dd>zh-CN, en</dd>
+  <dt data-hia-label="meta.defaultLocale">默认语言</dt><dd>zh-CN</dd>
+  <dt data-hia-label="meta.fallbackLocale">Fallback 语言</dt><dd>en</dd>
+  <dt data-hia-label="meta.i18nMode">I18N 模式</dt><dd>runtimeSwitch</dd>
+  <dt data-hia-label="meta.i18nFields">I18N 字段数</dt><dd>1</dd>
+  <dt data-hia-label="meta.missingLocales">缺失语言</dt><dd>-</dd>
+</dl>
+  </div>
+</details>
+    </div>
+  </details>
+</article>
+    </section>
+  </main>
+  <script type="application/json" id="hia-search-data">[{"id":"module-module:portal-build","kind":"module","name":"portal-build","longname":"module:portal-build","memberof":"","summary":"Portal front-end build tasks.","localizedSummaries":{"zh-CN":"门户前端资源构建任务。","en":"Portal front-end build tasks."},"sourceReferences":0},{"id":"module-module:portal-login-password-encryption","kind":"module","name":"portal-login-password-encryption","longname":"module:portal-login-password-encryption","memberof":"","summary":"Login-password pre-submit encryption helper for the legacy Portal login flow.","localizedSummaries":{"zh-CN":"登录密码提交前加密助手；保留 IE6 级语法兼容，并只向页面暴露最小的加密入口。","en":"Login-password pre-submit encryption helper; it keeps IE6-level syntax compatibility and exposes only the minimal encryption entry points to the page."},"sourceReferences":0},{"id":"function-module:portal-build-closewatchers","kind":"function","name":"closeWatchers","longname":"module:portal-build~closeWatchers","memberof":"module:portal-build","summary":"Stops every active Gulp watcher and clears its in-memory handle.","localizedSummaries":{"zh-CN":"停止全部活动的 Gulp watcher，并清空对应的内存句柄。","en":"Stops every active Gulp watcher and clears its in-memory handle."},"sourceReferences":0},{"id":"function-module:portal-build-coffeejs","kind":"function","name":"coffeejs","longname":"module:portal-build~coffeejs","memberof":"module:portal-build","summary":"Builds CoffeeScript source files to minimized JavaScript with source maps.","localizedSummaries":{"zh-CN":"构建 CoffeeScript 源文件，输出压缩后的 JavaScript 及 source map。","en":"Builds CoffeeScript source files to minimized JavaScript with source maps."},"sourceReferences":0},{"id":"function-module:portal-build-esjs","kind":"function","name":"esjs","longname":"module:portal-build~esjs","memberof":"module:portal-build","summary":"Builds ES module source files from `*.src.js` to minimized JavaScript with source maps.","localizedSummaries":{"zh-CN":"构建 `*.src.js` ES 模块源码，输出压缩后的 JavaScript 及 source map。","en":"Builds ES module source files from `*.src.js` to minimized JavaScript with source maps."},"sourceReferences":0},{"id":"function-module:portal-build-postcssprocessors","kind":"function","name":"postcssProcessors","longname":"module:portal-build~postcssProcessors","memberof":"module:portal-build","summary":"Creates the PostCSS processor chain shared by Sass asset builds.","localizedSummaries":{"zh-CN":"创建 Sass 资源构建共用的 PostCSS 处理器链，负责补全浏览器前缀并压缩 CSS。","en":"Creates the PostCSS processor chain shared by Sass asset builds."},"sourceReferences":0},{"id":"function-module:portal-build-sasscss","kind":"function","name":"sasscss","longname":"module:portal-build~sasscss","memberof":"module:portal-build","summary":"Builds Sass and SCSS source files to prefixed and minimized CSS with source maps.","localizedSummaries":{"zh-CN":"构建 Sass 与 SCSS 源文件，输出补全前缀、压缩后的 CSS 及 source map。","en":"Builds Sass and SCSS source files to prefixed and minimized CSS with source maps."},"sourceReferences":0},{"id":"function-module:portal-build-startwatch","kind":"function","name":"startWatch","longname":"module:portal-build~startWatch","memberof":"module:portal-build","summary":"Starts the Visual Studio Task Runner watchers without performing an initial asset build.","localizedSummaries":{"zh-CN":"启动 Visual Studio Task Runner 使用的 watcher，不执行首次资源构建。","en":"Starts the Visual Studio Task Runner watchers without performing an initial asset build."},"sourceReferences":0},{"id":"function-module:portal-build-stopwatch","kind":"function","name":"stopWatch","longname":"module:portal-build~stopWatch","memberof":"module:portal-build","summary":"Writes the watcher signal file so the active Visual Studio watcher process exits gracefully.","localizedSummaries":{"zh-CN":"写入 watcher 信号文件，使活动的 Visual Studio watcher 进程正常退出。","en":"Writes the watcher signal file so the active Visual Studio watcher process exits gracefully."},"sourceReferences":0},{"id":"function-module:portal-login-password-encryption-createrequest","kind":"function","name":"createRequest","longname":"module:portal-login-password-encryption~createRequest","memberof":"module:portal-login-password-encryption","summary":"Creates an XMLHttpRequest-compatible object for the current browser.","localizedSummaries":{"zh-CN":"按现代接口、Msxml2.XMLHTTP、Microsoft.XMLHTTP 顺序创建请求对象；均不可用时返回 null。","en":"Creates a request object in the order native API, Msxml2.XMLHTTP, then Microsoft.XMLHTTP; returns null when none is available."},"sourceReferences":0},{"id":"function-module:portal-login-password-encryption-encryptpassword","kind":"function","name":"encryptPassword","longname":"module:portal-login-password-encryption~encryptPassword","memberof":"module:portal-login-password-encryption","summary":"Adapts one password pair to the batch encryption routine.","localizedSummaries":{"zh-CN":"将单个密码控件对适配到批量流程，保持单字段入口与多字段入口使用同一失败和明文清理语义。","en":"Adapts one password-control pair to the batch flow so single-field and multi-field entry points share the same failure and plaintext-clearing semantics."},"sourceReferences":0},{"id":"function-module:portal-login-password-encryption-encryptpasswordfields","kind":"function","name":"encryptPasswordFields","longname":"module:portal-login-password-encryption~encryptPasswordFields","memberof":"module:portal-login-password-encryption","summary":"Encrypts one or more page password fields and commits ciphertext only after the whole batch succeeds.","localizedSummaries":{"zh-CN":"校验成对字段、按需读取公钥并先完成整批加密，再一次性写入密文并清空明文；任一准备或加密失败都保留未提交的明文值供页面重试。","en":"Validates field pairs, fetches the public key only when needed, encrypts the complete batch first, then commits ciphertext and clears plaintext; any preparation or encryption failure leaves uncommitted plaintext available for a page retry."},"sourceReferences":0},{"id":"function-module:portal-login-password-encryption-getbyid","kind":"function","name":"getById","longname":"module:portal-login-password-encryption~getById","memberof":"module:portal-login-password-encryption","summary":"Resolves a page element by its DOM id.","localizedSummaries":{"zh-CN":"按页面集成提供的 DOM id 查找元素；找不到时返回 null，不创建或修改元素。","en":"Resolves the element identified by the page integration's DOM id; returns null when it is absent and never creates or mutates an element."},"sourceReferences":0},{"id":"function-module:portal-login-password-encryption-requestpublickey","kind":"function","name":"requestPublicKey","longname":"module:portal-login-password-encryption~requestPublicKey","memberof":"module:portal-login-password-encryption","summary":"Fetches the public key text used for one synchronous encryption pass.","localizedSummaries":{"zh-CN":"以同步 GET 读取页面指定的公钥端点并加入时间戳避免缓存；本函数不验证 URL 来源，来源信任由页面集成负责。","en":"Reads the page-selected public-key endpoint with a synchronous GET and cache-busting timestamp; URL-origin validation remains the responsibility of the page integration."},"sourceReferences":0},{"id":"function-module:portal-login-password-encryption-setmessage","kind":"function","name":"setMessage","longname":"module:portal-login-password-encryption~setMessage","memberof":"module:portal-login-password-encryption","summary":"Writes a fixed login-preparation message into the page message element.","localizedSummaries":{"zh-CN":"将本助手选择的固定提示写入页面消息元素；不承担通用 HTML 净化或错误详情展示。","en":"Writes the fixed message selected by this helper into the page message element; it is not a general HTML sanitizer or error-detail renderer."},"sourceReferences":0},{"id":"constant-module:portal-build-assetsbuild","kind":"constant","name":"assetsBuild","longname":"module:portal-build~assetsBuild","memberof":"module:portal-build","summary":"One-time asset build task for VSCode and AI automation. It processes only existing source globs, writes outputs beside them, and does not create input directories or change the Visual Studio `startWatch` binding.","localizedSummaries":{"zh-CN":"供 VSCode 与 AI 自动化使用的一次性资源构建任务；仅处理已有输入并在相邻目录写入输出， 不创建输入目录，也不改变 Visual Studio 的 `startWatch` 绑定。","en":"One-time asset build task for VSCode and AI automation; it processes existing inputs and writes adjacent outputs without creating input directories or changing the Visual Studio `startWatch` binding."},"sourceReferences":0}]</script>
+  <script type="application/json" id="hia-i18n-data">{"enabled":true,"mode":"runtimeSwitch","runtimeSwitch":true,"currentLocale":"zh-CN","defaultLocale":"zh-CN","fallbackLocale":"en","locales":["zh-CN","en"],"labels":{"en":{"skip.content":"Skip to content","header.eyebrow":"API Documentation","summary.symbols":"{count} symbols","nav.symbols":"Symbols","search.label":"Search symbols","search.placeholder":"Filter by name, kind, or summary","empty.symbols":"No document symbols.","language.controls":"Languages","language.select":"Select language","language.runtime":"runtime","code.controls":"Code display","code.fontFamily":"Font","code.fontSize":"Size","code.lineHeight":"Line height","code.tabSize":"Tab","code.wrap":"Wrap","code.reset":"Reset","section.parameters":"Parameters","section.properties":"Properties","section.returns":"Returns","section.examples":"Examples","section.source":"Source","section.sourceReferences":"Source References","section.metadata":"Metadata","source.file":"File","source.lines":"Lines","source.lineRange":"Lines {start}-{end}","source.preview":"Source preview","source.unresolved":"Source fragment metadata is missing or unresolved.","source.previewDisabled":"Source preview is disabled for this fragment.","source.definedIn":"Defined in","source.reference":"Reference {index}","table.name":"Name","table.type":"Type","table.default":"Default","table.attributes":"Attributes","table.description":"Description","attr.optional":"optional","attr.nullable":"nullable","attr.repeatable":"repeatable","meta.kind":"Kind","meta.name":"Name","meta.longname":"Longname","meta.memberof":"Member of","meta.definedIn":"Defined in","meta.hiaMetadata":"HIA metadata","meta.microPlugins":"Micro plugins","meta.sourceRefs":"Source refs","meta.locales":"Locales","meta.defaultLocale":"Default locale","meta.fallbackLocale":"Fallback locale","meta.i18nMode":"I18N mode","meta.i18nFields":"I18N fields","meta.missingLocales":"Missing locales","value.yes":"yes","value.no":"no","value.empty":"-","example.default":"Example {index}","kind.module":"Modules","kind.namespace":"Namespaces","kind.class":"Classes","kind.interface":"Interfaces","kind.mixin":"Mixins","kind.function":"Functions","kind.member":"Members","kind.constant":"Constants","kind.typedef":"Typedefs","kind.event":"Events","kind.external":"Externals","kind.unknown":"Other"},"zh-CN":{"skip.content":"跳到内容","header.eyebrow":"API 文档","summary.symbols":"{count} 个符号","nav.symbols":"符号","search.label":"搜索符号","search.placeholder":"按名称、类型或摘要筛选","empty.symbols":"没有文档符号。","language.controls":"语言","language.select":"选择语言","language.runtime":"运行时","code.controls":"代码显示","code.fontFamily":"字体","code.fontSize":"字号","code.lineHeight":"行高","code.tabSize":"缩进","code.wrap":"换行","code.reset":"重置","section.parameters":"参数","section.properties":"属性","section.returns":"返回值","section.examples":"示例","section.source":"源码","section.sourceReferences":"源码引用","section.metadata":"元数据","source.file":"文件","source.lines":"行","source.lineRange":"行 {start}-{end}","source.preview":"源码预览","source.unresolved":"源码片段元数据缺失或未解析。","source.previewDisabled":"此源码片段的预览已禁用。","source.definedIn":"定义于","source.reference":"引用 {index}","table.name":"名称","table.type":"类型","table.default":"默认值","table.attributes":"属性","table.description":"描述","attr.optional":"可选","attr.nullable":"可空","attr.repeatable":"可重复","meta.kind":"类型","meta.name":"名称","meta.longname":"完整名称","meta.memberof":"所属","meta.definedIn":"定义于","meta.hiaMetadata":"HIA metadata","meta.microPlugins":"微插件","meta.sourceRefs":"源码引用数","meta.locales":"语言","meta.defaultLocale":"默认语言","meta.fallbackLocale":"Fallback 语言","meta.i18nMode":"I18N 模式","meta.i18nFields":"I18N 字段数","meta.missingLocales":"缺失语言","value.yes":"是","value.no":"否","value.empty":"-","example.default":"示例 {index}","kind.module":"模块","kind.namespace":"命名空间","kind.class":"类","kind.interface":"接口","kind.mixin":"Mixin","kind.function":"函数","kind.member":"成员","kind.constant":"常量","kind.typedef":"类型定义","kind.event":"事件","kind.external":"外部项","kind.unknown":"其它"}},"perLocalePages":{"zh-CN":"index.zh-CN.html","en":"index.en.html"}}</script>
+  <script type="application/json" id="hia-theme-data">{"code":{"controls":true,"fontFamily":"cascadia","fontSize":12,"lineHeight":1.55,"tabSize":2,"wrap":false}}</script>
+  <script src="hia-theme.js" defer></script>
+</body>
+</html>

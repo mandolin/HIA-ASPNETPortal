@@ -1,0 +1,5 @@
+        internal static string Document_LabelTitle {
+            get {
+                return ResourceManager.GetString("Document_LabelTitle", resourceCulture);
+            }
+        }

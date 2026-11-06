@@ -1,0 +1,34 @@
+    public enum PortalNavigationVisibilityMode
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>满足权限、Profile 和包状态时才显示。</zh-CN>
+        ///   <en>Visible only when role, Profile, and package-state checks pass.</en>
+        /// </lang>
+        /// </summary>
+        VisibleWhenAllowed,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>普通用户隐藏不可用入口，管理员诊断可显示不可用原因。</zh-CN>
+        ///   <en>Hide unavailable entries from ordinary users while allowing administrator diagnostics to show reasons.</en>
+        /// </lang>
+        /// </summary>
+        HideWhenBlocked,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>仅管理员可见。</zh-CN>
+        ///   <en>Visible only to administrators.</en>
+        /// </lang>
+        /// </summary>
+        AdminOnly,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>作为历史或诊断资料登记，不进入普通导航。</zh-CN>
+        ///   <en>Registered as legacy or diagnostic reference, not shown in ordinary navigation.</en>
+        /// </lang>
+        /// </summary>
+        DiagnosticOnly
+    }

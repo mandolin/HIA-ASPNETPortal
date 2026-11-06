@@ -1,0 +1,39 @@
+        private void BindParentList(int currentOrganizationUnitId)
+        {
+            // <lang>
+            //   <zh-CN>清空旧候选并保留根节点空值，明确无父级与具体父级的区别。</zh-CN>
+            //   <en>Clear old candidates and retain the root sentinel so no parent is distinct from a concrete parent.</en>
+            // </lang>
+            ParentOrganizationList.Items.Clear();
+            ParentOrganizationList.Items.Add(new ListItem(lang.Admin_OrganizationUnitEdit_OptionRoot, string.Empty));
+
+            // <lang>
+            //   <zh-CN>候选查询包含停用组织并限制 500 条，用于修复历史树结构；父级存在性和循环校验仍由数据层负责。</zh-CN>
+            //   <en>Query inactive organizations with a 500-item cap for historical tree repair; the data layer still owns parent existence and cycle validation.</en>
+            // </lang>
+            IList<IOrganizationUnitInfo> organizations = EmployeeDirectoryDb.GetOrganizationUnits(new EmployeeDirectoryQuery
+            {
+                IncludeInactiveOrganizations = true,
+                Take = 500
+            }).ToList();
+
+            foreach (IOrganizationUnitInfo organization in organizations)
+            {
+                // <lang>
+                //   <zh-CN>编辑自身时从候选中排除当前组织，减少明显的自引用输入；这不是数据层循环规则的替代。</zh-CN>
+                //   <en>Exclude the current organization from candidates to prevent obvious self-parenting input; this does not replace data-layer cycle rules.</en>
+                // </lang>
+                if (organization.OrganizationUnitId == currentOrganizationUnitId)
+                {
+                    continue;
+                }
+
+                // <lang>
+                //   <zh-CN>显示文本供管理员识别，提交值使用不变文化格式的稳定主键。</zh-CN>
+                //   <en>Use display text for administrator recognition and submit the stable key formatted with invariant culture.</en>
+                // </lang>
+                ParentOrganizationList.Items.Add(new ListItem(
+                    organization.DisplayName + " (#" + organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture) + ")",
+                    organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture)));
+            }
+        }

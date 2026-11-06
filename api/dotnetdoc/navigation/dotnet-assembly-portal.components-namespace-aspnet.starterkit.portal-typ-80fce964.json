@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaproducerdescriptor",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaproducerdescriptor:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaproducerdescriptor:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaproducerdescriptor.id",
+      "kind": "entry",
+      "label": "Id",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaproducerdescriptor.id",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaproducerdescriptor.id",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaproducerdescript-f1092595.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaproducerdescriptor:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaproducerdescriptor.version",
+      "kind": "entry",
+      "label": "Version",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaproducerdescriptor.version",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaproducerdescriptor.version",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaproducerdescript-5da49a14.html"
+    }
+  ]
+}

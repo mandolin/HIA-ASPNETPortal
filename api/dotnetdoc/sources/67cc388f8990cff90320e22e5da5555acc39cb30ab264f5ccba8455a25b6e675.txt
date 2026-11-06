@@ -1,0 +1,5 @@
+        internal static string Common_PasswordMessageComplexityPolicy {
+            get {
+                return ResourceManager.GetString("Common_PasswordMessageComplexityPolicy", resourceCulture);
+            }
+        }

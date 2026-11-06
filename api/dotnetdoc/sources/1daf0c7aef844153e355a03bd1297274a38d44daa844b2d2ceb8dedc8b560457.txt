@@ -1,0 +1,4 @@
+        private bool HasUploadedFile()
+        {
+            return FileUpload.PostedFile != null && FileUpload.PostedFile.ContentLength > 0;
+        }

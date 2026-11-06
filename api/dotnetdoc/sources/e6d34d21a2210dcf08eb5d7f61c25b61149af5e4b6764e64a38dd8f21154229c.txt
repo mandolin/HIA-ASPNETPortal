@@ -1,0 +1,1 @@
+        PortalSignInResult SignIn(string emailOrName, string password);

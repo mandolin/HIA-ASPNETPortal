@@ -1,0 +1,19 @@
+        private static bool IsValidResourcePath(string resource)
+        {
+            // <lang>
+            //   <zh-CN>先拒绝空值、绝对路径、协议 URL 和协议相对路径，避免资源声明离开主题根目录语义。</zh-CN>
+            //   <en>Reject blank, absolute, protocol, and protocol-relative paths first so resource declarations cannot leave the theme-root semantics.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(resource) || resource.StartsWith("/", StringComparison.Ordinal) ||
+                resource.IndexOf("://", StringComparison.Ordinal) >= 0 || resource.StartsWith("//", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐段拒绝空段、当前目录和父目录片段，阻断显式遍历路径。</zh-CN>
+            //   <en>Reject empty, current-directory, and parent-directory segments to block explicit traversal paths.</en>
+            // </lang>
+            string[] segments = resource.Split('/');
+            return segments.All(segment => !string.IsNullOrWhiteSpace(segment) && segment != "." && segment != "..");
+        }

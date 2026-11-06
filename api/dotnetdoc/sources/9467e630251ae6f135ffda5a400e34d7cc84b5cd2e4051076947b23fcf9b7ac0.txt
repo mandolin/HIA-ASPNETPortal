@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_KindBusinessApplication {
+            get {
+                return ResourceManager.GetString("MyWorkItems_KindBusinessApplication", resourceCulture);
+            }
+        }

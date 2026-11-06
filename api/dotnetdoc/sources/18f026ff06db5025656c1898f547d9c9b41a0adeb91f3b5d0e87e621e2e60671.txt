@@ -1,0 +1,29 @@
+        private bool TryInitializeRequest()
+        {
+            // <lang>
+            //   <zh-CN>原始 HTML 回发会触发普通 Request.Form 的请求验证；只读取未验证集合中的 Mid 参数。</zh-CN>
+            //   <en>A raw-HTML postback triggers request validation on ordinary Request.Form access, so read only Mid from the unvalidated collection.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>优先使用查询字符串中的模块标识，只有原始 HTML 回发场景才从未验证表单读取同名值。</zh-CN>
+            //   <en>Prefer the module id from the query string and read the same value from the unvalidated form only for raw-HTML postbacks.</en>
+            // </lang>
+            string moduleValue = Request.QueryString["Mid"] ?? Request.Unvalidated.Form["Mid"];
+
+            // <lang>
+            //   <zh-CN>正整数解析和模块编辑权限必须同时通过；失败时统一重定向并停止调用方的后续分支。</zh-CN>
+            //   <en>Positive-integer parsing and module-edit permission must both pass; otherwise redirect through the shared denial flow and stop the caller's branch.</en>
+            // </lang>
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(moduleValue, out moduleId) ||
+                !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>原始 HTML 是比普通模块编辑更窄的权限边界；由统一授权组件决定是否允许当前上下文继续。</zh-CN>
+            //   <en>Raw HTML is a narrower boundary than ordinary module editing; the shared authorization component decides whether this context may continue.</en>
+            // </lang>
+            return PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ContentRawHtmlEdit);
+        }

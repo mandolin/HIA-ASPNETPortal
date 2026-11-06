@@ -1,0 +1,20 @@
+        private void RecordActionAudit(CollaborationItemResult result)
+        {
+            // <lang>
+            //   <zh-CN>只审计成功且动作键明确为重提的结果，避免重复或误报。</zh-CN>
+            //   <en>Audit only successful results whose action key is explicitly resubmission to avoid duplicates or false reports.</en>
+            // </lang>
+            if (result == null || !result.Succeeded ||
+                !string.Equals(result.ActionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemResubmitted,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item resubmitted from EnterpriseCapabilityWorkbench. ItemCode=" + result.ItemCode,
+                Context);
+        }

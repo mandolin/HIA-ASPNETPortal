@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>资料字段使用块级网格，避免业务模块继续保留旧表格布局。</zh-CN>
+                <en>Profile fields use a block grid so business modules do not continue the old table-based layout.</en>
+            </lang>
+        --%>

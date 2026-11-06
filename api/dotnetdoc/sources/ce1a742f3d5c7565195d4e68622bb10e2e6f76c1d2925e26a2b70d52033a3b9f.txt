@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>外层表格保留 StarterKit 时代布局契约，避免注册页在旧主题和窄屏回退中脱离主内容列。</zh-CN>
+        <en>The outer table preserves the StarterKit-era layout contract so the registration page stays aligned with the main content column in legacy themes and narrow fallbacks.</en>
+      </lang>
+    --%>

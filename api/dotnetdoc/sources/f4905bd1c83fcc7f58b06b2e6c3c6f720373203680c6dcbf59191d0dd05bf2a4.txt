@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition RequireEncryptedLoginPassword =
+            new PortalSettingDefinition(
+                PortalSettingKeys.RequireEncryptedLoginPassword,
+                "登录密码必须前端加密",
+                "控制登录密码是否必须通过一次性 RSA 公钥加密后提交；默认开启。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");

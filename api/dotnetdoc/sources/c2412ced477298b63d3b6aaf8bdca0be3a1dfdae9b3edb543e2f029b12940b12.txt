@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition PasswordDisallowContextTerms =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordDisallowContextTerms,
+                "禁止账号相关密码",
+                "控制是否拒绝包含用户名、邮箱、员工号、显示名等账号相关词的密码；默认启用。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");

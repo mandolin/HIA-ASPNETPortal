@@ -1,0 +1,33 @@
+        private static PortalDiagnosticEntry BuildEntry(
+            string level,
+            string category,
+            string message,
+            Exception exception,
+            HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>在进入任何输出接收器前固定 UTC 时间、关联编号和字段长度；异常详情仅在确有异常时纳入并同样净化。</zh-CN>
+            //   <en>Fix UTC time, correlation id, and field caps before any output sink; include exception detail only when present and sanitize it as well.</en>
+            // </lang>
+            var entry = new PortalDiagnosticEntry
+            {
+                EventId = CreateEventId(),
+                UtcTime = DateTime.UtcNow,
+                Level = PortalDiagnosticSanitizer.SanitizeAndTruncate(level, 20),
+                Category = PortalDiagnosticSanitizer.SanitizeAndTruncate(category, 80),
+                Message = PortalDiagnosticSanitizer.SanitizeAndTruncate(message, 2000),
+                ExceptionType = exception == null
+                    ? string.Empty
+                    : PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.GetType().FullName, 300),
+                ExceptionDetail = exception == null
+                    ? string.Empty
+                    : PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.ToString(), 16000)
+            };
+
+            // <lang>
+            //   <zh-CN>可选请求上下文仅通过受控 helper 附加，不能绕过条目字段的净化和长度限制。</zh-CN>
+            //   <en>Append optional request context only through the controlled helper; it cannot bypass entry-field sanitization or length limits.</en>
+            // </lang>
+            AppendRequestContext(entry, context);
+            return entry;
+        }

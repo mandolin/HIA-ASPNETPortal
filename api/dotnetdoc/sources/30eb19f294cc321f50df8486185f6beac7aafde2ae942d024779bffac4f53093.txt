@@ -1,0 +1,101 @@
+    public sealed class UserEmployeeBindingDirectoryRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从账号员工绑定数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from a user-employee binding data object.</en>
+        /// </lang>
+        /// </summary>
+        internal UserEmployeeBindingDirectoryRow(IUserEmployeeBindingInfo binding)
+        {
+            // <lang>
+            //   <zh-CN>投影复制账号员工关系的低敏展示字段，时间统一为 UTC 文本，原因保持数据层提供的非敏感摘要。</zh-CN>
+            //   <en>Project low-sensitivity account-employee relationship fields, render time as UTC text, and retain the non-sensitive summary supplied by the data layer.</en>
+            // </lang>
+            BindingId = binding.BindingId;
+            UserId = binding.UserId;
+            UserName = binding.UserName;
+            EmployeeCode = binding.EmployeeCode;
+            EmployeeDisplayName = binding.EmployeeDisplayName;
+            BindingStatus = binding.BindingStatus;
+            BoundUtcText = binding.BoundUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+            Reason = binding.Reason;
+            // <lang>
+            //   <zh-CN>绑定维护地址固定在当前应用内，标识采用不变文化格式，目录页仍保持只读。</zh-CN>
+            //   <en>Keep the binding-maintenance URL inside the current application and format its identifier invariantly while the directory remains read-only.</en>
+            // </lang>
+            EditUrl = "UserEmployeeBindingEdit.aspx?bindingId=" + binding.BindingId.ToString(CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定标识。</zh-CN>
+        ///   <en>Binding identifier.</en>
+        /// </lang>
+        /// </summary>
+        public int BindingId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户账号标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </lang>
+        /// </summary>
+        public int UserId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户用户名。</zh-CN>
+        ///   <en>Portal user name.</en>
+        /// </lang>
+        /// </summary>
+        public string UserName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </lang>
+        /// </summary>
+        public string EmployeeCode { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工显示名。</zh-CN>
+        ///   <en>Employee display name.</en>
+        /// </lang>
+        /// </summary>
+        public string EmployeeDisplayName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定状态。</zh-CN>
+        ///   <en>Binding status.</en>
+        /// </lang>
+        /// </summary>
+        public string BindingStatus { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定时间展示文本。</zh-CN>
+        ///   <en>Binding time display text.</en>
+        /// </lang>
+        /// </summary>
+        public string BoundUtcText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定维护页站内地址。</zh-CN>
+        ///   <en>Current-application binding maintenance URL.</en>
+        /// </lang>
+        /// </summary>
+        public string EditUrl { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>非敏感绑定说明。</zh-CN>
+        ///   <en>Non-sensitive binding reason.</en>
+        /// </lang>
+        /// </summary>
+        public string Reason { get; private set; }
+    }

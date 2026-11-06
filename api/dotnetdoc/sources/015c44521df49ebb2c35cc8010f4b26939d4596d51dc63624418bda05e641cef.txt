@@ -1,0 +1,5 @@
+        public static string GetSafeReturnUrl(HttpRequest request)
+        {
+            Uri referer = request == null ? null : request.UrlReferrer;
+            return GetSafeReturnUrl(request, referer == null ? null : referer.AbsoluteUri);
+        }

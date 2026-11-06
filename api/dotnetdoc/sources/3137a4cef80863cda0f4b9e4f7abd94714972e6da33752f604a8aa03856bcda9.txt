@@ -1,0 +1,35 @@
+        public static string ResolveExternalConfigRoot()
+        {
+            // <lang>
+            //   <zh-CN>读取部署模板中的根目录覆盖值；它是路径配置而非敏感连接串来源。</zh-CN>
+            //   <en>Read the deployment-template root override; it is path configuration, not a sensitive connection-string source.</en>
+            // </lang>
+            string configuredPath = ConfigurationManager.AppSettings[ExternalCfgPathSettingName];
+
+            if (!string.IsNullOrWhiteSpace(configuredPath))
+            {
+                // <lang>
+                //   <zh-CN>Web.config 显式配置优先，主要用于 IIS 或生产部署不适合用户目录时。</zh-CN>
+                //   <en>An explicit Web.config value takes priority, mainly for IIS or production deployments where the user-profile default is unsuitable.</en>
+                // </lang>
+                return NormalizePath(configuredPath);
+            }
+
+            // <lang>
+            //   <zh-CN>解析当前进程用户目录，作为没有显式覆盖时的默认路径基准。</zh-CN>
+            //   <en>Resolve the current process user profile as the default-path base when no explicit override exists.</en>
+            // </lang>
+            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+            if (string.IsNullOrWhiteSpace(userProfile))
+            {
+                throw new ConfigurationErrorsException(
+                    "ExternalCfgPath is not configured, and the current process user profile path cannot be resolved.");
+            }
+
+            // <lang>
+            //   <zh-CN>默认路径遵循用户确认的规则：{当前进程用户目录}\Web\HIA-ASPNETPortal\。</zh-CN>
+            //   <en>The default path follows the user-confirmed rule: {current-process user profile}\Web\HIA-ASPNETPortal\.</en>
+            // </lang>
+            return Path.Combine(userProfile, "Web", ProjectName);
+        }

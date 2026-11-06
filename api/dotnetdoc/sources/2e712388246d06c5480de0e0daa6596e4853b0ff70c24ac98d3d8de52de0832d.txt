@@ -1,0 +1,11 @@
+    public static class PortalCapabilityLifecycleStates
+    {
+        /// <summary><lang><zh-CN>已规划，尚未有主责模块实现。</zh-CN><en>Planned, not yet implemented by a primary module.</en></lang></summary>
+        public const string Planned = "Planned";
+
+        /// <summary><lang><zh-CN>已激活，可被模块声明为主责。</zh-CN><en>Active and available as a primary-module target.</en></lang></summary>
+        public const string Active = "Active";
+
+        /// <summary><lang><zh-CN>已弃用，不再接受新的主责声明。</zh-CN><en>Deprecated and no longer accepts new primary declarations.</en></lang></summary>
+        public const string Deprecated = "Deprecated";
+    }

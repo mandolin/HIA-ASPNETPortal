@@ -1,0 +1,90 @@
+        private sealed class ProfileProjection
+        {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工主数据标识。</zh-CN>
+            ///   <en>Employee master-data identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
+            public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示姓名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
+            public string DisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工偏好姓名。</zh-CN>
+            ///   <en>Employee preferred name.</en>
+            /// </lang>
+            /// </summary>
+            public string PreferredName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工工作邮箱。</zh-CN>
+            ///   <en>Employee work email.</en>
+            /// </lang>
+            /// </summary>
+            public string WorkEmail { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>所属组织显示名称。</zh-CN>
+            ///   <en>Display name of the owning organization.</en>
+            /// </lang>
+            /// </summary>
+            public string OrganizationDisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工当前状态。</zh-CN>
+            ///   <en>Current employee status.</en>
+            /// </lang>
+            /// </summary>
+            public string EmploymentStatus { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>账号员工绑定标识。</zh-CN>
+            ///   <en>User-employee binding identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int BindingId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建 UTC 时间。</zh-CN>
+            ///   <en>Binding creation UTC time.</en>
+            /// </lang>
+            /// </summary>
+            public DateTime BoundUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>最近一次确认记录标识。</zh-CN>
+            ///   <en>Identifier of the latest confirmation record.</en>
+            /// </lang>
+            /// </summary>
+            public long? LastConfirmationId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>最近一次确认 UTC 时间。</zh-CN>
+            ///   <en>Latest confirmation UTC time.</en>
+            /// </lang>
+            /// </summary>
+            public DateTime? LastConfirmedUtc { get; set; }
+        }

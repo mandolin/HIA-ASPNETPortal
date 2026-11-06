@@ -1,0 +1,1 @@
+        public IList<PortalHealthCheckResult> Checks { get; private set; }

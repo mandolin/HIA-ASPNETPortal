@@ -1,0 +1,14 @@
+        private static bool TryReadOptionalPositiveId(string rawValue, out int value)
+        {
+            // <lang>
+            //   <zh-CN>输出默认为零，非法或缺失值不会复用旧请求状态。</zh-CN>
+            //   <en>Default the output to zero so missing or invalid values cannot reuse prior request state.</en>
+            // </lang>
+            value = 0;
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            return int.TryParse(rawValue, out value) && value > 0;
+        }

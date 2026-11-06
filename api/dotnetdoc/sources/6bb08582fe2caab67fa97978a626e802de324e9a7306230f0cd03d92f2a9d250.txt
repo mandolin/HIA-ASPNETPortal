@@ -1,0 +1,15 @@
+        public PortalCookieSecurityOptions(
+            bool secure,
+            PortalCookieSameSiteMode sameSite,
+            bool degraded,
+            string degradeReason)
+        {
+            // <lang>
+            //   <zh-CN>逐字段保存决策结果；原因文本统一规范化为空字符串，避免调用方对 null 做额外判断。</zh-CN>
+            //   <en>Store each decision field; the reason text is normalized to an empty string so callers need no extra null checks.</en>
+            // </lang>
+            Secure = secure;
+            SameSite = sameSite;
+            Degraded = degraded;
+            DegradeReason = degradeReason ?? string.Empty;
+        }

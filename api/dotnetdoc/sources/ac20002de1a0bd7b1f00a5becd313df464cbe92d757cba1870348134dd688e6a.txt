@@ -1,0 +1,6 @@
+                                    <%--
+                                      <lang>
+                                        <zh-CN>审核备注有长度上限但仍是管理员输入；状态转换、请求归属、审计事件和主数据旁路规则由 code-behind 校验。</zh-CN>
+                                        <en>The review note has a length limit but remains administrator input; code-behind validates state transition, request ownership, audit events, and the master-data side-channel rule.</en>
+                                      </lang>
+                                    --%>

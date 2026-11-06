@@ -1,0 +1,29 @@
+        private void TryRemoveParticipant(long itemId, RepeaterItem rowItem)
+        {
+            // <lang>
+            //   <zh-CN>用户标识来自当前列表行输入控件且必须为正整数；操作者授权由数据层复核，标记层不做授权判断。</zh-CN>
+            //   <en>The user identifier comes from the current list-row input control and must be a positive integer; actor authorization is rechecked by the data layer and markup performs no authorization decision.</en>
+            // </lang>
+            TextBox userBox = rowItem == null ? null : rowItem.FindControl("ParticipantUserTextBox") as TextBox;
+            if (userBox == null || CollaborationItemDb == null)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            int userId;
+            if (!int.TryParse(userBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out userId) || userId <= 0)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            CollaborationItemParticipantResult result = CollaborationItemDb.RemoveParticipant(
+                itemId,
+                userId,
+                GetCurrentUserId());
+
+            MessageLabel.Text = result.Success
+                ? lang.Admin_CollaborationItems_MessageParticipantRemoved
+                : result.Message;
+        }

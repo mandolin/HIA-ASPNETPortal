@@ -1,0 +1,4 @@
+        private static SqlParameter CreateNullableDateTimeParameter(string name, DateTime? value)
+        {
+            return new SqlParameter(name, value.HasValue ? (object)value.Value : DBNull.Value);
+        }

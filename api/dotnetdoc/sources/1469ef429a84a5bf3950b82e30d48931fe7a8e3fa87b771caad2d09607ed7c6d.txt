@@ -1,0 +1,1 @@
+        public const string CookiesSameSite = "Portal.Security.Cookies.SameSite";

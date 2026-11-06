@@ -1,0 +1,1 @@
+        public string ItemStatus { get; set; }

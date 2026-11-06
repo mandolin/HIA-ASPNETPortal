@@ -1,0 +1,1 @@
+        public const string CookiesSecure = "Portal.Security.Cookies.Secure";

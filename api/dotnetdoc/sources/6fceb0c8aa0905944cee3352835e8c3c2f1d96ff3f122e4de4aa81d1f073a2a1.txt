@@ -1,0 +1,39 @@
+        public static bool TryValidate(string password, IEnumerable<string> contextTerms, out PortalPasswordRejection rejection)
+        {
+            // <lang>
+            //   <zh-CN>读取已按硬下限规范化的当前策略；该对象只保存参数，不包含密码或上下文原文。</zh-CN>
+            //   <en>Read the current policy normalized against hard lower bounds; this object holds parameters only, never password or raw context text.</en>
+            // </lang>
+            PortalPasswordPolicyOptions options = GetEffectiveOptions();
+            if (password == null || password.Length < options.MinimumLength)
+            {
+                rejection = PortalPasswordRejection.BelowComplexityPolicy;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>统计密码实际覆盖的字符类别，结果只用于本次验证且不写入诊断。</zh-CN>
+            //   <en>Count character categories actually covered by the password; the result is used only for this validation and never written to diagnostics.</en>
+            // </lang>
+            int categoryCount = CountCategories(password);
+            if (categoryCount < options.RequiredCategoryCount)
+            {
+                rejection = PortalPasswordRejection.BelowComplexityPolicy;
+                return false;
+            }
+
+            if (options.WeakDictionaryEnabled && IsWeakPassword(password))
+            {
+                rejection = PortalPasswordRejection.WeakDictionaryMatch;
+                return false;
+            }
+
+            if (options.DisallowContextTerms && ContainsContextTerm(password, contextTerms))
+            {
+                rejection = PortalPasswordRejection.ContainsAccountContextTerm;
+                return false;
+            }
+
+            rejection = PortalPasswordRejection.None;
+            return true;
+        }

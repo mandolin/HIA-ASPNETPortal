@@ -1,0 +1,1 @@
+        public DateTime? OccurredUtc { get; set; }

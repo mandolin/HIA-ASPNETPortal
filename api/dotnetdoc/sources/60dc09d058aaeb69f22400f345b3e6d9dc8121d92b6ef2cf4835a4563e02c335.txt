@@ -1,0 +1,8 @@
+        private static string NormalizeSeparators(string source)
+        {
+            // <lang>
+            //   <zh-CN>只做文本级规范化，不解析 URI、物理路径或外部资源。</zh-CN>
+            //   <en>Performs text-only normalization without resolving a URI, physical path, or external resource.</en>
+            // </lang>
+            return (source ?? string.Empty).Trim().Replace('\\', '/');
+        }

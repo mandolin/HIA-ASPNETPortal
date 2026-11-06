@@ -1,0 +1,26 @@
+        public static string GetCurrentCssClass(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>读取请求缓存主题；缺失时只输出 Default scope，不在渲染阶段访问配置或数据库。</zh-CN>
+            //   <en>Read the request-cached theme; when absent, emit Default scope only and never access configuration or database during rendering.</en>
+            // </lang>
+            PortalThemeContext themeContext = GetCurrentThemeContext(context);
+            if (themeContext == null)
+            {
+                return "portal-theme-default";
+            }
+
+            // <lang>
+            //   <zh-CN>构造仅含受控前缀和规范化片段的 body class，避免主题原文直接进入 HTML 属性。</zh-CN>
+            //   <en>Build a body class using only controlled prefixes and normalized segments so raw theme text never enters an HTML attribute.</en>
+            // </lang>
+            var builder = new StringBuilder("portal-theme-");
+            builder.Append(NormalizeCssSegment(themeContext.ThemeName));
+            if (themeContext.TabId.HasValue && themeContext.TabId.Value > 0)
+            {
+                builder.Append(" portal-tab-");
+                builder.Append(themeContext.TabId.Value);
+            }
+
+            return builder.ToString();
+        }

@@ -1,0 +1,1 @@
+        public string ErrorCode { get; set; }

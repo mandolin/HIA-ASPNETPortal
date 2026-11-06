@@ -1,0 +1,8 @@
+        public static bool HideTabsWithoutRenderableModules(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>布尔项以 false 为保守默认：未知时不隐藏，保持既有菜单形态，避免配置缺失导致导航突然变空。</zh-CN>
+            //   <en>Boolean fallback is false: when unknown, hide nothing and preserve the existing menu shape so a missing setting cannot suddenly empty the navigation.</en>
+            // </lang>
+            return ReadBoolean(PortalSettingsRegistry.NavigationHideTabsWithoutRenderableModules, false, context);
+        }

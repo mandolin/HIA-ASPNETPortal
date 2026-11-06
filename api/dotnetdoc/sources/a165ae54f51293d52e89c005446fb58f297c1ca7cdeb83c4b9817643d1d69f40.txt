@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition AllowedDocumentExtensions =
+            new PortalSettingDefinition(
+                PortalSettingKeys.AllowedDocumentExtensions,
+                "文档上传允许扩展名",
+                "以逗号分隔的上传允许扩展名；只能收紧内置安全类型集合。",
+                PortalSettingValueType.String,
+                "pdf,txt,csv,json,doc,docx,xls,xlsx,ppt,pptx,zip",
+                true,
+                false,
+                "Admins",
+                "Documents");

@@ -1,0 +1,14 @@
+        private static EmployeeProfileCorrectionReviewRequest NormalizeReviewRequest(EmployeeProfileCorrectionReviewRequest request)
+        {
+            request = request ?? new EmployeeProfileCorrectionReviewRequest();
+            return new EmployeeProfileCorrectionReviewRequest
+            {
+                RequestId = request.RequestId,
+                RequestStatus = NormalizeStatusFilter(request.RequestStatus),
+                ReviewNote = NormalizeOptionalText(request.ReviewNote, 1000),
+                ReviewedUtc = request.ReviewedUtc ?? DateTime.UtcNow,
+                ReviewedBy = string.IsNullOrWhiteSpace(request.ReviewedBy)
+                    ? "system"
+                    : NormalizeText(request.ReviewedBy, 100)
+            };
+        }

@@ -1,0 +1,22 @@
+        private void BindReferenceDataList(DropDownList list, string referenceSetKey)
+        {
+            // <lang>
+            //   <zh-CN>绑定前清空旧项，避免后台回发或服务切换造成重复选项。</zh-CN>
+            //   <en>Clear old entries before binding so postbacks or service switches cannot duplicate options.</en>
+            // </lang>
+            list.Items.Clear();
+            IList<ReferenceDataItem> items;
+            if (ReferenceDataDb == null || !ReferenceDataDb.TryGetActiveItems(referenceSetKey, out items))
+            {
+                items = PortalReferenceDataSets.GetFallbackItems(referenceSetKey);
+            }
+
+            // <lang>
+            //   <zh-CN>下拉项保存稳定值键，显示名称仅来自参考数据目录。</zh-CN>
+            //   <en>Store stable value keys in the drop-down while taking display names only from the reference catalog.</en>
+            // </lang>
+            foreach (ReferenceDataItem item in items)
+            {
+                list.Items.Add(new ListItem(item.DisplayName, item.ValueKey));
+            }
+        }

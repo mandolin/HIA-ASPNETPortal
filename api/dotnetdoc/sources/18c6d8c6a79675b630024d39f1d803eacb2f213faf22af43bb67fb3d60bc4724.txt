@@ -1,0 +1,57 @@
+        protected void Apply_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存路径使用设置编辑权限，和只读显示分离，便于逐步拆分更细粒度系统配置权限。</zh-CN>
+            //   <en>The save path uses settings-edit permission separately from read display, leaving room for finer-grained system-setting permissions later.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.SettingsEdit))
+            {
+                return;
+            }
+
+            string portalName;
+            // <lang>
+            //   <zh-CN>站点名称限制为单行、非空且不超过既有上限；校验失败时保持原设置不变。</zh-CN>
+            //   <en>Keep the existing settings unchanged unless the site name is non-empty, single-line, and within the established length limit.</en>
+            // </lang>
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(SiteName.Text, 150, out portalName))
+            {
+                ShowMessage(lang.Admin_SiteSettings_MessageInvalidSiteName);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>旧 `IGlobalsDb` 仍负责写入门户名称和编辑按钮开关；本控件只负责输入清洗、审计和安全回跳。</zh-CN>
+                //   <en>The legacy `IGlobalsDb` still writes portal name and edit-button toggle; this control handles input cleanup, audit and safe return navigation.</en>
+                // </lang>
+                PortalSettings portalSettings = PortalContext.GetPortalSettings();
+                PortalConfig.UpdatePortalInfo(portalSettings.PortalId, portalName, showEdit.Checked);
+                PortalOperationAudit.Record(
+                    "PortalAdministration",
+                    "UpdateSiteSettings",
+                    "Portal",
+                    portalSettings.PortalId.ToString(),
+                    "Updated site settings.",
+                    Context);
+                // <lang>
+                //   <zh-CN>保存和审计完成后只按当前请求地址安全刷新，不接受外部回跳地址。</zh-CN>
+                //   <en>After save and audit, safely refresh only the current request URL and do not accept an external return address.</en>
+                // </lang>
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, Request.RawUrl);
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>异常详细内容写入诊断日志；页面提示只携带事件编号，避免把配置存储细节暴露给浏览器。</zh-CN>
+                //   <en>Exception details are written to diagnostics; the page message carries only the event id to avoid exposing configuration-storage details to the browser.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.SiteSettings.Apply",
+                    "Updating site settings failed.",
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_SiteSettings_MessageSaveFailed, eventId));
+            }
+        }

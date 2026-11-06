@@ -1,0 +1,1 @@
+        public bool InheritsDefault { get; private set; }

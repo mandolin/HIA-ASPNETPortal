@@ -1,0 +1,1 @@
+        public DbSet<UserEmployeeBindingItem> UserEmployeeBindings { get; set; }

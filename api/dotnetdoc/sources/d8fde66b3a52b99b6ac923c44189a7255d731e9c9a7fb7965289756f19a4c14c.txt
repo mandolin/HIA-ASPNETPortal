@@ -1,0 +1,8 @@
+        private string EncodeDisplayText(string value)
+        {
+            // <lang>
+            //   <zh-CN>旧创建人文本显示前执行解码再编码，兼容历史实体存储并保持输出安全。</zh-CN>
+            //   <en>Legacy creator text is decoded before encoding for display, supporting historical entity storage while keeping output safe.</en>
+            // </lang>
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
+        }

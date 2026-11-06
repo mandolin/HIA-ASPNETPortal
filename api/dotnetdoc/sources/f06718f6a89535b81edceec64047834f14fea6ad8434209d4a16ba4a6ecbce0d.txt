@@ -1,0 +1,10 @@
+            public string GetDesktopEntry(string packageId)
+            {
+                if (string.IsNullOrEmpty(packageId))
+                {
+                    return string.Empty;
+                }
+
+                string entry;
+                return GetDesktopEntries().TryGetValue(packageId, out entry) ? entry : string.Empty;
+            }

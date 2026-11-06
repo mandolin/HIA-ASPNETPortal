@@ -1,0 +1,1 @@
+        public ICollection<ModuleItem> Modules { get; set; }

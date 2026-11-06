@@ -1,0 +1,39 @@
+        public static string FormatSixElementSummary(
+            string packageId,
+            string version,
+            string hashBefore,
+            string hashAfter,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            string direction)
+        {
+            // <lang>
+            //   <zh-CN>TargetId 用 packageId@version；version 为空以 unknown 表达，避免装配态事实被省略而静默丢要素。</zh-CN>
+            //   <en>TargetId uses packageId@version; a blank version becomes unknown so the assembly-state fact is never omitted and silently loses an element.</en>
+            // </lang>
+            string targetId = string.IsNullOrEmpty(version) ? (packageId + "@unknown") : (packageId + "@" + version);
+            string summary = string.Format(
+                CultureInfo.InvariantCulture,
+                "pkg={0};hashBefore={1};hashAfter={2};actor={3};startUtc={4};endUtc={5};verification={6};direction={7}",
+                targetId,
+                hashBefore ?? string.Empty,
+                hashAfter ?? string.Empty,
+                actor ?? string.Empty,
+                startUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                endUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                verification ?? string.Empty,
+                direction ?? string.Empty);
+
+            // <lang>
+            //   <zh-CN>超长即失败并显式抛出，让调用方决定走审计表扩展方案；不截断、不丢弃任何要素。</zh-CN>
+            //   <en>Overflow fails explicitly so the caller can choose the audit-table extension path; no element is truncated or dropped.</en>
+            // </lang>
+            if (summary.Length > MaxSummaryLength)
+            {
+                throw new AuditSummaryTooLongException(summary.Length, MaxSummaryLength);
+            }
+
+            return summary;
+        }

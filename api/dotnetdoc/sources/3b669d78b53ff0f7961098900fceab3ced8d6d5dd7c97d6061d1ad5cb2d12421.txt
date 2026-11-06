@@ -1,0 +1,68 @@
+        protected void ConfirmButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>W70：提交前再次校验权限。确认按钮的启用状态来自上一次渲染，可被绕过，不能作为授权依据；校验失败即拒绝并写授权失败审计。</zh-CN>
+            //   <en>W70: re-check permission before submitting. The confirm button's enabled state comes from the previous render and can be bypassed, so it is not an authorization basis; a failed check is denied and recorded as an authorization-failure audit.</en>
+            // </lang>
+            if (!PortalAuthorization.HasAnyPermission(
+                    PortalPermissionKeys.EmployeeProfileConfirmConfirm,
+                    PortalPermissionKeys.EmployeeProfileConfirmAdmin))
+            {
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.BusinessModuleCategory,
+                    PortalOperationAuditEvents.AccessDenied,
+                    "Request",
+                    Context.Request.Path ?? string.Empty,
+                    "Employee profile confirmation denied. RequiredAny=" +
+                        PortalPermissionKeys.EmployeeProfileConfirmConfirm + "|" +
+                        PortalPermissionKeys.EmployeeProfileConfirmAdmin,
+                    Context,
+                    null,
+                    "Failure");
+
+                ShowMessage(lang.EmployeeProfileConfirm_MessageNoPermission);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>确认动作重新读取当前绑定资料，避免用户在页面加载后绑定状态变化时仍提交旧员工标识。</zh-CN>
+            //   <en>The confirm action reloads the current bound profile so a user cannot submit a stale employee identifier after binding state changes.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            EmployeeProfileConfirmationView profile = GetCurrentProfile(userId);
+            if (profile == null)
+            {
+                ShowMessage(lang.EmployeeProfileConfirm_MessageNoActiveProfile);
+                return;
+            }
+
+            EmployeeProfileConfirmationResult result = EmployeeProfileConfirmationDb.ConfirmProfile(
+                new EmployeeProfileConfirmationRequest
+                {
+                    UserId = userId,
+                    EmployeeId = profile.EmployeeId,
+                    ConfirmedUtc = DateTime.UtcNow,
+                    ConfirmedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                ShowMessage(result.Message);
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.EmployeeProfileConfirmed,
+                PortalOperationAuditEvents.EmployeeProfileConfirmationTargetType,
+                result.ConfirmationId.ToString(CultureInfo.InvariantCulture),
+                "Employee profile confirmed. EmployeeId=" + profile.EmployeeId.ToString(CultureInfo.InvariantCulture),
+                Context);
+
+            // <lang>
+            //   <zh-CN>写入确认快照后刷新模块，确保最近确认时间来自数据库返回路径而不是页面临时状态。</zh-CN>
+            //   <en>After writing the confirmation snapshot, the module refreshes so the latest confirmation time comes from the database path rather than transient page state.</en>
+            // </lang>
+            BindProfile();
+            ShowMessage(lang.EmployeeProfileConfirm_MessageConfirmed);
+        }

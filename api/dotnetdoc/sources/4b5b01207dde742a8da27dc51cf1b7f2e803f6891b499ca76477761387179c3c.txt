@@ -1,0 +1,1 @@
+        public string Contact2 { get; set; }

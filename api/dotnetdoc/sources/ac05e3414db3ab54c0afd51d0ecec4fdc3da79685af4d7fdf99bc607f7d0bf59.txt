@@ -1,0 +1,4 @@
+        private static PortalHiaBoundaryValidationResult Success()
+        {
+            return new PortalHiaBoundaryValidationResult(true, "HIA_PERIPHERAL_VALID", "The peripheral envelope is valid.");
+        }

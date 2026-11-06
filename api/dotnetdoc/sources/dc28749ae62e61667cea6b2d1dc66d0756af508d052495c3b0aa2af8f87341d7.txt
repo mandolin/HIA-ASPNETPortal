@@ -1,0 +1,28 @@
+        public static bool TryApply(EmployeeSaveRequest request, string fieldName, string proposedValue)
+        {
+            // <lang>
+            //   <zh-CN>请求为空、字段不在白名单或建议值为空白时拒绝：空白建议值等价于"无变更"，写入它只会制造无意义的主数据更新。</zh-CN>
+            //   <en>Reject a null request, a field outside the allow list, or a blank proposed value: a blank value means "no change" and writing it would only create a meaningless master-data update.</en>
+            // </lang>
+            if (request == null || !CanAutoApply(fieldName) || string.IsNullOrWhiteSpace(proposedValue))
+            {
+                return false;
+            }
+
+            string value = proposedValue.Trim();
+
+            if (string.Equals(fieldName, FieldDisplayName, System.StringComparison.Ordinal))
+            {
+                request.DisplayName = value;
+                return true;
+            }
+
+            if (string.Equals(fieldName, FieldPreferredName, System.StringComparison.Ordinal))
+            {
+                request.PreferredName = value;
+                return true;
+            }
+
+            request.WorkEmail = value;
+            return true;
+        }

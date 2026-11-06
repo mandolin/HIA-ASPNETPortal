@@ -1,0 +1,1 @@
+        public int MinimumLength { get; private set; }

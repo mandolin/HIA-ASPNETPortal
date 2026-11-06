@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先重做权限、角色和导航参数门禁，避免未验证角色进入绑定或成员事件。</zh-CN>
+            //   <en>Reapply permission, role, and navigation gates before binding or membership events can use an unverified role.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅首次请求加载成员和可选用户，保留 Web Forms 回发字段。</zh-CN>
+            //   <en>Load members and selectable users only on the initial request, preserving Web Forms postback fields.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }

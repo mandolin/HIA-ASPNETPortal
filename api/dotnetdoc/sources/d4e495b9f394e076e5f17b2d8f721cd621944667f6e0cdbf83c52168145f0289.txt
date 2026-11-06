@@ -1,0 +1,24 @@
+        internal PortalModulePackageState(
+            string packageId,
+            bool isEnabled,
+            bool isConfigured,
+            DateTime updatedUtc,
+            string updatedBy,
+            string note)
+        {
+            // <lang>
+            //   <zh-CN>该内部投影不读取数据库、不验证受信任部署，也不执行 Profile 或授权判断；调用方已决定此处是显式行还是兼容默认快照。</zh-CN>
+            //   <en>This internal projection neither reads the database nor validates trusted deployment, profile, or authorization; its caller has already decided whether this is an explicit row or a compatibility-default snapshot.</en>
+            // </lang>
+            PackageId = packageId ?? string.Empty;
+            IsEnabled = isEnabled;
+            IsConfigured = isConfigured;
+            UpdatedUtc = updatedUtc;
+
+            // <lang>
+            //   <zh-CN>可选元数据以空文本而非 null 暴露，保持读取消费者的稳定展示契约；这不净化、记录或传播底层异常详情。</zh-CN>
+            //   <en>Expose optional metadata as empty text rather than null to preserve a stable display contract for read consumers; this neither sanitizes, logs, nor propagates underlying exception detail.</en>
+            // </lang>
+            UpdatedBy = updatedBy ?? string.Empty;
+            Note = note ?? string.Empty;
+        }

@@ -1,0 +1,1 @@
+        public virtual ICollection<UserItem> Users { get; set; }

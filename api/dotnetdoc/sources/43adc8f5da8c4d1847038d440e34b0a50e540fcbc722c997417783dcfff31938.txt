@@ -1,0 +1,23 @@
+        public void DeleteModuleDefinition(int defId)
+        {
+            // <lang>
+            //   <zh-CN>沿用旧行为：删除定义前先删除所有引用该定义的模块实例。该操作会影响页面内容，调用方必须先确认可以执行破坏性清理。</zh-CN>
+            //   <en>Keep the legacy behavior: delete every module instance that references this definition before deleting the definition itself. This affects page content, so callers must confirm that destructive cleanup is allowed.</en>
+            // </lang>
+            var moduleIds = _modulesDb.GetModulesByModuleDefId(defId);
+
+            foreach (var moduleId in moduleIds)
+            {
+                _modulesDb.DeleteModule(moduleId);
+            }
+
+            var moduleDef = _context.ModuleDefinitions.Single(i => i.ModuleDefId == defId);
+            _context.ModuleDefinitions.Remove(moduleDef);
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>删除完成后刷新快照，确保旧管理页和运行时读取一致状态。</zh-CN>
+            //   <en>Refresh the snapshot after deletion so legacy administration pages and runtime reads observe the same state.</en>
+            // </lang>
+            _items = _context.ModuleDefinitions.ToList();
+        }

@@ -1,0 +1,80 @@
+    public sealed class PortalCookieSecurityOptions
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>使用给定的安全属性与降级状态初始化 Cookie 安全选项。</zh-CN>
+        ///   <en>Initializes cookie security options with the supplied attributes and degradation state.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="secure">
+        /// <l>
+        ///   <zh-CN>是否下发 Secure 属性。</zh-CN>
+        ///   <en>Whether to emit the Secure attribute.</en>
+        /// </l>
+        /// </param>
+        /// <param name="sameSite">
+        /// <l>
+        ///   <zh-CN>要下发的 SameSite 模式。</zh-CN>
+        ///   <en>SameSite mode to emit.</en>
+        /// </l>
+        /// </param>
+        /// <param name="degraded">
+        /// <l>
+        ///   <zh-CN>配置是否被降级处理。</zh-CN>
+        ///   <en>Whether the configuration was degraded.</en>
+        /// </l>
+        /// </param>
+        /// <param name="degradeReason">
+        /// <l>
+        ///   <zh-CN>降级原因代码；未降级时为空字符串。</zh-CN>
+        ///   <en>Degradation reason code; an empty string when not degraded.</en>
+        /// </l>
+        /// </param>
+        public PortalCookieSecurityOptions(
+            bool secure,
+            PortalCookieSameSiteMode sameSite,
+            bool degraded,
+            string degradeReason)
+        {
+            // <lang>
+            //   <zh-CN>逐字段保存决策结果；原因文本统一规范化为空字符串，避免调用方对 null 做额外判断。</zh-CN>
+            //   <en>Store each decision field; the reason text is normalized to an empty string so callers need no extra null checks.</en>
+            // </lang>
+            Secure = secure;
+            SameSite = sameSite;
+            Degraded = degraded;
+            DegradeReason = degradeReason ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否下发 Secure 属性；默认关闭以兼容 HTTP 与旧浏览器部署。</zh-CN>
+        ///   <en>Whether to emit the Secure attribute; disabled by default for HTTP and legacy-browser compatibility.</en>
+        /// </lang>
+        /// </summary>
+        public bool Secure { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>要下发的 SameSite 模式；默认为 Unset（不下发该属性）。</zh-CN>
+        ///   <en>SameSite mode to emit; defaults to Unset (the attribute is not emitted).</en>
+        /// </lang>
+        /// </summary>
+        public PortalCookieSameSiteMode SameSite { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>配置是否被降级处理；为 true 时应结合 DegradeReason 写入诊断。</zh-CN>
+        ///   <en>Whether the configuration was degraded; when true, DegradeReason should be written to diagnostics.</en>
+        /// </lang>
+        /// </summary>
+        public bool Degraded { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>降级原因代码；未降级时为空字符串。</zh-CN>
+        ///   <en>Degradation reason code; an empty string when not degraded.</en>
+        /// </lang>
+        /// </summary>
+        public string DegradeReason { get; private set; }
+    }

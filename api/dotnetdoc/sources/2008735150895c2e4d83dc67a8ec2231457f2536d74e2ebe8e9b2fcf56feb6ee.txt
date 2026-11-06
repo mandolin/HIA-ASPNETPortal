@@ -1,0 +1,7 @@
+        private bool EnsureCanCreateItems()
+        {
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessCollaborationCreate,
+                PortalPermissionKeys.BusinessCollaborationAdmin);
+        }

@@ -1,0 +1,8 @@
+        protected bool HasSafeBrowseUrl(object value)
+        {
+            // <lang>
+            //   <zh-CN>可见性与最终 href 共享同一规范化入口，避免链接容器和实际地址状态不一致。</zh-CN>
+            //   <en>Visibility and final href share the same normalization entry so the link container and actual address cannot diverge.</en>
+            // </lang>
+            return !string.IsNullOrEmpty(GetSafeBrowseUrl(value));
+        }

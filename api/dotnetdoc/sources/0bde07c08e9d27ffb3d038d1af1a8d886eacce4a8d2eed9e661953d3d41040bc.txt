@@ -1,0 +1,32 @@
+        public void UpdateContact(int itemId, string userName, string name, string role, string email,
+                                  string contact1, string contact2)
+        {
+            // <lang>
+            //   <zh-CN>保持和新增路径一致的显示名占位策略。</zh-CN>
+            //   <en>Keep the same display-name placeholder strategy as the add path.</en>
+            // </lang>
+            userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
+
+            // <lang>
+            //   <zh-CN>更新路径要求目标联系人唯一存在；调用页已完成模块归属和编辑权限判断。</zh-CN>
+            //   <en>The update path requires the target contact to exist uniquely; the caller page has already completed module ownership and edit-permission checks.</en>
+            // </lang>
+            var item = _context.Contacts.Single(i => i.ItemId == itemId);
+
+            // <lang>
+            //   <zh-CN>旧表没有独立“最后编辑人”字段，当前实现沿用 CreatedByUser 保存最近一次编辑显示名；创建时间保持原值。</zh-CN>
+            //   <en>The legacy table has no separate last-editor field, so the current implementation reuses CreatedByUser for the latest editor display name; creation time keeps its original value.</en>
+            // </lang>
+            item.CreatedByUser = userName;
+            item.Name = name;
+            item.Role = role;
+            item.Email = email;
+            item.Contact1 = contact1;
+            item.Contact2 = contact2;
+
+            // <lang>
+            //   <zh-CN>提交当前可编辑字段更新；所属模块、原创建时间和页面级审计不在此处改变。</zh-CN>
+            //   <en>Commit the current editable-field update; owning module, original creation time, and page-level audit are not changed here.</en>
+            // </lang>
+            _context.SaveChanges();
+        }

@@ -1,0 +1,13 @@
+        private static string GetOwnerText(CollaborationItemInfo item)
+        {
+            // <lang>
+            //   <zh-CN>优先显示负责人用户标识和名称，否则回退到负责人角色键。</zh-CN>
+            //   <en>Prefer the owner user identifier and name, falling back to the owner role key otherwise.</en>
+            // </lang>
+            if (item.OwnerUserId.HasValue)
+            {
+                return item.OwnerUserId.Value.ToString(CultureInfo.InvariantCulture) + " / " + EmptyToNone(item.OwnerUserName);
+            }
+
+            return EmptyToNone(item.OwnerRoleKey);
+        }

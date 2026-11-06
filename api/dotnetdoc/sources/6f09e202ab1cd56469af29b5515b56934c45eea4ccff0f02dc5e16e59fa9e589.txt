@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>链接列表由当前模块的数据服务绑定且关闭 ViewState；标题使用编码绑定，地址必须经过服务器导航策略后才能进入浏览链接。</zh-CN>
+        <en>The current module's data service binds the link list with ViewState disabled; titles use encoded binding, and addresses must pass the server navigation policy before becoming browse links.</en>
+    </lang>
+--%>

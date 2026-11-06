@@ -1,0 +1,61 @@
+        public static PortalHiaBoundaryValidationResult Validate(PortalHiaPeripheralEnvelope envelope)
+        {
+            if (envelope == null)
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_ENVELOPE", "The peripheral envelope is required.");
+            }
+
+            if (!string.Equals(envelope.Contract, ContractName, StringComparison.Ordinal))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_CONTRACT", "The peripheral contract name is unsupported.");
+            }
+
+            if (!string.Equals(envelope.ContractVersion, CurrentContractVersion, StringComparison.Ordinal))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_VERSION", "The peripheral contract version is unsupported.");
+            }
+
+            // <lang>
+            //   <zh-CN>暂存规范化实例标识；验证结果只返回状态，不把原始输入回显给调用方。</zh-CN>
+            //   <en>Hold the normalized instance identifier; validation returns status only and never echoes the raw input.</en>
+            // </lang>
+            string normalizedInstanceId;
+            if (!TryNormalizePortalInstanceId(envelope.PortalInstanceId, out normalizedInstanceId))
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_INSTANCE_ID", "The portal instance identifier is invalid.");
+            }
+
+            if (envelope.Producer == null ||
+                !string.Equals(envelope.Producer.Id, ProducerId, StringComparison.Ordinal) ||
+                !IsSemanticVersion(envelope.Producer.Version))
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_PRODUCER", "The producer descriptor is invalid.");
+            }
+
+            if (!AllowedKinds.Contains(envelope.Kind ?? string.Empty))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_KIND", "The capability kind is unsupported.");
+            }
+
+            if (!IsUtcTimestamp(envelope.OccurredUtc))
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_TIMESTAMP", "The UTC timestamp is invalid.");
+            }
+
+            // <lang>
+            //   <zh-CN>先验证按 kind 约束的 payload，使未知字段和敏感字段在 metadata 之前被拒绝。</zh-CN>
+            //   <en>Validate the kind-scoped payload first so unknown and sensitive fields are rejected before metadata processing.</en>
+            // </lang>
+            PortalHiaBoundaryValidationResult payloadResult = ValidatePayload(envelope.Kind, envelope.Payload);
+            if (!payloadResult.IsValid)
+            {
+                return payloadResult;
+            }
+
+            // <lang>
+            //   <zh-CN>最后验证可忽略 metadata，并只返回成功或稳定失败结果，不携带 payload 原文。</zh-CN>
+            //   <en>Validate ignorable metadata last and return only success or a stable failure without raw payload content.</en>
+            // </lang>
+            PortalHiaBoundaryValidationResult metadataResult = ValidateMetadata(envelope.Metadata);
+            return metadataResult.IsValid ? Success() : metadataResult;
+        }

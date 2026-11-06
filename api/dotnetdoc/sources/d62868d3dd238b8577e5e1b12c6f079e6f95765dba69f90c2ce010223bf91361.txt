@@ -1,0 +1,5 @@
+        internal static string Admin_User_EditUser {
+            get {
+                return ResourceManager.GetString("Admin_User_EditUser", resourceCulture);
+            }
+        }

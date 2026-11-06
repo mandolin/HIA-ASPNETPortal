@@ -1,0 +1,15 @@
+        private int GetCurrentUserId()
+        {
+            // <lang>
+            //   <zh-CN>审核人标识只通过用户服务解析，不从申请参数或控件值推断。</zh-CN>
+            //   <en>Resolve the reviewer identifier only through the user service; never infer it from application parameters or controls.</en>
+            // </lang>
+            string userName = GetCurrentUserName();
+            if (string.IsNullOrWhiteSpace(userName) || UsersDb == null)
+            {
+                return 0;
+            }
+
+            IUserItem user = UsersDb.GetSingleUser(userName);
+            return user == null ? 0 : user.UserId;
+        }

@@ -1,0 +1,111 @@
+        public static PortalOperationAuditQueryResult Query(PortalOperationAuditQuery query, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>规范化对象将不可信页面输入收敛为受限的 UTC 时间窗、精确筛选和分页上限，随后的 SQL 只消费该对象。</zh-CN>
+            //   <en>The normalized object reduces untrusted page input to a bounded UTC window, exact filters, and paging limits; subsequent SQL consumes only this object.</en>
+            // </lang>
+            PortalOperationAuditQuery normalized = NormalizeQuery(query);
+
+            // <lang>
+            //   <zh-CN>结果列表先初始化为空，使连接、schema 或查询不可用时仍能返回稳定的只读结果契约。</zh-CN>
+            //   <en>The result list starts empty so an unavailable connection, schema, or query can still return a stable read-only result contract.</en>
+            // </lang>
+            var entries = new List<PortalOperationAuditEntry>();
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>查询与写入共享同一受控连接解析；没有配置时返回不可用，而不以空连接字符串触发 provider 细节泄露。</zh-CN>
+                //   <en>The query shares the same controlled connection resolution as writing; without configuration it returns unavailable rather than exposing provider detail from an empty connection string.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalOperationAuditQueryResult(entries, false, false);
+                    }
+
+                    // <lang>
+                    //   <zh-CN>连接成功后再检查表存在性，确保旧数据库的正常兼容降级和实际 SQL 故障被区分处理。</zh-CN>
+                    //   <en>Check table existence only after opening the connection so normal legacy-database degradation is distinguished from an actual SQL failure.</en>
+                    // </lang>
+                    connection.Open();
+                    if (!IsAuditTableAvailable(connection))
+                    {
+                        return new PortalOperationAuditQueryResult(entries, false, false);
+                    }
+
+                    // <lang>
+                    //   <zh-CN>命令由当前打开连接创建，固定选择列防止未来 schema 扩展自动暴露未审查字段。</zh-CN>
+                    //   <en>The command is created from the current open connection; fixed selected columns prevent future schema extensions from automatically exposing unreviewed fields.</en>
+                    // </lang>
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        // <lang>
+                        //   <zh-CN>WHERE 只允许时间范围和三个精确等值筛选；排序加主键稳定化，OFFSET/FETCH 读取一条额外记录作为下一页探测。</zh-CN>
+                        //   <en>WHERE permits only the time range and three exact equality filters; ordering is stabilized by the primary key, and OFFSET/FETCH reads one extra row as the next-page probe.</en>
+                        // </lang>
+                        command.CommandText = @"
+SELECT [AuditId], [OccurredUtc], [Category], [Action], [Outcome], [ActorUserName], [TargetType],
+       [TargetId], [Summary], [RelatedEventId], [ClientIp], [UserAgent], [CorrelationId]
+FROM [dbo].[PortalCfg_OperationAudits]
+WHERE [OccurredUtc] >= @StartUtc
+  AND [OccurredUtc] < @EndUtcExclusive
+  AND (@Category = N'' OR [Category] = @Category)
+  AND (@Action = N'' OR [Action] = @Action)
+  AND (@TargetId = N'' OR [TargetId] = @TargetId)
+ORDER BY [OccurredUtc] DESC, [AuditId] DESC
+OFFSET @Offset ROWS FETCH NEXT @Take ROWS ONLY;";
+
+                        // <lang>
+                        //   <zh-CN>时间、文本筛选和分页均作为显式类型参数绑定；Offset 和 Take 已在 NormalizeQuery 限制，不能被页面直接放大。</zh-CN>
+                        //   <en>Time, text filters, and paging are bound as explicitly typed parameters; Offset and Take were bounded in NormalizeQuery and cannot be enlarged directly by the page.</en>
+                        // </lang>
+                        command.Parameters.Add("@StartUtc", SqlDbType.DateTime2).Value = normalized.StartUtc;
+                        command.Parameters.Add("@EndUtcExclusive", SqlDbType.DateTime2).Value = normalized.EndUtcExclusive;
+                        AddTextParameter(command, "@Category", 80, normalized.Category, string.Empty);
+                        AddTextParameter(command, "@Action", 80, normalized.Action, string.Empty);
+                        AddTextParameter(command, "@TargetId", 200, normalized.TargetId, string.Empty);
+                        command.Parameters.Add("@Offset", SqlDbType.Int).Value = normalized.Page * normalized.PageSize;
+                        command.Parameters.Add("@Take", SqlDbType.Int).Value = normalized.PageSize + 1;
+
+                        // <lang>
+                        //   <zh-CN>reader 只读取固定选择列并逐行映射到传输模型；不把 DataReader 或连接对象泄漏给页面层。</zh-CN>
+                        //   <en>The reader consumes only fixed selected columns and maps each row to the transport model; it does not leak a DataReader or connection object to the page layer.</en>
+                        // </lang>
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            // <lang>
+                            //   <zh-CN>循环保留最多一条探测记录；ReadEntry 统一处理可空审计上下文字段。</zh-CN>
+                            //   <en>The loop retains at most one probe record; ReadEntry consistently handles nullable audit-context fields.</en>
+                            // </lang>
+                            while (reader.Read())
+                            {
+                                entries.Add(ReadEntry(reader));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>查询失败仅记录固定诊断事件并返回不可用状态；管理员 UI 不能获得底层 SQL、连接串或堆栈细节。</zh-CN>
+                //   <en>A query failure records only a stable diagnostics event and returns unavailable; the administration UI must not receive underlying SQL, connection-string, or stack detail.</en>
+                // </lang>
+                PortalDiagnostics.Error("OperationAudit.Query", "Querying operation audits failed.", exception, context);
+                return new PortalOperationAuditQueryResult(entries, false, false);
+            }
+
+            // <lang>
+            //   <zh-CN>多出的第 PageSize+1 条仅用于判断下一页，不属于当前页内容，必须在返回前移除。</zh-CN>
+            //   <en>The extra PageSize+1 record exists only to determine the next page and must be removed before returning current-page content.</en>
+            // </lang>
+            bool hasMore = entries.Count > normalized.PageSize;
+            if (hasMore)
+            {
+                entries.RemoveAt(entries.Count - 1);
+            }
+
+            return new PortalOperationAuditQueryResult(entries, hasMore, true);
+        }

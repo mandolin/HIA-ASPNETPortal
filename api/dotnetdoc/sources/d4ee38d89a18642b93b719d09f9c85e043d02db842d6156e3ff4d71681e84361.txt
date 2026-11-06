@@ -1,0 +1,22 @@
+        private static string ReadProviderInvariantName(string configFile, string connectionStringName)
+        {
+            // <lang>
+            //   <zh-CN>复用同一 XML 条目读取路径，避免 provider 检查绕过文件、根节点和名称校验。</zh-CN>
+            //   <en>Reuse the same XML-entry path so provider checking cannot bypass file, root, or logical-name validation.</en>
+            // </lang>
+            XElement entry = ReadConnectionStringEntry(configFile, connectionStringName);
+
+            // <lang>
+            //   <zh-CN>提取配置声明的 provider invariant；后续只接受主门户允许的 SQL Server provider。</zh-CN>
+            //   <en>Extract the configured provider invariant; later validation accepts only the SQL Server provider allowed for the primary Portal path.</en>
+            // </lang>
+            string providerInvariantName = (string)entry.Attribute("providerName");
+
+            if (string.IsNullOrWhiteSpace(providerInvariantName))
+            {
+                throw new ConfigurationErrorsException(
+                    "Connection string '" + connectionStringName + "' is missing providerName in " + configFile);
+            }
+
+            return providerInvariantName.Trim();
+        }

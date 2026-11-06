@@ -1,0 +1,19 @@
+        private int GetCurrentUserId()
+        {
+            // <lang>
+            //   <zh-CN>从认证上下文取得登录名，避免接受隐藏字段或查询字符串中的用户标识。</zh-CN>
+            //   <en>Obtain the sign-in name from the authenticated context instead of trusting a hidden field or query-string user id.</en>
+            // </lang>
+            string userName = GetCurrentUserName();
+            if (string.IsNullOrWhiteSpace(userName) || UsersDb == null)
+            {
+                return 0;
+            }
+
+            // <lang>
+            //   <zh-CN>按登录名读取唯一用户记录；无法解析时返回零，交由上层统一生成低敏提示。</zh-CN>
+            //   <en>Read the unique user record by sign-in name; return zero when it cannot be resolved so the caller can produce the shared low-detail message.</en>
+            // </lang>
+            IUserItem user = UsersDb.GetSingleUser(userName);
+            return user == null ? 0 : user.UserId;
+        }

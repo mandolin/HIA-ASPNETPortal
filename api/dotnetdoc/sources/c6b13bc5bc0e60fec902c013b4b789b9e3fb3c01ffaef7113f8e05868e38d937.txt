@@ -1,0 +1,4 @@
+        public static void BuildItemWithCurrentContext<T>(Control ctrl)
+        {
+            Container.BuildUp(typeof(T), ctrl);
+        }

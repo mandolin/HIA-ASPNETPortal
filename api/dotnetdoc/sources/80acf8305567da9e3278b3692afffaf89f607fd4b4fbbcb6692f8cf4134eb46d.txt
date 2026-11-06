@@ -1,0 +1,47 @@
+    public sealed class PortalCapabilityDefinition
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一条能力定义。</zh-CN>
+        ///   <en>Creates a capability definition.</en>
+        /// </lang>
+        /// </summary>
+        internal PortalCapabilityDefinition(
+            string capabilityId,
+            string layer,
+            string lifecycleState,
+            string primaryModuleId,
+            string permissionKeyPrefix,
+            string displayNameZh,
+            string displayNameEn)
+        {
+            CapabilityId = capabilityId ?? string.Empty;
+            Layer = layer ?? string.Empty;
+            LifecycleState = lifecycleState ?? string.Empty;
+            PrimaryModuleId = primaryModuleId ?? string.Empty;
+            PermissionKeyPrefix = permissionKeyPrefix ?? string.Empty;
+            DisplayNameZh = displayNameZh ?? string.Empty;
+            DisplayNameEn = displayNameEn ?? string.Empty;
+        }
+
+        /// <summary><lang><zh-CN>稳定能力键，形如 <c>BasicBusiness.Collaboration</c>。</zh-CN><en>Stable capability key such as <c>BasicBusiness.Collaboration</c>.</en></lang></summary>
+        public string CapabilityId { get; private set; }
+
+        /// <summary><lang><zh-CN>所属能力层（取自 P19.2 的 6 层词表）。</zh-CN><en>Owning capability layer from the P19.2 six-layer vocabulary.</en></lang></summary>
+        public string Layer { get; private set; }
+
+        /// <summary><lang><zh-CN>生命周期状态。</zh-CN><en>Lifecycle state.</en></lang></summary>
+        public string LifecycleState { get; private set; }
+
+        /// <summary><lang><zh-CN>主责模块包标识（能力锚点，不含全部实现）。</zh-CN><en>Primary module package identifier (the capability anchor, not the full implementation).</en></lang></summary>
+        public string PrimaryModuleId { get; private set; }
+
+        /// <summary><lang><zh-CN>该能力的权限键前缀。</zh-CN><en>Permission-key prefix for this capability.</en></lang></summary>
+        public string PermissionKeyPrefix { get; private set; }
+
+        /// <summary><lang><zh-CN>中文显示名。</zh-CN><en>Chinese display name.</en></lang></summary>
+        public string DisplayNameZh { get; private set; }
+
+        /// <summary><lang><zh-CN>英文显示名。</zh-CN><en>English display name.</en></lang></summary>
+        public string DisplayNameEn { get; private set; }
+    }

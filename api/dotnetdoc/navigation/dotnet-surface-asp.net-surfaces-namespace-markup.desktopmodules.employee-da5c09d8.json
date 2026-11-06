@@ -1,0 +1,87 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-1",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-81a1ad07.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-2",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-82a1ae9a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-3",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-83a1b02d.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-4",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-7ca1a528.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-5",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-7da1a6bb.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-6",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-7ea1a84e.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-7",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-7fa1a9e1.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofilecorrectionrequest:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofilecorrectionrequest-employeeprofilecorrectionrequest.ascx-8",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-78a19edc.json"
+    }
+  ]
+}

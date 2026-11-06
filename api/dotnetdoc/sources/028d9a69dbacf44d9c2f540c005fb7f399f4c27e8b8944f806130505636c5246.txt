@@ -1,0 +1,26 @@
+    public static class PortalModuleAssemblyModes
+    {
+        /// <summary><lang><zh-CN>生产默认态：Web Application 预编译装配。</zh-CN><en>Production default: Web Application precompiled assembly.</en></lang></summary>
+        public const string CodeBehind = "CodeBehind";
+
+        /// <summary><lang><zh-CN>受控调试态：运行时编译装配；本周期不进入该态。</zh-CN><en>Controlled debug mode: runtime-compiled assembly; this cycle never enters it.</en></lang></summary>
+        public const string CodeFile = "CodeFile";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断文本是否为已登记的装配态值，采用精确大小写比较，不接受同义词或第三值。</zh-CN>
+        ///   <en>Determines whether text is a registered assembly mode using exact case-sensitive comparison; synonyms and third values are rejected.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="mode"><l zh-CN="待判定的装配态文本，可为 null。" en="Assembly-mode text to check; may be null." /></param>
+        /// <returns><l zh-CN="仅当等于两个已登记值之一时为 true。" en="True only when equal to one of the two registered values." /></returns>
+        public static bool IsRegistered(string mode)
+        {
+            // <lang>
+            //   <zh-CN>两个常量即封闭集合全部成员；不做 Trim 与大小写折叠，避免相似输入被误当作已登记值。</zh-CN>
+            //   <en>The two constants are the complete closed set; no trimming or case folding keeps merely similar input from being mistaken for a registered value.</en>
+            // </lang>
+            return string.Equals(mode, CodeBehind, StringComparison.Ordinal) ||
+                   string.Equals(mode, CodeFile, StringComparison.Ordinal);
+        }
+    }

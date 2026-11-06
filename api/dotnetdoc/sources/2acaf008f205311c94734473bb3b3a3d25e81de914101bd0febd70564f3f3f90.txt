@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeDirectoryView,
+                PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>首次请求才创建筛选项并查询目录，避免回发覆盖控件状态或重复读取数据。</zh-CN>
+            //   <en>Build filters and query the directory only on the initial request so postbacks do not overwrite control state or repeat reads.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindFilterLists();
+                BindDirectory();
+            }
+        }

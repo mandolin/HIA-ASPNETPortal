@@ -1,0 +1,9 @@
+        private int? GetParentOrganizationUnitId(int organizationUnitId)
+        {
+            return _context.Database.SqlQuery<int?>(
+                @"
+SELECT [ParentOrganizationUnitId]
+FROM [dbo].[PortalBiz_OrganizationUnits]
+WHERE [OrganizationUnitId] = @OrganizationUnitId;",
+                IntParameter("@OrganizationUnitId", organizationUnitId)).SingleOrDefault();
+        }

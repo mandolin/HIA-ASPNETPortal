@@ -1,0 +1,6 @@
+                    <%--
+                      <lang>
+                        <zh-CN>异常详情使用只读多行控件承载展示，不提供回发编辑能力，也不把异常文本重新作为用户输入提交。</zh-CN>
+                        <en>Render exception detail in a read-only multiline control; it provides no edit-back capability and does not resubmit exception text as user input.</en>
+                      </lang>
+                    --%>

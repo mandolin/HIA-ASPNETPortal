@@ -1,0 +1,7 @@
+        public PortalBusinessApplicationTransition(string actionKey, string toStatus, string[] fromStatuses, bool viaReviewPath)
+        {
+            ActionKey = actionKey;
+            ToStatus = toStatus;
+            FromStatuses = new List<string>(fromStatuses ?? new string[0]).AsReadOnly();
+            ViaReviewPath = viaReviewPath;
+        }

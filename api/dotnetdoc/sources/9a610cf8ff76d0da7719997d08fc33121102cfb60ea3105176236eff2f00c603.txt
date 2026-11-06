@@ -1,0 +1,10 @@
+        private void BindData()
+        {
+            // <lang>
+            //   <zh-CN>从当前门户读取角色集合并绑定列表；绑定阶段不执行写入。</zh-CN>
+            //   <en>Read the current-Portal role collection and bind the list without performing writes.</en>
+            // </lang>
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            rolesList.DataSource = RolesDB.GetPortalRoles(portalSettings.PortalId);
+            rolesList.DataBind();
+        }

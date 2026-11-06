@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulestyleresource.-ctor-system.string-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulestyleresource.-ctor-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulestyleresource.-ctor-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulestyleresource-1df77e60.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource.packageid",
+      "kind": "entry",
+      "label": "PackageId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource.packageid",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulestyleresource.packageid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource-61767051.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource.virtualpath",
+      "kind": "entry",
+      "label": "VirtualPath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource.virtualpath",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulestyleresource.virtualpath",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource-cecebeb0.html"
+    }
+  ]
+}

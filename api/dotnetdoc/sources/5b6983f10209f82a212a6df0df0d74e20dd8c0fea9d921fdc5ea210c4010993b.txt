@@ -1,0 +1,8 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>所有模块提示都经过服务器 HTML 编码后进入 Label，避免服务层或兼容消息形成标记注入。</zh-CN>
+            //   <en>Encode every module message before assigning it to the Label so service or compatibility text cannot become markup injection.</en>
+            // </lang>
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

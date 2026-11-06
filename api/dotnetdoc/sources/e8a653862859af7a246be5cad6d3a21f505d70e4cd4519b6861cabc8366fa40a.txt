@@ -1,0 +1,4 @@
+        public static IList<string> ExcludedNavigationKeyPrefixes(HttpContext context = null)
+        {
+            return ReadList(PortalSettingsRegistry.NavigationExcludedNavigationKeyPrefixes, context);
+        }

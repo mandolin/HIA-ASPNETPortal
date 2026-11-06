@@ -1,0 +1,42 @@
+    public sealed class PortalSystemSettingWriteResult
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建数据库运行级设置写入或删除结果。</zh-CN>
+        ///   <en>Creates a database runtime-setting write or deletion result.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="succeeded">
+        /// <l>
+        ///   <zh-CN>操作是否成功。</zh-CN>
+        ///   <en>Whether the operation succeeded.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>可展示给管理员的安全说明。</zh-CN>
+        ///   <en>Safe message that may be shown to an administrator.</en>
+        /// </l>
+        /// </param>
+        internal PortalSystemSettingWriteResult(bool succeeded, string message)
+        {
+            Succeeded = succeeded;
+            Message = message ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>操作是否成功完成。</zh-CN>
+        ///   <en>Whether the operation completed successfully.</en>
+        /// </lang>
+        /// </summary>
+        public bool Succeeded { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可安全展示给管理员的结果说明，不包含连接串或 SQL 细节。</zh-CN>
+        ///   <en>Result message safe to show to an administrator; it contains no connection-string or SQL details.</en>
+        /// </lang>
+        /// </summary>
+        public string Message { get; private set; }
+    }

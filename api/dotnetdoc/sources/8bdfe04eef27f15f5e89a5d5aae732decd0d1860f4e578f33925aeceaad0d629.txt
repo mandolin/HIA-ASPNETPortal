@@ -1,0 +1,76 @@
+        protected void UpDown_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>排序事件重做权限和上下文检查，避免跨 Tab 操作模块顺序。</zh-CN>
+            //   <en>Repeat authorization and context checks for ordering so module order cannot be changed across Tabs.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>按钮命令只允许 up/down，窗格名称通过规范化 helper 映射到受控控件。</zh-CN>
+            //   <en>Allow only up/down commands and map the pane name to a controlled list box through the normalization helper.</en>
+            // </lang>
+            LinkButton button = sender as LinkButton;
+            string pane;
+            ListBox listBox;
+            if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
+                (button.CommandName != "up" && button.CommandName != "down"))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>从当前窗格按稳定顺序读取模块，并验证列表选中项与数据键一致。</zh-CN>
+            //   <en>Read modules from the current pane in stable order and verify that the selected list item matches its data key.</en>
+            // </lang>
+            List<ModuleSettings> modules = GetModules(pane);
+            ModuleSettings selectedModule;
+            // <lang>
+            //   <zh-CN>没有有效选中模块时只回到当前布局，不写入任何排序变化。</zh-CN>
+            //   <en>Return to the current layout without writing when no valid module is selected.</en>
+            // </lang>
+            if (!TryGetSelectedModule(listBox, modules, out selectedModule))
+            {
+                RedirectToCurrentLayout();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>用有间隔的临时顺序表达方向，随后由 OrderModules 统一归一化。</zh-CN>
+            //   <en>Use a spaced temporary order to express direction, then normalize all orders through OrderModules.</en>
+            // </lang>
+            selectedModule.ModuleOrder += button.CommandName == "down" ? 3 : -3;
+            try
+            {
+                // <lang>
+                //   <zh-CN>排序 helper 负责持久化窗格内完整顺序；成功后记录单个模块审计并安全回跳。</zh-CN>
+                //   <en>The ordering helper persists the complete pane order; on success audit the module and navigate back safely.</en>
+                // </lang>
+                OrderModules(modules);
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Order",
+                    "Module",
+                    selectedModule.ModuleId.ToString(),
+                    "Changed module order within a pane.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>排序失败沿用统一诊断和低敏提示。</zh-CN>
+                //   <en>Ordering failures use shared diagnostics and low-sensitivity feedback.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.OrderModule",
+                    "Ordering a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleReorderFailed, eventId));
+            }
+        }

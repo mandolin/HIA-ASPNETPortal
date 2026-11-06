@@ -1,0 +1,17 @@
+        protected string ChooseUrl(object itemId, object url)
+        {
+            // <lang>
+            //   <zh-CN>编辑状态优先进入站内修复路径，即使旧 URL 当前不符合浏览策略也允许维护者修改。</zh-CN>
+            //   <en>Edit mode prefers the in-site repair path so maintainers can update a legacy URL even when it currently fails browse policy.</en>
+            // </lang>
+            if (IsEditable)
+            {
+                return "~/DesktopModules/EditLinks.aspx?ItemID=" + Convert.ToString(itemId) + "&mid=" + ModuleId;
+            }
+
+            // <lang>
+            //   <zh-CN>非编辑状态只允许规范化后的浏览地址，失败时由空字符串阻断链接输出。</zh-CN>
+            //   <en>Non-edit mode allows only normalized browse URLs, with an empty string blocking link output on failure.</en>
+            // </lang>
+            return GetSafeBrowseUrl(url);
+        }

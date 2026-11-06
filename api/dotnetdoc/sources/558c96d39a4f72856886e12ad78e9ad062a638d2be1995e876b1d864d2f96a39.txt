@@ -1,0 +1,5 @@
+        internal static string BusinessApplicationRequest_Heading {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_Heading", resourceCulture);
+            }
+        }

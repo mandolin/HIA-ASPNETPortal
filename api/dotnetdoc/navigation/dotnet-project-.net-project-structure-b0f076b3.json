@@ -1,0 +1,27 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:project:.net-project-structure",
+  "children": [
+    {
+      "id": "dotnet:project:.net-project-structure:namespace:projects",
+      "kind": "namespace",
+      "label": "Projects",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-project-.net-project-structure-namespace-projects-5dd42f9e.json"
+    },
+    {
+      "id": "dotnet:project:.net-project-structure:namespace:solutions",
+      "kind": "namespace",
+      "label": "Solutions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-project-.net-project-structure-namespace-solutions-4e988b80.json"
+    }
+  ]
+}

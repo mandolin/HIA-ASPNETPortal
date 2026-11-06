@@ -1,0 +1,6 @@
+        public IEnumerable<IRoleItem> GetPortalRoles(int portalId)
+        {
+            return _context.Roles
+                .Where(i => i.PortalId == portalId && i.RoleName != PortalRoleNames.AllUsers)
+                .ToList();
+        }

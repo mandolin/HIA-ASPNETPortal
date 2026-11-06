@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>Update/Cancel/Delete 进入既有文档状态流程；数据库存储选项当前禁用，不能把页面勾选当作已启用能力。</zh-CN>
+                  <en>Update, Cancel, and Delete enter the existing document state flow; database storage is currently disabled, so a page option cannot be treated as an enabled capability.</en>
+                </lang>
+                --%>

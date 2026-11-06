@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblyaudit:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblyaudit:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordCheck",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-a58a69f0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblyaudit:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordRollbackDrill",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-a7253e23.html"
+    }
+  ]
+}

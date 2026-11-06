@@ -1,0 +1,1 @@
+        public string DefinitionText { get; private set; }

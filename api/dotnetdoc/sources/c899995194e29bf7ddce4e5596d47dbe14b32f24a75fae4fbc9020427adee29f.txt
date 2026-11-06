@@ -1,0 +1,5 @@
+        internal static string Admin_AccessDenied_AccessDenied {
+            get {
+                return ResourceManager.GetString("Admin_AccessDenied_AccessDenied", resourceCulture);
+            }
+        }

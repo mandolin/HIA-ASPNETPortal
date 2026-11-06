@@ -1,0 +1,52 @@
+        public static string RenderActions(string entryKey, HttpContext context, int maxCount = PortalNavigationVisibilityPolicy.DefaultMaxRelatedEntries)
+        {
+            // <lang>
+            //   <zh-CN>先取同组候选（已含可导航过滤与常用入口兜底），再按当前上下文逐个判定；候选为空时直接返回空字符串。</zh-CN>
+            //   <en>Take same-group candidates first (already filtered for navigability and topped up from common entries), then evaluate each against the current context; return an empty string when there is no candidate.</en>
+            // </lang>
+            IList<PortalNavigationEntry> candidates = PortalNavigationVisibilityPolicy.GetRelatedEntries(entryKey, maxCount);
+            if (candidates == null || candidates.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            PortalNavigationVisibilityContext visibilityContext = BuildContext(candidates);
+
+            StringBuilder builder = new StringBuilder();
+            int rendered = 0;
+
+            foreach (PortalNavigationEntry entry in candidates)
+            {
+                if (rendered >= maxCount)
+                {
+                    break;
+                }
+
+                string reason = PortalNavigationVisibilityPolicy.GetBlockedReason(entry, visibilityContext);
+                if (string.IsNullOrEmpty(reason))
+                {
+                    builder.Append(RenderLink(entry));
+                    rendered++;
+                }
+                else if (visibilityContext.IsAdministrator)
+                {
+                    // <lang>
+                    //   <zh-CN>管理员额外看到被阻断入口的禁用态与原因，便于排查"入口为何不显示"。</zh-CN>
+                    //   <en>Administrators additionally see blocked entries as disabled with a reason, which helps diagnose why an entry is missing.</en>
+                    // </lang>
+                    builder.Append(RenderDisabled(entry, reason));
+                    rendered++;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>一条都没有渲染时不输出容器，避免留下空动作区。</zh-CN>
+            //   <en>Emit no container when nothing was rendered, so an empty action area is never left behind.</en>
+            // </lang>
+            if (rendered == 0)
+            {
+                return string.Empty;
+            }
+
+            return "<div class=\"portal-admin-actions\">" + builder + "</div>";
+        }

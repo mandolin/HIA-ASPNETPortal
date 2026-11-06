@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_KindCollaborationItem {
+            get {
+                return ResourceManager.GetString("MyWorkItems_KindCollaborationItem", resourceCulture);
+            }
+        }

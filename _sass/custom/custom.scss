@@ -1,0 +1,852 @@
+// Site-wide custom styles (C-anp-P22 overhaul) — the theme's official override point:
+// just-the-docs 0.12.0 compiles this via `_includes/css/custom.scss.liquid`
+// (@import "./custom/custom").
+//
+// Two benchmarks, mirroring exactly how orchardcore.net splits its surfaces:
+//   - landing / marketing pages (site/_layouts/home.html): orchardcore.net main-site layout —
+//     own top nav, big hero with a copyable command block, stat row, card grids, CTA bands,
+//     FAQ accordion, multi-column footer.
+//   - documentation pages (site/_layouts/default.html): the theme's own docs layout
+//     (sidebar + search) — deliberately a different style, as on Orchard Core's docs subsite.
+// Block structure is copied; colours stay the HIA series tokens
+// (HIA-Theme-Builder: primary #0047AB, text #172633, muted #667782, line #DCE5EC, p50 #EFF6FF).
+
+// ---- Top navigation (landing) ----------------------------------------------
+
+.oc-nav {
+  // Fixed header, like orchardcore.net (sticky top-0 z-40; visually equivalent).
+  // Inner content aligns with the landing container: inline padding equals the
+  // centred 68rem .oc-page container's side margin, falling back to 2rem on
+  // narrow screens. Backdrop blur over page content while scrolled.
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0 max(2rem, calc((100% - 68rem) / 2));
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #dce5ec;
+}
+
+// Fixed nav leaves the flow — offset the landing body, and keep anchor jumps
+// clear of the bar.
+.oc-main {
+  padding-top: 3.5rem;
+}
+
+.oc-main [id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.oc-nav-brand {
+  color: #172633;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+
+  &:hover {
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+.oc-nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.35rem;
+  margin-left: auto;
+}
+
+.oc-nav-link {
+  color: #172633;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+.oc-page {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// ---- Hero (headline + command block + dual CTA) -----------------------------
+
+.oc-hero {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+
+.oc-hero-tag {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  color: #0047ab;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.oc-hero-title {
+  color: #172633;
+  font-size: 2.5rem;
+  line-height: 1.22;
+  max-width: 44rem;
+  margin: 1.1rem auto 0.9rem;
+}
+
+.oc-hero-lead {
+  color: #667782;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 40rem;
+  margin: 0 auto 2rem;
+}
+
+.oc-code {
+  position: relative;
+  max-width: 46rem;
+  margin: 0 auto 1.3rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e6edf3;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.oc-code pre {
+  margin: 0;
+  font-family: ui-monospace, "sfmono-regular", consolas, monospace;
+  font-size: 0.84rem;
+  line-height: 1.75;
+}
+
+.oc-code-comment {
+  color: #93c5fd;
+}
+
+.oc-code-copy {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dbeafe;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.oc-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+// ---- Buttons (HIA cobalt primary / hairline ghost) --------------------------
+
+.oc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.66rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.oc-btn-primary {
+  background: #0047ab;
+  color: #ffffff;
+
+  &:hover {
+    background: #1d4ed8;
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
+.oc-btn-ghost {
+  border: 1px solid #dce5ec;
+  color: #0047ab;
+
+  &:hover {
+    border-color: #0047ab;
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+// ---- Sections, eyebrows, grids ---------------------------------------------
+
+.oc-section {
+  padding: 3.4rem 0;
+  border-top: 1px solid #e8eef4;
+}
+
+.oc-eyebrow {
+  color: #0047ab;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin: 0 0 0.5rem;
+}
+
+.oc-h2 {
+  color: #172633;
+  font-size: 1.9rem;
+  line-height: 1.3;
+  margin: 0 0 0.8rem;
+}
+
+.oc-lead {
+  color: #667782;
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 44rem;
+  margin: 0;
+}
+
+.oc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.15rem;
+  margin-top: 2rem;
+}
+
+.oc-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.15rem;
+  margin-top: 2rem;
+}
+
+.oc-card {
+  display: block;
+  padding: 1.3rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid #dce5ec;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+
+  &:hover {
+    border-color: #0047ab;
+    box-shadow: 0 8px 30px rgba(25, 41, 58, 0.12);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+}
+
+.oc-card-title {
+  color: #172633;
+  font-weight: 800;
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.oc-card p {
+  color: #667782;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.oc-card-more {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: #0047ab;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+// ---- Stat row ---------------------------------------------------------------
+
+.oc-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid #e8eef4;
+  border-bottom: 1px solid #e8eef4;
+}
+
+.oc-stat-val {
+  color: #0047ab;
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.oc-stat-label {
+  color: #667782;
+  font-size: 0.84rem;
+}
+
+// ---- CTA band ---------------------------------------------------------------
+
+.oc-band {
+  margin: 3rem 0 0;
+  padding: 2.6rem 1.5rem;
+  border-radius: 12px;
+  background: #f3f6f9;
+  text-align: center;
+}
+
+// ---- FAQ accordion (native <details>, no JS) --------------------------------
+
+.oc-faq {
+  margin-top: 1.8rem;
+}
+
+.oc-faq details {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #e8eef4;
+}
+
+.oc-faq summary {
+  color: #172633;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.oc-faq p {
+  color: #667782;
+  font-size: 0.94rem;
+  line-height: 1.8;
+  margin: 0.7rem 0 0;
+}
+
+// ---- Footer columns ---------------------------------------------------------
+
+.oc-footer {
+  margin-top: 3rem;
+  padding: 2.6rem 0 3rem;
+  border-top: 1px solid #dce5ec;
+}
+
+.oc-footer-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.6rem;
+}
+
+.oc-footer-title {
+  color: #172633;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.7rem;
+}
+
+.oc-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.oc-footer li {
+  margin: 0.35rem 0;
+}
+
+.oc-footer a {
+  color: #667782;
+  font-size: 0.9rem;
+  text-decoration: none;
+
+  &:hover {
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+.oc-footer-note {
+  margin: 1.6rem 0 0;
+  color: #667782;
+  font-size: 0.84rem;
+}
+
+
+// ---- Language switcher (header_custom.html, every page) ---------------------
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+}
+
+.lang-switch-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.24rem 0.8rem;
+  border: 1px solid #dce5ec;
+  border-radius: 999px;
+  color: #0047ab;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: #0047ab;
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+// ---- Documentation shell (layouts/default.html) — Material-for-MkDocs style ---
+// Benchmark: docs.orchardcore.net. Dark top bar, light sidebar tree, content grid
+// with a sticky right "Table of contents" rail, prev/next pager, dark footer bar.
+// Colours stay HIA: bar #172633, primary #0047AB, line #DCE5EC, muted #667782.
+
+.docs-topbar {
+  // Fixed header (same behaviour as the landing nav / orchardcore.net's sticky
+  // top-0). Explicit height keeps the fixed sidebar offset stable; inner content
+  // stays aligned to the centred --docs-container via the max() padding.
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  // Brand/search/repo align with the layout container: inline padding equals the
+  // centred container's side margin on wide screens (tracks --docs-container),
+  // falling back to 1.6rem below the container width.
+  padding: 0 max(1.6rem, calc((100% - var(--docs-container, 1220px)) / 2));
+  background: #172633;
+}
+
+// The topbar left the flow: anchor the fixed sidebar below it (the theme relies
+// on the topbar's static position for this — with a fixed topbar that breaks),
+// offset the article body, and keep anchor jumps clear of the bar.
+.docs-body .side-bar {
+  top: 4rem;
+}
+
+.docs-body .main {
+  padding-top: 4rem;
+}
+
+.docs-body [id] {
+  scroll-margin-top: 5rem;
+}
+
+.docs-brand {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover { color: #ffffff; text-decoration: none; }
+}
+
+.docs-brand-sub {
+  margin-left: 0.4rem;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #dbeafe;
+  font-size: 0.72rem;
+  font-weight: 700;
+  vertical-align: 2px;
+}
+
+.docs-topbar .search {
+  flex: 1 1 22rem;
+  max-width: 26rem;
+  margin: 0;
+}
+
+.docs-topbar .search-input-wrap {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+.docs-topbar .search-input {
+  color: #ffffff;
+  background: transparent;
+}
+
+.docs-topbar .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.docs-topbar .search-label .search-icon {
+  fill: rgba(255, 255, 255, 0.65);
+}
+
+.docs-topbar .search-results {
+  background: #ffffff;
+  border: 1px solid #dce5ec;
+  color: #172633;
+}
+
+.docs-repo {
+  margin-left: auto;
+  color: #dbeafe;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover { color: #ffffff; text-decoration: none; }
+}
+
+.docs-topbar .lang-switch-link {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #dbeafe;
+
+  &:hover { border-color: #ffffff; color: #ffffff; }
+}
+
+// Sidebar top site-title (theme default, duplicates the topbar brand; Material
+// has no such element) — hide it on docs pages.
+.docs-body .side-bar .site-title {
+  display: none;
+}
+
+// Topbar search box: give it explicit box geometry — inherited theme rules
+// collapse it to a thin line inside the flex topbar.
+.docs-topbar .search {
+  display: block;
+}
+
+.docs-topbar .search-input-wrap {
+  display: flex;
+  align-items: center;
+  height: 2.1rem;
+  padding: 0 0.7rem;
+}
+
+.docs-topbar .search-input {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+// At >=50rem the theme forces `.search { height: 100% !important; padding: 0 !important }`
+// — designed for its own fixed-height `.main-header`. Our topbar is content-sized, so
+// height:100% resolves to 0 and the box collapses to a thin line. Re-anchor explicitly;
+// !important is required to outbid the theme's own !important rule.
+.docs-topbar .search {
+  height: 2.6rem !important;
+  padding: 0.3rem 0.5rem !important;
+}
+
+// Content grid: article + sticky right TOC rail. The theme's .main carries a
+// max-width ($content-width, 50rem) that would clamp the three-column grid —
+// release it here and let .docs-grid own the 61rem Material container width.
+
+.docs-body .main {
+  max-width: none;
+}
+
+.docs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 13.5rem;
+  gap: 2.8rem;
+  align-items: start;
+  max-width: 61rem;
+  margin: 0 auto;
+}
+
+// Typography scale matched to Material for MkDocs (docs.orchardcore.net):
+// 16px body, ~32px h1, ~24px h2, 1.6 line height.
+
+.docs-article {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.docs-article h1 {
+  font-size: 2em;
+  line-height: 1.25;
+  margin: 0 0 1em;
+}
+
+.docs-article h2 {
+  font-size: 1.5em;
+  line-height: 1.3;
+  margin: 1.8em 0 0.7em;
+}
+
+.docs-article h3 {
+  font-size: 1.17em;
+  line-height: 1.35;
+  margin: 1.5em 0 0.6em;
+}
+
+.docs-toc {
+  position: sticky;
+  top: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  padding: 1rem 0 1rem 1.4rem;
+  border-left: 1px solid #e8eef4;
+}
+
+.docs-toc-title {
+  color: #172633;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.7rem;
+}
+
+.docs-toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-toc li {
+  margin: 0.4rem 0;
+}
+
+.docs-toc a {
+  color: #667782;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  text-decoration: none;
+
+  &:hover { color: #0047ab; text-decoration: none; }
+}
+
+@media (max-width: 66.5rem) {
+  .docs-grid { grid-template-columns: minmax(0, 1fr); }
+  .docs-toc { display: none; }
+}
+
+// ---- Material container geometry (>=66rem) ----------------------------------
+// Measured live on docs.orchardcore.net (Material for MkDocs): the layout is
+// rem-based against a root font-size that STEPS UP on wide screens —
+// root 20px (grid 1220, sidebar 242) → 22px (1342/266) at ~1500w → 24px
+// (1464/290) at ~1900w. Our first port fixed 1220px, which reads "too narrow"
+// on wide monitors exactly because Orchard keeps growing. Replicated with two
+// custom properties stepped at 1500px/1900px; article inner padding measured
+// there too (margin-inline 28.8px, padding-top 14.4px at root 24 → 1.2rem/0.6rem).
+.docs-body {
+  --docs-container: 1220px;
+  --docs-sidebar: 242px;
+}
+
+@media (min-width: 1500px) {
+  .docs-body {
+    --docs-container: 1342px;
+    --docs-sidebar: 266px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .docs-body {
+    --docs-container: 1464px;
+    --docs-sidebar: 290px;
+  }
+}
+
+@media (min-width: 66rem) {
+  .docs-body .side-bar {
+    left: max(0px, calc((100% - var(--docs-container)) / 2));
+    width: var(--docs-sidebar);
+    // Theme clamps the sidebar with min-width: $nav-width at lg — release it.
+    min-width: var(--docs-sidebar);
+    // Topbar is 4rem tall and sits above the fixed sidebar in flow.
+    height: calc(100vh - 4rem);
+  }
+
+  // The nav column inside the sidebar is 15.5rem at lg — match the bar width.
+  .docs-body .side-bar .site-nav,
+  .docs-body .side-bar .site-footer {
+    width: var(--docs-sidebar);
+  }
+
+  // Content area = container minus the sidebar; the docs-grid then fills it
+  // edge to edge (article + right TOC rail, no gap — as measured on Orchard).
+  .docs-body .side-bar + .main {
+    margin-left: calc(max(0px, (100% - var(--docs-container)) / 2) + var(--docs-sidebar));
+    margin-right: max(0px, calc((100% - var(--docs-container)) / 2));
+  }
+
+  // jtd's content wrappers add ~2rem padding each side, which would inset the
+  // grid and break the container alignment — zero them here (the article below
+  // carries the inner padding instead, like Material's .md-content__inner).
+  .docs-body .main-content-wrap,
+  .docs-body .main-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .docs-body .main .docs-grid {
+    max-width: none;
+    margin: 0;
+    grid-template-columns: minmax(0, 1fr) var(--docs-sidebar);
+    gap: 0;
+  }
+
+  // Article inner padding (Orchard: 28.8px sides, 14.4px top at root 24):
+  // keeps text off the sidebar edge on the left and off the TOC's left border
+  // on the right.
+  .docs-body .docs-article {
+    padding: 1rem 1.8rem 2rem;
+  }
+}
+
+// Material-style headings: uppercase display + tighter tracking (CJK unaffected).
+
+// Sidebar bottom theme credit ("This site uses Just the Docs") — Material's
+// sidebar has no such block; hide it (upstream licence note stays in the repo).
+// The element carries the theme utility `d-md-block` (display:block !important
+// at md+), so a plain display:none loses — this needs !important too; ours wins
+// on specificity (0,3,0 vs 0,1,0).
+.docs-body .side-bar .site-footer {
+  display: none !important;
+}
+
+.docs-body .main-content h1,
+.docs-body .main-content h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+// Admonition-style blockquotes (Material callout look, HIA p50 base).
+
+.docs-body .main-content blockquote {
+  border: none;
+  border-left: 4px solid #0047ab;
+  border-radius: 0 8px 8px 0;
+  background: #eff6ff;
+  padding: 0.9rem 1.1rem;
+  color: #172633;
+
+  p { margin: 0.2rem 0; }
+}
+
+// Dark code blocks in article body (Material default).
+
+.docs-body .main-content div.highlighter-rouge,
+.docs-body .main-content figure.highlight {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.docs-body .main-content div.highlighter-rouge pre,
+.docs-body .main-content figure.highlight pre {
+  background: #0f172a;
+  color: #e6edf3;
+}
+
+.docs-body .main-content div.highlighter-rouge code,
+.docs-body .main-content figure.highlight code {
+  background: transparent;
+  color: #e6edf3;
+}
+
+.docs-body .main-content code.highlighter-rouge {
+  background: #eff6ff;
+  color: #0047ab;
+}
+
+// Prev / next pager (Material pagination).
+
+.docs-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid #e8eef4;
+}
+
+.docs-pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-width: 46%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #dce5ec;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover {
+    border-color: #0047ab;
+    box-shadow: 0 8px 30px rgba(25, 41, 58, 0.12);
+    text-decoration: none;
+  }
+
+  span {
+    color: #667782;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  strong {
+    color: #0047ab;
+    font-size: 0.95rem;
+  }
+}
+
+.docs-pager-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.docs-pager-spacer {
+  flex: 1;
+}
+
+// Dark footer bar (Material sandwich: dark — light — dark).
+
+.docs-footer {
+  max-width: var(--docs-container, 1220px);
+  margin: 3rem auto 0;
+  background: #172633;
+  border-radius: 0 0 10px 10px;
+}
+
+.docs-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.84rem;
+}
+
+.docs-footer a {
+  color: #93c5fd;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover { color: #ffffff; text-decoration: none; }
+}

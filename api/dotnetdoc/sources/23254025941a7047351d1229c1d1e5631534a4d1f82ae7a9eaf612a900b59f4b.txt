@@ -1,0 +1,5 @@
+        internal static string ModuleProbe_LabelPackage {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelPackage", resourceCulture);
+            }
+        }

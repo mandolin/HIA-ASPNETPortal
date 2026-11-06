@@ -1,0 +1,49 @@
+        private static void ReadCurrentValueForUpdate(
+            SqlConnection connection,
+            SqlTransaction transaction,
+            string settingKey,
+            out bool exists,
+            out string currentValue,
+            out bool canDelete)
+        {
+            // <lang>
+            //   <zh-CN>先设置稳定“未找到/不可删除”输出，保证 reader 无行或异常前的调用方不会使用未初始化状态。</zh-CN>
+            //   <en>Set stable not-found/not-deletable outputs first so a caller cannot use uninitialized state before a reader has rows or an exception occurs.</en>
+            // </lang>
+            exists = false;
+            currentValue = null;
+            canDelete = false;
+
+            // <lang>
+            //   <zh-CN>命令绑定当前事务并使用 UPDLOCK、HOLDLOCK 读取单键行，将存在性、旧值和删除保护与随后更新/删除串行化。</zh-CN>
+            //   <en>Bind the command to the current transaction and read the single key with UPDLOCK and HOLDLOCK, serializing existence, old value, and deletion protection with the later update or delete.</en>
+            // </lang>
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.Transaction = transaction;
+                command.CommandText = @"
+SELECT [SettingValue], [CanDelete]
+FROM [dbo].[PortalCfg_SystemSettings] WITH (UPDLOCK, HOLDLOCK)
+WHERE [SettingKey] = @SettingKey;";
+                AddTextParameter(command, "@SettingKey", 200, settingKey, string.Empty);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // <lang>
+                    //   <zh-CN>未找到行保留初始输出并返回；保存路径据此插入，删除路径据此幂等成功。</zh-CN>
+                    //   <en>When no row is found, retain initial outputs and return; the save path then inserts while the delete path treats it as idempotent success.</en>
+                    // </lang>
+                    if (!reader.Read())
+                    {
+                        return;
+                    }
+
+                    // <lang>
+                    //   <zh-CN>读取结果只保存在事务局部变量：当前值供审计前值使用，CanDelete 仅控制删除路径，均不进入用户消息。</zh-CN>
+                    //   <en>Keep read results only in transaction-local outputs: current value supplies the audit before-image and CanDelete controls only deletion, and neither enters a user message.</en>
+                    // </lang>
+                    exists = true;
+                    currentValue = reader.IsDBNull(0) ? null : reader.GetString(0);
+                    canDelete = !reader.IsDBNull(1) && reader.GetBoolean(1);
+                }
+            }
+        }

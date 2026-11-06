@@ -1,0 +1,55 @@
+        private static bool IsValidPayloadValue(string kind, string key, object value)
+        {
+            if (string.Equals(key, "capabilities", StringComparison.Ordinal))
+            {
+                return IsValidCapabilities(value);
+            }
+
+            if (string.Equals(key, "isAvailable", StringComparison.Ordinal) ||
+                string.Equals(key, "isSensitive", StringComparison.Ordinal) ||
+                string.Equals(key, "canEditOnline", StringComparison.Ordinal))
+            {
+                return value is bool;
+            }
+
+            // <lang>
+            //   <zh-CN>非布尔/集合字段必须先转换为安全文本，后续枚举判断只作用于已净化值。</zh-CN>
+            //   <en>Non-boolean and non-collection fields must first become safe text so later enum checks operate on sanitized values.</en>
+            // </lang>
+            string text = value as string;
+            if (!IsSafeText(text, 200))
+            {
+                return false;
+            }
+
+            if (string.Equals(key, "descriptorVersion", StringComparison.Ordinal))
+            {
+                return string.Equals(text, CurrentContractVersion, StringComparison.Ordinal);
+            }
+
+            if (string.Equals(key, "status", StringComparison.Ordinal))
+            {
+                return string.Equals(text, "Healthy", StringComparison.Ordinal) ||
+                       string.Equals(text, "Warning", StringComparison.Ordinal) ||
+                       string.Equals(text, "Error", StringComparison.Ordinal) ||
+                       string.Equals(text, "Unknown", StringComparison.Ordinal);
+            }
+
+            if (string.Equals(key, "state", StringComparison.Ordinal))
+            {
+                return string.Equals(text, "Available", StringComparison.Ordinal) ||
+                       string.Equals(text, "Registered", StringComparison.Ordinal) ||
+                       string.Equals(text, "Enabled", StringComparison.Ordinal) ||
+                       string.Equals(text, "Disabled", StringComparison.Ordinal) ||
+                       string.Equals(text, "UninstallReady", StringComparison.Ordinal);
+            }
+
+            if (string.Equals(key, "level", StringComparison.Ordinal))
+            {
+                return string.Equals(text, "Info", StringComparison.Ordinal) ||
+                       string.Equals(text, "Warning", StringComparison.Ordinal) ||
+                       string.Equals(text, "Error", StringComparison.Ordinal);
+            }
+
+            return true;
+        }

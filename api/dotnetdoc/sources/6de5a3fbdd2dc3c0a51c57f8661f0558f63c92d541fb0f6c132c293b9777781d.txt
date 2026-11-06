@@ -1,0 +1,29 @@
+        private static string GetCurrentValue(EmployeeProfileCorrectionProfileView profile, string fieldName)
+        {
+            // <lang>
+            //   <zh-CN>缺少资料时不允许通过空对象继续比较；空值会让调用方保持可预测的拒绝路径。</zh-CN>
+            //   <en>Do not compare through a missing profile; an empty result keeps the caller on a predictable rejection path.</en>
+            // </lang>
+            if (profile == null)
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>switch 是提交字段的第二道白名单，未知值返回空文本而不是反射读取任意属性。</zh-CN>
+            //   <en>The switch is the second allowlist for submit fields; unknown values return empty text instead of reflecting arbitrary properties.</en>
+            // </lang>
+            switch (fieldName)
+            {
+                case "DisplayName":
+                    return profile.DisplayName ?? string.Empty;
+                case "PreferredName":
+                    return profile.PreferredName ?? string.Empty;
+                case "WorkEmail":
+                    return profile.WorkEmail ?? string.Empty;
+                case "OrganizationDisplayName":
+                    return profile.OrganizationDisplayName ?? string.Empty;
+                default:
+                    return string.Empty;
+            }
+        }

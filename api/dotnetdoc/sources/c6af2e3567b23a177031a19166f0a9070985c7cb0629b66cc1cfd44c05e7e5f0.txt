@@ -1,0 +1,11 @@
+        protected string EmployeesEmptyStateText
+        {
+            get
+            {
+                return BuildEmptyStateText(
+                    lang.Admin_EmployeeDirectory_EmptyNoEmployees,
+                    lang.Admin_EmployeeDirectory_EmptyNoMatchingEmployees,
+                    KeywordTextBox.Text,
+                    EmployeeStatusList.SelectedValue);
+            }
+        }

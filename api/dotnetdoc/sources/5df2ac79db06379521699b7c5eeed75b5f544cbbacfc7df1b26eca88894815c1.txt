@@ -1,0 +1,39 @@
+        private bool TryReadRequestIdentifiers()
+        {
+            // <lang>
+            //   <zh-CN>模块标识是权限检查的根；缺失或非法时不能继续读取消息，避免跨模块探测。</zh-CN>
+            //   <en>The module identifier is the root of permission checks; when it is missing or invalid, message reads must not continue, preventing cross-module probing.</en>
+            // </lang>
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>ItemId 是可选请求参数；缺失表示从模块标题栏进入“新增主题”路径。</zh-CN>
+            //   <en>ItemId is an optional request parameter; when absent, the module-title entry is opening the "new topic" path.</en>
+            // </lang>
+            string requestedItemId = Request.Params["ItemId"];
+            if (string.IsNullOrWhiteSpace(requestedItemId))
+            {
+                // <lang>
+                //   <zh-CN>用 0 作为服务器内部的新主题哨兵值，但不接受客户端显式传入 0。</zh-CN>
+                //   <en>Use 0 as the server-internal sentinel for a new topic, while still rejecting an explicit client-supplied 0.</en>
+                // </lang>
+                itemId = 0;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>消息标识只接受正整数；新增主题使用空 ItemId 表达，不接受零或负数伪装。</zh-CN>
+            //   <en>The message identifier accepts positive integers only; new topics are represented by an empty ItemId, not by zero or negative values.</en>
+            // </lang>
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }

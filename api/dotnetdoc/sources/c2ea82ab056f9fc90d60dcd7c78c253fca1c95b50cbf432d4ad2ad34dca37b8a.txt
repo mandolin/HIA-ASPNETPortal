@@ -1,0 +1,6 @@
+                            <%--
+                              <lang>
+                                <zh-CN>Email 字段用于注册联系地址；页面校验只覆盖基本格式和必填，邮箱可信度与后续使用策略不能由客户端验证替代。</zh-CN>
+                                <en>The Email field stores the registration contact address; page validators only cover basic format and presence, and cannot replace server-side trust or follow-up usage policy.</en>
+                              </lang>
+                            --%>

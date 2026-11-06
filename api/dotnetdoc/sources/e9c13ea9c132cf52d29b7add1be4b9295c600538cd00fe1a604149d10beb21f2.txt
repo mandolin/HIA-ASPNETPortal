@@ -1,0 +1,8 @@
+        private static string GetClientIp(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>地址仅为审计上下文，不用于信任代理头、访问控制或身份验证；缺少 Request 时不得访问其属性。</zh-CN>
+            //   <en>The address is audit context only and is not used for trusted proxy headers, access control, or authentication; do not access request properties when Request is absent.</en>
+            // </lang>
+            return context == null || context.Request == null ? string.Empty : context.Request.UserHostAddress;
+        }

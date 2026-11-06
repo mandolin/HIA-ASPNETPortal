@@ -1,0 +1,47 @@
+        protected void AddUser_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>显式 POST 才能进入占位用户创建流程，避免通过 GET 访问编辑地址触发写入。</zh-CN>
+            //   <en>Only an explicit POST enters placeholder creation, preventing a GET to the edit URL from triggering a write.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            for (int attempt = 0; attempt < PlaceholderCreationAttempts; attempt++)
+            {
+                // <lang>
+                //   <zh-CN>每次尝试使用不可预测的占位名；成功后立即重新读取用户并转入既有编辑流程。</zh-CN>
+                //   <en>Each attempt uses an unpredictable placeholder name; after success, reload the user and enter the existing edit flow.</en>
+                // </lang>
+                string placeholderName = CreatePlaceholderUserName();
+                int userId = UsersDB.AddUser(placeholderName, placeholderName, string.Empty);
+                if (userId <= 0)
+                {
+                    continue;
+                }
+
+                IUserItem user = UsersDB.FindUserById(userId);
+                if (user == null)
+                {
+                    break;
+                }
+
+                PortalOperationAudit.Record(
+                    "UserAdministration",
+                    "CreatePlaceholder",
+                    "User",
+                    user.UserId.ToString(),
+                    "Created an administrator placeholder user.",
+                    Context);
+                RedirectToManageUser(user);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>达到固定尝试上限仍失败时不再继续写入，仅展示受控提示。</zh-CN>
+            //   <en>When the fixed attempt limit is exhausted, stop writing and show only a controlled message.</en>
+            // </lang>
+            ShowMessage(lang.Admin_Users_MessageCreateFailed);
+        }

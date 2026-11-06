@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_ButtonDelete {
+            get {
+                return ResourceManager.GetString("LegacyEdit_ButtonDelete", resourceCulture);
+            }
+        }

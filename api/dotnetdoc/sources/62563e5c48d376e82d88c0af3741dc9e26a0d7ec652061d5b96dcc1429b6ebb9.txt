@@ -1,0 +1,9 @@
+        private string BuildPortalReturnUrl()
+        {
+            if (tabId <= 0 || tabIndex <= 0)
+            {
+                return ResolveUrl("~/DesktopDefault.aspx");
+            }
+
+            return ResolveUrl("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+        }

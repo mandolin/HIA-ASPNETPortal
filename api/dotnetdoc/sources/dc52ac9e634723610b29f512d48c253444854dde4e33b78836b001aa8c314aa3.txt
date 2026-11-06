@@ -1,0 +1,101 @@
+        public static PortalThemeContext ResolveThemeContext(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>读取本请求已缓存的主题上下文，避免同一请求在渲染过程中重复访问设置存储。</zh-CN>
+            //   <en>Read the theme context already cached for this request to avoid repeated settings-store access during rendering.</en>
+            // </lang>
+            PortalThemeContext existing = GetCurrentThemeContext(context);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            // <lang>
+            //   <zh-CN>读取全局主题的受控运行期设置值及来源层级，后续仍需校验部署包可信度。</zh-CN>
+            //   <en>Read the controlled runtime global-theme value and source layer; deployed-package trust still requires later validation.</en>
+            // </lang>
+            PortalRuntimeSettingValue globalSetting =
+                PortalRuntimeSettings.GetEffectiveValue(PortalSettingsRegistry.ThemeName, context);
+
+            // <lang>
+            //   <zh-CN>保存全局候选校验失败的非敏感原因；成功时保持空字符串。</zh-CN>
+            //   <en>Hold the non-sensitive reason when global-candidate validation fails; retain empty on success.</en>
+            // </lang>
+            string fallbackReason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>将全局候选解析为可信部署主题，失败时得到 Default 而非未验证目录名。</zh-CN>
+            //   <en>Resolve the global candidate to a trusted deployed theme, producing Default on failure rather than an unverified directory name.</en>
+            // </lang>
+            string themeName = ResolveTrustedThemeName(globalSetting.Value, context, out fallbackReason);
+
+            // <lang>
+            //   <zh-CN>将运行期设置来源映射为展示/健康检查使用的稳定主题来源。</zh-CN>
+            //   <en>Map the runtime-setting source to the stable theme source used by display and health checks.</en>
+            // </lang>
+            PortalThemeSource source = ToThemeSource(globalSetting.Source, !string.IsNullOrEmpty(fallbackReason));
+
+            // <lang>
+            //   <zh-CN>初始化可选 Tab 标识；后台请求和无法建立门户上下文的请求保持 null。</zh-CN>
+            //   <en>Initialize the optional tab identifier; administration requests and requests without portal context remain null.</en>
+            // </lang>
+            int? tabId = null;
+
+            if (!IsAdminRequest(context))
+            {
+                // <lang>
+                //   <zh-CN>仅门户请求尝试读取活动 Tab，避免后台页因覆盖表或 Tab 上下文出现额外依赖。</zh-CN>
+                //   <en>Attempt to read the active tab only for portal requests, avoiding extra override-table or tab-context dependencies for administration pages.</en>
+                // </lang>
+                tabId = TryGetActiveTabId(context);
+                if (tabId.HasValue)
+                {
+                    // <lang>
+                    //   <zh-CN>读取当前 Tab 的覆盖状态；表不可用只触发告警并保持已解析全局主题。</zh-CN>
+                    //   <en>Read current-tab override state; an unavailable table only triggers a warning and retains the resolved global theme.</en>
+                    // </lang>
+                    PortalTabThemeOverrideReadResult overrideResult = PortalTabThemeOverrides.Read(tabId.Value, context);
+                    if (overrideResult.IsAvailable && overrideResult.IsFound)
+                    {
+                        // <lang>
+                        //   <zh-CN>保存覆盖主题验证失败原因；无效覆盖不会替换全局主题或阻断请求。</zh-CN>
+                        //   <en>Hold the override-theme validation failure reason; an invalid override neither replaces the global theme nor blocks the request.</en>
+                        // </lang>
+                        string overrideFallbackReason;
+
+                        // <lang>
+                        //   <zh-CN>把覆盖候选解析为可信部署主题，只有验证成功才允许提升来源为 TabOverride。</zh-CN>
+                        //   <en>Resolve the override candidate to a trusted deployed theme and elevate the source to TabOverride only after validation succeeds.</en>
+                        // </lang>
+                        string overrideThemeName = ResolveTrustedThemeName(
+                            overrideResult.ThemeName,
+                            context,
+                            out overrideFallbackReason);
+                        if (string.IsNullOrEmpty(overrideFallbackReason))
+                        {
+                            themeName = overrideThemeName;
+                            source = PortalThemeSource.TabOverride;
+                        }
+                    }
+                    else if (!overrideResult.IsAvailable)
+                    {
+                        TraceFallback(
+                            context,
+                            "TabOverrideTable",
+                            "Tab theme override table is unavailable; using the global theme.");
+                    }
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>封装本请求最终主题快照，避免后续渲染阶段重新计算候选链。</zh-CN>
+            //   <en>Package the final theme snapshot for this request so later rendering does not recompute the candidate chain.</en>
+            // </lang>
+            var resolved = new PortalThemeContext(themeName, source, tabId, fallbackReason);
+            if (context != null)
+            {
+                context.Items[ThemeContextKey] = resolved;
+            }
+
+            return resolved;
+        }

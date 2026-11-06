@@ -1,0 +1,8 @@
+        void UpdateUserProfile(
+            int userId,
+            string loginName,
+            string displayName,
+            string nickname,
+            string email,
+            string password,
+            string actor);

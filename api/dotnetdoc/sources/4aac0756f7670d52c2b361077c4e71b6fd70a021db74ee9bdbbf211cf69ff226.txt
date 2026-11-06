@@ -1,0 +1,58 @@
+        protected void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除事件重新验证权限、Tab、窗格和选中模块，避免删除陈旧或跨 Tab 对象。</zh-CN>
+            //   <en>Revalidate permission, Tab, pane, and selected module before deletion to block stale or cross-Tab objects.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>删除前使用当前窗格读模型确认目标，失败时不触碰数据服务。</zh-CN>
+            //   <en>Confirm the target from the current pane read model before touching the data service.</en>
+            // </lang>
+            LinkButton button = sender as LinkButton;
+            string pane;
+            ListBox listBox;
+            ModuleSettings selectedModule;
+            if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
+                !TryGetSelectedModule(listBox, GetModules(pane), out selectedModule))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>删除成功后重载当前 Tab、整理剩余顺序、写入审计并安全回跳。</zh-CN>
+                //   <en>After successful deletion, reload the Tab, reorder remaining modules, audit the action, and navigate back safely.</en>
+                // </lang>
+                ModulesConfig.DeleteModule(selectedModule.ModuleId);
+                ReloadCurrentTab();
+                OrderModules(GetModules(pane));
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Delete",
+                    "Module",
+                    selectedModule.ModuleId.ToString(),
+                    "Deleted module instance from a Tab layout.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>删除失败写入统一诊断并只显示事件编号。</zh-CN>
+                //   <en>Record delete failures through shared diagnostics and display only the event id.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.DeleteModule",
+                    "Deleting a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleDeleteFailed, eventId));
+            }
+        }

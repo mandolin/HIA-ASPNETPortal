@@ -1,0 +1,1 @@
+        public IList<PortalWorkItemInfo> Items { get; private set; }

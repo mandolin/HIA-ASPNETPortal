@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>事件列表关闭 ViewState 并展示数据服务返回的当前模块事件；标题、时间地点和摘要使用编码绑定，避免把正文当作标记输出。</zh-CN>
+        <en>The event list disables ViewState and renders events returned for the current module; title, time/place, and summary use encoded binding so content is not emitted as markup.</en>
+    </lang>
+--%>

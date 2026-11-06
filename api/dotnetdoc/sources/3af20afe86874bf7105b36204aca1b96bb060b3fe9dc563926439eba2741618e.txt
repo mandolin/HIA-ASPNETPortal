@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_LabelLeaveType {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelLeaveType", resourceCulture);
+            }
+        }

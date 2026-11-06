@@ -1,0 +1,35 @@
+        internal static bool Verify(
+            string password,
+            string passwordFormat,
+            byte[] passwordSalt,
+            byte[] expectedHash,
+            int iterationCount)
+        {
+            // <lang>
+            //   <zh-CN>所有凭据字段必须同时完整且格式精确匹配，防止旧格式、损坏盐或无效成本参数进入派生步骤。</zh-CN>
+            //   <en>All credential fields must be complete and the format must match exactly, preventing legacy formats, damaged salts, or invalid cost parameters from entering derivation.</en>
+            // </lang>
+            if (password == null ||
+                !string.Equals(passwordFormat, Format, StringComparison.Ordinal) ||
+                passwordSalt == null ||
+                expectedHash == null ||
+                iterationCount <= 0)
+            {
+                // <lang>
+                //   <zh-CN>凭据字段缺失或算法不匹配时直接失败，不尝试兼容解释，避免把损坏数据误判为有效密码。</zh-CN>
+                //   <en>When credential fields are missing or the algorithm does not match, fail directly instead of attempting compatibility interpretation so damaged data is not accepted as a valid password.</en>
+                // </lang>
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>实际哈希仅保留在当前验证栈帧中，用保存的盐和成本参数复现数据库凭据。</zh-CN>
+            //   <en>The actual hash remains only in the current verification stack frame and reproduces the database credential with the saved salt and cost parameter.</en>
+            // </lang>
+            byte[] actualHash = DeriveHash(password, passwordSalt, iterationCount);
+            // <lang>
+            //   <zh-CN>比较步骤委托给固定时间 helper，避免普通数组比较提前暴露首个差异位置。</zh-CN>
+            //   <en>The comparison is delegated to the fixed-time helper so ordinary array comparison does not reveal the first differing position early.</en>
+            // </lang>
+            return FixedTimeEquals(actualHash, expectedHash);
+        }

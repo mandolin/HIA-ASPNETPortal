@@ -1,0 +1,38 @@
+{%- comment -%}
+  Controlled override of the just-the-docs `components/sidebar.html`.
+
+  WHY: upstream calls `{% include_cached components/site_nav.html %}` with **no parameters**. Jekyll's
+  `include_cached` keys its cache **only on the parameters**, so with none the navigation is rendered once
+  and reused for the whole site — identical on every page regardless of language. This site is bilingual
+  (Chinese at the root, English under /en/), so a shared cache necessarily mixes both trees in one sidebar.
+
+  THE ONLY CHANGE: pass the page language as a cache key (`lang=page.lang`), which makes the cache
+  per-language while still benefiting from caching. Everything else is copied verbatim from
+  just-the-docs v0.12.0. When upgrading the theme, re-diff this file against upstream.
+{%- endcomment -%}
+
+<header class="side-bar">
+  <div class="site-header">
+    <a href="{{ '/' | relative_url }}" class="site-title lh-tight">{% include title.html %}</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  {% include_cached components/site_nav.html lang=page.lang %}
+
+  {%- comment -%}
+    note: nav_footer_custom and/or this "site footer" appear in components/footer.html for the mobile view.
+  {%- endcomment -%}
+
+  <div class="d-md-block d-none site-footer">
+  {% capture nav_footer_custom %}
+    {%- include nav_footer_custom.html -%}
+  {% endcapture %}
+  {% if nav_footer_custom != "" %}
+    {{ nav_footer_custom }}
+  {% else %}
+    This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+  {% endif %}
+  </div>
+</header>

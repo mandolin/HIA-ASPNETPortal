@@ -1,0 +1,5 @@
+        private static string NormalizeOptionalText(string value, int maxLength)
+        {
+            string normalized = NormalizeText(value, maxLength);
+            return normalized.Length == 0 ? null : normalized;
+        }

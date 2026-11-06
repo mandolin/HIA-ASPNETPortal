@@ -1,0 +1,23 @@
+        public void DeleteTab(int tabId)
+        {
+            TabItem tabRow = _tabs.Single(i => i.TabId == tabId);
+
+            // <lang>
+            //   <zh-CN>先复制并遍历模块标识，避免删除过程中修改 `Modules` 集合导致枚举异常。</zh-CN>
+            //   <en>Module identifiers are selected before deletion so modifying the `Modules` collection during removal does not invalidate enumeration.</en>
+            // </lang>
+            foreach (int moduleId in tabRow.Modules.Select(i => i.ModuleId))
+            {
+                _portalDb.DeleteModule(moduleId);
+            }
+
+            _context.Tabs.Remove(tabRow);
+
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>删除完成后刷新快照，防止后台返回列表时继续显示已删除 Tab。</zh-CN>
+            //   <en>The snapshot is refreshed after deletion so the admin list does not continue showing the removed Tab.</en>
+            // </lang>
+            _tabs = _context.Tabs.ToList();
+        }

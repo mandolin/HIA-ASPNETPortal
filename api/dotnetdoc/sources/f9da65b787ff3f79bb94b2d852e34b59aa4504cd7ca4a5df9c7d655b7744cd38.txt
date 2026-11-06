@@ -1,0 +1,9 @@
+        protected void PreviousButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>页面索引在减法后仍保持非负，避免伪造回发值产生负页查询。</zh-CN>
+            //   <en>Keep the page index non-negative after decrementing so forged postback values cannot produce a negative-page query.</en>
+            // </lang>
+            CurrentPage = Math.Max(0, CurrentPage - 1);
+            BindEntries();
+        }

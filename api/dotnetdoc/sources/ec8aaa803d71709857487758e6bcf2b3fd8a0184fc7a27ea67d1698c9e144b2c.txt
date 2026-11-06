@@ -1,0 +1,24 @@
+        private static string GetChildPath(string rootPath, string childPath)
+        {
+            // <lang>
+            //   <zh-CN>先规范化根目录并去除末尾分隔符，保证后续前缀比较只接受根目录的真实子路径。</zh-CN>
+            //   <en>Normalize the root and remove its trailing separator first so the later prefix check accepts only real descendants.</en>
+            // </lang>
+            string normalizedRoot = Path.GetFullPath(rootPath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            // <lang>
+            //   <zh-CN>组合并规范化候选路径；任何路径解析后的逃逸都在返回前拒绝。</zh-CN>
+            //   <en>Combine and normalize the candidate path; any escape revealed by path resolution is rejected before return.</en>
+            // </lang>
+            string candidate = Path.GetFullPath(Path.Combine(normalizedRoot, childPath));
+            // <lang>
+            //   <zh-CN>使用带分隔符的根前缀，避免把同前缀但非子目录的路径误判为合法子路径。</zh-CN>
+            //   <en>Use a separator-terminated root prefix so a sibling path sharing the text prefix is not mistaken for a child.</en>
+            // </lang>
+            string rootWithSeparator = normalizedRoot + Path.DirectorySeparatorChar;
+            if (!candidate.StartsWith(rootWithSeparator, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException("Path escapes its root.");
+            }
+
+            return candidate;
+        }

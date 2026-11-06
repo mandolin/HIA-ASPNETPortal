@@ -1,0 +1,55 @@
+        public static bool CanView(CollaborationItemInfo item, CollaborationItemDataScope scope)
+        {
+            // <lang>
+            //   <zh-CN>事项、范围快照或身份任一缺失都直接拒绝：无法确定范围时按越权处理，不退回"放行"。</zh-CN>
+            //   <en>Deny directly when the item, the scope snapshot, or the identity is missing: an undeterminable scope is treated as out-of-scope instead of falling back to "allow".</en>
+            // </lang>
+            if (item == null || scope == null || scope.ActorUserId <= 0)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>管理员继续沿用既有集中查看能力；该能力仍由上游协同管理员权限门禁约束，不在此处推断角色继承。</zh-CN>
+            //   <en>Administrators continue to use the existing centralized viewing capability; that capability remains constrained by the upstream collaboration-admin permission gate and no role inheritance is inferred here.</en>
+            // </lang>
+            if (scope.IsAdministrator)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>归属维度：发起人或负责人为当前用户时可见；负责人可空，只有存在值才参与比较。</zh-CN>
+            //   <en>Ownership dimension: visible when the initiator or the owner is the current user; the owner is nullable and participates only when a value exists.</en>
+            // </lang>
+            if (item.InitiatorUserId == scope.ActorUserId ||
+                (item.OwnerUserId.HasValue && item.OwnerUserId.Value == scope.ActorUserId))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>W72：负责人角色键维度——动作人持有该事项的受控负责人角色键时可见。既有 `CanParticipate` 已用同一条件授予写/处理资格，若读取不同步，处理者会因打不开详情而无法执行动作（写资格名存实亡）。该键本身是受控权限键且只对本事项授予，因此不扩大可见范围。</zh-CN>
+            //   <en>W72 owner-role-key dimension: an actor holding the item's controlled owner role key may view it. The existing `CanParticipate` already grants write/handling eligibility on the same condition; if reads did not align, a handler could not open the detail page and therefore could not act (the write eligibility would be nominal). The key is a controlled permission key scoped to this item, so visibility is not widened.</en>
+            // </lang>
+            if (scope.HoldsOwnerRoleKey)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>参与人维度：由调用方在服务端查询参与人集合后传入，协办与关注共用同一入口。</zh-CN>
+            //   <en>Participant dimension: supplied by the caller after a server-side participant-set query; Collaborator and Watcher share the same entry.</en>
+            // </lang>
+            if (scope.IsParticipant)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>组织维度：事项必须标注组织单元且该单元落在可见组织范围内；空可见集合按范围未知处理并拒绝。</zh-CN>
+            //   <en>Organization dimension: the item must carry an organization unit that falls inside the visible organization scope; an empty visible collection is treated as unknown scope and denies.</en>
+            // </lang>
+            return item.OrganizationUnitId.HasValue &&
+                   scope.VisibleOrganizationUnitIds.Contains(item.OrganizationUnitId.Value);
+        }

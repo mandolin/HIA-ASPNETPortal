@@ -1,0 +1,40 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>item 是通过权限与归属校验后的联系人快照；新增联系人时保持为空。</zh-CN>
+            //   <en>item is the contact snapshot after permission and ownership validation; it remains null when creating a new contact.</en>
+            // </lang>
+            IContactItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                if (item != null)
+                {
+                    // <lang>
+                    //   <zh-CN>首次加载只在归属校验通过后回填旧联系人字段，避免通过 ItemId 读取其他模块的条目。</zh-CN>
+                    //   <en>Initial binding fills legacy contact fields only after ownership validation, avoiding reads of items from another module via ItemId.</en>
+                    // </lang>
+                    NameField.Text = item.Name;
+                    RoleField.Text = item.Role;
+                    EmailField.Text = item.Email;
+                    Contact1Field.Text = item.Contact1;
+                    Contact2Field.Text = item.Contact2;
+                    CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
+                    // <lang>
+                    //   <zh-CN>创建时间只作为历史展示字段回填，不参与联系人保存或授权判断。</zh-CN>
+                    //   <en>The creation date is filled only as a historical display field and does not participate in contact saving or authorization.</en>
+                    // </lang>
+                    CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
+                }
+
+                // <lang>
+                //   <zh-CN>回跳地址只保存经策略清洗后的站内地址，供保存、删除和取消共用。</zh-CN>
+                //   <en>The return URL stores only a policy-cleaned in-app address shared by save, delete and cancel actions.</en>
+                // </lang>
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

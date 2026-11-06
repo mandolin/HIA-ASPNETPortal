@@ -1,0 +1,5 @@
+        internal static string EditHtml_Heading {
+            get {
+                return ResourceManager.GetString("EditHtml_Heading", resourceCulture);
+            }
+        }

@@ -1,0 +1,54 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>所有生命周期分支先通过同一请求门禁，保证无效模块标识或权限缺失不会进入读取/回填路径。</zh-CN>
+            //   <en>Run the same request gate before every lifecycle branch so an invalid module id or missing permission cannot enter read or hydration paths.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅首次请求从数据库回填编辑模型；回发保留控件内容，并在保存/取消时重新验证权限。</zh-CN>
+            //   <en>Hydrate the edit model only on the first request; postbacks retain control content and revalidate permission on save or cancel.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>首次加载只做读模型回填；后续保存时再统一做权限复核和编码写入，避免旧 Web Forms 回发绕过初始化分支。</zh-CN>
+                //   <en>Initial loading only hydrates the edit model; later saves re-check authorization and perform encoded writes, so legacy Web Forms postbacks cannot bypass the initialization branch.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>按已验证模块标识读取 HTML 文本；服务返回 null 表示首次编辑而不是异常。</zh-CN>
+                //   <en>Read HTML text by the validated module id; a null service result means first edit rather than an exception.</en>
+                // </lang>
+                IHtmlTextItem item = HtmlTextDB.GetHtmlText(moduleId);
+                if (item == null)
+                {
+                    // <lang>
+                    //   <zh-CN>没有已有记录时使用固定提示，避免把空数据库值误当成可渲染 HTML。</zh-CN>
+                    //   <en>Use fixed prompts when no record exists instead of treating an empty database value as renderable HTML.</en>
+                    // </lang>
+                    DesktopText.Text = lang.EditHtml_PlaceholderAddContent;
+                    MobileSummary.Text = lang.EditHtml_PlaceholderAddSummary;
+                    MobileDetails.Text = lang.EditHtml_PlaceholderAddDetails;
+                }
+                else
+                {
+                    // <lang>
+                    //   <zh-CN>历史数据在存储前已编码；回填时只在受信编辑控件内解码，页面输出仍受当前权限门禁保护。</zh-CN>
+                    //   <en>Legacy data was encoded before storage; decode only into the trusted edit controls while the page remains protected by the current permission gate.</en>
+                    // </lang>
+                    DesktopText.Text = Server.HtmlDecode(item.DesktopHtml);
+                    MobileSummary.Text = Server.HtmlDecode(item.MobileSummary);
+                    MobileDetails.Text = Server.HtmlDecode(item.MobileDetails);
+                }
+
+                // <lang>
+                //   <zh-CN>保存安全返回地址而不是原始 Referer，后续回调只使用策略组件认可的本地目标。</zh-CN>
+                //   <en>Store a safe return target rather than the raw Referer so later callbacks use only a local destination accepted by the navigation policy.</en>
+                // </lang>
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

@@ -1,0 +1,9 @@
+                <%--
+                    <lang>
+                      <zh-CN>P81.3 空态：GridView 零条时默认不渲染表格，因而用 <c>EmptyDataTemplate</c> 并开启
+                      <c>ShowHeaderWhenEmpty</c>，使"表头 + 居中提示行"形态与其余六个列表一致。</zh-CN>
+                      <en>P81.3 empty state: a GridView renders no table when it has zero rows, so <c>EmptyDataTemplate</c>
+                      is used together with <c>ShowHeaderWhenEmpty</c> so the "header plus centred hint row" shape matches
+                      the other six lists.</en>
+                    </lang>
+                --%>

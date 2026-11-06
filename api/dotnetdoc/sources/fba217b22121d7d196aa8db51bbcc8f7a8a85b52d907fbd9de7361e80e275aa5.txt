@@ -1,0 +1,9 @@
+        public static PortalThemeContext GetCurrentThemeContext(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>优先使用显式上下文，再回退当前请求；没有请求时安全返回 null。</zh-CN>
+            //   <en>Prefer the explicit context and then fall back to the current request; return null safely when no request exists.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+            return current == null ? null : current.Items[ThemeContextKey] as PortalThemeContext;
+        }

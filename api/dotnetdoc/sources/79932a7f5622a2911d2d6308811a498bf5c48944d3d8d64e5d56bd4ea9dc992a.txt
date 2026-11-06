@@ -1,0 +1,92 @@
+        protected void SaveButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存动作再次复核权限，避免用户在页面加载后被撤权仍能通过旧表单提交。</zh-CN>
+            //   <en>The save action checks permission again so a user whose permission changed after page load cannot submit an old form successfully.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>保存前要求写入服务和 schema 同时可用；不可用时只显示固定提示，不触发半完成写入。</zh-CN>
+            //   <en>Require both the write service and its schema before saving; when unavailable, show a fixed message without attempting a partial write.</en>
+            // </lang>
+            if (EmployeeDirectoryAdminDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
+            {
+                ShowMessage(lang.Admin_Common_MessageP63SchemaUnavailable);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>请求对象只在所有页面级输入校验通过后生成；失败消息保持低敏且不回显原始正文。</zh-CN>
+            //   <en>Create the request only after all page-level input checks pass; validation messages stay low-sensitivity and do not echo raw content.</en>
+            // </lang>
+            EmployeeSaveRequest request;
+            string validationMessage;
+            if (!TryCreateSaveRequest(out request, out validationMessage))
+            {
+                ShowMessage(validationMessage);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>用请求标识区分新增和更新，供审计事件选择；不在页面层自行生成数据库标识。</zh-CN>
+            //   <en>Use the request identifier to distinguish creation from update for audit selection; the page does not generate database identifiers.</en>
+            // </lang>
+            bool isNew = request.EmployeeId <= 0;
+            try
+            {
+                // <lang>
+                //   <zh-CN>数据层负责唯一性、并发时间戳和状态规则；页面只根据低敏结果显示提示并写入运营审计。</zh-CN>
+                //   <en>The data layer owns uniqueness, concurrency timestamp and status rules; the page only displays low-sensitivity results and records operational audit.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>保存结果承载数据层的低敏成功/失败事实和实体标识，页面不推断唯一性或并发语义。</zh-CN>
+                //   <en>The write result carries the data layer's low-sensitivity success/failure fact and entity identifier; the page does not infer uniqueness or concurrency semantics.</en>
+                // </lang>
+                EmployeeDirectoryWriteResult result = EmployeeDirectoryAdminDb.SaveEmployee(request);
+                if (!result.Succeeded)
+                {
+                    // <lang>
+                    //   <zh-CN>失败时保留数据层提示并停留在当前页，避免审计成功事件或错误回跳。</zh-CN>
+                    //   <en>On failure, retain the data-layer message on the current page and avoid recording a success audit or redirecting.</en>
+                    // </lang>
+                    ShowMessage(result.Message);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>只有持久化成功后才写入创建/更新审计，并使用稳定实体类型和不变文化标识。</zh-CN>
+                //   <en>Record the create/update audit only after persistence succeeds, using a stable entity type and invariant-culture identifier.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.EnterpriseDirectoryCategory,
+                    isNew
+                        ? PortalOperationAuditEvents.EmployeeCreated
+                        : PortalOperationAuditEvents.EmployeeUpdated,
+                    PortalOperationAuditEvents.EmployeeTargetType,
+                    result.EntityId.ToString(CultureInfo.InvariantCulture),
+                    isNew ? "Created employee master data." : "Updated employee master data.",
+                    Context);
+                RedirectToDirectory();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>异常详情进入结构化诊断日志；页面只展示事件编号，避免把数据库或路径细节暴露给浏览器。</zh-CN>
+                //   <en>Exception details go to structured diagnostics; the page shows only the event id so database or path details are not exposed to the browser.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>事件编号是浏览器可见的低敏关联值，不承载异常正文或连接细节。</zh-CN>
+                //   <en>The event id is a low-sensitivity correlation value visible to the browser and carries no exception body or connection detail.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.EmployeeEdit.Save",
+                    "Saving employee failed. EmployeeId=" + request.EmployeeId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_EmployeeEdit_MessageSaveFailed, eventId));
+            }
+        }

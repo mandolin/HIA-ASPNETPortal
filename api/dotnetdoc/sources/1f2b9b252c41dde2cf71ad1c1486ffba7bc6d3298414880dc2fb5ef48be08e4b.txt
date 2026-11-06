@@ -1,0 +1,5 @@
+        internal static string Admin_SystemHealth_ColumnSummary {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnSummary", resourceCulture);
+            }
+        }

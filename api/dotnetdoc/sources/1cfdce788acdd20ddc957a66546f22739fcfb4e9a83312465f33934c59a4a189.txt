@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>共享模块标题控件承载联系人编辑入口和主题化标题；动作是否可见仍由服务器编辑上下文决定。</zh-CN>
+        <en>The shared module-title control hosts the contact-edit entry and themed title; action visibility remains a server-side edit-context decision.</en>
+    </lang>
+--%>

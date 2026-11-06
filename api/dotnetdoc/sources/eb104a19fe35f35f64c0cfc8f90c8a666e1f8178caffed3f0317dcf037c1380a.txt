@@ -1,0 +1,8 @@
+        public static string Warn(string category, string message, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>门面固定使用受控 Warning 级别，实际字段净化和接收器故障隔离仍由共享写入链负责。</zh-CN>
+            //   <en>The facade fixes the controlled Warning level; shared write pipeline still owns field sanitization and sink-failure isolation.</en>
+            // </lang>
+            return Write("Warning", category, message, null, context);
+        }

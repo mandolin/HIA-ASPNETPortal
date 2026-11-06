@@ -1,0 +1,116 @@
+    public sealed class PortalPasswordPolicyOptions
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建密码策略运行期选项。</zh-CN>
+        ///   <en>Creates runtime options for the password policy.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="minimumLength">
+        /// <l>
+        ///   <zh-CN>最小长度。</zh-CN>
+        ///   <en>Minimum length.</en>
+        /// </l>
+        /// </param>
+        /// <param name="requiredCategoryCount">
+        /// <l>
+        ///   <zh-CN>必须满足的字符类别数。</zh-CN>
+        ///   <en>Required character-category count.</en>
+        /// </l>
+        /// </param>
+        /// <param name="weakDictionaryEnabled">
+        /// <l>
+        ///   <zh-CN>是否启用常见弱口令字典。</zh-CN>
+        ///   <en>Whether the common weak-password dictionary is enabled.</en>
+        /// </l>
+        /// </param>
+        /// <param name="disallowContextTerms">
+        /// <l>
+        ///   <zh-CN>是否禁止包含账号上下文词。</zh-CN>
+        ///   <en>Whether account-context terms are disallowed.</en>
+        /// </l>
+        /// </param>
+        public PortalPasswordPolicyOptions(
+            int minimumLength,
+            int requiredCategoryCount,
+            bool weakDictionaryEnabled,
+            bool disallowContextTerms)
+        {
+            // <lang>
+            //   <zh-CN>保存请求的最小长度；实际使用前仍由策略类施加硬下限。</zh-CN>
+            //   <en>Store the requested minimum length; the policy class still applies hard lower bounds before use.</en>
+            // </lang>
+            MinimumLength = minimumLength;
+
+            // <lang>
+            //   <zh-CN>保存请求的类别数量；实际使用前仍限制在四类可表达范围内。</zh-CN>
+            //   <en>Store the requested category count; actual use remains limited to the expressible range of four categories.</en>
+            // </lang>
+            RequiredCategoryCount = requiredCategoryCount;
+
+            // <lang>
+            //   <zh-CN>保存弱口令字典开关；该开关不携带任何用户密码。</zh-CN>
+            //   <en>Store the weak-dictionary switch; it carries no user password.</en>
+            // </lang>
+            WeakDictionaryEnabled = weakDictionaryEnabled;
+
+            // <lang>
+            //   <zh-CN>保存账号上下文词限制开关；调用方仍负责不记录上下文文本。</zh-CN>
+            //   <en>Store the account-context-term restriction switch; callers remain responsible for not logging context text.</en>
+            // </lang>
+            DisallowContextTerms = disallowContextTerms;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建组件层默认策略选项。</zh-CN>
+        ///   <en>Creates the component-layer default policy options.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>默认策略选项。</zh-CN>
+        ///   <en>Default policy options.</en>
+        /// </l>
+        /// </returns>
+        public static PortalPasswordPolicyOptions CreateDefault()
+        {
+            return new PortalPasswordPolicyOptions(
+                PortalPasswordPolicy.MinimumLength,
+                PortalPasswordPolicy.RequiredCategoryCount,
+                true,
+                true);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最小密码长度。</zh-CN>
+        ///   <en>Minimum password length.</en>
+        /// </lang>
+        /// </summary>
+        public int MinimumLength { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>必须满足的字符类别数量。</zh-CN>
+        ///   <en>Required number of character categories.</en>
+        /// </lang>
+        /// </summary>
+        public int RequiredCategoryCount { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否启用常见弱口令字典。</zh-CN>
+        ///   <en>Whether the common weak-password dictionary is enabled.</en>
+        /// </lang>
+        /// </summary>
+        public bool WeakDictionaryEnabled { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否禁止密码包含账号上下文词。</zh-CN>
+        ///   <en>Whether passwords may contain account-context terms.</en>
+        /// </lang>
+        /// </summary>
+        public bool DisallowContextTerms { get; private set; }
+    }

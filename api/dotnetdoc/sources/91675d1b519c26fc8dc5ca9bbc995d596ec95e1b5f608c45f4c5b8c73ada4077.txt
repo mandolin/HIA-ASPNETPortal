@@ -1,0 +1,67 @@
+        protected void BindButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryBind))
+            {
+                return;
+            }
+
+            int userId;
+            if (!TryReadUserId(out userId))
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>绑定写入只接收员工号和操作原因，账号标识来自已校验的后台输入，操作者来自当前登录身份。</zh-CN>
+                //   <en>The bind write accepts only the employee code and operation reason; the account identifier comes from validated administration input and the actor comes from the current identity.</en>
+                // </lang>
+                EmployeeDirectoryWriteResult result = BindingAdminDb.BindUserToEmployee(new UserEmployeeBindingSaveRequest
+                {
+                    UserId = userId,
+                    EmployeeCode = EmployeeCodeTextBox.Text,
+                    Reason = ReasonTextBox.Text,
+                    ActorName = GetCurrentActor()
+                });
+
+                if (!result.Succeeded)
+                {
+                    // <lang>
+                    //   <zh-CN>绑定服务返回失败时不递增安全版本、不记录成功审计，刷新当前状态以反映服务端事实。</zh-CN>
+                    //   <en>When the binding service reports failure, do not increment the security version or record success audit; refresh the current state to reflect the server fact.</en>
+                    // </lang>
+                    ShowMessage(result.Message, true);
+                    RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>绑定成功后递增安全版本，让目标用户旧票据在后续请求自然失效。</zh-CN>
+                //   <en>After a successful bind, increment the security version so the target user's old tickets expire naturally on later requests.</en>
+                // </lang>
+                UsersDb.IncrementSecurityVersion(userId, "EmployeeBindingChanged");
+                // <lang>
+                //   <zh-CN>安全版本递增与绑定写入已是连续调用；若递增异常，绑定事实可能已经持久化，不能把 catch 后提示误写成回滚完成。</zh-CN>
+                //   <en>The security-version increment is a sequential call after binding persistence; if it throws, the binding fact may already be durable, so the catch message must not be read as a completed rollback.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.EnterpriseDirectoryCategory,
+                    PortalOperationAuditEvents.UserEmployeeBound,
+                    PortalOperationAuditEvents.UserEmployeeBindingTargetType,
+                    result.EntityId.ToString(CultureInfo.InvariantCulture),
+                    "Bound user id " + userId.ToString(CultureInfo.InvariantCulture) + " to employee code.",
+                    Context);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBoundSaved, false);
+                RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.UserEmployeeBindingEdit.Bind",
+                    "Binding user to employee failed. UserId=" + userId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_UserEmployeeBindingEdit_MessageBindFailed, eventId), true);
+            }
+        }

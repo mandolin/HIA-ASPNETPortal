@@ -1,0 +1,1 @@
+        int? ContentSize { get; set; }

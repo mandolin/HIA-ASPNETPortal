@@ -1,0 +1,1 @@
+        public string AuthorizedRoles { get; private set; }

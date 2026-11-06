@@ -1,0 +1,63 @@
+        private static PortalHealthStatus CalculateOverallStatus(IEnumerable<PortalHealthCheckResult> checks)
+        {
+            // <lang>
+            //   <zh-CN>分别记录警告和未知状态，等遍历结束后再按优先级决定非错误结果。</zh-CN>
+            //   <en>Track warning and unknown states separately so non-error priority can be decided after traversal.</en>
+            // </lang>
+            bool hasUnknown = false;
+
+            // <lang>
+            //   <zh-CN>警告标志只表示至少一个单项需要关注，不覆盖更高优先级的 Error。</zh-CN>
+            //   <en>The warning flag means at least one item needs attention and never overrides the higher-priority Error.</en>
+            // </lang>
+            bool hasWarning = false;
+
+            // <lang>
+            //   <zh-CN>按输入序列逐项读取状态；本 helper 不修改结果对象或集合。</zh-CN>
+            //   <en>Read each status from the input sequence without modifying result objects or the collection.</en>
+            // </lang>
+            foreach (PortalHealthCheckResult check in checks)
+            {
+                // <lang>
+                //   <zh-CN>错误是终止性最高状态，立即返回以避免后续低优先级结果掩盖关键故障。</zh-CN>
+                //   <en>Error is the highest terminal state, so return immediately to prevent later lower-priority results from masking a critical fault.</en>
+                // </lang>
+                if (check.Status == PortalHealthStatus.Error)
+                {
+                    return PortalHealthStatus.Error;
+                }
+
+                // <lang>
+                //   <zh-CN>记录警告事实但继续遍历，以便发现后续 Error。</zh-CN>
+                //   <en>Record a warning and continue so a later Error can still be discovered.</en>
+                // </lang>
+                if (check.Status == PortalHealthStatus.Warning)
+                {
+                    hasWarning = true;
+                }
+
+                // <lang>
+                //   <zh-CN>记录未知事实但继续遍历；Warning 在最终优先级中高于 Unknown。</zh-CN>
+                //   <en>Record an unknown state and continue; Warning has higher final priority than Unknown.</en>
+                // </lang>
+                if (check.Status == PortalHealthStatus.Unknown)
+                {
+                    hasUnknown = true;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>没有 Error 时，任一 Warning 使汇总状态为 Warning。</zh-CN>
+            //   <en>When no Error exists, any Warning makes the overall status Warning.</en>
+            // </lang>
+            if (hasWarning)
+            {
+                return PortalHealthStatus.Warning;
+            }
+
+            // <lang>
+            //   <zh-CN>无 Error/Warning 时保留 Unknown；只有所有项目均为 Healthy 才返回 Healthy。</zh-CN>
+            //   <en>Preserve Unknown when no Error or Warning exists; return Healthy only when every item is Healthy.</en>
+            // </lang>
+            return hasUnknown ? PortalHealthStatus.Unknown : PortalHealthStatus.Healthy;
+        }

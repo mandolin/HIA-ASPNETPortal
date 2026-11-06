@@ -1,0 +1,400 @@
+    public class Global : HttpApplication, IContainerAccessor
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前应用程序的 Unity 容器。</zh-CN>
+        ///   <en>Unity container for the current application.</en>
+        /// </lang>
+        /// </summary>
+        public static IUnityContainer Container { get; set; }
+
+        #region IContainerAccessor Members
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>返回当前应用程序的 Unity 容器。</zh-CN>
+        ///   <en>Returns the Unity container of the current application.</en>
+        /// </lang>
+        /// </summary>
+        IUnityContainer IContainerAccessor.Container
+        {
+            get { return Container; }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理应用程序启动事件，并装配配置、容器和运行级基础服务。</zh-CN>
+        ///   <en>Handles application startup and composes configuration, the container, and runtime infrastructure services.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该方法会读取配置、注册依赖并触发受控 SQL 可用性检查；异常继续沿既有 ASP.NET 启动失败路径传播。它不执行业务迁移、修复数据或记录连接串秘密，调用方不能把启动完成误解为页面授权已完成。</zh-CN>
+        ///   <en>This method reads configuration, registers dependencies, and performs the existing controlled SQL-availability check; exceptions continue through the established ASP.NET startup-failure path. It does not run business migrations, repair data, or log connection-string secrets, and startup completion must not be treated as page authorization.</en>
+        /// </lang>
+        /// </remarks>
+        protected void Application_Start(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先解析当前环境标识；后续 appSettings、Unity 覆盖和外置连接串都以它作为选择维度。</zh-CN>
+            //   <en>Resolve the current environment marker first; later appSettings, Unity overrides, and external connection strings all use it as the selection dimension.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>先解析当前环境标识：Web.config 的 &lt;env&gt; 为部署期固定值，进程环境变量 HIA_PORTAL_ENV 可在其之上做本地/CI 模式切换；
+            //   二者都只选择“基础配置 + 环境覆盖”的覆盖文件名，不携带任何敏感值；非法环境名收敛为 dev 以阻止路径穿越。</zh-CN>
+            //   <en>Resolve the current environment marker: the Web.config &lt;env&gt; element is the deployment-time fixed value, while the
+            //   HIA_PORTAL_ENV process variable can switch the local/CI mode on top of it; both only select the override-file name for
+            //   "base configuration plus environment override" and carry no sensitive values; an invalid environment name converges to dev to block path traversal.</en>
+            // </lang>
+            string env = (string)(EnvSection)ConfigurationManager.GetSection("env");
+            string envVarOverride = Environment.GetEnvironmentVariable("HIA_PORTAL_ENV");
+            if (!string.IsNullOrWhiteSpace(envVarOverride) &&
+                System.Text.RegularExpressions.Regex.IsMatch(envVarOverride, @"^[A-Za-z0-9_-]{1,32}$"))
+            {
+                // <lang>
+                //   <zh-CN>仅接受稳定环境名，避免未规范化输入拼接出任意配置文件路径（如 appSettings.{env}.json）。</zh-CN>
+                //   <en>Accept only a stable environment name so unnormalized input cannot compose an arbitrary configuration-file path such as appSettings.{env}.json.</en>
+                // </lang>
+                env = envVarOverride;
+            }
+            if (string.IsNullOrWhiteSpace(env))
+            {
+                env = "dev";
+            }
+            GlobalInfo.Environment = env;
+
+            // <lang>
+            //   <zh-CN>按“基础配置 + 环境覆盖”的顺序加载 JSON appSettings；真实敏感值仍由外置配置或环境变量处理。</zh-CN>
+            //   <en>Load JSON appSettings in "base configuration plus environment override" order; real sensitive values remain handled by external configuration or environment variables.</en>
+            // </lang>
+            AppSettingsLoader.LoadConfig("Config/appSettings.json");
+            AppSettingsLoader.LoadConfig($"Config/appSettings.{env}.json");
+
+
+            // <lang>
+            //   <zh-CN>创建 Unity 根容器。旧 Web Forms 页面和控件依赖 BuildUp/Resolve，因此容器初始化失败应尽早暴露。</zh-CN>
+            //   <en>Create the Unity root container. Legacy Web Forms pages and controls depend on BuildUp/Resolve, so container initialization failures should surface early.</en>
+            // </lang>
+            Container = new UnityContainer();
+
+            // <lang>
+            //   <zh-CN>先加载主 Unity 配置与环境覆盖 XML，再注册外置连接串命名实例；这样既保留旧数据访问层依赖名，也避免真实连接串继续写在 UnityCfg*.xml 中。</zh-CN>
+            //   <en>Load the main Unity configuration and environment override XML before registering the external connection-string named instance; this keeps legacy data-layer dependency names while preventing real connection strings from remaining in UnityCfg*.xml.</en>
+            // </lang>
+            var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+            section.Configure(Container);
+            UnityConfigLoader.LoadUnityConfig(Container, $"Config/UnityCfg.{env}.xml");
+
+            // <lang>
+            //   <zh-CN>从仓库外部读取语义化连接串 Portal，并映射为旧代码仍使用的 connectionString。加载器会校验外置文件存在；环境变量只覆盖连接串值，不绕过文件校验。</zh-CN>
+            //   <en>Read the semantic Portal connection string outside the repository and map it to the legacy connectionString name. The loader verifies that the external file exists; environment variables override only the connection-string value and do not bypass file validation.</en>
+            // </lang>
+            ExternalConnectionStringLoadResult portalConnectionString =
+                ExternalConnectionStringLoader.LoadPortalConnectionString(env);
+            Container.RegisterInstance(
+                ExternalConnectionStringLoader.UnityConnectionStringName,
+                portalConnectionString.ConnectionString);
+            // <lang>
+            //   <zh-CN>新代码通过 profile 获取 provider invariant，不再把连接串文本当成数据库类型标识。</zh-CN>
+            //   <en>New code receives a profile with the provider invariant instead of treating a connection string as a database type.</en>
+            // </lang>
+            Container.RegisterInstance(portalConnectionString.DatabaseProfile);
+            Container.RegisterType<IPortalDbConnectionFactory, PortalDbConnectionFactory>();
+            PortalDiagnostics.Info(
+                "Startup",
+                $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' with provider '{portalConnectionString.ProviderInvariantName}' from {portalConnectionString.Source}; ConfigFile={portalConnectionString.ConfigFile}");
+            // <lang>
+            //   <zh-CN>该探针只验证当前启动配置能否建立最小连接；它不改变业务状态，异常仍由启动流程处理。</zh-CN>
+            //   <en>This probe only verifies that the current startup configuration can open the minimal connection; it does not change business state, and failures remain handled by the startup flow.</en>
+            // </lang>
+            PortalDiagnostics.CheckSqlConnection(portalConnectionString.ConnectionString);
+            RegisterPasswordPolicyOptionsProvider();
+            RegisterPasswordIterationPolicyProvider();
+
+            // <lang>
+            //   <zh-CN>启动期最小自检只解析关键服务和环境覆盖字符串，验证容器 wiring；不在这里执行业务迁移或破坏性数据修复。</zh-CN>
+            //   <en>The startup smoke check only resolves key services and the environment override string to verify container wiring; it does not perform business migrations or destructive data fixes.</en>
+            // </lang>
+            var usersDbService = Container.Resolve<IUsersDb>();
+            string testStr = Container.Resolve<string>("testStr");
+            PortalDiagnostics.Info(
+                "Startup",
+                $"Resolved IUsersDb: {usersDbService?.GetType().Name}; Resolved testStr: {!string.IsNullOrEmpty(testStr)}");
+
+
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把 Web 层运行期系统设置接入组件层密码策略。</zh-CN>
+        ///   <en>Connects Web-layer runtime system settings to the component-layer password policy.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN><see cref="PortalPasswordPolicy"/> 位于独立组件项目，不能反向依赖 Web 配置读取器；因此启动期通过委托注入当前有效策略。读取失败时策略类自身会回退到硬下限默认值。</zh-CN>
+        ///   <en><see cref="PortalPasswordPolicy"/> lives in the independent components project and must not depend back on the Web configuration resolver, so startup injects a delegate for the effective policy. The policy class falls back to its hard lower-bound defaults if reads fail.</en>
+        /// </lang>
+        /// </remarks>
+        private static void RegisterPasswordPolicyOptionsProvider()
+        {
+            PortalPasswordPolicy.ConfigureOptionsProvider(
+                () => new PortalPasswordPolicyOptions(
+                    PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordMinimumLength),
+                    PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordRequiredCategoryCount),
+                    PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordWeakDictionaryEnabled),
+                    PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordDisallowContextTerms)));
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>注入密码哈希目标迭代次数提供器。</zh-CN>
+        ///   <en>Registers the password-hash target iteration-count provider.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN><see cref="PortalPasswordIterationPolicy"/> 位于独立组件项目，不能反向依赖 Web 配置读取器；因此启动期通过委托注入当前目标迭代次数。读取失败或配置低于硬下限时，策略类自身会回退到硬下限 210000。</zh-CN>
+        ///   <en><see cref="PortalPasswordIterationPolicy"/> lives in the independent components project and must not depend back on the Web configuration resolver, so startup injects a delegate for the target iteration count. The policy class falls back to its hard lower bound of 210000 if reads fail or configuration is lower.</en>
+        /// </lang>
+        /// </remarks>
+        private static void RegisterPasswordIterationPolicyProvider()
+        {
+            // <lang>
+            //   <zh-CN>只从受控设置读取目标迭代次数；提供器不接触密码、盐或哈希材料。</zh-CN>
+            //   <en>Only the controlled setting is read for the target iteration count; the provider never touches passwords, salts, or hash material.</en>
+            // </lang>
+            PortalPasswordIterationPolicy.ConfigureTargetProvider(
+                () => PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordIterationCount));
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理应用程序结束事件，并释放 Unity 容器。</zh-CN>
+        ///   <en>Handles application shutdown and disposes the Unity container.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>关闭阶段只释放当前进程持有的 Unity 容器；启动失败时容器可能为空，释放操作必须保持幂等且不重新解析服务。</zh-CN>
+        ///   <en>Shutdown only releases the Unity container held by the current process; startup may have left it null, so disposal must remain idempotent and must not resolve services again.</en>
+        /// </lang>
+        /// </remarks>
+        protected void Application_End(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>容器可能因启动失败而保持为空；关闭路径必须允许这种半初始化状态。</zh-CN>
+            //   <en>The container may remain null after startup failure, so shutdown must tolerate this partially initialized state.</en>
+            // </lang>
+            if (Container != null)
+            {
+                Container.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用当前 Unity 容器为既有 Web Forms 控件实例执行后期依赖注入。</zh-CN>
+        ///   <en>Uses the current Unity container to perform late dependency injection on an existing Web Forms control instance.</en>
+        /// </lang>
+        /// </summary>
+        /// <typeparam name="T">
+        /// <l>
+        ///   <zh-CN>控件或页面的实际类型，用于 Unity BuildUp。</zh-CN>
+        ///   <en>Actual control or page type used for Unity BuildUp.</en>
+        /// </l>
+        /// </typeparam>
+        /// <param name="ctrl">
+        /// <l>
+        ///   <zh-CN>已由 Web Forms 生命周期创建的控件实例。</zh-CN>
+        ///   <en>Control instance already created by the Web Forms lifecycle.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>Web Forms 通常先由 ASP.NET 创建页面和控件，再进入项目代码；因此构造函数注入在旧页面里不可用。本方法把 Unity 的 <c>BuildUp</c> 限定为“补充已注册属性依赖”的兼容入口，不负责创建控件，也不改变控件生命周期。</zh-CN>
+        ///   <en>Web Forms usually lets ASP.NET create pages and controls before project code runs, so constructor injection is unavailable in legacy pages. This method limits Unity <c>BuildUp</c> to the compatibility role of filling registered property dependencies; it does not create controls or change their lifecycle.</en>
+        /// </lang>
+        /// </remarks>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该兼容入口假定容器已由启动阶段建立，并把异常和生命周期责任保留给既有 Unity/Web Forms 调用方；它不创建控件、不提供授权判断，也不吞掉未注册依赖错误。</zh-CN>
+        ///   <en>This compatibility entry assumes the container was created during startup and leaves exception and lifecycle responsibility with the existing Unity/Web Forms caller; it does not create controls, perform authorization, or hide unregistered-dependency errors.</en>
+        /// </lang>
+        /// </remarks>
+        public static void BuildItemWithCurrentContext<T>(Control ctrl)
+        {
+            Container.BuildUp(typeof(T), ctrl);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理每个请求的 BeginRequest 事件，建立当前 PortalSettings 与请求文化。</zh-CN>
+        ///   <en>Handles the BeginRequest event for each request and establishes the current PortalSettings and request culture.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>PortalSettings 会写入当前 <c>HttpContext</c>，供同一请求内的页面、控件和组件读取。查询参数只用于选择活动 Tab，上下文构造阶段必须使用安全默认值，具体页面再处理非法目标。</zh-CN>
+        ///   <en>PortalSettings is stored in the current <c>HttpContext</c> for pages, controls, and components in the same request. Query parameters select the active Tab only; context construction must use safe defaults, and individual pages then handle invalid targets.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name = "sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name = "e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            //string TestKey = ConfigurationManager.AppSettings.Get("TestKey").ToString();
+            //System.Diagnostics.Debug.WriteLine($"获取TestKey：{TestKey}");
+
+            if (IsGenericErrorPageRequest(Request))
+            {
+                // <lang>
+                //   <zh-CN>通用错误页必须跳过门户设置和文化构造，避免错误处理链再次触发同一异常。</zh-CN>
+                //   <en>The generic error page must bypass Portal settings and culture construction so the error-handling path does not trigger the same failure again.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>BeginRequest 必须先使用安全的活动 Tab 上下文。无效查询参数由具体页面随后拒绝，避免门户设置构造阶段因不存在的 Tab 直接进入全局错误页。</zh-CN>
+            //   <en>BeginRequest must first use a safe active-Tab context. Individual pages reject invalid query parameters afterwards, preventing a nonexistent Tab from reaching the global error page during settings construction.</en>
+            // </lang>
+            int tabIndex = GetNonNegativeIntParam("tabindex", 0);
+            int tabId = GetPositiveIntParam("tabid", 1);
+
+            var portalConfig = Container.Resolve<IGlobalsDb>();
+            var tabsConfig = Container.Resolve<ITabsDb>();
+            var modulesConfig = Container.Resolve<IModulesDb>();
+            var moduleDefConfig = Container.Resolve<IModuleDefsDb>();
+
+            // <lang>
+            //   <zh-CN>四个数据依赖只用于构造当前请求的 PortalSettings 快照；此处不执行页面级权限判断，具体页面仍须自行授权。</zh-CN>
+            //   <en>The four data dependencies only compose the current request's PortalSettings snapshot; this stage does not perform page-level authorization, which remains the page's responsibility.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>PortalSettings 是旧门户请求级对象图的核心；先集中构造，再通过 PortalContext 挂入当前请求。</zh-CN>
+            //   <en>PortalSettings is the core request-level object graph of the legacy portal; build it centrally and attach it to the current request through PortalContext.</en>
+            // </lang>
+            PortalContext.SetPortalSettings(new PortalSettings(tabIndex, tabId, portalConfig, tabsConfig, modulesConfig, moduleDefConfig), Context);
+
+            SetLanguage();
+
+            // <lang>
+            //   <zh-CN>文化名来自 Cookie 或浏览器请求头，必须先确认是 .NET 支持的 culture，再写入线程上下文。</zh-CN>
+            //   <en>Culture names come from cookies or browser headers and must be confirmed as .NET-supported cultures before being applied to the thread context.</en>
+            // </lang>
+            bool IsValidCulture(string cultureName)
+            {
+                return CultureInfo.GetCultures(CultureTypes.AllCultures)?.Any(c => c.Name == cultureName) ?? false;
+            }
+
+            // <lang>
+            //   <zh-CN>同时设置 CurrentCulture 与 CurrentUICulture，避免格式化文化和资源文化在同一请求内分裂。</zh-CN>
+            //   <en>Set both CurrentCulture and CurrentUICulture so formatting culture and resource culture do not diverge within the same request.</en>
+            // </lang>
+            void SetCulture(string cultureName)
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureName);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
+            }
+
+            // <lang>
+            //   <zh-CN>活动 Tab 索引允许零；负数、非数字和缺失值使用安全默认值。</zh-CN>
+            //   <en>Active Tab indexes may be zero; negative, nonnumeric, and missing values use the safe default.</en>
+            // </lang>
+            int GetNonNegativeIntParam(string paramName, int defaultValue)
+            {
+                string rawValue = Request.QueryString[paramName] ?? Request.Unvalidated.Form[paramName];
+                if (int.TryParse(rawValue, out int value) && value >= 0)
+                {
+                    return value;
+                }
+
+                return defaultValue;
+            }
+
+            // <lang>
+            //   <zh-CN>活动 Tab 标识必须为正数；负数、零、非数字和缺失值使用安全默认值。</zh-CN>
+            //   <en>Active Tab identifiers must be positive; negative, zero, nonnumeric, and missing values use the safe default.</en>
+            // </lang>
+            int GetPositiveIntParam(string paramName, int defaultValue)
+            {
+                string rawValue = Request.QueryString[paramName] ?? Request.Unvalidated.Form[paramName];
+                if (int.TryParse(rawValue, out int value) && value > 0)
+                {
+                    return value;
+                }
+
+                return defaultValue;
+            }
+
+            // <lang>
+            //   <zh-CN>语言选择优先显式 Cookie，其次浏览器首选语言，最后回退 en-US；此处只影响当前请求线程。</zh-CN>
+            //   <en>Language selection prefers the explicit cookie, then the browser's first preferred language, and finally falls back to en-US; it affects only the current request thread.</en>
+            // </lang>
+            void SetLanguage()
+            {
+                var langCookie = Request.Cookies["lang"];
+                var userLanguages = Request.UserLanguages;
+
+                if (IsValidCulture(langCookie?.Value))
+                {
+                    SetCulture(langCookie.Value);
+                }
+                else if (userLanguages?.Length > 0 && IsValidCulture(userLanguages[0]))
+                {
+                    SetCulture(userLanguages[0]);
+                }
+                else
+                {
+                    // <lang>
+                    //   <zh-CN>Cookie 和浏览器首选语言都不可用时，使用固定的 en-US 线程文化；该回退不写回 Cookie 或用户资料。</zh-CN>
+                    //   <en>When neither the cookie nor the browser preference is usable, use a fixed en-US thread culture; this fallback does not write a cookie or user profile.</en>
+                    // </lang>
+                    SetCulture("en-US"); // 设置默认语言
+                }
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理未捕获的应用程序错误，记录诊断事件编号，并按部署开关转向通用错误页。</zh-CN>
+        ///   <en>Handles unhandled application errors, records a diagnostics event id, and redirects to the generic error page according to deployment switches.</en>
+        /// </lang>
+        /// </summary>

@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel 进入既有 XML/XSL 设置流程；按钮不绕过部署路径验证、权限或错误提示。</zh-CN>
+                    <en>Update and Cancel enter the existing XML/XSL settings flow; the buttons do not bypass deployment-path validation, authorization, or error reporting.</en>
+                </lang>
+            --%>

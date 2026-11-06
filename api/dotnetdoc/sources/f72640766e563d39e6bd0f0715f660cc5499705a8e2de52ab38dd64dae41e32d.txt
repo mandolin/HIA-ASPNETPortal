@@ -1,0 +1,30 @@
+        public IEmployeeInfo GetEmployeeById(int employeeId)
+        {
+            if (employeeId <= 0 || !IsSchemaAvailable())
+            {
+                return null;
+            }
+
+            EmployeeProjection row = _context.Database.SqlQuery<EmployeeProjection>(
+                @"
+SELECT
+    [Employee].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName],
+    [Employee].[PreferredName],
+    [Employee].[WorkEmail],
+    [Employee].[OrganizationUnitId],
+    [Organization].[DisplayName] AS [OrganizationDisplayName],
+    [Employee].[EmploymentStatus],
+    [Employee].[JoinedUtc],
+    [Employee].[LeftUtc],
+    [Employee].[SourceSystem],
+    [Employee].[UpdatedUtc]
+FROM [dbo].[PortalBiz_Employees] AS [Employee]
+LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
+    ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
+WHERE [Employee].[EmployeeId] = @EmployeeId;",
+                IntParameter("@EmployeeId", employeeId)).SingleOrDefault();
+
+            return row == null ? null : CreateEmployeeInfo(row);
+        }

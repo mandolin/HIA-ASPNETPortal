@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition NavigationAnonymousHiddenNavigationKeys =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationAnonymousHiddenNavigationKeys,
+                "仅对匿名隐藏的页签",
+                "逗号分隔的页签键；这些页签对未登录访客隐藏，对登录用户正常显示。默认空。",
+                PortalSettingValueType.String,
+                "",
+                true,
+                false,
+                "Admins",
+                "Navigation");

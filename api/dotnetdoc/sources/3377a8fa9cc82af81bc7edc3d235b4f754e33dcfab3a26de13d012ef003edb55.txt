@@ -1,0 +1,5 @@
+        internal static string QuickLinks_Heading {
+            get {
+                return ResourceManager.GetString("QuickLinks_Heading", resourceCulture);
+            }
+        }

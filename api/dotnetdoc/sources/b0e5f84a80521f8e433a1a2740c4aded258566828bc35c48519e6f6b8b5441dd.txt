@@ -1,0 +1,1 @@
+        public string Version { get; private set; }

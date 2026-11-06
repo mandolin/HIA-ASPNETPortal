@@ -1,0 +1,11 @@
+        private void ClearSubmittedPasswordFields()
+        {
+            // <lang>
+            //   <zh-CN>同时清除明文输入和隐藏密文，覆盖校验失败、解密失败和异常路径。</zh-CN>
+            //   <en>Clear both plain inputs and hidden ciphertext across validation failures, decryption failures, and exception paths.</en>
+            // </lang>
+            Password.Text = string.Empty;
+            ConfirmPassword.Text = string.Empty;
+            EncryptedPassword.Value = string.Empty;
+            EncryptedConfirmPassword.Value = string.Empty;
+        }

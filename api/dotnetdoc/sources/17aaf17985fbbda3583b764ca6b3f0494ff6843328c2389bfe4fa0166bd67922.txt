@@ -1,0 +1,79 @@
+        public List<IDiscussionItem> GetTopLevelMessages(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>输出列表只在本次读取内累积，承载已物化的顶级主题 DTO，不延迟持有 reader 或连接。</zh-CN>
+            //   <en>The output list accumulates only within this read and carries materialized top-level topic DTOs without retaining the reader or connection lazily.</en>
+            // </lang>
+            var list = new List<IDiscussionItem>();
+
+            // <lang>
+            //   <zh-CN>连接和命令均限制在当前查询作用域；存储过程名称沿用旧数据库契约，不在代码层重写查询。</zh-CN>
+            //   <en>Both connection and command are scoped to the current query; the stored-procedure name preserves the legacy database contract rather than rewriting the query in code.</en>
+            // </lang>
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand("Portal_GetTopLevelMessages", connection))
+            {
+                // <lang>
+                //   <zh-CN>明确声明存储过程调用，避免命令文本被解释为即席 SQL。</zh-CN>
+                //   <en>Explicitly declare a stored-procedure call so the command text is not interpreted as ad-hoc SQL.</en>
+                // </lang>
+                command.CommandType = CommandType.StoredProcedure;
+
+                // <lang>
+                //   <zh-CN>模块标识作为强类型整型参数传入；模块权限与可见性已由调用页在进入数据层前处理。</zh-CN>
+                //   <en>The module identifier is passed as a strongly typed integer parameter; module permission and visibility are handled by the caller page before entering the data layer.</en>
+                // </lang>
+                command.Parameters.Add(new SqlParameter("@ModuleID", SqlDbType.Int) { Value = moduleId });
+
+                // <lang>
+                //   <zh-CN>仅在命令完全配置后打开连接，缩短连接占用时间并保持异常定位清晰。</zh-CN>
+                //   <en>Open the connection only after the command is fully configured, shortening connection hold time and keeping exception origin clear.</en>
+                // </lang>
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // <lang>
+                    //   <zh-CN>循环前缓存列序号，减少每行读取时的名称查找；当前顶级主题过程不返回 ModuleID，投影时使用入参保持模块上下文。</zh-CN>
+                    //   <en>Cache column ordinals before the loop to avoid per-row name lookup; the current top-level-topic procedure does not return ModuleID, so projection uses the input value to preserve module context.</en>
+                    // </lang>
+                    int idxItemID = reader.GetOrdinal("ItemID");
+                    int idxChildCount = reader.GetOrdinal("ChildCount");
+                    int idxTitle = reader.GetOrdinal("Title");
+                    int idxCreatedDate = reader.GetOrdinal("CreatedDate");
+                    int idxBody = reader.GetOrdinal("Body");
+                    int idxDisplayOrder = reader.GetOrdinal("DisplayOrder");
+                    int idxCreatedByUser = reader.GetOrdinal("CreatedByUser");
+
+                    while (reader.Read())
+                    {
+                        // <lang>
+                        //   <zh-CN>每一行立即投影为讨论项；可空列按旧表兼容语义保留为 null，展示层再决定空值呈现。</zh-CN>
+                        //   <en>Each row is immediately projected into a discussion item; nullable columns preserve legacy-table null semantics and the presentation layer decides empty display.</en>
+                        // </lang>
+                        var item = new DiscussionItem
+                        {
+                            ItemID = reader.GetInt32(idxItemID),
+                            ChildCount = reader.GetInt32(idxChildCount),
+                            ModuleID = moduleId,
+                            Title = reader.IsDBNull(idxTitle) ? null : reader.GetString(idxTitle),
+                            CreatedDate = reader.IsDBNull(idxCreatedDate) ? (DateTime?)null : reader.GetDateTime(idxCreatedDate),
+                            Body = reader.IsDBNull(idxBody) ? null : reader.GetString(idxBody),
+                            DisplayOrder = reader.IsDBNull(idxDisplayOrder) ? null : reader.GetString(idxDisplayOrder),
+                            CreatedByUser = reader.IsDBNull(idxCreatedByUser) ? null : reader.GetString(idxCreatedByUser)
+                        };
+
+                        // <lang>
+                        //   <zh-CN>按 reader 返回顺序追加，保留存储过程负责的顶级主题排序。</zh-CN>
+                        //   <en>Append in reader order, preserving the top-level topic ordering owned by the stored procedure.</en>
+                        // </lang>
+                        list.Add(item);
+                    }
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>返回已脱离连接生命周期的列表；空模块结果以空列表表达，而不是 null。</zh-CN>
+            //   <en>Return the list after it has been detached from the connection lifetime; an empty module result is represented as an empty list rather than null.</en>
+            // </lang>
+            return list;
+        }

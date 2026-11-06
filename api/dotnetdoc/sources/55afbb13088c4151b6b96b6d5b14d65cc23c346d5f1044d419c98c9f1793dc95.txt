@@ -1,0 +1,8 @@
+        private string GetCurrentUserName()
+        {
+            // <lang>
+            //   <zh-CN>只有通过认证门禁才读取 Identity.Name；未登录时返回空文本供上层统一处理。</zh-CN>
+            //   <en>Read Identity.Name only after the authentication gate; return empty text when signed out for the caller's shared handling.</en>
+            // </lang>
+            return IsCurrentUserAuthenticated() ? Context.User.Identity.Name : string.Empty;
+        }

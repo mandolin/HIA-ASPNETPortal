@@ -1,0 +1,1 @@
+        public string BindingStatus { get; private set; }

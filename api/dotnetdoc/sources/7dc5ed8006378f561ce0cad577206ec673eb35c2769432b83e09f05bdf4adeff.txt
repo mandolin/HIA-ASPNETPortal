@@ -1,0 +1,22 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>读取路径使用设置查看权限；没有权限时统一授权 helper 会处理拒绝响应。</zh-CN>
+            //   <en>The read path uses settings-view permission; the shared authorization helper handles the deny response when permission is missing.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.SettingsView))
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>首次加载从当前 PortalSettings 快照回填表单，避免回发时覆盖管理员刚输入的值。</zh-CN>
+                //   <en>The initial load fills the form from the current PortalSettings snapshot so postback does not overwrite values just entered by the administrator.</en>
+                // </lang>
+                PortalSettings portalSettings = PortalContext.GetPortalSettings();
+                SiteName.Text = portalSettings.PortalName;
+                showEdit.Checked = portalSettings.AlwaysShowEditButton;
+            }
+        }

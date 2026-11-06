@@ -1,0 +1,13 @@
+        public static readonly PortalSettingDefinition PasswordMinimumLength =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordMinimumLength,
+                "密码最小长度",
+                "控制新建、注册和重置密码的最小长度；不能低于 8 位。",
+                PortalSettingValueType.Integer,
+                "8",
+                true,
+                false,
+                "Admins",
+                "Security",
+                minIntegerValue: 8,
+                maxIntegerValue: 128);

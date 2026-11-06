@@ -1,0 +1,16 @@
+        private string GetUnavailableMessage(int userId)
+        {
+            if (!IsCurrentUserAuthenticated())
+            {
+                return lang.EmployeeProfileConfirm_MessageNotAuthenticated;
+            }
+
+            if (EmployeeProfileConfirmationDb == null || !EmployeeProfileConfirmationDb.IsSchemaAvailable())
+            {
+                return lang.EmployeeProfileConfirm_MessageSchemaUnavailable;
+            }
+
+            return userId <= 0
+                ? lang.EmployeeProfileConfirm_MessageUserUnresolved
+                : lang.EmployeeProfileConfirm_MessageNoActiveProfile;
+        }

@@ -1,0 +1,15 @@
+        public static bool TryGetTargetStatus(string fromStatus, string actionKey, out string toStatus)
+        {
+            CollaborationItemTransition transition = All.FirstOrDefault(candidate =>
+                string.Equals(candidate.FromStatus, fromStatus, StringComparison.Ordinal) &&
+                string.Equals(candidate.ActionKey, actionKey, StringComparison.Ordinal));
+
+            if (transition.ToStatus == null)
+            {
+                toStatus = null;
+                return false;
+            }
+
+            toStatus = transition.ToStatus;
+            return true;
+        }

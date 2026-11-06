@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>页面自有导航入口：Employee Directory 属 Admin.Capability 族，而本页入口属 Admin.Modules 族；渲染器按族输出、无法表达该跨族链接，故整块保留在页面内并只做文案本地化。</zh-CN>
+                <en>Page-owned navigation entries: Employee Directory belongs to Admin.Capability while this page belongs to Admin.Modules; the group-scoped renderer cannot express that cross-group link, so the block stays in the page and is localized only.</en>
+              </lang>
+            --%>

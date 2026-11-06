@@ -1,0 +1,4 @@
+        private bool HasCredentialTables()
+        {
+            return HasCredentialTable() && HasSecurityStateTable();
+        }

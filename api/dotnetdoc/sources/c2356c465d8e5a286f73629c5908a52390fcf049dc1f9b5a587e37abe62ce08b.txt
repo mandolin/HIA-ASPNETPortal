@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>待办数据由已通过权限门禁的 code-behind 绑定；此标记层不直接查询或拼接业务数据。空集合和 schema 不可用状态由后端清空 Repeater 并显示受控提示。</zh-CN>
+                  <en>Work-item data is bound by code-behind after the permission gate; this markup layer neither queries nor concatenates business data directly. The backend clears the Repeater and shows controlled messaging for empty collections and unavailable schema.</en>
+                </lang>
+                --%>

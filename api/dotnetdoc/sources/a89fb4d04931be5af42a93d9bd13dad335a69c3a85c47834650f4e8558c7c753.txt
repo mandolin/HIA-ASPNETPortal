@@ -1,0 +1,17 @@
+        public PortalSignInResult(
+            bool succeeded,
+            int userId,
+            string userName,
+            long securityVersion,
+            bool upgradedLegacyCredential,
+            bool requiresReset,
+            bool credentialCostUpgraded = false)
+        {
+            Succeeded = succeeded;
+            UserId = userId;
+            UserName = userName ?? string.Empty;
+            SecurityVersion = securityVersion;
+            UpgradedLegacyCredential = upgradedLegacyCredential;
+            RequiresReset = requiresReset;
+            CredentialCostUpgraded = credentialCostUpgraded;
+        }

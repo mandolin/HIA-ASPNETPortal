@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>模块标题控件负责显示门户模块标题，并在配置了编辑页且当前用户具备编辑权限时显示模块动作入口。</zh-CN>
+        <en>The module-title control displays each portal module title and, when an edit page is configured and the current user has edit permission, shows the module action entry.</en>
+    </lang>
+--%>

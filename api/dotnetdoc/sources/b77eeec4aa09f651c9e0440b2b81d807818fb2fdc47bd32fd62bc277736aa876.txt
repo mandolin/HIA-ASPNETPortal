@@ -1,0 +1,6 @@
+                    <%--
+                        <lang>
+                            <zh-CN>编辑模板允许改名或进入成员管理，但角色删除保护、旧分号授权同步和保存结果仍由 code-behind 决定。</zh-CN>
+                            <en>The edit template allows renaming or entering membership management, while deletion protection, legacy semicolon-authorization synchronization, and save results remain decided by the code-behind.</en>
+                        </lang>
+                    --%>

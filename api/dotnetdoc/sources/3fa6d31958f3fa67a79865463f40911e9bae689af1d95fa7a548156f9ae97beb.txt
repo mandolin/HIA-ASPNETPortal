@@ -1,0 +1,9 @@
+                <%--
+                <lang>
+                  <zh-CN>原「门户文档」按钮指向 `/admin/NotImplemented.aspx`（未实现占位页），是公开导航里的一处死链，
+                  已移除。文档入口应由部署侧提供真实文档地址后再挂回，避免把"未实现"页面暴露给使用者。</zh-CN>
+                  <en>The former "Documentation" button pointed at `/admin/NotImplemented.aspx` — a not-implemented placeholder —
+                  a dead link inside the public chrome, now removed. A documentation entry should be re-added only once the
+                  deployment supplies a real documentation address, so that no "not implemented" page is ever exposed to users.</en>
+                </lang>
+                --%>

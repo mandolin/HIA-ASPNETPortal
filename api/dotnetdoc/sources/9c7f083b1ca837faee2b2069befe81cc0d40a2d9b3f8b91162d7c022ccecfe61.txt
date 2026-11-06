@@ -1,0 +1,55 @@
+        protected void usersInRole_ItemCommand(object sender, DataListCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>仅处理不区分大小写的 delete 命令，其他命令保持无副作用。</zh-CN>
+            //   <en>Handle only the case-insensitive delete command; other commands remain side-effect free.</en>
+            // </lang>
+            if (!TryInitializeRequest() || !string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>校验行对象、索引、DataKeys 和用户存在性，防止篡改行索引删除其他用户。</zh-CN>
+            //   <en>Validate the row, index, DataKeys entry, and user existence so a tampered row index cannot delete another user.</en>
+            // </lang>
+            int userId;
+            if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= usersInRole.DataKeys.Count ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(usersInRole.DataKeys[e.Item.ItemIndex].ToString(), out userId) ||
+                UsersDB.FindUserById(userId) == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>删除成功后清除编辑索引、写入审计并刷新成员读模型。</zh-CN>
+                //   <en>After successful deletion, clear the edit index, write the audit, and refresh the membership read model.</en>
+                // </lang>
+                RolesDB.DeleteUserRole(roleId, userId);
+                PortalOperationAudit.Record(
+                    "RoleAdministration",
+                    "RemoveMember",
+                    "Role",
+                    roleId.ToString(),
+                    "Removed user id " + userId + " from role.",
+                    Context);
+                usersInRole.EditItemIndex = -1;
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>成员移除异常沿用统一诊断和低敏页面反馈。</zh-CN>
+                //   <en>Member-removal failures use shared diagnostics and low-sensitivity page feedback.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.SecurityRoles.RemoveUser",
+                    "Removing a role member failed. RoleId=" + roleId + "; UserId=" + userId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_SecurityRoles_MessageMemberRemoveFailed, eventId));
+            }
+        }

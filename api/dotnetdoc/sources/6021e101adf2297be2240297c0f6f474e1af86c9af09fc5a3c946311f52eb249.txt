@@ -1,0 +1,1 @@
+        IUserEmployeeBindingInfo GetActiveBindingByEmployeeCode(string employeeCode);

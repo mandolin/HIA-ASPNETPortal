@@ -1,0 +1,37 @@
+        private static string CreateUniqueDefaultRoleName(IEnumerable<IRoleItem> roles)
+        {
+            // <lang>
+            //   <zh-CN>把现有角色名放入不区分大小写集合，控制默认名称生成的唯一性范围。</zh-CN>
+            //   <en>Place existing names in a case-insensitive set to constrain default-name uniqueness.</en>
+            // </lang>
+            var existingNames = new HashSet<string>(
+                roles.Select(item => item.RoleName ?? string.Empty),
+                StringComparer.OrdinalIgnoreCase);
+            if (!existingNames.Contains("New Role"))
+            {
+                return "New Role";
+            }
+
+            // <lang>
+            //   <zh-CN>在有限后缀范围内寻找第一个未占用名称，避免无限循环。</zh-CN>
+            //   <en>Search for the first unused suffix within a bounded range to avoid an unbounded loop.</en>
+            // </lang>
+            for (int suffix = 2; suffix < 1000; suffix++)
+            {
+                // <lang>
+                //   <zh-CN>候选名称由固定前缀和当前后缀组成，并再次通过集合检查。</zh-CN>
+                //   <en>Build each candidate from the fixed prefix and current suffix, then check it against the set.</en>
+                // </lang>
+                string candidate = "New Role " + suffix;
+                if (!existingNames.Contains(candidate))
+                {
+                    return candidate;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>所有预设名称均被占用时显式失败，不回退到重复名称。</zh-CN>
+            //   <en>Fail explicitly when all preset names are occupied instead of falling back to a duplicate.</en>
+            // </lang>
+            throw new InvalidOperationException("A unique default role name could not be generated.");
+        }

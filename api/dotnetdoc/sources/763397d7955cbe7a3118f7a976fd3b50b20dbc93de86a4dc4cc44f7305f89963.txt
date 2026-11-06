@@ -1,0 +1,11 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>只在首次请求绑定主题列表，避免展开/折叠等回发状态被初始化覆盖。</zh-CN>
+            //   <en>Binds the topic list only on the initial request so expand/collapse postback state is not reset.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindList();
+            }
+        }

@@ -1,0 +1,23 @@
+        private static void AddProfilePackages(
+            string profileName,
+            ISet<string> allowedPackages,
+            IList<string> invalidEntries)
+        {
+            // <lang>
+            //   <zh-CN>包列表键仅以稳定 Profile 名和固定后缀构造，维持读取范围在 Profile 配置命名空间内。</zh-CN>
+            //   <en>Construct the package-list key only from the stable Profile name and fixed suffix, keeping the read scope inside the Profile configuration namespace.</en>
+            // </lang>
+            string key = ProfileKeyPrefix + profileName + ProfilePackagesSuffix;
+
+            // <lang>
+            //   <zh-CN>空白部署项才采用内置默认包；已提供的非空配置即使包含无效片段，也不与默认列表隐式合并。</zh-CN>
+            //   <en>Use built-in default packages only for a blank deployment entry; a supplied nonblank configuration, even with invalid segments, is not implicitly merged with defaults.</en>
+            // </lang>
+            string configured = ConfigurationManager.AppSettings[key];
+            if (string.IsNullOrWhiteSpace(configured) && DefaultProfilePackages.ContainsKey(profileName))
+            {
+                configured = DefaultProfilePackages[profileName];
+            }
+
+            AddPackageList(configured, allowedPackages, invalidEntries, key);
+        }

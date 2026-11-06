@@ -1,0 +1,84 @@
+    public sealed class OrganizationDirectoryRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从组织数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from an organization data object.</en>
+        /// </lang>
+        /// </summary>
+        internal OrganizationDirectoryRow(IOrganizationUnitInfo organization, string parentText)
+        {
+            // <lang>
+            //   <zh-CN>投影复制组织字段并把启用状态、编辑地址转换为只读展示值；不保留可写数据对象。</zh-CN>
+            //   <en>Project organization fields and convert active state and edit URL into read-only display values without retaining a writable data object.</en>
+            // </lang>
+            OrganizationUnitId = organization.OrganizationUnitId;
+            OrganizationCode = organization.OrganizationCode;
+            DisplayName = organization.DisplayName;
+            ParentText = parentText;
+            SortOrder = organization.SortOrder;
+            IsActiveText = organization.IsActive ? "Yes" : "No";
+            // <lang>
+            //   <zh-CN>编辑地址固定为当前应用内页，标识使用不变文化格式，不接受外部 URL。</zh-CN>
+            //   <en>Keep the edit URL inside the current application and format the identifier invariantly; no external URL is accepted.</en>
+            // </lang>
+            EditUrl = "OrganizationUnitEdit.aspx?organizationUnitId=" +
+                      organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元标识。</zh-CN>
+        ///   <en>Organization-unit identifier.</en>
+        /// </lang>
+        /// </summary>
+        public int OrganizationUnitId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织编码。</zh-CN>
+        ///   <en>Organization code.</en>
+        /// </lang>
+        /// </summary>
+        public string OrganizationCode { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织显示名。</zh-CN>
+        ///   <en>Organization display name.</en>
+        /// </lang>
+        /// </summary>
+        public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>父级组织展示文本。</zh-CN>
+        ///   <en>Parent organization display text.</en>
+        /// </lang>
+        /// </summary>
+        public string ParentText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>排序值。</zh-CN>
+        ///   <en>Sort order.</en>
+        /// </lang>
+        /// </summary>
+        public int SortOrder { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>启用状态展示文本。</zh-CN>
+        ///   <en>Active-state display text.</en>
+        /// </lang>
+        /// </summary>
+        public string IsActiveText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑页站内地址。</zh-CN>
+        ///   <en>Current-application edit-page URL.</en>
+        /// </lang>
+        /// </summary>
+        public string EditUrl { get; private set; }
+    }

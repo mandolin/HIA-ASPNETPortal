@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>共享模块标题控件承载受服务器权限控制的 XML 编辑入口；标记层不自行授予编辑能力。</zh-CN>
+        <en>The shared module-title control hosts the XML-edit entry under server permission control; the markup does not grant edit capability by itself.</en>
+    </lang>
+--%>

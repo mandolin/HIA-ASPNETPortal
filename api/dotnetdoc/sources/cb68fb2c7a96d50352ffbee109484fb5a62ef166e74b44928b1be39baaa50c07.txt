@@ -1,0 +1,18 @@
+        public static string SanitizeAndTruncate(string value, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>始终先净化再判断长度；非正上限明确返回空字符串，而不是泄露未截断输入。</zh-CN>
+            //   <en>Always sanitize before evaluating length; a non-positive cap explicitly returns an empty string rather than exposing untruncated input.</en>
+            // </lang>
+            string sanitized = Sanitize(value);
+            if (maximumLength <= 0 || sanitized.Length <= maximumLength)
+            {
+                return maximumLength <= 0 ? string.Empty : sanitized;
+            }
+
+            // <lang>
+            //   <zh-CN>省略号计入固定上限，保留“内容被截断”的事实而不让结果超过调用方字段预算。</zh-CN>
+            //   <en>The ellipsis counts toward the fixed cap, preserving the fact of truncation without exceeding the caller's field budget.</en>
+            // </lang>
+            return sanitized.Substring(0, Math.Max(0, maximumLength - 3)) + "...";
+        }

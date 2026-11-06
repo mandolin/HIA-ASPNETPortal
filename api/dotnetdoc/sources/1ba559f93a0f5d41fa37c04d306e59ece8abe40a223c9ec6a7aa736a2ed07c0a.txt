@@ -1,0 +1,24 @@
+        private void TryEnsureWorkItem(long itemId, string itemCode, string title, string summary, string ownerRoleKey, DateTime? dueUtc)
+        {
+            // <lang>
+            //   <zh-CN>待办是后台入口投影，不是协同事项事实；待办创建失败只影响入口便利性，不回滚已写入的事项和事项事件。</zh-CN>
+            //   <en>The work item is an administration-entry projection, not the collaboration-item fact; creation failures affect entry convenience only and do not roll back the item or its event.</en>
+            // </lang>
+            if (WorkItemDb == null || itemId <= 0)
+            {
+                return;
+            }
+
+            WorkItemDb.EnsureWorkItem(
+                new PortalWorkItemCreateRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.CollaborationItem,
+                    BusinessId = itemId.ToString(CultureInfo.InvariantCulture),
+                    Title = NormalizeInput(title, 200),
+                    Summary = "Collaboration item " + itemCode + ": " + NormalizeInput(summary, 400),
+                    AssignedRoleKey = NormalizeInput(ownerRoleKey, 120),
+                    CreatedUtc = DateTime.UtcNow,
+                    CreatedBy = GetCurrentUserName(),
+                    DueUtc = dueUtc
+                });
+        }

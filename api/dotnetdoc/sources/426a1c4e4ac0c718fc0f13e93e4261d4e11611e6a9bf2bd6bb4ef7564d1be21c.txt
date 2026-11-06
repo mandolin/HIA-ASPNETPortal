@@ -1,0 +1,45 @@
+        public IDictionary<long, IList<CollaborationItemParticipantInfo>> GetParticipantsForItems(IList<long> itemIds)
+        {
+            List<long> requestedIds = NormalizeItemIdList(itemIds);
+            if (requestedIds.Count == 0 || !HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return CreateEmptyParticipantMap(requestedIds);
+            }
+
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                string itemIdList = BuildItemIdParameterList(requestedIds, parameters);
+
+                List<CollaborationItemParticipantInfo> participants = context.Database.SqlQuery<CollaborationItemParticipantInfo>(@"
+SELECT
+    [P].[ParticipantId],
+    [P].[ItemId],
+    [P].[UserId],
+    [U].[Name] AS [UserName],
+    [P].[ParticipantRoleKey],
+    [P].[CreatedUtc]
+FROM [dbo].[PortalBiz_CollaborationItemParticipants] AS [P]
+LEFT JOIN [dbo].[Portal_Users] AS [U]
+    ON [U].[UserID] = [P].[UserId]
+WHERE [P].[ItemId] IN (" + itemIdList + @")
+ORDER BY [P].[ItemId] ASC, [P].[ParticipantId] ASC;",
+                    parameters.ToArray()).ToList();
+
+                IDictionary<long, IList<CollaborationItemParticipantInfo>> participantsByItem = CreateEmptyParticipantMap(requestedIds);
+                foreach (CollaborationItemParticipantInfo participant in participants)
+                {
+                    IList<CollaborationItemParticipantInfo> bucket;
+                    if (participant != null && participantsByItem.TryGetValue(participant.ItemId, out bucket))
+                    {
+                        bucket.Add(participant);
+                    }
+                }
+
+                return participantsByItem;
+            }
+            catch (Exception)
+            {
+                return CreateEmptyParticipantMap(requestedIds);
+            }
+        }

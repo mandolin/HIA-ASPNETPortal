@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先执行统一权限与请求初始化；失败时立即结束，避免未验证的定义标识进入绑定或事件处理。</zh-CN>
+            //   <en>Run the shared authorization and request initialization first; stop immediately on failure so an unverified definition id cannot reach binding or event handlers.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅首次请求绑定快照，保留 Web Forms 回发字段并避免重复读取数据库。</zh-CN>
+            //   <en>Bind the snapshot only on the initial request, preserving Web Forms postback fields and avoiding a duplicate database read.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindDefinition();
+            }
+        }

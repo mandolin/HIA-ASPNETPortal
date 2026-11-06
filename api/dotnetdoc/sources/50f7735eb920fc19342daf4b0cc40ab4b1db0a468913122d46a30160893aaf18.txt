@@ -1,0 +1,68 @@
+        private void BindEntries()
+        {
+            DateTime startUtc;
+            DateTime endUtc;
+            if (!TryReadDateRange(out startUtc, out endUtc))
+            {
+                // <lang>
+                //   <zh-CN>输入无效时同时清空列表和分页控件，避免继续展示上一组日期的诊断数据。</zh-CN>
+                //   <en>Clear both the list and paging controls for invalid input so diagnostics from the previous date range are not left visible.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>显式抑制空态：此处是**输入无效**而非"没有日志"，渲染"暂无…"会把错误提示混成空结果。</zh-CN>
+                //   <en>Suppress the empty state explicitly: this is **invalid input** rather than "no logs", so rendering
+                //   "nothing here" would blend an error message into an empty result.</en>
+                // </lang>
+                entriesEmptyStateRowCount = null;
+                EntriesRepeater.DataSource = null;
+                EntriesRepeater.DataBind();
+                PreviousButton.Visible = false;
+                NextButton.Visible = false;
+                return;
+            }
+
+            var query = new PortalDiagnosticQuery
+            {
+                StartUtc = startUtc,
+                EndUtcExclusive = endUtc.AddDays(1),
+                Level = LevelFilter.SelectedValue,
+                Category = CategoryFilter.Text,
+                EventId = EventIdFilter.Text,
+                Page = CurrentPage,
+                PageSize = PageSize
+            };
+
+            // <lang>
+            //   <zh-CN>查询对象只携带受控筛选和页边界；服务负责数据可用性、扫描上限和低敏投影。</zh-CN>
+            //   <en>The query carries only controlled filters and page bounds; the service owns availability, scan limits, and low-sensitivity projection.</en>
+            // </lang>
+            PortalDiagnosticQueryResult result = PortalDiagnosticQueryService.Query(query);
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（输入无效路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it; <c>null</c> suppresses it on the invalid-input path.</en>
+            // </lang>
+            entriesEmptyStateRowCount = result.Entries.Count;
+            EntriesRepeater.DataSource = result.Entries;
+            EntriesRepeater.DataBind();
+
+            // <lang>
+            //   <zh-CN>分页可见性依据当前索引和服务 HasMore 结果计算，截断提示不改变已绑定的低敏事件集合。</zh-CN>
+            //   <en>Paging visibility follows the current index and service HasMore result; a truncation notice does not alter the bound low-sensitivity event set.</en>
+            // </lang>
+            PreviousButton.Visible = CurrentPage > 0;
+            NextButton.Visible = result.HasMore;
+            // <lang>
+            //   <zh-CN>用户可见消息统一取自资源并用编号占位符 ＋ CurrentCulture 格式化数字；跨页完全相同的消息共用一个 Admin_Common_* 键，避免同文案出现多份翻译来源。</zh-CN>
+            //   <en>User-visible messages come from resources with numbered placeholders, formatted with CurrentCulture; messages that are identical across pages share one Admin_Common_* key so the same text never has two translation sources.</en>
+            // </lang>
+            ResultLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_Common_PageInfo, CurrentPage + 1, result.Entries.Count);
+            if (result.WasTruncated)
+            {
+                MessageLabel.Text = lang.Admin_DiagnosticsLogs_ScanLimitReached;
+            }
+            else
+            {
+                MessageLabel.Text = string.Empty;
+            }
+        }

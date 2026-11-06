@@ -1,0 +1,57 @@
+    public readonly struct CollaborationItemTransition
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用当前状态、触发动作与目标状态构造一条迁移。</zh-CN>
+        ///   <en>Constructs a transition from the current status, triggering action, and target status.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="fromStatus">
+        /// <l>
+        ///   <zh-CN>迁移前的当前状态，应来自 <see cref="PortalCollaborationItemStatuses"/>。</zh-CN>
+        ///   <en>Status before the transition, expected to come from <see cref="PortalCollaborationItemStatuses"/>.</en>
+        /// </l>
+        /// </param>
+        /// <param name="actionKey">
+        /// <l>
+        ///   <zh-CN>触发动作键，应来自 <see cref="PortalCollaborationItemActions"/>。</zh-CN>
+        ///   <en>Triggering action key, expected to come from <see cref="PortalCollaborationItemActions"/>.</en>
+        /// </l>
+        /// </param>
+        /// <param name="toStatus">
+        /// <l>
+        ///   <zh-CN>迁移后的目标状态，应来自 <see cref="PortalCollaborationItemStatuses"/>。</zh-CN>
+        ///   <en>Status after the transition, expected to come from <see cref="PortalCollaborationItemStatuses"/>.</en>
+        /// </l>
+        /// </param>
+        public CollaborationItemTransition(string fromStatus, string actionKey, string toStatus)
+        {
+            FromStatus = fromStatus;
+            ActionKey = actionKey;
+            ToStatus = toStatus;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>迁移前的当前状态。</zh-CN>
+        ///   <en>Status before the transition.</en>
+        /// </lang>
+        /// </summary>
+        public string FromStatus { get; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>触发动作键。</zh-CN>
+        ///   <en>Triggering action key.</en>
+        /// </lang>
+        /// </summary>
+        public string ActionKey { get; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>迁移后的目标状态。</zh-CN>
+        ///   <en>Status after the transition.</en>
+        /// </lang>
+        /// </summary>
+        public string ToStatus { get; }
+    }

@@ -1,0 +1,15 @@
+        private static string GetActorUserName(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>优先采用显式上下文，再回退当前请求；该引用只在本次写入中存活。</zh-CN>
+            //   <en>Prefer the explicit context and then fall back to the current request; this reference lives only for the current write.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+            if (current == null || current.User == null || current.User.Identity == null ||
+                !current.User.Identity.IsAuthenticated)
+            {
+                return "(anonymous)";
+            }
+
+            return current.User.Identity.Name;
+        }

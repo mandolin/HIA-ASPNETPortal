@@ -1,0 +1,12 @@
+        public static readonly PortalSettingDefinition ModuleAssemblyAllowCodeFile =
+            new PortalSettingDefinition(
+                PortalSettingKeys.ModuleAssemblyAllowCodeFile,
+                "允许装配调试态",
+                "控制本环境是否允许装配态台账中出现 CodeFile 受控调试态；默认关闭，须由部署侧显式开启。",
+                PortalSettingValueType.Boolean,
+                "false",
+                false,
+                true,
+                "Admins",
+                "ModuleAssembly",
+                true);

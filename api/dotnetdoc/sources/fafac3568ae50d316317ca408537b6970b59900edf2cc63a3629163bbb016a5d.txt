@@ -1,0 +1,42 @@
+    public enum PortalNavigationEntryKind
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧门户 Tab 入口。</zh-CN>
+        ///   <en>Legacy Portal Tab entry.</en>
+        /// </lang>
+        /// </summary>
+        Tab,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可挂载到 Tab 的桌面模块入口。</zh-CN>
+        ///   <en>Desktop module entry that can be mounted to a Tab.</en>
+        /// </lang>
+        /// </summary>
+        DesktopModule,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>后台管理页面入口。</zh-CN>
+        ///   <en>Administration page entry.</en>
+        /// </lang>
+        /// </summary>
+        AdminPage,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>文档、帮助或外部资料入口。</zh-CN>
+        ///   <en>Documentation, help, or external-reference entry.</en>
+        /// </lang>
+        /// </summary>
+        Documentation,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>历史账号入口，例如旧注册页。</zh-CN>
+        ///   <en>Legacy account entry, such as the old registration page.</en>
+        /// </lang>
+        /// </summary>
+        LegacyAccount
+    }

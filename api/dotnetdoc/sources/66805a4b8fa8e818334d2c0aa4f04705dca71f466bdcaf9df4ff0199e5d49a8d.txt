@@ -1,0 +1,37 @@
+        private bool TryInitializeEditContext()
+        {
+            // <lang>
+            //   <zh-CN>模块标识是编辑权限根；缺失、非法或无权时不继续读取项目。</zh-CN>
+            //   <en>The module identifier roots edit authorization; missing, invalid, or unauthorized values must not continue to item reads.</en>
+            // </lang>
+            if (!TryReadOptionalPositiveId(Request.Params["Mid"], out _moduleId) || _moduleId == 0 ||
+                !PortalSecurity.HasEditPermissions(_moduleId))
+            {
+                RedirectToEditAccessDenied();
+                return false;
+            }
+
+            if (!TryReadOptionalPositiveId(Request.Params["ItemId"], out _itemId))
+            {
+                RedirectToEditAccessDenied();
+                return false;
+            }
+
+            if (_itemId == 0)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>已有项目必须真实存在并属于当前模块，防止跨模块编辑。</zh-CN>
+            //   <en>An existing item must exist and belong to the current module to prevent cross-module editing.</en>
+            // </lang>
+            _currentItem = DocumentDB.GetSingleDocument(_itemId);
+            if (_currentItem == null || _currentItem.ModuleId != _moduleId)
+            {
+                RedirectToEditAccessDenied();
+                return false;
+            }
+
+            return true;
+        }

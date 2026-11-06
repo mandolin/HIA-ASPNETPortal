@@ -1,0 +1,6 @@
+        private static bool IsSupportedAction(string actionKey)
+        {
+            return string.Equals(actionKey, PortalWorkflowActions.Approve, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalWorkflowActions.Return, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal);
+        }

@@ -1,0 +1,42 @@
+    public enum PortalThemeSource
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>内置 Default 回退。</zh-CN>
+        ///   <en>Built-in Default fallback.</en>
+        /// </lang>
+        /// </summary>
+        Default,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>部署级 appSettings。</zh-CN>
+        ///   <en>Deployment-level appSettings.</en>
+        /// </lang>
+        /// </summary>
+        AppSettings,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>数据库运行级覆盖。</zh-CN>
+        ///   <en>Database runtime override.</en>
+        /// </lang>
+        /// </summary>
+        Database,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前门户 Tab 覆盖。</zh-CN>
+        ///   <en>Current portal Tab override.</en>
+        /// </lang>
+        /// </summary>
+        TabOverride,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>非法或不可用主题触发的安全回退。</zh-CN>
+        ///   <en>Safe fallback caused by an invalid or unavailable theme.</en>
+        /// </lang>
+        /// </summary>
+        Fallback
+    }

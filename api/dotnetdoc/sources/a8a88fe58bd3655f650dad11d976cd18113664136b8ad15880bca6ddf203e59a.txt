@@ -1,0 +1,6 @@
+<%--
+   <lang>
+     <zh-CN>该入口来自页眉注销按钮；页面只负责终止认证状态并回到门户首页，不读取或展示业务数据。</zh-CN>
+     <en>This endpoint is reached from the header logoff button; it only terminates authentication state and returns to the portal home page, without reading or displaying business data.</en>
+   </lang>
+--%>

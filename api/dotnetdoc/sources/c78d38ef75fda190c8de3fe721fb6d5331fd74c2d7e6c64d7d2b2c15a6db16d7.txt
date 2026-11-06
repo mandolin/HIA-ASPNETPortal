@@ -1,0 +1,45 @@
+        public IList<PortalWorkItemInfo> GetAdminWorkItems(string status, int take)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return new List<PortalWorkItemInfo>();
+            }
+
+            string normalizedStatus = NormalizeStatusFilter(status);
+            int safeTake = NormalizeTake(take, 50);
+            try
+            {
+                // <lang>
+                //   <zh-CN>管理员列表只读取审批工作项摘要和被分配用户显示名；条数和状态过滤在进入 SQL 前已标准化，避免异常输入扩大查询范围。</zh-CN>
+                //   <en>The administration list reads only work-item summaries and assigned-user display names; row count and status filters are normalized before entering SQL so unusual input cannot expand the query scope.</en>
+                // </lang>
+                return context.Database.SqlQuery<PortalWorkItemInfo>(
+                    @"
+SELECT TOP (@Take)
+    [WorkItem].[WorkItemId],
+    [WorkItem].[BusinessKind],
+    [WorkItem].[BusinessId],
+    [WorkItem].[Title],
+    [WorkItem].[Summary],
+    [WorkItem].[WorkItemStatus],
+    [WorkItem].[AssignedUserId],
+    [User].[Name] AS [AssignedUserName],
+    [WorkItem].[AssignedRoleKey],
+    [WorkItem].[CreatedUtc],
+    [WorkItem].[CreatedBy],
+    [WorkItem].[DueUtc],
+    [WorkItem].[CompletedUtc],
+    [WorkItem].[CompletedBy]
+FROM [dbo].[PortalBiz_WorkItems] AS [WorkItem]
+LEFT JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [WorkItem].[AssignedUserId]
+WHERE (@Status = N'' OR [WorkItem].[WorkItemStatus] = @Status)
+ORDER BY [WorkItem].[CreatedUtc] DESC, [WorkItem].[WorkItemId] DESC;",
+                    new SqlParameter("@Take", safeTake),
+                    new SqlParameter("@Status", normalizedStatus)).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<PortalWorkItemInfo>();
+            }
+        }

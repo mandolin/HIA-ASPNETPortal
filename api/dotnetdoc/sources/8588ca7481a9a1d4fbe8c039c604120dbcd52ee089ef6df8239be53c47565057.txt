@@ -1,0 +1,46 @@
+        private void UpdateRoleReferences(PortalSettings portalSettings, string oldRoleName, string newRoleName)
+        {
+            // <lang>
+            //   <zh-CN>遍历当前门户 Tab 及其模块，只更新完整角色项发生变化的记录。</zh-CN>
+            //   <en>Walk current-Portal Tabs and modules, updating only records whose complete role entries changed.</en>
+            // </lang>
+            foreach (ITabItem tab in portalSettings.DesktopTabs)
+            {
+                // <lang>
+                //   <zh-CN>先计算 Tab 访问角色的新串；无变化时不产生写入。</zh-CN>
+                //   <en>Compute the new Tab access-role string first; unchanged values produce no write.</en>
+                // </lang>
+                string updatedTabRoles = ReplaceRoleReference(tab.AccessRoles, oldRoleName, newRoleName);
+                if (!string.Equals(tab.AccessRoles ?? string.Empty, updatedTabRoles, StringComparison.Ordinal))
+                {
+                    TabsConfig.UpdateTab(
+                        portalSettings.PortalId,
+                        tab.TabId,
+                        tab.TabName,
+                        tab.TabOrder ?? 0,
+                        updatedTabRoles,
+                        tab.MobileTabName,
+                        tab.ShowMobile ?? false);
+                }
+
+                foreach (IModuleItem module in ModulesConfig.GetModulesByTab(tab.TabId))
+                {
+                    // <lang>
+                    //   <zh-CN>模块编辑角色同样按完整项替换，保留原有布局和模块字段。</zh-CN>
+                    //   <en>Replace complete module edit-role entries while preserving existing layout and module fields.</en>
+                    // </lang>
+                    string updatedModuleRoles = ReplaceRoleReference(module.EditRoles, oldRoleName, newRoleName);
+                    if (!string.Equals(module.EditRoles ?? string.Empty, updatedModuleRoles, StringComparison.Ordinal))
+                    {
+                        ModulesConfig.UpdateModule(
+                            module.ModuleId,
+                            module.ModuleOrder ?? 0,
+                            module.PaneName,
+                            module.ModuleTitle,
+                            module.CacheTimeout ?? 0,
+                            updatedModuleRoles,
+                            module.ShowMobile ?? false);
+                    }
+                }
+            }
+        }

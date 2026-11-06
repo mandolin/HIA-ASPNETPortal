@@ -1,0 +1,4 @@
+        private static SqlParameter CreateNullableIntParameter(string name, int? value)
+        {
+            return new SqlParameter(name, value.HasValue ? (object)value.Value : DBNull.Value);
+        }

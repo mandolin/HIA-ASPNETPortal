@@ -1,0 +1,9 @@
+        private bool TryReadNavigationParameters()
+        {
+            // <lang>
+            //   <zh-CN>两个可选参数分别保留 Tab 标识和索引；任一非法值都会阻断后续命令。</zh-CN>
+            //   <en>Read the optional Tab id and index together; any invalid value blocks subsequent commands.</en>
+            // </lang>
+            return TryReadOptionalPositiveParameter("tabid", out tabId) &&
+                   TryReadOptionalPositiveParameter("tabindex", out tabIndex);
+        }

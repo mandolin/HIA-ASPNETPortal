@@ -1,0 +1,133 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.allowpendingemployeebinding",
+      "kind": "entry",
+      "label": "AllowPendingEmployeeBinding",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.allowpendingemployeebinding",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalregistrationoptions.allowpendingemployeebinding",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalregistrationoptions-1dffc19d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.allowpendingemployeebindingkey",
+      "kind": "entry",
+      "label": "AllowPendingEmployeeBindingKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.allowpendingemployeebindingkey",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationoptions.allowpendingemployeebindingkey",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationoptions-fe910a96.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.allowselfregistration",
+      "kind": "entry",
+      "label": "AllowSelfRegistration",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.allowselfregistration",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalregistrationoptions.allowselfregistration",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalregistrationoptions-a096de9a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.allowselfregistrationkey",
+      "kind": "entry",
+      "label": "AllowSelfRegistrationKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.allowselfregistrationkey",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationoptions.allowselfregistrationkey",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationoptions-c146d24b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalregistrationoptions.isemployeecoderequired-system.string",
+      "kind": "entry",
+      "label": "IsEmployeeCodeRequired",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalregistrationoptions.isemployeecoderequired-system.string",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalregistrationoptions.isemployeecoderequired-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalregistrationoptions-b38ec91e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.registrationinvitedefaultexpirydays",
+      "kind": "entry",
+      "label": "RegistrationInviteDefaultExpiryDays",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.registrationinvitedefaultexpirydays",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalregistrationoptions.registrationinvitedefaultexpirydays",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalregistrationoptions-59155f9d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.registrationinvitedefaultexpirydayskey",
+      "kind": "entry",
+      "label": "RegistrationInviteDefaultExpiryDaysKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.registrationinvitedefaultexpirydayskey",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationoptions.registrationinvitedefaultexpirydayskey",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationoptions-13a8e5aa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.requireregistrationapproval",
+      "kind": "entry",
+      "label": "RequireRegistrationApproval",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalregistrationoptions.requireregistrationapproval",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalregistrationoptions.requireregistrationapproval",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalregistrationoptions-5357fc45.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationoptions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.requireregistrationapprovalkey",
+      "kind": "entry",
+      "label": "RequireRegistrationApprovalKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationoptions.requireregistrationapprovalkey",
+      "sourcePath": "src/Portal/Components/PortalRegistrationOptions.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationoptions.requireregistrationapprovalkey",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationoptions-8b67c292.html"
+    }
+  ]
+}

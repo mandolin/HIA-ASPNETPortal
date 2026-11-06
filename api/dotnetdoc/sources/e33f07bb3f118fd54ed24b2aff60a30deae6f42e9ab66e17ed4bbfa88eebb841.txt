@@ -1,0 +1,14 @@
+        private static SqlConnection CreateConnection()
+        {
+            if (Global.Container == null)
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>从既有 Unity 注册读取运行期连接串；空值不创建连接，避免把缺失配置误作可用存储。</zh-CN>
+            //   <en>Read the runtime connection string from the existing Unity registration; an empty value creates no connection so missing configuration is not treated as available storage.</en>
+            // </lang>
+            string connectionString = Global.Container.Resolve<string>(ExternalConnectionStringLoader.UnityConnectionStringName);
+            return string.IsNullOrWhiteSpace(connectionString) ? null : new SqlConnection(connectionString);
+        }

@@ -1,0 +1,1 @@
+        public const string PortalModulesEdit = "Portal.Modules.Edit";

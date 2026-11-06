@@ -1,0 +1,46 @@
+        private void BindInitialState()
+        {
+            if (BindingAdminDb == null || EmployeeDirectoryDb == null || EmployeeAdminDb == null || UsersDb == null)
+            {
+                ShowUnavailable(lang.Admin_UserEmployeeBindingEdit_MessageServiceNotRegistered);
+                return;
+            }
+
+            if (!BindingAdminDb.IsSchemaAvailable() || !EmployeeDirectoryDb.IsSchemaAvailable())
+            {
+                ShowUnavailable(lang.Admin_UserEmployeeBindingEdit_MessageSchemaUnavailable);
+                return;
+            }
+
+            int bindingId;
+            if (TryReadOptionalPositiveParameter("bindingId", out bindingId) && bindingId > 0)
+            {
+                IUserEmployeeBindingInfo binding = BindingAdminDb.GetBindingById(bindingId);
+                if (binding != null)
+                {
+                    UserIdTextBox.Text = binding.UserId.ToString(CultureInfo.InvariantCulture);
+                    EmployeeCodeTextBox.Text = binding.EmployeeCode;
+                    RefreshCurrentState(binding.UserId, binding.EmployeeCode);
+                    return;
+                }
+            }
+
+            int userId;
+            TryReadOptionalPositiveParameter("userId", out userId);
+            if (userId > 0)
+            {
+                UserIdTextBox.Text = userId.ToString(CultureInfo.InvariantCulture);
+            }
+
+            int employeeId;
+            if (TryReadOptionalPositiveParameter("employeeId", out employeeId) && employeeId > 0)
+            {
+                IEmployeeInfo employee = EmployeeAdminDb.GetEmployeeById(employeeId);
+                if (employee != null)
+                {
+                    EmployeeCodeTextBox.Text = employee.EmployeeCode;
+                }
+            }
+
+            RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
+        }

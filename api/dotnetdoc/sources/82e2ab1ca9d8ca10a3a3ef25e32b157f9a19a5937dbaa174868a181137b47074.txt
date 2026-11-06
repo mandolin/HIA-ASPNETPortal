@@ -1,0 +1,74 @@
+        protected void RolesList_ItemCommand(object sender, DataListCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每个命令先验证页面权限、导航参数和 DataList 角色归属。</zh-CN>
+            //   <en>Validate page permission, navigation parameters, and DataList role ownership before every command.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>DataList 键必须解析为当前门户角色，避免篡改索引操作其他角色。</zh-CN>
+            //   <en>The DataList key must resolve to a current-Portal role so a tampered index cannot target another role.</en>
+            // </lang>
+            IRoleItem role;
+            if (!TryGetRoleFromDataList(e, out role))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>edit 命令只切换当前行编辑状态并刷新展示，不写入角色。</zh-CN>
+            //   <en>The edit command only switches the current row to edit mode and refreshes display without persisting a role.</en>
+            // </lang>
+            if (string.Equals(e.CommandName, "edit", StringComparison.OrdinalIgnoreCase))
+            {
+                rolesList.EditItemIndex = e.Item.ItemIndex;
+                BindData();
+                return;
+            }
+
+            if (string.Equals(e.CommandName, "apply", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(e.CommandName, "members", StringComparison.OrdinalIgnoreCase))
+            {
+                // <lang>
+                //   <zh-CN>apply/members 共用名称规范化和改名流程，失败时不继续导航或刷新。</zh-CN>
+                //   <en>apply and members share the rename normalization flow; failure stops navigation and refresh.</en>
+                // </lang>
+                TextBox roleNameTextBox = e.Item.FindControl("roleName") as TextBox;
+                if (roleNameTextBox == null || !TryRenameRole(role, roleNameTextBox.Text))
+                {
+                    return;
+                }
+
+                if (string.Equals(e.CommandName, "members", StringComparison.OrdinalIgnoreCase))
+                {
+                    // <lang>
+                    //   <zh-CN>成员入口只携带已验证角色和兼容导航参数，并交给安全导航策略。</zh-CN>
+                    //   <en>The membership entry carries only the verified role and compatibility navigation parameters through safe navigation.</en>
+                    // </lang>
+                    string url = ResolveUrl(
+                        "~/Admin/SecurityRoles.aspx?roleId=" + role.RoleId +
+                        "&tabindex=" + tabIndex +
+                        "&tabid=" + tabId);
+                    PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, url);
+                    return;
+                }
+
+                rolesList.EditItemIndex = -1;
+                BindData();
+                return;
+            }
+
+            if (string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                // <lang>
+                //   <zh-CN>删除命令交由 DeleteRole 统一执行管理员保护、成员和引用检查。</zh-CN>
+                //   <en>Delegate delete to DeleteRole so administrator, member, and reference guards stay centralized.</en>
+                // </lang>
+                DeleteRole(role);
+            }
+        }

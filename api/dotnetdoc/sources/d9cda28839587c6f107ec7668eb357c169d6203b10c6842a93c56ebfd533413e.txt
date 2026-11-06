@@ -1,0 +1,5 @@
+        internal static string GenericError_ReturnHome {
+            get {
+                return ResourceManager.GetString("GenericError_ReturnHome", resourceCulture);
+            }
+        }

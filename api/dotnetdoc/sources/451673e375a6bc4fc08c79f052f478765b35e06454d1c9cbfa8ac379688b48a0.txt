@@ -1,0 +1,90 @@
+        protected void Application_Start(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先解析当前环境标识；后续 appSettings、Unity 覆盖和外置连接串都以它作为选择维度。</zh-CN>
+            //   <en>Resolve the current environment marker first; later appSettings, Unity overrides, and external connection strings all use it as the selection dimension.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>先解析当前环境标识：Web.config 的 &lt;env&gt; 为部署期固定值，进程环境变量 HIA_PORTAL_ENV 可在其之上做本地/CI 模式切换；
+            //   二者都只选择“基础配置 + 环境覆盖”的覆盖文件名，不携带任何敏感值；非法环境名收敛为 dev 以阻止路径穿越。</zh-CN>
+            //   <en>Resolve the current environment marker: the Web.config &lt;env&gt; element is the deployment-time fixed value, while the
+            //   HIA_PORTAL_ENV process variable can switch the local/CI mode on top of it; both only select the override-file name for
+            //   "base configuration plus environment override" and carry no sensitive values; an invalid environment name converges to dev to block path traversal.</en>
+            // </lang>
+            string env = (string)(EnvSection)ConfigurationManager.GetSection("env");
+            string envVarOverride = Environment.GetEnvironmentVariable("HIA_PORTAL_ENV");
+            if (!string.IsNullOrWhiteSpace(envVarOverride) &&
+                System.Text.RegularExpressions.Regex.IsMatch(envVarOverride, @"^[A-Za-z0-9_-]{1,32}$"))
+            {
+                // <lang>
+                //   <zh-CN>仅接受稳定环境名，避免未规范化输入拼接出任意配置文件路径（如 appSettings.{env}.json）。</zh-CN>
+                //   <en>Accept only a stable environment name so unnormalized input cannot compose an arbitrary configuration-file path such as appSettings.{env}.json.</en>
+                // </lang>
+                env = envVarOverride;
+            }
+            if (string.IsNullOrWhiteSpace(env))
+            {
+                env = "dev";
+            }
+            GlobalInfo.Environment = env;
+
+            // <lang>
+            //   <zh-CN>按“基础配置 + 环境覆盖”的顺序加载 JSON appSettings；真实敏感值仍由外置配置或环境变量处理。</zh-CN>
+            //   <en>Load JSON appSettings in "base configuration plus environment override" order; real sensitive values remain handled by external configuration or environment variables.</en>
+            // </lang>
+            AppSettingsLoader.LoadConfig("Config/appSettings.json");
+            AppSettingsLoader.LoadConfig($"Config/appSettings.{env}.json");
+
+
+            // <lang>
+            //   <zh-CN>创建 Unity 根容器。旧 Web Forms 页面和控件依赖 BuildUp/Resolve，因此容器初始化失败应尽早暴露。</zh-CN>
+            //   <en>Create the Unity root container. Legacy Web Forms pages and controls depend on BuildUp/Resolve, so container initialization failures should surface early.</en>
+            // </lang>
+            Container = new UnityContainer();
+
+            // <lang>
+            //   <zh-CN>先加载主 Unity 配置与环境覆盖 XML，再注册外置连接串命名实例；这样既保留旧数据访问层依赖名，也避免真实连接串继续写在 UnityCfg*.xml 中。</zh-CN>
+            //   <en>Load the main Unity configuration and environment override XML before registering the external connection-string named instance; this keeps legacy data-layer dependency names while preventing real connection strings from remaining in UnityCfg*.xml.</en>
+            // </lang>
+            var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+            section.Configure(Container);
+            UnityConfigLoader.LoadUnityConfig(Container, $"Config/UnityCfg.{env}.xml");
+
+            // <lang>
+            //   <zh-CN>从仓库外部读取语义化连接串 Portal，并映射为旧代码仍使用的 connectionString。加载器会校验外置文件存在；环境变量只覆盖连接串值，不绕过文件校验。</zh-CN>
+            //   <en>Read the semantic Portal connection string outside the repository and map it to the legacy connectionString name. The loader verifies that the external file exists; environment variables override only the connection-string value and do not bypass file validation.</en>
+            // </lang>
+            ExternalConnectionStringLoadResult portalConnectionString =
+                ExternalConnectionStringLoader.LoadPortalConnectionString(env);
+            Container.RegisterInstance(
+                ExternalConnectionStringLoader.UnityConnectionStringName,
+                portalConnectionString.ConnectionString);
+            // <lang>
+            //   <zh-CN>新代码通过 profile 获取 provider invariant，不再把连接串文本当成数据库类型标识。</zh-CN>
+            //   <en>New code receives a profile with the provider invariant instead of treating a connection string as a database type.</en>
+            // </lang>
+            Container.RegisterInstance(portalConnectionString.DatabaseProfile);
+            Container.RegisterType<IPortalDbConnectionFactory, PortalDbConnectionFactory>();
+            PortalDiagnostics.Info(
+                "Startup",
+                $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' with provider '{portalConnectionString.ProviderInvariantName}' from {portalConnectionString.Source}; ConfigFile={portalConnectionString.ConfigFile}");
+            // <lang>
+            //   <zh-CN>该探针只验证当前启动配置能否建立最小连接；它不改变业务状态，异常仍由启动流程处理。</zh-CN>
+            //   <en>This probe only verifies that the current startup configuration can open the minimal connection; it does not change business state, and failures remain handled by the startup flow.</en>
+            // </lang>
+            PortalDiagnostics.CheckSqlConnection(portalConnectionString.ConnectionString);
+            RegisterPasswordPolicyOptionsProvider();
+            RegisterPasswordIterationPolicyProvider();
+
+            // <lang>
+            //   <zh-CN>启动期最小自检只解析关键服务和环境覆盖字符串，验证容器 wiring；不在这里执行业务迁移或破坏性数据修复。</zh-CN>
+            //   <en>The startup smoke check only resolves key services and the environment override string to verify container wiring; it does not perform business migrations or destructive data fixes.</en>
+            // </lang>
+            var usersDbService = Container.Resolve<IUsersDb>();
+            string testStr = Container.Resolve<string>("testStr");
+            PortalDiagnostics.Info(
+                "Startup",
+                $"Resolved IUsersDb: {usersDbService?.GetType().Name}; Resolved testStr: {!string.IsNullOrEmpty(testStr)}");
+
+
+        }

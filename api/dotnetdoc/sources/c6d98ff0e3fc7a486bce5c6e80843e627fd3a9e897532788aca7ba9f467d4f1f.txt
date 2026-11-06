@@ -1,0 +1,32 @@
+        private string GetUnavailableMessage(int userId)
+        {
+            // <lang>
+            //   <zh-CN>先区分认证缺失，避免把未登录状态误报为 schema 或员工绑定问题。</zh-CN>
+            //   <en>Check authentication first so an unauthenticated request is not misreported as a schema or employee-binding problem.</en>
+            // </lang>
+            if (!IsCurrentUserAuthenticated())
+            {
+                return lang.EmployeeProfileCorrectionRequest_MessageSignInRequired;
+            }
+
+            // <lang>
+            //   <zh-CN>认证存在但功能 schema 不可用时，只报告初始化状态，不泄露异常或连接细节。</zh-CN>
+            //   <en>When authentication exists but the feature schema is unavailable, report only initialization state without exposing exceptions or connection details.</en>
+            // </lang>
+            if (CorrectionRequestDb == null || !CorrectionRequestDb.IsSchemaAvailable())
+            {
+                return lang.EmployeeProfileCorrectionRequest_MessageSchemaUnavailable;
+            }
+
+            // <lang>
+            //   <zh-CN>最后区分用户解析失败与没有在职绑定，保持前台提示低敏且可行动。</zh-CN>
+            //   <en>Finally distinguish user-resolution failure from the absence of an active binding while keeping the front-end message low sensitivity and actionable.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>三条前台提示自 2026-10-04 起一律走资源键：此前前三条是**硬编码中文字面量**、第四条已是资源键，同一方法混用两种来源 —— 英文界面下只要走到前三条就会露出中文。中文值与原字面量逐字相同，故中文界面零可见变化。</zh-CN>
+            //   <en>Since 2026-10-04 all three front-end messages come from resource keys: the first three were **hard-coded Chinese literals** while the fourth already used a key, so one method mixed two sources and any path reaching the first three would show Chinese in the English UI. The Chinese values are character-for-character identical to the former literals, so the Chinese UI shows no visible change.</en>
+            // </lang>
+            return userId <= 0
+                ? lang.EmployeeProfileCorrectionRequest_MessageUserNotResolved
+                : lang.EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile;
+        }

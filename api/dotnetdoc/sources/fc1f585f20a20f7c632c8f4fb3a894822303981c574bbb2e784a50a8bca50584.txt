@@ -1,0 +1,80 @@
+        protected override void CreateChildControls()
+        {
+            // <lang>
+            //   <zh-CN>仅当模块配置启用缓存时读取 ASP.NET 缓存；零缓存时间保留 _cachedOutput 的未命中状态，随后按既有直接子控件构造路径继续。</zh-CN>
+            //   <en>Read ASP.NET cache only when module configuration enables caching; a zero cache time retains the _cachedOutput miss state and subsequently follows the existing direct child-control construction path.</en>
+            // </lang>
+            if (_moduleConfiguration.CacheTime > 0)
+            {
+                // <lang>
+                //   <zh-CN>缓存输出只按既有 CacheKey 读取；本方法不在读取时重算入口信任、角色授权或用户身份。</zh-CN>
+                //   <en>Read cached output only by the existing CacheKey; this method does not recalculate entry trust, role authorization, or user identity during the read.</en>
+                // </lang>
+                _cachedOutput = (string)Context.Cache[CacheKey];
+            }
+
+            // <lang>
+            //   <zh-CN>只有缓存未命中才构造子控件；命中时保留已缓存输出并避免重复加载或执行模块生命周期。</zh-CN>
+            //   <en>Construct child controls only on a cache miss; on a hit retain cached output and avoid repeated loading or module lifecycle execution.</en>
+            // </lang>
+            if (_cachedOutput == null)
+            {
+                // <lang>
+                //   <zh-CN>先让 Web Forms 建立本容器的基础子控件状态，再添加动态模块；不改变父类生命周期顺序。</zh-CN>
+                //   <en>Let Web Forms establish this container's base child-control state before adding the dynamic module; do not change base lifecycle order.</en>
+                // </lang>
+                base.CreateChildControls();
+
+                // <lang>
+                //   <zh-CN>动态加载、接口检查与配置注入属于单模块失败边界；任何异常都会在下方诊断并保持空输出。</zh-CN>
+                //   <en>Dynamic loading, interface checking, and configuration injection belong to the single-module failure boundary; any exception is diagnosed below while output remains empty.</en>
+                // </lang>
+                try
+                {
+                    // <lang>
+                    //   <zh-CN>优先使用调用方从运行描述符传入的受控入口；空值时仅为历史兼容规范化模块定义中的旧路径，不把任意路径当作可加载来源。</zh-CN>
+                    //   <en>Prefer the controlled entry supplied by the caller from a runtime descriptor; when it is empty, normalize only the legacy path in module definition for compatibility and do not treat arbitrary paths as loadable sources.</en>
+                    // </lang>
+                    string desktopSource = string.IsNullOrWhiteSpace(DesktopSource)
+                        ? PortalModulePathValidator.NormalizeDesktopSourceOrThrow(_moduleConfiguration.DesktopSrc)
+                        : DesktopSource;
+
+                    // <lang>
+                    //   <zh-CN>加载选定入口并要求实现门户模块接口，防止普通 Web Forms 控件获得 Portal/模块配置；本层不再次验证 manifest、Profile 或状态。</zh-CN>
+                    //   <en>Load the selected entry and require the portal-module interface, preventing ordinary Web Forms controls from receiving Portal/module configuration; this layer does not revalidate manifest, Profile, or state.</en>
+                    // </lang>
+                    var module = Page.LoadControl(desktopSource) as IPortalModuleControl;
+                    if (module == null)
+                    {
+                        throw new InvalidOperationException(
+                            "The module control does not implement IPortalModuleControl.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>在加入容器前传递调用方已绑定的模块设置和 Portal，使缓存未命中路径与未缓存路径看到同一运行时上下文；这不是持久化或授权动作。</zh-CN>
+                    //   <en>Pass the caller-bound module settings and Portal before joining the container so the cache-miss path sees the same runtime context as the uncached path; this is neither persistence nor authorization.</en>
+                    // </lang>
+                    module.ModuleConfiguration = ModuleConfiguration;
+                    module.PortalId = PortalId;
+
+                    // <lang>
+                    //   <zh-CN>仅将通过接口和配置注入的用户控件加入当前缓存容器；缓存 render 阶段是否保存其输出由独立方法决定。</zh-CN>
+                    //   <en>Add only the user control that passed interface and configuration injection to the current cache container; whether the render stage stores its output is decided by a separate method.</en>
+                    // </lang>
+                    Controls.Add((UserControl)module);
+                }
+                catch (Exception exception)
+                {
+                    // <lang>
+                    //   <zh-CN>缓存分支的加载失败不能中止整个门户页；诊断保留在服务器侧，并把当前输出设为空字符串以避免残留错误或部分控件树。</zh-CN>
+                    //   <en>A load failure in the cache branch must not abort the entire portal page; retain diagnostics server-side and set current output to an empty string to avoid stale errors or a partial control tree.</en>
+                    // </lang>
+                    PortalDiagnostics.Error(
+                        "ModulePackage.CachedLoad",
+                        "Loading a cached portal module failed. ModuleId=" + ModuleId,
+                        exception,
+                        Context);
+                    _cachedOutput = string.Empty;
+                }
+            }
+        }

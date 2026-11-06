@@ -1,0 +1,15 @@
+        private string BuildDegradationReasonSummary()
+        {
+            if (degradationReasonCounts.Count == 0)
+            {
+                return "none";
+            }
+
+            IList<string> parts = new List<string>();
+            foreach (string reasonCode in degradationReasonCounts.Keys.OrderBy(key => key, StringComparer.Ordinal))
+            {
+                parts.Add(reasonCode + ":" + degradationReasonCounts[reasonCode].ToString(CultureInfo.InvariantCulture));
+            }
+
+            return string.Join(",", parts.ToArray());
+        }

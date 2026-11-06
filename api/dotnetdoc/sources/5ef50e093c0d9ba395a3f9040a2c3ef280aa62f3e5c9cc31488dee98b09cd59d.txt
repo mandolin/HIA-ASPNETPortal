@@ -1,0 +1,30 @@
+        private void SavePackageState(PortalModulePackage package, bool isEnabled)
+        {
+            // <lang>
+            //   <zh-CN>状态存储统一处理 Profile 后的持久化、不可用回退和诊断；页面只传包标识、目标状态和当前上下文。</zh-CN>
+            //   <en>The state store owns persistence, unavailable fallback, and diagnostics after Profile checks; the page passes only package identity, target state, and context.</en>
+            // </lang>
+            PortalModulePackageStateWriteResult result = PortalModulePackageStates.Save(
+                package.PackageId,
+                isEnabled,
+                string.Empty,
+                Context);
+            if (!result.Succeeded)
+            {
+                ShowMessage(result.Message);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只有持久化成功才写启停审计并显示成功消息，避免把失败状态伪装成页面成功。</zh-CN>
+            //   <en>Write the enable/disable audit and show success only after persistence succeeds, never disguising a failed state as page success.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                "ModulePackage",
+                isEnabled ? "Enable" : "Disable",
+                "ModulePackage",
+                package.PackageId,
+                isEnabled ? "Enabled validated deployed module package." : "Disabled validated deployed module package.",
+                Context);
+            ResultLabel.Text = result.Message;
+        }

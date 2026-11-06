@@ -1,0 +1,400 @@
+    public static class PortalNavigationPolicy
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>校验并规范化一个普通浏览地址。</zh-CN>
+        ///   <en>Validates and normalizes an ordinary browse URL.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="candidate">
+        /// <l>
+        ///   <zh-CN>编辑者输入或旧记录保存的候选地址。</zh-CN>
+        ///   <en>Candidate address entered by an editor or stored in a legacy record.</en>
+        /// </l>
+        /// </param>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前请求，用于确认根路径仍在当前应用虚拟目录内。</zh-CN>
+        ///   <en>Current request used to ensure a root path remains inside the current application virtual directory.</en>
+        /// </l>
+        /// </param>
+        /// <param name="normalizedUrl">
+        /// <l>
+        ///   <zh-CN>成功时返回可使用的地址；失败时为空。</zh-CN>
+        ///   <en>Usable URL when successful; otherwise empty.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>候选地址为允许的应用内地址或 HTTP(S) 外链时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the candidate is an allowed application path or HTTP(S) external link.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryNormalizeBrowseUrl(string candidate, HttpRequest request, out string normalizedUrl)
+        {
+            normalizedUrl = string.Empty;
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                return false;
+            }
+
+            string value = candidate.Trim();
+            if (value.Length > 2048 || ContainsControlCharacter(value) ||
+                value.StartsWith("//", StringComparison.Ordinal) || value.StartsWith("\\\\", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            Uri absoluteUri;
+            if (Uri.TryCreate(value, UriKind.Absolute, out absoluteUri))
+            {
+                if (string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
+                {
+                    normalizedUrl = absoluteUri.AbsoluteUri;
+                    return true;
+                }
+
+                return false;
+            }
+
+            if (value.IndexOf('\\') >= 0 || HasTraversalSegment(value))
+            {
+                return false;
+            }
+
+            if (value.StartsWith("~/", StringComparison.Ordinal))
+            {
+                normalizedUrl = value;
+                return true;
+            }
+
+            if (value.StartsWith("/", StringComparison.Ordinal))
+            {
+                if (!IsCurrentApplicationPath(value, request))
+                {
+                    return false;
+                }
+
+                normalizedUrl = value;
+                return true;
+            }
+
+            if (value.StartsWith("~", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            normalizedUrl = value;
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>校验并规范化 XML、XSL 等受信任部署资源的应用内路径。</zh-CN>
+        ///   <en>Validates and normalizes a current-application path for trusted deployed resources such as XML and XSL files.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="candidate">
+        /// <l>
+        ///   <zh-CN>模块设置中的候选路径。</zh-CN>
+        ///   <en>Candidate path from module settings.</en>
+        /// </l>
+        /// </param>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前请求，用于确认根路径仍在当前应用虚拟目录内。</zh-CN>
+        ///   <en>Current request used to ensure a root path remains inside the current application virtual directory.</en>
+        /// </l>
+        /// </param>
+        /// <param name="normalizedPath">
+        /// <l>
+        ///   <zh-CN>成功时返回应用内虚拟路径；失败时为空。</zh-CN>
+        ///   <en>Current-application virtual path when successful; otherwise empty.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>路径为当前应用内的安全部署资源路径时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the path is a safe deployed resource path inside the current application.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryNormalizeTrustedDeploymentResourcePath(string candidate, HttpRequest request, out string normalizedPath)
+        {
+            normalizedPath = string.Empty;
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                return false;
+            }
+
+            string value = candidate.Trim();
+            if (value.Length > 2048 || ContainsControlCharacter(value) || value.IndexOf('?') >= 0 || value.IndexOf('#') >= 0 ||
+                value.StartsWith("//", StringComparison.Ordinal) || value.StartsWith("\\\\", StringComparison.Ordinal) ||
+                value.IndexOf('\\') >= 0 || HasTraversalSegment(value))
+            {
+                return false;
+            }
+
+            Uri absoluteUri;
+            if (Uri.TryCreate(value, UriKind.Absolute, out absoluteUri))
+            {
+                return false;
+            }
+
+            if (value.StartsWith("~/", StringComparison.Ordinal))
+            {
+                normalizedPath = value;
+                return true;
+            }
+
+            if (value.StartsWith("/", StringComparison.Ordinal))
+            {
+                if (!IsCurrentApplicationPath(value, request))
+                {
+                    return false;
+                }
+
+                normalizedPath = value;
+                return true;
+            }
+
+            if (value.StartsWith("~", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>兼容旧配置中的相对路径，但保存时统一为应用相对路径，避免其受当前页面目录影响。</zh-CN>
+            //   <en>Accept legacy relative paths, but normalize them to application-relative paths so they do not depend on the current page directory.</en>
+            // </lang>
+            if (value.StartsWith("./", StringComparison.Ordinal))
+            {
+                value = value.Substring(2);
+            }
+
+            normalizedPath = "~/" + value;
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从候选 Referer 或 ViewState 回跳值中解析当前应用内的安全返回地址。</zh-CN>
+        ///   <en>Resolves a safe current-application return address from a candidate Referer or ViewState value.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 请求。</zh-CN>
+        ///   <en>Current HTTP request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="candidate">
+        /// <l>
+        ///   <zh-CN>候选回跳地址，可为空。</zh-CN>
+        ///   <en>Candidate return address; may be empty.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前应用内安全地址；非法或缺失时返回门户首页。</zh-CN>
+        ///   <en>Safe current-application URL, or the Portal home page when invalid or missing.</en>
+        /// </l>
+        /// </returns>
+        public static string GetSafeReturnUrl(HttpRequest request, string candidate)
+        {
+            string normalizedUrl;
+            if (TryNormalizeReturnUrl(request, candidate, out normalizedUrl))
+            {
+                return normalizedUrl;
+            }
+
+            return GetPortalHomeUrl(request);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从当前请求 Referer 解析安全返回地址。</zh-CN>
+        ///   <en>Resolves a safe return address from the current request Referer.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 请求。</zh-CN>
+        ///   <en>Current HTTP request.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前应用内安全地址；没有有效 Referer 时返回门户首页。</zh-CN>
+        ///   <en>Safe current-application URL, or the Portal home page when no valid Referer exists.</en>
+        /// </l>
+        /// </returns>
+        public static string GetSafeReturnUrl(HttpRequest request)
+        {
+            Uri referer = request == null ? null : request.UrlReferrer;
+            return GetSafeReturnUrl(request, referer == null ? null : referer.AbsoluteUri);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>向安全返回地址重定向，并避免 <see cref="HttpResponse.End"/> 造成线程中止。</zh-CN>
+        ///   <en>Redirects to a safe return URL while avoiding the thread abort caused by <see cref="HttpResponse.End"/>.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="candidate">
+        /// <l>
+        ///   <zh-CN>候选回跳地址。</zh-CN>
+        ///   <en>Candidate return address.</en>
+        /// </l>
+        /// </param>
+        public static void RedirectToSafeReturnUrl(HttpContext context, string candidate)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            context.Response.Redirect(GetSafeReturnUrl(context.Request, candidate), false);
+            context.ApplicationInstance.CompleteRequest();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>重定向到编辑拒绝页，并避免 <see cref="HttpResponse.End"/> 造成线程中止。</zh-CN>
+        ///   <en>Redirects to the edit-access-denied page while avoiding the thread abort caused by <see cref="HttpResponse.End"/>.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        public static void RedirectToEditAccessDenied(HttpContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            // <lang>
+            //   <zh-CN>授权失败属于必须审计的安全事件：在重定向前尽力写入真实的被拒事实（Outcome=Failure），只记录请求路径这类非敏感事实；审计写入失败绝不阻断拒绝流程。</zh-CN>
+            //   <en>A denied authorization is a security event that must be audited: before redirecting, a genuine denial fact is written best-effort (Outcome=Failure) carrying only non-sensitive facts such as the request path; an audit write failure never blocks the denial flow.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.SecurityAuthorizationCategory,
+                PortalOperationAuditEvents.EditAccessDenied,
+                "Request",
+                context.Request.Path ?? string.Empty,
+                "Edit access denied.",
+                context,
+                null,
+                "Failure");
+
+            context.Response.Redirect("~/Admin/EditAccessDenied.aspx", false);
+            context.ApplicationInstance.CompleteRequest();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>重定向到普通访问拒绝页，并避免 <see cref="HttpResponse.End"/> 造成线程中止。</zh-CN>
+        ///   <en>Redirects to the general access-denied page while avoiding the thread abort caused by <see cref="HttpResponse.End"/>.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>调用方必须自行结束当前流程：本方法使用 `endResponse: false` 并调用 `CompleteRequest`，不会像默认 `Response.Redirect` 那样抛出线程中止异常，因此调用点的后续语句仍会执行，需要显式 `return`。该出口取代页面对 `~/Admin/AccessDenied.aspx` 的硬编码重定向。</zh-CN>
+        ///   <en>Callers must end their own flow: this method uses `endResponse: false` and calls `CompleteRequest`, so unlike the default `Response.Redirect` it does not throw a thread-abort exception and subsequent statements at the call site still run, requiring an explicit `return`. This exit replaces hardcoded redirects to `~/Admin/AccessDenied.aspx`.</en>
+        /// </lang>
+        /// </remarks>
+        public static void RedirectToAccessDenied(HttpContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            // <lang>
+            //   <zh-CN>授权失败属于必须审计的安全事件：在重定向前尽力写入真实的被拒事实（Outcome=Failure），只记录请求路径这类非敏感事实；审计写入失败绝不阻断拒绝流程。</zh-CN>
+            //   <en>A denied authorization is a security event that must be audited: before redirecting, a genuine denial fact is written best-effort (Outcome=Failure) carrying only non-sensitive facts such as the request path; an audit write failure never blocks the denial flow.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.SecurityAuthorizationCategory,
+                PortalOperationAuditEvents.AccessDenied,
+                "Request",
+                context.Request.Path ?? string.Empty,
+                "Access denied.",
+                context,
+                null,
+                "Failure");
+
+            context.Response.Redirect("~/Admin/AccessDenied.aspx", false);
+            context.ApplicationInstance.CompleteRequest();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试读取正整数请求参数。</zh-CN>
+        ///   <en>Attempts to read a positive integer request parameter.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>原始参数值。</zh-CN>
+        ///   <en>Raw parameter value.</en>
+        /// </l>
+        /// </param>
+        /// <param name="parsedValue">
+        /// <l>
+        ///   <zh-CN>成功时返回正整数；失败时为零。</zh-CN>
+        ///   <en>Positive integer when successful; otherwise zero.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>参数是正整数时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the parameter is a positive integer.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryReadPositiveInt32(string value, out int parsedValue)
+        {
+            return int.TryParse(value, out parsedValue) && parsedValue > 0;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试读取非负整数请求参数，用于旧数据中允许从零开始的标识，例如种子管理员角色。</zh-CN>
+        ///   <en>Attempts to read a nonnegative integer request parameter for legacy identifiers that may start at zero, such as the seeded administrator role.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>原始参数值。</zh-CN>
+        ///   <en>Raw parameter value.</en>
+        /// </l>
+        /// </param>
+        /// <param name="parsedValue">
+        /// <l>
+        ///   <zh-CN>成功时返回非负整数；失败时为零。</zh-CN>
+        ///   <en>Nonnegative integer when successful; otherwise zero.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>参数为非负整数时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the parameter is a nonnegative integer.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryReadNonNegativeInt32(string value, out int parsedValue)

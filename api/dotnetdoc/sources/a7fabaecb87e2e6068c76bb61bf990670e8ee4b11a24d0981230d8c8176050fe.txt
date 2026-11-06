@@ -1,0 +1,5 @@
+        internal static string EditXml_LabelXmlDataFile {
+            get {
+                return ResourceManager.GetString("EditXml_LabelXmlDataFile", resourceCulture);
+            }
+        }

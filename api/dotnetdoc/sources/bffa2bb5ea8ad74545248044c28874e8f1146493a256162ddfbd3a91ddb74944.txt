@@ -1,0 +1,114 @@
+        public static PortalModulePackageStateWriteResult Save(
+            string packageId,
+            bool isEnabled,
+            string note,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>仅拒绝格式非法的包标识，避免它进入参数化 SQL；该门禁不替代调用方的受信任 manifest/目录确认，也不进行页面或用户授权。</zh-CN>
+            //   <en>Reject only a format-invalid package identifier before it reaches parameterized SQL; this gate does not replace the caller's trusted manifest/directory confirmation and performs no page or user authorization.</en>
+            // </lang>
+            if (!PortalModuleCatalog.IsValidPackageId(packageId))
+            {
+                return new PortalModulePackageStateWriteResult(false, "The module package identifier is invalid.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>连接从受控容器路径创建并在 using 结束时释放；本方法不记录连接串，也不把缺失来源转换为异常详情。</zh-CN>
+                //   <en>Create the connection through the controlled container path and release it at the end of the using block; this method does not log the connection string or turn a missing source into exception detail.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalModulePackageStateWriteResult(false, "The module package state database is unavailable.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>写入不采用读取路径的默认启用回退：状态表未迁移或不可用时必须显式失败，不能静默改写其他配置来源或模块文件。</zh-CN>
+                    //   <en>Writes do not use the read path's default-enabled fallback: when the state table is not migrated or unavailable, fail explicitly and never silently rewrite another configuration source or module files.</en>
+                    // </lang>
+                    connection.Open();
+                    if (!IsTableAvailable(connection))
+                    {
+                        return new PortalModulePackageStateWriteResult(false, "Run the module-package migration before changing package state.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>存在判断、更新/插入和提交共用一个事务；并发调用不会以未锁定普通读取推断写入分支，任何失败都不会得到成功结果。</zh-CN>
+                    //   <en>Existence check, update/insert, and commit share one transaction; concurrent calls do not infer the write branch from an unlocked ordinary read, and any failure cannot receive a success result.</en>
+                    // </lang>
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // <lang>
+                        //   <zh-CN>该标志来自事务内带锁存在判断，只决定更新既有状态行还是插入新状态行；它不判断包是否受信任、Profile 允许或当前请求可加载。</zh-CN>
+                        //   <en>This flag comes from the locked existence check inside the transaction and selects update of an existing state row versus insertion of a new one; it does not decide whether the package is trusted, profile-allowed, or loadable in the current request.</en>
+                        // </lang>
+                        bool exists = ExistsForUpdate(connection, transaction, packageId);
+
+                        // <lang>
+                        //   <zh-CN>命令被绑定到同一事务；固定 SQL 只改变状态事实、非敏感备注、操作人和 UTC 时间，所有可变输入均由参数传入。</zh-CN>
+                        //   <en>The command is bound to the same transaction; fixed SQL changes only state fact, non-sensitive note, actor, and UTC time, while every variable input is supplied through parameters.</en>
+                        // </lang>
+                        using (SqlCommand command = connection.CreateCommand())
+                        {
+                            command.Transaction = transaction;
+
+                            // <lang>
+                            //   <zh-CN>锁定存在结果选择 update 或 insert，不动态拼接包标识、备注或请求内容；两条 SQL 保持同一受控表和字段集。</zh-CN>
+                            //   <en>The locked existence result selects update or insert without dynamically concatenating package identifier, note, or request content; both SQL paths keep the same controlled table and field set.</en>
+                            // </lang>
+                            command.CommandText = exists
+                                ? @"
+UPDATE [dbo].[PortalCfg_ModulePackageStates]
+SET [IsEnabled] = @IsEnabled,
+    [Note] = @Note,
+    [UpdatedBy] = @UpdatedBy,
+    [UpdatedUtc] = @UpdatedUtc
+WHERE [PackageId] = @PackageId;"
+                                : @"
+INSERT INTO [dbo].[PortalCfg_ModulePackageStates]
+    ([PackageId], [IsEnabled], [Note], [UpdatedBy], [UpdatedUtc])
+VALUES
+    (@PackageId, @IsEnabled, @Note, @UpdatedBy, @UpdatedUtc);";
+
+                            // <lang>
+                            //   <zh-CN>包标识、启用标志、备注、操作人和 UTC 事实均作为类型化参数写入；备注可为空并映射数据库 NULL，不能以自由文本改变 SQL 结构。</zh-CN>
+                            //   <en>Package identifier, enabled flag, note, actor, and UTC fact all write as typed parameters; the note may be empty and map to database NULL, and free text cannot alter SQL structure.</en>
+                            // </lang>
+                            AddTextParameter(command, "@PackageId", 100, packageId, string.Empty);
+                            command.Parameters.Add("@IsEnabled", SqlDbType.Bit).Value = isEnabled;
+                            AddNullableTextParameter(command, "@Note", 500, note);
+                            AddTextParameter(command, "@UpdatedBy", 100, GetActorUserName(context), "(anonymous)");
+                            command.Parameters.Add("@UpdatedUtc", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+                            command.ExecuteNonQuery();
+                        }
+
+                        // <lang>
+                        //   <zh-CN>仅在本事务的状态命令已完成后提交；提交证明持久化状态已完成，不代表物理部署、Profile 或授权结果。</zh-CN>
+                        //   <en>Commit only after the state command completed within this transaction; commit proves persisted state completion, not physical deployment, profile, or authorization outcome.</en>
+                        // </lang>
+                        transaction.Commit();
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>成功消息只陈述保存的启用状态，供目录页显示；不承诺即时加载、实例变更、文件操作或跨请求缓存失效。</zh-CN>
+                //   <en>The success message states only the saved enabled state for catalog display; it does not promise immediate loading, instance changes, file operations, or cross-request cache invalidation.</en>
+                // </lang>
+                return new PortalModulePackageStateWriteResult(
+                    true,
+                    isEnabled ? "The module package was enabled." : "The module package was disabled.");
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>诊断层接收异常和可选上下文以保留受限运营证据；调用方只得到固定安全消息，不获得连接串、SQL 或异常文本。</zh-CN>
+                //   <en>The diagnostic layer receives the exception and optional context for restricted operational evidence; the caller receives only a fixed safe message, never connection string, SQL, or exception text.</en>
+                // </lang>
+                PortalDiagnostics.Error("ModulePackageState.Save", "Saving a module package state failed.", exception, context);
+                return new PortalModulePackageStateWriteResult(false, "The module package state could not be saved. Check diagnostics for the event id.");
+            }
+        }

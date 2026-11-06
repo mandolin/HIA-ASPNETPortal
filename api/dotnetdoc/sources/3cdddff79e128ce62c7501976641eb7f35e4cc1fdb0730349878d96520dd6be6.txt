@@ -1,0 +1,11 @@
+        public static IList<PortalNavigationEntry> GetVisibleRelatedEntries(
+            string entryKey,
+            PortalNavigationVisibilityContext context,
+            int maxCount = DefaultMaxRelatedEntries)
+        {
+            return GetRelatedEntries(entryKey, maxCount)
+                .Where(entry => IsVisible(entry, context))
+                .Take(maxCount <= 0 ? DefaultMaxRelatedEntries : maxCount)
+                .ToList()
+                .AsReadOnly();
+        }

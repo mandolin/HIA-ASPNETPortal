@@ -1,0 +1,30 @@
+        protected string GetIndentHtml(object displayOrderObj)
+        {
+            // <lang>
+            //   <zh-CN>缺失排序路径时不生成占位标记，避免错误数据改变讨论行布局。</zh-CN>
+            //   <en>When the sort path is missing, no placeholder markup is emitted so malformed data does not alter the discussion-row layout.</en>
+            // </lang>
+            if (displayOrderObj == null || displayOrderObj == DBNull.Value)
+                return string.Empty;
+
+            // <lang>
+            //   <zh-CN>DisplayOrder 是旧线程路径文本，只用于计算层级；不会原样拼接进返回的 HTML。</zh-CN>
+            //   <en>DisplayOrder is a legacy thread-path string used only to compute the level; it is never concatenated directly into returned HTML.</en>
+            // </lang>
+            string displayOrder = displayOrderObj.ToString();
+            if (string.IsNullOrEmpty(displayOrder))
+                return string.Empty;
+
+            // <lang>
+            //   <zh-CN>层级由点分段数推导，顶级或异常短路径不需要缩进。</zh-CN>
+            //   <en>The level is inferred from dot-separated segments, and top-level or unusually short paths need no indentation.</en>
+            // </lang>
+            int level = displayOrder.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Length - 1;
+            if (level <= 0) return string.Empty;
+
+            // <lang>
+            //   <zh-CN>返回片段只包含由整数层级计算出的像素值，因此不引入来自数据库的 HTML 或样式文本。</zh-CN>
+            //   <en>The returned fragment contains only a pixel value calculated from an integer level, so it introduces no HTML or style text from the database.</en>
+            // </lang>
+            return "<span style=\"margin-left:" + (level * 20) + "px;display:inline-block;\"></span>";
+        }

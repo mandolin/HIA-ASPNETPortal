@@ -1,0 +1,5 @@
+        internal static string Admin_UserEmployeeBindingEdit_LinkEmployeeDirectory {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LinkEmployeeDirectory", resourceCulture);
+            }
+        }

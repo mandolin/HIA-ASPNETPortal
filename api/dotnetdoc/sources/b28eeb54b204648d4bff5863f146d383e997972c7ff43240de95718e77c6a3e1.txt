@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleDefinitions_MetadataSectionTitle {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_MetadataSectionTitle", resourceCulture);
+            }
+        }

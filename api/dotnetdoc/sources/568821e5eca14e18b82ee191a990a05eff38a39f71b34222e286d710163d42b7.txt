@@ -1,0 +1,42 @@
+    public static class PortalWorkItemBusinessKinds
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工资料更正请求业务对象。</zh-CN>
+        ///   <en>Employee-profile correction request business object.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequest = "EmployeeProfileCorrectionRequest";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>抽象业务申请业务对象。</zh-CN>
+        ///   <en>Abstract business-application business object.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplication = "BusinessApplication";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项业务对象。</zh-CN>
+        ///   <en>Enterprise collaboration-item business object.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItem = "CollaborationItem";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假申请业务对象（P20 新增）。</zh-CN>
+        ///   <en>Leave-request business object (added in P20).</en>
+        /// </lang>
+        /// </summary>
+        public const string LeaveRequest = "LeaveRequest";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>费用报销业务对象（P20 新增）。</zh-CN>
+        ///   <en>Expense-reimbursement business object (added in P20).</en>
+        /// </lang>
+        /// </summary>
+        public const string ExpenseReimbursement = "ExpenseReimbursement";
+    }

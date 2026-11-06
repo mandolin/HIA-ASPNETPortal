@@ -1,0 +1,70 @@
+        protected void rptRecent_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (!string.Equals(e.CommandName, "Resubmit", StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            long requestId;
+            if (!long.TryParse(e.CommandArgument == null ? string.Empty : e.CommandArgument.ToString(), out requestId) || requestId <= 0)
+            {
+                ShowMessage("无效的重提请求。");
+                return;
+            }
+
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage("请先登录后再操作。");
+                return;
+            }
+
+            ExpenseReimbursementResubmitResult result = ExpenseReimbursementDb.ResubmitReimbursement(new ExpenseReimbursementResubmitRequest
+            {
+                RequestId = requestId,
+                ApplicantUserId = userId,
+                ActorName = GetCurrentUserName()
+            });
+
+            if (!result.Succeeded)
+            {
+                ShowMessage("重新提交失败，请稍后重试。");
+                return;
+            }
+
+            string summary = string.Empty;
+            var recent = ExpenseReimbursementDb.GetRecentByUser(userId, 20);
+            if (recent != null)
+            {
+                foreach (ExpenseReimbursementInfo item in recent)
+                {
+                    if (item.RequestId == requestId)
+                    {
+                        summary = item.Category + " ¥" + item.Amount.ToString("N2", CultureInfo.InvariantCulture);
+                        break;
+                    }
+                }
+            }
+
+            WorkItemDb.EnsureWorkItem(new PortalWorkItemCreateRequest
+            {
+                BusinessKind = PortalWorkItemBusinessKinds.ExpenseReimbursement,
+                BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                Title = "费用报销 #" + requestId,
+                Summary = summary,
+                AssignedRoleKey = "Admins"
+            });
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                "ExpenseReimbursement.Resubmit",
+                "Request",
+                requestId.ToString(CultureInfo.InvariantCulture),
+                "Expense reimbursement resubmitted. UserId=" + userId,
+                Context,
+                null,
+                "Success");
+
+            ShowMessage("已重新提交，可在「我的待办」跟踪审批进度。", false);
+            RenderRecent();
+        }

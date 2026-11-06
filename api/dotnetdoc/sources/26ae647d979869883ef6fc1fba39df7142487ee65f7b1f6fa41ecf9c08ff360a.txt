@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_LabelMobileUrl {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelMobileUrl", resourceCulture);
+            }
+        }

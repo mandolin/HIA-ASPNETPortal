@@ -1,0 +1,399 @@
+    public static class PortalHiaBoundaryContract
+    {
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>当前外围契约的稳定名称。</zh-CN>
+        ///   <en>Stable name of the current peripheral contract.</en>
+        /// </l>
+        /// </summary>
+        public const string ContractName = "hia.portal.peripheral";
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>当前外围契约的草案版本。</zh-CN>
+        ///   <en>Current draft version of the peripheral contract.</en>
+        /// </l>
+        /// </summary>
+        public const string CurrentContractVersion = "0.1.0-draft";
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>当前门户 producer 的稳定标识。</zh-CN>
+        ///   <en>Stable producer identifier for the current portal.</en>
+        /// </l>
+        /// </summary>
+        public const string ProducerId = "hia-aspnetportal";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>限制部署级实例标识的字符集和长度，阻止路径、空白及敏感内容进入契约。</zh-CN>
+        ///   <en>Restricts deployment instance identifiers by character set and length so paths, whitespace, and sensitive content cannot enter the contract.</en>
+        /// </lang>
+        /// </summary>
+        private static readonly Regex InstanceIdPattern = new Regex(
+            @"^[a-z0-9][a-z0-9._-]{0,127}$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>约束 producer 版本为 invariant 的语义版本文本。</zh-CN>
+        ///   <en>Constrains producer versions to invariant semantic-version text.</en>
+        /// </lang>
+        /// </summary>
+        private static readonly Regex SemanticVersionPattern = new Regex(
+            @"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>外围契约允许发布的能力类型白名单。</zh-CN>
+        ///   <en>Allowlist of capability kinds that the peripheral contract may publish.</en>
+        /// </lang>
+        /// </summary>
+        private static readonly ISet<string> AllowedKinds = new HashSet<string>(StringComparer.Ordinal)
+        {
+            "portal.module-capability",
+            "portal.theme-capability",
+            "portal.setting-capability",
+            "portal.health-capability",
+            "portal.diagnostic-reference"
+        };
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按能力类型保存 payload 必填/可选字段规则；规则只用于离线验证，不启用外部连接。</zh-CN>
+        ///   <en>Stores required and optional payload-field rules by capability kind; rules serve offline validation only and enable no external connection.</en>
+        /// </lang>
+        /// </summary>
+        private static readonly IDictionary<string, PayloadRule> PayloadRules =
+            new Dictionary<string, PayloadRule>(StringComparer.Ordinal)
+            {
+                {
+                    "portal.module-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "packageId", "displayName", "packageVersion", "state", "capabilities" },
+                        new string[0])
+                },
+                {
+                    "portal.theme-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "themeName", "packageVersion", "isAvailable", "capabilities" },
+                        new string[0])
+                },
+                {
+                    "portal.setting-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "settingKey", "valueType", "isSensitive", "sourceLevel", "canEditOnline" },
+                        new string[0])
+                },
+                {
+                    "portal.health-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "componentId", "status" },
+                        new string[0])
+                },
+                {
+                    "portal.diagnostic-reference",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "eventId", "level", "category" },
+                        new string[0])
+                }
+            };
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证一个外围能力 envelope 是否符合当前草案、字段范围和隐私边界。</zh-CN>
+        ///   <en>Validates whether a peripheral capability envelope meets the current draft, field scope, and privacy boundary.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="envelope">
+        /// <l>
+        ///   <zh-CN>待验证的门户拥有 envelope。</zh-CN>
+        ///   <en>Portal-owned envelope to validate.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>不包含 payload 原文的结构化验证结果。</zh-CN>
+        ///   <en>Structured validation result without raw payload content.</en>
+        /// </l>
+        /// </returns>
+        public static PortalHiaBoundaryValidationResult Validate(PortalHiaPeripheralEnvelope envelope)
+        {
+            if (envelope == null)
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_ENVELOPE", "The peripheral envelope is required.");
+            }
+
+            if (!string.Equals(envelope.Contract, ContractName, StringComparison.Ordinal))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_CONTRACT", "The peripheral contract name is unsupported.");
+            }
+
+            if (!string.Equals(envelope.ContractVersion, CurrentContractVersion, StringComparison.Ordinal))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_VERSION", "The peripheral contract version is unsupported.");
+            }
+
+            // <lang>
+            //   <zh-CN>暂存规范化实例标识；验证结果只返回状态，不把原始输入回显给调用方。</zh-CN>
+            //   <en>Hold the normalized instance identifier; validation returns status only and never echoes the raw input.</en>
+            // </lang>
+            string normalizedInstanceId;
+            if (!TryNormalizePortalInstanceId(envelope.PortalInstanceId, out normalizedInstanceId))
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_INSTANCE_ID", "The portal instance identifier is invalid.");
+            }
+
+            if (envelope.Producer == null ||
+                !string.Equals(envelope.Producer.Id, ProducerId, StringComparison.Ordinal) ||
+                !IsSemanticVersion(envelope.Producer.Version))
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_PRODUCER", "The producer descriptor is invalid.");
+            }
+
+            if (!AllowedKinds.Contains(envelope.Kind ?? string.Empty))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_KIND", "The capability kind is unsupported.");
+            }
+
+            if (!IsUtcTimestamp(envelope.OccurredUtc))
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_TIMESTAMP", "The UTC timestamp is invalid.");
+            }
+
+            // <lang>
+            //   <zh-CN>先验证按 kind 约束的 payload，使未知字段和敏感字段在 metadata 之前被拒绝。</zh-CN>
+            //   <en>Validate the kind-scoped payload first so unknown and sensitive fields are rejected before metadata processing.</en>
+            // </lang>
+            PortalHiaBoundaryValidationResult payloadResult = ValidatePayload(envelope.Kind, envelope.Payload);
+            if (!payloadResult.IsValid)
+            {
+                return payloadResult;
+            }
+
+            // <lang>
+            //   <zh-CN>最后验证可忽略 metadata，并只返回成功或稳定失败结果，不携带 payload 原文。</zh-CN>
+            //   <en>Validate ignorable metadata last and return only success or a stable failure without raw payload content.</en>
+            // </lang>
+            PortalHiaBoundaryValidationResult metadataResult = ValidateMetadata(envelope.Metadata);
+            return metadataResult.IsValid ? Success() : metadataResult;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证并规范化部署级门户实例标识。</zh-CN>
+        ///   <en>Validates and normalizes a deployment-level portal instance identifier.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="candidate">
+        /// <l>
+        ///   <zh-CN>部署配置提供的候选标识。</zh-CN>
+        ///   <en>Candidate identifier supplied by deployment configuration.</en>
+        /// </l>
+        /// </param>
+        /// <param name="normalizedInstanceId">
+        /// <l>
+        ///   <zh-CN>成功时返回小写受限标识或规范 GUID。</zh-CN>
+        ///   <en>Normalized restricted identifier or canonical GUID when successful.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>候选值可作为非敏感稳定实例标识时为 true。</zh-CN>
+        ///   <en>True when the candidate can serve as a non-sensitive stable instance identifier.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryNormalizePortalInstanceId(string candidate, out string normalizedInstanceId)
+        {
+            // <lang>
+            //   <zh-CN>先清空输出，确保空值、格式错误或长度超限时不会残留上一次结果。</zh-CN>
+            //   <en>Clear the output first so null, malformed, or overlong input cannot retain a previous result.</en>
+            // </lang>
+            normalizedInstanceId = string.Empty;
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>去除部署配置外围空白，再按 GUID 优先、受限文本其次的顺序规范化。</zh-CN>
+            //   <en>Trim deployment-configuration whitespace, then normalize in GUID-first and restricted-text order.</en>
+            // </lang>
+            string trimmed = candidate.Trim();
+
+            // <lang>
+            //   <zh-CN>保存 GUID 解析结果，以统一 D 格式输出不含大括号的稳定标识。</zh-CN>
+            //   <en>Hold the GUID parse result so the stable identifier is emitted in brace-free D format.</en>
+            // </lang>
+            Guid guid;
+            if (Guid.TryParse(trimmed, out guid))
+            {
+                normalizedInstanceId = guid.ToString("D");
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>将非 GUID 候选转为 invariant 小写，再由正则执行字符和长度门禁。</zh-CN>
+            //   <en>Convert non-GUID candidates to invariant lowercase before the regex enforces character and length bounds.</en>
+            // </lang>
+            string normalized = trimmed.ToLowerInvariant();
+            if (!InstanceIdPattern.IsMatch(normalized))
+            {
+                return false;
+            }
+
+            normalizedInstanceId = normalized;
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证 payload 的必填字段、未知字段和字段值安全性。</zh-CN>
+        ///   <en>Validates required payload fields, unknown fields, and field-value safety.</en>
+        /// </lang>
+        /// </summary>
+        private static PortalHiaBoundaryValidationResult ValidatePayload(
+            string kind,
+            IDictionary<string, object> payload)
+        {
+            if (payload == null)
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_PAYLOAD", "The capability payload is required.");
+            }
+
+            // <lang>
+            //   <zh-CN>按 capability kind 取得字段白名单；未知 kind 立即失败，避免宽松接受未定义 payload。</zh-CN>
+            //   <en>Resolve the field allowlist by capability kind; fail unknown kinds immediately instead of accepting undefined payloads.</en>
+            // </lang>
+            PayloadRule rule;
+            if (!PayloadRules.TryGetValue(kind, out rule))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_KIND", "The capability kind has no payload rule.");
+            }
+
+            // <lang>
+            //   <zh-CN>逐项确认契约声明的必填字段都存在，缺失时返回稳定错误码。</zh-CN>
+            //   <en>Confirm every contract-declared required field is present and return a stable error code when one is missing.</en>
+            // </lang>
+            foreach (string requiredKey in rule.RequiredKeys)
+            {
+                if (!payload.ContainsKey(requiredKey))
+                {
+                    return Failure("HIA_PERIPHERAL_MISSING_FIELD", "A required capability field is missing.");
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>遍历实际 payload，依次执行敏感字段拒绝、白名单校验和字段值类型/范围校验。</zh-CN>
+            //   <en>Traverse the actual payload to reject sensitive names, enforce the allowlist, and validate value type and scope.</en>
+            // </lang>
+            foreach (KeyValuePair<string, object> entry in payload)
+            {
+                if (ContainsProhibitedFieldName(entry.Key))
+                {
+                    return Failure("HIA_PERIPHERAL_PROHIBITED_FIELD", "The capability payload contains a prohibited field.");
+                }
+
+                if (!rule.Allows(entry.Key))
+                {
+                    return Failure("HIA_PERIPHERAL_UNKNOWN_FIELD", "The capability payload contains an unknown field.");
+                }
+
+                if (!IsValidPayloadValue(kind, entry.Key, entry.Value))
+                {
+                    return Failure("HIA_PERIPHERAL_INVALID_FIELD", "The capability payload contains an invalid field value.");
+                }
+            }
+
+            return Success();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证可忽略 metadata 的字段范围和版本一致性。</zh-CN>
+        ///   <en>Validates field scope and version consistency for ignorable metadata.</en>
+        /// </lang>
+        /// </summary>
+        private static PortalHiaBoundaryValidationResult ValidateMetadata(IDictionary<string, object> metadata)
+        {
+            if (metadata == null || metadata.Count == 0)
+            {
+                return Success();
+            }
+
+            // <lang>
+            //   <zh-CN>只允许 metadataVersion 与 source 两个非敏感字段，并复用安全文本规则。</zh-CN>
+            //   <en>Allow only the non-sensitive metadataVersion and source fields and reuse the safe-text rule.</en>
+            // </lang>
+            foreach (KeyValuePair<string, object> entry in metadata)
+            {
+                if (ContainsProhibitedFieldName(entry.Key))
+                {
+                    return Failure("HIA_PERIPHERAL_PROHIBITED_FIELD", "The metadata contains a prohibited field.");
+                }
+
+                if (!string.Equals(entry.Key, "metadataVersion", StringComparison.Ordinal) &&
+                    !string.Equals(entry.Key, "source", StringComparison.Ordinal))
+                {
+                    return Failure("HIA_PERIPHERAL_UNKNOWN_FIELD", "The metadata contains an unknown field.");
+                }
+
+                // <lang>
+                //   <zh-CN>将 metadata 值限制为文本，再校验长度、路径/URL 外观和版本一致性。</zh-CN>
+                //   <en>Restrict metadata values to text, then validate length, path/URL appearance, and version consistency.</en>
+                // </lang>
+                string text = entry.Value as string;
+                if (!IsSafeText(text, 100) ||
+                    (string.Equals(entry.Key, "metadataVersion", StringComparison.Ordinal) &&
+                     !string.Equals(text, CurrentContractVersion, StringComparison.Ordinal)))
+                {
+                    return Failure("HIA_PERIPHERAL_INVALID_FIELD", "The metadata contains an invalid field value.");
+                }
+            }
+
+            return Success();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按字段语义验证 payload 值的类型、枚举范围和安全文本约束。</zh-CN>
+        ///   <en>Validates payload value type, enumeration scope, and safe-text constraints by field semantics.</en>
+        /// </lang>
+        /// </summary>
+        private static bool IsValidPayloadValue(string kind, string key, object value)
+        {
+            if (string.Equals(key, "capabilities", StringComparison.Ordinal))
+            {
+                return IsValidCapabilities(value);
+            }
+
+            if (string.Equals(key, "isAvailable", StringComparison.Ordinal) ||
+                string.Equals(key, "isSensitive", StringComparison.Ordinal) ||
+                string.Equals(key, "canEditOnline", StringComparison.Ordinal))
+            {
+                return value is bool;
+            }
+
+            // <lang>
+            //   <zh-CN>非布尔/集合字段必须先转换为安全文本，后续枚举判断只作用于已净化值。</zh-CN>
+            //   <en>Non-boolean and non-collection fields must first become safe text so later enum checks operate on sanitized values.</en>
+            // </lang>
+            string text = value as string;
+            if (!IsSafeText(text, 200))
+            {
+                return false;
+            }
+
+            if (string.Equals(key, "descriptorVersion", StringComparison.Ordinal))
+            {
+                return string.Equals(text, CurrentContractVersion, StringComparison.Ordinal);
+            }
+
+            if (string.Equals(key, "status", StringComparison.Ordinal))
+            {
+                return string.Equals(text, "Healthy", StringComparison.Ordinal) ||
+                       string.Equals(text, "Warning", StringComparison.Ordinal) ||
+                       string.Equals(text, "Error", StringComparison.Ordinal) ||
+                       string.Equals(text, "Unknown", StringComparison.Ordinal);
+            }

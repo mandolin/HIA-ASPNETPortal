@@ -1,0 +1,16 @@
+        private string BuildProfileAuditSummary(
+            IUserProfileInfo before,
+            string loginName,
+            string displayName,
+            string nickname,
+            string email)
+        {
+            string changedFields = string.Empty;
+            AppendChangedField(ref changedFields, before == null ? currentUser.Name : before.LoginName, loginName, "LoginName");
+            AppendChangedField(ref changedFields, before == null ? currentUser.Name : before.DisplayName, displayName, "DisplayName");
+            AppendChangedField(ref changedFields, before == null ? string.Empty : before.Nickname, nickname, "Nickname");
+            AppendChangedField(ref changedFields, before == null ? currentUser.Email : before.PreferredEmail, email, "PreferredEmail");
+            return string.IsNullOrEmpty(changedFields)
+                ? "Saved user profile without profile field changes."
+                : "Updated user profile fields: " + changedFields + ".";
+        }

@@ -1,0 +1,17 @@
+        private static bool TryParseParentItemId(string value, out long? parentItemId)
+        {
+            parentItemId = null;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return true;
+            }
+
+            long parsed;
+            if (!long.TryParse(value.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed) || parsed <= 0)
+            {
+                return false;
+            }
+
+            parentItemId = parsed;
+            return true;
+        }

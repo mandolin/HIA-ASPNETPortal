@@ -1,0 +1,15 @@
+        private void BindCategoryList()
+        {
+            // <lang>
+            //   <zh-CN>先清除旧项，保证重复初始化不会累加相同分类。</zh-CN>
+            //   <en>Clear existing items first so repeated initialization cannot accumulate duplicate categories.</en>
+            // </lang>
+            CategoryList.Items.Clear();
+            // <lang>
+            //   <zh-CN>分类值是提交契约，展示文本可本地化但值保持稳定。</zh-CN>
+            //   <en>Category values are the submission contract; display text may be localized while values remain stable.</en>
+            // </lang>
+            CategoryList.Items.Add(new ListItem(lang.BusinessApplicationRequest_OptionGeneral, "General"));
+            CategoryList.Items.Add(new ListItem(lang.BusinessApplicationRequest_OptionContent, "Content"));
+            CategoryList.Items.Add(new ListItem(lang.BusinessApplicationRequest_OptionOperations, "Operations"));
+        }

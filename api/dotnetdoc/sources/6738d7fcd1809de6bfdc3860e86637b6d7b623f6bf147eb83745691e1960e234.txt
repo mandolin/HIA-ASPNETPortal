@@ -1,0 +1,4 @@
+        public static IList<string> HiddenNavigationKeys(HttpContext context = null)
+        {
+            return ReadList(PortalSettingsRegistry.NavigationHiddenNavigationKeys, context);
+        }

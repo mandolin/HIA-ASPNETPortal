@@ -1,0 +1,5 @@
+        private static bool IsEmployeeStatusAllowedForActiveBinding(string status)
+        {
+            return string.Equals(status, PortalEmployeeStatuses.Active, StringComparison.Ordinal) ||
+                   string.Equals(status, PortalEmployeeStatuses.Pending, StringComparison.Ordinal);
+        }

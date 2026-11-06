@@ -1,0 +1,12 @@
+        private static string ReplaceRoleReference(string roles, string oldRoleName, string newRoleName)
+        {
+            // <lang>
+            //   <zh-CN>先按旧分号协议解析完整角色项，再仅替换大小写不敏感匹配项并重新拼接。</zh-CN>
+            //   <en>Parse complete entries under the legacy semicolon contract, replace only case-insensitive matches, and join them again.</en>
+            // </lang>
+            return PortalRoleParser.Join(
+                PortalRoleParser.Parse(roles)
+                    .Select(role => string.Equals(role, oldRoleName, StringComparison.OrdinalIgnoreCase)
+                        ? newRoleName
+                        : role));
+        }

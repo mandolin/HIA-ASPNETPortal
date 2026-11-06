@@ -1,0 +1,39 @@
+        public static bool TryDecryptSubmittedPassword(
+            HttpContext context,
+            string encryptedPassword,
+            out string password,
+            out string failureCode,
+            out string eventId)
+        {
+            // <lang>
+            //   <zh-CN>先初始化明文输出，确保失败路径不会把调用方已有内容当作本次解密结果。</zh-CN>
+            //   <en>Initialize the plaintext output first so a failure path cannot expose a caller's previous value as this decryption result.</en>
+            // </lang>
+            password = string.Empty;
+
+            // <lang>
+            //   <zh-CN>单字段入口复用多字段消费逻辑，保证一次性私钥清理和失败分类只有一套实现。</zh-CN>
+            //   <en>Reuse the multi-field consumption path so one-time-key clearing and failure classification have a single implementation.</en>
+            // </lang>
+            string[] passwords;
+            if (!TryDecryptSubmittedPasswords(
+                context,
+                new[] { encryptedPassword },
+                out passwords,
+                out failureCode,
+                out eventId))
+            {
+                // <lang>
+                //   <zh-CN>底层已给出失败分类和低敏诊断事件；单字段入口不再重写或扩展敏感信息。</zh-CN>
+                //   <en>The lower layer already supplied a failure category and low-sensitivity diagnostic event; the single-field entry does not rewrite or extend sensitive details.</en>
+                // </lang>
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>只从成功的多字段结果取第一项；空数组仍安全回退为空字符串。</zh-CN>
+            //   <en>Read only the first item from the successful multi-field result; an empty array safely falls back to an empty string.</en>
+            // </lang>
+            password = passwords.Length > 0 ? passwords[0] : string.Empty;
+            return true;
+        }

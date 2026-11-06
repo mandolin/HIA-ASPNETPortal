@@ -1,0 +1,1 @@
+        public readonly List<ModuleSettings> Modules = new List<ModuleSettings>();

@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>新增 Tab 是写库入口，仍通过原 AddTab_Click 回调执行服务器端创建与权限检查。</zh-CN>
+                    <en>Adding a tab is a persistence entry point and still uses AddTab_Click for server-side creation and authorization checks.</en>
+                </lang>
+            --%>

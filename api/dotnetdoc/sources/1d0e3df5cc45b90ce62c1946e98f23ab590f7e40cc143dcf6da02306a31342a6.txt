@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>移动端摘要和详情是旧数据兼容字段；它们的可选性和展示回退由服务器内容模型决定。</zh-CN>
+                  <en>Mobile summary and detail are legacy-compatibility fields; their optionality and display fallback are decided by the server content model.</en>
+                </lang>
+                --%>

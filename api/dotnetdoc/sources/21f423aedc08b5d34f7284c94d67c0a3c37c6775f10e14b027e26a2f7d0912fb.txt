@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>成员 DataList 只读展示当前成员并使用编码绑定文本；删除命令的角色/用户关系和审计结果由服务端决定。</zh-CN>
+                <en>The member DataList renders current members read-only with encoded text binding; the server decides the role/user relationship and audit result for a removal command.</en>
+              </lang>
+            --%>

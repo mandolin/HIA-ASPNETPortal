@@ -1,0 +1,13 @@
+        private int CurrentPage
+        {
+            get
+            {
+                object value = ViewState["OperationAudits.CurrentPage"];
+                return value is int ? (int)value : 0;
+            }
+            // <lang>
+            //   <zh-CN>ViewState 只承载非负索引，避免回发状态将审计查询游标写成负数。</zh-CN>
+            //   <en>ViewState carries only a non-negative index so postback state cannot write a negative audit-query cursor.</en>
+            // </lang>
+            set { ViewState["OperationAudits.CurrentPage"] = Math.Max(0, value); }
+        }

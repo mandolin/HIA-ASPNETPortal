@@ -1,0 +1,57 @@
+        private static PortalOperationAuditQuery NormalizeQuery(PortalOperationAuditQuery query)
+        {
+            // <lang>
+            //   <zh-CN>今天的 UTC 日期是缺省时间窗的锚点；使用 Date 去除当前时分秒，保证默认窗口在一个请求内稳定。</zh-CN>
+            //   <en>Today's UTC date anchors the default time window; Date removes current clock time so the default window remains stable within a request.</en>
+            // </lang>
+            DateTime nowUtc = DateTime.UtcNow.Date;
+
+            // <lang>
+            //   <zh-CN>起点缺失时默认回看六天，使含今天的窗口为七个 UTC 日期；提供值仅保留日期部分。</zh-CN>
+            //   <en>When the start is missing, default to six days back so the window including today contains seven UTC dates; a supplied value retains its date portion only.</en>
+            // </lang>
+            DateTime startUtc = query == null || query.StartUtc == DateTime.MinValue
+                ? nowUtc.AddDays(-6)
+                : query.StartUtc.Date;
+
+            // <lang>
+            //   <zh-CN>终点是排除边界，缺失时取明天 UTC 零点；这样今天整日仍被包含且相邻请求不会重叠。</zh-CN>
+            //   <en>The end is an exclusive boundary and defaults to tomorrow's UTC midnight; this includes the whole current day without overlapping adjacent requests.</en>
+            // </lang>
+            DateTime endUtcExclusive = query == null || query.EndUtcExclusive == DateTime.MinValue
+                ? nowUtc.AddDays(1)
+                : query.EndUtcExclusive.Date;
+
+            // <lang>
+            //   <zh-CN>结束早于或等于开始会产生空窗或反向窗，因此收敛为最小的一日有效窗口而不是交给 SQL 解释。</zh-CN>
+            //   <en>An end at or before the start would create an empty or reversed window, so reduce it to the minimum valid one-day window rather than delegating interpretation to SQL.</en>
+            // </lang>
+            if (endUtcExclusive <= startUtc)
+            {
+                endUtcExclusive = startUtc.AddDays(1);
+            }
+
+            // <lang>
+            //   <zh-CN>过长时间窗会让高价值审计后台变成无界扫描，故截到固定最大天数；调用方必须以分页或更窄日期继续查询。</zh-CN>
+            //   <en>An overlong window would turn the high-value audit page into an unbounded scan, so cap it at the fixed maximum days; callers must continue with paging or narrower dates.</en>
+            // </lang>
+            if ((endUtcExclusive - startUtc).TotalDays > MaximumQueryDays)
+            {
+                endUtcExclusive = startUtc.AddDays(MaximumQueryDays);
+            }
+
+            // <lang>
+            //   <zh-CN>新对象不复用调用方实例，避免页面在规范化后观察到隐式修改；每个筛选和分页值在此冻结为 SQL 可安全消费的范围。</zh-CN>
+            //   <en>The new object does not reuse the caller instance, preventing the page from observing an implicit mutation; each filter and paging value is frozen here within the range safe for SQL consumption.</en>
+            // </lang>
+            return new PortalOperationAuditQuery
+            {
+                StartUtc = DateTime.SpecifyKind(startUtc, DateTimeKind.Utc),
+                EndUtcExclusive = DateTime.SpecifyKind(endUtcExclusive, DateTimeKind.Utc),
+                Category = NormalizeFilter(query == null ? null : query.Category, 80),
+                Action = NormalizeFilter(query == null ? null : query.Action, 80),
+                TargetId = NormalizeFilter(query == null ? null : query.TargetId, 200),
+                Page = Math.Max(0, Math.Min(query == null ? 0 : query.Page, MaximumPage)),
+                PageSize = Math.Max(1, Math.Min(query == null || query.PageSize <= 0 ? DefaultPageSize : query.PageSize, MaximumPageSize))
+            };
+        }

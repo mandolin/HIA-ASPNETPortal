@@ -1,0 +1,1 @@
+        PortalWorkItemResult EnsureWorkItem(PortalWorkItemCreateRequest request);

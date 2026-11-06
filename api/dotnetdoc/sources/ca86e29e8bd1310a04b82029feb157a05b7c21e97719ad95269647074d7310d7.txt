@@ -1,0 +1,34 @@
+        protected void SaveGlobalThemeButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeEdit))
+            {
+                return;
+            }
+
+            PortalThemePackage package;
+            string reason;
+            if (!PortalThemeCatalog.TryGetTrustedPackage(GlobalThemeList.SelectedValue, out package, out reason))
+            {
+                ShowMessage(lang.Admin_ThemeSettings_MessageSelectGlobalTheme);
+                return;
+            }
+
+            PortalSystemSettingWriteResult result = PortalSystemSettingsStore.SaveOverride(
+                PortalSettingsRegistry.ThemeName,
+                package.Name,
+                Context);
+            if (result.Succeeded)
+            {
+                PortalOperationAudit.Record(
+                    "Theme",
+                    "SetGlobalTheme",
+                    "SystemSetting",
+                    PortalSettingKeys.ThemeName,
+                    "Selected deployed global theme '" + package.Name + "'.",
+                    Context);
+                RedirectToSelf();
+                return;
+            }
+
+            ShowMessage(result.Message);
+        }

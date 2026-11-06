@@ -1,0 +1,10 @@
+            public IEnumerable<IModuleDefinitionItem> GetModuleDefinitions()
+            {
+                IModuleDefsDb definitions = owner.ModuleDefinitionsConfig;
+                if (definitions == null)
+                {
+                    return Enumerable.Empty<IModuleDefinitionItem>();
+                }
+
+                return definitions.GetModuleDefinitions() ?? Enumerable.Empty<IModuleDefinitionItem>();
+            }

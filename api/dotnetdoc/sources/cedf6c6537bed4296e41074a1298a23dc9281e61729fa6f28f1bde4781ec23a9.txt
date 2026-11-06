@@ -1,0 +1,1 @@
+        public IList<PortalDiagnosticEntry> Entries { get; private set; }

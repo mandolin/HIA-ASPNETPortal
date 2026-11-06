@@ -1,0 +1,5 @@
+        internal static string Admin_SiteSettings_MessageInvalidSiteName {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_MessageInvalidSiteName", resourceCulture);
+            }
+        }

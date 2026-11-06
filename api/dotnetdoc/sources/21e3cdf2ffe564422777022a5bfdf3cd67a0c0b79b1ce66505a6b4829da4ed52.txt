@@ -1,0 +1,70 @@
+        private static bool TryGetJsonValue(string localizedJson, CultureInfo culture, out string value, out string error)
+        {
+            value = null;
+            error = null;
+
+            if (string.IsNullOrWhiteSpace(localizedJson) || culture == null)
+            {
+                return false;
+            }
+
+            Dictionary<string, object> parsed;
+            try
+            {
+                // <lang>
+                //   <zh-CN>使用框架自带的 `JavaScriptSerializer`：它直接支持 `{"ja-JP":"值"}` 形态（无需
+                //   DataContractJsonSerializer 的字典开关），且避免为此引入第三方依赖。
+                //   反序列化目标用 `object` 值字典，避免"值是数字或 null"时强转字符串抛异常。</zh-CN>
+                //   <en>Use the framework-provided `JavaScriptSerializer`: it handles the `{"ja-JP":"value"}` shape directly (no
+                //   DataContractJsonSerializer dictionary switch needed) and avoids adding a third-party dependency for this.
+                //   The deserialization target uses an `object`-valued dictionary so a numeric or null value cannot throw on a
+                //   string cast.</en>
+                // </lang>
+                var serializer = new JavaScriptSerializer();
+                parsed = serializer.Deserialize<Dictionary<string, object>>(localizedJson);
+            }
+            catch (ArgumentException exception)
+            {
+                error = exception.GetType().Name;
+                return false;
+            }
+            catch (InvalidOperationException exception)
+            {
+                error = exception.GetType().Name;
+                return false;
+            }
+
+            if (parsed == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>三级键：完整文化名（`ja-JP`）→ 父文化名（`ja`）→ 两字母码（`ja`）。
+            //   父文化与两字母码在多数文化下相同，但保留两级可以覆盖"自定义文化没有父级"等边界。</zh-CN>
+            //   <en>Three-tier keys: full culture name (`ja-JP`) → parent culture name (`ja`) → two-letter code (`ja`). The parent
+            //   and the two-letter code coincide for most cultures, yet keeping both covers boundaries such as custom cultures with no parent.</en>
+            // </lang>
+            foreach (string candidateKey in GetCultureCandidateKeys(culture))
+            {
+                foreach (string actualKey in parsed.Keys)
+                {
+                    if (!string.Equals(actualKey, candidateKey, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    object rawValue = parsed[actualKey];
+                    string text = rawValue == null ? null : rawValue as string;
+                    if (string.IsNullOrWhiteSpace(text))
+                    {
+                        continue;
+                    }
+
+                    value = text;
+                    return true;
+                }
+            }
+
+            return false;
+        }

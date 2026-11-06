@@ -1,0 +1,88 @@
+    public sealed class PortalModulePackage
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个已通过 manifest 和资源校验的模块包元数据对象。</zh-CN>
+        ///   <en>Creates metadata for a module package that has passed manifest and resource validation.</en>
+        /// </lang>
+        /// </summary>
+        internal PortalModulePackage(
+            string directoryName,
+            string packageId,
+            string displayName,
+            string version,
+            string minimumPortalVersion,
+            string desktopEntry,
+            IList<string> resources,
+            string capabilityId,
+            string capabilityRole)
+        {
+            DirectoryName = directoryName ?? string.Empty;
+            PackageId = packageId ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            Version = version ?? string.Empty;
+            MinimumPortalVersion = minimumPortalVersion ?? string.Empty;
+            DesktopEntry = desktopEntry ?? string.Empty;
+            Resources = new List<string>(resources ?? new List<string>()).AsReadOnly();
+            CapabilityId = capabilityId ?? string.Empty;
+            CapabilityRole = capabilityRole ?? string.Empty;
+        }
+
+        /// <summary>
+        /// `DesktopModules` 下的受控目录名。
+        /// Controlled directory name under `DesktopModules`.
+        /// </summary>
+        public string DirectoryName { get; private set; }
+
+        /// <summary>
+        /// 不随显示名改变的稳定包标识。
+        /// Stable package identifier independent from its display name.
+        /// </summary>
+        public string PackageId { get; private set; }
+
+        /// <summary>
+        /// 供管理员目录展示的名称。
+        /// Name displayed by the administrator catalog.
+        /// </summary>
+        public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// 模块包版本。
+        /// Module package version.
+        /// </summary>
+        public string Version { get; private set; }
+
+        /// <summary>
+        /// 模块包声明的最低门户版本。
+        /// Minimum portal version declared by the module package.
+        /// </summary>
+        public string MinimumPortalVersion { get; private set; }
+
+        /// <summary>
+        /// 通过校验的桌面用户控件入口。
+        /// Validated desktop user-control entry point.
+        /// </summary>
+        public string DesktopEntry { get; private set; }
+
+        /// <summary>
+        /// 已声明且位于包目录内的静态资源。
+        /// Declared static resources located inside the package directory.
+        /// </summary>
+        public IList<string> Resources { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>包声明的能力键；未声明能力时为稳定空文本。</zh-CN>
+        ///   <en>Capability key declared by the package; a stable empty string when no capability is declared.</en>
+        /// </lang>
+        /// </summary>
+        public string CapabilityId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>包在该能力中的角色；未声明能力时为稳定空文本。</zh-CN>
+        ///   <en>Role of the package within the capability; a stable empty string when no capability is declared.</en>
+        /// </lang>
+        /// </summary>
+        public string CapabilityRole { get; private set; }
+    }

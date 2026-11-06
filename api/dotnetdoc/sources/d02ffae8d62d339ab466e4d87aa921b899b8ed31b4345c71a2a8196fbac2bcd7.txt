@@ -1,0 +1,39 @@
+        private static byte[] EncodeInteger(byte[] value)
+        {
+            // <lang>
+            //   <zh-CN>先去除冗余前导零，再判断最高位；ASN.1 INTEGER 的符号位要求非负 RSA 数补零。</zh-CN>
+            //   <en>Remove redundant leading zeros, then inspect the high bit; ASN.1 INTEGER requires a zero prefix for non-negative RSA values when needed.</en>
+            // </lang>
+            byte[] normalizedValue = TrimLeadingZeroBytes(value);
+
+            // <lang>
+            //   <zh-CN>最高位为 1 时补零，否则直接沿用规范化内容；结果仍保持大端顺序。</zh-CN>
+            //   <en>Prefix zero when the high bit is set; otherwise keep normalized content in big-endian order.</en>
+            // </lang>
+            bool mustPrefixZero = normalizedValue.Length > 0 && (normalizedValue[0] & 0x80) != 0;
+
+            // <lang>
+            //   <zh-CN>为可选的符号保护字节预留最终 INTEGER 内容缓冲区。</zh-CN>
+            //   <en>Reserve the final INTEGER-content buffer, including the optional sign-protection byte.</en>
+            // </lang>
+            byte[] integerBytes = new byte[normalizedValue.Length + (mustPrefixZero ? 1 : 0)];
+
+            if (mustPrefixZero)
+            {
+                // <lang>
+                //   <zh-CN>从索引 1 写入原始数值，索引 0 保留为非负符号保护字节。</zh-CN>
+                //   <en>Copy the numeric value at index 1 and reserve index 0 for the non-negative sign-protection byte.</en>
+                // </lang>
+                Buffer.BlockCopy(normalizedValue, 0, integerBytes, 1, normalizedValue.Length);
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>无需符号保护时直接复制完整规范化数值。</zh-CN>
+                //   <en>Copy the complete normalized value directly when no sign-protection byte is required.</en>
+                // </lang>
+                Buffer.BlockCopy(normalizedValue, 0, integerBytes, 0, normalizedValue.Length);
+            }
+
+            return EncodeTag(0x02, integerBytes);
+        }

@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_MessageTitleRequired {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageTitleRequired", resourceCulture);
+            }
+        }

@@ -1,0 +1,4 @@
+        public IEnumerable<IModuleDefinitionItem> GetModuleDefinitions()
+        {
+            return _items;
+        }

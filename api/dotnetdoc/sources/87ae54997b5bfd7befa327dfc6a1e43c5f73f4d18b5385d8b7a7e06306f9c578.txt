@@ -1,0 +1,2 @@
+        [Dependency]
+        public IEmployeeProfileCorrectionRequestDb CorrectionRequestDb { private get; set; }

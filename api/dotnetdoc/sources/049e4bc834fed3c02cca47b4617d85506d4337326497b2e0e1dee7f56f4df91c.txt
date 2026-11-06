@@ -1,0 +1,4 @@
+        public static string GetUploadVirtualPath(string storageFileName)
+        {
+            return UploadVirtualDirectory + "/" + Path.GetFileName(storageFileName ?? string.Empty);
+        }

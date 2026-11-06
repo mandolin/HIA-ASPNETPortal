@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-discussdetails.aspx-5",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-discussdetails.aspx-5:entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopmodules-discussdetails.aspx-5",
+      "kind": "entry",
+      "label": "DiscussDetails.aspx webforms-server-comment 5",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopmodules-discussdetails.aspx-5",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx",
+      "symbolId": "dotnetdoc:markup-comment:src-portal-desktopmodules-discussdetails.aspx:5",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-discussd-9030b559.html"
+    }
+  ]
+}

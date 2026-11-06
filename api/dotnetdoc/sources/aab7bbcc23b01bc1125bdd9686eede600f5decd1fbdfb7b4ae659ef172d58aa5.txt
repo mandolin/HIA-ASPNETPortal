@@ -1,0 +1,4 @@
+        protected int? HealthChecksEmptyStateRowCount
+        {
+            get { return healthChecksEmptyStateRowCount; }
+        }

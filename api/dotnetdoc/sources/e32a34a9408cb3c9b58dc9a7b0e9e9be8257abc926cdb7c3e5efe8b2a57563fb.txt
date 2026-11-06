@@ -1,0 +1,27 @@
+        public EmployeeInfo(
+            int employeeId,
+            string employeeCode,
+            string displayName,
+            string preferredName,
+            string workEmail,
+            int? organizationUnitId,
+            string organizationDisplayName,
+            string employmentStatus,
+            DateTime? joinedUtc,
+            DateTime? leftUtc,
+            string sourceSystem,
+            DateTime updatedUtc)
+        {
+            EmployeeId = employeeId;
+            EmployeeCode = employeeCode ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            PreferredName = preferredName ?? string.Empty;
+            WorkEmail = workEmail ?? string.Empty;
+            OrganizationUnitId = organizationUnitId;
+            OrganizationDisplayName = organizationDisplayName ?? string.Empty;
+            EmploymentStatus = employmentStatus ?? string.Empty;
+            JoinedUtc = joinedUtc;
+            LeftUtc = leftUtc;
+            SourceSystem = sourceSystem ?? string.Empty;
+            UpdatedUtc = updatedUtc;
+        }

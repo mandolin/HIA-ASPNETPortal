@@ -1,0 +1,10 @@
+        public static string GetSafeReturnUrl(HttpRequest request, string candidate)
+        {
+            string normalizedUrl;
+            if (TryNormalizeReturnUrl(request, candidate, out normalizedUrl))
+            {
+                return normalizedUrl;
+            }
+
+            return GetPortalHomeUrl(request);
+        }

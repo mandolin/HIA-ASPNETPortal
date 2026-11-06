@@ -1,0 +1,4 @@
+        public static bool IsAdmin()
+        {
+            return PortalSecurity.IsInRole(PortalRoleNames.Administrators);
+        }

@@ -1,0 +1,31 @@
+        private EmployeeProfileCorrectionRequestInfo LoadRequestForReview(long requestId)
+        {
+            if (requestId <= 0)
+            {
+                return null;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只取回写判定所需的四列，避免把业务正文带入审核路径；复用公开 DTO 承接，不新增映射类型。</zh-CN>
+                //   <en>Only the four columns needed for the write-back decision are read, keeping domain content out of the review path; the public DTO is reused so no new mapping type is added.</en>
+                // </lang>
+                return context.Database.SqlQuery<EmployeeProfileCorrectionRequestInfo>(
+                    @"
+SELECT TOP (1)
+    [RequestId],
+    [EmployeeId],
+    [UserId],
+    [FieldName],
+    [ProposedValue],
+    [RequestStatus]
+FROM [dbo].[PortalBiz_EmployeeProfileCorrectionRequests]
+WHERE [RequestId] = @RequestId;",
+                    new SqlParameter("@RequestId", requestId)).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string Common_DocumentMessageUploadTooLarge {
+            get {
+                return ResourceManager.GetString("Common_DocumentMessageUploadTooLarge", resourceCulture);
+            }
+        }

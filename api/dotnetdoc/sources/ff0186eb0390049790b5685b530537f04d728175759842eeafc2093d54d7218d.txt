@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>用户、员工和原因输入受标记层长度上限约束，但格式、存在性、唯一性、当前绑定和审计要求仍由 code-behind 校验。</zh-CN>
+                <en>User, employee, and reason inputs have markup-level length limits, while code-behind still validates format, existence, uniqueness, current binding, and audit requirements.</en>
+              </lang>
+            --%>

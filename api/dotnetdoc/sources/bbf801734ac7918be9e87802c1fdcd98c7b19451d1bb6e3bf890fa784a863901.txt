@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_LabelPriority {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelPriority", resourceCulture);
+            }
+        }

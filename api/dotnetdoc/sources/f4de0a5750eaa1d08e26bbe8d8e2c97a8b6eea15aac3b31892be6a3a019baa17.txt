@@ -1,0 +1,5 @@
+        internal static string EditHtml_SectionMobileFallback {
+            get {
+                return ResourceManager.GetString("EditHtml_SectionMobileFallback", resourceCulture);
+            }
+        }

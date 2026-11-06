@@ -1,0 +1,48 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存前重新初始化请求，确保事件归属与模块编辑权限来自服务器端实时校验。</zh-CN>
+            //   <en>The request is initialized again before saving so event ownership and module edit permission come from live server-side validation.</en>
+            // </lang>
+            IEventItem item;
+            if (!TryInitializeRequest(out item) || !Page.IsValid)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>expireDate 是当前文化解析得到的事件过期时间；解析失败只显示低敏提示，不写入数据库。</zh-CN>
+            //   <en>expireDate is the event expiry time parsed with the current culture; parse failures only show a low-sensitivity notice and do not write to the database.</en>
+            // </lang>
+            DateTime expireDate;
+            if (!DateTime.TryParse(ExpireField.Text, out expireDate))
+            {
+                // <lang>
+                //   <zh-CN>旧页面仍用当前文化解析日期；失败时只显示低敏校验提示，不暴露服务器区域性或异常细节。</zh-CN>
+                //   <en>The legacy page still parses dates using current culture; failures show only a low-sensitivity validation message without exposing server culture or exception details.</en>
+                // </lang>
+                ShowValidationMessage(lang.EditEvents_MessageInvalidExpirationDate);
+                return;
+            }
+
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>新增事件使用当前模块标识，创建人来自服务器端认证身份，不接受浏览器传入。</zh-CN>
+                //   <en>New events use the current module id, and creator identity comes from the server-side authenticated principal rather than browser input.</en>
+                // </lang>
+                EventsDB.AddEvent(moduleId, Context.User.Identity.Name, TitleField.Text, expireDate,
+                    DescriptionField.Text, WhereWhenField.Text);
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>更新路径已经在 `TryInitializeRequest` 中核验条目归属，避免跨模块编辑。</zh-CN>
+                //   <en>The update path has already validated item ownership in `TryInitializeRequest`, avoiding cross-module edits.</en>
+                // </lang>
+                EventsDB.UpdateEvent(itemId, Context.User.Identity.Name, TitleField.Text, expireDate,
+                    DescriptionField.Text, WhereWhenField.Text);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

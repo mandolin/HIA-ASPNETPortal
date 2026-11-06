@@ -1,0 +1,54 @@
+        private void ChangeUserProfileStatus(
+            string status,
+            string auditAction,
+            string auditSummary,
+            string successMessage,
+            string failurePrefix)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
+            {
+                return;
+            }
+
+            if (string.Equals(status, PortalUserProfileStatuses.Disabled, StringComparison.Ordinal) && IsCurrentTargetSelf())
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageCannotDisableSelf, true);
+                return;
+            }
+
+            IUserRegistrationInfo registration = UsersDB.GetRegistrationInfo(userId);
+            if (registration != null &&
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal))
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRegistrationAlreadyRejected, true);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>状态写入成功后再记录审计并刷新页面；审计或刷新异常不改变前一步已持久化事实。</zh-CN>
+                //   <en>Status persistence is followed by audit and page refresh; an audit or refresh exception does not change the fact that the earlier write may be durable.</en>
+                // </lang>
+                UsersDB.SetUserProfileStatus(userId, status, auditAction, GetCurrentActor());
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    auditAction,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    auditSummary,
+                    Context);
+                ShowRegistrationMessage(successMessage, false);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.ChangeUserProfileStatus",
+                    "Changing user profile status failed. UserId=" + userId + "; Status=" + status,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(failurePrefix + eventId, true);
+            }
+        }

@@ -1,0 +1,23 @@
+        private static void SelectListValue(DropDownList list, string value)
+        {
+            // <lang>
+            //   <zh-CN>按稳定值查找选项，避免把显示文本或文化格式用于选择匹配。</zh-CN>
+            //   <en>Find the option by its stable value so display text or culture-specific formatting is not used for selection.</en>
+            // </lang>
+            ListItem item = list.Items.FindByValue(value ?? string.Empty);
+            if (item == null)
+            {
+                // <lang>
+                //   <zh-CN>当前候选集没有该值时保持控件现状，不凭空添加可能越权的选项。</zh-CN>
+                //   <en>Keep the control unchanged when the candidate set lacks the value instead of adding an untrusted option.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先清除旧选择，再标记匹配项，确保单选控件不会保留多个状态。</zh-CN>
+            //   <en>Clear the previous selection before marking the match so the single-select control cannot retain multiple states.</en>
+            // </lang>
+            list.ClearSelection();
+            item.Selected = true;
+        }

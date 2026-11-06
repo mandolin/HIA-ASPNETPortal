@@ -1,0 +1,10 @@
+        private static bool IsSupportedAction(string actionKey)
+        {
+            return string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Complete, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Cancel, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Close, StringComparison.Ordinal);
+        }

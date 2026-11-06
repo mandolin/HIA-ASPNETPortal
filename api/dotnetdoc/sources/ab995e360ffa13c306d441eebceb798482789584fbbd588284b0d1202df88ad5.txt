@@ -1,0 +1,5 @@
+        private void BindReferenceDataLists()
+        {
+            BindReferenceDataList(ItemTypeList, PortalReferenceDataSets.CollaborationItemType);
+            BindReferenceDataList(PriorityList, PortalReferenceDataSets.CollaborationPriority);
+        }

@@ -1,0 +1,32 @@
+        private static PortalDiagnosticEntry ParseEntry(string line, string fileName)
+        {
+            // <lang>
+            //   <zh-CN>空白行不是诊断事件，直接忽略而不反序列化或产生警告。</zh-CN>
+            //   <en>A blank line is not a diagnostic event; ignore it without deserialization or warning.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                return null;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只反序列化为受控 DTO；DTO 仍依赖日志生产者已完成净化，不把原始行返回或写入警告。</zh-CN>
+                //   <en>Deserialize only into the controlled DTO; it still relies on producer sanitization and neither returns raw line content nor writes it to warnings.</en>
+                // </lang>
+                return JsonConvert.DeserializeObject<PortalDiagnosticEntry>(line);
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>单条畸形事件仅写入受控文件名和已净化、截断的异常摘要后跳过；不记录原始行，且不会阻止同文件其余事件继续读取。</zh-CN>
+                //   <en>Skip one malformed event after logging only the controlled file name and sanitized, truncated exception summary; do not log the raw line or block reading other events in the file.</en>
+                // </lang>
+                Trace.TraceWarning(
+                    "Portal diagnostic query skipped malformed entry in '{0}'. Error={1}",
+                    fileName,
+                    PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 300));
+                return null;
+            }
+        }

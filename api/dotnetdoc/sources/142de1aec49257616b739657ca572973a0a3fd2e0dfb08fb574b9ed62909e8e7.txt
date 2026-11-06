@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每次请求先重做权限与归属门禁，避免回发继续使用未验证的模块状态。</zh-CN>
+            //   <en>Reapply authorization and ownership gates on every request so a postback cannot reuse unverified module state.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅首次请求绑定数据库快照，保留回发控件值供保存事件读取。</zh-CN>
+            //   <en>Bind the database snapshot only on the initial request, preserving postback control values for the save event.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindData();
+            }
+        }

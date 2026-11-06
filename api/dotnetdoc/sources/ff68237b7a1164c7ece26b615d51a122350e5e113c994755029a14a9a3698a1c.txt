@@ -1,0 +1,91 @@
+        protected void LoginBtn_Click(Object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>仅规范化输入边界，不在此记录用户名、密码或摘要。</zh-CN>
+            //   <en>Normalize input boundaries only; do not log user name, password, or digest here.</en>
+            // </lang>
+            var loginIdentifier = EmailOrName.Text.Trim();
+            string submittedPassword;
+            if (!TryResolveSubmittedPassword(out submittedPassword))
+            {
+                ClearSubmittedPasswordFields();
+                Message.Text = string.Format("<br>{0}<br/>", lang.Signin_LoginFaild);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>不在页面层生成摘要；数据层负责强哈希验证、旧 MD5 兼容和迁移。</zh-CN>
+            //   <en>Do not generate a digest in the page layer; the data layer owns strong-hash verification, legacy MD5 compatibility, and migration.</en>
+            // </lang>
+            PortalSignInResult signInResult = UsersDB.SignIn(loginIdentifier, submittedPassword);
+
+            ClearSubmittedPasswordFields();
+
+            if (signInResult.Succeeded)
+            {
+                // <lang>
+                //   <zh-CN>主身份票据写入安全版本；角色票据在 AuthenticateRequest 中按需构造。</zh-CN>
+                //   <en>The main identity ticket carries the security version; the role ticket is built on demand during AuthenticateRequest.</en>
+                // </lang>
+                PortalAuthenticationService.SignIn(
+                    Response,
+                    Request,
+                    signInResult.UserName,
+                    signInResult.SecurityVersion,
+                    RememberCheckbox.Checked);
+
+                if (signInResult.UpgradedLegacyCredential)
+                {
+                    PortalOperationAudit.Record(
+                        PortalOperationAuditEvents.SecurityCredentialsCategory,
+                        PortalOperationAuditEvents.LegacyCredentialUpgraded,
+                        PortalOperationAuditEvents.UserTargetType,
+                        signInResult.UserId.ToString(),
+                        "Legacy credential upgraded after successful sign-in.",
+                        Context);
+                }
+
+                // <lang>
+                //   <zh-CN>凭据按更高迭代次数重哈希后单独记录审计；只写用户标识，不写密码、盐或哈希材料。</zh-CN>
+                //   <en>Record a separate audit when the credential was rehashed to a higher iteration count; only the user identifier is written, never the password, salt, or hash material.</en>
+                // </lang>
+                if (signInResult.CredentialCostUpgraded)
+                {
+                    PortalOperationAudit.Record(
+                        PortalOperationAuditEvents.SecurityCredentialsCategory,
+                        PortalOperationAuditEvents.CredentialCostUpgraded,
+                        PortalOperationAuditEvents.UserTargetType,
+                        signInResult.UserId.ToString(),
+                        "Credential rehashed to a higher iteration count after successful sign-in.",
+                        Context);
+                }
+
+                // <lang>
+                //   <zh-CN>回到应用根路径，沿用既有登录后导航。</zh-CN>
+                //   <en>Return to the application root and retain legacy post-sign-in navigation.</en>
+                // </lang>
+                Response.Redirect(Request.ApplicationPath);
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>认证失败属于必须审计的安全事件：写入真实的失败事实（Outcome=Failure），只携带登录标识这类非敏感事实，绝不写入口令、盐或哈希材料；审计写入失败不影响登录流程。</zh-CN>
+                //   <en>A failed authentication is a security event that must be audited: a genuine failure fact is written (Outcome=Failure) carrying only non-sensitive facts such as the login identifier, never passwords, salts, or hash material; an audit write failure never affects the sign-in flow.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.SecurityAuthenticationCategory,
+                    PortalOperationAuditEvents.SignInFailed,
+                    PortalOperationAuditEvents.UserTargetType,
+                    loginIdentifier ?? string.Empty,
+                    "Sign-in failed for the submitted login identifier.",
+                    Context,
+                    null,
+                    "Failure");
+
+                // <lang>
+                //   <zh-CN>使用通用失败提示，不暴露用户是否存在、审核状态或摘要比较细节。</zh-CN>
+                //   <en>Use a generic failure message and do not expose user existence, review status, or digest-comparison details.</en>
+                // </lang>
+                Message.Text = string.Format("<br>{0}<br/>", lang.Signin_LoginFaild);
+            }
+        }

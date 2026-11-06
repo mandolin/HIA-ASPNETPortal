@@ -1,0 +1,4 @@
+        protected int? EmptyStateRowCount
+        {
+            get { return itemsEmptyStateRowCount; }
+        }

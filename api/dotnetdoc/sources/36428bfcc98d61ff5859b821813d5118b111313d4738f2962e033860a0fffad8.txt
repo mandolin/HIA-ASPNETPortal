@@ -1,0 +1,7 @@
+        public static bool AllowSelfRegistration
+        {
+            get
+            {
+                return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.AllowSelfRegistration);
+            }
+        }

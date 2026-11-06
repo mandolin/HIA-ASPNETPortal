@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>账号状态卡片仅在服务端授权后显示禁用/恢复按钮；禁用动作额外保留浏览器确认，但确认不替代服务端授权。</zh-CN>
+                <en>The account-status card shows disable/restore buttons only after server authorization; the disable action keeps a browser confirmation, which never replaces server authorization.</en>
+              </lang>
+            --%>

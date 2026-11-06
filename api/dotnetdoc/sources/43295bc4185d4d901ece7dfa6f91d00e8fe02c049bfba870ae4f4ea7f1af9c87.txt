@@ -1,0 +1,53 @@
+    public sealed class PortalTabThemeOverrideReadResult
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建 Tab 主题覆盖读取结果。</zh-CN>
+        ///   <en>Creates a tab theme-override read result.</en>
+        /// </lang>
+        /// </summary>
+        internal PortalTabThemeOverrideReadResult(bool isAvailable, bool isFound, string themeName)
+        {
+            // <lang>
+            //   <zh-CN>保存覆盖表可读性；不可用时调用方必须回退全局主题而非阻断页面。</zh-CN>
+            //   <en>Store override-table availability; when unavailable, callers must fall back to the global theme instead of blocking the page.</en>
+            // </lang>
+            IsAvailable = isAvailable;
+
+            // <lang>
+            //   <zh-CN>保存当前 Tab 是否存在覆盖行，与表可用状态分开表达。</zh-CN>
+            //   <en>Store whether the current tab has an override row, separately from table availability.</en>
+            // </lang>
+            IsFound = isFound;
+
+            // <lang>
+            //   <zh-CN>将读取主题空值归一为空字符串，避免把数据库 null 当作可应用主题。</zh-CN>
+            //   <en>Normalize a null theme to empty so a database null is never treated as an applicable theme.</en>
+            // </lang>
+            ThemeName = themeName ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>覆盖表是否已部署并可读取。</zh-CN>
+        ///   <en>Whether the override table is deployed and readable.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsAvailable { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前 Tab 是否有覆盖值。</zh-CN>
+        ///   <en>Whether the current tab has an override.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsFound { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>覆盖主题名。</zh-CN>
+        ///   <en>Overridden theme name.</en>
+        /// </lang>
+        /// </summary>
+        public string ThemeName { get; private set; }
+    }

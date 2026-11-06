@@ -1,0 +1,1 @@
+        public string LegacyName { get; private set; }

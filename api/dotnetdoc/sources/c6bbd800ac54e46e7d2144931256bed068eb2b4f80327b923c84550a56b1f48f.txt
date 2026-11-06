@@ -1,0 +1,57 @@
+        private static void AddConfigurationChecks(IList<PortalHealthCheckResult> checks)
+        {
+            // <lang>
+            //   <zh-CN>把环境标识归一到稳定的 dev 回退，不把空白配置传播到路径拼接或诊断结果。</zh-CN>
+            //   <en>Normalize the environment identifier to a stable dev fallback so blank configuration does not flow into path composition or diagnostics.</en>
+            // </lang>
+            string env = string.IsNullOrWhiteSpace(GlobalInfo.Environment) ? "dev" : GlobalInfo.Environment;
+            checks.Add(new PortalHealthCheckResult(
+                "Configuration",
+                "环境标识",
+                PortalHealthStatus.Healthy,
+                "当前环境标识已解析。",
+                "env=" + env));
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>解析受控外置配置根目录；该路径只用于存在性检查，不读取连接串内容。</zh-CN>
+                //   <en>Resolve the controlled external-configuration root; use the path only for an existence check and never read connection-string content.</en>
+                // </lang>
+                string configRoot = ExternalConnectionStringLoader.ResolveExternalConfigRoot();
+
+                // <lang>
+                //   <zh-CN>按环境和固定文件名构造预期配置文件路径，环境名来自受控回退，文件名不接受请求输入。</zh-CN>
+                //   <en>Compose the expected configuration-file path from the controlled environment fallback and fixed filename; neither accepts request input.</en>
+                // </lang>
+                string configFile = Path.Combine(
+                    configRoot,
+                    env,
+                    ExternalConnectionStringLoader.ConnectionStringsFileName);
+                // <lang>
+                //   <zh-CN>只记录文件是否存在，不打开、解析或回显文件内容。</zh-CN>
+                //   <en>Record only whether the file exists; do not open, parse, or echo its contents.</en>
+                // </lang>
+                bool exists = File.Exists(configFile);
+
+                checks.Add(new PortalHealthCheckResult(
+                    "Configuration",
+                    "外置连接串文件",
+                    exists ? PortalHealthStatus.Healthy : PortalHealthStatus.Warning,
+                    exists ? "外置连接串文件存在。" : "外置连接串文件不存在。",
+                    "ConfigRoot=" + configRoot + "; ConfigFile=" + configFile));
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>路径解析失败映射为健康错误并保留受限异常消息；不让配置检查异常中断其它健康检查。</zh-CN>
+                //   <en>Map path-resolution failure to a health error with restricted exception text so it cannot abort the other health checks.</en>
+                // </lang>
+                checks.Add(new PortalHealthCheckResult(
+                    "Configuration",
+                    "外置配置根目录",
+                    PortalHealthStatus.Error,
+                    "外置配置根目录解析失败。",
+                    exception.Message));
+            }
+        }

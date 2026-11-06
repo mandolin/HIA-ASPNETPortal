@@ -1,0 +1,23 @@
+        public int AddModuleDefinition(string name, string desktopSrc, string mobileSrc)
+        {
+            // <lang>
+            //   <zh-CN>这里仅把已经完成页面级校验的契约值落到旧定义表，不在数据层重新解释路径语义。</zh-CN>
+            //   <en>This layer only persists contract values that have already passed page-level validation and does not reinterpret path semantics.</en>
+            // </lang>
+            var newModuleDef = new ModuleDefinitionItem
+            {
+                FriendlyName = name,
+                DesktopSourceFile = desktopSrc,
+                MobileSourceFile = mobileSrc
+            };
+
+            _context.ModuleDefinitions.Add(newModuleDef);
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>保存后立即刷新快照，避免稍后的页面仍读取旧列表。</zh-CN>
+            //   <en>Refresh the snapshot immediately after saving so later pages do not keep reading a stale list.</en>
+            // </lang>
+            _items = _context.ModuleDefinitions.ToList();
+            return newModuleDef.ModuleDefId;
+        }

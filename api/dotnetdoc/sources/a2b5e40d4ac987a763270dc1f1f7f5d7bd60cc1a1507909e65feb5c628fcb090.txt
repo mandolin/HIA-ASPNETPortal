@@ -1,0 +1,7 @@
+        private void ClearSubmittedPasswordFields()
+        {
+            Password.Text = string.Empty;
+            ConfirmPassword.Text = string.Empty;
+            EncryptedPassword.Value = string.Empty;
+            EncryptedConfirmPassword.Value = string.Empty;
+        }

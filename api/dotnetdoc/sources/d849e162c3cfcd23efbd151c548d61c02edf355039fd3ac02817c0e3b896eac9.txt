@@ -1,0 +1,2 @@
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]// 设置属性不可浏览且不在设计器序列化中可见
+        int ModuleId { get; }

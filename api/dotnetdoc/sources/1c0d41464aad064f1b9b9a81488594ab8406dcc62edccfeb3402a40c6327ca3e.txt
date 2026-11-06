@@ -1,0 +1,5 @@
+        internal static string Admin_ExpenseReimbursements_Title {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_Title", resourceCulture);
+            }
+        }

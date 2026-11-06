@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_LabelEndDate {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelEndDate", resourceCulture);
+            }
+        }

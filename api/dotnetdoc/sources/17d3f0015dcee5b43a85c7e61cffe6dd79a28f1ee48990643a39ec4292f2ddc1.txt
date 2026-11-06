@@ -1,0 +1,13 @@
+        private EmployeeDirectoryQuery CreateCommonQuery()
+        {
+            // <lang>
+            //   <zh-CN>从当前控件读取关键字和停用组织开关，形成只读查询输入；具体字段清理由数据层继续负责。</zh-CN>
+            //   <en>Read the keyword and inactive-organization switch from controls to form read-only query input; the data layer remains responsible for field cleanup.</en>
+            // </lang>
+            return new EmployeeDirectoryQuery
+            {
+                Keyword = KeywordTextBox.Text,
+                IncludeInactiveOrganizations = IncludeInactiveOrganizations.Checked,
+                Take = PageSize
+            };
+        }

@@ -1,0 +1,58 @@
+        protected void DeleteBtn_Click(Object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除事件同样重新执行授权和对象解析，避免陈旧页面状态绕过门禁。</zh-CN>
+            //   <en>The delete event repeats authorization and object resolution so stale page state cannot bypass the gate.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>删除前统计实例引用，明确阻断仍被使用的定义。</zh-CN>
+            //   <en>Count instance references before deletion and explicitly block definitions that are still in use.</en>
+            // </lang>
+            int instanceCount = ModulesConfig.GetModulesByModuleDefId(defId).Count();
+            if (instanceCount > 0)
+            {
+                /*
+                 * <lang>
+                 *   <zh-CN>旧删除会级联清除业务模块数据；这里先阻断被引用定义，要求管理员先处理实例级影响。</zh-CN>
+                 *   <en>Legacy deletion cascades into business module data, so referenced definitions are blocked here and administrators must handle instance-level impact first.</en>
+                 * </lang>
+                 */
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleDefinitions_MessageInUseByInstances, instanceCount));
+                return;
+            }
+
+            try
+            {
+                ModuleDefConfig.DeleteModuleDefinition(defId);
+                // <lang>
+                //   <zh-CN>仅在删除调用成功后记录审计，避免把失败操作误报为完成。</zh-CN>
+                //   <en>Record the audit only after the delete call succeeds, avoiding a false completion record.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    "ModuleDefinition",
+                    "Delete",
+                    "ModuleDefinition",
+                    defId.ToString(),
+                    "Deleted an unused legacy module definition.",
+                    Context);
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>删除失败沿用统一诊断和低敏反馈边界，不向页面泄漏异常细节。</zh-CN>
+                //   <en>Delete failures use the shared diagnostics and low-sensitivity feedback boundary without exposing exception details.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ModuleDefinitions.Delete",
+                    "Deleting a legacy module definition failed. ModuleDefinitionId=" + defId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleDefinitions_MessageDeleteFailed, eventId));
+            }
+        }

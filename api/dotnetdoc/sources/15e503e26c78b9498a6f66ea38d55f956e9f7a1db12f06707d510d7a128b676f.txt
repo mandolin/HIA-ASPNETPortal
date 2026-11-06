@@ -1,0 +1,13 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>仅在首次请求绑定固定参考数据和本人列表，避免回发时覆盖用户输入或控件选择。</zh-CN>
+            //   <en>Bind fixed reference data and the own-item list only on the first request so postbacks do not overwrite user input or selections.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindItemTypeList();
+                BindPriorityList();
+                BindModule();
+            }
+        }

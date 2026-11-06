@@ -1,0 +1,35 @@
+        private bool TryGetActorAuthorization(int? actorUserId, out CollaborationItemActorAuthorization authorization)
+        {
+            authorization = null;
+            if (!actorUserId.HasValue || actorUserId.Value <= 0 || usersDb == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                IUserItem actor = usersDb.FindUserById(actorUserId.Value);
+                if (actor == null || string.IsNullOrWhiteSpace(actor.Name))
+                {
+                    return false;
+                }
+
+                string[] permissionKeys = rolesDb == null
+                    ? new string[0]
+                    : (rolesDb.GetPermissionKeysByUserName(actor.Name) ?? Enumerable.Empty<string>())
+                        .Where(key => !string.IsNullOrWhiteSpace(key))
+                        .Distinct(StringComparer.OrdinalIgnoreCase)
+                        .ToArray();
+                string[] roleNames = (usersDb.GetRoleNamesByUser(actor.Name) ?? Enumerable.Empty<string>())
+                    .Where(name => !string.IsNullOrWhiteSpace(name))
+                    .ToArray();
+                bool isAdministrator = roleNames.Any(name => string.Equals(name, PortalRoleNames.Administrators, StringComparison.OrdinalIgnoreCase)) ||
+                                       permissionKeys.Any(key => string.Equals(key, PortalPermissionKeys.BusinessCollaborationAdmin, StringComparison.OrdinalIgnoreCase));
+                authorization = new CollaborationItemActorAuthorization(actor.UserId, NormalizeText(actor.Name, 100), permissionKeys, isAdministrator);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }

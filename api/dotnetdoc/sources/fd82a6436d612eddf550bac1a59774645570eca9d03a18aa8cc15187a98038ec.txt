@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_LabelOrganization {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelOrganization", resourceCulture);
+            }
+        }

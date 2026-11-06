@@ -1,0 +1,5 @@
+        internal static string EditEvents_MessageValidDescription {
+            get {
+                return ResourceManager.GetString("EditEvents_MessageValidDescription", resourceCulture);
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageSchemaUnavailable", resourceCulture);
+            }
+        }

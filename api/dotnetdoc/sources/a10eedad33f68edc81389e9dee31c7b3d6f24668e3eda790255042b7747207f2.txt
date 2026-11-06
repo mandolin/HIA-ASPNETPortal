@@ -1,0 +1,8 @@
+        private string EncodeDisplayText(string value)
+        {
+            // <lang>
+            //   <zh-CN>旧记录可能已经存储实体文本；显示前先解码再编码，得到稳定的一次编码输出。</zh-CN>
+            //   <en>Legacy rows may already store entity text; decoding before encoding yields stable single-encoded output.</en>
+            // </lang>
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
+        }

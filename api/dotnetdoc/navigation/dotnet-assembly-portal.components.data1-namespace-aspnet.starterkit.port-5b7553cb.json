@@ -1,0 +1,116 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:interface:t-aspnet.starterkit.portal.ilinksdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.ILinksDb",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.-ctor-aspnet.starterkit.portal.portaldbcontext",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.-ctor-aspnet.starterkit.portal.portaldbcontext",
+      "sourcePath": "src/Portal.Components.Data1/LinksDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.linksdb.-ctor-aspnet.starterkit.portal.portaldbcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.linksdb.-ctor-aspnet.star-6c79b8d8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.addlink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
+      "kind": "entry",
+      "label": "AddLink",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.addlink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
+      "sourcePath": "src/Portal.Components.Data1/LinksDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.linksdb.addlink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.linksdb.addlink-system.in-4071761f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.deletelink-system.int32",
+      "kind": "entry",
+      "label": "DeleteLink",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.deletelink-system.int32",
+      "sourcePath": "src/Portal.Components.Data1/LinksDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.linksdb.deletelink-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.linksdb.deletelink-system-441f1e68.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.getlinks-system.int32",
+      "kind": "entry",
+      "label": "GetLinks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.getlinks-system.int32",
+      "sourcePath": "src/Portal.Components.Data1/LinksDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.linksdb.getlinks-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.linksdb.getlinks-system.i-3f791cf2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.getsinglelink-system.int32",
+      "kind": "entry",
+      "label": "GetSingleLink",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.getsinglelink-system.int32",
+      "sourcePath": "src/Portal.Components.Data1/LinksDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.linksdb.getsinglelink-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.linksdb.getsinglelink-sys-a6c4eb33.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.updatelink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
+      "kind": "entry",
+      "label": "UpdateLink",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.linksdb.updatelink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
+      "sourcePath": "src/Portal.Components.Data1/LinksDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.linksdb.updatelink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.linksdb.updatelink-system-aecb1673.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.linksdb:entry:hia-document:dotnet-f-aspnet.starterkit.portal.linksdb._context",
+      "kind": "entry",
+      "label": "_context",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.linksdb._context",
+      "sourcePath": "src/Portal.Components.Data1/LinksDb.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.linksdb._context",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.linksdb._context-4d675c82.html"
+    }
+  ]
+}

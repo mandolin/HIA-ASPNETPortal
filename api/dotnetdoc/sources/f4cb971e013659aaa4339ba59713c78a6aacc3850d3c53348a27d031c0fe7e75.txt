@@ -1,0 +1,8 @@
+        public CollaborationItemDb(PortalBizDbContext context, IReferenceDataDb referenceDataDb, IUsersDb usersDb, IRolesDb rolesDb, IEmployeeDirectoryDb employeeDirectoryDb)
+        {
+            this.context = context;
+            this.referenceDataDb = referenceDataDb;
+            this.usersDb = usersDb;
+            this.rolesDb = rolesDb;
+            this.employeeDirectoryDb = employeeDirectoryDb;
+        }

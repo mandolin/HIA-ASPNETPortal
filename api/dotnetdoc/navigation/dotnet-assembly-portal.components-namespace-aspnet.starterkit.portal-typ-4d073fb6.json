@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iglobalsdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iglobalsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iglobalsdb.getsingleportal-system.int32",
+      "kind": "entry",
+      "label": "GetSinglePortal",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iglobalsdb.getsingleportal-system.int32",
+      "sourcePath": "src/Portal.Components/IGlobalDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iglobalsdb.getsingleportal-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iglobalsdb.getsingleporta-f6747359.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iglobalsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iglobalsdb.updateportalinfo-system.int32-system.string-system.boolean",
+      "kind": "entry",
+      "label": "UpdatePortalInfo",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iglobalsdb.updateportalinfo-system.int32-system.string-system.boolean",
+      "sourcePath": "src/Portal.Components/IGlobalDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iglobalsdb.updateportalinfo-system.int32-system.string-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iglobalsdb.updateportalin-bf2fbacf.html"
+    }
+  ]
+}

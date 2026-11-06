@@ -1,0 +1,8 @@
+        private static string GetUserAgent(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>User-Agent 是不可信请求元数据，只供低敏审计诊断；缺少 Request 时以空值降级。</zh-CN>
+            //   <en>User-Agent is untrusted request metadata used only for low-sensitivity audit diagnostics; degrade to empty when Request is absent.</en>
+            // </lang>
+            return context == null || context.Request == null ? string.Empty : context.Request.UserAgent;
+        }

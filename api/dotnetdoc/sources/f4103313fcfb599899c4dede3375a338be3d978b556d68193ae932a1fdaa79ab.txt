@@ -1,0 +1,38 @@
+        protected void DefsList_ItemCommand(object sender, DataListCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>编辑命令再次验证权限、导航参数和 DataList 目标，避免仅凭行索引构造地址。</zh-CN>
+            //   <en>Revalidate permission, navigation parameters, and the DataList target so a URL cannot be built from a row index alone.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>旧 DataList 只给出行索引，因此这里先把索引、DataKeys 和真实定义集合串起来复核，避免构造不存在的定义编辑地址。</zh-CN>
+            //   <en>The legacy DataList provides only a row index, so this block cross-checks the index, DataKeys, and actual definition set before composing an edit URL.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>定义标识必须同时通过行边界、DataKeys 正整数和当前定义集合校验。</zh-CN>
+            //   <en>The definition id must pass row bounds, DataKeys positive-integer parsing, and current-definition-set validation together.</en>
+            // </lang>
+            int moduleDefId;
+            if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= defsList.DataKeys.Count ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(defsList.DataKeys[e.Item.ItemIndex].ToString(), out moduleDefId) ||
+                !ModuleDefConfig.GetModuleDefinitions().Any(item => item.ModuleDefId == moduleDefId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>编辑地址只携带已验证定义和兼容导航参数，并交给安全导航策略。</zh-CN>
+            //   <en>Carry only the verified definition and compatibility navigation parameters through the safe navigation policy.</en>
+            // </lang>
+            string url = ResolveUrl(
+                "~/Admin/ModuleDefinitions.aspx?defId=" + moduleDefId +
+                "&tabindex=" + tabIndex +
+                "&tabid=" + tabId);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, url);
+        }

@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>返回门户链接只提供安全的离开路径；是否允许再次进入编辑流程仍由目标页服务器校验。</zh-CN>
+            <en>The portal return link provides only a safe exit path; any later edit attempt remains subject to server checks on the target page.</en>
+          </lang>
+        --%>

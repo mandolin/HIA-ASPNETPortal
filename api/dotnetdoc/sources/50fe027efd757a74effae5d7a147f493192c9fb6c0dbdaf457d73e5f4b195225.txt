@@ -1,0 +1,46 @@
+        private static byte[] EncodeLength(int length)
+        {
+            // <lang>
+            //   <zh-CN>短格式直接写入一个长度字节，覆盖 DER 小于 128 的内容长度。</zh-CN>
+            //   <en>Use one length byte for DER content lengths below 128.</en>
+            // </lang>
+            if (length < 128)
+            {
+                return new byte[] { (byte)length };
+            }
+
+            // <lang>
+            //   <zh-CN>复制原始长度用于统计长格式需要的有效字节数，不提前破坏调用方长度值。</zh-CN>
+            //   <en>Copy the original length to count significant bytes for long form without consuming the caller's length value early.</en>
+            // </lang>
+            int tempLength = length;
+            int byteCount = 0;
+            while (tempLength > 0)
+            {
+                // <lang>
+                //   <zh-CN>每右移 8 位增加一个大端长度字节。</zh-CN>
+                //   <en>Each eight-bit shift accounts for one big-endian length byte.</en>
+                // </lang>
+                byteCount++;
+                tempLength >>= 8;
+            }
+
+            // <lang>
+            //   <zh-CN>首字节标记长格式，后续字节承载实际长度。</zh-CN>
+            //   <en>Mark long form in the first byte and carry the actual length in following bytes.</en>
+            // </lang>
+            byte[] encoded = new byte[byteCount + 1];
+            encoded[0] = (byte)(0x80 | byteCount);
+
+            for (int index = byteCount; index > 0; index--)
+            {
+                // <lang>
+                //   <zh-CN>从低位向高位填充，最终数组仍为 DER 要求的大端顺序。</zh-CN>
+                //   <en>Fill from low-order positions toward high order so the final array remains DER big-endian.</en>
+                // </lang>
+                encoded[index] = (byte)(length & 0xFF);
+                length >>= 8;
+            }
+
+            return encoded;
+        }

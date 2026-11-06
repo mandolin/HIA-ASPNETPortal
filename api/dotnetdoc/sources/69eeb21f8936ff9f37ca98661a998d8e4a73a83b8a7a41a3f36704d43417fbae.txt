@@ -1,0 +1,4 @@
+        public static bool IsEncryptedSubmissionRequired()
+        {
+            return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.RequireEncryptedLoginPassword);
+        }

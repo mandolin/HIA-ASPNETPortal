@@ -1,0 +1,30 @@
+        public static bool TryNormalizeOptionalMultilineText(
+            string candidate,
+            int maximumLength,
+            out string normalizedValue)
+        {
+            normalizedValue = Normalize(candidate);
+            if (maximumLength <= 0)
+            {
+                return false;
+            }
+
+            if (normalizedValue.Length > maximumLength)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>按字符逐个判断控制字符，只放行回车与换行；不引入正则以保持与既有实现一致的判定口径。</zh-CN>
+            //   <en>Judge control characters character by character and allow only carriage return and line feed; no regex is introduced, keeping the decision consistent with existing implementations.</en>
+            // </lang>
+            foreach (char character in normalizedValue)
+            {
+                if (char.IsControl(character) && character != '\r' && character != '\n')
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }

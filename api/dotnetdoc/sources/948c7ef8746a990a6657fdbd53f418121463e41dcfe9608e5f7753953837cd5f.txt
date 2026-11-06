@@ -1,0 +1,38 @@
+        public static string GetTabBlockedReason(string tabName, string navigationKey, PortalNavigationVisibilityContext context)
+        {
+            // <lang>
+            //   <zh-CN>空白 Tab 名没有可判定对象：返回放行，让渲染层按既有"数据缺失不渲染该项"的规则处理，而不是在这里制造一种新的隐藏原因。</zh-CN>
+            //   <en>A blank tab name has nothing to evaluate: return allowed so the rendering layer applies its existing "skip entries with missing data" rule instead of inventing a new hiding reason here.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(tabName))
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>上下文缺失即放行：本阶段不引入新的失败模式，gate 只有在能完成判定时才可能阻断。</zh-CN>
+            //   <en>A missing context is allowed: this phase introduces no new failure mode, so the gate can block only when a decision can actually be completed.</en>
+            // </lang>
+            if (context == null)
+            {
+                return null;
+            }
+
+            string entryKey = BuildTabEntryKey(tabName, navigationKey);
+            if (entryKey.Length == 0)
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>未登记即为放行（零回归兜底）：registry 只对**已登记**的 Tab 施加门控，未登记 Tab 继续沿用既有的角色过滤结果。</zh-CN>
+            //   <en>Unregistered means allowed (zero-regression fallback): the registry only gates **registered** tabs, while unregistered tabs keep the existing role-filtered outcome.</en>
+            // </lang>
+            PortalNavigationEntry entry = PortalNavigationRegistry.FindByKey(entryKey);
+            if (entry == null)
+            {
+                return null;
+            }
+
+            return GetBlockedReason(entry, context);
+        }

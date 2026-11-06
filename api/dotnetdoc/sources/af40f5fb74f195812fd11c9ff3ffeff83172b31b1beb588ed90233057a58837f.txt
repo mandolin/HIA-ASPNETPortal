@@ -1,0 +1,30 @@
+        protected void EditBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>编辑事件只把已验证模块标识带入实例设置页，并保留当前 Tab 上下文。</zh-CN>
+            //   <en>The edit event forwards only the verified module id to the instance-settings page with the current Tab context.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>按钮窗格和列表选中项必须同时有效，否则拒绝构造编辑地址。</zh-CN>
+            //   <en>Both the button pane and selected list item must be valid before constructing the edit URL.</en>
+            // </lang>
+            LinkButton button = sender as LinkButton;
+            string pane;
+            ListBox listBox;
+            ModuleSettings selectedModule;
+            if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
+                !TryGetSelectedModule(listBox, GetModules(pane), out selectedModule))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                Context,
+                ResolveUrl("~/Admin/ModuleSettings.aspx?mid=" + selectedModule.ModuleId + "&tabid=" + tabId));
+        }

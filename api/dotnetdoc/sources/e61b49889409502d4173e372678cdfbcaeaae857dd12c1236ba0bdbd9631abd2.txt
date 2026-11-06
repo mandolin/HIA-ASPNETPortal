@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>事件标题、描述和 Where/When 字段构成事件内容输入；必填验证只提供表单反馈，服务器仍需规范化和授权。</zh-CN>
+                    <en>Event title, description, and Where/When fields form event content input; required validators provide form feedback while the server still normalizes and authorizes.</en>
+                </lang>
+            --%>

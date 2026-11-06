@@ -1,0 +1,55 @@
+        private static string ResolveCurrentLogFile(string logDirectory, DateTime utcTime, int incomingByteCount)
+        {
+            // <lang>
+            //   <zh-CN>文件大小上限来自受控运行设置；传入字节数由调用方以实际 UTF-8 无 BOM payload 计算，本 helper 不接收调用方文件名。</zh-CN>
+            //   <en>The file-size cap comes from controlled runtime settings; the caller supplies bytes calculated from the actual UTF-8-without-BOM payload and this helper accepts no caller file name.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>读取受控单文件容量上限，非法设置已由运行期解析器回退。</zh-CN>
+            //   <en>Read the controlled per-file byte cap; invalid settings already fall back through the runtime resolver.</en>
+            // </lang>
+            int maximumFileBytes = PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.DiagnosticsMaxFileBytes);
+
+            // <lang>
+            //   <zh-CN>将事件 UTC 日期格式化为受控文件名前缀，不使用本地时区。</zh-CN>
+            //   <en>Format the event UTC date as the controlled filename prefix without using local time.</en>
+            // </lang>
+            string datePart = utcTime.ToString("yyyyMMdd");
+
+            // <lang>
+            //   <zh-CN>只在已解析目录中探测固定日期和三位序号的受控命名空间；首个不存在候选或仍有容量的候选可继续使用。</zh-CN>
+            //   <en>Probe only the controlled fixed-date, three-digit-sequence namespace under the resolved directory; the first missing candidate or one still within capacity may be used.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>在固定 1..999 序号范围内逐个探测候选，序号耗尽后由固定 IOException 终止。</zh-CN>
+            //   <en>Probe candidates through the fixed 1..999 sequence range; exhaustion terminates with a fixed IOException.</en>
+            // </lang>
+            for (int sequence = 1; sequence <= 999; sequence++)
+            {
+                // <lang>
+                //   <zh-CN>构造当前日期/序号的受控候选路径，不接受动态文件名片段。</zh-CN>
+                //   <en>Compose the controlled date/sequence candidate path without accepting dynamic filename fragments.</en>
+                // </lang>
+                string candidate = Path.Combine(logDirectory, string.Format("portal-{0}-{1:D3}.jsonl", datePart, sequence));
+                if (!File.Exists(candidate))
+                {
+                    return candidate;
+                }
+
+                // <lang>
+                //   <zh-CN>读取候选现有长度并与本次 payload 字节数比较，避免追加后超过上限。</zh-CN>
+                //   <en>Read the candidate length and compare it with incoming payload bytes so append stays within the cap.</en>
+                // </lang>
+                long currentLength = new FileInfo(candidate).Length;
+                if (currentLength + incomingByteCount <= maximumFileBytes)
+                {
+                    return candidate;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>每日受控序号耗尽时抛出固定、无路径的 I/O 失败，交由上层诊断隔离逻辑处理。</zh-CN>
+            //   <en>When the controlled daily sequence is exhausted, throw a fixed I/O failure without paths for the upper diagnostics-isolation logic to handle.</en>
+            // </lang>
+            throw new IOException("Portal diagnostics exhausted the daily log-file sequence range.");
+        }

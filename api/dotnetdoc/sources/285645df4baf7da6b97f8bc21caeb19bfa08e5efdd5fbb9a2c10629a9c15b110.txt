@@ -1,0 +1,1 @@
+        public PortalModulePackage Package { get; private set; }

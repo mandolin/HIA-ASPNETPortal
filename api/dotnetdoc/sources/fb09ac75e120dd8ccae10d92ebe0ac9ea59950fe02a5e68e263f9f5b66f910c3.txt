@@ -1,0 +1,54 @@
+        public static string Resolve(
+            string chineseText,
+            string englishText,
+            string localizedJson,
+            CultureInfo culture,
+            out string diagnostic)
+        {
+            diagnostic = string.Empty;
+
+            // <lang>
+            //   <zh-CN>未显式传入文化时取当前线程界面文化；两者都缺失时按中文处理，与门户默认语言一致。</zh-CN>
+            //   <en>Use the current thread UI culture when none is supplied; if both are missing, treat it as Chinese, matching the portal default language.</en>
+            // </lang>
+            CultureInfo effectiveCulture = culture ?? CultureInfo.CurrentUICulture;
+            string languageCode = effectiveCulture == null
+                ? ChineseLanguageCode
+                : effectiveCulture.TwoLetterISOLanguageName;
+
+            // <lang>
+            //   <zh-CN>中文侧：命中中文列，缺失时回落英文列（不因缺中文就显示空标签）。</zh-CN>
+            //   <en>Chinese side: take the Chinese column and fall back to the English one when missing, so a missing Chinese value never renders an empty label.</en>
+            // </lang>
+            if (string.Equals(languageCode, ChineseLanguageCode, StringComparison.OrdinalIgnoreCase))
+            {
+                return FirstNonBlank(chineseText, englishText);
+            }
+
+            // <lang>
+            //   <zh-CN>英文侧：命中英文列，缺失时回落中文列。</zh-CN>
+            //   <en>English side: take the English column and fall back to the Chinese one when missing.</en>
+            // </lang>
+            if (string.Equals(languageCode, EnglishLanguageCode, StringComparison.OrdinalIgnoreCase))
+            {
+                return FirstNonBlank(englishText, chineseText);
+            }
+
+            // <lang>
+            //   <zh-CN>其它文化：先在 JSON 列里按三级键匹配，未命中再回落到中英两列。</zh-CN>
+            //   <en>Other cultures: first try the three-tier key lookup in the JSON column, then fall back to the Chinese and English columns.</en>
+            // </lang>
+            string jsonValue;
+            string jsonError;
+            if (TryGetJsonValue(localizedJson, effectiveCulture, out jsonValue, out jsonError))
+            {
+                return jsonValue;
+            }
+
+            if (!string.IsNullOrEmpty(jsonError))
+            {
+                diagnostic = JsonInvalidReasonPrefix + jsonError;
+            }
+
+            return FirstNonBlank(chineseText, englishText);
+        }

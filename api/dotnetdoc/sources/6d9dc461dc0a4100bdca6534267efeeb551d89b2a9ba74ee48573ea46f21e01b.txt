@@ -1,0 +1,28 @@
+        private static void LoadAppSettings(JObject appSettings, bool preservePrevious)
+        {
+            if (appSettings != null)
+            {
+                var prevKeys = ConfigurationManager.AppSettings.AllKeys;
+
+                foreach (var prop in appSettings.Properties())
+                {
+                    ConfigurationManager.AppSettings.Set(prop.Name, prop.Value.ToString());
+                }
+
+                if (!preservePrevious)
+                {
+                    // <lang>
+                    //   <zh-CN>显式替换模式会移除 JSON 未声明的旧键，避免历史配置在当前环境中继续生效。</zh-CN>
+                    //   <en>Explicit replacement mode removes old keys not declared by JSON so historical configuration does not continue to affect the current environment.</en>
+                    // </lang>
+                    foreach (var key in prevKeys)
+                    {
+                        if (!appSettings.ContainsKey(key))
+                        {
+                            ConfigurationManager.AppSettings.Remove(key);
+                        }
+                    }
+
+                }
+            }
+        }

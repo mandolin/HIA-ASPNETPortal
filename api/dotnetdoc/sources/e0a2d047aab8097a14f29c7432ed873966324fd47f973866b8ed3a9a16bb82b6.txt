@@ -1,0 +1,41 @@
+        private void BindModule()
+        {
+            // <lang>
+            //   <zh-CN>模块绑定前先做认证和数据库能力检查，失败时隐藏工作区并绑定空列表。</zh-CN>
+            //   <en>Check authentication and database capability before binding; failures hide the work area and bind an empty list.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (!IsCurrentUserAuthenticated())
+            {
+                WorkbenchPanel.Visible = false;
+                BindRecentItems(0);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench);
+                return;
+            }
+
+            if (CollaborationItemDb == null || !CollaborationItemDb.IsSchemaAvailable())
+            {
+                WorkbenchPanel.Visible = false;
+                BindRecentItems(0);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageModuleNotInitialized);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>创建、查看本人和管理员权限共同决定前台是否可用；此处不推断角色继承关系。</zh-CN>
+            //   <en>Create, own-view, and administrator permissions jointly determine front-end availability; no role inheritance is inferred here.</en>
+            // </lang>
+            bool canUseWorkbench = PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.BusinessCollaborationCreate,
+                PortalPermissionKeys.BusinessCollaborationViewOwn,
+                PortalPermissionKeys.BusinessCollaborationAdmin);
+            WorkbenchPanel.Visible = canUseWorkbench;
+            if (!canUseWorkbench)
+            {
+                BindRecentItems(0);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench);
+                return;
+            }
+
+            BindRecentItems(userId);
+        }

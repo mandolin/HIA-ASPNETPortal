@@ -1,0 +1,5 @@
+        internal static string ModuleProbe_Heading {
+            get {
+                return ResourceManager.GetString("ModuleProbe_Heading", resourceCulture);
+            }
+        }

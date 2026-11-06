@@ -1,0 +1,32 @@
+        public static bool HasAnyPermission(params string[] permissionKeys)
+        {
+            // <lang>
+            //   <zh-CN>保持同一请求上下文供规范化失败和空集合诊断使用。</zh-CN>
+            //   <en>Keep the same request context for normalization-failure and empty-set diagnostics.</en>
+            // </lang>
+            HttpContext context = HttpContext.Current;
+            // <lang>
+            //   <zh-CN>把输入集合转换为已登记且去重的权限键，避免任意字符串扩大检查范围。</zh-CN>
+            //   <en>Convert the input collection into registered, normalized permission keys so arbitrary strings cannot expand the check scope.</en>
+            // </lang>
+            string[] normalizedKeys;
+            if (!TryNormalizePermissionKeys(permissionKeys, context, out normalizedKeys))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>空集合直接拒绝：任一权限检查不接受"没有键"作为通过条件，也不因调用方漏传而回退到管理员或宽松判定。</zh-CN>
+            //   <en>An empty set is denied directly: an any-permission check never treats "no keys" as a pass, and a caller omission never falls back to an administrator or permissive verdict.</en>
+            // </lang>
+            if (normalizedKeys.Length == 0)
+            {
+                PortalDiagnostics.Warn(
+                    "Authorization.PermissionKey",
+                    "No permission keys were supplied for an any-permission check.",
+                    context);
+                return false;
+            }
+
+            return normalizedKeys.Any(HasPermission);
+        }

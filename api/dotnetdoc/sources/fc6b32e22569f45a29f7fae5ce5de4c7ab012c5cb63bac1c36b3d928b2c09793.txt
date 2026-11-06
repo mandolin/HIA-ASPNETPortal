@@ -1,0 +1,1 @@
+        public string LeaveType { get; set; }

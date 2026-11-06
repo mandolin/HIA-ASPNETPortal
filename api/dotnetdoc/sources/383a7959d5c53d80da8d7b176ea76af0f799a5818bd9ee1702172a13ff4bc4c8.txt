@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_LabelReason {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelReason", resourceCulture);
+            }
+        }

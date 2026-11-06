@@ -1,0 +1,23 @@
+        protected void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除路径重新校验模块权限和链接归属，避免通过 ItemId 删除其他模块链接。</zh-CN>
+            //   <en>The delete path revalidates module permission and link ownership, avoiding deletion of another module's link by ItemId.</en>
+            // </lang>
+            ILinkItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (itemId != 0)
+            {
+                // <lang>
+                //   <zh-CN>只有既有链接且归属已确认时，才调用数据访问层删除。</zh-CN>
+                //   <en>The data-access delete is called only for an existing link whose ownership has been confirmed.</en>
+                // </lang>
+                LinkDB.DeleteLink(itemId);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

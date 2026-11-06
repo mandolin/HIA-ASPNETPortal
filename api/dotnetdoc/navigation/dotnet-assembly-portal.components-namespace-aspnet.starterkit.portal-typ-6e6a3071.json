@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresubmitrequest",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresubmitrequest:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.actorname",
+      "kind": "entry",
+      "label": "ActorName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.actorname",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestresubmitrequest.actorname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-c022f13b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.applicantuserid",
+      "kind": "entry",
+      "label": "ApplicantUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.applicantuserid",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestresubmitrequest.applicantuserid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-2a2fed9d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.requestid",
+      "kind": "entry",
+      "label": "RequestId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.requestid",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestresubmitrequest.requestid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-7bce19d1.html"
+    }
+  ]
+}

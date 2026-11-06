@@ -1,0 +1,1 @@
+        IUserProfileInfo GetUserProfileInfo(int userId);

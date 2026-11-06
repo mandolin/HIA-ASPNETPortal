@@ -1,0 +1,11 @@
+        private int GetCurrentUserId()
+        {
+            string userName = GetCurrentUserName();
+            if (string.IsNullOrWhiteSpace(userName) || UsersDb == null)
+            {
+                return 0;
+            }
+
+            IUserItem user = UsersDb.GetSingleUser(userName);
+            return user == null ? 0 : user.UserId;
+        }

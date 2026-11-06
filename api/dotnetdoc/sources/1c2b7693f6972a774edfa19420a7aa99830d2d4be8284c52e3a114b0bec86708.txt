@@ -1,0 +1,4 @@
+        private static string BuildCellKey(string roleName, string permissionKey)
+        {
+            return (roleName ?? string.Empty).Trim() + "\u001f" + (permissionKey ?? string.Empty).Trim();
+        }

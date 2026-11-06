@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_ButtonUpdate {
+            get {
+                return ResourceManager.GetString("LegacyEdit_ButtonUpdate", resourceCulture);
+            }
+        }

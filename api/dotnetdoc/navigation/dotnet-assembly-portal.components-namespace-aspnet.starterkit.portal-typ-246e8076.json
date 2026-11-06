@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes.administrators",
+      "kind": "entry",
+      "label": "Administrators",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes.administrators",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemVisibilityScopes.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes.administrators",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcollaborationitemvi-20b93536.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes.itemparticipants",
+      "kind": "entry",
+      "label": "ItemParticipants",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes.itemparticipants",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemVisibilityScopes.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes.itemparticipants",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcollaborationitemvi-79549995.html"
+    }
+  ]
+}

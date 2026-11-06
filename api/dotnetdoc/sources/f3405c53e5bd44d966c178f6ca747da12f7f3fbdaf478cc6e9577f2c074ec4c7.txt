@@ -1,0 +1,8 @@
+        public static PortalModuleAssemblyState Empty
+        {
+            // <lang>
+            //   <zh-CN>新建空字典而非共享静态实例，保证任何调用方都无法通过共享引用污染基线。</zh-CN>
+            //   <en>Create a fresh dictionary rather than sharing a static instance so no caller can pollute the baseline through a shared reference.</en>
+            // </lang>
+            get { return new PortalModuleAssemblyState(new Dictionary<string, string>(StringComparer.Ordinal)); }
+        }

@@ -1,0 +1,5 @@
+        public PortalRuntimeSettingValue(string value, PortalRuntimeSettingSource source)
+        {
+            Value = value ?? string.Empty;
+            Source = source;
+        }

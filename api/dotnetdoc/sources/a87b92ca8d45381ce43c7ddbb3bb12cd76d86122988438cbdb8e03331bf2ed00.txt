@@ -1,0 +1,23 @@
+        private static void AppendRequestContext(PortalDiagnosticEntry entry, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>后台任务等调用方可没有 HTTP 上下文；此时保留基础条目，不推造请求字段。</zh-CN>
+            //   <en>Callers such as background work may have no HTTP context; retain the base entry without fabricating request fields.</en>
+            // </lang>
+            HttpRequest request = context == null ? null : context.Request;
+            if (request == null)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只记录不含查询值的 Request.Path，避免邀请代码、Token 等随 URL 进入日志；其余上下文字段仍逐项净化并限长。</zh-CN>
+            //   <en>Record only Request.Path without query values to keep invite codes and tokens out of logs; sanitize and cap every remaining context field individually.</en>
+            // </lang>
+            entry.RequestPath = PortalDiagnosticSanitizer.SanitizeAndTruncate(request.Path, 1000);
+            entry.HttpMethod = PortalDiagnosticSanitizer.SanitizeAndTruncate(request.HttpMethod, 20);
+            entry.UserName = PortalDiagnosticSanitizer.SanitizeAndTruncate(context.User == null || context.User.Identity == null ? null : context.User.Identity.Name, 100);
+            entry.ClientIp = PortalDiagnosticSanitizer.SanitizeAndTruncate(request.UserHostAddress, 64);
+            entry.PhysicalPath = PortalDiagnosticSanitizer.SanitizeAndTruncate(request.PhysicalPath, 2000);
+            entry.UserAgent = PortalDiagnosticSanitizer.SanitizeAndTruncate(request.UserAgent, 400);
+        }

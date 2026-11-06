@@ -1,0 +1,5 @@
+        internal static string Admin_Register_MessageEmployeeCodeBlankRequired {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageEmployeeCodeBlankRequired", resourceCulture);
+            }
+        }

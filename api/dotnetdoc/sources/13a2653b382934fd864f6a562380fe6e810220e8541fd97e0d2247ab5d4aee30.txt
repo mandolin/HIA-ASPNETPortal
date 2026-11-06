@@ -1,0 +1,218 @@
+    public sealed class LeaveRequestDb : ILeaveRequestDb
+    {
+        private const string TableName = "PortalBiz_LeaveRequests";
+        private readonly PortalBizDbContext context;
+
+        /// <summary><lang><zh-CN>通过 Unity 构造函数注入企业业务基础数据上下文。</zh-CN><en>Enterprise business foundation data context injected by Unity via constructor.</en></lang></summary>
+        /// <param name="context"><l><zh-CN>企业业务基础数据上下文。</zh-CN><en>Enterprise business foundation data context.</en></l></param>
+        public LeaveRequestDb(PortalBizDbContext context)
+        {
+            this.context = context;
+        }
+
+        private bool HasTable(string name)
+        {
+            try
+            {
+                var cnt = context.Database.SqlQuery<int>(
+                    "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = @Name;",
+                    new SqlParameter("@Name", name)).SingleOrDefault();
+                return cnt > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary><lang>
+        ///   <zh-CN>探测业务表 <c>PortalBiz_LeaveRequests</c> 是否存在，作为降级与运行期装配的前置检查。</zh-CN>
+        ///   <en>Probes whether the business table <c>PortalBiz_LeaveRequests</c> exists, used as a precondition for graceful degradation and runtime assembly.</en>
+        /// </lang></summary>
+        /// <returns><l><zh-CN>表存在返回 <c>true</c>，否则 <c>false</c>（含探测异常）。</zh-CN><en><c>true</c> when the table exists, otherwise <c>false</c> (including probe exceptions).</en></l></returns>
+        public bool IsSchemaAvailable()
+        {
+            try
+            {
+                return HasTable(TableName);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary><lang>
+        ///   <zh-CN>插入一条请假申请，状态固定为 <c>Pending</c>，并以 <c>OUTPUT INSERTED</c> 取回自增主键。</zh-CN>
+        ///   <en>Inserts a leave request with status fixed to <c>Pending</c> and returns the identity key via <c>OUTPUT INSERTED</c>.</en>
+        /// </lang></summary>
+        /// <param name="request"><l><zh-CN>请假申请创建请求（含申请人、类型、起止日期、天数、事由与附件名）。</zh-CN><en>Leave-request creation request (applicant, type, start/end dates, days, reason, attachment name).</en></l></param>
+        /// <returns><l><zh-CN>成功时 <see cref="LeaveRequestResult.Ok"/> 为 <c>true</c> 且携带新主键；失败返回低敏失败结果。</zh-CN><en>On success <see cref="LeaveRequestResult.Ok"/> is <c>true</c> with the new identity key; otherwise a low-sensitivity failure result.</en></l></returns>
+        public LeaveRequestResult CreateRequest(LeaveRequestCreateRequest request)
+        {
+            try
+            {
+                var id = context.Database.SqlQuery<long>(
+                    "INSERT INTO dbo.PortalBiz_LeaveRequests (UserId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc) " +
+                    "OUTPUT INSERTED.RequestId VALUES (@UserId, @LeaveType, @StartDate, @EndDate, @Days, @Reason, @AttachmentName, N'Pending', SYSUTCDATETIME());",
+                    new SqlParameter("@UserId", request.UserId),
+                    new SqlParameter("@LeaveType", (object)request.LeaveType ?? DBNull.Value),
+                    new SqlParameter("@StartDate", request.StartDate),
+                    new SqlParameter("@EndDate", request.EndDate),
+                    new SqlParameter("@Days", request.Days),
+                    new SqlParameter("@Reason", (object)request.Reason ?? DBNull.Value),
+                    new SqlParameter("@AttachmentName", (object)request.AttachmentName ?? DBNull.Value)).Single();
+                return new LeaveRequestResult { Ok = true, RequestId = id };
+            }
+            catch
+            {
+                return new LeaveRequestResult { Ok = false, ErrorCode = "DbError" };
+            }
+        }
+
+        /// <summary><lang>
+        ///   <zh-CN>按申请人取最近若干条请假申请（按创建时间倒序），供模块“我的请假”列表展示。</zh-CN>
+        ///   <en>Returns the most recent leave requests for a user (descending by creation time) for the module's "My Leave" list.</en>
+        /// </lang></summary>
+        /// <param name="userId"><l><zh-CN>申请人用户标识。</zh-CN><en>Applicant user identifier.</en></l></param>
+        /// <param name="limit"><l><zh-CN>返回条数上限。</zh-CN><en>Maximum number of rows to return.</en></l></param>
+        /// <returns><l><zh-CN>只读请假申请列表；查询异常时返回空列表而非抛错。</zh-CN><en>A read-only list of leave requests; returns an empty list on query failure instead of throwing.</en></l></returns>
+        public IReadOnlyList<LeaveRequestInfo> GetRecentByUser(int userId, int limit)
+        {
+            try
+            {
+                return context.Database.SqlQuery<LeaveRequestInfo>(
+                    "SELECT TOP (@Limit) RequestId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc " +
+                    "FROM dbo.PortalBiz_LeaveRequests WHERE UserId = @UserId ORDER BY CreatedUtc DESC;",
+                    new SqlParameter("@Limit", limit),
+                    new SqlParameter("@UserId", userId)).ToList();
+            }
+            catch
+            {
+                return new List<LeaveRequestInfo>();
+            }
+        }
+
+        /// <summary><lang>
+        ///   <zh-CN>按状态筛选读取后台审核用请假申请列表；空筛选值表示全部。</zh-CN>
+        ///   <en>Reads the administration review list filtered by status; an empty filter means all.</en>
+        /// </lang></summary>
+        public IList<LeaveRequestInfo> GetAdminRequests(string statusFilter, int limit)
+        {
+            try
+            {
+                string sql = "SELECT TOP (@Limit) RequestId, UserId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc, ReviewedUtc, ReviewedByUserId, ReviewComment " +
+                    "FROM dbo.PortalBiz_LeaveRequests";
+                if (!string.IsNullOrEmpty(statusFilter))
+                {
+                    sql += " WHERE Status = @Status";
+                }
+
+                sql += " ORDER BY CreatedUtc DESC;";
+                var parameters = new List<SqlParameter> { new SqlParameter("@Limit", limit) };
+                if (!string.IsNullOrEmpty(statusFilter))
+                {
+                    parameters.Add(new SqlParameter("@Status", statusFilter));
+                }
+
+                return context.Database.SqlQuery<LeaveRequestInfo>(sql, parameters.ToArray()).ToList();
+            }
+            catch
+            {
+                return new List<LeaveRequestInfo>();
+            }
+        }
+
+        /// <summary><lang>
+        ///   <zh-CN>按动作键审核请假申请：更新状态与审核人信息，返回低敏结果。</zh-CN>
+        ///   <en>Reviews a leave request by action key: updates status and reviewer info and returns a low-sensitivity result.</en>
+        /// </lang></summary>
+        public LeaveRequestReviewResult ReviewRequest(LeaveRequestReviewRequest request)
+        {
+            try
+            {
+                string status = MapActionToStatus(request.ActionKey);
+                int rows = context.Database.ExecuteSqlCommand(
+                    "UPDATE dbo.PortalBiz_LeaveRequests SET Status = @Status, ReviewedByUserId = @ReviewedByUserId, ReviewedBy = @ReviewedBy, ReviewedUtc = @ReviewedUtc, ReviewComment = @ReviewComment WHERE RequestId = @RequestId;",
+                    new SqlParameter("@Status", status),
+                    new SqlParameter("@ReviewedByUserId", request.ReviewedByUserId),
+                    new SqlParameter("@ReviewedBy", (object)request.ReviewedBy ?? DBNull.Value),
+                    new SqlParameter("@ReviewedUtc", request.ReviewedUtc),
+                    new SqlParameter("@ReviewComment", (object)request.ReviewComment ?? DBNull.Value),
+                    new SqlParameter("@RequestId", request.RequestId));
+                if (rows <= 0)
+                {
+                    return new LeaveRequestReviewResult { Succeeded = false, Message = "NotFound", RequestId = request.RequestId };
+                }
+
+                return new LeaveRequestReviewResult { Succeeded = true, RequestId = request.RequestId };
+            }
+            catch
+            {
+                return new LeaveRequestReviewResult { Succeeded = false, Message = "DbError", RequestId = request.RequestId };
+            }
+        }
+
+        /// <summary><lang>
+        ///   <zh-CN>把退回或拒绝状态的请假申请重置为待审批，并清空审核身份列（ReviewedUtc / ReviewedByUserId / ReviewedBy），保留退回意见（ReviewComment）作为历史。
+        ///   受保护更新仅命中 Returned/Rejected → Pending 一行；工作项重开由调用方（前台模块）负责。</zh-CN>
+        ///   <en>Resets a returned or rejected leave request to pending and clears the reviewer-identity columns (ReviewedUtc / ReviewedByUserId / ReviewedBy) while keeping the return comment (ReviewComment) as history.
+        ///   The guarded update only hits a single Returned/Rejected → Pending row; reopening the work item is the caller's (front-end module) responsibility.</en>
+        /// </lang></summary>
+        /// <remarks><lang>
+        ///   <zh-CN>本方法刻意不写入 PortalBiz_WorkflowEvents：该表 ActionKey/ToStatus 白名单不含请假/报销使用的 Pending（仅业务申请的 Submitted），且请假/报销的审核路径本就不写工作流事件；如需审计事件，应在把白名单扩展到 Pending 或引入请假/报销专属事件表后再补。</zh-CN>
+        ///   <en>This method intentionally does not write PortalBiz_WorkflowEvents: the table's ActionKey/ToStatus whitelist excludes the Pending status used by leave/expense (only the business-application Submitted is allowed), and the leave/expense review path already omits workflow events. Add audit logging only after extending the whitelist to Pending or introducing a leave/expense-specific event table.</en>
+        /// </lang></remarks>
+        public LeaveRequestResubmitResult ResubmitRequest(LeaveRequestResubmitRequest request)
+        {
+            if (request == null || request.RequestId <= 0)
+            {
+                return new LeaveRequestResubmitResult { Succeeded = false, Message = "InvalidRequest", RequestId = request == null ? 0 : request.RequestId };
+            }
+
+            try
+            {
+                int rows = context.Database.ExecuteSqlCommand(
+                    "UPDATE dbo.PortalBiz_LeaveRequests " +
+                    "SET Status = @Status, ReviewedUtc = NULL, ReviewedByUserId = NULL, ReviewedBy = NULL " +
+                    "WHERE RequestId = @RequestId AND UserId = @ApplicantUserId AND Status IN (@FromReturned, @FromRejected);",
+                    new SqlParameter("@Status", LeaveRequestStatuses.Pending),
+                    new SqlParameter("@RequestId", request.RequestId),
+                    new SqlParameter("@ApplicantUserId", request.ApplicantUserId),
+                    new SqlParameter("@FromReturned", LeaveRequestStatuses.Returned),
+                    new SqlParameter("@FromRejected", LeaveRequestStatuses.Rejected));
+
+                if (rows <= 0)
+                {
+                    return new LeaveRequestResubmitResult { Succeeded = false, Message = "NotFound", RequestId = request.RequestId };
+                }
+
+                return new LeaveRequestResubmitResult { Succeeded = true, RequestId = request.RequestId };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError("请假申请重新提交失败（RequestId=" + request.RequestId + "）：" + ex);
+                return new LeaveRequestResubmitResult { Succeeded = false, Message = "DbError", RequestId = request.RequestId };
+            }
+        }
+
+        private static string MapActionToStatus(string actionKey)
+        {
+            if (string.Equals(actionKey, PortalWorkflowActions.Approve, StringComparison.Ordinal))
+            {
+                return LeaveRequestStatuses.Approved;
+            }
+
+            if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
+            {
+                return LeaveRequestStatuses.Rejected;
+            }
+
+            if (string.Equals(actionKey, PortalWorkflowActions.Return, StringComparison.Ordinal))
+            {
+                return LeaveRequestStatuses.Returned;
+            }
+
+            return LeaveRequestStatuses.Pending;
+        }
+    }

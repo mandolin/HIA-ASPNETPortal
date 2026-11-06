@@ -1,0 +1,8 @@
+        public static string GetApplicationPath(HttpRequest request)
+        {
+            // <lang>
+            //   <zh-CN>旧代码经常把返回值直接拼进站内 URL；统一去除末尾斜杠可减少根站点和虚拟目录差异。空请求按既有实现返回空字符串，不承担 URL 白名单或外跳校验。</zh-CN>
+            //   <en>Legacy code often concatenates this value into site-local URLs; removing the trailing slash reduces root-site and virtual-directory differences. A null request returns the existing empty-string fallback; URL allowlisting and external-redirect validation remain outside this helper.</en>
+            // </lang>
+            return request.ApplicationPath?.TrimEnd('/') ?? "";
+        }

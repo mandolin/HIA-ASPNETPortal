@@ -1,0 +1,1 @@
+        public IList<string> RequiredPermissionKeys { get; private set; }

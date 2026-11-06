@@ -1,0 +1,10 @@
+        private IRoleItem FindCurrentPortalRole(int roleId)
+        {
+            // <lang>
+            //   <zh-CN>从当前门户设置读取角色集合，角色名称和成员范围不来自请求参数。</zh-CN>
+            //   <en>Read the role collection from current Portal settings so names and membership scope do not come from request parameters.</en>
+            // </lang>
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            return RolesDB.GetPortalRoles(portalSettings.PortalId)
+                .FirstOrDefault(item => item.RoleId == roleId);
+        }

@@ -1,0 +1,15 @@
+        private static void AddTextParameter(
+            SqlCommand command,
+            string parameterName,
+            int size,
+            string value,
+            string fallback)
+        {
+            // <lang>
+            //   <zh-CN>在参数化写入前净化并截断文本，限制操作人和主题名等管理数据的长度与诊断风险。</zh-CN>
+            //   <en>Sanitize and truncate text before the parameterized write to bound the length and diagnostic risk of administrative data such as actor and theme names.</en>
+            // </lang>
+            string sanitized = PortalDiagnosticSanitizer.SanitizeAndTruncate(value, size);
+            command.Parameters.Add(parameterName, SqlDbType.NVarChar, size).Value =
+                string.IsNullOrWhiteSpace(sanitized) ? fallback : sanitized;
+        }

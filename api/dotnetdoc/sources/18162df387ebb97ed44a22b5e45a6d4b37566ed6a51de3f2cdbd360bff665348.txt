@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>标题使用服务器端 Label，避免包含代码块的 HtmlControl 在运行时修改文本时报错。</zh-CN>
+                    <en>The title uses a server-side Label to avoid runtime text-update errors on an HtmlControl that contains code blocks.</en>
+                  </lang>
+                --%>

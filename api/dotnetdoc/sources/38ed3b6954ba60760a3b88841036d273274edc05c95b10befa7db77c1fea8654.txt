@@ -1,0 +1,13 @@
+        public PortalDiagnosticQueryResult(
+            IList<PortalDiagnosticEntry> entries,
+            bool hasMore,
+            bool wasTruncated)
+        {
+            // <lang>
+            //   <zh-CN>将 null 条目集合回退为空集合，使结果消费者可安全枚举；该回退不读取日志、不制造条目，也不隐藏服务端截断事实。</zh-CN>
+            //   <en>Fall back from a null entry collection to an empty collection so result consumers can enumerate safely; this fallback neither reads logs nor fabricates entries nor hides server-side truncation facts.</en>
+            // </lang>
+            Entries = entries ?? new List<PortalDiagnosticEntry>();
+            HasMore = hasMore;
+            WasTruncated = wasTruncated;
+        }

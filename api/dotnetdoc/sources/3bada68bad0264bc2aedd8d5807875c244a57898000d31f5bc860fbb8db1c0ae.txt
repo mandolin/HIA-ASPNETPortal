@@ -1,0 +1,6 @@
+        public EmployeeProfileConfirmationResult(bool succeeded, long confirmationId, string message)
+        {
+            Succeeded = succeeded;
+            ConfirmationId = confirmationId;
+            Message = message ?? string.Empty;
+        }

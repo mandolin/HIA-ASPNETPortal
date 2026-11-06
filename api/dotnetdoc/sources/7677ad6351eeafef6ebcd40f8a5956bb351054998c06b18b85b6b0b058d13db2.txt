@@ -1,0 +1,2 @@
+        void UpdateModule(int moduleId, int moduleOrder, string paneName, string title, int cacheTime, string editRoles,
+                          bool showMobile, string titleEn = null, string titleLocalizedJson = null);

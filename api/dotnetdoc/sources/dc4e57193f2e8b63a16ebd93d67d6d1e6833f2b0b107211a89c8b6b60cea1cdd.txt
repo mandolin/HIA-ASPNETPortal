@@ -1,0 +1,2 @@
+        [Dependency]
+        public IBusinessApplicationDb BusinessApplicationDb { private get; set; }

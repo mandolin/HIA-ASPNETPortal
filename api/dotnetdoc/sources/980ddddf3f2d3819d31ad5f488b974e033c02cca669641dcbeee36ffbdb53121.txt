@@ -1,0 +1,40 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>item 是经过请求参数、权限和归属校验后的旧公告快照；新增路径保持为空。</zh-CN>
+            //   <en>item is the legacy announcement snapshot after request-parameter, permission, and ownership validation; it remains null on the creation path.</en>
+            // </lang>
+            IAnnouncementItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>首次加载只在归属校验通过后回填旧公告字段，避免通过 ItemId 读取其他模块的条目。</zh-CN>
+                //   <en>Initial binding fills legacy announcement fields only after ownership validation, avoiding reads of items from another module via ItemId.</en>
+                // </lang>
+                if (item != null)
+                {
+                    TitleField.Text = item.Title;
+                    MoreLinkField.Text = item.MoreLink;
+                    MobileMoreField.Text = item.MobileMoreLink;
+                    DescriptionField.Text = item.Description;
+                    // <lang>
+                    //   <zh-CN>过期日期按旧页面使用短日期文本回填，保持当前区域性输入/显示兼容。</zh-CN>
+                    //   <en>The expiry date is filled using the legacy page's short-date text, preserving current-culture input and display compatibility.</en>
+                    // </lang>
+                    ExpireField.Text = item.ExpireDate.HasValue ? item.ExpireDate.Value.ToShortDateString() : string.Empty;
+                    CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
+                    CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
+                }
+
+                // <lang>
+                //   <zh-CN>回跳地址只记录经策略清洗后的站内地址；更新、删除和取消共用该安全回跳。</zh-CN>
+                //   <en>The return URL stores only a policy-cleaned in-app address; update, delete and cancel share this safe return.</en>
+                // </lang>
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

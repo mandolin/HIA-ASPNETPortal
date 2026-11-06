@@ -1,0 +1,20 @@
+        private static void EnsureSession(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>空上下文无法提供 Session，也无法形成可诊断的当前请求边界。</zh-CN>
+            //   <en>A null context cannot provide Session or establish a diagnosable current-request boundary.</en>
+            // </lang>
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            // <lang>
+            //   <zh-CN>无 Session 时不允许签发或消费一次性密钥，避免密钥落入不可回收的范围。</zh-CN>
+            //   <en>Do not issue or consume a one-time key without Session, preventing a key from entering an unrecoverable scope.</en>
+            // </lang>
+            if (context.Session == null)
+            {
+                throw new InvalidOperationException("The current request does not have a Session.");
+            }
+        }

@@ -1,0 +1,6 @@
+        private bool OrganizationExists(int organizationUnitId)
+        {
+            return ScalarInt(
+                "SELECT COUNT(*) FROM [dbo].[PortalBiz_OrganizationUnits] WHERE [OrganizationUnitId] = @OrganizationUnitId;",
+                IntParameter("@OrganizationUnitId", organizationUnitId)) > 0;
+        }

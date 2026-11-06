@@ -1,0 +1,14 @@
+        public static bool TryNormalizeRoleName(string candidate, out string normalizedRoleName)
+        {
+            if (!TryNormalizeRequiredSingleLineText(candidate, MaximumRoleNameLength, out normalizedRoleName))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>旧角色存储使用分号分隔且保留 All Users 虚拟角色；两者都不能作为新角色名写入。</zh-CN>
+            //   <en>The legacy role store uses semicolons as delimiters and reserves the All Users virtual role; neither may be written as a new role name.</en>
+            // </lang>
+            return normalizedRoleName.IndexOf(';') < 0 &&
+                   !string.Equals(normalizedRoleName, PortalRoleNames.AllUsers, StringComparison.OrdinalIgnoreCase);
+        }

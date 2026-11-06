@@ -1,0 +1,9 @@
+        private static string NormalizeEnvironmentName(string environmentName)
+        {
+            if (string.IsNullOrWhiteSpace(environmentName))
+            {
+                return "dev";
+            }
+
+            return environmentName.Trim();
+        }

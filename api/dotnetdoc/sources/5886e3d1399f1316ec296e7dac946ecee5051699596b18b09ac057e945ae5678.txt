@@ -1,0 +1,4 @@
+        public static bool TryNormalizeBrowseUrl(string candidate, HttpRequest request, out string normalizedUrl)
+        {
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(candidate, request, out normalizedUrl);
+        }

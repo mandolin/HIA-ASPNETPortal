@@ -1,0 +1,77 @@
+    public sealed class BusinessApplicationRecentRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从业务申请读模型构造最近申请展示行，并把缺失的日期和审核意见转换为低敏占位文本。</zh-CN>
+        ///   <en>Builds a recent-application display row from the business-application read model and maps missing date or review-comment values to low-sensitivity placeholders.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="application">
+        /// <l>
+        ///   <zh-CN>业务申请读模型。</zh-CN>
+        ///   <en>Business-application read model.</en>
+        /// </l>
+        /// </param>
+        internal BusinessApplicationRecentRow(BusinessApplicationInfo application)
+        {
+            // <lang>
+            //   <zh-CN>展示行只复制列表所需字段，不保留数据访问对象引用。</zh-CN>
+            //   <en>The display row copies only fields needed by the list and retains no data-access object reference.</en>
+            // </lang>
+            ApplicationCode = application.ApplicationCode;
+            Title = application.Title;
+            ApplicationStatus = application.ApplicationStatus;
+            // <lang>
+            //   <zh-CN>UTC 时间使用固定文化格式；缺失值统一显示低敏占位文本。</zh-CN>
+            //   <en>Format UTC time with a fixed culture; map missing values to a low-sensitivity placeholder.</en>
+            // </lang>
+            SubmittedUtcText = application.SubmittedUtc.HasValue
+                ? application.SubmittedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
+                : lang.Common_NonePlaceholder;
+            // <lang>
+            //   <zh-CN>审核意见为空时不暴露 null，列表仍保持稳定可渲染。</zh-CN>
+            //   <en>Do not expose null for a missing review comment so the list remains stable and renderable.</en>
+            // </lang>
+            ReviewComment = string.IsNullOrWhiteSpace(application.ReviewComment) ? lang.Common_NonePlaceholder : application.ReviewComment;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请编号。</zh-CN>
+        ///   <en>Application code.</en>
+        /// </lang>
+        /// </summary>
+        public string ApplicationCode { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请标题。</zh-CN>
+        ///   <en>Application title.</en>
+        /// </lang>
+        /// </summary>
+        public string Title { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请状态。</zh-CN>
+        ///   <en>Application status.</en>
+        /// </lang>
+        /// </summary>
+        public string ApplicationStatus { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交 UTC 展示文本。</zh-CN>
+        ///   <en>Submission UTC display text.</en>
+        /// </lang>
+        /// </summary>
+        public string SubmittedUtcText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近审核意见。</zh-CN>
+        ///   <en>Latest review comment.</en>
+        /// </lang>
+        /// </summary>
+        public string ReviewComment { get; private set; }
+    }

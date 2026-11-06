@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>主题设置页只调整展示结构，主题写入和审计仍由 code-behind 处理。</zh-CN>
+            <en>The theme settings page only adjusts the presentation structure; theme writes and audit recording remain in code-behind.</en>
+        </lang>
+    --%>

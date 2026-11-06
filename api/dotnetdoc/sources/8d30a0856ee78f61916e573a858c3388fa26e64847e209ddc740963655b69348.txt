@@ -1,0 +1,5 @@
+        internal static string DiscussDetails_PrevTooltip {
+            get {
+                return ResourceManager.GetString("DiscussDetails_PrevTooltip", resourceCulture);
+            }
+        }

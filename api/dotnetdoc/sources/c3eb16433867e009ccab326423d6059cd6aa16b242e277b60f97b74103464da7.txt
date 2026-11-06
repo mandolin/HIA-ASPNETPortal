@@ -1,0 +1,34 @@
+        private bool TryAuthorizeEditorForCurrentItem()
+        {
+            if (!TryReadRequestIdentifiers() || !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>新增主题没有既有消息可校验归属，前面的模块编辑权限就是完整授权条件。</zh-CN>
+            //   <en>A new topic has no existing message whose ownership can be checked, so the earlier module edit permission is the complete authorization condition.</en>
+            // </lang>
+            if (itemId == 0)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>回复必须确认消息真实存在并归属于当前模块，避免用合法权限编辑其他模块的消息。</zh-CN>
+            //   <en>Replies must confirm that the message exists and belongs to the current module, avoiding edits to another module's message with otherwise valid permissions.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>父消息快照只用于归属校验；它不授权跨模块写入，也不把正文回填给编辑框。</zh-CN>
+            //   <en>The parent-message snapshot is used only for ownership checks; it does not authorize cross-module writes or populate the editor body.</en>
+            // </lang>
+            IDiscussionItem item = DiscussionDB.GetSingleMessage(itemId);
+            if (item == null || item.ModuleID != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }

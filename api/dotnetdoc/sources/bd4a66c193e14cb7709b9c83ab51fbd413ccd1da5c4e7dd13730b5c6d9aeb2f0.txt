@@ -1,0 +1,24 @@
+        private static string GetBindingSql(string predicate)
+        {
+            return @"
+SELECT TOP (1)
+    [Binding].[BindingId],
+    [Binding].[UserId],
+    [User].[Name] AS [UserName],
+    [Binding].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName] AS [EmployeeDisplayName],
+    [Binding].[BindingStatus],
+    [Binding].[BoundUtc],
+    [Binding].[BoundBy],
+    [Binding].[EndedUtc],
+    [Binding].[EndedBy],
+    [Binding].[Reason]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+INNER JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [Binding].[UserId]
+WHERE " + predicate + @"
+ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
+        }

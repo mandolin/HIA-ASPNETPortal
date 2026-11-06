@@ -1,0 +1,9 @@
+        private static string ToLikePattern(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return string.Empty;
+            }
+
+            return "%" + keyword.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]") + "%";
+        }

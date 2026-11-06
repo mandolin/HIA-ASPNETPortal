@@ -1,0 +1,9 @@
+        private static string NormalizeInput(string value, int maxLength)
+        {
+            // <lang>
+            //   <zh-CN>把 null 归一化为空字符串并裁剪首尾空白，随后按字符上限截断。</zh-CN>
+            //   <en>Normalize null to an empty string and trim outer whitespace before applying the character limit.</en>
+            // </lang>
+            string normalized = (value ?? string.Empty).Trim();
+            return normalized.Length <= maxLength ? normalized : normalized.Substring(0, maxLength);
+        }

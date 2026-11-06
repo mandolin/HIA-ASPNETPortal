@@ -1,0 +1,11 @@
+        public static void ConfigureOptionsProvider(Func<PortalPasswordPolicyOptions> provider)
+        {
+            // <lang>
+            //   <zh-CN>在同步边界内原子替换提供器；传入 null 明确恢复组件层默认策略。</zh-CN>
+            //   <en>Replace the provider atomically within the synchronization boundary; null explicitly restores the component-layer default policy.</en>
+            // </lang>
+            lock (OptionsProviderLock)
+            {
+                optionsProvider = provider;
+            }
+        }

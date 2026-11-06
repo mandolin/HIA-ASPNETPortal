@@ -1,0 +1,12 @@
+        private static string BuildItemIdParameterList(List<long> itemIds, List<SqlParameter> parameters)
+        {
+            List<string> names = new List<string>();
+            for (int index = 0; index < itemIds.Count; index++)
+            {
+                string name = "@BatchItemId" + index.ToString(CultureInfo.InvariantCulture);
+                names.Add(name);
+                parameters.Add(new SqlParameter(name, itemIds[index]));
+            }
+
+            return string.Join(", ", names.ToArray());
+        }

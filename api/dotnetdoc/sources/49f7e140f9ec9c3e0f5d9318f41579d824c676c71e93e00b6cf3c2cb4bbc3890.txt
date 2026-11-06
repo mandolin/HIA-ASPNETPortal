@@ -1,0 +1,4 @@
+        private bool HasCredentialTable()
+        {
+            return HasTable(CredentialTableName);
+        }

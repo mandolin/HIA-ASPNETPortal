@@ -1,0 +1,5 @@
+        internal static string QuickLinks_ButtonAddLink {
+            get {
+                return ResourceManager.GetString("QuickLinks_ButtonAddLink", resourceCulture);
+            }
+        }

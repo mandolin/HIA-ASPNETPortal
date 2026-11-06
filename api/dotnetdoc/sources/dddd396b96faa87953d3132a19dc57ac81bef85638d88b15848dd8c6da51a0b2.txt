@@ -1,0 +1,1 @@
+        public string DesktopEntry { get; private set; }

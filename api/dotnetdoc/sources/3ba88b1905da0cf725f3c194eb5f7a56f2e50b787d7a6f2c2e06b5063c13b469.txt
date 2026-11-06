@@ -1,0 +1,29 @@
+        private static string ReadOptionalString(JObject manifest, string propertyName, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>缺失与 JSON null 是唯一允许的空值形态；对象、数组、数值和布尔值不会被字符串化，以避免歧义 manifest 表示进入后续路径或版本判断。</zh-CN>
+            //   <en>Missing and JSON null are the only permitted empty forms; objects, arrays, numbers, and Booleans are not stringified, preventing ambiguous manifest representations from reaching later path or version decisions.</en>
+            // </lang>
+            JToken token = manifest[propertyName];
+            if (token == null || token.Type == JTokenType.Null)
+            {
+                return string.Empty;
+            }
+
+            if (token.Type != JTokenType.String)
+            {
+                throw new InvalidOperationException("Manifest string value is invalid.");
+            }
+
+            // <lang>
+            //   <zh-CN>先修剪再按字符数限制，确保目录展示和后续受控比较使用稳定文本，同时不对值进行 URL、路径或版本语义解释。</zh-CN>
+            //   <en>Trim before applying the character limit so catalog display and later controlled comparison use stable text; this does not interpret URL, path, or version semantics in the value.</en>
+            // </lang>
+            string value = token.Value<string>().Trim();
+            if (value.Length > maximumLength)
+            {
+                throw new InvalidOperationException("Manifest string value is too long.");
+            }
+
+            return value;
+        }

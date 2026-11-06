@@ -1,0 +1,74 @@
+        protected void RightLeft_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>移动事件重新验证当前 Tab，并要求来源和目标窗格均为不同的受控名称。</zh-CN>
+            //   <en>Revalidate the current Tab and require distinct controlled source and target pane names for a move.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>按钮属性只用于选择受控窗格控件；目标控件仅验证存在，不直接信任请求文本。</zh-CN>
+            //   <en>Button attributes select controlled pane controls; the target control is validated for existence rather than trusted as request text.</en>
+            // </lang>
+            LinkButton button = sender as LinkButton;
+            string sourcePane;
+            string targetPane;
+            ListBox sourceBox;
+            ListBox ignoredTargetBox;
+            if (button == null ||
+                !TryGetPaneListBox(button.Attributes["sourcepane"], out sourcePane, out sourceBox) ||
+                !TryGetPaneListBox(button.Attributes["targetpane"], out targetPane, out ignoredTargetBox) ||
+                string.Equals(sourcePane, targetPane, StringComparison.Ordinal))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>在来源窗格中校验选中模块，空选中仅回跳而不写入移动。</zh-CN>
+            //   <en>Validate the selected module in the source pane; an empty selection only navigates back without a move.</en>
+            // </lang>
+            List<ModuleSettings> sourceModules = GetModules(sourcePane);
+            ModuleSettings selectedModule;
+            if (!TryGetSelectedModule(sourceBox, sourceModules, out selectedModule))
+            {
+                RedirectToCurrentLayout();
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>先更新目标窗格，再重载并分别整理来源和目标顺序，最后审计并回跳。</zh-CN>
+                //   <en>Update the target pane first, reload and reorder both panes, then audit and navigate back.</en>
+                // </lang>
+                ModulesConfig.UpdateModuleOrder(selectedModule.ModuleId, 998, targetPane);
+                ReloadCurrentTab();
+                OrderModules(GetModules(sourcePane));
+                OrderModules(GetModules(targetPane));
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Move",
+                    "Module",
+                    selectedModule.ModuleId.ToString(),
+                    "Moved module between layout panes.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>移动失败写入统一诊断并保持页面低敏反馈。</zh-CN>
+                //   <en>Record move failures through shared diagnostics and keep page feedback low sensitivity.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.MoveModule",
+                    "Moving a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleMoveFailed, eventId));
+            }
+        }

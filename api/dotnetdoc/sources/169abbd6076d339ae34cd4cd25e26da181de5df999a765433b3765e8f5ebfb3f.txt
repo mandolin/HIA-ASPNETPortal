@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>设置 registry 行同时标出敏感性、在线可编辑和重启要求；这些标签只反映服务器元数据，不能绕过配置写入策略。</zh-CN>
+                  <en>Settings-registry rows expose sensitivity, online-editability, and restart requirements; these labels reflect server metadata and cannot bypass configuration-write policy.</en>
+                </lang>
+                --%>

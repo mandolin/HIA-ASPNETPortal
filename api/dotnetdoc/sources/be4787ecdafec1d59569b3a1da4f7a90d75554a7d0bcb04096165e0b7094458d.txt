@@ -1,0 +1,15 @@
+        public IEnumerable<IAnnouncementItem> GetGuestVisibleAnnouncements(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>过滤条件与全量查询保持一致，只额外要求 IsGuestVisible，避免两条路径出现过期语义差异。
+            //   这里不做授权判定：条目是否公开由数据属性决定，能否进入页面仍由页签 AccessRoles 决定。</zh-CN>
+            //   <en>Keep the same expiry semantics as the full query and add only the IsGuestVisible requirement so the
+            //   two paths cannot diverge. No authorization decision is made here: an item's publicness is a data attribute,
+            //   while page access is still governed by the tab's AccessRoles.</en>
+            // </lang>
+            return _context.Announcements
+                .Where(i => i.ModuleId == moduleId)
+                .Where(i => i.ExpireDate > DateTime.Now)
+                .Where(i => i.IsGuestVisible)
+                .ToList<IAnnouncementItem>();
+        }

@@ -1,0 +1,29 @@
+        private bool TryReadEmployeeId(out int employeeId)
+        {
+            // <lang>
+            //   <zh-CN>缺失参数代表新增，因此先把输出初始化为 0；该默认值不会访问数据库。</zh-CN>
+            //   <en>A missing parameter means creation, so initialize the output to zero; this default does not access the database.</en>
+            // </lang>
+            employeeId = 0;
+            // <lang>
+            //   <zh-CN>只从当前请求参数读取实体标识，不使用未验证的控件文本替代路由输入。</zh-CN>
+            //   <en>Read the entity identifier only from the current request parameter, rather than substituting unvalidated control text for route input.</en>
+            // </lang>
+            string rawValue = Request.Params["employeeId"];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out employeeId))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非法标识统一进入编辑拒绝路径，不向调用方透露解析细节或继续绑定实体。</zh-CN>
+            //   <en>Route invalid identifiers to the shared edit-denied path without exposing parsing details or continuing entity binding.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }

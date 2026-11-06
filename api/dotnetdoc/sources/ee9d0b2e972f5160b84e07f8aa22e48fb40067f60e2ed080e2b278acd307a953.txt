@@ -1,0 +1,25 @@
+        private static bool TryGetEventDate(string eventId, out DateTime eventDate)
+        {
+            // <lang>
+            //   <zh-CN>先写入稳定失败值，再以 culture-invariant 受控正则和 yyyyMMdd 解析日期；不访问日志或抛出格式细节。</zh-CN>
+            //   <en>Set a stable failure value first, then parse the date with culture-invariant controlled regex and yyyyMMdd; do not access logs or throw format detail.</en>
+            // </lang>
+            eventDate = DateTime.MinValue;
+
+            // <lang>
+            //   <zh-CN>保存受控正则匹配对象，仅在当前事件编号调用内使用，不保留外部输入。</zh-CN>
+            //   <en>Keep the controlled regex match only for this event-id call and retain no external input beyond parsing.</en>
+            // </lang>
+            Match match = EventIdPattern.Match(eventId ?? string.Empty);
+            if (!match.Success)
+            {
+                return false;
+            }
+
+            return DateTime.TryParseExact(
+                match.Groups["date"].Value,
+                "yyyyMMdd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                out eventDate);
+        }

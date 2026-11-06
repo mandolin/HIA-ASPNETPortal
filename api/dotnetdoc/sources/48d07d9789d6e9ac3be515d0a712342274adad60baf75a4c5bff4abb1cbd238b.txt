@@ -1,0 +1,5 @@
+        internal static string Admin_CapabilityPermissionMatrix_EmptyDefinitions {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_EmptyDefinitions", resourceCulture);
+            }
+        }

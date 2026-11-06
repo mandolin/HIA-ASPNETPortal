@@ -1,0 +1,36 @@
+    public sealed class PortalModulePackageStateReadResult
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建模块包状态读取结果。</zh-CN>
+        ///   <en>Creates a module-package state read result.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="isAvailable"><l zh-CN="状态表是否可用；该事实不确认包部署、Profile、授权或加载。" en="Whether the state table is available; this fact does not confirm package deployment, profile, authorization, or loading." /></param>
+        /// <param name="state"><l zh-CN="可用时的默认或显式状态快照；本存储的不可用读取路径传入 null。" en="Default or explicit state snapshot when available; this store's unavailable read path passes null." /></param>
+        internal PortalModulePackageStateReadResult(bool isAvailable, PortalModulePackageState state)
+        {
+            // <lang>
+            //   <zh-CN>本存储的构造位置以成对事实传入可用性与状态：不可用读取不伪装为“未配置且默认启用”，本类型也不自行触发模块加载。</zh-CN>
+            //   <en>This store's construction sites pass availability and state as paired facts: an unavailable read is not disguised as “unconfigured and default enabled,” and this type does not initiate module loading.</en>
+            // </lang>
+            IsAvailable = isAvailable;
+            State = state;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>状态表是否可连接且可读取；false 时没有可靠状态快照。</zh-CN>
+        ///   <en>Whether the state table can be connected and read; false means there is no reliable state snapshot.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsAvailable { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可用状态表返回的默认或显式快照；不可用时为 null，而可用缺行时为未配置的默认启用快照。</zh-CN>
+        ///   <en>Default or explicit snapshot returned by an available state table; null when unavailable, and an unconfigured default-enabled snapshot when the available table has no row.</en>
+        /// </lang>
+        /// </summary>
+        public PortalModulePackageState State { get; private set; }
+    }

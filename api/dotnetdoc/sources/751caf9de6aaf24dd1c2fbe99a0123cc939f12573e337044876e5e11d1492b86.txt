@@ -1,0 +1,2 @@
+        [Dependency]
+        public IEventsDb EventsDB { private get; set; }

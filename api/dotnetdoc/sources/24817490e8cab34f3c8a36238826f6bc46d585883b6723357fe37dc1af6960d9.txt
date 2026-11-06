@@ -1,0 +1,9 @@
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // 设置属性不可浏览且不在设计器序列化中可见
+        public int ModuleId
+        {
+            // <lang>
+            //   <zh-CN>直接返回调用方设置快照中的稳定实例标识，保持接口与数据读取使用同一来源。</zh-CN>
+            //   <en>Return the stable instance identifier directly from the caller-bound settings snapshot so the interface and data reads use the same source.</en>
+            // </lang>
+            get { return _moduleConfiguration.ModuleId; } 
+        }

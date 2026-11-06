@@ -1,0 +1,21 @@
+        private void RecordCommentAudit(CollaborationItemCommentResult result, string visibilityScope, string comment)
+        {
+            // <lang>
+            //   <zh-CN>审计仅保留可追踪的事项、事件、可见范围和长度，降低正文泄露风险。</zh-CN>
+            //   <en>Audit retains only traceable item, event, scope, and length metadata to reduce comment-body exposure.</en>
+            // </lang>
+            if (result == null || !result.Succeeded)
+            {
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemCommentAdded,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item comment added. EventId=" + result.EventId.ToString(CultureInfo.InvariantCulture) +
+                "; VisibilityScope=" + visibilityScope +
+                "; Length=" + NormalizeInput(comment, 1000).Length.ToString(CultureInfo.InvariantCulture),
+                Context);
+        }

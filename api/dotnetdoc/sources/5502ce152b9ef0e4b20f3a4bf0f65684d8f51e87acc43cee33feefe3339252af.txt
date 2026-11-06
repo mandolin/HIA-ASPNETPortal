@@ -1,0 +1,4 @@
+        private int ScalarInt(string sql, params object[] parameters)
+        {
+            return _context.Database.SqlQuery<int>(sql, parameters).Single();
+        }

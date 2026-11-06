@@ -1,0 +1,36 @@
+        public void UpdateHtmlText(int moduleId, string desktopHtml, string mobileSummary, string mobileDetails)
+        {
+            // <lang>
+            //   <zh-CN>旧 HTML 模块以 ModuleId 作为唯一定位；首次保存时可能还没有对应记录。</zh-CN>
+            //   <en>The legacy HTML module is uniquely located by ModuleId; its first save may occur before a record exists.</en>
+            // </lang>
+            var item = _context.HtmlTexts.SingleOrDefault(i => i.ModuleId == moduleId);
+
+            if (item != null)
+            {
+                // <lang>
+                //   <zh-CN>更新现有记录时只替换三个内容字段，模块归属保持不变。</zh-CN>
+                //   <en>When updating an existing record, replace only the three content fields and keep module ownership unchanged.</en>
+                // </lang>
+                item.DesktopHtml = desktopHtml;
+                item.MobileSummary = mobileSummary;
+                item.MobileDetails = mobileDetails;
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>首次保存创建记录；调用页已保证 moduleId 来自当前可编辑模块。</zh-CN>
+                //   <en>The first save creates the record; the caller page has already ensured that moduleId comes from the current editable module.</en>
+                // </lang>
+                var newItem = new HtmlTextItem
+                {
+                    ModuleId = moduleId,
+                    DesktopHtml = desktopHtml,
+                    MobileSummary = mobileSummary,
+                    MobileDetails = mobileDetails
+                };
+                _context.HtmlTexts.Add(newItem);
+            }
+
+            _context.SaveChanges();
+        }

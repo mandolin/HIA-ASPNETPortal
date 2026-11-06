@@ -1,0 +1,5 @@
+        internal static string Discussion_CollapseThread {
+            get {
+                return ResourceManager.GetString("Discussion_CollapseThread", resourceCulture);
+            }
+        }

@@ -1,0 +1,17 @@
+        private static void TryDeleteFile(string physicalPath)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(physicalPath) && File.Exists(physicalPath))
+                {
+                    File.Delete(physicalPath);
+                }
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>原异常比清理失败更有诊断价值，因此不覆盖原异常。</zh-CN>
+                //   <en>The original exception is more diagnostic than cleanup failure, so do not mask it.</en>
+                // </lang>
+            }
+        }

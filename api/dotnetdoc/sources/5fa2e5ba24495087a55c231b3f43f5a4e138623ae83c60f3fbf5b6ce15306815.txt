@@ -1,0 +1,6 @@
+        public PortalPermissionDefinition(string key, string category, string description)
+        {
+            Key = key;
+            Category = category;
+            Description = description;
+        }

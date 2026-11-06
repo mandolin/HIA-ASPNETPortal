@@ -1,0 +1,51 @@
+        protected void UpDown_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>排序命令只接受受控的 up/down 值，并要求选中项通过列表与快照交叉校验。</zh-CN>
+            //   <en>Ordering accepts only the controlled up/down commands and requires the selected item to cross-check against the list snapshot.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            IButtonControl button = sender as IButtonControl;
+            TabSettings selectedTab;
+            if (button == null || (button.CommandName != "up" && button.CommandName != "down") ||
+                !TryGetSelectedTab(out selectedTab))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先调整内存顺序，再由 OrderTabs 写回稳定的奇数步长并记录低敏审计。</zh-CN>
+            //   <en>Adjust the in-memory order first, then let OrderTabs persist a stable odd-step sequence and record a low-sensitivity audit.</en>
+            // </lang>
+            selectedTab.TabOrder += button.CommandName == "down" ? 3 : -3;
+            try
+            {
+                OrderTabs();
+                PortalOperationAudit.Record(
+                    "TabAdministration",
+                    "Order",
+                    "Tab",
+                    selectedTab.TabId.ToString(),
+                    "Changed Tab display order.",
+                    Context);
+                RedirectToPortalHome();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>排序失败只展示事件编号，不回显异常或 Tab 资料。</zh-CN>
+                //   <en>On ordering failure, expose only the event identifier rather than the exception or Tab data.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Tabs.Order",
+                    "Ordering a Tab failed. TabId=" + selectedTab.TabId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Tabs_MessageReorderFailed, eventId));
+            }
+        }

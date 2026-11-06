@@ -1,0 +1,5 @@
+        private static string NormalizeReason(string value)
+        {
+            string reason = NormalizeOptional(value);
+            return reason.Length > 200 ? reason.Substring(0, 200) : reason;
+        }

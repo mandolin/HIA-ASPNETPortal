@@ -1,0 +1,43 @@
+        public int AddLink(int moduleId, string userName, string title, string url, string mobileUrl,
+                           int viewOrder, string description)
+        {
+            // <lang>
+            //   <zh-CN>旧内容表只有显示用创建人字段；缺失认证名称时使用占位值，不把它作为权限依据。</zh-CN>
+            //   <en>The legacy content table only has a display creator field; when the authenticated name is missing, use a placeholder and do not treat it as an authorization source.</en>
+            // </lang>
+            userName = userName ?? "unknown";
+
+            // <lang>
+            //   <zh-CN>新链接实体承载一次新增投影；URL、移动端 URL 和排序值均来自编辑页的前置策略处理。</zh-CN>
+            //   <en>The new link entity carries one create projection; URL, mobile URL, and order value all come from the editor page's prior policy handling.</en>
+            // </lang>
+            var item = new LinkItem
+            {
+                ModuleId = moduleId,
+                CreatedByUser = userName,
+                CreatedDate = DateTime.Now,
+                Title = title,
+                Url = url,
+                MobileUrl = mobileUrl,
+                ViewOrder = viewOrder,
+                Description = description
+            };
+
+            // <lang>
+            //   <zh-CN>把新实体加入 EF 跟踪集，数据库标识会在保存后回填到同一对象。</zh-CN>
+            //   <en>Add the new entity to the EF tracking set; the database identifier is populated back onto the same object after saving.</en>
+            // </lang>
+            _context.Links.Add(item);
+
+            // <lang>
+            //   <zh-CN>提交新增批次；本层不重判权限、不访问目标 URL，也不决定展示时是否可点击。</zh-CN>
+            //   <en>Commit the create batch; this layer does not re-authorize, access the target URL, or decide whether it is clickable at display time.</en>
+            // </lang>
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>返回 EF 保存后生成的旧表主键，供编辑页继续导航或反馈。</zh-CN>
+            //   <en>Return the legacy-table primary key generated after EF saving, allowing the editor page to continue navigation or feedback.</en>
+            // </lang>
+            return item.ItemId;
+        }

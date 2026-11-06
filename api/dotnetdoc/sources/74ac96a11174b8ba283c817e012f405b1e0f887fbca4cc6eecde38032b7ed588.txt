@@ -1,0 +1,11 @@
+        public static bool IsLegalTransition(string fromStatus, string actionKey)
+        {
+            if (string.IsNullOrEmpty(fromStatus) || string.IsNullOrEmpty(actionKey))
+            {
+                return false;
+            }
+
+            return All.Any(candidate =>
+                string.Equals(candidate.FromStatus, fromStatus, StringComparison.Ordinal) &&
+                string.Equals(candidate.ActionKey, actionKey, StringComparison.Ordinal));
+        }

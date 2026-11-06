@@ -1,0 +1,4 @@
+        public string GetDetailUrl(object eventId)
+        {
+            return ResolveUrl("~/Admin/DiagnosticLogDetail.aspx?id=" + HttpUtility.UrlEncode(Convert.ToString(eventId)));
+        }

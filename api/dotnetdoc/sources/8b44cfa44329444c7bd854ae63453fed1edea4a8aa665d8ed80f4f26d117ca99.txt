@@ -1,0 +1,107 @@
+    [Table("PortalCfg_Tabs")]
+    public class TabItem : ITabItem
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前 Tab 下挂载的模块实例集合。</zh-CN>
+        ///   <en>Module instances mounted under the current tab.</en>
+        /// </lang>
+        /// </summary>
+        public ICollection<ModuleItem> Modules { get; set; }
+
+        #region ITabItem Members
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 在桌面门户导航中的排序值。</zh-CN>
+        ///   <en>Sort value of the tab in desktop portal navigation.</en>
+        /// </lang>
+        /// </summary>
+        public int? TabOrder { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 显示名称；多语言体系下为中文列兼默认回退列。</zh-CN>
+        ///   <en>Display name of the tab; the Chinese column and default fallback within the multilingual scheme.</en>
+        /// </lang>
+        /// </summary>
+        public string TabName { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 名称的英文列；为空时渲染回退到 `TabName`。</zh-CN>
+        ///   <en>English column for the tab name; rendering falls back to `TabName` when it is blank.</en>
+        /// </lang>
+        /// </summary>
+        public string TabNameEn { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 名称的其它语言列，存以文化名为键的 JSON 文本；合法性由数据库 CHECK 约束 `ISJSON` 保证，键名语义由解析器负责。</zh-CN>
+        ///   <en>Other-languages column for the tab name, storing culture-keyed JSON text; validity is guaranteed by the database
+        ///   `ISJSON` CHECK constraint while key semantics belong to the resolver.</en>
+        /// </lang>
+        /// </summary>
+        public string TabNameLocalizedJson { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>导航门控稳定键；为空时门控回退到 `TabName`。它使显示名可以自由本地化而不改变 `Tab.*` 键。</zh-CN>
+        ///   <en>Navigation gate stable key; the gate falls back to `TabName` when it is blank. It lets the display name be
+        ///   localized freely without changing `Tab.*` keys.</en>
+        /// </lang>
+        /// </summary>
+        public string NavigationKey { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 配置主键。</zh-CN>
+        ///   <en>Primary key of the tab configuration row.</en>
+        /// </lang>
+        /// </summary>
+        [Key]
+        public int TabId { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧门户分号分隔角色字符串，需通过统一角色解析工具解释。</zh-CN>
+        ///   <en>Legacy semicolon-delimited role string, which must be interpreted through the shared role parser.</en>
+        /// </lang>
+        /// </summary>
+        public string AccessRoles { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧移动端 Tab 名称字段，作为历史兼容数据保留；多语言体系下为中文列兼默认回退列。</zh-CN>
+        ///   <en>Legacy mobile tab-name field retained as historical compatibility data; the Chinese column and default fallback
+        ///   within the multilingual scheme.</en>
+        /// </lang>
+        /// </summary>
+        public string MobileTabName { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>移动端 Tab 名称的英文列；为空时回退到 `MobileTabName`。</zh-CN>
+        ///   <en>English column for the mobile tab name; falls back to `MobileTabName` when blank.</en>
+        /// </lang>
+        /// </summary>
+        public string MobileTabNameEn { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>移动端 Tab 名称的其它语言列，取值形态与 `TabNameLocalizedJson` 相同。</zh-CN>
+        ///   <en>Other-languages column for the mobile tab name, with the same shape as `TabNameLocalizedJson`.</en>
+        /// </lang>
+        /// </summary>
+        public string MobileTabNameLocalizedJson { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧移动端可见性标记，当前主题体系不直接依赖该字段。</zh-CN>
+        ///   <en>Legacy mobile visibility flag; the current theme system does not directly depend on it.</en>
+        /// </lang>
+        /// </summary>
+        public bool? ShowMobile { get; set; }
+
+        #endregion
+    }

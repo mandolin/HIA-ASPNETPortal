@@ -1,0 +1,6 @@
+<%@ Page
+    Language="c#"
+    CodeBehind="SystemHealth.aspx.cs"
+    AutoEventWireup="True"
+    Inherits="ASPNET.StarterKit.Portal.SystemHealth"
+    MasterPageFile="~/Default.master" %>

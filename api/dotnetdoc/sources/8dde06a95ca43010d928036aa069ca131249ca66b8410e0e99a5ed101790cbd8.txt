@@ -1,0 +1,5 @@
+        internal static string EditDocs_SectionServerUpload {
+            get {
+                return ResourceManager.GetString("EditDocs_SectionServerUpload", resourceCulture);
+            }
+        }

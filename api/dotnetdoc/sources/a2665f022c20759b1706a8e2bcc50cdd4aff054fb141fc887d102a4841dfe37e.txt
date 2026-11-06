@@ -1,0 +1,9 @@
+        protected void NextButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>下一页动作不直接信任按钮可见性，实际可用性由审计查询结果 HasMore 决定。</zh-CN>
+            //   <en>The next-page action does not trust button visibility; actual availability is determined by the audit-query result HasMore flag.</en>
+            // </lang>
+            CurrentPage++;
+            BindEntries();
+        }

@@ -1,0 +1,5 @@
+        internal static string Contacts_LabelName {
+            get {
+                return ResourceManager.GetString("Contacts_LabelName", resourceCulture);
+            }
+        }

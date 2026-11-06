@@ -1,0 +1,1 @@
+        ITabItem GetSingleTab(int tabId);

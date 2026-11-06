@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_MessageModuleNotInitialized {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageModuleNotInitialized", resourceCulture);
+            }
+        }

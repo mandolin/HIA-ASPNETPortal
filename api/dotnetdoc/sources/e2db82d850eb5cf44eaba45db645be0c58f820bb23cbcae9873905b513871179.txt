@@ -1,0 +1,6 @@
+        private IRoleItem FindCurrentPortalRole(int roleId)
+        {
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            return RolesDB.GetPortalRoles(portalSettings.PortalId)
+                .FirstOrDefault(item => item.RoleId == roleId);
+        }

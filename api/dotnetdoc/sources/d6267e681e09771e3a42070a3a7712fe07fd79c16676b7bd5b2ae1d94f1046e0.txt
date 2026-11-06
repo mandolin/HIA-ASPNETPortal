@@ -1,0 +1,6 @@
+    <%--
+    <lang>
+      <zh-CN>P7.4.2-E 将受信任 HTML 配置页改为主题化表单；原始 HTML 的安全边界仍由权限、审计和未来治理机制共同承担。</zh-CN>
+      <en>P7.4.2-E rebuilds the trusted HTML settings page with a themed form while keeping the raw-HTML security boundary in permissions, audit trails, and future governance.</en>
+    </lang>
+    --%>

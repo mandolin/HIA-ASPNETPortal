@@ -1,0 +1,5 @@
+        internal static string EditImage_MessageInvalidSize {
+            get {
+                return ResourceManager.GetString("EditImage_MessageInvalidSize", resourceCulture);
+            }
+        }

@@ -1,0 +1,4 @@
+        private string EncodeDisplay(string value)
+        {
+            return Server.HtmlEncode(value ?? string.Empty);
+        }

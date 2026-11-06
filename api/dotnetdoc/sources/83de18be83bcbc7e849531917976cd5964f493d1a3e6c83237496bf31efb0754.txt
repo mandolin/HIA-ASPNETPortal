@@ -1,0 +1,28 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>查看权限是最小访问门槛，管理权限作为历史兼容的替代门槛；任一权限均可进入只读后台列表。</zh-CN>
+            //   <en>The view permission is the minimum access gate, while the administration permission is a legacy-compatible alternative; either permission may enter the read-only administration list.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessWorkItemsView,
+                PortalPermissionKeys.BusinessWorkItemsAdmin))
+            {
+                // <lang>
+                //   <zh-CN>授权组件已处理拒绝响应；此处立即结束，确保未授权请求不会触及筛选控件、服务或绑定结果。</zh-CN>
+                //   <en>The authorization component has handled the denial response; end immediately so an unauthorized request cannot touch filters, services, or bound results.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅在首次请求建立默认状态筛选并加载列表；postback 保留已提交筛选，交由搜索事件重新读取。</zh-CN>
+            //   <en>Establish the default status filter and load the list only on the initial request; postback retains the submitted filter for the search event to reload.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindStatusFilter();
+                BindWorkItems();
+            }
+        }

@@ -1,0 +1,19 @@
+        public OrganizationUnitInfo(
+            int organizationUnitId,
+            int? parentOrganizationUnitId,
+            string organizationCode,
+            string displayName,
+            int sortOrder,
+            bool isActive,
+            DateTime createdUtc,
+            DateTime updatedUtc)
+        {
+            OrganizationUnitId = organizationUnitId;
+            ParentOrganizationUnitId = parentOrganizationUnitId;
+            OrganizationCode = organizationCode ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            SortOrder = sortOrder;
+            IsActive = isActive;
+            CreatedUtc = createdUtc;
+            UpdatedUtc = updatedUtc;
+        }

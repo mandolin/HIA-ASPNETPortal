@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>P2.2 只读系统健康页仅展示检查结果、设置 registry 摘要和重新检测入口，不在页面上提供自动修复、配置写入或命令执行能力。</zh-CN>
+  <en>The P2.2 read-only system health page only displays check results, the settings-registry summary, and a recheck entry point; it does not provide automated repair, configuration writes, or command execution.</en>
+</lang>
+--%>

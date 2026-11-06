@@ -1,0 +1,5 @@
+        internal static string Admin_Tabs_ButtonAddNewTab {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_ButtonAddNewTab", resourceCulture);
+            }
+        }

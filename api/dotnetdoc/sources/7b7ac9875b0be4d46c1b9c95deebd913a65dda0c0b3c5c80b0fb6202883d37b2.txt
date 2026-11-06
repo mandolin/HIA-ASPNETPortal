@@ -1,0 +1,1 @@
+        public const string BusinessApplicationTargetType = "BusinessApplication";

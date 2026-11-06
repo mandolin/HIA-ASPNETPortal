@@ -1,0 +1,14 @@
+        public static string[] Parse(string roles)
+        {
+            if (string.IsNullOrWhiteSpace(roles))
+            {
+                return new string[0];
+            }
+
+            return roles
+                .Split(RoleSeparators, StringSplitOptions.RemoveEmptyEntries)
+                .Select(role => role.Trim())
+                .Where(role => role.Length > 0)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+        }

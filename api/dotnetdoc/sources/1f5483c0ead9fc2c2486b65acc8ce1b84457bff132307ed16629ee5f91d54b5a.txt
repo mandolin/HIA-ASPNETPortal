@@ -1,0 +1,5 @@
+        internal static string Admin_EmployeeDirectory_LabelEmployeeStatus {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_LabelEmployeeStatus", resourceCulture);
+            }
+        }

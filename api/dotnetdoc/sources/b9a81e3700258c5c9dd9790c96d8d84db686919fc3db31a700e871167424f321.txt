@@ -1,0 +1,5 @@
+        internal static string Common_StatusPending {
+            get {
+                return ResourceManager.GetString("Common_StatusPending", resourceCulture);
+            }
+        }

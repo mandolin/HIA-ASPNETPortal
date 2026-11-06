@@ -1,0 +1,20 @@
+        internal UserEmployeeBindingDirectoryRow(IUserEmployeeBindingInfo binding)
+        {
+            // <lang>
+            //   <zh-CN>投影复制账号员工关系的低敏展示字段，时间统一为 UTC 文本，原因保持数据层提供的非敏感摘要。</zh-CN>
+            //   <en>Project low-sensitivity account-employee relationship fields, render time as UTC text, and retain the non-sensitive summary supplied by the data layer.</en>
+            // </lang>
+            BindingId = binding.BindingId;
+            UserId = binding.UserId;
+            UserName = binding.UserName;
+            EmployeeCode = binding.EmployeeCode;
+            EmployeeDisplayName = binding.EmployeeDisplayName;
+            BindingStatus = binding.BindingStatus;
+            BoundUtcText = binding.BoundUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+            Reason = binding.Reason;
+            // <lang>
+            //   <zh-CN>绑定维护地址固定在当前应用内，标识采用不变文化格式，目录页仍保持只读。</zh-CN>
+            //   <en>Keep the binding-maintenance URL inside the current application and format its identifier invariantly while the directory remains read-only.</en>
+            // </lang>
+            EditUrl = "UserEmployeeBindingEdit.aspx?bindingId=" + binding.BindingId.ToString(CultureInfo.InvariantCulture);
+        }

@@ -1,0 +1,1 @@
+        PortalWorkItemQueryResult GetWorkItemsForUser(int userId, IEnumerable<string> assignedRoleKeys, string status, int take);

@@ -1,0 +1,36 @@
+        public static PortalLoginPasswordPublicKey IssueLoginPasswordKey(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>先确认请求具备 Session；私钥只能绑定当前请求上下文，不能在无 Session 的情况下生成并丢失消费边界。</zh-CN>
+            //   <en>Validate Session first; the private key must be bound to the current request context and must not be generated without a consumption boundary.</en>
+            // </lang>
+            EnsureSession(context);
+
+            // <lang>
+            //   <zh-CN>在固定密钥强度下创建一次性 RSA 实例，并把其生命周期限制在当前 using 块。</zh-CN>
+            //   <en>Create a one-time RSA instance at the fixed key strength and limit its lifetime to the current using block.</en>
+            // </lang>
+            using (var rsa = new RSACryptoServiceProvider(DefaultKeySizeBits))
+            {
+                // <lang>
+                //   <zh-CN>只导出公钥参数供页面使用；私钥不进入返回模型。</zh-CN>
+                //   <en>Export only public parameters for the page; the private key never enters the response model.</en>
+                // </lang>
+                RSAParameters publicParameters = rsa.ExportParameters(false);
+
+                // <lang>
+                //   <zh-CN>把完整私钥和签发时间放入当前 Session，供下一次口令提交一次性消费。</zh-CN>
+                //   <en>Store the full private key and issue time in the current Session for one-time consumption by the next password post.</en>
+                // </lang>
+                context.Session[PrivateKeySessionKey] = rsa.ToXmlString(true);
+                context.Session[IssuedUtcSessionKey] = DateTime.UtcNow;
+
+                // <lang>
+                //   <zh-CN>返回 SubjectPublicKeyInfo PEM 和固定位数；响应不携带私钥、Session 键或诊断数据。</zh-CN>
+                //   <en>Return SubjectPublicKeyInfo PEM and the fixed key size; the response contains no private key, Session key, or diagnostic data.</en>
+                // </lang>
+                return new PortalLoginPasswordPublicKey(
+                    ExportSubjectPublicKeyInfoPem(publicParameters),
+                    DefaultKeySizeBits);
+            }
+        }

@@ -1,0 +1,34 @@
+        public void SaveRolePermissions(int roleId, IEnumerable<string> permissionKeys, string updatedBy)
+        {
+            if (!HasRolePermissionsTable())
+            {
+                throw new InvalidOperationException("PortalCfg_RolePermissions is not available.");
+            }
+
+            var role = _context.Roles.Single(i => i.RoleId == roleId);
+            string[] normalizedKeys = PortalPermissionRegistry.NormalizeDefinedKeys(permissionKeys);
+            List<int> affectedUserIds = GetRoleMemberIds(role.RoleId);
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                _context.Database.ExecuteSqlCommand(
+                    "DELETE FROM [dbo].[PortalCfg_RolePermissions] WHERE [RoleId] = @p0",
+                    role.RoleId);
+
+                foreach (string permissionKey in normalizedKeys)
+                {
+                    _context.Database.ExecuteSqlCommand(
+                        @"
+INSERT INTO [dbo].[PortalCfg_RolePermissions]
+    ([RoleId], [PermissionKey], [IsEnabled], [UpdatedUtc], [UpdatedBy])
+VALUES
+    (@p0, @p1, 1, SYSUTCDATETIME(), @p2)",
+                        role.RoleId,
+                        permissionKey,
+                        NormalizeUpdatedBy(updatedBy));
+                }
+
+                IncrementSecurityVersions(affectedUserIds, "RolePermissionsChanged");
+                transaction.Commit();
+            }
+        }

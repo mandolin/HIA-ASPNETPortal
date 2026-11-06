@@ -1,0 +1,17 @@
+        private static bool IsAdminRequest(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>优先采用显式上下文，再回退当前请求，以保持测试和宿主调用可预测。</zh-CN>
+            //   <en>Prefer the explicit context and then the current request to keep tests and host calls predictable.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+
+            // <lang>
+            //   <zh-CN>读取应用相对执行路径；缺少请求时使用空文本，使判定安全地落入非后台分支。</zh-CN>
+            //   <en>Read the application-relative execution path; use empty text without a request so the decision safely falls outside the administration branch.</en>
+            // </lang>
+            string path = current == null || current.Request == null
+                ? string.Empty
+                : current.Request.AppRelativeCurrentExecutionFilePath;
+            return path.StartsWith("~/Admin/", StringComparison.OrdinalIgnoreCase);
+        }

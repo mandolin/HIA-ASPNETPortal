@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>状态筛选只表达审核列表的查询意图；状态值解析、页大小、授权和空结果处理仍由 SearchButton_Click 的服务端职责负责。</zh-CN>
+            <en>The status filter expresses only review-list query intent; SearchButton_Click remains responsible for parsing, page size, authorization, and empty-result handling.</en>
+          </lang>
+        --%>

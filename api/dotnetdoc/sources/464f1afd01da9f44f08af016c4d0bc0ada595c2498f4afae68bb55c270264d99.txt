@@ -1,0 +1,12 @@
+        private static bool IsAllowedEntryField(string fieldKey)
+        {
+            // <lang>
+            //   <zh-CN>五个字段名构成封闭白名单；精确比较避免大小写变体绕过校验。</zh-CN>
+            //   <en>Five field names form the closed whitelist; exact comparison keeps case variants from bypassing validation.</en>
+            // </lang>
+            return string.Equals(fieldKey, "assemblyMode", StringComparison.Ordinal) ||
+                   string.Equals(fieldKey, "recordedUtc", StringComparison.Ordinal) ||
+                   string.Equals(fieldKey, "recordedBy", StringComparison.Ordinal) ||
+                   string.Equals(fieldKey, "sourceHash", StringComparison.Ordinal) ||
+                   string.Equals(fieldKey, "note", StringComparison.Ordinal);
+        }

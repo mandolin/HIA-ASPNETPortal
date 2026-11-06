@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>标记层直接调用讨论模块 code-behind 中的格式化和编码 helper，因此显式导入门户命名空间。</zh-CN>
+  <en>The markup calls formatting and encoding helpers from the discussion module code-behind, so the portal namespace is imported explicitly.</en>
+</lang>
+--%>

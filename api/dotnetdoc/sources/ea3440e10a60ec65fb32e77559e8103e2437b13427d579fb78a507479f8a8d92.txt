@@ -1,0 +1,1 @@
+        public DbSet<GlobalItem> Globals { get; set; }

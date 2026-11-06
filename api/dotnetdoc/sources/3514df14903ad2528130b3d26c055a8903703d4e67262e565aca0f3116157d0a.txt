@@ -1,0 +1,8 @@
+        protected bool HasChildMessages(int count)
+        {
+            // <lang>
+            //   <zh-CN>该返回值同时驱动按钮可用性和展开命令，保持视觉状态与服务器端回发语义一致。</zh-CN>
+            //   <en>This return value drives both button enablement and expand command behavior, keeping visual state aligned with server-side postback semantics.</en>
+            // </lang>
+            return count > 0;
+        }

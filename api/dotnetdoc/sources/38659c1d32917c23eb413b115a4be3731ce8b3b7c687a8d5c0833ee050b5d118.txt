@@ -1,0 +1,17 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先执行查看/审核权限门禁，再仅在首次请求绑定筛选项和申请列表，避免回发覆盖筛选状态。</zh-CN>
+            //   <en>Apply the view/review gate first, then bind filters and applications only on the first request so postbacks do not overwrite filter state.</en>
+            // </lang>
+            if (!EnsureCanViewApplications())
+            {
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                BindStatusFilter();
+                BindApplications();
+            }
+        }

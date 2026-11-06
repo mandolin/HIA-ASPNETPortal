@@ -1,0 +1,1 @@
+        public DateTime? ReviewedUtc { get; set; }

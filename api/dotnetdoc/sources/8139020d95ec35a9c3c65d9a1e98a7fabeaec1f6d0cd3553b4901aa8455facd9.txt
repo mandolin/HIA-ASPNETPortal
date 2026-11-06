@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_LabelSalutation {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelSalutation", resourceCulture);
+            }
+        }

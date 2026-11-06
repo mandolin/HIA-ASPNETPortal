@@ -1,0 +1,181 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:interface:t-aspnet.starterkit.portal.itabitem",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.ITabItem",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.accessroles",
+      "kind": "entry",
+      "label": "AccessRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.accessroles",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.accessroles",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.accessroles-0686279c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabname",
+      "kind": "entry",
+      "label": "MobileTabName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabname",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.mobiletabname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabname-f0e91365.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabnameen",
+      "kind": "entry",
+      "label": "MobileTabNameEn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabnameen",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.mobiletabnameen",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabnameen-76a7782a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabnamelocalizedjson",
+      "kind": "entry",
+      "label": "MobileTabNameLocalizedJson",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabnamelocalizedjson",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.mobiletabnamelocalizedjson",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.mobiletabnameloca-31876294.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.modules",
+      "kind": "entry",
+      "label": "Modules",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.modules",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.modules",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.modules-cf6a5822.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.navigationkey",
+      "kind": "entry",
+      "label": "NavigationKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.navigationkey",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.navigationkey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.navigationkey-2dc908f2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.showmobile",
+      "kind": "entry",
+      "label": "ShowMobile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.showmobile",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.showmobile",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.showmobile-36564aae.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabid",
+      "kind": "entry",
+      "label": "TabId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabid",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.tabid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.tabid-c5159499.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabname",
+      "kind": "entry",
+      "label": "TabName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabname",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.tabname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.tabname-3261cc0f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabnameen",
+      "kind": "entry",
+      "label": "TabNameEn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabnameen",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.tabnameen",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.tabnameen-6c5b1310.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabnamelocalizedjson",
+      "kind": "entry",
+      "label": "TabNameLocalizedJson",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.tabnamelocalizedjson",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.tabnamelocalizedjson",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.tabnamelocalizedj-480f3766.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.taborder",
+      "kind": "entry",
+      "label": "TabOrder",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabitem.taborder",
+      "sourcePath": "src/Portal.Components.Data1/TabItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabitem.taborder",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabitem.taborder-edf2be6c.html"
+    }
+  ]
+}

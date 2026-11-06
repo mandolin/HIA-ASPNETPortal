@@ -1,0 +1,9 @@
+        private static bool IsProfileActive(string profile, PortalNavigationVisibilityContext context)
+        {
+            if (string.Equals(profile, context.ActiveProfile, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return context.IncludedProfiles.Contains(profile);
+        }

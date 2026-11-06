@@ -1,0 +1,1 @@
+        public const int MaxSummaryLength = 500;

@@ -1,0 +1,5 @@
+        internal static string Admin_CapabilityPermissionMatrix_StateDisabled {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_StateDisabled", resourceCulture);
+            }
+        }

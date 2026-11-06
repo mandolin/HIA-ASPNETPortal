@@ -1,0 +1,13 @@
+        private bool HasColumn(string tableName, string columnName)
+        {
+            try
+            {
+                return context.Database.SqlQuery<int>(
+                    "SELECT CASE WHEN COL_LENGTH(N'[dbo].[" + tableName + "]', @ColumnName) IS NULL THEN 0 ELSE 1 END",
+                    new SqlParameter("@ColumnName", columnName)).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }

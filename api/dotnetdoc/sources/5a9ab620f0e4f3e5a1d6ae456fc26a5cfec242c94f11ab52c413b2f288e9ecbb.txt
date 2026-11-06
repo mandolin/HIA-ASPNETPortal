@@ -1,0 +1,26 @@
+        private void ShowUnavailable(string message)
+        {
+            // <lang>
+            //   <zh-CN>将空消息规范为空文本；调用方提供的是已审查的操作提示，而非直接暴露的底层异常内容。</zh-CN>
+            //   <en>Normalize a null message to empty text; callers supply reviewed operational guidance rather than directly exposed lower-level exception content.</en>
+            // </lang>
+            MessageLabel.Text = message ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>清除成功路径的统计摘要，使不可用提示不与先前查询结果并存。</zh-CN>
+            //   <en>Clear the successful-path summary so the unavailable notice cannot coexist with a previous query result.</en>
+            // </lang>
+            ResultLabel.Text = string.Empty;
+
+            // <lang>
+            //   <zh-CN>绑定固定的空展示行集合以撤销旧列表；不在故障呈现路径重新查询或写入待办数据。</zh-CN>
+            //   <en>Bind a fixed empty display-row collection to remove the old list; the failure-presentation path does not requery or write work-item data.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>显式抑制空态：本页失败时表格仍然可见，若再渲染"暂无待办"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state explicitly: this page keeps the table visible on failure, so rendering "no work items" would contradict the error message shown above.</en>
+            // </lang>
+            workItemsEmptyStateRowCount = null;
+            WorkItemsRepeater.DataSource = Enumerable.Empty<PortalWorkItemAdminRow>();
+            WorkItemsRepeater.DataBind();
+        }

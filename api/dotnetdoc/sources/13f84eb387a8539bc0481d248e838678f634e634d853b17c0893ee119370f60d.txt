@@ -1,0 +1,20 @@
+        private static IEnumerable<string> SplitCsv(string value)
+        {
+            // <lang>
+            //   <zh-CN>空白配置产生稳定空序列，不创建占位 Profile 或包，也不抛出配置格式异常。</zh-CN>
+            //   <en>Blank configuration produces a stable empty sequence, creates no placeholder Profile or package, and does not throw a configuration-format exception.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return new string[0];
+            }
+
+            // <lang>
+            //   <zh-CN>仅以逗号分隔、移除空项并去除每项边缘空白；名称合法性仍由上层稳定名称门禁负责。</zh-CN>
+            //   <en>Split only on commas, remove empty segments, and trim each edge; the higher-level stable-name gate still owns name validity.</en>
+            // </lang>
+            return value
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(item => item.Trim())
+                .Where(item => item.Length > 0);
+        }

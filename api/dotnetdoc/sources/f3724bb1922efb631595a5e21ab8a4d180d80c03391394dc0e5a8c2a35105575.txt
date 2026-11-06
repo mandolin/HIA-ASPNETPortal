@@ -1,0 +1,1 @@
+        IUserItem FindUserById(int userId);

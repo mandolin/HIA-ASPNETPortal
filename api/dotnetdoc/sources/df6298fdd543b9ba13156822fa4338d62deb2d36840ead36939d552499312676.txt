@@ -1,0 +1,29 @@
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>Server.GetLastError 可能为空或包含敏感异常；统一交给 PortalDiagnostics.Unhandled 生成低敏事件编号。</zh-CN>
+            //   <en>Server.GetLastError may be null or contain sensitive details; pass it to PortalDiagnostics.Unhandled to obtain a low-sensitivity event id.</en>
+            // </lang>
+            Exception exception = Server.GetLastError();
+            string eventId = PortalDiagnostics.Unhandled(exception, Context);
+
+            if (IsGenericErrorPageRequest(Request))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>开发环境可用显式开关保留 ASP.NET 详细错误页；后续应升级为密码或角色授权查看，避免误把生产详细错误暴露给普通用户。</zh-CN>
+            //   <en>Development can keep detailed ASP.NET errors by explicit switch; later this should require password or role authorization to avoid exposing production details to ordinary users.</en>
+            // </lang>
+            if (PortalDiagnostics.AreDetailedErrorsEnabled() && Request.IsLocal)
+            {
+                return;
+            }
+
+            Server.ClearError();
+            Response.Clear();
+            Response.TrySkipIisCustomErrors = true;
+            Response.Redirect("~/GenericErrorPage.aspx?id=" + HttpUtility.UrlEncode(eventId), false);
+            Context.ApplicationInstance.CompleteRequest();
+        }

@@ -1,0 +1,9 @@
+        private static string GetNormalizedExtension(string fileName)
+        {
+            // <lang>
+            //   <zh-CN>Path.GetFileName 先建立文件名边界，随后只将非空扩展名转为不区分大小写的稳定形式。</zh-CN>
+            //   <en>Establish the filename boundary with Path.GetFileName, then convert only a nonempty extension to a stable case-insensitive form.</en>
+            // </lang>
+            string extension = Path.GetExtension(Path.GetFileName(fileName ?? string.Empty));
+            return string.IsNullOrEmpty(extension) ? string.Empty : extension.ToLowerInvariant();
+        }

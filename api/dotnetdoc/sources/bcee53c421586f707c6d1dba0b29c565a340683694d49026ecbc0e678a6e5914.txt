@@ -1,0 +1,18 @@
+        private static string MapWorkItemEventType(string actionKey)
+        {
+            // <lang>
+            //   <zh-CN>拒绝和退回保持特定事件语义，批准动作回退为批准事件。</zh-CN>
+            //   <en>Preserve specific event semantics for reject and return, with approve as the default approval event.</en>
+            // </lang>
+            if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Rejected;
+            }
+
+            if (string.Equals(actionKey, PortalWorkflowActions.Return, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Commented;
+            }
+
+            return PortalWorkItemEventTypes.Approved;
+        }

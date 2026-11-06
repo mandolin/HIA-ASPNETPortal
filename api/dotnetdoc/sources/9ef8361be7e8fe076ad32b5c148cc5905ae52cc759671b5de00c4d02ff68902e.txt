@@ -1,0 +1,8 @@
+        public static bool TryGetLegacyPackageId(string normalizedDesktopSource, out string packageId)
+        {
+            // <lang>
+            //   <zh-CN>映射前使用同一来源规范化，避免 ~/、起始斜杠或目录分隔符差异绕过固定 Legacy 映射表。</zh-CN>
+            //   <en>Apply the same source normalization before mapping so ~/ prefixes, leading slashes, or directory-separator differences cannot bypass the fixed Legacy mapping table.</en>
+            // </lang>
+            return LegacyPackagesBySource.TryGetValue(NormalizeSource(normalizedDesktopSource), out packageId);
+        }

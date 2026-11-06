@@ -1,0 +1,34 @@
+        public string GetDisplayName(System.Globalization.CultureInfo culture)
+        {
+            // <lang>
+            //   <zh-CN>未显式传入文化时取当前线程界面文化，保证调用方无需自行读取全球化配置。</zh-CN>
+            //   <en>When no culture is supplied, use the current thread UI culture so callers need not read globalization configuration themselves.</en>
+            // </lang>
+            System.Globalization.CultureInfo effectiveCulture = culture ?? System.Globalization.CultureInfo.CurrentUICulture;
+
+            // <lang>
+            //   <zh-CN>以两字母语言代码判定中文，兼容 zh-CN、zh-TW 等区域变体。</zh-CN>
+            //   <en>Detect Chinese by the two-letter language code, covering regional variants such as zh-CN and zh-TW.</en>
+            // </lang>
+            bool preferChinese = effectiveCulture != null &&
+                string.Equals(effectiveCulture.TwoLetterISOLanguageName, "zh", StringComparison.OrdinalIgnoreCase);
+
+            string preferred = preferChinese ? DisplayNameZhCn : DisplayNameEn;
+            string fallback = preferChinese ? DisplayNameEn : DisplayNameZhCn;
+
+            if (!string.IsNullOrWhiteSpace(preferred))
+            {
+                return preferred;
+            }
+
+            if (!string.IsNullOrWhiteSpace(fallback))
+            {
+                return fallback;
+            }
+
+            // <lang>
+            //   <zh-CN>两侧都缺失时返回稳定键：宁可显示键名也不留空标签。</zh-CN>
+            //   <en>Return the stable key when both sides are missing: showing the key beats an empty label.</en>
+            // </lang>
+            return EntryKey ?? string.Empty;
+        }

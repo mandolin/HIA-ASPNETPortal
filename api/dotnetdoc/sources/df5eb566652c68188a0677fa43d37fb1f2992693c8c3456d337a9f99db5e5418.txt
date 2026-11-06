@@ -1,0 +1,13 @@
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>搜索回调只重新读取当前状态筛选，不改变审核权限或领域状态。</zh-CN>
+            //   <en>The search callback reloads the current status filter only; it does not change review authorization or domain state.</en>
+            // </lang>
+            if (!EnsureCanViewApplications())
+            {
+                return;
+            }
+
+            BindApplications();
+        }

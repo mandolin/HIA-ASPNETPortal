@@ -1,0 +1,62 @@
+        protected void UpdateBtn_Click(Object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>回发事件再次初始化请求，防止仅依赖首次加载时缓存的字段状态。</zh-CN>
+            //   <en>Reinitialize the request for the postback event so it does not rely only on state cached during the initial load.</en>
+            // </lang>
+            if (!TryInitializeRequest() || !Page.IsValid)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>名称先经过单行、长度和规范化检查；无效输入不触碰数据服务。</zh-CN>
+            //   <en>Validate and normalize the single-line name before touching the data service; invalid input performs no persistence.</en>
+            // </lang>
+            string friendlyName;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(FriendlyName.Text, 150, out friendlyName))
+            {
+                ShowMessage(lang.Admin_ModuleDefinitions_MessageInvalidName);
+                return;
+            }
+
+            try
+            {
+                /*
+                 * <lang>
+                 *   <zh-CN>保留既有受控路径，避免通过 legacy 表单创建或变更任意动态加载入口。</zh-CN>
+                 *   <en>Preserve existing controlled paths so the legacy form cannot create or change arbitrary dynamic-load entries.</en>
+                 * </lang>
+                 */
+                ModuleDefConfig.UpdateModuleDefinition(
+                    defId,
+                    friendlyName,
+                    currentDefinition.DesktopSourceFile,
+                    currentDefinition.MobileSourceFile);
+                // <lang>
+                //   <zh-CN>审计只记录名称更新这一受限动作，路径保持来自已验证快照。</zh-CN>
+                //   <en>Audit only the constrained name-update action while paths remain sourced from the verified snapshot.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    "ModuleDefinition",
+                    "UpdateName",
+                    "ModuleDefinition",
+                    defId.ToString(),
+                    "Updated the legacy module-definition display name.",
+                    Context);
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>持久化异常转为带事件编号的低敏提示，详细异常留在诊断日志。</zh-CN>
+                //   <en>Convert persistence failures into a low-sensitivity message with an event id while keeping details in diagnostics.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ModuleDefinitions.Update",
+                    "Updating a legacy module definition failed. ModuleDefinitionId=" + defId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleDefinitions_MessageSaveFailed, eventId));
+            }
+        }

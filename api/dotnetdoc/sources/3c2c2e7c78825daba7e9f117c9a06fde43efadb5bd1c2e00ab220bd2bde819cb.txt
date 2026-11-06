@@ -1,0 +1,1 @@
+        public string FileNameUrl { get; set; }

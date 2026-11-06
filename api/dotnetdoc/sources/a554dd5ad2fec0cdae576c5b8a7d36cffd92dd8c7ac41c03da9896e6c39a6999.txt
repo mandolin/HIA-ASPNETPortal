@@ -1,0 +1,23 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每次生命周期先复核诊断查看权限，拒绝时不读取查询服务或修改结果控件。</zh-CN>
+            //   <en>Recheck diagnostics-view permission on every lifecycle entry so rejection performs no query-service read or result-control mutation.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.OpsDiagnosticsView))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅首次请求填充最近七个 UTC 日期并查询，回发保留筛选器当前值。</zh-CN>
+            //   <en>Populate the recent seven-day UTC range and query only on the initial request, preserving filter values on postback.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                DateTime todayUtc = DateTime.UtcNow.Date;
+                StartDateTextBox.Text = todayUtc.AddDays(-6).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                EndDateTextBox.Text = todayUtc.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                BindEntries();
+            }
+        }

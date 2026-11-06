@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition CookiesSameSite =
+            new PortalSettingDefinition(
+                PortalSettingKeys.CookiesSameSite,
+                "Cookie SameSite 模式",
+                "控制身份与角色 Cookie 的 SameSite 模式；取值 Unset、Lax、Strict 或 None。None 必须同时启用 Secure，否则自动降级为 Unset。默认 Unset。",
+                PortalSettingValueType.String,
+                "Unset",
+                true,
+                false,
+                "Admins",
+                "Security");

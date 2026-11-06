@@ -1,0 +1,22 @@
+        private static string GetAssignedText(PortalWorkItemInfo item)
+        {
+            // <lang>
+            //   <zh-CN>存在直接用户分派时优先显示它；即使同时存在角色键，也不能改变现有用户优先的管理语义。</zh-CN>
+            //   <en>Prefer a direct user assignment when it exists; even if a role key also exists, it must not change the established user-first administration semantics.</en>
+            // </lang>
+            if (item.AssignedUserId.HasValue)
+            {
+                // <lang>
+                //   <zh-CN>保留既有“User {标识} / {名称}”文本契约；数值标识不受服务器区域影响，缺失名称使用统一占位。</zh-CN>
+                //   <en>Preserve the established “User {identifier} / {name}” text contract; the numeric identifier is server-locale-independent and a missing name uses the shared placeholder.</en>
+                // </lang>
+                return "User " + item.AssignedUserId.Value.ToString(CultureInfo.InvariantCulture) +
+                       " / " + EmptyToNone(item.AssignedUserName);
+            }
+
+            // <lang>
+            //   <zh-CN>没有直接用户分派时才回退到角色文本；空角色键仍使用统一占位而不返回空单元格。</zh-CN>
+            //   <en>Fall back to role text only when no direct user assignment exists; an empty role key still uses the shared placeholder rather than returning a blank cell.</en>
+            // </lang>
+            return "Role " + EmptyToNone(item.AssignedRoleKey);
+        }

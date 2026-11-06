@@ -1,0 +1,19 @@
+        public void UpdateModuleOrder(int moduleId, int moduleOrder, string pane)
+        {
+            // <lang>
+            //   <zh-CN>更新前要求模块已存在；缺失模块表示后台布局状态已损坏。</zh-CN>
+            //   <en>The module must already exist before updating; a missing module means the administration layout state is corrupted.</en>
+            // </lang>
+            var moduleRow = _items.Single(i => i.ModuleId == moduleId);
+
+            moduleRow.ModuleOrder = moduleOrder;
+            moduleRow.PaneName = pane;
+
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>写入后刷新快照，避免后续同一请求链读取到旧排序。</zh-CN>
+            //   <en>Refresh the snapshot after the write so later reads in the same request chain do not see stale ordering.</en>
+            // </lang>
+            _items = _context.Modules.ToList();
+        }

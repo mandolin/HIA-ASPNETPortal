@@ -1,0 +1,1 @@
+        IEnumerable<int> GetModulesByModuleDefId(int moduleDefId);

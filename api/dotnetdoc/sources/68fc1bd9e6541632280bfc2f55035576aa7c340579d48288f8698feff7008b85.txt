@@ -1,0 +1,78 @@
+        private static void AddWritableDirectoryCheck(
+            IList<PortalHealthCheckResult> checks,
+            string category,
+            string name,
+            string directoryPath)
+        {
+            // <lang>
+            //   <zh-CN>空白目录路径直接失败并返回，避免 Path.Combine 或文件写入隐式使用未定义位置。</zh-CN>
+            //   <en>Fail and return immediately for a blank directory path so Path.Combine or file writes cannot use an undefined location.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(directoryPath))
+            {
+                checks.Add(new PortalHealthCheckResult(
+                    category,
+                    name,
+                    PortalHealthStatus.Error,
+                    "目录路径为空。",
+                    string.Empty));
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>目录不存在时不尝试创建目录；健康检查保持只读部署诊断，不承担修复或初始化职责。</zh-CN>
+            //   <en>Do not create a missing directory; the health check remains a read-only deployment diagnostic and performs no repair or initialization.</en>
+            // </lang>
+            if (!Directory.Exists(directoryPath))
+            {
+                checks.Add(new PortalHealthCheckResult(
+                    category,
+                    name,
+                    PortalHealthStatus.Error,
+                    "目录不存在。",
+                    directoryPath));
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>生成当前检查专用的临时文件路径；随机名避免并发冲突，文件仅用于可写性探测并在 finally 清理。</zh-CN>
+            //   <en>Generate a check-specific temporary-file path; the random name avoids concurrency collisions, and the file exists only for writability probing before finally cleanup.</en>
+            // </lang>
+            string testFile = Path.Combine(directoryPath, ".hia-health-" + Guid.NewGuid().ToString("N") + ".tmp");
+            try
+            {
+                // <lang>
+                //   <zh-CN>写入固定无敏感内容后立即删除，验证目录写权限而不留下健康检查数据。</zh-CN>
+                //   <en>Write fixed non-sensitive content and delete it immediately to verify directory write access without leaving health-check data.</en>
+                // </lang>
+                File.WriteAllText(testFile, "health", new UTF8Encoding(false));
+                File.Delete(testFile);
+                checks.Add(new PortalHealthCheckResult(
+                    category,
+                    name,
+                    PortalHealthStatus.Healthy,
+                    "目录存在且可写。",
+                    directoryPath));
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>写入或删除失败映射为目录错误，摘要仅用于诊断展示，不改变检查整体编排。</zh-CN>
+                //   <en>Map write or delete failure to a directory error; the summary is diagnostic display only and does not change overall orchestration.</en>
+                // </lang>
+                checks.Add(new PortalHealthCheckResult(
+                    category,
+                    name,
+                    PortalHealthStatus.Error,
+                    "目录写入测试失败。",
+                    directoryPath + "; Error=" + exception.Message));
+            }
+            finally
+            {
+                // <lang>
+                //   <zh-CN>无论探测成功与否都尝试删除临时文件，清理失败由 TryDelete 隔离而不掩盖原始结果。</zh-CN>
+                //   <en>Attempt temporary-file deletion regardless of probe outcome; TryDelete isolates cleanup failure without hiding the original result.</en>
+                // </lang>
+                TryDelete(testFile);
+            }
+        }

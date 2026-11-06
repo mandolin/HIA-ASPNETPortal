@@ -1,0 +1,1 @@
+        public string LogicalName { get; private set; }

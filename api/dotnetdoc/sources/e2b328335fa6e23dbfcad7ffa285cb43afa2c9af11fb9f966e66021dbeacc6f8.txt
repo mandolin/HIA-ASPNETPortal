@@ -1,0 +1,9 @@
+    public sealed class ExpenseReimbursementReviewResult
+    {
+        /// <summary><lang><zh-CN>是否成功。</zh-CN><en>Whether the review succeeded.</en></lang></summary>
+        public bool Succeeded { get; set; }
+        /// <summary><lang><zh-CN>低敏结果消息（失败时使用）。</zh-CN><en>Low-sensitivity result message (used on failure).</en></lang></summary>
+        public string Message { get; set; }
+        /// <summary><lang><zh-CN>报销主键。</zh-CN><en>Reimbursement identity key.</en></lang></summary>
+        public long RequestId { get; set; }
+    }

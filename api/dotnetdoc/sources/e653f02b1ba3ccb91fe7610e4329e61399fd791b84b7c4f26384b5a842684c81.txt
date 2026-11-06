@@ -1,0 +1,8 @@
+        public IEnumerable<IDocumentItem> GetDocuments(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>只按模块实例过滤并立即物化；排序、空列表展示和下载入口策略由页面/控件层继续处理。</zh-CN>
+            //   <en>Filter only by module instance and materialize immediately; ordering, empty-list display, and download-link policy remain with the page/control layer.</en>
+            // </lang>
+            return _context.Documents.Where(item => item.ModuleId == moduleId).ToList<IDocumentItem>();
+        }

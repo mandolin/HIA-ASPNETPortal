@@ -1,0 +1,6 @@
+                <%--
+                    <lang>
+                        <zh-CN>员工行同时提供编辑和绑定入口，绑定 URL 只针对员工记录生成；编码输出与操作授权仍由服务器端模型和 code-behind 负责。</zh-CN>
+                        <en>Employee rows expose edit and binding entries, with binding URLs generated only for employee records; encoded output and operation authorization remain owned by the server model and code-behind.</en>
+                    </lang>
+                --%>

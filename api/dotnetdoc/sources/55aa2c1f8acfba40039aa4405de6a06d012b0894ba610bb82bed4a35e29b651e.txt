@@ -1,0 +1,71 @@
+        private bool TryCreateSaveRequest(out OrganizationUnitSaveRequest request, out string message)
+        {
+            // <lang>
+            //   <zh-CN>先清空输出，保证任何校验失败都不会把上一次请求或提示带入当前提交。</zh-CN>
+            //   <en>Clear outputs first so validation failures cannot carry a previous request or message into the current submission.</en>
+            // </lang>
+            request = null;
+            message = string.Empty;
+
+            // <lang>
+            //   <zh-CN>组织标识只接受非负不变整数；0 表示新增，正数表示已有组织。</zh-CN>
+            //   <en>Accept only a non-negative invariant integer; zero denotes creation and a positive value an existing organization.</en>
+            // </lang>
+            int organizationUnitId;
+            if (!int.TryParse(OrganizationUnitIdField.Value, NumberStyles.None, CultureInfo.InvariantCulture, out organizationUnitId) ||
+                organizationUnitId < 0)
+            {
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidUnitId;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>父级空值映射为根组织，正整数才进入请求，避免负数或非数字伪造树关系。</zh-CN>
+            //   <en>Map an empty parent value to the root organization and allow only positive integers into the request, rejecting forged tree relations.</en>
+            // </lang>
+            int? parentOrganizationUnitId;
+            if (!TryReadOptionalListInt32(ParentOrganizationList.SelectedValue, out parentOrganizationUnitId))
+            {
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidParentId;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>排序值按不变文化整数解析；范围和跨节点排序语义由数据层与既有契约处理。</zh-CN>
+            //   <en>Parse sort order as an invariant integer; range and cross-node ordering semantics remain with the data layer and existing contract.</en>
+            // </lang>
+            int sortOrder;
+            if (!int.TryParse(SortOrderTextBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out sortOrder))
+            {
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidSortOrder;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>编辑时间戳仅用于并发保护；新增路径允许为空。</zh-CN>
+            //   <en>The edit timestamp is used only for concurrency protection; creation allows it to be empty.</en>
+            // </lang>
+            DateTime? originalUpdatedUtc;
+            if (!TryReadOriginalUpdatedUtc(organizationUnitId, OriginalUpdatedUtcField.Value, out originalUpdatedUtc))
+            {
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidTimestamp;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>最后组装完整请求，把父级循环、唯一性、状态和并发约束留给数据层。</zh-CN>
+            //   <en>Assemble the complete request last, leaving parent-cycle, uniqueness, status and concurrency constraints to the data layer.</en>
+            // </lang>
+            request = new OrganizationUnitSaveRequest
+            {
+                OrganizationUnitId = organizationUnitId,
+                ParentOrganizationUnitId = parentOrganizationUnitId,
+                OrganizationCode = OrganizationCodeTextBox.Text,
+                DisplayName = DisplayNameTextBox.Text,
+                SortOrder = sortOrder,
+                IsActive = IsActiveCheckBox.Checked,
+                OriginalUpdatedUtc = originalUpdatedUtc,
+                ActorName = GetCurrentActor()
+            };
+            return true;
+        }

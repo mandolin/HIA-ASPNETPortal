@@ -1,0 +1,9 @@
+        private static void AddDirectoryChecks(IList<PortalHealthCheckResult> checks)
+        {
+            // <lang>
+            //   <zh-CN>对两个固定用途目录复用同一可写性检查，保持空路径、缺失目录、写入失败和清理规则一致。</zh-CN>
+            //   <en>Reuse the same writability check for the two fixed-purpose directories so blank paths, missing directories, write failures, and cleanup follow one rule.</en>
+            // </lang>
+            AddWritableDirectoryCheck(checks, "Storage", "诊断日志目录", PortalDiagnostics.ResolveLogDirectory());
+            AddWritableDirectoryCheck(checks, "Storage", "上传目录", HostingEnvironment.MapPath("~/uploads"));
+        }

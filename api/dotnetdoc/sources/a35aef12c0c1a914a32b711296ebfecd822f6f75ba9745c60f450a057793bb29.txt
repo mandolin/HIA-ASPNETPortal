@@ -1,0 +1,5 @@
+        internal static string EditImage_HintSource {
+            get {
+                return ResourceManager.GetString("EditImage_HintSource", resourceCulture);
+            }
+        }

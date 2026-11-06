@@ -1,0 +1,11 @@
+        private bool TryReadUserId(out int userId)
+        {
+            userId = 0;
+            if (PortalNavigationPolicy.TryReadPositiveInt32(UserIdTextBox.Text, out userId))
+            {
+                return true;
+            }
+
+            ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageInvalidPortalUserId, true);
+            return false;
+        }

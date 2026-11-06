@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_EmptyState {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_EmptyState", resourceCulture);
+            }
+        }

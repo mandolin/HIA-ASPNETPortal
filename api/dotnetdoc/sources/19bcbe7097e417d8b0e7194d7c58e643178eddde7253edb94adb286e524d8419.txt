@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>Repeater 仅呈现审计记录，不提供写入或删除动作；文本字段使用编码绑定，摘要、操作者和目标信息的脱敏边界由服务端查询层负责。</zh-CN>
+                    <en>The Repeater only renders audit records and exposes no write or delete action; encoded bindings render text, while the server query layer owns redaction boundaries for summary, actor, and target data.</en>
+                  </lang>
+                --%>

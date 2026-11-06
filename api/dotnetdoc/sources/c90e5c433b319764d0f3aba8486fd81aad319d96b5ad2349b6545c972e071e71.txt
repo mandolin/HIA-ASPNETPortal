@@ -1,0 +1,6 @@
+                            <%--
+                              <lang>
+                                <zh-CN>确认密码字段只为本次回发提供一致性检查；匹配验证发生在页面层，服务器仍需重新确认明文/密文输入对应同一用户意图。</zh-CN>
+                                <en>The confirmation password field only supports consistency checks for this postback; matching validation occurs at the page layer, and the server must still re-confirm that plaintext or ciphertext input reflects the same user intent.</en>
+                              </lang>
+                            --%>

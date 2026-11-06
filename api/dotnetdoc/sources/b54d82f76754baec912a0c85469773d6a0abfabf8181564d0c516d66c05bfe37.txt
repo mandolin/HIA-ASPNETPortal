@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>P7.4 登录区改为真实表单布局和 Button，不再使用旧图片按钮。</zh-CN>
+        <en>P7.4 uses a real form layout and Button for sign-in instead of legacy image buttons.</en>
+    </lang>
+--%>

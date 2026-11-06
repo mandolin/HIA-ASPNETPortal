@@ -1,0 +1,12 @@
+        public static readonly PortalSettingDefinition RegistrationInviteDefaultExpiryDays =
+            new PortalSettingDefinition(
+                PortalSettingKeys.RegistrationInviteDefaultExpiryDays,
+                "注册链接默认有效天数",
+                "临时注册链接默认有效天数；第一版用于设计与后续创建入口。",
+                PortalSettingValueType.Integer,
+                "7",
+                true,
+                false,
+                "Admins",
+                "Registration",
+                minIntegerValue: 1);

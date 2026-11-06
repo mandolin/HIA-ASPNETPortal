@@ -1,0 +1,138 @@
+        public static PortalSystemSettingWriteResult SaveOverride(
+            PortalSettingDefinition definition,
+            string settingValue,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>先准备稳定失败输出并通过同一运行时规范化门禁验证候选值；该变量只在通过定义、安全性和类型/范围检查后参与数据库参数。</zh-CN>
+            //   <en>Prepare a stable failure output and validate the candidate through the same runtime-normalization gate; this variable enters database parameters only after definition, sensitivity, type, and range checks pass.</en>
+            // </lang>
+            string normalizedValue;
+            if (!CanWrite(definition, settingValue, out normalizedValue))
+            {
+                // <lang>
+                //   <zh-CN>存储层拒绝未登记、不可在线编辑、敏感或无效的值，但不自行执行页面/用户授权；返回固定消息而不回显候选设置文本。</zh-CN>
+                //   <en>The store rejects unregistered, non-online-editable, sensitive, or invalid values but does not perform page or user authorization itself; return a fixed message without echoing candidate setting text.</en>
+                // </lang>
+                return new PortalSystemSettingWriteResult(false, "This setting cannot be saved online.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>连接由受控 Unity/外置连接串路径创建并在 using 结束时释放；本方法不记录连接串，也不把缺失连接串转换为异常详情。</zh-CN>
+                //   <en>Create the connection through the controlled Unity/external-connection-string path and release it at the end of the using block; this method does not record the connection string or turn a missing connection string into exception detail.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalSystemSettingWriteResult(false, "The runtime settings database is unavailable.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>只有当前值表和审计表均存在才允许变更，防止在部分迁移状态写出无法审计的覆盖值。</zh-CN>
+                    //   <en>Allow a change only when both the current-value and audit tables exist, preventing an override from being written in a partial migration state without auditability.</en>
+                    // </lang>
+                    connection.Open();
+                    if (!IsTableAvailable(connection, SettingsTableName) ||
+                        !IsTableAvailable(connection, AuditsTableName))
+                    {
+                        return new PortalSystemSettingWriteResult(false, "Run the system-settings migration before changing this setting.");
+                    }
+
+                    // <lang>
+                    //   <zh-CN>当前值读取、更新/插入与审计共用一个事务；任一步失败由 using/异常路径阻止成功结果，提交只发生在所有写入完成之后。</zh-CN>
+                    //   <en>Current-value read, update/insert, and audit share one transaction; any failure prevents a success result through the using/exception path, and commit occurs only after every write completes.</en>
+                    // </lang>
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        // <lang>
+                        //   <zh-CN>保存锁定读取到的旧值以形成审计前值；它不离开事务，也不进入成功/失败消息。</zh-CN>
+                        //   <en>Keep the locked old value for the audit before-image; it does not leave the transaction or enter success/failure messages.</en>
+                        // </lang>
+                        string oldValue;
+
+                        // <lang>
+                        //   <zh-CN>存在标志决定使用更新还是插入 SQL，避免以竞态下的预先普通读取推断分支。</zh-CN>
+                        //   <en>The existence flag selects update versus insert SQL, avoiding a branch inferred from a prior unlocked read under concurrency.</en>
+                        // </lang>
+                        bool exists;
+
+                        // <lang>
+                        //   <zh-CN>保存路径保留锁定行的删除保护输出以维持 helper 契约，但不据此改变已有覆盖值的更新资格。</zh-CN>
+                        //   <en>The save path retains the locked row's deletion-protection output to preserve the helper contract but does not use it to change update eligibility for an existing override.</en>
+                        // </lang>
+                        bool ignoredCanDelete;
+                        ReadCurrentValueForUpdate(
+                            connection,
+                            transaction,
+                            definition.Key,
+                            out exists,
+                            out oldValue,
+                            out ignoredCanDelete);
+
+                        // <lang>
+                        //   <zh-CN>同一事务中的参数化命令只在已存在行更新规范化值和元数据，否则以固定 SourceLevel/CanDelete 默认值插入；设置键和所有可变值均为参数。</zh-CN>
+                        //   <en>The parameterized command in the same transaction updates normalized value and metadata only for an existing row; otherwise it inserts with fixed SourceLevel/CanDelete defaults, while the setting key and every variable value remain parameters.</en>
+                        // </lang>
+                        using (SqlCommand command = connection.CreateCommand())
+                        {
+                            command.Transaction = transaction;
+                            command.CommandText = exists
+                                ? @"
+UPDATE [dbo].[PortalCfg_SystemSettings]
+SET [SettingValue] = @SettingValue,
+    [ValueType] = @ValueType,
+    [UpdatedBy] = @UpdatedBy,
+    [UpdatedUtc] = @UpdatedUtc
+WHERE [SettingKey] = @SettingKey;"
+                                : @"
+INSERT INTO [dbo].[PortalCfg_SystemSettings]
+    ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+VALUES
+    (@SettingKey, @SettingValue, @ValueType, N'Database', 1, @UpdatedBy, @UpdatedUtc);";
+                            AddTextParameter(command, "@SettingKey", 200, definition.Key, string.Empty);
+                            AddUnlimitedTextParameter(command, "@SettingValue", normalizedValue);
+                            AddTextParameter(command, "@ValueType", 50, definition.ValueType.ToString(), string.Empty);
+                            AddTextParameter(command, "@UpdatedBy", 100, GetActorUserName(context), "(anonymous)");
+                            command.Parameters.Add("@UpdatedUtc", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+                            command.ExecuteNonQuery();
+                        }
+
+                        // <lang>
+                        //   <zh-CN>审计记录旧/新值、固定变更类型和受限请求事实，随后才提交；审计插入失败不会留下已提交而无审计的设置变化。</zh-CN>
+                        //   <en>Record old/new values, controlled change type, and restricted request facts before committing; an audit-insert failure cannot leave a committed setting change without audit.</en>
+                        // </lang>
+                        WriteAudit(
+                            connection,
+                            transaction,
+                            definition.Key,
+                            exists ? "Update" : "Insert",
+                            oldValue,
+                            normalizedValue,
+                            context);
+                        transaction.Commit();
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>成功消息只说明结果，不包含设置值、连接串、SQL 或审计数据。</zh-CN>
+                //   <en>The success message states only the outcome and contains no setting value, connection string, SQL, or audit data.</en>
+                // </lang>
+                return new PortalSystemSettingWriteResult(true, "The runtime setting was saved.");
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>异常交给既有净化诊断链，调用方仅收到固定可展示失败消息；不把数据库或候选值细节泄露到管理界面。</zh-CN>
+                //   <en>Send exceptions to the existing sanitized diagnostics chain while the caller receives only a fixed display-safe failure message; do not leak database or candidate-value detail to the administration UI.</en>
+                // </lang>
+                PortalDiagnostics.Error(
+                    "SystemSettings.Save",
+                    "Writing a database runtime setting failed.",
+                    exception,
+                    context);
+                return new PortalSystemSettingWriteResult(false, "The runtime setting could not be saved. Check diagnostics for the event id.");
+            }
+        }

@@ -1,0 +1,9 @@
+    public sealed class ExpenseReimbursementResubmitResult
+    {
+        /// <summary><lang><zh-CN>是否成功（受保护更新命中一行）。</zh-CN><en>Whether the guarded update hit a row.</en></lang></summary>
+        public bool Succeeded { get; set; }
+        /// <summary><lang><zh-CN>低敏结果说明（InvalidRequest/NotFound/DbError/OK）。</zh-CN><en>Low-sensitivity result note (InvalidRequest/NotFound/DbError/OK).</en></lang></summary>
+        public string Message { get; set; }
+        /// <summary><lang><zh-CN>申请主键。</zh-CN><en>Request identity key.</en></lang></summary>
+        public long RequestId { get; set; }
+    }

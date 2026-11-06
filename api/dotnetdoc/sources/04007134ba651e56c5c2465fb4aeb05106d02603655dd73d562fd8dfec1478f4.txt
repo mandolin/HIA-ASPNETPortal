@@ -1,0 +1,8 @@
+        public static bool IsInRole(string role)
+        {
+            // <lang>
+            //   <zh-CN>后台任务或测试中不存在 HTTP 上下文时安全拒绝。</zh-CN>
+            //   <en>Safely deny when no HTTP context exists, such as in background work or tests.</en>
+            // </lang>
+            return HttpContext.Current?.User?.IsInRole(role) ?? false;
+        }

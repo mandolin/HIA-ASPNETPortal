@@ -1,0 +1,20 @@
+        private static void AddTextParameter(
+            SqlCommand command,
+            string parameterName,
+            int size,
+            string value,
+            string fallback)
+        {
+            // <lang>
+            //   <zh-CN>净化器删除或截断不适合进入诊断/审计存储的字符与过长文本；长度由目标列契约而非调用方决定。</zh-CN>
+            //   <en>The sanitizer removes or truncates characters and overlong text unsuitable for diagnostic/audit storage; the target-column contract, not the caller, decides the length.</en>
+            // </lang>
+            string sanitized = PortalDiagnosticSanitizer.SanitizeAndTruncate(value, size);
+
+            // <lang>
+            //   <zh-CN>空白净化结果统一落到调用点定义的稳定回退，保证 NOT NULL 审计列不需要把原始值重新带回数据库。</zh-CN>
+            //   <en>A blank sanitized result consistently falls back to the stable value defined at the call site, keeping NOT NULL audit columns satisfied without bringing raw text back to the database.</en>
+            // </lang>
+            command.Parameters.Add(parameterName, SqlDbType.NVarChar, size).Value =
+                string.IsNullOrWhiteSpace(sanitized) ? fallback : sanitized;
+        }

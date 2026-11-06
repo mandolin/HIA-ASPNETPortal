@@ -1,0 +1,33 @@
+        public static PortalHealthSnapshot Check(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>使用本次检查独立的结果集合，避免跨请求共享可变健康状态。</zh-CN>
+            //   <en>Use a result collection owned by this check so mutable health state is not shared across requests.</en>
+            // </lang>
+            var checks = new List<PortalHealthCheckResult>();
+
+            // <lang>
+            //   <zh-CN>先读取设置行快照，后续健康检查只消费已构建的受控元数据，不在编排过程中临时推断设置。</zh-CN>
+            //   <en>Build the setting rows first so later checks consume controlled metadata rather than inferring settings during orchestration.</en>
+            // </lang>
+            var settings = BuildSettingRows();
+
+            // <lang>
+            //   <zh-CN>按应用、运行时、配置、模块、数据库、Registry、目录和主题的固定顺序执行只读检查，保持快照输出稳定。</zh-CN>
+            //   <en>Run read-only checks in the fixed application, runtime, configuration, module, database, registry, directory, and theme order so snapshot output remains stable.</en>
+            // </lang>
+            AddApplicationChecks(checks, context);
+            AddRuntimeChecks(checks);
+            AddConfigurationChecks(checks);
+            AddModuleProfileChecks(checks, context);
+            AddDatabaseCheck(checks, context);
+            AddRegistryCheck(checks, settings);
+            AddDirectoryChecks(checks);
+            AddThemeChecks(checks, context);
+
+            // <lang>
+            //   <zh-CN>以当前 UTC 时间封存结果；快照不触发修复、写配置或暴露连接串等秘密。</zh-CN>
+            //   <en>Seal the result with the current UTC time; the snapshot performs no repair or configuration write and exposes no secrets such as connection strings.</en>
+            // </lang>
+            return new PortalHealthSnapshot(DateTime.UtcNow, checks, settings);
+        }

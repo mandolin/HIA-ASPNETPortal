@@ -1,0 +1,5 @@
+        internal static string GenericError_Title {
+            get {
+                return ResourceManager.GetString("GenericError_Title", resourceCulture);
+            }
+        }

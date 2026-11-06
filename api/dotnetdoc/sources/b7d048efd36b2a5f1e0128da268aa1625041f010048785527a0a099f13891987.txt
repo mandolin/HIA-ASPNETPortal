@@ -1,0 +1,9 @@
+    public sealed class ExpenseReimbursementResult
+    {
+        /// <summary><lang><zh-CN>是否创建成功。</zh-CN><en>Whether the creation succeeded.</en></lang></summary>
+        public bool Ok { get; set; }
+        /// <summary><lang><zh-CN>低敏错误码（失败时使用）。</zh-CN><en>Low-sensitivity error code (used on failure).</en></lang></summary>
+        public string ErrorCode { get; set; }
+        /// <summary><lang><zh-CN>新建报销主键（成功时有效）。</zh-CN><en>New reimbursement identity key (valid on success).</en></lang></summary>
+        public long RequestId { get; set; }
+    }

@@ -1,0 +1,5 @@
+        internal static string EditXml_HintDeploymentResources {
+            get {
+                return ResourceManager.GetString("EditXml_HintDeploymentResources", resourceCulture);
+            }
+        }

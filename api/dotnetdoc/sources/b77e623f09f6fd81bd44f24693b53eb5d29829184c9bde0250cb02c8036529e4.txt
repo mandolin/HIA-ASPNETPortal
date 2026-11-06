@@ -1,0 +1,39 @@
+        private static PortalHiaBoundaryValidationResult ValidateMetadata(IDictionary<string, object> metadata)
+        {
+            if (metadata == null || metadata.Count == 0)
+            {
+                return Success();
+            }
+
+            // <lang>
+            //   <zh-CN>只允许 metadataVersion 与 source 两个非敏感字段，并复用安全文本规则。</zh-CN>
+            //   <en>Allow only the non-sensitive metadataVersion and source fields and reuse the safe-text rule.</en>
+            // </lang>
+            foreach (KeyValuePair<string, object> entry in metadata)
+            {
+                if (ContainsProhibitedFieldName(entry.Key))
+                {
+                    return Failure("HIA_PERIPHERAL_PROHIBITED_FIELD", "The metadata contains a prohibited field.");
+                }
+
+                if (!string.Equals(entry.Key, "metadataVersion", StringComparison.Ordinal) &&
+                    !string.Equals(entry.Key, "source", StringComparison.Ordinal))
+                {
+                    return Failure("HIA_PERIPHERAL_UNKNOWN_FIELD", "The metadata contains an unknown field.");
+                }
+
+                // <lang>
+                //   <zh-CN>将 metadata 值限制为文本，再校验长度、路径/URL 外观和版本一致性。</zh-CN>
+                //   <en>Restrict metadata values to text, then validate length, path/URL appearance, and version consistency.</en>
+                // </lang>
+                string text = entry.Value as string;
+                if (!IsSafeText(text, 100) ||
+                    (string.Equals(entry.Key, "metadataVersion", StringComparison.Ordinal) &&
+                     !string.Equals(text, CurrentContractVersion, StringComparison.Ordinal)))
+                {
+                    return Failure("HIA_PERIPHERAL_INVALID_FIELD", "The metadata contains an invalid field value.");
+                }
+            }
+
+            return Success();
+        }

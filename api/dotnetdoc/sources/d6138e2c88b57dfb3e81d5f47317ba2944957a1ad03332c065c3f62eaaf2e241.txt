@@ -1,0 +1,8 @@
+        protected bool CanRenderNavigation(object url)
+        {
+            // <lang>
+            //   <zh-CN>编辑者始终看到导航图标作为修复入口；浏览者必须先通过地址策略。</zh-CN>
+            //   <en>Editors always see the navigation icon as a repair entry, while viewers must first pass URL policy.</en>
+            // </lang>
+            return IsEditable || !string.IsNullOrEmpty(GetSafeBrowseUrl(url));
+        }

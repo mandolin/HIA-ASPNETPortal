@@ -1,0 +1,15 @@
+        public static string GetSafeDownloadFileName(string candidate)
+        {
+            // <lang>
+            //   <zh-CN>仅保留文件名部分，阻断历史记录中的目录片段进入 Content-Disposition。</zh-CN>
+            //   <en>Keep only the filename component so directory fragments from legacy records cannot enter Content-Disposition.</en>
+            // </lang>
+            string fileName = Path.GetFileName(candidate ?? string.Empty);
+            // <lang>
+            //   <zh-CN>扩展名和主名分别规范化，返回值不包含路径、控制字符或引号。</zh-CN>
+            //   <en>Normalize extension and stem separately so the result contains no path, control characters, or quotation marks.</en>
+            // </lang>
+            string extension = GetNormalizedExtension(fileName);
+            string stem = SanitizeFileStem(Path.GetFileNameWithoutExtension(fileName));
+            return stem + extension;
+        }

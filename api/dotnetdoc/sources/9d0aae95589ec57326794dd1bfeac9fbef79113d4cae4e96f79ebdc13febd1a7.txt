@@ -1,0 +1,4 @@
+        public RolesDb(PortalSecurityDbContext context)
+        {
+            _context = context;
+        }

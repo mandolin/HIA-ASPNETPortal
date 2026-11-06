@@ -1,0 +1,20 @@
+        private static void AddTextParameter(
+            SqlCommand command,
+            string parameterName,
+            int size,
+            string value,
+            string fallback)
+        {
+            // <lang>
+            //   <zh-CN>先按目标列长度净化并截断外来文本；此 helper 不记录原值，避免包标识、操作人或备注污染日志或参数结构。</zh-CN>
+            //   <en>Sanitize and truncate external text to the target column length first; this helper logs no raw value, preventing package identifier, actor, or note from contaminating logs or parameter structure.</en>
+            // </lang>
+            string sanitized = PortalDiagnosticSanitizer.SanitizeAndTruncate(value, size);
+
+            // <lang>
+            //   <zh-CN>参数名称和类型由调用方固定，净化空白使用受控回退而不是内联文本；所有结果仍作为 NVarChar 参数绑定。</zh-CN>
+            //   <en>Parameter name and type are fixed by the caller; sanitized blank text uses a controlled fallback rather than inline text, and every result remains bound as an NVarChar parameter.</en>
+            // </lang>
+            command.Parameters.Add(parameterName, SqlDbType.NVarChar, size).Value =
+                string.IsNullOrWhiteSpace(sanitized) ? fallback : sanitized;
+        }

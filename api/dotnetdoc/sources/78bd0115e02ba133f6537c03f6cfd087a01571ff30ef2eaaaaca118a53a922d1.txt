@@ -1,0 +1,14 @@
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public ModuleSettings ModuleConfiguration
+        {
+            // <lang>
+            //   <zh-CN>返回当前绑定的对象引用，不创建防御副本。</zh-CN>
+            //   <en>Return the currently bound object reference without creating a defensive copy.</en>
+            // </lang>
+            get { return _moduleConfiguration; } // 获取模块配置
+            // <lang>
+            //   <zh-CN>保存调用方引用但不重置已计算的编辑提示或已加载设置，也不验证或持久化内容。</zh-CN>
+            //   <en>Retain the caller reference without resetting the computed edit hint or loaded settings, and without validating or persisting content.</en>
+            // </lang>
+            set { _moduleConfiguration = value; } // 设置模块配置
+        }

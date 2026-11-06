@@ -1,0 +1,1 @@
+        public string CapabilityRole { get; private set; }

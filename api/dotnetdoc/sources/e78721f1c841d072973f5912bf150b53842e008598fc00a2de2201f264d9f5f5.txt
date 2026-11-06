@@ -1,0 +1,14 @@
+        protected void ReplyBtn_Click(object sender, EventArgs e)
+        {
+            if (!TryAuthorizeEditorForCurrentItem())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>回复动作只改变服务器控件可见性，原始消息内容保留在详情区作为上下文。</zh-CN>
+            //   <en>The reply action changes only server-control visibility, while the original message content remains in the detail area as context.</en>
+            // </lang>
+            EditPanel.Visible = true;
+            ButtonPanel.Visible = false;
+        }

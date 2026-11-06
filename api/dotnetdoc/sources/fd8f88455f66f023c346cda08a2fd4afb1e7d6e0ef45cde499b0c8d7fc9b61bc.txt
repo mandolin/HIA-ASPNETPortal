@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>更正表单只承载服务器生成的字段白名单和有界低敏文本；MaxLength 约束改善交互，但规范化、授权与敏感字段边界仍由 code-behind 和数据服务负责。</zh-CN>
+                <en>The correction form carries only a server-generated field allowlist and bounded low-sensitivity text; MaxLength improves interaction, while normalization, authorization, and sensitive-field boundaries remain owned by code-behind and the data service.</en>
+            </lang>
+        --%>

@@ -1,0 +1,25 @@
+        private static bool TryReadOptionalListInt32(string value, out int? parsedValue)
+        {
+            // <lang>
+            //   <zh-CN>输出先设为空，区分“没有选择”与“提交了非法值”。</zh-CN>
+            //   <en>Initialize the output to null so “no selection” remains distinct from “an invalid value was submitted.”</en>
+            // </lang>
+            parsedValue = null;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>使用不变文化解析正整数，避免本地化数字格式进入主键字段。</zh-CN>
+            //   <en>Parse a positive integer with invariant culture so localized number formats cannot enter a key field.</en>
+            // </lang>
+            int integerValue;
+            if (int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out integerValue) && integerValue > 0)
+            {
+                parsedValue = integerValue;
+                return true;
+            }
+
+            return false;
+        }

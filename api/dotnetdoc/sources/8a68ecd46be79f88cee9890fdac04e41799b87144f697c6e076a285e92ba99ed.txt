@@ -1,0 +1,22 @@
+        private static string GetEffectiveDisplayName(IUserProfileInfo profile, string fallbackName)
+        {
+            if (profile != null)
+            {
+                if (!string.IsNullOrWhiteSpace(profile.DisplayName))
+                {
+                    return profile.DisplayName;
+                }
+
+                if (!string.IsNullOrWhiteSpace(profile.Nickname))
+                {
+                    return profile.Nickname;
+                }
+
+                if (!string.IsNullOrWhiteSpace(profile.LoginName))
+                {
+                    return profile.LoginName;
+                }
+            }
+
+            return fallbackName ?? string.Empty;
+        }

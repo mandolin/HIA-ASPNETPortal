@@ -1,0 +1,5 @@
+        internal static string Admin_Register_ValidatorPasswordRequired {
+            get {
+                return ResourceManager.GetString("Admin_Register_ValidatorPasswordRequired", resourceCulture);
+            }
+        }

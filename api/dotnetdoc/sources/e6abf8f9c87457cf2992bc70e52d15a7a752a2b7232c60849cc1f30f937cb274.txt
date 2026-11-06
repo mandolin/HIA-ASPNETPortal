@@ -1,0 +1,2 @@
+        [Dependency]
+        public ICollaborationItemDb CollaborationItemDb { private get; set; }

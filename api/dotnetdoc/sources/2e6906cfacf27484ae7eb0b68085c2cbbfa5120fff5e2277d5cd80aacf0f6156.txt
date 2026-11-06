@@ -1,0 +1,23 @@
+        private static List<long> NormalizeItemIdList(IList<long> itemIds)
+        {
+            List<long> normalized = new List<long>();
+            if (itemIds == null)
+            {
+                return normalized;
+            }
+
+            foreach (long itemId in itemIds)
+            {
+                if (normalized.Count >= MaxBatchItemIds)
+                {
+                    break;
+                }
+
+                if (itemId > 0 && !normalized.Contains(itemId))
+                {
+                    normalized.Add(itemId);
+                }
+            }
+
+            return normalized;
+        }

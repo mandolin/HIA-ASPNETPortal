@@ -1,0 +1,91 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存前要求编辑上下文和页面校验都通过，并显式拒绝已停用的数据库文件存储路线。</zh-CN>
+            //   <en>Require a valid edit context and page validation before saving, and explicitly reject the disabled database-file-storage route.</en>
+            // </lang>
+            if (!_hasValidEditContext || !Page.IsValid)
+            {
+                return;
+            }
+
+            if (storeInDatabase.Checked)
+            {
+                UploadMessage.Text = lang.EditDocs_MessageDatabaseStorageDisabled;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅跟踪本次请求新建的物理文件，数据库保存失败时用于定向清理。</zh-CN>
+            //   <en>Track only the physical file created by this request so it can be targeted for cleanup if database persistence fails.</en>
+            // </lang>
+            string savedPhysicalPath = null;
+            try
+            {
+                if (Upload.Checked)
+                {
+                    // <lang>
+                    //   <zh-CN>上传路径必须先确认存在文件，再经过统一大小/扩展名策略校验。</zh-CN>
+                    //   <en>The upload path must confirm a file exists before applying the shared size and extension policy.</en>
+                    // </lang>
+                    if (!HasUploadedFile())
+                    {
+                        UploadMessage.Text = lang.EditDocs_MessageUploadSelected;
+                        return;
+                    }
+
+                    // <lang>
+                    //   <zh-CN>上传 helper 同时返回应用内虚拟路径和新建物理路径，前者入库、后者只用于失败清理。</zh-CN>
+                    //   <en>The upload helper returns an application virtual path for persistence and a new physical path only for failure cleanup.</en>
+                    // </lang>
+                    string virtualPath;
+                    if (!TrySaveUploadedFile(out virtualPath, out savedPhysicalPath))
+                    {
+                        return;
+                    }
+
+                    PathField.Text = virtualPath;
+                }
+                else
+                {
+                    // <lang>
+                    //   <zh-CN>非上传路径只接受应用内相对地址或 http/https 浏览地址，避免写入任意本地路径。</zh-CN>
+                    //   <en>The non-upload path accepts only an application-relative or http/https browse address, preventing arbitrary local paths from being stored.</en>
+                    // </lang>
+                    string normalizedUrl;
+                    if (!PortalNavigationPolicy.TryNormalizeBrowseUrl(PathField.Text, Request, out normalizedUrl))
+                    {
+                        UploadMessage.Text = lang.EditDocs_MessageInvalidBrowseUrl;
+                        return;
+                    }
+
+                    PathField.Text = normalizedUrl;
+                }
+
+                // <lang>
+                //   <zh-CN>文档服务持久化已验证模块上下文和页面输入；数据库二进制参数保持历史兼容空值。</zh-CN>
+                //   <en>The document service persists the validated module context and page input while retaining the historical empty database-binary arguments.</en>
+                // </lang>
+                DocumentDB.UpdateDocument(
+                    _moduleId,
+                    _itemId,
+                    Context.User.Identity.Name,
+                    NameField.Text,
+                    PathField.Text,
+                    CategoryField.Text,
+                    new byte[0],
+                    0,
+                    string.Empty);
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>数据库保存失败时删除本次新建文件，避免留下无记录的上传孤儿文件。</zh-CN>
+                //   <en>Remove the file created by this request when database save fails, avoiding an unreferenced upload orphan.</en>
+                // </lang>
+                TryDeleteFile(savedPhysicalPath);
+                throw;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

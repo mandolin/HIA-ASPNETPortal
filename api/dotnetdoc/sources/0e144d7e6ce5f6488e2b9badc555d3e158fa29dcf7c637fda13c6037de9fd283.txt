@@ -1,0 +1,45 @@
+        private static void TraceFallback(HttpContext context, string requestedTheme, string fallbackReason)
+        {
+            // <lang>
+            //   <zh-CN>净化并截断请求主题，供受限日志使用，避免把原始配置或攻击输入写入诊断。</zh-CN>
+            //   <en>Sanitize and truncate the requested theme for restricted logging, preventing raw configuration or hostile input from entering diagnostics.</en>
+            // </lang>
+            string requested = PortalDiagnosticSanitizer.SanitizeAndTruncate(requestedTheme, 100);
+
+            // <lang>
+            //   <zh-CN>净化并截断回退原因，保持诊断稳定且不携带 manifest 或路径细节。</zh-CN>
+            //   <en>Sanitize and truncate the fallback reason, keeping diagnostics stable without manifest or path details.</en>
+            // </lang>
+            string reason = PortalDiagnosticSanitizer.SanitizeAndTruncate(fallbackReason, 200);
+
+            // <lang>
+            //   <zh-CN>组合进程内去重键；它不写入 Cookie、数据库或跨请求用户状态。</zh-CN>
+            //   <en>Combine the process-local de-duplication key; it writes to no cookie, database, or cross-request user state.</en>
+            // </lang>
+            string fallbackKey = requested + "|" + reason;
+            lock (TraceLock)
+            {
+                if (WarnedFallbacks.Contains(fallbackKey))
+                {
+                    return;
+                }
+
+                WarnedFallbacks.Add(fallbackKey);
+            }
+
+            // <lang>
+            //   <zh-CN>构造已净化的固定格式告警文本，供 Trace 和门户诊断复用。</zh-CN>
+            //   <en>Build a sanitized fixed-format warning message shared by Trace and portal diagnostics.</en>
+            // </lang>
+            string warningMessage = string.Format(
+                "Theme configuration fell back to {0}. Requested='{1}', Reason='{2}'.",
+                DefaultThemeName,
+                requested,
+                reason);
+            if (context != null && context.Trace != null)
+            {
+                context.Trace.Warn(TraceCategory, warningMessage);
+            }
+
+            PortalDiagnostics.Warn(TraceCategory, warningMessage, context);
+        }

@@ -1,0 +1,6 @@
+            <%--
+            <lang>
+              <zh-CN>摘要卡片只呈现 code-behind 生成的总体状态和检查时间；重新检测按钮重新触发只读检查，不提供修复或配置写入。</zh-CN>
+              <en>Summary cards only present the overall status and check time produced by the code-behind; recheck triggers read-only checks and does not repair or write configuration.</en>
+            </lang>
+            --%>

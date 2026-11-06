@@ -1,0 +1,8 @@
+        protected bool HasSafeBrowseUrl(object value)
+        {
+            // <lang>
+            //   <zh-CN>可见性复用同一规范化 helper，确保链接文本和链接地址不会采用不同安全判断。</zh-CN>
+            //   <en>Visibility reuses the same normalization helper so link text and link address do not rely on different safety decisions.</en>
+            // </lang>
+            return !string.IsNullOrEmpty(GetSafeBrowseUrl(value));
+        }

@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>旧账号名继续只读展示，用于兼容历史 URL、角色和审计引用。</zh-CN>
+                    <en>The legacy user name remains read-only for compatibility with historical URLs, roles, and audit references.</en>
+                  </lang>
+                --%>

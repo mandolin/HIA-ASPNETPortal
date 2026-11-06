@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>实例元数据输入只表达标题、秒数和移动兼容意图；实例归属、范围、缓存单位和合法值仍由 code-behind 校验。</zh-CN>
+                <en>Instance metadata inputs express only title, seconds, and mobile-compatibility intent; code-behind validates instance ownership, ranges, cache units, and legal values.</en>
+              </lang>
+            --%>

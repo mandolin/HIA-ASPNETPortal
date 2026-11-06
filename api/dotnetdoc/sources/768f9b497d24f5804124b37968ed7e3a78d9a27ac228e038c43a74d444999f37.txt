@@ -1,0 +1,14 @@
+        private static string GetCookiePath(HttpRequest request)
+        {
+            // <lang>
+            //   <zh-CN>根站点使用 /，虚拟目录去除末尾 / 后作为 Cookie Path。</zh-CN>
+            //   <en>Root sites use /; virtual directories use the application path without a trailing / as the cookie Path.</en>
+            // </lang>
+            string applicationPath = request?.ApplicationPath;
+            if (string.IsNullOrWhiteSpace(applicationPath) || applicationPath == "/")
+            {
+                return "/";
+            }
+
+            return applicationPath.TrimEnd('/');
+        }

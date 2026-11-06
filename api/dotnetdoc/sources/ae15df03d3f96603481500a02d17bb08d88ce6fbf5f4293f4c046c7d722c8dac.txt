@@ -1,0 +1,1 @@
+        void UpdateTabOrder(int tabId, int tabOrder);

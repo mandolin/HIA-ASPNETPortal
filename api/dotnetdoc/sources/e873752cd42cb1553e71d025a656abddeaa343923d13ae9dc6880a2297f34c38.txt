@@ -1,0 +1,6 @@
+<%--
+  <lang>
+    <zh-CN>P6.3-S4 员工主数据最小维护页不提供账号绑定、工号登录启用、导入、导出或敏感个人资料字段。</zh-CN>
+    <en>The P6.3-S4 minimal employee master-data page does not provide account binding, employee-code login enablement, import, export, or sensitive personal-profile fields.</en>
+  </lang>
+--%>

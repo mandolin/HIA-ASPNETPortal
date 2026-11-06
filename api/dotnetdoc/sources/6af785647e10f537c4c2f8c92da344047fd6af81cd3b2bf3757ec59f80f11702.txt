@@ -1,0 +1,6 @@
+    <%--
+    <lang>
+      <zh-CN>状态消息由服务器写入，用于反馈站点设置保存结果；页面不把客户端文本当作成功证明。</zh-CN>
+      <en>The server writes the status message to report site-settings persistence; the page does not treat client text as proof of success.</en>
+    </lang>
+    --%>

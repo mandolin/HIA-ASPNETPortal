@@ -1,0 +1,5 @@
+        internal static string Legacy_XmlModule_MessageXmlUnavailable {
+            get {
+                return ResourceManager.GetString("Legacy_XmlModule_MessageXmlUnavailable", resourceCulture);
+            }
+        }

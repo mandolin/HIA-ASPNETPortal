@@ -1,0 +1,6 @@
+                    <%--
+                      <lang>
+                        <zh-CN>用户信息区域按回发字段组织输入；每个服务器控件的 ID 是后端读取和验证注册请求的稳定契约。</zh-CN>
+                        <en>The user information area groups postback fields; each server control ID is the stable contract used by the backend to read and validate the registration request.</en>
+                      </lang>
+                    --%>

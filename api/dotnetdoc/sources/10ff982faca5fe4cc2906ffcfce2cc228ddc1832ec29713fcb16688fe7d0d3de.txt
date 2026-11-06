@@ -1,0 +1,87 @@
+        private bool TryResolveRegistrationPasswords(
+            out string submittedPassword,
+            out string submittedConfirmPassword)
+        {
+            // <lang>
+            //   <zh-CN>先以空字符串初始化输出，保证任一失败分支不会把未定义密码传给调用方。</zh-CN>
+            //   <en>Initialize both outputs to empty so every failure path returns no undefined password to the caller.</en>
+            // </lang>
+            submittedPassword = string.Empty;
+            submittedConfirmPassword = string.Empty;
+
+            // <lang>
+            //   <zh-CN>隐藏字段是否存在只表示客户端尝试走加密链，不代表密文已经完整或可信。</zh-CN>
+            //   <en>Presence of hidden fields only indicates a client attempt at encryption; it does not prove ciphertext completeness or trustworthiness.</en>
+            // </lang>
+            bool hasEncryptedPassword = !string.IsNullOrWhiteSpace(EncryptedPassword.Value);
+            bool hasEncryptedConfirmPassword = !string.IsNullOrWhiteSpace(EncryptedConfirmPassword.Value);
+
+            if (hasEncryptedPassword || hasEncryptedConfirmPassword)
+            {
+                if (!hasEncryptedPassword || !hasEncryptedConfirmPassword)
+                {
+                    // <lang>
+                    //   <zh-CN>只提交一个密文字段时拒绝整组请求，避免密码和确认值使用不同来源。</zh-CN>
+                    //   <en>Reject the whole request when only one ciphertext field is present so password and confirmation cannot come from different sources.</en>
+                    // </lang>
+                    PortalDiagnostics.Warn(
+                        "PasswordSubmissionEncryption",
+                        "Registration password submission was incomplete: one encrypted password field was missing.",
+                        Context);
+                    Message.Text = lang.Admin_Register_MessagePasswordIncomplete;
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>以下输出只在本次解密调用内保存；失败分类和事件编号不包含口令材料。</zh-CN>
+                //   <en>Keep these outputs only for this decryption call; failure categories and event ids contain no password material.</en>
+                // </lang>
+                string[] submittedPasswords;
+                string failureCode;
+                string eventId;
+                if (PortalPasswordSubmissionCrypto.TryDecryptSubmittedPasswords(
+                    Context,
+                    new[] { EncryptedPassword.Value, EncryptedConfirmPassword.Value },
+                    out submittedPasswords,
+                    out failureCode,
+                    out eventId))
+                {
+                    // <lang>
+                    //   <zh-CN>按位置提取密码与确认值；长度不足时回退为空文本，由调用方的空值门禁拒绝。</zh-CN>
+                    //   <en>Extract password and confirmation by position; a short result falls back to empty text for the caller's blank-value gate.</en>
+                    // </lang>
+                    submittedPassword = submittedPasswords.Length > 0 ? submittedPasswords[0] : string.Empty;
+                    submittedConfirmPassword = submittedPasswords.Length > 1 ? submittedPasswords[1] : string.Empty;
+                    return true;
+                }
+
+                // <lang>
+                //   <zh-CN>解密失败只显示刷新重试提示，绝不回显密文、异常或事件细节。</zh-CN>
+                //   <en>On decryption failure, show only a refresh-and-retry message and never echo ciphertext, exceptions, or event details.</en>
+                // </lang>
+                Message.Text = lang.Admin_Register_MessagePasswordVerifyFailed;
+                return false;
+            }
+
+            if (PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                // <lang>
+                //   <zh-CN>服务端要求加密但客户端没有密文字段时拒绝明文回退，并记录不含敏感值的 warning。</zh-CN>
+                //   <en>When the server requires encryption but no ciphertext fields arrived, reject plain-text fallback and record a warning without sensitive values.</en>
+                // </lang>
+                PortalDiagnostics.Warn(
+                    "PasswordSubmissionEncryption",
+                    "Registration password was submitted without the required encrypted fields.",
+                    Context);
+                Message.Text = lang.Admin_Register_MessagePasswordVerifyFailed;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>仅在明确允许明文兼容时读取 Password 控件；调用方会在后续流程结束后清除它们。</zh-CN>
+            //   <en>Read the Password controls only when plain compatibility is explicitly allowed; the caller clears them before later processing ends.</en>
+            // </lang>
+            submittedPassword = Password.Text ?? string.Empty;
+            submittedConfirmPassword = ConfirmPassword.Text ?? string.Empty;
+            return true;
+        }

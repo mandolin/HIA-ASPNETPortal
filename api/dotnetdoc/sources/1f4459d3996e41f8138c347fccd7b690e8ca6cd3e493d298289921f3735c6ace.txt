@@ -1,0 +1,136 @@
+        public CollaborationItemCommentResult AddComment(CollaborationItemCommentCreateRequest request)
+        {
+            // <lang>
+            //   <zh-CN>将空请求收敛为本地对象，使后续校验返回稳定的业务失败结果而非空引用异常。</zh-CN>
+            //   <en>Collapse a null request to a local object so later checks return a stable business failure instead of a null-reference exception.</en>
+            // </lang>
+            request = request ?? new CollaborationItemCommentCreateRequest();
+
+            // <lang>
+            //   <zh-CN>评论必须绑定已有事项标识；无效标识在数据库访问前被拒绝。</zh-CN>
+            //   <en>A comment must be bound to an existing item identifier; reject an invalid identifier before database access.</en>
+            // </lang>
+            if (request.ItemId <= 0)
+            {
+                return new CollaborationItemCommentResult(false, 0, 0, "Collaboration item id is required.");
+            }
+
+            // <lang>
+            //   <zh-CN>先确认事件表所需 schema 可用，防止降级部署把评论路径误报为成功。</zh-CN>
+            //   <en>Confirm that the schema needed by the event table is available first, preventing a downgraded deployment from reporting the comment path as successful.</en>
+            // </lang>
+            if (!IsSchemaAvailable())
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "Collaboration item schema is unavailable.");
+            }
+
+            // <lang>
+            //   <zh-CN>规范化用于持久化的评论值，但仍须结合原始输入检查长度，避免静默截断超长用户内容。</zh-CN>
+            //   <en>Normalize the comment value for persistence, while retaining a raw-input length check so overlong user content is rejected rather than silently truncated.</en>
+            // </lang>
+            string comment = NormalizeOptionalText(request.Comment, 1000);
+            if (string.IsNullOrWhiteSpace(comment))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "A plain-text comment is required.");
+            }
+
+            // <lang>
+            //   <zh-CN>长度限制按去除首尾空白后的原始请求执行，与事件列容量和页面提示保持一致。</zh-CN>
+            //   <en>Apply the length limit to the trimmed original request so it remains aligned with event-column capacity and the page message.</en>
+            // </lang>
+            if ((request.Comment ?? string.Empty).Trim().Length > 1000)
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "The plain-text comment cannot exceed 1000 characters.");
+            }
+
+            // <lang>
+            //   <zh-CN>规范化可见性范围；省略时采用参与者范围这一最小共享默认值。</zh-CN>
+            //   <en>Normalize the visibility scope and use participant scope as the minimum shared default when it is omitted.</en>
+            // </lang>
+            string visibilityScope = NormalizeText(request.VisibilityScope, 30);
+            if (string.IsNullOrWhiteSpace(visibilityScope))
+            {
+                visibilityScope = PortalCollaborationItemVisibilityScopes.ItemParticipants;
+            }
+
+            // <lang>
+            //   <zh-CN>范围必须属于封闭白名单，禁止将任意文本持久化为潜在的新可见性语义。</zh-CN>
+            //   <en>The scope must be in the closed allowlist so arbitrary text cannot be persisted as a potential new visibility semantic.</en>
+            // </lang>
+            if (!IsKnownVisibilityScope(visibilityScope))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "The requested comment visibility scope is not supported.");
+            }
+
+            // <lang>
+            //   <zh-CN>读取事项并重新解析动作人授权；不可用身份不会仅凭客户端传入的用户标识获得评论资格。</zh-CN>
+            //   <en>Load the item and re-resolve actor authorization; an unavailable identity cannot gain comment eligibility from a client-supplied user identifier alone.</en>
+            // </lang>
+            CollaborationItemInfo item = FindItem(request.ItemId);
+            CollaborationItemActorAuthorization actor;
+            if (item == null || !TryGetActorAuthorization(request.ActorUserId, out actor))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "A signed-in portal user is required to add a comment.");
+            }
+
+            // <lang>
+            //   <zh-CN>即使身份有效，也必须是当前事项参与者或管理员，避免已认证但无关用户写入事件时间线。</zh-CN>
+            //   <en>Even a valid identity must be a current item participant or administrator, preventing authenticated but unrelated users from writing to the event timeline.</en>
+            // </lang>
+            if (!CanParticipate(item, actor))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "The current user is not allowed to comment on this item.");
+            }
+
+            // <lang>
+            //   <zh-CN>管理员范围评论可能对普通参与者隐藏，因此仅保留给已重新确认的管理员。</zh-CN>
+            //   <en>Administrator-scope comments can be hidden from ordinary participants, so reserve them for actors re-confirmed as administrators.</en>
+            // </lang>
+            if (string.Equals(visibilityScope, PortalCollaborationItemVisibilityScopes.Administrators, StringComparison.Ordinal) && !actor.IsAdministrator)
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "Only collaboration-item administrators can add administrator-visible comments.");
+            }
+
+            // <lang>
+            //   <zh-CN>以调用方提供的 UTC 时刻或当前 UTC 记录事件发生时间，避免本地时区参与时间线排序。</zh-CN>
+            //   <en>Record the event occurrence with a caller-supplied UTC time or current UTC, keeping local time zones out of timeline ordering.</en>
+            // </lang>
+            DateTime occurredUtc = request.OccurredUtc ?? DateTime.UtcNow;
+            try
+            {
+                // <lang>
+                //   <zh-CN>评论只写入独立 Comment 事件；事项状态和最近工作流评论字段保持不变，所有可变值均通过显式参数传递。</zh-CN>
+                //   <en>Write the comment only as an independent Comment event; item status and latest workflow-comment fields remain unchanged, and every variable value is passed through an explicit parameter.</en>
+                // </lang>
+                List<long> eventIds = context.Database.SqlQuery<long>(
+                    @"
+INSERT INTO [dbo].[PortalBiz_CollaborationItemEvents]
+    ([ItemId], [OccurredUtc], [EventType], [ActionKey], [VisibilityScope], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
+VALUES
+    (@ItemId, @OccurredUtc, N'Comment', NULL, @VisibilityScope, @ActorUserId, @ActorName, NULL, NULL, @Comment, NULL);
+
+SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
+                    new SqlParameter("@ItemId", item.ItemId),
+                    new SqlParameter("@OccurredUtc", occurredUtc),
+                    new SqlParameter("@VisibilityScope", visibilityScope),
+                    new SqlParameter("@ActorUserId", actor.ActorUserId),
+                    new SqlParameter("@ActorName", actor.ActorName),
+                    new SqlParameter("@Comment", comment)).ToList();
+                // <lang>
+                //   <zh-CN>只有数据库明确返回的新事件标识才报告成功；空结果按未创建处理，避免未知写入状态进入页面反馈。</zh-CN>
+                //   <en>Report success only when the database explicitly returns a new event identifier; treat an empty result as not created so an unknown write state cannot reach page feedback.</en>
+                // </lang>
+                long eventId = eventIds.Count == 0 ? 0 : eventIds[0];
+                return eventId <= 0
+                    ? new CollaborationItemCommentResult(false, item.ItemId, 0, "The collaboration-item comment was not created.")
+                    : new CollaborationItemCommentResult(true, item.ItemId, eventId, "The collaboration-item comment was added.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>异常只映射为既有通用失败结果，不向页面泄露数据库、SQL 或异常细节。</zh-CN>
+                //   <en>Map exceptions only to the established generic failure result and do not expose database, SQL, or exception detail to the page.</en>
+                // </lang>
+                return new CollaborationItemCommentResult(false, item.ItemId, 0, "The collaboration-item comment could not be added.");
+            }
+        }

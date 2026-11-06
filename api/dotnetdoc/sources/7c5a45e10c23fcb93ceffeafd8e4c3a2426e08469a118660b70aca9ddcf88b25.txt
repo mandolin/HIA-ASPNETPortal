@@ -1,0 +1,36 @@
+        public static bool IsInRoles(string roles)
+        {
+            // <lang>
+            //   <zh-CN>无请求上下文时不能形成授权结论。</zh-CN>
+            //   <en>No authorization decision can be made without a request context.</en>
+            // </lang>
+            HttpContext context = HttpContext.Current;
+
+            if (context == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>统一解析末尾分号、空项与多余空白，避免各页面自行拆分角色字符串。</zh-CN>
+            //   <en>Normalize trailing separators, empty items, and whitespace instead of splitting role strings in each page.</en>
+            // </lang>
+            foreach (string role in PortalRoleParser.Parse(roles))
+            {
+                // <lang>
+                //   <zh-CN>All Users 是旧门户虚拟角色，表示当前请求身份可访问。</zh-CN>
+                //   <en>All Users is a legacy virtual role meaning the current request identity may access.</en>
+                // </lang>
+                if (string.Equals(role, PortalRoleNames.AllUsers, StringComparison.OrdinalIgnoreCase) ||
+                    (context.User?.IsInRole(role) ?? false))
+                {
+                    return true;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>未命中任何角色时保持拒绝。</zh-CN>
+            //   <en>Keep access denied when no role matches.</en>
+            // </lang>
+            return false;
+        }

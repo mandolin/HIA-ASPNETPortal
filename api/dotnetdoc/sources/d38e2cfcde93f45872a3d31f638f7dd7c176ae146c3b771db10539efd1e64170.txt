@@ -1,0 +1,11 @@
+        private void MarkCredentialVerified(int userId)
+        {
+            if (!HasCredentialTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                "UPDATE [dbo].[Portal_UserCredentials] SET [LastVerifiedUtc] = SYSUTCDATETIME() WHERE [UserId] = @p0",
+                userId);
+        }

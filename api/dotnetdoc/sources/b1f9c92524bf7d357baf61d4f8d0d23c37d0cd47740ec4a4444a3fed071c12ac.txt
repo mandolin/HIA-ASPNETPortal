@@ -1,0 +1,47 @@
+        public bool ValidateRegistrationInvite(string inviteCode, out PortalRegistrationInviteRejection rejection)
+        {
+            // <lang>
+            //   <zh-CN>空邀请码当前表示允许的非邀请注册，未来“必须邀请码”策略应作为独立设置实现。</zh-CN>
+            //   <en>An empty invite code currently represents allowed non-invite registration; a required-invite policy must be implemented as a separate setting.</en>
+            // </lang>
+            string normalizedInviteCode = Normalize(inviteCode);
+            if (string.IsNullOrEmpty(normalizedInviteCode))
+            {
+                rejection = PortalRegistrationInviteRejection.None;
+                return true;
+            }
+
+            if (!HasInviteTable())
+            {
+                rejection = PortalRegistrationInviteRejection.InviteTableMissing;
+                return false;
+            }
+
+            var invite = _context.RegistrationInvites.SingleOrDefault(i => i.InviteCode == normalizedInviteCode);
+            if (invite == null)
+            {
+                rejection = PortalRegistrationInviteRejection.InviteNotFound;
+                return false;
+            }
+
+            if (!invite.IsEnabled)
+            {
+                rejection = PortalRegistrationInviteRejection.InviteDisabled;
+                return false;
+            }
+
+            if (invite.ExpiresUtc < DateTime.UtcNow)
+            {
+                rejection = PortalRegistrationInviteRejection.InviteExpired;
+                return false;
+            }
+
+            if (invite.MaxUses.HasValue && invite.UsedCount >= invite.MaxUses.Value)
+            {
+                rejection = PortalRegistrationInviteRejection.InviteUsageLimitReached;
+                return false;
+            }
+
+            rejection = PortalRegistrationInviteRejection.None;
+            return true;
+        }

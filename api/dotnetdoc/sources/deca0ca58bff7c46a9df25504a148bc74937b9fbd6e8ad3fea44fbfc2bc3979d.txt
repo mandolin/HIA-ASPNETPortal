@@ -1,0 +1,12 @@
+        public static IList<PortalNavigationEntry> GetEntries()
+        {
+            // <lang>
+            //   <zh-CN>每次调用从内部数组投影一个新只读列表；先按数值排序、再按稳定键大小写不敏感排序，使相同排序值不依赖数组声明顺序。</zh-CN>
+            //   <en>Project a new read-only list from the internal array on every call; order first by number then by stable key case-insensitively so equal sort values do not rely on array declaration order.</en>
+            // </lang>
+            return EntryArray
+                .OrderBy(entry => entry.SortOrder)
+                .ThenBy(entry => entry.EntryKey, StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }

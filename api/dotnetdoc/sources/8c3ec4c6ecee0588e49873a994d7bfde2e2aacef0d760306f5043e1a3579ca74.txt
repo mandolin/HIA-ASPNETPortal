@@ -1,0 +1,23 @@
+        internal PortalLoginIdentifierResolver(
+            PortalSecurityDbContext context,
+            bool userProfilesAvailable,
+            bool employeeCodeSignInAvailable)
+        {
+            // <lang>
+            //   <zh-CN>保存当前安全查询上下文；其生命周期由调用方数据访问操作限定。</zh-CN>
+            //   <en>Store the current security-query context; its lifetime is bounded by the caller's data-access operation.</en>
+            // </lang>
+            this.context = context;
+
+            // <lang>
+            //   <zh-CN>保存资料表可用性快照，避免每个解析分支重复探测数据库 schema。</zh-CN>
+            //   <en>Store the profile-table availability snapshot, avoiding repeated database-schema probing in every resolution branch.</en>
+            // </lang>
+            this.userProfilesAvailable = userProfilesAvailable;
+
+            // <lang>
+            //   <zh-CN>保存员工工号解析依赖表可用性快照，不把工号当作独立凭据。</zh-CN>
+            //   <en>Store the availability snapshot for employee-code resolution dependencies and never treat an employee code as a standalone credential.</en>
+            // </lang>
+            this.employeeCodeSignInAvailable = employeeCodeSignInAvailable;
+        }

@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>P8.3 让快捷链接自有头部接入统一模块标题/动作区契约，避免与外层模块标题重复。</zh-CN>
+            <en>P8.3 connects the quick-links local header to the shared module title/action contract without duplicating the outer module title.</en>
+        </lang>
+    --%>

@@ -1,0 +1,6 @@
+        private static string NormalizeToken(string value)
+        {
+            return string.IsNullOrWhiteSpace(value)
+                ? string.Empty
+                : value.Trim().ToLowerInvariant();
+        }

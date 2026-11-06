@@ -1,0 +1,27 @@
+        private static bool TryGetFileParts(string fileName, out DateTime fileDate, out int sequence)
+        {
+            // <lang>
+            //   <zh-CN>从受控 portal 文件名提取 UTC 日期和三位序号；不匹配或无效日期保持失败值并拒绝候选。</zh-CN>
+            //   <en>Extract UTC date and three-digit sequence from a controlled portal filename; a mismatch or invalid date retains failure values and rejects the candidate.</en>
+            // </lang>
+            fileDate = DateTime.MinValue;
+            sequence = 0;
+
+            // <lang>
+            //   <zh-CN>保存文件名正则匹配对象，仅用于当前候选的日期/序号提取。</zh-CN>
+            //   <en>Keep the filename regex match only to extract date and sequence for the current candidate.</en>
+            // </lang>
+            Match match = FileNamePattern.Match(fileName ?? string.Empty);
+            if (!match.Success ||
+                !DateTime.TryParseExact(
+                    match.Groups["date"].Value,
+                    "yyyyMMdd",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                    out fileDate))
+            {
+                return false;
+            }
+
+            return int.TryParse(match.Groups["sequence"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out sequence);
+        }

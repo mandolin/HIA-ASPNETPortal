@@ -1,0 +1,34 @@
+        private string ResolveMatrixText(string key)
+        {
+            // <lang>
+            //   <zh-CN>白名单式映射：只解析渲染器实际使用的键，未知键原样返回（渲染器已对其做 HTML 编码）。</zh-CN>
+            //   <en>Whitelist mapping: only the keys the renderer actually uses are resolved, and unknown keys pass through unchanged (the renderer already HTML-encodes them).</en>
+            // </lang>
+            switch (key)
+            {
+                case "EmptyDefinitions":
+                    return lang.Admin_CapabilityPermissionMatrix_EmptyDefinitions;
+                case "ColumnPermissionKey":
+                    return lang.Admin_CapabilityPermissionMatrix_ColumnPermissionKey;
+                case "LayerFoundation":
+                    return lang.Admin_CapabilityPermissionMatrix_LayerFoundation;
+                case "LayerBasicBusiness":
+                    return lang.Admin_CapabilityPermissionMatrix_LayerBasicBusiness;
+                case "LayerPlatform":
+                    return lang.Admin_CapabilityPermissionMatrix_LayerPlatform;
+                case "MarkGranted":
+                    return lang.Admin_CapabilityPermissionMatrix_MarkGranted;
+                case "MarkNotGranted":
+                    return lang.Admin_CapabilityPermissionMatrix_MarkNotGranted;
+                case "MarkDisabled":
+                    return lang.Admin_CapabilityPermissionMatrix_MarkDisabled;
+                case "StateGranted":
+                    return lang.Admin_CapabilityPermissionMatrix_StateGranted;
+                case "StateNotGranted":
+                    return lang.Admin_CapabilityPermissionMatrix_StateNotGranted;
+                case "StateDisabled":
+                    return lang.Admin_CapabilityPermissionMatrix_StateDisabled;
+                default:
+                    return key;
+            }
+        }

@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>P2.4 只读运营审计页用于查询高价值状态变更；普通查看行为当前不写审计，相关策略扩展由审计策略配置统一控制。</zh-CN>
+  <en>The P2.4 read-only operation-audit page queries high-value state changes; ordinary view actions are not audited at this stage and can later be governed by audit-policy settings if needed.</en>
+</lang>
+--%>

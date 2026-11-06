@@ -1,0 +1,5 @@
+        private static bool IsCommentCommand(string commandName)
+        {
+            return string.Equals(commandName, "AddParticipantComment", StringComparison.Ordinal) ||
+                   string.Equals(commandName, "AddAdministratorComment", StringComparison.Ordinal);
+        }

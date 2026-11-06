@@ -1,0 +1,24 @@
+        public bool HasCodeFileEntries()
+        {
+            // <lang>
+            //   <zh-CN>逐条检查已登记的装配态；只做精确比较，缺省条目不在映射中因而天然不触发。</zh-CN>
+            //   <en>Check each registered mode with exact comparison; default entries are absent from the map and therefore never trigger it.</en>
+            // </lang>
+            foreach (string mode in _modesByPackageId.Values)
+            {
+                // <lang>
+                //   <zh-CN>命中受控调试态即返回，不继续遍历；调用方据此决定是否拦截。</zh-CN>
+                //   <en>Return as soon as the controlled debug mode is found; callers decide whether to block.</en>
+                // </lang>
+                if (string.Equals(mode, PortalModuleAssemblyModes.CodeFile, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>无调试态条目即为合法的生产态台账，无需开关介入。</zh-CN>
+            //   <en>No debug-mode entry means a legitimate production ledger with no need for switch intervention.</en>
+            // </lang>
+            return false;
+        }

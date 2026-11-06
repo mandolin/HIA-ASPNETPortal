@@ -1,0 +1,35 @@
+        protected void ApproveRegistration_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>批准状态写入成功后才记录审核审计；两次调用没有本页声明的跨服务事务。</zh-CN>
+                //   <en>Registration approval audit follows a successful state write; the two calls have no cross-service transaction claimed by this page.</en>
+                // </lang>
+                UsersDB.ApproveUser(userId, GetCurrentActor());
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    PortalOperationAuditEvents.RegistrationApproved,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    "Registration approved.",
+                    Context);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRegistrationApproved, false);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.ApproveRegistration",
+                    "Approving user registration failed. UserId=" + userId,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageApprovalFailed, eventId), true);
+            }
+        }

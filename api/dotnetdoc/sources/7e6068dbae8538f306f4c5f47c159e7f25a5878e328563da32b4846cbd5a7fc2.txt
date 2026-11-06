@@ -1,0 +1,23 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>首次进入时只读取当前模块既有设置；权限校验已经在 TryInitializeRequest 中完成。</zh-CN>
+                //   <en>On the first request, read only the current module's existing settings; authorization has already completed in TryInitializeRequest.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>settings 是当前模块的 XML/XSL 文本设置快照，只在首次加载时回填表单。</zh-CN>
+                //   <en>settings is the XML/XSL text-setting snapshot for the current module and is used only to fill the form on first load.</en>
+                // </lang>
+                Hashtable settings = ModulesConfig.GetModuleSettings(moduleId);
+                XmlDataSrc.Text = settings["xmlsrc"] as string;
+                XslTransformSrc.Text = settings["xslsrc"] as string;
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

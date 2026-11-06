@@ -1,0 +1,25 @@
+        private void IncrementSecurityVersion(int userId, string reason)
+        {
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                @"
+UPDATE [dbo].[Portal_UserSecurityStates]
+SET [SecurityVersion] = [SecurityVersion] + 1,
+    [ChangedUtc] = SYSUTCDATETIME(),
+    [ChangeReason] = @p1
+WHERE [UserId] = @p0;
+
+IF @@ROWCOUNT = 0
+BEGIN
+    INSERT INTO [dbo].[Portal_UserSecurityStates] ([UserId], [SecurityVersion], [ChangedUtc], [ChangeReason])
+    SELECT @p0, @p2, SYSUTCDATETIME(), @p1
+    WHERE EXISTS (SELECT 1 FROM [dbo].[Portal_Users] WHERE [UserID] = @p0);
+END",
+                userId,
+                NormalizeReason(reason),
+                1);
+        }

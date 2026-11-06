@@ -1,0 +1,8 @@
+        public IModuleItem GetSingleModule(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>这里故意使用 Single；重复记录和缺失记录都应被视为配置完整性错误。</zh-CN>
+            //   <en>This intentionally uses Single; duplicate and missing records should both surface as configuration-integrity errors.</en>
+            // </lang>
+            return _items.Single(i => i.ModuleId == moduleId);
+        }

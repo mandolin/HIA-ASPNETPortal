@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>标题、Url 和移动端 Url 是导航目标输入；标记层只收集值，协议、主机、站内路径和权限边界必须由服务器验证。</zh-CN>
+                    <en>Title, Url, and mobile Url are navigation-target inputs; markup only collects values, while the server must validate scheme, host, local paths, and authorization boundaries.</en>
+                </lang>
+            --%>

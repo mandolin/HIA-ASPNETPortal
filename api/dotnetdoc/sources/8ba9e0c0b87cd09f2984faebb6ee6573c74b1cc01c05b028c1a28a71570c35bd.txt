@@ -1,0 +1,8 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保留旧 WebForms 门户的根入口跳转，避免在导航重构完成前改变用户可见入口。</zh-CN>
+            //   <en>Keep the legacy WebForms root-entry redirect so user-visible entry behavior does not change before navigation redesign is complete.</en>
+            // </lang>
+            Response.Redirect("DesktopDefault.aspx");
+        }

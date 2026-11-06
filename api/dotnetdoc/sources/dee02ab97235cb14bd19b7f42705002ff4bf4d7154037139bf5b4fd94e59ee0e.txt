@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>详情页只调整只读展示结构，不改变事件编号查询和部署级详情开关。</zh-CN>
+        <en>The detail page changes only the read-only presentation structure and does not change event-id lookup or the deployment-level detail switch.</en>
+      </lang>
+    --%>

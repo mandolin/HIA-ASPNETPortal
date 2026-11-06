@@ -1,0 +1,26 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存回调重新执行请求门禁，防止权限或模块目标在首次加载后发生变化而继续写入。</zh-CN>
+            //   <en>Re-run the request gate on save so changes after initial load cannot continue to a write with stale authorization or target state.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>这里仍按旧门户约定在入库前编码，而不是做 HTML 白名单净化；真正的安全边界来自模块编辑权限和原始 HTML 权限。</zh-CN>
+            //   <en>This still follows the legacy portal convention of encoding before persistence instead of sanitizing with an HTML allowlist; the real safety boundary is module-edit authorization plus Raw HTML permission.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>四个文本值在进入数据访问层前统一 HTML 编码，保持历史存储契约；返回地址仍由同一策略组件处理。</zh-CN>
+            //   <en>Encode all four text values before data access to preserve the legacy storage contract, then route the return through the same policy component.</en>
+            // </lang>
+            HtmlTextDB.UpdateHtmlText(
+                moduleId,
+                Server.HtmlEncode(DesktopText.Text),
+                Server.HtmlEncode(MobileSummary.Text),
+                Server.HtmlEncode(MobileDetails.Text));
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

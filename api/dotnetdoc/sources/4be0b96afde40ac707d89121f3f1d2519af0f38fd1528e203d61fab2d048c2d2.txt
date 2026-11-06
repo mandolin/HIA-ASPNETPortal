@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_SubtitleMyClaims {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_SubtitleMyClaims", resourceCulture);
+            }
+        }

@@ -1,0 +1,65 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存前重新初始化请求，确保链接编辑不能依赖旧 ViewState 绕过权限或归属检查。</zh-CN>
+            //   <en>The request is initialized again before saving so link editing cannot rely on stale ViewState to bypass permission or ownership checks.</en>
+            // </lang>
+            ILinkItem item;
+            if (!TryInitializeRequest(out item) || !Page.IsValid)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>viewOrder 是旧链接模块的整数排序值；解析失败时不进入数据层。</zh-CN>
+            //   <en>viewOrder is the legacy Links module integer ordering value; parse failures never reach the data layer.</en>
+            // </lang>
+            int viewOrder;
+            if (!int.TryParse(ViewOrderField.Text, out viewOrder))
+            {
+                // <lang>
+                //   <zh-CN>显示顺序只接受旧数据库可保存的整数值，失败时输出低敏校验提示。</zh-CN>
+                //   <en>Display order accepts only integer values that the legacy database can persist; failures emit a low-sensitivity validation message.</en>
+                // </lang>
+                ShowValidationMessage(lang.EditLinks_MessageInvalidViewOrder);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>url 为必填浏览地址，mobileUrl 为可选兼容地址；两者都保存归一化结果。</zh-CN>
+            //   <en>url is the required browse address and mobileUrl is the optional compatibility address; both persist normalized results.</en>
+            // </lang>
+            string url;
+            string mobileUrl;
+            if (!PortalNavigationPolicy.TryNormalizeBrowseUrl(UrlField.Text, Request, out url) ||
+                !TryNormalizeOptionalBrowseUrl(MobileUrlField.Text, out mobileUrl))
+            {
+                // <lang>
+                //   <zh-CN>链接地址沿用统一浏览地址策略，避免在编辑页绕过前台链接过滤。</zh-CN>
+                //   <en>Link URLs reuse the shared browse-URL policy so the edit page cannot bypass front-end link filtering.</en>
+                // </lang>
+                ShowValidationMessage(lang.EditLinks_MessageInvalidUrl);
+                return;
+            }
+
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>新增链接使用当前模块标识，创建人来自服务器端认证身份，不接受浏览器传入。</zh-CN>
+                //   <en>New links use the current module id, and creator identity comes from the server-side authenticated principal rather than browser input.</en>
+                // </lang>
+                LinkDB.AddLink(moduleId, Context.User.Identity.Name, TitleField.Text, url, mobileUrl, viewOrder,
+                    DescriptionField.Text);
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>更新路径已经在 `TryInitializeRequest` 中核验条目归属，避免跨模块编辑。</zh-CN>
+                //   <en>The update path has already validated item ownership in `TryInitializeRequest`, avoiding cross-module edits.</en>
+                // </lang>
+                LinkDB.UpdateLink(itemId, Context.User.Identity.Name, TitleField.Text, url, mobileUrl, viewOrder,
+                    DescriptionField.Text);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

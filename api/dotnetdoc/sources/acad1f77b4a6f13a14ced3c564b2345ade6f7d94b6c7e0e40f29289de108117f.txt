@@ -1,0 +1,10 @@
+        private static string GetActorUserName(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>逐层检查 Context、User 与 Identity，避免后台任务、错误处理或匿名请求访问缺失对象；此 helper 不进行认证或授权判定。</zh-CN>
+            //   <en>Check Context, User, and Identity layer by layer to support background tasks, error handling, or anonymous requests with missing objects; this helper performs no authentication or authorization decision.</en>
+            // </lang>
+            return context == null || context.User == null || context.User.Identity == null
+                ? string.Empty
+                : context.User.Identity.Name;
+        }

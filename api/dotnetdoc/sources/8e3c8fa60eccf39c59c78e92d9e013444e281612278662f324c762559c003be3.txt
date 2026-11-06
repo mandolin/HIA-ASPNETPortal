@@ -1,0 +1,1 @@
+        void AddUserRole(int roleId, int userId);

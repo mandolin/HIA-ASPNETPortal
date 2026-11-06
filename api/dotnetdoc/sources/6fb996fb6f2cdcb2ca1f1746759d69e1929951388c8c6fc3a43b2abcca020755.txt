@@ -1,0 +1,8 @@
+        public bool IsPackageAllowed(string packageId)
+        {
+            // <lang>
+            //   <zh-CN>空白 id 不是允许包；其余值只去除边缘空白后查询不可变集合，本方法不检查模块启用状态或用户权限。</zh-CN>
+            //   <en>A blank id is not an allowed package; otherwise trim edge whitespace then query the immutable set, and do not check module enablement or user permissions here.</en>
+            // </lang>
+            return !string.IsNullOrWhiteSpace(packageId) && allowedPackageSet.Contains(packageId.Trim());
+        }

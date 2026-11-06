@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_LabelReadMoreMobile {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelReadMoreMobile", resourceCulture);
+            }
+        }

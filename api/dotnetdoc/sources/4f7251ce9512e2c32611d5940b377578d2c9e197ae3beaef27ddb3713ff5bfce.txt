@@ -1,0 +1,55 @@
+        private static int CountCategories(string password)
+        {
+            // <lang>
+            //   <zh-CN>记录是否已出现大写字母；布尔状态只在本次迭代中存活。</zh-CN>
+            //   <en>Record whether an uppercase letter appeared; this Boolean state lives only for the current iteration.</en>
+            // </lang>
+            bool hasUpper = false;
+
+            // <lang>
+            //   <zh-CN>记录是否已出现小写字母；不保存具体字符。</zh-CN>
+            //   <en>Record whether a lowercase letter appeared without retaining the actual character.</en>
+            // </lang>
+            bool hasLower = false;
+
+            // <lang>
+            //   <zh-CN>记录是否已出现数字；不保存具体字符。</zh-CN>
+            //   <en>Record whether a digit appeared without retaining the actual character.</en>
+            // </lang>
+            bool hasDigit = false;
+
+            // <lang>
+            //   <zh-CN>记录是否已出现其余特殊字符；类别判断不对密码文本产生副作用。</zh-CN>
+            //   <en>Record whether any remaining special character appeared; categorization has no side effect on password text.</en>
+            // </lang>
+            bool hasSpecial = false;
+
+            // <lang>
+            //   <zh-CN>逐字符分类一次性输入，只累积类别布尔值，不输出、缓存或记录字符。</zh-CN>
+            //   <en>Classify the one-time input character by character, accumulating Boolean categories only and never outputting, caching, or logging characters.</en>
+            // </lang>
+            foreach (char character in password)
+            {
+                if (char.IsUpper(character))
+                {
+                    hasUpper = true;
+                }
+                else if (char.IsLower(character))
+                {
+                    hasLower = true;
+                }
+                else if (char.IsDigit(character))
+                {
+                    hasDigit = true;
+                }
+                else
+                {
+                    hasSpecial = true;
+                }
+            }
+
+            return Convert.ToInt32(hasUpper) +
+                   Convert.ToInt32(hasLower) +
+                   Convert.ToInt32(hasDigit) +
+                   Convert.ToInt32(hasSpecial);
+        }

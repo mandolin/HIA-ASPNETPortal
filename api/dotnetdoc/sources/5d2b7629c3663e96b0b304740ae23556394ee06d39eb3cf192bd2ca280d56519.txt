@@ -1,0 +1,4 @@
+        protected virtual bool ShouldApplyPortalTheme
+        {
+            get { return true; }
+        }

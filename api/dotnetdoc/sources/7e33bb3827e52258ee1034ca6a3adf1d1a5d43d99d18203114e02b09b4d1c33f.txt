@@ -1,0 +1,1 @@
+        DbConnection CreateConnection(PortalDatabaseProfile profile);

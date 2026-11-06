@@ -1,0 +1,13 @@
+        private void ClearSubmitForm()
+        {
+            // <lang>
+            //   <zh-CN>成功提交后清空用户输入，默认值仅通过稳定参考数据键选择。</zh-CN>
+            //   <en>Clear user input after a successful submission and select defaults only by stable reference-data keys.</en>
+            // </lang>
+            TitleTextBox.Text = string.Empty;
+            SummaryTextBox.Text = string.Empty;
+            DescriptionTextBox.Text = string.Empty;
+            DueUtcTextBox.Text = string.Empty;
+            SelectReferenceValue(ItemTypeList, PortalReferenceDataSets.GeneralItemType);
+            SelectReferenceValue(PriorityList, PortalReferenceDataSets.NormalPriority);
+        }

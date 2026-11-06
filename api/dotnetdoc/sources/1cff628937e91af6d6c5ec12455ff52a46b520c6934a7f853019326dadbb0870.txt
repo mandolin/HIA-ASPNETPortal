@@ -1,0 +1,27 @@
+        public void UpdatePortalInfo(int portalId, string portalName, bool alwaysShow)
+        {
+            // <lang>
+            //   <zh-CN>先定位内存快照中的目标行，保持和读取路径一致的严格单行语义。</zh-CN>
+            //   <en>Locate the target row in the in-memory snapshot first, preserving the same strict single-row semantics as the read path.</en>
+            // </lang>
+            var globalRow = _items.Single(i => i.PortalId == portalId);
+
+            // <lang>
+            //   <zh-CN>只更新旧全局配置表拥有的两个字段；在线设置、主题设置和安全策略不在这里写入。</zh-CN>
+            //   <en>Update only the two fields owned by the legacy global configuration table; online settings, theme settings, and security policy are not written here.</en>
+            // </lang>
+            globalRow.PortalName = portalName;
+            globalRow.AlwaysShowEditButton = alwaysShow;
+
+            // <lang>
+            //   <zh-CN>EF 跟踪实体负责生成更新语句；调用页面负责权限检查、输入归一化和审计。</zh-CN>
+            //   <en>The EF tracked entity produces the update statement; the calling page owns authorization checks, input normalization, and auditing.</en>
+            // </lang>
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>保存后刷新快照，避免同一个数据访问实例继续返回保存前的配置值。</zh-CN>
+            //   <en>Refresh the snapshot after saving so the same data access instance does not keep returning pre-save values.</en>
+            // </lang>
+            _items = _context.Globals.ToList();
+        }

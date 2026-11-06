@@ -1,0 +1,80 @@
+        public PortalWorkItemResult CompleteBusinessWorkItem(PortalWorkItemCompletionRequest request)
+        {
+            PortalWorkItemCompletionRequest normalized = NormalizeCompletionRequest(request);
+            if (string.IsNullOrWhiteSpace(normalized.BusinessKind) ||
+                string.IsNullOrWhiteSpace(normalized.BusinessId) ||
+                string.IsNullOrWhiteSpace(normalized.TargetStatus) ||
+                string.IsNullOrWhiteSpace(normalized.EventType))
+            {
+                return new PortalWorkItemResult(false, 0, "Business kind, business id, target status, and event type are required.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new PortalWorkItemResult(false, 0, "Portal work-item schema is unavailable.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>通过 OUTPUT 捕获被更新的审批工作项标识和旧状态，再写入状态事件；没有未完成工作项时返回 0，由调用方决定是否需要提示。</zh-CN>
+                //   <en>Use OUTPUT to capture the updated work-item identity and previous status, then write a status event; when no unfinished item exists, return 0 and let the caller decide whether to show guidance.</en>
+                // </lang>
+                List<long> rows = context.Database.SqlQuery<long>(
+                    @"
+DECLARE @Updated TABLE
+(
+    [WorkItemId] BIGINT NOT NULL,
+    [FromStatus] NVARCHAR(20) NOT NULL
+);
+
+UPDATE [dbo].[PortalBiz_WorkItems]
+SET [WorkItemStatus] = @TargetStatus,
+    [CompletedUtc] = @OccurredUtc,
+    [CompletedBy] = @ActorName
+OUTPUT INSERTED.[WorkItemId], DELETED.[WorkItemStatus]
+INTO @Updated ([WorkItemId], [FromStatus])
+WHERE [BusinessKind] = @BusinessKind
+  AND [BusinessId] = @BusinessId
+  AND [WorkItemStatus] IN (N'Open', N'InProgress');
+
+DECLARE @WorkItemId BIGINT;
+DECLARE @FromStatus NVARCHAR(20);
+
+SELECT TOP (1)
+    @WorkItemId = [WorkItemId],
+    @FromStatus = [FromStatus]
+FROM @Updated;
+
+IF @WorkItemId IS NOT NULL
+BEGIN
+    INSERT INTO [dbo].[PortalBiz_WorkItemEvents]
+        ([WorkItemId], [OccurredUtc], [EventType], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment])
+    VALUES
+        (@WorkItemId, @OccurredUtc, @EventType, @ActorUserId, @ActorName, @FromStatus, @TargetStatus, @Comment);
+END
+
+SELECT ISNULL(@WorkItemId, 0);",
+                    new SqlParameter("@BusinessKind", normalized.BusinessKind),
+                    new SqlParameter("@BusinessId", normalized.BusinessId),
+                    new SqlParameter("@TargetStatus", normalized.TargetStatus),
+                    new SqlParameter("@OccurredUtc", normalized.OccurredUtc.Value),
+                    new SqlParameter("@EventType", normalized.EventType),
+                    CreateNullableIntParameter("@ActorUserId", normalized.ActorUserId),
+                    new SqlParameter("@ActorName", normalized.ActorName),
+                    CreateNullableStringParameter("@Comment", normalized.Comment)).ToList();
+
+                long workItemId = rows.Count == 0 ? 0 : rows[0];
+                return workItemId <= 0
+                    ? new PortalWorkItemResult(false, 0, "No unfinished work item was found.")
+                    : new PortalWorkItemResult(true, workItemId, "Work item state updated.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>状态回写失败不应暴露 SQL 或表结构细节；调用方只接收可展示的低敏失败说明。</zh-CN>
+                //   <en>Status write-back failures should not expose SQL or schema details; callers receive only display-safe failure text.</en>
+                // </lang>
+                return new PortalWorkItemResult(false, 0, "Work item state update failed.");
+            }
+        }

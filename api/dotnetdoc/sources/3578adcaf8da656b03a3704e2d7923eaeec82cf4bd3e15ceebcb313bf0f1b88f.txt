@@ -1,0 +1,29 @@
+        public void IncrementSecurityVersion(int userId, string reason)
+        {
+            // <lang>
+            //   <zh-CN>安全版本递增是使旧票据失效的持久化门禁；非法标识或缺少状态表直接 no-op，数据库执行异常保持原有传播行为。</zh-CN>
+            //   <en>Security-version increment is the persistence gate that invalidates older tickets; invalid identifiers or a missing state table are no-ops, while database execution errors retain their existing propagation behavior.</en>
+            // </lang>
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                @"
+UPDATE [dbo].[Portal_UserSecurityStates]
+SET [SecurityVersion] = [SecurityVersion] + 1,
+    [ChangedUtc] = SYSUTCDATETIME(),
+    [ChangeReason] = @p1
+WHERE [UserId] = @p0;
+
+IF @@ROWCOUNT = 0
+BEGIN
+    INSERT INTO [dbo].[Portal_UserSecurityStates] ([UserId], [SecurityVersion], [ChangedUtc], [ChangeReason])
+    SELECT @p0, @p2, SYSUTCDATETIME(), @p1
+    WHERE EXISTS (SELECT 1 FROM [dbo].[Portal_Users] WHERE [UserID] = @p0);
+END",
+                userId,
+                NormalizeReason(reason),
+                InitialSecurityVersion);
+        }

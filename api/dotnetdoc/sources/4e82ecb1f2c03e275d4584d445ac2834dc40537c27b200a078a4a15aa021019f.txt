@@ -1,0 +1,78 @@
+        public static bool TryNormalizeDesktopSource(string source, out string normalizedSource, out string errorMessage)
+        {
+            // <lang>
+            //   <zh-CN>先统一分隔符并去除首尾空白，使后续规则只处理稳定的站内路径形状。</zh-CN>
+            //   <en>Normalizes separators and trims surrounding whitespace first so later rules process one stable site-path shape.</en>
+            // </lang>
+            normalizedSource = NormalizeSeparators(source);
+
+            // <lang>
+            //   <zh-CN>错误说明只供受控调用方展示或诊断，保持为空直到某个拒绝分支提供固定低敏原因。</zh-CN>
+            //   <en>Keeps the diagnostic explanation empty until a rejection branch supplies a fixed low-sensitivity reason for controlled callers.</en>
+            // </lang>
+            errorMessage = string.Empty;
+
+            // <lang>
+            //   <zh-CN>空路径没有可验证的控件目标，直接拒绝而不继续解析。</zh-CN>
+            //   <en>An empty path has no verifiable control target and is rejected before further parsing.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(normalizedSource))
+            {
+                errorMessage = lang.Common_ModulePathMessageEmpty;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>兼容旧 Web Forms 的站内根前缀，但只移除固定的 <c>~/</c>，不展开物理路径。</zh-CN>
+            //   <en>Supports the legacy Web Forms site-root prefix by removing only fixed <c>~/</c> text without resolving a physical path.</en>
+            // </lang>
+            if (normalizedSource.StartsWith("~/", StringComparison.Ordinal))
+            {
+                normalizedSource = normalizedSource.Substring(2);
+            }
+
+            // <lang>
+            //   <zh-CN>拒绝绝对路径、外部协议和父目录跳转，确保候选仍处于站内相对路径边界。</zh-CN>
+            //   <en>Rejects absolute paths, external schemes, and parent traversal so the candidate remains site-relative.</en>
+            // </lang>
+            if (normalizedSource.StartsWith("/", StringComparison.Ordinal) ||
+                normalizedSource.Contains("://") ||
+                normalizedSource.Split('/').Any(part => part == ".."))
+            {
+                errorMessage = lang.Common_ModulePathMessageNotSiteRelative;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>动态加载只接受用户控件后缀，避免把其它文件类型送入 <c>LoadControl</c> 路径。</zh-CN>
+            //   <en>Dynamic loading accepts only the user-control suffix so other file types cannot enter the <c>LoadControl</c> path.</en>
+            // </lang>
+            if (!normalizedSource.EndsWith(".ascx", StringComparison.OrdinalIgnoreCase))
+            {
+                errorMessage = lang.Common_ModulePathMessageNotAscx;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>保留已规范化候选供固定目录前缀检查，避免后续分支重新解释原始输入。</zh-CN>
+            //   <en>Keeps the normalized candidate for the fixed-prefix check so later branches do not reinterpret raw input.</en>
+            // </lang>
+            string candidateSource = normalizedSource;
+            // <lang>
+            //   <zh-CN>只有 DesktopModules/ 或 Admin/ 下的控件才进入受控动态加载边界。</zh-CN>
+            //   <en>Only controls under DesktopModules/ or Admin/ enter the controlled dynamic-loading boundary.</en>
+            // </lang>
+            bool allowedPrefix = AllowedDesktopPrefixes.Any(prefix =>
+                candidateSource.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
+            if (!allowedPrefix)
+            {
+                errorMessage = lang.Common_ModulePathMessageOutsideAllowedDirectories;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>所有路径规则通过后返回成功；此结果仍不代表调用方已完成页面或部署授权。</zh-CN>
+            //   <en>Returns success only after all path rules pass; the result still does not represent page or deployment authorization.</en>
+            // </lang>
+            return true;
+        }
