@@ -58,6 +58,20 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>是否允许装配态台账中出现受控调试态（CodeFile）的部署级开关键；缺省关闭，且不允许在线编辑或数据库覆盖。</zh-CN>
+        ///   <en>Deployment-level switch key controlling whether the assembly-state ledger may contain the controlled debug mode (CodeFile); disabled by default, with neither online editing nor database override permitted.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本键只表达"环境是否允许"，不表达任何模块当前处于何种装配态；装配态的唯一事实源是 Config/module-assembly-state.json 台账。</zh-CN>
+        ///   <en>This key expresses only "whether the environment allows it", never the current mode of any module; the ledger at Config/module-assembly-state.json is the single source of truth for assembly mode.</en>
+        /// </lang>
+        /// </remarks>
+        public const string ModuleAssemblyAllowCodeFile = "Portal.ModuleAssembly.AllowCodeFile";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>文档上传大小上限（字节）的设置键。</zh-CN>
         ///   <en>Setting key for maximum document-upload size in bytes.</en>
         /// </lang>

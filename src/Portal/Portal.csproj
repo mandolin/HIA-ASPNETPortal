@@ -812,6 +812,7 @@
     <Content Include="Config\appSettings.dev.template.json" />
     <Content Include="Config\appSettings.prod.template.json" />
     <Content Include="Config\appSettings.test.template.json" />
+    <Content Include="Config\module-assembly-state.json" />
     <Content Include="Uploads\web.config" />
     <None Include="Uploads\sample.doc" />
     <Content Include="Web.config" />

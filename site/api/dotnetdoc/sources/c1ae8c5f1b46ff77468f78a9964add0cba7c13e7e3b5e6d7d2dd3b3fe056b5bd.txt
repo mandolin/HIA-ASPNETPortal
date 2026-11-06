@@ -1,0 +1,17 @@
+        internal PortalModuleAssemblyState(IDictionary<string, string> modesByPackageId)
+        {
+            // <lang>
+            //   <zh-CN>空映射是合法缺省；拒绝 null 避免把"未初始化"误表达成"所有包缺省"。</zh-CN>
+            //   <en>An empty map is a valid default; rejecting null keeps "not initialized" from being misrepresented as "all packages default".</en>
+            // </lang>
+            if (modesByPackageId == null)
+            {
+                throw new ArgumentNullException("modesByPackageId");
+            }
+
+            // <lang>
+            //   <zh-CN>复制为 Ordinal 比较的新字典，使快照不共享可变来源且键匹配口径固定。</zh-CN>
+            //   <en>Copy into a new Ordinal-comparer dictionary so the snapshot shares no mutable source and key matching stays fixed.</en>
+            // </lang>
+            _modesByPackageId = new Dictionary<string, string>(modesByPackageId, StringComparer.Ordinal);
+        }

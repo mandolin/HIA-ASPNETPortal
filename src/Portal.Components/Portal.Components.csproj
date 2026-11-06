@@ -219,6 +219,7 @@
     <Compile Include="IRoleItem.cs" />
     <Compile Include="ITabItem.cs" />
     <Compile Include="IUserItem.cs" />
+    <Compile Include="PortalModuleAssemblyState.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

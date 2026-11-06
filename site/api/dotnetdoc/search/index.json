@@ -11649,6 +11649,15 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.diagnosticsallowadmindetailview diagnosticsallowadmindetailview dotnet-field setting key controlling whether administrators may view sanitized diagnostic details. public const string aspnet.starterkit.portal.portalsettingkeys.diagnosticsallowadmindetailview dotnet:f:aspnet.starterkit.portal.portalsettingkeys.diagnosticsallowadmindetailview portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 管理员是否可查看已净化诊断详情的设置键。 setting key controlling whether administrators may view sanitized diagnostic details."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.moduleassemblyallowcodefile",
+      "name": "ModuleAssemblyAllowCodeFile",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.modulea-187d5919.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.modulea-187d5919.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.moduleassemblyallowcodefile moduleassemblyallowcodefile dotnet-field deployment-level switch key controlling whether the assembly-state ledger may contain the controlled debug mode (codefile); disabled by default, with neither online editing nor database override permitted. public const string aspnet.starterkit.portal.portalsettingkeys.moduleassemblyallowcodefile dotnet:f:aspnet.starterkit.portal.portalsettingkeys.moduleassemblyallowcodefile portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 是否允许装配态台账中出现受控调试态（codefile）的部署级开关键；缺省关闭，且不允许在线编辑或数据库覆盖。 deployment-level switch key controlling whether the assembly-state ledger may contain the controlled debug mode (codefile); disabled by default, with neither online editing nor database override permitted. 本键只表达\"环境是否允许\"，不表达任何模块当前处于何种装配态；装配态的唯一事实源是 config/module-assembly-state.json 台账。 this key expresses only \"whether the environment allows it\", never the current mode of any module; the ledger at config/module-assembly-state.json is the single source of truth for assembly mode."
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.maxuploadbytes",
       "name": "MaxUploadBytes",
       "kind": "dotnet-field",
@@ -12106,6 +12115,15 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.di-2cda825b.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.di-2cda825b.html",
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.diagnosticsallowadmindetailview diagnosticsallowadmindetailview dotnet-field deployment-level read-only setting definition for administrator access to sanitized diagnostic details. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.diagnosticsallowadmindetailview dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.diagnosticsallowadmindetailview portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 管理员查看已净化诊断详情权限的部署级只读设置定义。 deployment-level read-only setting definition for administrator access to sanitized diagnostic details."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.moduleassemblyallowcodefile",
+      "name": "ModuleAssemblyAllowCodeFile",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.mo-7cc7667d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.mo-7cc7667d.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.moduleassemblyallowcodefile moduleassemblyallowcodefile dotnet-field deployment-level read-only setting definition controlling whether the assembly-state ledger may contain the controlled debug mode; disabled by default. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.moduleassemblyallowcodefile dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.moduleassemblyallowcodefile portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 控制是否允许装配态台账出现受控调试态的部署级只读设置定义，默认关闭。 deployment-level read-only setting definition controlling whether the assembly-state ledger may contain the controlled debug mode; disabled by default. requiresrestart 为 true 且 caneditonline 为 false：仅部署侧 appsettings 可提供该值，数据库覆盖层与请求值都不是合法来源；本定义不实施页面授权。 requiresrestart is true and caneditonline is false: only deployment-side appsettings may supply the value; neither the database override layer nor request values are legitimate sources. this definition implements no page authorization."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.hiaportalinstanceid",
@@ -39682,6 +39700,132 @@
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuseritem.name-a6003897.html",
       "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.iuseritem.name-a6003897.html",
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.iuseritem.name name dotnet-property user display name or legacy name field; not used as a unique identity or authorization source. string aspnet.starterkit.portal.iuseritem.name { get; set; } dotnet:p:aspnet.starterkit.portal.iuseritem.name portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iuseritem t:aspnet.starterkit.portal.iuseritem dotnet hia-document api/portal.components.hia.json src/portal.components/iuseritem.cs csharp 用户显示名或旧名称字段；不作为唯一身份或授权依据。 user display name or legacy name field; not used as a unique identity or authorization source."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes",
+      "name": "PortalModuleAssemblyModes",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes-a50ffefb.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes-a50ffefb.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes portalmoduleassemblymodes dotnet-type closed two-value vocabulary for module assembly modes: the production precompiled mode and the controlled debug mode. class aspnet.starterkit.portal.portalmoduleassemblymodes dotnet:t:aspnet.starterkit.portal.portalmoduleassemblymodes portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 模块装配态的封闭两值：生产预编译态与受控调试态。 closed two-value vocabulary for module assembly modes: the production precompiled mode and the controlled debug mode. 取值一经写入台账、迁移记录与文档即成为稳定契约，不得重命名；本类只定义词表，不判断当前环境是否允许调试态，也不执行装配动作。 these values become a stable contract once written into the ledger, migration records, and documentation, and must not be renamed; this class defines the vocabulary only, judges no environment permission, and performs no assembly action."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes.codebehind",
+      "name": "CodeBehind",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes-657a935c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes-657a935c.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes.codebehind codebehind dotnet-field production default: web application precompiled assembly. public const string aspnet.starterkit.portal.portalmoduleassemblymodes.codebehind dotnet:f:aspnet.starterkit.portal.portalmoduleassemblymodes.codebehind portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblymodes t:aspnet.starterkit.portal.portalmoduleassemblymodes dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 生产默认态：web application 预编译装配。 production default: web application precompiled assembly."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes.codefile",
+      "name": "CodeFile",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes-3efc4976.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes-3efc4976.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes.codefile codefile dotnet-field controlled debug mode: runtime-compiled assembly; this cycle never enters it. public const string aspnet.starterkit.portal.portalmoduleassemblymodes.codefile dotnet:f:aspnet.starterkit.portal.portalmoduleassemblymodes.codefile portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblymodes t:aspnet.starterkit.portal.portalmoduleassemblymodes dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 受控调试态：运行时编译装配；本周期不进入该态。 controlled debug mode: runtime-compiled assembly; this cycle never enters it."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblymodes.isregistered-system.string",
+      "name": "IsRegistered",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblymodes-6c5400d5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblymodes-6c5400d5.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblymodes.isregistered-system.string isregistered dotnet-method determines whether text is a registered assembly mode using exact case-sensitive comparison; synonyms and third values are rejected. public static bool aspnet.starterkit.portal.portalmoduleassemblymodes.isregistered(string mode) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblymodes.isregistered-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblymodes t:aspnet.starterkit.portal.portalmoduleassemblymodes dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 判断文本是否为已登记的装配态值，采用精确大小写比较，不接受同义词或第三值。 determines whether text is a registered assembly mode using exact case-sensitive comparison; synonyms and third values are rejected. 待判定的装配态文本，可为 null。 assembly-mode text to check; may be null. 仅当等于两个已登记值之一时为 true。 true only when equal to one of the two registered values."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate",
+      "name": "PortalModuleAssemblyState",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate-2edbb57e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate-2edbb57e.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate portalmoduleassemblystate dotnet-type read-only snapshot of the deployment-side module-assembly state ledger, holding explicitly registered modes keyed by stable package identifier. class aspnet.starterkit.portal.portalmoduleassemblystate dotnet:t:aspnet.starterkit.portal.portalmoduleassemblystate portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 独立部署侧装配态台账的只读快照：按稳定包标识保存已显式登记的装配态。 read-only snapshot of the deployment-side module-assembly state ledger, holding explicitly registered modes keyed by stable package identifier. 台账是装配态的唯一事实源，与包启用状态、能力归属、profile gate 严格分离；无条目的包按受控缺省视为 codebehind。本类型不读取文件、数据库或 http 请求，也不写回任何来源。 the ledger is the single source of truth for assembly mode and stays strictly separate from package enablement, capability ownership, and the profile gate; a package without an entry uses the controlled codebehind default. this type reads no file, database, or http request and writes back to no source."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblystate._modesbypackageid",
+      "name": "_modesByPackageId",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblystate-29a58599.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblystate-29a58599.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblystate._modesbypackageid _modesbypackageid dotnet-field internal map from stable package identifier to registered mode; empty means all-default. private readonly system.collections.generic.idictionary<string, string> aspnet.starterkit.portal.portalmoduleassemblystate._modesbypackageid dotnet:f:aspnet.starterkit.portal.portalmoduleassemblystate._modesbypackageid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 稳定包标识到已登记装配态的内部映射；空集合表示全缺省态。 internal map from stable package identifier to registered mode; empty means all-default."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.-ctor-system.collections.generic.idictionary-system.string-system.string",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-70baa547.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-70baa547.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.-ctor-system.collections.generic.idictionary-system.string-system.string #ctor dotnet-method constructs the snapshot from a validated map; callers must ensure keys and values passed validation. internal aspnet.starterkit.portal.portalmoduleassemblystate.portalmoduleassemblystate(system.collections.generic.idictionary<string, string> modesbypackageid) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblystate.-ctor-system.collections.generic.idictionary-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 以已校验的映射构造快照；调用方负责保证键与值均通过校验。 constructs the snapshot from a validated map; callers must ensure keys and values passed validation. 已校验映射，不能为 null。 validated map; cannot be null. 映射为 null 时引发。 thrown when the map is null."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate.entrycount",
+      "name": "EntryCount",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate-aa4aeb07.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate-aa4aeb07.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate.entrycount entrycount dotnet-property number of explicit entries, used by diagnostics and gates to detect an all-default ledger. public int aspnet.starterkit.portal.portalmoduleassemblystate.entrycount { get; } dotnet:p:aspnet.starterkit.portal.portalmoduleassemblystate.entrycount portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 显式登记条目数，供诊断与门禁判断是否全缺省。 number of explicit entries, used by diagnostics and gates to detect an all-default ledger."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.hascodefileentries",
+      "name": "HasCodeFileEntries",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-9ec68ce2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-9ec68ce2.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.hascodefileentries hascodefileentries dotnet-method determines whether the ledger contains any explicitly registered controlled-debug-mode entry, serving as input to the deployment-level switch and the pre-release review point. public bool aspnet.starterkit.portal.portalmoduleassemblystate.hascodefileentries() dotnet:m:aspnet.starterkit.portal.portalmoduleassemblystate.hascodefileentries portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 判断台账中是否存在显式登记的受控调试态条目，供部署级开关与封版前复核点作为判定输入。 determines whether the ledger contains any explicitly registered controlled-debug-mode entry, serving as input to the deployment-level switch and the pre-release review point. 这是\"环境开关该不该拦\"的纯函数判据，不读取配置、不读取请求、不修改任何状态；实际接线由部署侧与封版前复核门禁完成，本方法不实施页面授权。 this is the pure predicate behind \"whether the environment switch should block\"; it reads no config or request and mutates no state. actual wiring belongs to deployment and the pre-release review gate; this method implements no page authorization. 至少一个条目的装配态为 codefile 时为 true；全缺省或仅 codebehind 时为 false。 true when at least one entry is codefile; false for an all-default or codebehind-only ledger."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.isallowedbyenvironment-system.boolean",
+      "name": "IsAllowedByEnvironment",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-2c850eef.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-2c850eef.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.isallowedbyenvironment-system.boolean isallowedbyenvironment dotnet-method decides whether the ledger is acceptable under the deployment-level switch: when the switch is off, any debug-mode entry makes the ledger unacceptable (fail-closed). public bool aspnet.starterkit.portal.portalmoduleassemblystate.isallowedbyenvironment(bool allowcodefile) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblystate.isallowedbyenvironment-system.boolean portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 按部署级开关判定当前台账是否允许被接受：开关关闭时，任何调试态条目都使台账不合格（fail-closed）。 decides whether the ledger is acceptable under the deployment-level switch: when the switch is off, any debug-mode entry makes the ledger unacceptable (fail-closed). 部署级开关的已解析布尔值，应由部署侧配置提供，不得来自数据库覆盖或请求值。 parsed deployment-level switch value, supplied by deployment config and never from a database override or request value. 台账在此环境下可接受时为 true。 true when the ledger is acceptable in this environment."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate.empty",
+      "name": "Empty",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate-69a72525.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate-69a72525.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleassemblystate.empty empty dotnet-property returns an all-default snapshot with no explicit entries as a controlled baseline for tools and diagnostics; each call returns an independent instance. public static aspnet.starterkit.portal.portalmoduleassemblystate aspnet.starterkit.portal.portalmoduleassemblystate.empty { get; } dotnet:p:aspnet.starterkit.portal.portalmoduleassemblystate.empty portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 返回一个没有任何显式条目的全缺省快照，供工具与诊断作为受控基线；每次调用返回独立实例。 returns an all-default snapshot with no explicit entries as a controlled baseline for tools and diagnostics; each call returns an independent instance. 不暴露构造器，避免调用方构造未通过封闭词表校验的映射；本工厂是取得空快照的唯一公开途径。 the constructor stays internal so callers cannot build a map that bypassed closed-vocabulary validation; this factory is the only public way to obtain an empty snapshot."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.getmode-system.string",
+      "name": "GetMode",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-beb39113.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-beb39113.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.getmode-system.string getmode dotnet-method returns the mode for a package; a missing entry yields the controlled codebehind default, and no unregistered value is ever returned. public string aspnet.starterkit.portal.portalmoduleassemblystate.getmode(string packageid) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblystate.getmode-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 返回指定包的装配态；台账无条目时返回受控缺省 codebehind，绝不返回未登记值。 returns the mode for a package; a missing entry yields the controlled codebehind default, and no unregistered value is ever returned. 稳定包标识；空白或非精确匹配按未登记处理。 stable package identifier; blank or non-exact matches are unregistered. 已登记装配态或 codebehind 缺省。 a registered mode or the codebehind default."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.tryparse-system.string-aspnet.starterkit.portal.portalmoduleassemblystate-system.string",
+      "name": "TryParse",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-f94065df.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-f94065df.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.tryparse-system.string-aspnet.starterkit.portal.portalmoduleassemblystate-system.string tryparse dotnet-method parses a read-only snapshot from ledger json text; any invalid structure or value fails the whole parse (fail-closed) with no partial result. public static bool aspnet.starterkit.portal.portalmoduleassemblystate.tryparse(string json, out aspnet.starterkit.portal.portalmoduleassemblystate state, out string reason) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblystate.tryparse-system.string-aspnet.starterkit.portal.portalmoduleassemblystate-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 从台账 json 文本解析只读快照；任何结构或取值不合法都整体失败（fail-closed），不返回部分结果。 parses a read-only snapshot from ledger json text; any invalid structure or value fails the whole parse (fail-closed) with no partial result. 只接受本台账自身的 schemaversion 1 与 entries 对象；不读取 module.json、不查询 portalmodulecatalog、不访问包启用状态、能力词表或 profile 配置，从结构上保证四分离。 accepts only this ledger's own schemaversion 1 and entries object; it never reads module.json, queries portalmodulecatalog, or touches package enablement, the capability registry, or profile configuration, structurally guaranteeing the four-way separation. 台账 utf-8 文本；空白或 null 视为无效。 ledger utf-8 text; blank or null is invalid. 成功时的快照；失败时为 null。 snapshot on success; null on failure. 稳定的失败短语，不含文件内容或路径。 stable failure phrase containing no file content or path. 解析且全部校验通过时为 true。 true when parsing and every validation pass."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.isallowedentryfield-system.string",
+      "name": "IsAllowedEntryField",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-252de6b0.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-252de6b0.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.isallowedentryfield-system.string isallowedentryfield dotnet-method determines whether a field name belongs to the entry whitelist (mode plus four traceability fields). private static bool aspnet.starterkit.portal.portalmoduleassemblystate.isallowedentryfield(string fieldkey) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblystate.isallowedentryfield-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 判断字段名是否属于条目白名单（装配态 + 四个追溯字段）。 determines whether a field name belongs to the entry whitelist (mode plus four traceability fields). 待判定的字段名。 field name to check. 属于白名单时为 true。 true when whitelisted."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionitem",

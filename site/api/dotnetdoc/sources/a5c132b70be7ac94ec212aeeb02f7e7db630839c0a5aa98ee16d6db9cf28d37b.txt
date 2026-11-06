@@ -1,0 +1,9 @@
+        public static bool IsRegistered(string mode)
+        {
+            // <lang>
+            //   <zh-CN>两个常量即封闭集合全部成员；不做 Trim 与大小写折叠，避免相似输入被误当作已登记值。</zh-CN>
+            //   <en>The two constants are the complete closed set; no trimming or case folding keeps merely similar input from being mistaken for a registered value.</en>
+            // </lang>
+            return string.Equals(mode, CodeBehind, StringComparison.Ordinal) ||
+                   string.Equals(mode, CodeFile, StringComparison.Ordinal);
+        }

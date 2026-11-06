@@ -1,0 +1,1 @@
+        public const string ModuleAssemblyAllowCodeFile = "Portal.ModuleAssembly.AllowCodeFile";

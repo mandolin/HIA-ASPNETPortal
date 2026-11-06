@@ -390,6 +390,38 @@ namespace ASPNET.StarterKit.Portal
                 "Diagnostics");
 
         // <lang>
+        //   <zh-CN>装配态调试开关：属于部署级策略而非运行期状态。默认关闭、不可在线编辑、标记为敏感以双重阻断数据库覆盖，
+        //   使"环境是否允许 CodeFile"只能由部署侧配置决定；它不读取台账、不改变任何模块的装配态。</zh-CN>
+        //   <en>Assembly-mode debug switch: deployment-level policy, not runtime state. Disabled by default, non-online-editable,
+        //   and marked sensitive to doubly block database overrides, so "whether the environment allows CodeFile" is decided only
+        //   by deployment configuration; it reads no ledger and changes no module's assembly mode.</en>
+        // </lang>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>控制是否允许装配态台账出现受控调试态的部署级只读设置定义，默认关闭。</zh-CN>
+        ///   <en>Deployment-level read-only setting definition controlling whether the assembly-state ledger may contain the controlled debug mode; disabled by default.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>requiresRestart 为 true 且 canEditOnline 为 false：仅部署侧 appSettings 可提供该值，数据库覆盖层与请求值都不是合法来源；本定义不实施页面授权。</zh-CN>
+        ///   <en>requiresRestart is true and canEditOnline is false: only deployment-side appSettings may supply the value; neither the database override layer nor request values are legitimate sources. This definition implements no page authorization.</en>
+        /// </lang>
+        /// </remarks>
+        public static readonly PortalSettingDefinition ModuleAssemblyAllowCodeFile =
+            new PortalSettingDefinition(
+                PortalSettingKeys.ModuleAssemblyAllowCodeFile,
+                "允许装配调试态",
+                "控制本环境是否允许装配态台账中出现 CodeFile 受控调试态；默认关闭，须由部署侧显式开启。",
+                PortalSettingValueType.Boolean,
+                "false",
+                false,
+                true,
+                "Admins",
+                "ModuleAssembly",
+                true);
+
+        // <lang>
         //   <zh-CN>HIA 外围实例标识策略：留空保持适配器不启用；此定义不是对外连接、密钥、端点或发布动作。</zh-CN>
         //   <en>HIA peripheral instance-identifier policy: blank keeps adapters disabled; this definition is not an external connection, secret, endpoint, or release action.</en>
         // </lang>
@@ -587,6 +619,7 @@ namespace ASPNET.StarterKit.Portal
                 DiagnosticsMaxFileBytes,
                 DiagnosticsRetentionDays,
                 DiagnosticsAllowAdminDetailView,
+                ModuleAssemblyAllowCodeFile,
                 HiaPortalInstanceId,
                 CookiesSecure,
                 CookiesSameSite,

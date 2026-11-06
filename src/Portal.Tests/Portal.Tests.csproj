@@ -75,6 +75,7 @@
     <Compile Include="PortalDisplayNameResolverTests.cs" />
     <Compile Include="PortalAdministrationPolicyTests.cs" />
     <Compile Include="PortalWorkItemTargetResolverTests.cs" />
+    <Compile Include="PortalModuleAssemblyStateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1736,6 +1736,34 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-80fce964.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblymodes",
+      "kind": "type",
+      "label": "PortalModuleAssemblyModes",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes",
+      "sourcePath": "src/Portal.Components/PortalModuleAssemblyState.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleassemblymodes",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes-a50ffefb.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-01afa909.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblystate",
+      "kind": "type",
+      "label": "PortalModuleAssemblyState",
+      "entryCount": 10,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate",
+      "sourcePath": "src/Portal.Components/PortalModuleAssemblyState.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleassemblystate",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate-2edbb57e.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4b991828.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentry",
       "kind": "type",
       "label": "PortalNavigationEntry",

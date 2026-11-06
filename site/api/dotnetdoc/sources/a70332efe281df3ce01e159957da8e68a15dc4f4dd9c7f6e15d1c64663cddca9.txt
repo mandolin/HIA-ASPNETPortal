@@ -1,0 +1,17 @@
+        public bool IsAllowedByEnvironment(bool allowCodeFile)
+        {
+            // <lang>
+            //   <zh-CN>开关显式开启时允许调试态条目；开启动作仍属部署侧受控流程，本方法不执行任何切换。</zh-CN>
+            //   <en>An explicitly enabled switch permits debug-mode entries; enabling remains a controlled deployment action and this method performs no switch.</en>
+            // </lang>
+            if (allowCodeFile)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>开关关闭时只要出现调试态条目就拒绝整份台账，不返回"部分可接受"。</zh-CN>
+            //   <en>With the switch off, any debug-mode entry rejects the whole ledger; no "partially acceptable" result exists.</en>
+            // </lang>
+            return !HasCodeFileEntries();
+        }
