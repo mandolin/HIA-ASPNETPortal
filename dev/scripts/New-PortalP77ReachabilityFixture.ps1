@@ -167,7 +167,15 @@ WHERE r.RoleName = N'All Users'
   AND p.IsEnabled = 1
   AND (p.PermissionKey = N'Business.WorkItems.View' OR p.PermissionKey = N'Business.WorkItems.Admin');
 '@
-        $allUsersHasPermission = [int](Invoke-PortalQuery $permissionQuery)[0] -gt 0
+        $rawResult = Invoke-PortalQuery $permissionQuery
+        # <lang>
+        #   <zh-CN>权限计数是以字符/字符串形式返回的；对字符 '0' 直接做 [int] 转换会取其 Unicode 码位 48 而非数字 0，
+        #   导致 count=0 被误判为 True。必须用 [int]::Parse([string] ...) 显式按十进制数字解析，才能正确区分 0 与 >0。</zh-CN>
+        #   <en>The permission count comes back as a char/string; casting a char '0' directly with [int] yields its Unicode code
+        #   point 48 instead of the digit 0, so a count of 0 would be misjudged as True. Parse it explicitly with [int]::Parse([string] ...)
+        #   to distinguish 0 from >0 correctly.</en>
+        # </lang>
+        $allUsersHasPermission = [int]::Parse([string]$rawResult[0]) -gt 0
         $factsDir = Split-Path -Parent $factsPath
         if (-not (Test-Path -LiteralPath $factsDir)) { New-Item -ItemType Directory -Force -Path $factsDir | Out-Null }
         $facts = [pscustomobject]@{
