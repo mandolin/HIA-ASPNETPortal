@@ -4,6 +4,20 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception",
+      "kind": "type",
+      "label": "AuditSummaryTooLongException",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception",
+      "sourcePath": "src/Portal.Components/AuditSummaryTooLongException.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.auditsummarytoolongexception",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexcept-35228b2f.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5a5a5ca9.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationinfo",
       "kind": "type",
       "label": "BusinessApplicationInfo",
@@ -1736,6 +1750,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-80fce964.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
+      "kind": "type",
+      "label": "PortalModuleAssemblyAuditFormatter",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
+      "sourcePath": "src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit-2422d926.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-55994fc8.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblymodes",
       "kind": "type",
       "label": "PortalModuleAssemblyModes",
@@ -1963,7 +1991,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys",
       "kind": "type",
       "label": "PortalPermissionKeys",
-      "entryCount": 54,
+      "entryCount": 56,
       "views": [
         "dotnet"
       ],

@@ -533,6 +533,32 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-11724c9e.html"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "kind": "entry",
+      "label": "ModuleAssemblyStateEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-737eed3f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
+      "kind": "entry",
+      "label": "ModuleAssemblyStateView",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-9c4820c6.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogedit",
       "kind": "entry",
       "label": "ModuleCatalogEdit",

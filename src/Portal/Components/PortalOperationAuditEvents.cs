@@ -394,6 +394,38 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>模块装配分类：覆盖装配态离线校验、回滚演练等装配机制事件；与业务模块动作（<see cref="BusinessModuleCategory"/>）区分。</zh-CN>
+        ///   <en>Module-assembly category covering assembly-state offline checks, rollback drills, and other assembly-mechanism events; distinct from business-module actions (see BusinessModuleCategory).</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleAssemblyCategory = "ModuleAssembly";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>装配态离线校验动作；记录校验结论与六要素，不表示任何装配态被切换（工具按 F 裁定只校验不切换）。</zh-CN>
+        ///   <en>Offline assembly-state check action; records the check conclusion and the six elements, never that any assembly mode was switched (the tool checks only, per ruling F).</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleAssemblyStateCheck = "AssemblyStateCheck";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>装配态回滚演练动作；记录快照可还原为零残留的演练结论，不表示真实回滚发生（演练非真实动作）。</zh-CN>
+        ///   <en>Assembly-state rollback-drill action; records the drill conclusion that a snapshot restores to zero residue, never that a real rollback occurred (a drill is not a real action).</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleAssemblyRollbackDrill = "AssemblyStateRollbackDrill";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：模块装配态声明（台账中的一条条目，TargetId 用 packageId@version）。</zh-CN>
+        ///   <en>Audit target type for a module-assembly-state declaration (one ledger entry; TargetId uses packageId@version).</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleAssemblyStateTargetType = "ModuleAssemblyState";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>企业协同事项已新增纯文本评论。</zh-CN>
         ///   <en>A plain-text comment was added to an enterprise collaboration item.</en>
         /// </lang>

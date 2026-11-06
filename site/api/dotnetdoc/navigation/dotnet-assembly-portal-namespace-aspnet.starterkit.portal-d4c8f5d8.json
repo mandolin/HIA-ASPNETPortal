@@ -1280,6 +1280,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-9a4165fe.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "kind": "type",
+      "label": "PortalModuleAssemblyAudit",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "sourcePath": "src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit-4e84a440.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-fd328996.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulecatalog",
       "kind": "type",
       "label": "PortalModuleCatalog",
@@ -1555,7 +1569,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditevents",
       "kind": "type",
       "label": "PortalOperationAuditEvents",
-      "entryCount": 52,
+      "entryCount": 56,
       "views": [
         "dotnet"
       ],

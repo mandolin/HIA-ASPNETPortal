@@ -1,0 +1,1 @@
+        public int MaxLength { get; private set; }

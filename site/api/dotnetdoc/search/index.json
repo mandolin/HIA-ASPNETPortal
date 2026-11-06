@@ -9120,6 +9120,33 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portaloperationaudit.getuseragent-system.web.httpcontext getuseragent dotnet-method gets the user-agent from an optional http request; returns the empty string when no request exists, and it is still sanitized and bounded before writing. private static string aspnet.starterkit.portal.portaloperationaudit.getuseragent(system.web.httpcontext context) dotnet:m:aspnet.starterkit.portal.portaloperationaudit.getuseragent-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portaloperationaudit t:aspnet.starterkit.portal.portaloperationaudit dotnet hia-document api/portal.hia.json src/portal/components/portaloperationaudit.cs csharp 从可选 http 请求取得 user-agent；请求不存在时返回空字符串，写入前仍会净化与截断。 gets the user-agent from an optional http request; returns the empty string when no request exists, and it is still sanitized and bounded before writing."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "name": "PortalModuleAssemblyAudit",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit-4e84a440.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit-4e84a440.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit portalmoduleassemblyaudit dotnet-type runtime write wrapper for module assembly-state audits (lives in the web project, depends on portaloperationaudit). summary should be the output of portalmoduleassemblyauditformatter (already guaranteed ≤500 and non-truncated). this class reads no ledger, changes no assembly mode, and triggers no compilation. class aspnet.starterkit.portal.portalmoduleassemblyaudit dotnet:t:aspnet.starterkit.portal.portalmoduleassemblyaudit portal aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.hia.json src/portal/components/portalmoduleassemblyaudit.cs csharp 模块装配态审计的运行时写入包装（承载于 web 项目，依赖 portaloperationaudit）。summary 应为 portalmoduleassemblyauditformatter 的产物（已确保 ≤500 且不截断）。本类不读取台账、不改变装配态、不触发编译。 runtime write wrapper for module assembly-state audits (lives in the web project, depends on portaloperationaudit). summary should be the output of portalmoduleassemblyauditformatter (already guaranteed ≤500 and non-truncated). this class reads no ledger, changes no assembly mode, and triggers no compilation. 写入经由 portaloperationaudit.record，本身为 best-effort（失败只记诊断、不冒泡）。审计只用于追溯，装配态的唯一事实源仍是台账（定稿 §二）。 与离线工具 invoke-portalmoduleassemblycheck.ps1 的关系：工具生成可审阅 sql 产物而不连库；本包装是「审批通过后由运行时记录」的同等能力入口。 writes go through portaloperationaudit.record, which is best-effort (failures only log diagnostics, never bubble). audit is only for traceability; the ledger remains the single source of truth for assembly mode (ruling §2). relationship with the offline tool invoke-portalmoduleassemblycheck.ps1: the tool generates a reviewable sql artifact without connecting to a database; this wrapper is the equivalent runtime entry point for \"record after approval\"."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "name": "RecordCheck",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-a58a69f0.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-a58a69f0.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext recordcheck dotnet-method records one offline assembly-state check (best-effort). summary should be the output of portalmoduleassemblyauditformatter. public static void aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck(string targetid, string summary, string actor, system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblyaudit t:aspnet.starterkit.portal.portalmoduleassemblyaudit dotnet hia-document api/portal.hia.json src/portal/components/portalmoduleassemblyaudit.cs csharp 记录一次装配态离线校验（best-effort）。summary 应为 portalmoduleassemblyauditformatter 的产物。 records one offline assembly-state check (best-effort). summary should be the output of portalmoduleassemblyauditformatter."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "name": "RecordRollbackDrill",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-a7253e23.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-a7253e23.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext recordrollbackdrill dotnet-method records one assembly-state rollback drill (best-effort). summary should be the output of portalmoduleassemblyauditformatter; the drill conclusion only proves the snapshot restores to zero residue, never that a real rollback occurred. public static void aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill(string targetid, string summary, string actor, system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblyaudit t:aspnet.starterkit.portal.portalmoduleassemblyaudit dotnet hia-document api/portal.hia.json src/portal/components/portalmoduleassemblyaudit.cs csharp 记录一次装配态回滚演练（best-effort）。summary 应为 portalmoduleassemblyauditformatter 的产物；演练结论只证明快照可还原为零残留，不表示真实回滚发生。 records one assembly-state rollback drill (best-effort). summary should be the output of portalmoduleassemblyauditformatter; the drill conclusion only proves the snapshot restores to zero residue, never that a real rollback occurred."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portaloperationauditevents",
       "name": "PortalOperationAuditEvents",
       "kind": "dotnet-type",
@@ -9559,6 +9586,42 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-807dbf86.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-807dbf86.html",
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemclosed collaborationitemclosed dotnet-field enterprise collaboration item was closed. public const string aspnet.starterkit.portal.portaloperationauditevents.collaborationitemclosed dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.collaborationitemclosed portal aspnet.starterkit.portal aspnet.starterkit.portal.portaloperationauditevents t:aspnet.starterkit.portal.portaloperationauditevents dotnet hia-document api/portal.hia.json src/portal/components/portaloperationauditevents.cs csharp 企业协同事项已关闭。 enterprise collaboration item was closed."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory",
+      "name": "ModuleAssemblyCategory",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-4fabbe58.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-4fabbe58.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory moduleassemblycategory dotnet-field module-assembly category covering assembly-state offline checks, rollback drills, and other assembly-mechanism events; distinct from business-module actions (see businessmodulecategory). public const string aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory portal aspnet.starterkit.portal aspnet.starterkit.portal.portaloperationauditevents t:aspnet.starterkit.portal.portaloperationauditevents dotnet hia-document api/portal.hia.json src/portal/components/portaloperationauditevents.cs csharp 模块装配分类：覆盖装配态离线校验、回滚演练等装配机制事件；与业务模块动作（）区分。 module-assembly category covering assembly-state offline checks, rollback drills, and other assembly-mechanism events; distinct from business-module actions (see businessmodulecategory)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck",
+      "name": "ModuleAssemblyStateCheck",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-64ecb9f7.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-64ecb9f7.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck moduleassemblystatecheck dotnet-field offline assembly-state check action; records the check conclusion and the six elements, never that any assembly mode was switched (the tool checks only, per ruling f). public const string aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck portal aspnet.starterkit.portal aspnet.starterkit.portal.portaloperationauditevents t:aspnet.starterkit.portal.portaloperationauditevents dotnet hia-document api/portal.hia.json src/portal/components/portaloperationauditevents.cs csharp 装配态离线校验动作；记录校验结论与六要素，不表示任何装配态被切换（工具按 f 裁定只校验不切换）。 offline assembly-state check action; records the check conclusion and the six elements, never that any assembly mode was switched (the tool checks only, per ruling f)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill",
+      "name": "ModuleAssemblyRollbackDrill",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-f4eacb1d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-f4eacb1d.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill moduleassemblyrollbackdrill dotnet-field assembly-state rollback-drill action; records the drill conclusion that a snapshot restores to zero residue, never that a real rollback occurred (a drill is not a real action). public const string aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill portal aspnet.starterkit.portal aspnet.starterkit.portal.portaloperationauditevents t:aspnet.starterkit.portal.portaloperationauditevents dotnet hia-document api/portal.hia.json src/portal/components/portaloperationauditevents.cs csharp 装配态回滚演练动作；记录快照可还原为零残留的演练结论，不表示真实回滚发生（演练非真实动作）。 assembly-state rollback-drill action; records the drill conclusion that a snapshot restores to zero residue, never that a real rollback occurred (a drill is not a real action)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype",
+      "name": "ModuleAssemblyStateTargetType",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-7a72bb30.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portaloperationauditevent-7a72bb30.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype moduleassemblystatetargettype dotnet-field audit target type for a module-assembly-state declaration (one ledger entry; targetid uses packageid@version). public const string aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype dotnet:f:aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype portal aspnet.starterkit.portal aspnet.starterkit.portal.portaloperationauditevents t:aspnet.starterkit.portal.portaloperationauditevents dotnet hia-document api/portal.hia.json src/portal/components/portaloperationauditevents.cs csharp 审计目标类型：模块装配态声明（台账中的一条条目，targetid 用 packageid@version）。 audit target type for a module-assembly-state declaration (one ledger entry; targetid uses packageid@version)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcommentadded",
@@ -34869,6 +34932,24 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit moduledefinitionedit dotnet-field edit module definitions. public const string aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 编辑模块定义。 edit module definitions."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
+      "name": "ModuleAssemblyStateView",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-9c4820c6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-9c4820c6.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview moduleassemblystateview dotnet-field view the module-assembly-state ledger and assembly-state audits. distinct from module-package management (module.catalog.*), module definitions (module.definition.edit), theme css (theme.edit), and content editing (content.*). public const string aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 查看模块装配态台账与装配态审计。与模块包管理（module.catalog.*）、模块定义（module.definition.edit）、主题 css（theme.edit）、内容编辑（content.*）互不混用。 view the module-assembly-state ledger and assembly-state audits. distinct from module-package management (module.catalog.*), module definitions (module.definition.edit), theme css (theme.edit), and content editing (content.*)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "name": "ModuleAssemblyStateEdit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-737eed3f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-737eed3f.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit moduleassemblystateedit dotnet-field edit module-assembly-state ledger declarations. distinct from module-package management, module definitions, theme css, and content editing. the offline tool never connects to a database or switches assembly mode this cycle, so this key lands only as a stable definition and is granted to no role yet. public const string aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 编辑模块装配态台账声明。与模块包管理、模块定义、主题 css、内容编辑互不混用。本周期离线工具不连库、不切换装配态，故本键仅作为稳定定义落地，暂未授予任何角色。 edit module-assembly-state ledger declarations. distinct from module-package management, module definitions, theme css, and content editing. the offline tool never connects to a database or switches assembly mode this cycle, so this key lands only as a stable definition and is granted to no role yet."
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
       "name": "PortalTabsEdit",
       "kind": "dotnet-field",
@@ -39826,6 +39907,78 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-252de6b0.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate-252de6b0.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblystate.isallowedentryfield-system.string isallowedentryfield dotnet-method determines whether a field name belongs to the entry whitelist (mode plus four traceability fields). private static bool aspnet.starterkit.portal.portalmoduleassemblystate.isallowedentryfield(string fieldkey) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblystate.isallowedentryfield-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblystate t:aspnet.starterkit.portal.portalmoduleassemblystate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblystate.cs csharp 判断字段名是否属于条目白名单（装配态 + 四个追溯字段）。 determines whether a field name belongs to the entry whitelist (mode plus four traceability fields). 待判定的字段名。 field name to check. 属于白名单时为 true。 true when whitelisted."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
+      "name": "PortalModuleAssemblyAuditFormatter",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit-2422d926.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit-2422d926.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter portalmoduleassemblyauditformatter dotnet-type structured compact formatter for the six-element module-assembly-state audit payload (pure function; no web context, no ledger read, no assembly-mode change). field order matches the offline tool invoke-portalmoduleassemblycheck.ps1 so the two artifacts corroborate each other. the carrier is the summary column of portalcfg_operationaudits. class aspnet.starterkit.portal.portalmoduleassemblyauditformatter dotnet:t:aspnet.starterkit.portal.portalmoduleassemblyauditformatter portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblyauditformatter.cs csharp 模块装配态审计载荷的六要素结构化紧凑格式器（纯函数，不依赖 web 上下文、不读取台账、不改变装配态）。 格式与离线工具 invoke-portalmoduleassemblycheck.ps1 使用同一字段顺序，确保两份产物可互相印证。目的载体是 portalcfg_operationaudits 的 summary 列。 structured compact formatter for the six-element module-assembly-state audit payload (pure function; no web context, no ledger read, no assembly-mode change). field order matches the offline tool invoke-portalmoduleassemblycheck.ps1 so the two artifacts corroborate each other. the carrier is the summary column of portalcfg_operationaudits. 超长时抛 auditsummarytoolongexception（fail-closed），绝不静默截断导致六要素缺失；调用方须据此走审计表扩展方案。本类只负责格式化，不负责写入——写入由 web 项目中的 portalmoduleassemblyaudit 包装调用 portaloperationaudit.record。 on overflow it throws auditsummarytoolongexception (fail-closed) rather than silently truncating and dropping elements; callers must take the audit-table extension path. this class only formats; writing is done by the portalmoduleassemblyaudit wrapper in the web project via portaloperationaudit.record."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength",
+      "name": "MaxSummaryLength",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyaudit-06b8100c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyaudit-06b8100c.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength maxsummarylength dotnet-field maximum character count of the summary column (matches portalcfg_operationaudits). public const int aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength dotnet:f:aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblyauditformatter t:aspnet.starterkit.portal.portalmoduleassemblyauditformatter dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblyauditformatter.cs csharp summary 列的最大字符数（与 portalcfg_operationaudits 列定义一致）。 maximum character count of the summary column (matches portalcfg_operationaudits)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "name": "FormatSixElementSummary",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-d6dfac87.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-d6dfac87.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string formatsixelementsummary dotnet-method structured compact format of the six elements: fixed key order, semicolon separated, no source paths, targetid as packageid@version; when exceeding maxsummarylength it throws auditsummarytoolongexception rather than silently truncating. field order matches the offline tool exactly. public static string aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary(string packageid, string version, string hashbefore, string hashafter, string actor, system.datetime startutc, system.datetime endutc, string verification, string direction) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblyauditformatter t:aspnet.starterkit.portal.portalmoduleassemblyauditformatter dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblyauditformatter.cs csharp 六要素结构化紧凑格式：固定键序、分号分隔、不写源文件路径、targetid 以 packageid@version 表达；超过 maxsummarylength 时抛出，绝不静默截断。字段顺序与离线工具完全一致。 auditsummarytoolongexception structured compact format of the six elements: fixed key order, semicolon separated, no source paths, targetid as packageid@version; when exceeding maxsummarylength it throws auditsummarytoolongexception rather than silently truncating. field order matches the offline tool exactly."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "name": "TryFormatSixElementSummary",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-e4e8ca53.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit-e4e8ca53.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string tryformatsixelementsummary dotnet-method attempts formatting; on overflow returns success=false (summary null) instead of throwing, for callers that will take the audit-table extension path. field order matches formatsixelementsummary. public static bool aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary(string packageid, string version, string hashbefore, string hashafter, string actor, system.datetime startutc, system.datetime endutc, string verification, string direction, out string summary) dotnet:m:aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleassemblyauditformatter t:aspnet.starterkit.portal.portalmoduleassemblyauditformatter dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleassemblyauditformatter.cs csharp 尝试格式化；超长时不抛异常而返回 success=false（summary 为 null），供需要走审计表扩展方案的调用方使用。字段顺序与 formatsixelementsummary 一致。 attempts formatting; on overflow returns success=false (summary null) instead of throwing, for callers that will take the audit-table extension path. field order matches formatsixelementsummary."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception",
+      "name": "AuditSummaryTooLongException",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexcept-35228b2f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexcept-35228b2f.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception auditsummarytoolongexception dotnet-type thrown when an assembly-state audit summary exceeds the maximum length; it blocks silent truncation that would drop six-element data and forces the caller to take the audit-table extension path (a separate detail table) instead of dropping any element. class aspnet.starterkit.portal.auditsummarytoolongexception dotnet:t:aspnet.starterkit.portal.auditsummarytoolongexception portal.components aspnet.starterkit.portal t:system.exception t:system.object t:system.runtime.serialization.iserializable t:system.runtime.interopservices._exception dotnet hia-document api/portal.components.hia.json src/portal.components/auditsummarytoolongexception.cs csharp 装配态审计摘要超过最大长度时抛出；用于阻断「静默截断导致六要素缺失」，迫使调用方改用审计表扩展方案（独立明细表）而非丢弃任何要素。 thrown when an assembly-state audit summary exceeds the maximum length; it blocks silent truncation that would drop six-element data and forces the caller to take the audit-table extension path (a separate detail table) instead of dropping any element. 定稿 §三.2 要求六要素不得静默截断：当结构化紧凑格式超过 summary 的 500 字符上限时，抛此异常比依赖数据库截断更诚实——调用方据此知道必须走扩展表，而不是收到一条缺要素的记录。 ruling §3.2 forbids silently truncating the six elements: when the compact format exceeds the summary 500-character limit, throwing is more honest than relying on database truncation, because it tells the caller to take the extension-table path rather than accept a record missing elements."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "name": "ActualLength",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexcept-97d6086d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexcept-97d6086d.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength actuallength dotnet-property actual length. public int aspnet.starterkit.portal.auditsummarytoolongexception.actuallength { get; private set; } dotnet:p:aspnet.starterkit.portal.auditsummarytoolongexception.actuallength portal.components aspnet.starterkit.portal aspnet.starterkit.portal.auditsummarytoolongexception t:aspnet.starterkit.portal.auditsummarytoolongexception dotnet hia-document api/portal.components.hia.json src/portal.components/auditsummarytoolongexception.cs csharp 实际长度。 actual length."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
+      "name": "MaxLength",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexcept-97449edf.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexcept-97449edf.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength maxlength dotnet-property allowed maximum length. public int aspnet.starterkit.portal.auditsummarytoolongexception.maxlength { get; private set; } dotnet:p:aspnet.starterkit.portal.auditsummarytoolongexception.maxlength portal.components aspnet.starterkit.portal aspnet.starterkit.portal.auditsummarytoolongexception t:aspnet.starterkit.portal.auditsummarytoolongexception dotnet hia-document api/portal.components.hia.json src/portal.components/auditsummarytoolongexception.cs csharp 允许的最大长度。 allowed maximum length."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexcept-e05bf7bf.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexcept-e05bf7bf.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32 #ctor dotnet-method creates the exception carrying the actual and maximum lengths. public aspnet.starterkit.portal.auditsummarytoolongexception.auditsummarytoolongexception(int actuallength, int maxlength) dotnet:m:aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.auditsummarytoolongexception t:aspnet.starterkit.portal.auditsummarytoolongexception dotnet hia-document api/portal.components.hia.json src/portal.components/auditsummarytoolongexception.cs csharp 创建异常并携带实际与最大长度。 creates the exception carrying the actual and maximum lengths."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionitem",

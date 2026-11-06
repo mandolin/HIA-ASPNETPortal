@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 5973,
-  "relationCount": 5544,
+  "nodeCount": 5993,
+  "relationCount": 5561,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -3904,6 +3904,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength",
+      "kind": "entry",
+      "label": "MaxSummaryLength",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes.codebehind",
       "kind": "entry",
       "label": "CodeBehind",
@@ -4370,6 +4377,34 @@
       "kind": "entry",
       "label": "LegacyCredentialUpgraded",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.legacycredentialupgraded",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory",
+      "kind": "entry",
+      "label": "ModuleAssemblyCategory",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill",
+      "kind": "entry",
+      "label": "ModuleAssemblyRollbackDrill",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck",
+      "kind": "entry",
+      "label": "ModuleAssemblyStateCheck",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype",
+      "kind": "entry",
+      "label": "ModuleAssemblyStateTargetType",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype",
       "view": "dotnet"
     },
     {
@@ -4937,6 +4972,20 @@
       "kind": "entry",
       "label": "EnterpriseCapabilityView",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "kind": "entry",
+      "label": "ModuleAssemblyStateEdit",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
+      "kind": "entry",
+      "label": "ModuleAssemblyStateView",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
       "view": "dotnet"
     },
     {
@@ -7198,6 +7247,13 @@
       "kind": "entry",
       "label": "UpdateAnnouncement",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.updateannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
       "view": "dotnet"
     },
     {
@@ -13998,6 +14054,34 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordCheck",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordRollbackDrill",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "kind": "entry",
+      "label": "FormatSixElementSummary",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryFormatSixElementSummary",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblymodes.isregistered-system.string",
       "kind": "entry",
       "label": "IsRegistered",
@@ -17348,6 +17432,20 @@
       "kind": "entry",
       "label": "AnnouncementsDB",
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.announcements.announcementsdb",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "kind": "entry",
+      "label": "ActualLength",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
+      "kind": "entry",
+      "label": "MaxLength",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
       "view": "dotnet"
     },
     {
@@ -33857,6 +33955,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception",
+      "kind": "entry",
+      "label": "AuditSummaryTooLongException",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationadminrow",
       "kind": "entry",
       "label": "BusinessApplicationAdminRow",
@@ -35667,6 +35772,20 @@
       "kind": "entry",
       "label": "PortalMasterPage",
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmasterpage",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "kind": "entry",
+      "label": "PortalModuleAssemblyAudit",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
+      "kind": "entry",
+      "label": "PortalModuleAssemblyAuditFormatter",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
       "view": "dotnet"
     },
     {
@@ -39173,6 +39292,12 @@
       "path": "src/Portal.Components.Data1/UsersDb.cs"
     },
     {
+      "id": "source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/AuditSummaryTooLongException.cs",
+      "path": "src/Portal.Components/AuditSummaryTooLongException.cs"
+    },
+    {
       "id": "source:src/Portal.Components/BusinessApplicationInfo.cs",
       "kind": "source",
       "label": "src/Portal.Components/BusinessApplicationInfo.cs",
@@ -39735,6 +39860,12 @@
       "kind": "source",
       "label": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "path": "src/Portal.Components/PortalHiaBoundaryContracts.cs"
+    },
+    {
+      "id": "source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "path": "src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs"
     },
     {
       "id": "source:src/Portal.Components/PortalModuleAssemblyState.cs",
@@ -40593,6 +40724,12 @@
       "kind": "source",
       "label": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "path": "src/Portal/Components/PortalLoginPasswordCrypto.cs"
+    },
+    {
+      "id": "source:src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "kind": "source",
+      "label": "src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "path": "src/Portal/Components/PortalModuleAssemblyAudit.cs"
     },
     {
       "id": "source:src/Portal/Components/PortalModuleControl.cs",
@@ -48595,6 +48732,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength->source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength",
+      "to": "source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.maxsummarylength",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 23,
+        "rangeEndLine": 23
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes.codebehind->source:src/Portal.Components/PortalModuleAssemblyState.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblymodes.codebehind",
@@ -49214,8 +49364,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.collaborationitemcommentadded",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 401,
-        "rangeEndLine": 401
+        "rangeStartLine": 433,
+        "rangeEndLine": 433
       }
     },
     {
@@ -49463,6 +49613,58 @@
         "language": "csharp",
         "rangeStartLine": 177,
         "rangeEndLine": 177
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory->source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory",
+      "to": "source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "label": "Source: src/Portal/Components/PortalOperationAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblycategory",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 401,
+        "rangeEndLine": 401
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill->source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill",
+      "to": "source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "label": "Source: src/Portal/Components/PortalOperationAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblyrollbackdrill",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 417,
+        "rangeEndLine": 417
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck->source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck",
+      "to": "source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "label": "Source: src/Portal/Components/PortalOperationAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatecheck",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 409,
+        "rangeEndLine": 409
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype->source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype",
+      "to": "source:src/Portal/Components/PortalOperationAuditEvents.cs",
+      "label": "Source: src/Portal/Components/PortalOperationAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.moduleassemblystatetargettype",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 425,
+        "rangeEndLine": 425
       }
     },
     {
@@ -49760,8 +49962,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.workitemsviewed",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 409,
-        "rangeEndLine": 409
+        "rangeStartLine": 441,
+        "rangeEndLine": 441
       }
     },
     {
@@ -49773,8 +49975,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaloperationauditevents.workitemtargettype",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 417,
-        "rangeEndLine": 417
+        "rangeStartLine": 449,
+        "rangeEndLine": 449
       }
     },
     {
@@ -50267,8 +50469,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentrawhtmledit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 391,
-        "rangeEndLine": 391
+        "rangeStartLine": 407,
+        "rangeEndLine": 407
       }
     },
     {
@@ -50280,8 +50482,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentuploadmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 399,
-        "rangeEndLine": 399
+        "rangeStartLine": 415,
+        "rangeEndLine": 415
       }
     },
     {
@@ -50436,8 +50638,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 436,
-        "rangeEndLine": 436
+        "rangeStartLine": 452,
+        "rangeEndLine": 452
       }
     },
     {
@@ -50449,8 +50651,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 444,
-        "rangeEndLine": 444
+        "rangeStartLine": 460,
+        "rangeEndLine": 460
       }
     },
     {
@@ -50462,8 +50664,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 420,
-        "rangeEndLine": 420
+        "rangeStartLine": 436,
+        "rangeEndLine": 436
       }
     },
     {
@@ -50475,8 +50677,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 428,
-        "rangeEndLine": 428
+        "rangeStartLine": 444,
+        "rangeEndLine": 444
       }
     },
     {
@@ -50488,8 +50690,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 452,
-        "rangeEndLine": 452
+        "rangeStartLine": 468,
+        "rangeEndLine": 468
       }
     },
     {
@@ -50501,8 +50703,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 460,
-        "rangeEndLine": 460
+        "rangeStartLine": 476,
+        "rangeEndLine": 476
       }
     },
     {
@@ -50514,8 +50716,34 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 412,
-        "rangeEndLine": 412
+        "rangeStartLine": 428,
+        "rangeEndLine": 428
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 383,
+        "rangeEndLine": 383
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 375,
+        "rangeEndLine": 375
       }
     },
     {
@@ -50605,8 +50833,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portalmodulesedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 383,
-        "rangeEndLine": 383
+        "rangeStartLine": 399,
+        "rangeEndLine": 399
       }
     },
     {
@@ -50618,8 +50846,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 375,
-        "rangeEndLine": 375
+        "rangeStartLine": 391,
+        "rangeEndLine": 391
       }
     },
     {
@@ -54715,6 +54943,19 @@
         "language": "csharp",
         "rangeStartLine": 262,
         "rangeEndLine": 293
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32->source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "to": "source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "label": "Source: src/Portal.Components/AuditSummaryTooLongException.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 31,
+        "rangeEndLine": 38
       }
     },
     {
@@ -67341,6 +67582,58 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext->source:src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "label": "Source: src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordcheck-system.string-system.string-system.string-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 32,
+        "rangeEndLine": 41
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext->source:src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "label": "Source: src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyaudit.recordrollbackdrill-system.string-system.string-system.string-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 49,
+        "rangeEndLine": 58
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string->source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "to": "source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 33,
+        "rangeEndLine": 71
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string->source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "to": "source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblyauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 79,
+        "rangeEndLine": 111
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblymodes.isregistered-system.string->source:src/Portal.Components/PortalModuleAssemblyState.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleassemblymodes.isregistered-system.string",
@@ -69299,8 +69592,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 501,
-        "rangeEndLine": 506
+        "rangeStartLine": 517,
+        "rangeEndLine": 522
       }
     },
     {
@@ -69312,8 +69605,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 661,
-        "rangeEndLine": 664
+        "rangeStartLine": 679,
+        "rangeEndLine": 682
       }
     },
     {
@@ -69325,8 +69618,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 696,
-        "rangeEndLine": 712
+        "rangeStartLine": 714,
+        "rangeEndLine": 730
       }
     },
     {
@@ -69338,8 +69631,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 738,
-        "rangeEndLine": 751
+        "rangeStartLine": 756,
+        "rangeEndLine": 769
       }
     },
     {
@@ -73565,6 +73858,32 @@
         "language": "csharp",
         "rangeStartLine": 33,
         "rangeEndLine": 34
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength->source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "to": "source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "label": "Source: src/Portal.Components/AuditSummaryTooLongException.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 20,
+        "rangeEndLine": 20
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength->source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
+      "to": "source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "label": "Source: src/Portal.Components/AuditSummaryTooLongException.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 23,
+        "rangeEndLine": 23
       }
     },
     {
@@ -87031,8 +87350,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.category",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 522,
-        "rangeEndLine": 522
+        "rangeStartLine": 538,
+        "rangeEndLine": 538
       }
     },
     {
@@ -87044,8 +87363,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.description",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 530,
-        "rangeEndLine": 530
+        "rangeStartLine": 546,
+        "rangeEndLine": 546
       }
     },
     {
@@ -87057,8 +87376,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.key",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 514,
-        "rangeEndLine": 514
+        "rangeStartLine": 530,
+        "rangeEndLine": 530
       }
     },
     {
@@ -87070,8 +87389,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 632,
-        "rangeEndLine": 635
+        "rangeStartLine": 650,
+        "rangeEndLine": 653
       }
     },
     {
@@ -104114,7 +104433,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 250
+        "rangeEndLine": 252
       }
     },
     {
@@ -104153,7 +104472,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 93
+        "rangeEndLine": 95
       }
     },
     {
@@ -104219,6 +104538,19 @@
         "language": "csharp",
         "rangeStartLine": 20,
         "rangeEndLine": 296
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception->source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception",
+      "to": "source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "label": "Source: src/Portal.Components/AuditSummaryTooLongException.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.auditsummarytoolongexception",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 17,
+        "rangeEndLine": 39
       }
     },
     {
@@ -107589,6 +107921,32 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit->source:src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "to": "source:src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "label": "Source: src/Portal/Components/PortalModuleAssemblyAudit.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyaudit",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 24,
+        "rangeEndLine": 59
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter->source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
+      "to": "source:src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalModuleAssemblyAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblyauditformatter",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 20,
+        "rangeEndLine": 112
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes->source:src/Portal.Components/PortalModuleAssemblyState.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleassemblymodes",
@@ -108117,8 +108475,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissiondefinition",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 469,
-        "rangeEndLine": 531
+        "rangeStartLine": 485,
+        "rangeEndLine": 547
       }
     },
     {
@@ -108143,8 +108501,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissionregistry",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 545,
-        "rangeEndLine": 752
+        "rangeStartLine": 561,
+        "rangeEndLine": 770
       }
     },
     {

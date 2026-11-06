@@ -368,6 +368,22 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查看模块装配态台账与装配态审计。与模块包管理（Module.Catalog.*）、模块定义（Module.Definition.Edit）、主题 CSS（Theme.Edit）、内容编辑（Content.*）互不混用。</zh-CN>
+        ///   <en>View the module-assembly-state ledger and assembly-state audits. Distinct from module-package management (Module.Catalog.*), module definitions (Module.Definition.Edit), theme CSS (Theme.Edit), and content editing (Content.*).</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleAssemblyStateView = "Module.AssemblyState.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑模块装配态台账声明。与模块包管理、模块定义、主题 CSS、内容编辑互不混用。本周期离线工具不连库、不切换装配态，故本键仅作为稳定定义落地，暂未授予任何角色。</zh-CN>
+        ///   <en>Edit module-assembly-state ledger declarations. Distinct from module-package management, module definitions, theme CSS, and content editing. The offline tool never connects to a database or switches assembly mode this cycle, so this key lands only as a stable definition and is granted to no role yet.</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleAssemblyStateEdit = "Module.AssemblyState.Edit";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>编辑门户 Tab。</zh-CN>
         ///   <en>Edit Portal Tabs.</en>
         /// </lang>
@@ -592,6 +608,8 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogEdit, "Module", "启停模块包。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleDefinitionEdit, "Module", "编辑模块定义。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ModuleAssemblyStateView, "Module", "查看模块装配态台账与装配态审计（与模块包管理、主题、内容编辑互不混用）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ModuleAssemblyStateEdit, "Module", "编辑模块装配态台账声明（本周期离线工具不连库、不切换装配态，暂未授予角色）。"),
             new PortalPermissionDefinition(PortalPermissionKeys.PortalTabsEdit, "PortalStructure", "编辑门户 Tab。"),
             new PortalPermissionDefinition(PortalPermissionKeys.PortalModulesEdit, "PortalStructure", "编辑门户模块实例和布局。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ContentRawHtmlEdit, "Content", "编辑原始 HTML 内容。"),
