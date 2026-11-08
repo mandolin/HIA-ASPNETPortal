@@ -1,0 +1,9 @@
+        public AuditSummaryTooLongException(int actualLength, int maxLength, string context)
+            : base((string.IsNullOrWhiteSpace(context) ? "Audit" : context) +
+                   " audit summary length " + actualLength.ToString(System.Globalization.CultureInfo.InvariantCulture) +
+                   " exceeds maximum " + maxLength.ToString(System.Globalization.CultureInfo.InvariantCulture) +
+                   "; use the audit-table extension path instead of truncating.")
+        {
+            ActualLength = actualLength;
+            MaxLength = maxLength;
+        }

@@ -1,0 +1,22 @@
+        public static bool RecordInstallConfirmed(
+            string targetId,
+            string stagingName,
+            string packageHash,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>确认前后包内容未变，两个哈希位取同一值，明确「未替换暂存包」。</zh-CN>
+            //   <en>Package content is unchanged before and after confirmation, so both hash positions carry the same value, making "no staged package substitution" explicit.</en>
+            // </lang>
+            string summary = PortalOnlinePackageAuditFormatter.FormatSixElementSummary(
+                stagingName, packageHash, packageHash, actor, startUtc, endUtc, verification,
+                PortalOnlinePackageAuditEvents.InstallConfirmed);
+
+            return TryRecord(
+                PortalOnlinePackageAuditEvents.InstallConfirmed, targetId, summary,
+                PortalOnlinePackageAuditEvents.OutcomeSuccess, context);
+        }

@@ -1,0 +1,10 @@
+        public static bool IsRegisteredOutcome(string outcome)
+        {
+            // <lang>
+            //   <zh-CN>白名单来自表约束 CHECK，未知值会让 INSERT 失败；此处提前拒绝以避免把审计写入变成可用性故障。</zh-CN>
+            //   <en>The whitelist mirrors the table CHECK constraint; an unknown value would fail INSERT, so reject early rather than turning audit into an availability failure.</en>
+            // </lang>
+            return string.Equals(outcome, PortalOnlinePackageAuditEvents.OutcomeSuccess, StringComparison.Ordinal) ||
+                   string.Equals(outcome, PortalOnlinePackageAuditEvents.OutcomeFailure, StringComparison.Ordinal) ||
+                   string.Equals(outcome, PortalOnlinePackageAuditEvents.OutcomeSkipped, StringComparison.Ordinal);
+        }

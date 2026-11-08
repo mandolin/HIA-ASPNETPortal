@@ -1,8 +1,0 @@
-        public AuditSummaryTooLongException(int actualLength, int maxLength)
-            : base("Assembly-state audit summary length " + actualLength.ToString(System.Globalization.CultureInfo.InvariantCulture) +
-                   " exceeds maximum " + maxLength.ToString(System.Globalization.CultureInfo.InvariantCulture) +
-                   "; use the audit-table extension path instead of truncating.")
-        {
-            ActualLength = actualLength;
-            MaxLength = maxLength;
-        }

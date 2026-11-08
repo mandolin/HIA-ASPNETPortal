@@ -1,0 +1,4 @@
+        public AuditSummaryTooLongException(int actualLength, int maxLength)
+            : this(actualLength, maxLength, "Assembly-state")
+        {
+        }

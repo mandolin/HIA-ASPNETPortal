@@ -7,7 +7,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception",
       "kind": "type",
       "label": "AuditSummaryTooLongException",
-      "entryCount": 4,
+      "entryCount": 5,
       "views": [
         "dotnet"
       ],
@@ -1888,6 +1888,34 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationvisibilitypolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilit-6b282149.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7b521793.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditevents",
+      "kind": "type",
+      "label": "PortalOnlinePackageAuditEvents",
+      "entryCount": 10,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditevents",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalonlinepackageauditevents",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudite-7448fa0c.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8a1fe772.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter",
+      "kind": "type",
+      "label": "PortalOnlinePackageAuditFormatter",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditformatter",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalonlinepackageauditformatter",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditf-00853fcd.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-22dc2a0b.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",

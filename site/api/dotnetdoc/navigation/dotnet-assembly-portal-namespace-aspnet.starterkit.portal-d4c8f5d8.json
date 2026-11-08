@@ -1538,6 +1538,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-c5767a56.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageaudit",
+      "kind": "type",
+      "label": "PortalOnlinePackageAudit",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudit",
+      "sourcePath": "src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalonlinepackageaudit",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudit-3ea9f77d.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-bd12a7af.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationaudit",
       "kind": "type",
       "label": "PortalOperationAudit",

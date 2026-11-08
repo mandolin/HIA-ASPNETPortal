@@ -1,0 +1,68 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageaudit",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageaudit:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageaudit:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordFailureOrCleanup",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.-a9e97d10.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageaudit:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordInstallConfirmed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.-b504165f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageaudit:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordUploadValidated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.-3b26fd56.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageaudit:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "TryRecord",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.-4afda3bb.html"
+    }
+  ]
+}

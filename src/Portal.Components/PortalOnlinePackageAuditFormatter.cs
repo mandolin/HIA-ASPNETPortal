@@ -1,0 +1,187 @@
+namespace ASPNET.StarterKit.Portal
+{
+    using System;
+    using System.Globalization;
+
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>在线能力包审计载荷的六要素结构化紧凑格式器（纯函数，不依赖 Web 上下文、不连接数据库、不执行安装）。
+    ///   固定键序与既有 `PortalModuleAssemblyAuditFormatter` 及离线工具 `Invoke-PortalModuleAssemblyCheck.ps1` 完全一致，
+    ///   使装配态与在线包两类产物可互相印证；载体同为该表的 Summary 列。本类只格式化，不写入。</zh-CN>
+    ///   <en>Structured compact formatter for the six-element online-package audit payload (pure function; no Web context,
+    ///   no database connection, no installation). Its fixed key order matches `PortalModuleAssemblyAuditFormatter` and the
+    ///   offline tool `Invoke-PortalModuleAssemblyCheck.ps1` exactly, so assembly-state and online-package artifacts corroborate
+    ///   each other; both use the Summary column. This class only formats and never writes.</en>
+    /// </lang>
+    /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>超长时抛 `AuditSummaryTooLongException`（fail-closed），绝不静默截断导致六要素缺失。
+    ///   `pkg` 使用**服务端生成的隔离暂存名**，不接受浏览器文件名、包内声明标识、来源或 capability；
+    ///   一次性票据 nonce 与防伪令牌刻意不写入摘要（最小披露）。</zh-CN>
+    ///   <en>On overflow it throws `AuditSummaryTooLongException` (fail-closed) rather than silently truncating and dropping elements.
+    ///   `pkg` uses the **server-generated isolated staging name** and accepts no browser file name, package-declared id, origin,
+    ///   or capability; the one-time ticket nonce and anti-forgery token are deliberately excluded (minimum disclosure).</en>
+    /// </lang>
+    /// </remarks>
+    public static class PortalOnlinePackageAuditFormatter
+    {
+        /// <summary><lang><zh-CN>Summary 列的最大字符数（与 PortalCfg_OperationAudits 列定义一致）。</zh-CN><en>Maximum character count of the Summary column (matches PortalCfg_OperationAudits).</en></lang></summary>
+        public const int MaxSummaryLength = 500;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>六要素紧凑格式：固定键序、分号分隔、时间用秒级 ISO 8601 UTC；超过 MaxSummaryLength 时抛出
+        ///   <c>AuditSummaryTooLongException</c>，绝不静默截断。字段顺序与装配态格式器逐字一致。</zh-CN>
+        ///   <en>Six-element compact format: fixed key order, semicolon separated, second-precision ISO 8601 UTC; when exceeding
+        ///   MaxSummaryLength it throws `AuditSummaryTooLongException` instead of silently truncating. Field order is character-for-character
+        ///   identical to the assembly-state formatter.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="stagingName"><l zh-CN="服务端生成的隔离暂存名，作为 pkg 主体；空白以 unknown 表达而不省略要素。" en="Server-generated isolated staging name as the pkg body; blank becomes unknown rather than dropping the element." /></param>
+        /// <param name="hashBefore"><l zh-CN="变更前哈希；上传动作传空。" en="Hash before the change; empty for an upload action." /></param>
+        /// <param name="hashAfter"><l zh-CN="隔离暂存包的 SHA-256 十六进制摘要。" en="SHA-256 hex digest of the isolated staged package." /></param>
+        /// <param name="actor"><l zh-CN="已认证账号名。" en="Authenticated account name." /></param>
+        /// <param name="startUtc"><l zh-CN="动作起始 UTC 时间。" en="Action start UTC time." /></param>
+        /// <param name="endUtc"><l zh-CN="动作结束 UTC 时间。" en="Action end UTC time." /></param>
+        /// <param name="verification"><l zh-CN="校验结论的稳定短语，不含自由文本。" en="Stable verification phrase, no free text." /></param>
+        /// <param name="direction"><l zh-CN="动作方向，应取自 PortalOnlinePackageAuditEvents 的动作常量。" en="Action direction, taken from PortalOnlinePackageAuditEvents action constants." /></param>
+        /// <returns><l zh-CN="长度不超过 500 的紧凑摘要。" en="Compact summary no longer than 500 characters." /></returns>
+        /// <exception cref="AuditSummaryTooLongException"><l zh-CN="摘要超长时抛出；调用方须走审计表扩展方案。" en="Thrown on overflow; callers must take the audit-table extension path." /></exception>
+        public static string FormatSixElementSummary(
+            string stagingName,
+            string hashBefore,
+            string hashAfter,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            string direction)
+        {
+            // <lang>
+            //   <zh-CN>空白暂存名退化为 unknown，避免六要素被静默省略；不 Trim 用户文本以免把畸形输入洗成合法值。</zh-CN>
+            //   <en>A blank staging name degrades to unknown so the element is never silently dropped; user text is not trimmed so malformed input is not washed into a valid value.</en>
+            // </lang>
+            string pkg = string.IsNullOrEmpty(stagingName) ? "unknown" : stagingName;
+
+            // <lang>
+            //   <zh-CN>按既有固定键序拼接；所有可空文本统一兜底为空串，时间统一转 UTC 以免调用方本地时区改变审计顺序。</zh-CN>
+            //   <en>Concatenate in the established fixed key order; all nullable text falls back to empty and times convert to UTC so caller-local zones cannot change audit ordering.</en>
+            // </lang>
+            string summary = string.Format(
+                CultureInfo.InvariantCulture,
+                "pkg={0};hashBefore={1};hashAfter={2};actor={3};startUtc={4};endUtc={5};verification={6};direction={7}",
+                pkg,
+                hashBefore ?? string.Empty,
+                hashAfter ?? string.Empty,
+                actor ?? string.Empty,
+                startUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                endUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                verification ?? string.Empty,
+                direction ?? string.Empty);
+
+            // <lang>
+            //   <zh-CN>超长即显式抛异常，携带在线包上下文以便诊断归因；绝不截断或丢弃任何要素。</zh-CN>
+            //   <en>Overflow throws explicitly with an online-package context for diagnosability; no element is truncated or dropped.</en>
+            // </lang>
+            if (summary.Length > MaxSummaryLength)
+            {
+                throw new AuditSummaryTooLongException(summary.Length, MaxSummaryLength, "Online-package");
+            }
+
+            return summary;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试格式化；超长时不抛异常而返回 false（summary 为 null），供需要走审计表扩展方案的调用方使用。</zh-CN>
+        ///   <en>Attempts formatting; on overflow returns false (summary null) instead of throwing, for callers taking the audit-table extension path.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="stagingName"><l zh-CN="服务端生成的隔离暂存名。" en="Server-generated isolated staging name." /></param>
+        /// <param name="hashBefore"><l zh-CN="变更前哈希。" en="Hash before the change." /></param>
+        /// <param name="hashAfter"><l zh-CN="隔离暂存包哈希。" en="Isolated staged package hash." /></param>
+        /// <param name="actor"><l zh-CN="已认证账号名。" en="Authenticated account name." /></param>
+        /// <param name="startUtc"><l zh-CN="动作起始 UTC 时间。" en="Action start UTC time." /></param>
+        /// <param name="endUtc"><l zh-CN="动作结束 UTC 时间。" en="Action end UTC time." /></param>
+        /// <param name="verification"><l zh-CN="校验结论。" en="Verification conclusion." /></param>
+        /// <param name="direction"><l zh-CN="动作方向常量。" en="Action direction constant." /></param>
+        /// <param name="summary"><l zh-CN="成功时为紧凑摘要，超长时为 null。" en="Compact summary on success, null on overflow." /></param>
+        /// <returns><l zh-CN="格式化成功且长度合规时为 true。" en="True when formatting succeeds within the length limit." /></returns>
+        public static bool TryFormatSixElementSummary(
+            string stagingName,
+            string hashBefore,
+            string hashAfter,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            string direction,
+            out string summary)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证超长或异常路径都不留下未初始化摘要。</zh-CN>
+            //   <en>Initialise the output to the failure state so overflow leaves no uninitialised summary.</en>
+            // </lang>
+            summary = null;
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>复用主格式器以杜绝两条路径的键序漂移；捕获唯一的超长异常并降级为 false。</zh-CN>
+                //   <en>Reuse the primary formatter so the two paths cannot drift in key order; catch only the overflow exception and degrade to false.</en>
+                // </lang>
+                summary = FormatSixElementSummary(
+                    stagingName, hashBefore, hashAfter, actor, startUtc, endUtc, verification, direction);
+                return true;
+            }
+            catch (AuditSummaryTooLongException)
+            {
+                // <lang>
+                //   <zh-CN>摘要保持 null，由调用方决定改走审计表扩展方案；不吞掉其它异常类型。</zh-CN>
+                //   <en>The summary stays null so the caller can take the extension path; no other exception type is swallowed.</en>
+                // </lang>
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断动作是否为在线能力包已登记的审计动作常量；未知动作一律拒绝，不允许自由文本进入 Action 列。</zh-CN>
+        ///   <en>Determines whether an action is a registered online-package audit action; unknown actions are rejected so free text never enters the Action column.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="action"><l zh-CN="待判定动作，可为 null。" en="Action to check; may be null." /></param>
+        /// <returns><l zh-CN="属于四个已登记动作之一时为 true。" en="True when it is one of the four registered actions." /></returns>
+        public static bool IsRegisteredAction(string action)
+        {
+            // <lang>
+            //   <zh-CN>Ordinal 精确比较，不 Trim、不折叠大小写，避免相似字符串被误当作已登记动作。</zh-CN>
+            //   <en>Ordinal exact comparison without trimming or case folding so merely similar strings are not mistaken for registered actions.</en>
+            // </lang>
+            return string.Equals(action, PortalOnlinePackageAuditEvents.UploadValidated, StringComparison.Ordinal) ||
+                   string.Equals(action, PortalOnlinePackageAuditEvents.InstallConfirmed, StringComparison.Ordinal) ||
+                   string.Equals(action, PortalOnlinePackageAuditEvents.StagedPackageDiscarded, StringComparison.Ordinal) ||
+                   string.Equals(action, PortalOnlinePackageAuditEvents.RollbackDrill, StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断结果值是否属于 PortalCfg_OperationAudits 的 Outcome 白名单（Success/Failure/Skipped）。</zh-CN>
+        ///   <en>Determines whether an outcome belongs to the Outcome whitelist of PortalCfg_OperationAudits (Success/Failure/Skipped).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="outcome"><l zh-CN="待判定结果值，可为 null。" en="Outcome to check; may be null." /></param>
+        /// <returns><l zh-CN="属于白名单时为 true。" en="True when whitelisted." /></returns>
+        public static bool IsRegisteredOutcome(string outcome)
+        {
+            // <lang>
+            //   <zh-CN>白名单来自表约束 CHECK，未知值会让 INSERT 失败；此处提前拒绝以避免把审计写入变成可用性故障。</zh-CN>
+            //   <en>The whitelist mirrors the table CHECK constraint; an unknown value would fail INSERT, so reject early rather than turning audit into an availability failure.</en>
+            // </lang>
+            return string.Equals(outcome, PortalOnlinePackageAuditEvents.OutcomeSuccess, StringComparison.Ordinal) ||
+                   string.Equals(outcome, PortalOnlinePackageAuditEvents.OutcomeFailure, StringComparison.Ordinal) ||
+                   string.Equals(outcome, PortalOnlinePackageAuditEvents.OutcomeSkipped, StringComparison.Ordinal);
+        }
+    }
+}

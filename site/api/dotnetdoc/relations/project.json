@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6035,
-  "relationCount": 5600,
+  "nodeCount": 6060,
+  "relationCount": 5622,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -4191,6 +4191,76 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.category",
+      "kind": "entry",
+      "label": "Category",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.category",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.installconfirmed",
+      "kind": "entry",
+      "label": "InstallConfirmed",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.installconfirmed",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomefailure",
+      "kind": "entry",
+      "label": "OutcomeFailure",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomefailure",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomeskipped",
+      "kind": "entry",
+      "label": "OutcomeSkipped",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomeskipped",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomesuccess",
+      "kind": "entry",
+      "label": "OutcomeSuccess",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomesuccess",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.rollbackdrill",
+      "kind": "entry",
+      "label": "RollbackDrill",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.rollbackdrill",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.stagedpackagediscarded",
+      "kind": "entry",
+      "label": "StagedPackageDiscarded",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.stagedpackagediscarded",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.targettype",
+      "kind": "entry",
+      "label": "TargetType",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.targettype",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.uploadvalidated",
+      "kind": "entry",
+      "label": "UploadValidated",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.uploadvalidated",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength",
+      "kind": "entry",
+      "label": "MaxSummaryLength",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength",
       "kind": "entry",
       "label": "PackageHashHexLength",
@@ -7345,6 +7415,13 @@
       "kind": "entry",
       "label": "#ctor",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string",
       "view": "dotnet"
     },
     {
@@ -14905,6 +14982,62 @@
       "kind": "entry",
       "label": "IsVisible",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isvisible-aspnet.starterkit.portal.portalnavigationentry-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordFailureOrCleanup",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordInstallConfirmed",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "RecordUploadValidated",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "TryRecord",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "kind": "entry",
+      "label": "FormatSixElementSummary",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string",
+      "kind": "entry",
+      "label": "IsRegisteredAction",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string",
+      "kind": "entry",
+      "label": "IsRegisteredOutcome",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryFormatSixElementSummary",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
       "view": "dotnet"
     },
     {
@@ -36209,6 +36342,27 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudit",
+      "kind": "entry",
+      "label": "PortalOnlinePackageAudit",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudit",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditevents",
+      "kind": "entry",
+      "label": "PortalOnlinePackageAuditEvents",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditevents",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditformatter",
+      "kind": "entry",
+      "label": "PortalOnlinePackageAuditFormatter",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditformatter",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
       "kind": "entry",
       "label": "PortalOnlinePackageConfirmationGate",
@@ -40159,6 +40313,18 @@
       "path": "src/Portal.Components/PortalNavigationVisibilityPolicy.cs"
     },
     {
+      "id": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "path": "src/Portal.Components/PortalOnlinePackageAuditEvents.cs"
+    },
+    {
+      "id": "source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "path": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs"
+    },
+    {
       "id": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
       "kind": "source",
       "label": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
@@ -41075,6 +41241,12 @@
       "kind": "source",
       "label": "src/Portal/Components/PortalNavigationVisibilityContextFactory.cs",
       "path": "src/Portal/Components/PortalNavigationVisibilityContextFactory.cs"
+    },
+    {
+      "id": "source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "kind": "source",
+      "label": "src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "path": "src/Portal/Components/PortalOnlinePackageAudit.cs"
     },
     {
       "id": "source:src/Portal/Components/PortalOperationAudit.cs",
@@ -49556,6 +49728,136 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.category->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.category",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.category",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 30,
+        "rangeEndLine": 30
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.installconfirmed->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.installconfirmed",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.installconfirmed",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 36,
+        "rangeEndLine": 36
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomefailure->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomefailure",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomefailure",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 51,
+        "rangeEndLine": 51
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomeskipped->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomeskipped",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomeskipped",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 54,
+        "rangeEndLine": 54
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomesuccess->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomesuccess",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.outcomesuccess",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 48,
+        "rangeEndLine": 48
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.rollbackdrill->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.rollbackdrill",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.rollbackdrill",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 42,
+        "rangeEndLine": 42
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.stagedpackagediscarded->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.stagedpackagediscarded",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.stagedpackagediscarded",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 39,
+        "rangeEndLine": 39
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.targettype->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.targettype",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.targettype",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 45,
+        "rangeEndLine": 45
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.uploadvalidated->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.uploadvalidated",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditevents.uploadvalidated",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 33,
+        "rangeEndLine": 33
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength->source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 30,
+        "rangeEndLine": 30
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength",
@@ -55415,7 +55717,20 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 31,
-        "rangeEndLine": 38
+        "rangeEndLine": 34
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string->source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string",
+      "to": "source:src/Portal.Components/AuditSummaryTooLongException.cs",
+      "label": "Source: src/Portal.Components/AuditSummaryTooLongException.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 48,
+        "rangeEndLine": 56
       }
     },
     {
@@ -69456,6 +69771,110 @@
         "language": "csharp",
         "rangeStartLine": 598,
         "rangeEndLine": 601
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext->source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "label": "Source: src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordfailureorcleanup-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 196,
+        "rangeEndLine": 232
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext->source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "label": "Source: src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recordinstallconfirmed-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 156,
+        "rangeEndLine": 177
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext->source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "label": "Source: src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.recorduploadvalidated-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 118,
+        "rangeEndLine": 139
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext->source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "label": "Source: src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageaudit.tryrecord-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 47,
+        "rangeEndLine": 99
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string->source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 51,
+        "rangeEndLine": 93
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string->source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 156,
+        "rangeEndLine": 166
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string->source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 176,
+        "rangeEndLine": 185
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string->source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 111,
+        "rangeEndLine": 146
       }
     },
     {
@@ -105179,7 +105598,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 265
+        "rangeEndLine": 267
       }
     },
     {
@@ -105218,7 +105637,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 107
+        "rangeEndLine": 108
       }
     },
     {
@@ -105296,7 +105715,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 17,
-        "rangeEndLine": 39
+        "rangeEndLine": 57
       }
     },
     {
@@ -109015,6 +109434,45 @@
         "language": "csharp",
         "rangeStartLine": 159,
         "rangeEndLine": 558
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudit->source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudit",
+      "to": "source:src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "label": "Source: src/Portal/Components/PortalOnlinePackageAudit.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageaudit",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 33,
+        "rangeEndLine": 233
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditevents->source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditevents",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditEvents.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditevents",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 27,
+        "rangeEndLine": 55
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditformatter->source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditformatter",
+      "to": "source:src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageauditformatter",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 27,
+        "rangeEndLine": 186
       }
     },
     {

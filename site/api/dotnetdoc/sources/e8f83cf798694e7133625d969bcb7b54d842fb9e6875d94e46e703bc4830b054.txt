@@ -1,0 +1,36 @@
+        public static bool TryFormatSixElementSummary(
+            string stagingName,
+            string hashBefore,
+            string hashAfter,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            string direction,
+            out string summary)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证超长或异常路径都不留下未初始化摘要。</zh-CN>
+            //   <en>Initialise the output to the failure state so overflow leaves no uninitialised summary.</en>
+            // </lang>
+            summary = null;
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>复用主格式器以杜绝两条路径的键序漂移；捕获唯一的超长异常并降级为 false。</zh-CN>
+                //   <en>Reuse the primary formatter so the two paths cannot drift in key order; catch only the overflow exception and degrade to false.</en>
+                // </lang>
+                summary = FormatSixElementSummary(
+                    stagingName, hashBefore, hashAfter, actor, startUtc, endUtc, verification, direction);
+                return true;
+            }
+            catch (AuditSummaryTooLongException)
+            {
+                // <lang>
+                //   <zh-CN>摘要保持 null，由调用方决定改走审计表扩展方案；不吞掉其它异常类型。</zh-CN>
+                //   <en>The summary stays null so the caller can take the extension path; no other exception type is swallowed.</en>
+                // </lang>
+                return false;
+            }
+        }

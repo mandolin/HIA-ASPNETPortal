@@ -29,7 +29,25 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public AuditSummaryTooLongException(int actualLength, int maxLength)
-            : base("Assembly-state audit summary length " + actualLength.ToString(System.Globalization.CultureInfo.InvariantCulture) +
+            : this(actualLength, maxLength, "Assembly-state")
+        {
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建异常并携带实际长度、最大长度与子系统上下文；上下文只用于让诊断消息指明是哪一类审计摘要，
+        ///   不改变 fail-closed 语义。既有装配态调用方走两参数重载，消息保持原样。</zh-CN>
+        ///   <en>Creates the exception carrying actual length, maximum length, and a subsystem context; the context only labels
+        ///   which audit summary overflowed in diagnostics and does not change fail-closed semantics. Existing assembly-state
+        ///   callers use the two-argument overload and keep their original message.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="actualLength"><l zh-CN="实际长度。" en="Actual length." /></param>
+        /// <param name="maxLength"><l zh-CN="允许的最大长度。" en="Allowed maximum length." /></param>
+        /// <param name="context"><l zh-CN="子系统标签，如 Assembly-state 或 Online-package。" en="Subsystem label such as Assembly-state or Online-package." /></param>
+        public AuditSummaryTooLongException(int actualLength, int maxLength, string context)
+            : base((string.IsNullOrWhiteSpace(context) ? "Audit" : context) +
+                   " audit summary length " + actualLength.ToString(System.Globalization.CultureInfo.InvariantCulture) +
                    " exceeds maximum " + maxLength.ToString(System.Globalization.CultureInfo.InvariantCulture) +
                    "; use the audit-table extension path instead of truncating.")
         {

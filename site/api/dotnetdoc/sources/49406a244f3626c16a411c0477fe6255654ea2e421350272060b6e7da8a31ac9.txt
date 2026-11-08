@@ -1,0 +1,53 @@
+        public static bool TryRecord(
+            string action,
+            string targetId,
+            string summary,
+            string outcome,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>动作必须是封闭词表成员：拒绝自由文本进入 Action 列，也防止用装配态动作冒充在线包动作。</zh-CN>
+            //   <en>The action must belong to the closed vocabulary: this keeps free text out of the Action column and stops assembly-state actions from impersonating online-package actions.</en>
+            // </lang>
+            if (!PortalOnlinePackageAuditFormatter.IsRegisteredAction(action))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>结果值必须符合表 CHECK 白名单；未知值提前拒绝，避免 INSERT 失败被 best-effort 静默吞掉而丢失审计。</zh-CN>
+            //   <en>The outcome must satisfy the table CHECK whitelist; unknown values are refused early so a failed INSERT is not silently swallowed and the audit lost.</en>
+            // </lang>
+            if (!PortalOnlinePackageAuditFormatter.IsRegisteredOutcome(outcome))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>目标标识与摘要不得缺失；摘要长度以格式器上限为准，超长直接拒绝而不截断。</zh-CN>
+            //   <en>Target id and summary must be present; summary length follows the formatter cap and overflow is refused rather than truncated.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(targetId) || string.IsNullOrEmpty(summary) ||
+                summary.Length > PortalOnlinePackageAuditFormatter.MaxSummaryLength)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>经既有统一入口写入；relatedEventId 传 null，outcome 显式传入以保留真实失败事实。
+            //   本调用是 best-effort，异常由 PortalOperationAudit 内部降级处理。</zh-CN>
+            //   <en>Write through the existing unified entry point; relatedEventId is null and outcome is passed explicitly to preserve genuine failure facts.
+            //   The call is best-effort, and exceptions are degraded inside PortalOperationAudit.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOnlinePackageAuditEvents.Category,
+                action,
+                PortalOnlinePackageAuditEvents.TargetType,
+                targetId,
+                summary,
+                context,
+                null,
+                outcome);
+
+            return true;
+        }

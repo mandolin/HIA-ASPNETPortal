@@ -1,0 +1,37 @@
+        public static bool RecordFailureOrCleanup(
+            string action,
+            string targetId,
+            string stagingName,
+            string packageHash,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            string outcome,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>不允许用本包装记录「安装已确认」动作，避免绕过专用的二次确认记录路径。</zh-CN>
+            //   <en>This wrapper refuses to record "install confirmed" so the dedicated two-step confirmation path cannot be bypassed.</en>
+            // </lang>
+            if (string.Equals(action, PortalOnlinePackageAuditEvents.InstallConfirmed, StringComparison.Ordinal) ||
+                string.Equals(action, PortalOnlinePackageAuditEvents.UploadValidated, StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>动作与结果先经 Components 层词表校验，再生成六要素摘要；任一不合法即不写入。</zh-CN>
+            //   <en>Validate action and outcome against the Components vocabulary before formatting; any invalid value writes nothing.</en>
+            // </lang>
+            if (!PortalOnlinePackageAuditFormatter.IsRegisteredAction(action) ||
+                !PortalOnlinePackageAuditFormatter.IsRegisteredOutcome(outcome))
+            {
+                return false;
+            }
+
+            string summary = PortalOnlinePackageAuditFormatter.FormatSixElementSummary(
+                stagingName, packageHash, packageHash, actor, startUtc, endUtc, verification, action);
+
+            return TryRecord(action, targetId, summary, outcome, context);
+        }
