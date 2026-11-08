@@ -166,6 +166,7 @@
     <Compile Include="IReferenceDataDb.cs" />
     <Compile Include="IEmployeeProfileConfirmationDb.cs" />
     <Compile Include="IFormBuilderDb.cs" />
+    <Compile Include="IPortalModuleProvisioner.cs" />
     <Compile Include="IEmployeeProfileCorrectionRequestDb.cs" />
     <Compile Include="LeaveRequestContracts.cs" />
     <Compile Include="ExpenseReimbursementContracts.cs" />

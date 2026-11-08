@@ -78,6 +78,16 @@
             <lifetime type="transient" />
         </register>
 
+        <!--
+        <lang>
+          <zh-CN>W-anp-P285：独立模块安装/卸载机制；注入已注册的 PortalCfgDbContext（瞬态，外置连接串）。</zh-CN>
+          <en>W-anp-P285: independent-module install/uninstall mechanism; injects the registered PortalCfgDbContext (transient, external connection string).</en>
+        </lang>
+        -->
+        <register type="IPortalModuleProvisioner" mapTo="PortalModuleProvisioner">
+            <lifetime type="transient" />
+        </register>
+
         <register type="IEmployeeProfileCorrectionRequestDb" mapTo="EmployeeProfileCorrectionRequestDb">
             <lifetime type="transient" />
         </register>

@@ -90,6 +90,7 @@
     <Compile Include="EmployeeItem.cs" />
     <Compile Include="EmployeeProfileConfirmationDb.cs" />
     <Compile Include="FormBuilderDb.cs" />
+    <Compile Include="PortalModuleProvisioner.cs" />
     <Compile Include="EmployeeProfileCorrectionRequestDb.cs" />
     <Compile Include="LeaveRequestDb.cs" />
     <Compile Include="ExpenseReimbursementDb.cs" />
