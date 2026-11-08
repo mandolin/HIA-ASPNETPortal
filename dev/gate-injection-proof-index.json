@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-07T06:36:16",
+  "generatedAt": "2026-11-08T23:00:03",
   "note": "门禁注入法双向证明覆盖索引：proved = 至少有一条「注入即红、还原即绿」的真实记录；notDetected = 夹具存在但注入后门禁仍绿（假证明，需重做注入点）；other = 基线不绿 / 还原后仍红 / 夹具错误；neverTouched = 尚无任何注入夹具；notApplicable = 已评估并裁定不适用（依据见 dev/gate-injection-proof-not-applicable.json），不计入 proved 也不计入 neverTouched。统计口径只认证明记录，不认「夹具里出现过门禁名」。由 dev/scripts/Update-PortalGateInjectionProofIndex.ps1 生成，勿手改。",
-  "registeredCount": 79,
+  "registeredCount": 80,
   "provedCount": 78,
   "notDetectedCount": 0,
   "otherCount": 0,
   "neverTouchedCount": 0,
-  "notApplicableCount": 1,
+  "notApplicableCount": 2,
   "proved": [
     "Build-Solution.ps1",
     "Invoke-PortalModuleRuntimeGate.ps1",
@@ -92,9 +92,11 @@
   "other": [],
   "neverTouched": [],
   "notApplicable": [
-    "Test-PortalIeModeReadiness.ps1"
+    "Test-PortalIeModeReadiness.ps1",
+    "Test-PortalOnlinePackageSecurityBoundaries.ps1"
   ],
   "notApplicableBasis": {
-    "Test-PortalIeModeReadiness.ps1": "只读本机 Edge 安装路径、PATH 中的 msedgedriver/IEDriverServer、以及 Edge 注册表策略（HKLM/HKCU Policies\\Microsoft\\Edge）的报告型门禁，默认 exit 0；全部判据在本机外部，仓库内无注入面。实测两档：默认档 EXIT=0（ReadyForIeModeAutomation=False / ReadyForEnterpriseSiteList=False / EdgeFound=True，其余全 False，并通过 [GATE-NOTE] 显式上报）；-FailWhenNotReady 档 EXIT=1。套件 L1402-1415 已有 [GATE-NOTE] 机制承载「通过但值得注意」的结论，V3 明确裁定不计入 L10 首发硬性判定。属注入证明方法的适用边界，不是门禁缺陷；为该门禁造注册表/驱动注入或降低默认退出码语义都属不可逆本机变更或弱化产品语义，不做。"
+    "Test-PortalIeModeReadiness.ps1": "只读本机 Edge 安装路径、PATH 中的 msedgedriver/IEDriverServer、以及 Edge 注册表策略（HKLM/HKCU Policies\\Microsoft\\Edge）的报告型门禁，默认 exit 0；全部判据在本机外部，仓库内无注入面。实测两档：默认档 EXIT=0（ReadyForIeModeAutomation=False / ReadyForEnterpriseSiteList=False / EdgeFound=True，其余全 False，并通过 [GATE-NOTE] 显式上报）；-FailWhenNotReady 档 EXIT=1。套件 L1402-1415 已有 [GATE-NOTE] 机制承载「通过但值得注意」的结论，V3 明确裁定不计入 L10 首发硬性判定。属注入证明方法的适用边界，不是门禁缺陷；为该门禁造注册表/驱动注入或降低默认退出码语义都属不可逆本机变更或弱化产品语义，不做。",
+    "Test-PortalOnlinePackageSecurityBoundaries.ps1": "在线能力（在线安装/上传）B 级安全边界静态一致性门禁：判据全部落在仓库源码符号（白名单/隔离策略常量、双步确认闸、审计事件词表与统一写入入口、工具不代写边界、RSA-SHA256 验签与完整性校验、扫描 fail-closed 适配点、回滚与故障隔离判定器、演练证据脚本）。这些是源码存在性与契约一致性的序数断言，仓库内无运行期可变注入面——任何违规（如符号被删、写入入口泄漏到 Components 层）都会立即在本门禁自身、Portal.Tests 静态断言或构建中 FAIL，无需也不应通过「不改源码前提下的可逆注入」来复现。为凑覆盖数对源码符号做临时篡改属于改产品代码，违背注入证明只针对受治理仓库文件的范式，且会污染真实构建与单测基线，不做。对应的运行期判定正确性由 Portal.Tests 的 8~10 项单测与试运行期证据承载（运行期证据因站点 HTTP 500 未就绪，已在账本如实登记，不以此免除）。"
   }
 }

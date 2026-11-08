@@ -329,6 +329,39 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalExtensionSmoke.ps1 -IncludeAdmin -AdminUser admin
 ```
 
+## 在线能力（在线安装/上传）
+
+在线能力指通过受控通道把能力包（`.zip` 归档）安全安装或上传到门户宿主，而不破坏既有安全与审批边界。承载基座、隔离通道、双步确认闸、审计、签名与完整性校验、恶意扫描、回滚与故障隔离均已在 `Portal.Components` 与 `Portal` 项目中实现，并由质量门禁与单元测试验证。
+
+### 承载基座与隔离通道
+
+隔离暂存策略常量集中在 `src/Portal.Components/PortalOnlinePackagePolicy.cs`，含包扩展名、包大小上限、条目数与单条目/解压总字节上限，以及隔离暂存虚拟目录（落在 `~/App_Data/OnlinePackages/Staging`）。隔离暂存器 `src/Portal.Components/PortalOnlinePackageStaging.cs` 的 `TryStage` 在隔离子目录下解压；任何失败都在 `finally` 中清理本次上传的独立子目录，确保单次失败上传不会污染核心目录或彼此。
+
+### 双步确认闸
+
+`src/Portal.Components/PortalOnlinePackageConfirmation.cs` 的 `PortalOnlinePackageConfirmationGate` 提供无状态双步确认：`TryIssue` 签发票据（nonce 防重放、同步令牌防 CSRF、包哈希绑定、幂等），`TryConfirm` 在二次鉴权下确认票据。权限键为 `Module.OnlinePackage.Upload` 与 `Module.OnlinePackage.Confirm`，落在 Module 域。
+
+### 审计
+
+`src/Portal.Components/PortalOnlinePackageAuditEvents.cs` 定义在线能力审计事件词表（上传校验 / 确认安装 / 放弃清理 / 回滚演练）；`src/Portal/Components/PortalOnlinePackageAudit.cs` 的运行时包装经既有 `PortalOperationAudit.Record` 统一写入 `PortalCfg_OperationAudits`，`outcome` 如实记录失败、不伪造成功。
+
+### 签名与完整性校验
+
+`src/Portal.Components/PortalOnlinePackageIntegrity.cs` 提供 SHA-256 字节/流计算（与离线装配态校验同口径）与 RSA-SHA256 真实验签，并承担 .NET Framework 4.8 读取归档不自动校验 CRC-32 所缺的完整性职责。
+
+### 扫描与安全闸门
+
+`src/Portal.Components/PortalOnlinePackageScanning.cs` 提供 `IPortalOnlinePackageScanner` 唯一适配点（企业内网扫描引擎可在此接线）、默认 `PortalOnlinePackageUnavailableScanner` 显式「未接线」实现，以及联合判定门 `TryAllowInstall`（白名单 → 完整性 → 签名 → 扫描，任一不满足即拒、前置失败短路）。
+
+### 回滚与故障隔离
+
+`src/Portal.Components/PortalOnlinePackageRollback.cs` 提供回滚演练判定器（哈希清单快照、字节级一致与零残留判定、三种演练情形结论）与单模块失败隔离判定器 `PortalOnlinePackageFailureIsolation`。可复跑的回滚演练证据脚本见 `dev/scripts/Invoke-PortalOnlinePackageRollbackDrill.ps1`。
+
+### 验证
+
+- 单元测试：`src/Portal.Tests/PortalOnlinePackage*.cs` 覆盖承载、确认、审计、安全、回滚。
+- 静态边界门禁：`dev/scripts/Test-PortalOnlinePackageSecurityBoundaries.ps1`（L0，覆盖白名单/隔离、权限、审计、签名、扫描、回滚六个维度一致性）。
+
 ## 数据库初始化
 
 参考 `src/ReadMe.txt`，基础流程为：

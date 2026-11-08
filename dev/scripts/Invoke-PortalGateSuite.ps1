@@ -219,6 +219,7 @@ $gateLayers = [ordered]@{
         # </lang>
         @{ File = 'Test-PortalBusinessIdentity.ps1';        Runner = 'ps1'; Kind = '业务身份契约'; Args = @() }
         @{ File = 'Test-PortalBusinessPermissionAudit.ps1';  Runner = 'ps1'; Kind = '业务权限审计'; Args = @() }
+        @{ File = 'Test-PortalOnlinePackageSecurityBoundaries.ps1'; Runner = 'ps1'; Kind = '在线能力安全边界'; Args = @() }
         @{ File = 'Test-PortalCollaborationWorkflowSmoke.ps1'; Runner = 'ps1'; Kind = '协同工作流'; Args = @() }
         @{ File = 'Test-PortalComplianceBaseline.ps1';       Runner = 'ps1'; Kind = '合规基线'; Args = @() }
         @{ File = 'Test-PortalFrontendContracts.ps1';       Runner = 'ps1'; Kind = '前端契约'; Args = @() }

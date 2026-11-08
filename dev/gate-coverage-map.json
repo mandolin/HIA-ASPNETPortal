@@ -410,6 +410,14 @@
       "owner": "项目维护者",
       "reEntry": "补导航链接须先出原型/设计稿（导航属界面改动，硬性前置），或裁定为主题运维直链专用。",
       "basis": "W-anp-P138 运行期核实全仓 0 入链、运行期不可达；已登记进 dev/evidence-coverage.json 未覆盖清单。"
+    },
+    {
+      "id": "online-package-security-boundaries",
+      "name": "在线能力安全边界（白名单/隔离/权限/审计/签名/扫描/回滚 静态一致性）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalOnlinePackageSecurityBoundaries.ps1",
+      "boundary": "只证明在线能力各 B 级安全边界在源码中存在且契约一致（静态断言）；不证明运行期授权/验签/扫描判定正确（由运行期门禁与单测承载），不执行安装或数据库操作。"
     }
   ],
   "boundaryRequiredGates": [
@@ -491,7 +499,8 @@
     "Test-PortalWorkItemNumbering.ps1",
     "Test-PortalWorkItemReachabilityEvidence.mjs",
     "Test-PortalWorkItemSmoke.ps1",
-    "Test-PortalXmlDocumentation.ps1"
+    "Test-PortalXmlDocumentation.ps1",
+    "Test-PortalOnlinePackageSecurityBoundaries.ps1"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },

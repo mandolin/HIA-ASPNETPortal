@@ -326,6 +326,39 @@ Administrator interaction regression uses `SecureString` password input and neve
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalExtensionSmoke.ps1 -IncludeAdmin -AdminUser admin
 ```
 
+## Online capabilities (online install/upload)
+
+Online capabilities mean installing or uploading a capability package (a `.zip` archive) into the portal host through a controlled channel without breaking existing security or approval boundaries. The carrier base, isolation channel, two-step confirmation gate, audit, signature and integrity checks, malware scanning, and rollback with failure isolation are all implemented in `Portal.Components` and `Portal` and verified by quality gates and unit tests.
+
+### Carrier base and isolation channel
+
+Isolation staging policy constants live in `src/Portal.Components/PortalOnlinePackagePolicy.cs` (package extension, maximum package bytes, maximum entry count, and per-entry / total-decompressed byte caps) together with the isolation staging virtual directory (under `~/App_Data/OnlinePackages/Staging`). The isolation stager `src/Portal.Components/PortalOnlinePackageStaging.cs` has `TryStage` decompress under an isolated sub-directory; on any failure it cleans up the current upload's own sub-directory in a `finally` block, so one failed upload never pollutes the core directory or another upload.
+
+### Two-step confirmation gate
+
+`PortalOnlinePackageConfirmationGate` in `src/Portal.Components/PortalOnlinePackageConfirmation.cs` provides a stateless two-step confirmation: `TryIssue` issues a ticket (nonce against replay, synchronization token against CSRF, package-hash binding, idempotent), and `TryConfirm` confirms the ticket under a second authentication step. The permission keys are `Module.OnlinePackage.Upload` and `Module.OnlinePackage.Confirm`, both in the Module domain.
+
+### Audit
+
+`src/Portal.Components/PortalOnlinePackageAuditEvents.cs` defines the online-capability audit event vocabulary (upload validated / install confirmed / staged discarded / rollback drill); the runtime wrapper in `src/Portal/Components/PortalOnlinePackageAudit.cs` writes through the existing `PortalOperationAudit.Record` into `PortalCfg_OperationAudits`, recording a truthful `outcome` (including failures) rather than faking success.
+
+### Signature and integrity checks
+
+`src/Portal.Components/PortalOnlinePackageIntegrity.cs` provides SHA-256 byte/stream computation (same convention as offline assembly-state checks) and genuine RSA-SHA256 signature verification, and carries the integrity duty that .NET Framework 4.8 omits by not auto-validating CRC-32 when reading archives.
+
+### Scanning and security gate
+
+`src/Portal.Components/PortalOnlinePackageScanning.cs` exposes a single `IPortalOnlinePackageScanner` adapter point (where an enterprise intranet scanner can be wired in), a default `PortalOnlinePackageUnavailableScanner` that is explicitly "not wired", and the joint gate `TryAllowInstall` (allowlist → integrity → signature → scan; any failure rejects, and early failures short-circuit).
+
+### Rollback and failure isolation
+
+`src/Portal.Components/PortalOnlinePackageRollback.cs` provides the rollback-drill decision maker (hash-manifest snapshot, byte-identical and zero-residue decisions, three drill-scenario verdicts) and the single-module failure-isolation decision maker `PortalOnlinePackageFailureIsolation`. A repeatable rollback-drill evidence script is `dev/scripts/Invoke-PortalOnlinePackageRollbackDrill.ps1`.
+
+### Verification
+
+- Unit tests: `src/Portal.Tests/PortalOnlinePackage*.cs` cover carrier, confirmation, audit, security and rollback.
+- Static boundary gate: `dev/scripts/Test-PortalOnlinePackageSecurityBoundaries.ps1` (L0, covering allowlist/isolation, permission, audit, signature, scanning and rollback dimension consistency).
+
 ## Database initialisation
 
 See `src/ReadMe.txt`; the basic flow is:
