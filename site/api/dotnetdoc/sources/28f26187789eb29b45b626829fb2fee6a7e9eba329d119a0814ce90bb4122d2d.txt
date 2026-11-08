@@ -1,0 +1,103 @@
+        public static bool IsAllowedEntryName(string entryName, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，避免提前返回留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>空条目名与超长条目名都拒绝；ZIP 目录条目以 '/' 结尾，属合法形态并单独处理。</zh-CN>
+            //   <en>Blank and overlong entry names are rejected; ZIP directory entries end with '/' and are handled as a valid shape.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(entryName) || entryName.Length > MaximumEntryNameLength)
+            {
+                reason = "Archive entry name is missing or too long.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>冒号同时覆盖 Windows 盘符与 NTFS 备用数据流；反斜杠在 ZIP 里不应用作分隔符，但仍按路径段拆解后校验。</zh-CN>
+            //   <en>A colon covers both Windows drive prefixes and NTFS alternate data streams; backslashes should not be ZIP separators but are still checked after segment splitting.</en>
+            // </lang>
+            if (entryName.IndexOf(':') >= 0 || entryName.IndexOf('\0') >= 0)
+            {
+                reason = "Archive entry name contains unsupported characters.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符拒绝控制字符与通配符，口径与包文件名校验一致，避免两端策略漂移。</zh-CN>
+            //   <en>Reject control characters and wildcards one by one, matching the package-file policy so the two ends cannot drift apart.</en>
+            // </lang>
+            foreach (char character in entryName)
+            {
+                // <lang>
+                //   <zh-CN>任一无害性未知的字符均按拒绝处理，属 allow-list 之外的输入。</zh-CN>
+                //   <en>Any character whose safety is unknown is rejected as input outside the allow-list.</en>
+                // </lang>
+                if (char.IsControl(character) || character == '*' || character == '?' || character == '"' ||
+                    character == '<' || character == '>' || character == '|')
+                {
+                    reason = "Archive entry name contains unsupported characters.";
+                    return false;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>把 '\' 与 '/' 都视作分隔符逐段检查：空段（连续分隔符）、'.' 与 '..' 一律拒绝，
+            //   从名字层面提前消除父级跳转；后续仍由 GetFullPath 做最终边界断言（纵深防御）。</zh-CN>
+            //   <en>Treat both '\' and '/' as separators and inspect each segment: empty segments (consecutive separators), '.', and '..' are rejected,
+            //   removing parent traversal at the name level; GetFullPath still performs the final boundary assertion (defence in depth).</en>
+            // </lang>
+            string[] segments = entryName.Split(new char[] { '/', '\\' });
+            for (int index = 0; index < segments.Length; index++)
+            {
+                // <lang>
+                //   <zh-CN>承接当前路径段，供后续片段判定使用；索引用于区分「末尾空段」与其它空段。</zh-CN>
+                //   <en>Holds the current path segment for the checks below; the index distinguishes a trailing empty segment from all other empty segments.</en>
+                // </lang>
+                string segment = segments[index];
+
+                // <lang>
+                //   <zh-CN>仅「最后一个空段」（目录条目以分隔符结尾）合法；前导分隔符代表根绝对路径、
+                //   连续分隔符代表畸形路径，二者都必须拒绝，否则会把 /absolute/file 当作相对条目。</zh-CN>
+                //   <en>Only the final empty segment (a directory entry ending in a separator) is legitimate; a leading separator denotes a rooted absolute path
+                //   and consecutive separators a malformed path. Both must be rejected, otherwise /absolute/file would be treated as relative.</en>
+                // </lang>
+                if (segment.Length == 0)
+                {
+                    if (index == segments.Length - 1)
+                    {
+                        continue;
+                    }
+                    reason = "Archive entry name contains an empty path segment.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>'.' 与 '..' 是路径穿越的核心片段，拒绝而非规范化，避免把恶意输入「洗白」。</zh-CN>
+                //   <en>'.' and '..' are the core traversal fragments; reject rather than normalise so malicious input is never "washed clean".</en>
+                // </lang>
+                if (string.Equals(segment, ".", StringComparison.Ordinal) ||
+                    string.Equals(segment, "..", StringComparison.Ordinal))
+                {
+                    reason = "Archive entry name contains a traversal segment.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>前导点隐藏文件与尾随点/空格（Windows 会静默去除）均拒绝，防止落地名与校验名不一致。</zh-CN>
+                //   <en>Leading-dot hidden files and trailing dots/spaces (silently stripped on Windows) are rejected so the landed name cannot differ from the validated name.</en>
+                // </lang>
+                if (segment.StartsWith(".", StringComparison.Ordinal) ||
+                    segment.EndsWith(".", StringComparison.Ordinal) ||
+                    segment.EndsWith(" ", StringComparison.Ordinal))
+                {
+                    reason = "Archive entry name contains an unsafe path segment.";
+                    return false;
+                }
+            }
+
+            return true;
+        }

@@ -815,6 +815,14 @@
     <Content Include="Config\appSettings.test.template.json" />
     <Content Include="Config\module-assembly-state.json" />
     <Content Include="Uploads\web.config" />
+    <!-- <lang>
+      <zh-CN>在线能力包隔离暂存区的目录级配置：拒绝一切 URL 直接访问与 per-directory 配置覆盖。
+      作为 Content 显式登记，确保部署产物包含该目录；目录本身不服务任何文件。</zh-CN>
+      <en>Directory-level config for the online capability package isolated staging area: denies all direct URL access and
+      per-directory configuration overrides. Registered explicitly as Content so deployment includes the directory;
+      the directory itself serves no files.</en>
+    </lang> -->
+    <Content Include="App_Data\OnlinePackages\Staging\web.config" />
     <None Include="Uploads\sample.doc" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">

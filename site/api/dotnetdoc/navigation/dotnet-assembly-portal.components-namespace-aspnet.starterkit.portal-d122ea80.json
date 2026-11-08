@@ -1890,6 +1890,34 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7b521793.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagepolicy",
+      "kind": "type",
+      "label": "PortalOnlinePackagePolicy",
+      "entryCount": 16,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackagePolicy.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalonlinepackagepolicy",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy-55227ff4.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-40271102.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagestaging",
+      "kind": "type",
+      "label": "PortalOnlinePackageStaging",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagestaging",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageStaging.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalonlinepackagestaging",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagestagin-31c9030f.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-685c0231.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalorganizationtreeedge",
       "kind": "type",
       "label": "PortalOrganizationTreeEdge",

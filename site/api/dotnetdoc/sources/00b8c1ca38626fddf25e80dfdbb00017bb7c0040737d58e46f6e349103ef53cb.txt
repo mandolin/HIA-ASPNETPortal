@@ -1,0 +1,30 @@
+        public static bool IsAllowedEntryExtension(string entryName, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>目录条目无扩展名，属 ZIP 正常结构，放行；其路径边界仍由暂存器断言。</zh-CN>
+            //   <en>Directory entries have no extension and are a normal ZIP shape; their path boundary is still asserted by the staging class.</en>
+            // </lang>
+            if (entryName.EndsWith("/", StringComparison.Ordinal) || entryName.EndsWith("\\", StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>取末段扩展名并与硬允许集精确比对；无扩展名、双扩展名的末段不在集合内即拒绝。</zh-CN>
+            //   <en>Take the final extension and compare it exactly against the hard allow-list; extensionless names and the final extension of double extensions are rejected unless listed.</en>
+            // </lang>
+            string extension = Path.GetExtension(entryName);
+            if (string.IsNullOrEmpty(extension) || !AllowedEntryExtensions.Contains(extension))
+            {
+                reason = "Archive entry type is not allowed in the staging area.";
+                return false;
+            }
+
+            return true;
+        }

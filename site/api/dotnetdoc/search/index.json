@@ -39981,6 +39981,177 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32 #ctor dotnet-method creates the exception carrying the actual and maximum lengths. public aspnet.starterkit.portal.auditsummarytoolongexception.auditsummarytoolongexception(int actuallength, int maxlength) dotnet:m:aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.auditsummarytoolongexception t:aspnet.starterkit.portal.auditsummarytoolongexception dotnet hia-document api/portal.components.hia.json src/portal.components/auditsummarytoolongexception.cs csharp 创建异常并携带实际与最大长度。 creates the exception carrying the actual and maximum lengths."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy",
+      "name": "PortalOnlinePackagePolicy",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy-55227ff4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy-55227ff4.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy portalonlinepackagepolicy dotnet-type centralised safety policy for the isolated-upload stage of an online capability package: file allow-list, size limits, entry-name and entry-type allow-lists, and server-generated storage names. class aspnet.starterkit.portal.portalonlinepackagepolicy dotnet:t:aspnet.starterkit.portal.portalonlinepackagepolicy portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 在线能力包在「隔离上传通道」阶段的集中安全策略：文件白名单、体积上限、条目名与条目类型白名单、服务端生成存储名。 centralised safety policy for the isolated-upload stage of an online capability package: file allow-list, size limits, entry-name and entry-type allow-lists, and server-generated storage names. 本类型是纯函数策略，不读取文件、不读取数据库、不读取 http 请求，也不执行解压或安装。所有判定 fail-closed：任何未知、缺失、超长或格式异常的输入一律拒绝，且不回显原始不可信文本。 依据 owasp file upload cheat sheet（allow-list、解码后校验、服务端生成文件名、大小上限、zip 高风险）、microsoft learn「best practices for working with zip and tar archives in .net」（解压后大小与条目数上限、路径边界校验、zip 不推荐作为可信载体）。 本白名单只定义「隔离暂存阶段可落地」的文件类型，与 manifest v2 的资源解析链相互独立；后续安装校验只能在本白名单基础上收紧，不得放宽。 this type is a pure-function policy: it reads no file, database, or http request and performs no extraction or installation. every decision is fail-closed — unknown, missing, overlong, or malformed input is rejected, and raw untrusted text is never echoed. it follows the owasp file upload cheat sheet (allow-list, validation after decoding, server-generated names, size limits, zip as a high-risk carrier) and microsoft learn \"best practices for working with zip and tar archives in .net\" (decompressed size and entry-count limits, destination-path validation). this allow-list defines only what may land in the isolated staging area; it is independent of the manifest v2 resource parser, and later installation checks may only narrow it, never broaden it."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.packageextension",
+      "name": "PackageExtension",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-85030705.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-85030705.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.packageextension packageextension dotnet-field the only permitted package-file extension; tar, gzip, and other containers carrying filesystem metadata are not introduced. public const string aspnet.starterkit.portal.portalonlinepackagepolicy.packageextension dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.packageextension portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 唯一允许的包文件扩展名；不引入 tar、gzip 或其它可携带文件系统元数据的容器。 the only permitted package-file extension; tar, gzip, and other containers carrying filesystem metadata are not introduced."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumpackagebytes",
+      "name": "MaximumPackageBytes",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-e57ca4fd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-e57ca4fd.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumpackagebytes maximumpackagebytes dotnet-field maximum compressed bytes for one uploaded package (10 mib), matching the constraint shown to administrators in the prototype. public const int aspnet.starterkit.portal.portalonlinepackagepolicy.maximumpackagebytes dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.maximumpackagebytes portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 单个上传包压缩后最大字节数（10 mib），与预设计稿中对管理员可见的约束一致。 maximum compressed bytes for one uploaded package (10 mib), matching the constraint shown to administrators in the prototype."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrycount",
+      "name": "MaximumEntryCount",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-ccd4e74d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-ccd4e74d.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrycount maximumentrycount dotnet-field maximum zip entry count per package, rejecting flat compression bombs made of many small entries. public const int aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrycount dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrycount portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 单个包允许的最大 zip 条目数，用于拒绝「大量小条目」型扁平压缩包炸弹。 maximum zip entry count per package, rejecting flat compression bombs made of many small entries."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumtotaldecompressedbytes",
+      "name": "MaximumTotalDecompressedBytes",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-1ab067cd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-1ab067cd.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumtotaldecompressedbytes maximumtotaldecompressedbytes dotnet-field maximum cumulative decompressed bytes per package (64 mib), decided from declared entry lengths before extraction. public const long aspnet.starterkit.portal.portalonlinepackagepolicy.maximumtotaldecompressedbytes dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.maximumtotaldecompressedbytes portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 单个包解压后累计最大字节数（64 mib），按条目声明长度在解压前判定。 maximum cumulative decompressed bytes per package (64 mib), decided from declared entry lengths before extraction."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumsingleentrybytes",
+      "name": "MaximumSingleEntryBytes",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-9aea4f6d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-9aea4f6d.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumsingleentrybytes maximumsingleentrybytes dotnet-field maximum declared decompressed bytes for a single zip entry (16 mib). public const long aspnet.starterkit.portal.portalonlinepackagepolicy.maximumsingleentrybytes dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.maximumsingleentrybytes portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 单个 zip 条目声明的最大解压字节数（16 mib）。 maximum declared decompressed bytes for a single zip entry (16 mib)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.stagingvirtualdirectory",
+      "name": "StagingVirtualDirectory",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-bce248a3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-bce248a3.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.stagingvirtualdirectory stagingvirtualdirectory dotnet-field application-relative virtual path of the isolated staging area, under app_data and not directly url-servable. public const string aspnet.starterkit.portal.portalonlinepackagepolicy.stagingvirtualdirectory dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.stagingvirtualdirectory portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 隔离暂存区的应用相对虚拟路径，位于 app_data 下、不可被 url 直接服务。 application-relative virtual path of the isolated staging area, under app_data and not directly url-servable."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrynamelength",
+      "name": "MaximumEntryNameLength",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-40920eed.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-40920eed.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrynamelength maximumentrynamelength dotnet-field maximum characters in a zip entry name, preventing filesystem errors and diagnostic bloat from overlong paths. public const int aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrynamelength dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrynamelength portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp zip 条目名允许的最大字符数，防止超长路径导致文件系统异常或诊断信息膨胀。 maximum characters in a zip entry name, preventing filesystem errors and diagnostic bloat from overlong paths."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.packagecontenttype",
+      "name": "PackageContentType",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-47c25575.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy-47c25575.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.packagecontenttype packagecontenttype dotnet-field the only mime type a package may declare; a quick hint only, never a security decision (content-type is spoofable). public const string aspnet.starterkit.portal.portalonlinepackagepolicy.packagecontenttype dotnet:f:aspnet.starterkit.portal.portalonlinepackagepolicy.packagecontenttype portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 包唯一可声明的 mime 类型，仅作快速提示；绝不作为安全判定依据（content-type 可伪造）。 the only mime type a package may declare; a quick hint only, never a security decision (content-type is spoofable)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatepackagefile-system.string-system.int32-system.string",
+      "name": "TryValidatePackageFile",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-f3f3e474.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-f3f3e474.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatepackagefile-system.string-system.int32-system.string tryvalidatepackagefile dotnet-method validates the client file name and compressed size of one package upload; it reads no file content and trusts no content-type. public static bool aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatepackagefile(string clientfilename, int compressedsize, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatepackagefile-system.string-system.int32-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 校验一次包上传的客户端文件名与压缩体积；不读取文件内容，也不信任 content-type。 validates the client file name and compressed size of one package upload; it reads no file content and trusts no content-type. 文件名只用于取扩展名与展示，绝不参与存储路径构造；物理存储名由 createstoragename 服务端生成。 the file name is used only to read its extension and for display; it never contributes to a storage path — createstoragename generates physical names server-side. 浏览器提交的原始文件名，仅作元数据，可为 null。 raw browser-supplied file name, metadata only; may be null. 上传流的字节数，必须为正且不超过包体积上限。 byte length of the uploaded stream; must be positive and within the package size limit. 拒绝原因的稳定短语，不回显原始文件名；通过时为空字符串。 stable rejection phrase that never echoes the raw file name; empty on success. 文件名与体积均合规时为 true。 true when both the file name and size comply."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryname-system.string-system.string",
+      "name": "IsAllowedEntryName",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-e85d96d2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-e85d96d2.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryname-system.string-system.string isallowedentryname dotnet-method validates a zip entry name as a relative path inside the isolated directory, rejecting rooted paths, parent traversal, drive prefixes, colons, and control characters. public static bool aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryname(string entryname, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryname-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 校验 zip 条目名是否可作为隔离目录内的相对路径，并拒绝绝对路径、父级跳转、盘符、冒号与控制字符。 validates a zip entry name as a relative path inside the isolated directory, rejecting rooted paths, parent traversal, drive prefixes, colons, and control characters. 本方法只做「名字本身」的策略校验；真正的路径边界断言由 portalonlinepackagestaging 用 path.getfullpath + startswith 完成，两者缺一不可。 this method validates the name itself; the actual destination-boundary assertion is performed by portalonlinepackagestaging with path.getfullpath + startswith. both are required. zip 中央目录中的原始条目名，可为 null。 raw entry name from the zip central directory; may be null. 拒绝原因的稳定短语，不回显条目名。 stable rejection phrase that never echoes the entry name. 条目名可安全参与路径解析时为 true。 true when the entry name may safely take part in path resolution."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryextension-system.string-system.string",
+      "name": "IsAllowedEntryExtension",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-e9729406.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-e9729406.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryextension-system.string-system.string isallowedentryextension dotnet-method validates a zip entry extension against the isolated-staging hard allow-list; directory entries (ending in a separator) are allowed separately. public static bool aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryextension(string entryname, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackagepolicy.isallowedentryextension-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 校验 zip 条目的扩展名是否属于隔离暂存阶段硬允许集；目录条目（以分隔符结尾）单独放行。 validates a zip entry extension against the isolated-staging hard allow-list; directory entries (ending in a separator) are allowed separately. 已通过 isallowedentryname 的条目名。 entry name that already passed isallowedentryname. 拒绝原因的稳定短语，不回显条目名。 stable rejection phrase that never echoes the entry name. 文件类型允许落地时为 true。 true when the file type may land in the staging area."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatedecompressedbudget-system.collections.generic.ilist-system.int64-system.string",
+      "name": "TryValidateDecompressedBudget",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-b53bef84.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-b53bef84.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatedecompressedbudget-system.collections.generic.ilist-system.int64-system.string tryvalidatedecompressedbudget dotnet-method validates entry count, per-entry cap, and cumulative decompressed size from declared zip entry lengths before extraction (zip-bomb defence). public static bool aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatedecompressedbudget(system.collections.generic.ilist<long> declaredlengths, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackagepolicy.tryvalidatedecompressedbudget-system.collections.generic.ilist-system.int64-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 按 zip 条目声明长度在解压前校验条目数、单条目上限与解压后累计上限（zip bomb 防护）。 validates entry count, per-entry cap, and cumulative decompressed size from declared zip entry lengths before extraction (zip-bomb defence). microsoft learn 明确指出 ziparchive 与 extracttodirectory 都不限制解压后总大小与条目数，必须由调用方自行强制； .net framework 4.8 不会在读取时自动校验 crc-32，故本方法只依据声明长度做「上界预算」，完整性另由签名/哈希校验承担。 microsoft learn states that neither ziparchive nor extracttodirectory limits total decompressed size or entry count, so callers must enforce both; .net framework 4.8 does not auto-validate crc-32 while reading, so this method only budgets an upper bound from declared lengths and integrity belongs to separate signature/hash checks. 每个条目的声明解压字节数序列，不能为 null。 sequence of declared decompressed byte counts, one per entry; cannot be null. 拒绝原因的稳定短语。 stable rejection phrase. 全部体积约束满足时为 true。 true when all size constraints are satisfied."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.createstoragefilename",
+      "name": "CreateStorageFileName",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-3f884923.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-3f884923.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.createstoragefilename createstoragefilename dotnet-method generates a physical storage file name (guid plus the single allowed extension) that depends on no user input. public static string aspnet.starterkit.portal.portalonlinepackagepolicy.createstoragefilename() dotnet:m:aspnet.starterkit.portal.portalonlinepackagepolicy.createstoragefilename portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 生成不依赖任何用户输入的物理存储文件名（guid + 唯一允许扩展名）。 generates a physical storage file name (guid plus the single allowed extension) that depends on no user input. 依据 owasp「文件名由服务端生成，用户文件名只作元数据」；攻击者不控制落地路径，从而消除覆盖、8.3 短名别名与特殊设备名攻击面。 follows owasp \"generate the filename server-side, keep the user name as metadata only\"; the attacker controls no landing path, eliminating overwrite, 8.3 short-name alias, and special device-name attacks. 形如 32 位十六进制小写串加 .zip 的存储名。 a storage name such as a 32-character lowercase hex string plus .zip."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.createisolateddirectoryname",
+      "name": "CreateIsolatedDirectoryName",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-6d49009a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-6d49009a.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.createisolateddirectoryname createisolateddirectoryname dotnet-method generates a fresh, application-controlled isolated subdirectory name for one upload. public static string aspnet.starterkit.portal.portalonlinepackagepolicy.createisolateddirectoryname() dotnet:m:aspnet.starterkit.portal.portalonlinepackagepolicy.createisolateddirectoryname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 为一次上传生成全新的、应用自控的隔离子目录名。 generates a fresh, application-controlled isolated subdirectory name for one upload. microsoft learn 要求不受信任归档解压到「全新的、应用自控的目录」，因为目标目录或其父级若已存在 junction/符号链接， 即便路径断言通过仍会写到链接之外；每次上传使用新目录可把该风险限制在单次操作，且失败时可按目录整体清理。 microsoft learn requires untrusted archives to be extracted into a fresh, application-controlled directory, because an existing junction or symbolic link in the destination or a parent can redirect writes outside even when path assertions pass; a new directory per upload confines that risk to one operation and allows whole-directory cleanup on failure. 形如 pkg- 加 32 位十六进制小写串的目录名。 a directory name such as pkg- plus a 32-character lowercase hex string."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.matchesdeclaredcontenttype-system.string",
+      "name": "MatchesDeclaredContentType",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-55a13e44.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy-55a13e44.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.matchesdeclaredcontenttype-system.string matchesdeclaredcontenttype dotnet-method provides a quick mime consistency hint; a false result does not imply malice, only a mismatch with the expected package type. public static bool aspnet.starterkit.portal.portalonlinepackagepolicy.matchesdeclaredcontenttype(string contenttype) dotnet:m:aspnet.starterkit.portal.portalonlinepackagepolicy.matchesdeclaredcontenttype-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagepolicy t:aspnet.starterkit.portal.portalonlinepackagepolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagepolicy.cs csharp 对 mime 类型做快速一致性提示；返回 false 不表示文件恶意，仅表示与预期包类型不符。 provides a quick mime consistency hint; a false result does not imply malice, only a mismatch with the expected package type. owasp 明确 content-type 可伪造、不得作为安全依据；本方法只用于给管理员一个早期提示， 真正的类型判定由扩展名白名单与后续签名/扫描完成，调用方不得用本方法结果放行文件。 owasp states content-type is spoofable and must not be a security basis; this method only gives administrators an early hint, while the real type decision belongs to the extension allow-list and later signature/scanning. callers must not use its result to accept a file. 浏览器声明的 content-type，可为 null。 browser-declared content-type; may be null. 等于 application/zip（忽略大小写）时为 true。 true when it equals application/zip, ignoring case."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagestaging",
+      "name": "PortalOnlinePackageStaging",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagestagin-31c9030f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagestagin-31c9030f.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagestaging portalonlinepackagestaging dotnet-type isolated staging for an online capability package: extracts one policy-validated zip into a fresh, application-controlled subdirectory and removes it entirely on failure. class aspnet.starterkit.portal.portalonlinepackagestaging dotnet:t:aspnet.starterkit.portal.portalonlinepackagestaging portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagestaging.cs csharp 在线能力包的隔离暂存器：把一个已通过策略校验的 zip 包解压到「全新的、应用自控的」隔离子目录，失败时整体清理。 isolated staging for an online capability package: extracts one policy-validated zip into a fresh, application-controlled subdirectory and removes it entirely on failure. 本类型是 `w-anp-p276` 的承载基座，只做「上传字节 → 隔离目录」这一段，不做安装、不写数据库、不写审计、不改装配态、不加载任何程序集或脚本。 实现严格遵循 microsoft learn「best practices for working with zip and tar archives in .net」：不受信任输入不得使用 zipfile.extracttodirectory（其路径校验只是 best-effort）； 必须手工迭代条目、用 path.getfullpath 解析后以带尾部分隔符的 startswith 断言边界、强制解压后大小与条目数上限、使用全新受控目标目录、且 overwrite:false。 本类面向 .net framework 4.8：使用 path.combine 而非 path.join（后者为 .net core 2.1+），不依赖 tar、异步解压、加密 zip 或运行时 crc-32 自动校验。 this type is the `w-anp-p276` hosting base and covers only the \"uploaded bytes to isolated directory\" segment: it performs no installation, database write, audit write, assembly-state change, or loading of assemblies or scripts. it follows microsoft learn \"best practices for working with zip and tar archives in .net\": untrusted input must not use zipfile.extracttodirectory (its path validation is best-effort only); entries must be iterated manually, resolved with path.getfullpath and asserted with a trailing-separator startswith check, bounded by decompressed size and entry-count limits, extracted into a fresh controlled directory, and always with overwrite:false. it targets .net framework 4.8: path.combine is used instead of path.join (.net core 2.1+ only), and there is no dependency on tar, async extraction, encrypted zip, or runtime crc-32 validation."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagestaging.manifestfilename",
+      "name": "ManifestFileName",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagestagin-f82474f5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagestagin-f82474f5.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagestaging.manifestfilename manifestfilename dotnet-field fixed manifest file name, consistent with the manifest v2 parser. public const string aspnet.starterkit.portal.portalonlinepackagestaging.manifestfilename dotnet:f:aspnet.starterkit.portal.portalonlinepackagestaging.manifestfilename portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagestaging t:aspnet.starterkit.portal.portalonlinepackagestaging dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagestaging.cs csharp 清单文件固定名，与 manifest v2 解析链一致。 fixed manifest file name, consistent with the manifest v2 parser."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagestaging.trystage-system.string-system.string-system.string-system.string",
+      "name": "TryStage",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagestagin-30f9c5b3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagestagin-30f9c5b3.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagestaging.trystage-system.string-system.string-system.string-system.string trystage dotnet-method safely extracts a zip into a fresh subdirectory beneath the isolation root; no failure leaves partially extracted content behind. public static bool aspnet.starterkit.portal.portalonlinepackagestaging.trystage(string archivepath, string isolationroot, out string extracteddirectory, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackagestaging.trystage-system.string-system.string-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagestaging t:aspnet.starterkit.portal.portalonlinepackagestaging dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagestaging.cs csharp 把一个 zip 包安全解压到隔离根目录下的全新子目录；任何失败都不留下半解压内容。 safely extracts a zip into a fresh subdirectory beneath the isolation root; no failure leaves partially extracted content behind. 调用方须先完成上传白名单与权限校验；本方法不实施页面授权，也不验证清单语义（由 manifest v2 解析链在后续包负责）。 返回的隔离子目录由调用方负责在「确认安装」或「放弃」后清理，本类只在失败路径上自动清理。 callers must complete upload allow-list and authorisation checks first; this method enforces no page authorisation and does not validate manifest semantics (the manifest v2 parser owns that in later packages). the returned isolated directory is cleaned up by the caller after \"confirm install\" or \"discard\"; this class cleans up automatically only on the failure path. 已落地的包压缩文件绝对路径。 absolute path of the landed compressed package file. 应用自控的隔离根目录绝对路径，不得为 null 或相对路径。 absolute path of the application-controlled isolation root; must not be null or relative. 成功时为新建的隔离子目录绝对路径，失败时为 null。 on success, the absolute path of the new isolated subdirectory; null on failure. 失败原因的稳定短语，不回显不可信条目名；成功时为空字符串。 stable failure phrase that never echoes untrusted entry names; empty on success. 整包解压成功且清单存在时为 true。 true when the whole archive extracted successfully and the manifest is present."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionitem",
       "name": "DiscussionItem",
       "kind": "dotnet-type",

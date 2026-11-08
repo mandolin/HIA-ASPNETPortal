@@ -1,0 +1,8 @@
+        public static string CreateStorageFileName()
+        {
+            // <lang>
+            //   <zh-CN>使用无连字符十六进制格式，得到纯字母数字主名，不含任何需要净化的字符。</zh-CN>
+            //   <en>The "N" format yields a purely alphanumeric stem with no characters requiring sanitisation.</en>
+            // </lang>
+            return Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture) + PackageExtension;
+        }

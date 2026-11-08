@@ -1,0 +1,78 @@
+        public static bool TryValidateDecompressedBudget(IList<long> declaredLengths, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>null 序列属于调用方错误，按拒绝处理，不解释为「零条目」。</zh-CN>
+            //   <en>A null sequence is a caller error and is rejected rather than interpreted as "zero entries".</en>
+            // </lang>
+            if (declaredLengths == null)
+            {
+                reason = "Archive entry length list is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>条目数上限在遍历前判定，避免为明显超量的中央目录分配任何工作。</zh-CN>
+            //   <en>The entry-count cap is checked before iteration so an obviously oversized central directory causes no further work.</en>
+            // </lang>
+            if (declaredLengths.Count == 0 || declaredLengths.Count > MaximumEntryCount)
+            {
+                reason = string.Format(CultureInfo.InvariantCulture, "Archive entry count is outside the 1..{0} limit.", MaximumEntryCount);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>累计解压字节数；用 checked 加法使溢出立即成为失败而非回绕成小数。</zh-CN>
+            //   <en>Cumulative decompressed byte count; checked addition makes overflow an immediate failure instead of wrapping to a small value.</en>
+            // </lang>
+            long total = 0L;
+            foreach (long declaredLength in declaredLengths)
+            {
+                // <lang>
+                //   <zh-CN>负长度是损坏或伪造的中央目录数据，一律拒绝。</zh-CN>
+                //   <en>A negative length is corrupt or forged central-directory data and is rejected.</en>
+                // </lang>
+                if (declaredLength < 0L)
+                {
+                    reason = "Archive entry declares a negative size.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>单条目上限防止「一个大条目」型炸弹，也把单次写入限制在可控范围。</zh-CN>
+                //   <en>The per-entry cap stops single-large-entry bombs and bounds each individual write.</en>
+                // </lang>
+                if (declaredLength > MaximumSingleEntryBytes)
+                {
+                    reason = string.Format(CultureInfo.InvariantCulture, "Archive entry exceeds the {0} byte per-entry limit.", MaximumSingleEntryBytes);
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>checked 累加后与总量上界比较，任何一步越界都在解压前终止。</zh-CN>
+                //   <en>Accumulate with checked arithmetic and compare against the total cap, terminating before extraction on any breach.</en>
+                // </lang>
+                try
+                {
+                    total = checked(total + declaredLength);
+                }
+                catch (OverflowException)
+                {
+                    reason = "Archive decompressed size overflows the supported range.";
+                    return false;
+                }
+
+                if (total > MaximumTotalDecompressedBytes)
+                {
+                    reason = string.Format(CultureInfo.InvariantCulture, "Archive exceeds the {0} byte total decompressed-size limit.", MaximumTotalDecompressedBytes);
+                    return false;
+                }
+            }
+
+            return true;
+        }

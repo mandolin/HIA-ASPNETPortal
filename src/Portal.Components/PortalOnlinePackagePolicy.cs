@@ -1,0 +1,494 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+
+namespace ASPNET.StarterKit.Portal
+{
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>在线能力包在「隔离上传通道」阶段的集中安全策略：文件白名单、体积上限、条目名与条目类型白名单、服务端生成存储名。</zh-CN>
+    ///   <en>Centralised safety policy for the isolated-upload stage of an online capability package: file allow-list, size limits, entry-name and entry-type allow-lists, and server-generated storage names.</en>
+    /// </lang>
+    /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>本类型是纯函数策略，不读取文件、不读取数据库、不读取 HTTP 请求，也不执行解压或安装。所有判定 fail-closed：任何未知、缺失、超长或格式异常的输入一律拒绝，且不回显原始不可信文本。
+    ///   依据 OWASP File Upload Cheat Sheet（allow-list、解码后校验、服务端生成文件名、大小上限、ZIP 高风险）、Microsoft Learn「Best practices for working with ZIP and TAR archives in .NET」（解压后大小与条目数上限、路径边界校验、ZIP 不推荐作为可信载体）。
+    ///   本白名单只定义「隔离暂存阶段可落地」的文件类型，与 manifest v2 的资源解析链相互独立；后续安装校验只能在本白名单基础上收紧，不得放宽。</zh-CN>
+    ///   <en>This type is a pure-function policy: it reads no file, database, or HTTP request and performs no extraction or installation. Every decision is fail-closed — unknown, missing, overlong, or malformed input is rejected, and raw untrusted text is never echoed.
+    ///   It follows the OWASP File Upload Cheat Sheet (allow-list, validation after decoding, server-generated names, size limits, ZIP as a high-risk carrier) and Microsoft Learn "Best practices for working with ZIP and TAR archives in .NET" (decompressed size and entry-count limits, destination-path validation).
+    ///   This allow-list defines only what may land in the isolated staging area; it is independent of the manifest v2 resource parser, and later installation checks may only narrow it, never broaden it.</en>
+    /// </lang>
+    /// </remarks>
+    public static class PortalOnlinePackagePolicy
+    {
+        /// <summary><lang><zh-CN>唯一允许的包文件扩展名；不引入 TAR、GZip 或其它可携带文件系统元数据的容器。</zh-CN><en>The only permitted package-file extension; TAR, GZip, and other containers carrying filesystem metadata are not introduced.</en></lang></summary>
+        public const string PackageExtension = ".zip";
+
+        /// <summary><lang><zh-CN>单个上传包压缩后最大字节数（10 MiB），与预设计稿中对管理员可见的约束一致。</zh-CN><en>Maximum compressed bytes for one uploaded package (10 MiB), matching the constraint shown to administrators in the prototype.</en></lang></summary>
+        public const int MaximumPackageBytes = 10485760;
+
+        /// <summary><lang><zh-CN>单个包允许的最大 ZIP 条目数，用于拒绝「大量小条目」型扁平压缩包炸弹。</zh-CN><en>Maximum ZIP entry count per package, rejecting flat compression bombs made of many small entries.</en></lang></summary>
+        public const int MaximumEntryCount = 200;
+
+        /// <summary><lang><zh-CN>单个包解压后累计最大字节数（64 MiB），按条目声明长度在解压前判定。</zh-CN><en>Maximum cumulative decompressed bytes per package (64 MiB), decided from declared entry lengths before extraction.</en></lang></summary>
+        public const long MaximumTotalDecompressedBytes = 67108864L;
+
+        /// <summary><lang><zh-CN>单个 ZIP 条目声明的最大解压字节数（16 MiB）。</zh-CN><en>Maximum declared decompressed bytes for a single ZIP entry (16 MiB).</en></lang></summary>
+        public const long MaximumSingleEntryBytes = 16777216L;
+
+        /// <summary><lang><zh-CN>隔离暂存区的应用相对虚拟路径，位于 App_Data 下、不可被 URL 直接服务。</zh-CN><en>Application-relative virtual path of the isolated staging area, under App_Data and not directly URL-servable.</en></lang></summary>
+        public const string StagingVirtualDirectory = "~/App_Data/OnlinePackages/Staging";
+
+        /// <summary><lang><zh-CN>ZIP 条目名允许的最大字符数，防止超长路径导致文件系统异常或诊断信息膨胀。</zh-CN><en>Maximum characters in a ZIP entry name, preventing filesystem errors and diagnostic bloat from overlong paths.</en></lang></summary>
+        public const int MaximumEntryNameLength = 240;
+
+        /// <summary><lang><zh-CN>包唯一可声明的 MIME 类型，仅作快速提示；绝不作为安全判定依据（Content-Type 可伪造）。</zh-CN><en>The only MIME type a package may declare; a quick hint only, never a security decision (Content-Type is spoofable).</en></lang></summary>
+        public const string PackageContentType = "application/zip";
+
+        // <lang>
+        //   <zh-CN>隔离暂存阶段允许落地的条目扩展名硬集合。仅容纳 manifest、静态资源、模块用户控件与说明文本；
+        //   显式排除 .config（防上传 web.config 覆盖目录配置）、.aspx/.cs/.dll/.exe/.js（脚本/页面/程序集）与 .zip（防嵌套炸弹）。
+        //   该集合与 manifest v2 的资源白名单同向但不等同：此集合的作用是让危险文件连隔离目录都无法落入。</zh-CN>
+        //   <en>Hard allow-list of entry extensions that may land in the isolated staging area. It admits a manifest, static resources, a module user control, and text notes only;
+        //   it explicitly excludes .config (to stop a web.config from overriding directory settings), .aspx/.cs/.dll/.exe/.js (scripts, pages, assemblies), and .zip (nested bombs).
+        //   It aligns with, but is not equal to, the manifest v2 resource allow-list: its purpose is to keep dangerous files out of even the isolated directory.</en>
+        // </lang>
+        private static readonly ISet<string> AllowedEntryExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ".json",
+            ".css",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".gif",
+            ".webp",
+            ".ascx",
+            ".txt",
+            ".md"
+        };
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>校验一次包上传的客户端文件名与压缩体积；不读取文件内容，也不信任 Content-Type。</zh-CN>
+        ///   <en>Validates the client file name and compressed size of one package upload; it reads no file content and trusts no Content-Type.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="clientFileName"><l zh-CN="浏览器提交的原始文件名，仅作元数据，可为 null。" en="Raw browser-supplied file name, metadata only; may be null." /></param>
+        /// <param name="compressedSize"><l zh-CN="上传流的字节数，必须为正且不超过包体积上限。" en="Byte length of the uploaded stream; must be positive and within the package size limit." /></param>
+        /// <param name="reason"><l zh-CN="拒绝原因的稳定短语，不回显原始文件名；通过时为空字符串。" en="Stable rejection phrase that never echoes the raw file name; empty on success." /></param>
+        /// <returns><l zh-CN="文件名与体积均合规时为 true。" en="True when both the file name and size comply." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>文件名只用于取扩展名与展示，绝不参与存储路径构造；物理存储名由 CreateStorageName 服务端生成。</zh-CN>
+        ///   <en>The file name is used only to read its extension and for display; it never contributes to a storage path — CreateStorageName generates physical names server-side.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool TryValidatePackageFile(string clientFileName, int compressedSize, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证所有提前返回都不留下未初始化的原因文本。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>体积必须是正数且不超过硬上限；零字节包不可能是合法 manifest 包，负值属调用方错误一律拒绝。</zh-CN>
+            //   <en>The size must be positive and within the hard cap; a zero-byte package cannot hold a valid manifest, and a negative value is a caller error.</en>
+            // </lang>
+            if (compressedSize <= 0)
+            {
+                reason = "Package is empty.";
+                return false;
+            }
+            if (compressedSize > MaximumPackageBytes)
+            {
+                reason = string.Format(CultureInfo.InvariantCulture, "Package exceeds the {0} byte compressed-size limit.", MaximumPackageBytes);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>空文件名无法取扩展名，按拒绝处理；不做 Trim 以保留原始证据但不使用其结果构造路径。</zh-CN>
+            //   <en>A blank file name has no extension and is rejected; no trimming is applied, and its text is never used to build a path.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(clientFileName))
+            {
+                reason = "Package file name is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>文件名长度上限防止超长输入进入诊断与日志路径；不含路径分隔符与冒号，避免 NTFS 备用数据流与目录穿越。</zh-CN>
+            //   <en>A length cap keeps overlong input out of diagnostics and logs; path separators and colons are rejected to prevent NTFS alternate data streams and traversal.</en>
+            // </lang>
+            if (clientFileName.Length > MaximumEntryNameLength ||
+                clientFileName.IndexOf(':') >= 0 ||
+                clientFileName.IndexOf('/') >= 0 ||
+                clientFileName.IndexOf('\\') >= 0)
+            {
+                reason = "Package file name contains unsupported characters or is too long.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符拒绝控制字符与通配符；这些在 Windows 文件名或 IIS 过滤器下可能改变实际落地形态。</zh-CN>
+            //   <en>Reject control characters and wildcards one by one; on Windows or under IIS filtering they can change the actual on-disk shape.</en>
+            // </lang>
+            foreach (char character in clientFileName)
+            {
+                // <lang>
+                //   <zh-CN>控制字符、通配符与双引号是文件名净化已知绕过点，任一命中即整包拒绝。</zh-CN>
+                //   <en>Control characters, wildcards, and quotes are known filename-sanitisation bypasses; any hit rejects the whole package.</en>
+                // </lang>
+                if (char.IsControl(character) || character == '*' || character == '?' || character == '"' ||
+                    character == '<' || character == '>' || character == '|')
+                {
+                    reason = "Package file name contains unsupported characters.";
+                    return false;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>扩展名在「原始文本」上判定（不解码、不折叠多余空白），且必须精确等于唯一允许值；
+            //   .zip.aspx、.zip.php 等双扩展名因末段扩展名不匹配而自然被拒，不做黑名单式枚举。</zh-CN>
+            //   <en>The extension is taken from the raw text (no decoding, no whitespace folding) and must equal the single allowed value exactly;
+            //   double extensions such as .zip.aspx are rejected because the final extension differs, without any block-list enumeration.</en>
+            // </lang>
+            string extension = Path.GetExtension(clientFileName);
+            if (!string.Equals(extension, PackageExtension, StringComparison.OrdinalIgnoreCase))
+            {
+                reason = "Package extension is not allowed.";
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>校验 ZIP 条目名是否可作为隔离目录内的相对路径，并拒绝绝对路径、父级跳转、盘符、冒号与控制字符。</zh-CN>
+        ///   <en>Validates a ZIP entry name as a relative path inside the isolated directory, rejecting rooted paths, parent traversal, drive prefixes, colons, and control characters.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="entryName"><l zh-CN="ZIP 中央目录中的原始条目名，可为 null。" en="Raw entry name from the ZIP central directory; may be null." /></param>
+        /// <param name="reason"><l zh-CN="拒绝原因的稳定短语，不回显条目名。" en="Stable rejection phrase that never echoes the entry name." /></param>
+        /// <returns><l zh-CN="条目名可安全参与路径解析时为 true。" en="True when the entry name may safely take part in path resolution." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法只做「名字本身」的策略校验；真正的路径边界断言由 PortalOnlinePackageStaging 用 Path.GetFullPath + StartsWith 完成，两者缺一不可。</zh-CN>
+        ///   <en>This method validates the name itself; the actual destination-boundary assertion is performed by PortalOnlinePackageStaging with Path.GetFullPath + StartsWith. Both are required.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool IsAllowedEntryName(string entryName, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，避免提前返回留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>空条目名与超长条目名都拒绝；ZIP 目录条目以 '/' 结尾，属合法形态并单独处理。</zh-CN>
+            //   <en>Blank and overlong entry names are rejected; ZIP directory entries end with '/' and are handled as a valid shape.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(entryName) || entryName.Length > MaximumEntryNameLength)
+            {
+                reason = "Archive entry name is missing or too long.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>冒号同时覆盖 Windows 盘符与 NTFS 备用数据流；反斜杠在 ZIP 里不应用作分隔符，但仍按路径段拆解后校验。</zh-CN>
+            //   <en>A colon covers both Windows drive prefixes and NTFS alternate data streams; backslashes should not be ZIP separators but are still checked after segment splitting.</en>
+            // </lang>
+            if (entryName.IndexOf(':') >= 0 || entryName.IndexOf('\0') >= 0)
+            {
+                reason = "Archive entry name contains unsupported characters.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符拒绝控制字符与通配符，口径与包文件名校验一致，避免两端策略漂移。</zh-CN>
+            //   <en>Reject control characters and wildcards one by one, matching the package-file policy so the two ends cannot drift apart.</en>
+            // </lang>
+            foreach (char character in entryName)
+            {
+                // <lang>
+                //   <zh-CN>任一无害性未知的字符均按拒绝处理，属 allow-list 之外的输入。</zh-CN>
+                //   <en>Any character whose safety is unknown is rejected as input outside the allow-list.</en>
+                // </lang>
+                if (char.IsControl(character) || character == '*' || character == '?' || character == '"' ||
+                    character == '<' || character == '>' || character == '|')
+                {
+                    reason = "Archive entry name contains unsupported characters.";
+                    return false;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>把 '\' 与 '/' 都视作分隔符逐段检查：空段（连续分隔符）、'.' 与 '..' 一律拒绝，
+            //   从名字层面提前消除父级跳转；后续仍由 GetFullPath 做最终边界断言（纵深防御）。</zh-CN>
+            //   <en>Treat both '\' and '/' as separators and inspect each segment: empty segments (consecutive separators), '.', and '..' are rejected,
+            //   removing parent traversal at the name level; GetFullPath still performs the final boundary assertion (defence in depth).</en>
+            // </lang>
+            string[] segments = entryName.Split(new char[] { '/', '\\' });
+            for (int index = 0; index < segments.Length; index++)
+            {
+                // <lang>
+                //   <zh-CN>承接当前路径段，供后续片段判定使用；索引用于区分「末尾空段」与其它空段。</zh-CN>
+                //   <en>Holds the current path segment for the checks below; the index distinguishes a trailing empty segment from all other empty segments.</en>
+                // </lang>
+                string segment = segments[index];
+
+                // <lang>
+                //   <zh-CN>仅「最后一个空段」（目录条目以分隔符结尾）合法；前导分隔符代表根绝对路径、
+                //   连续分隔符代表畸形路径，二者都必须拒绝，否则会把 /absolute/file 当作相对条目。</zh-CN>
+                //   <en>Only the final empty segment (a directory entry ending in a separator) is legitimate; a leading separator denotes a rooted absolute path
+                //   and consecutive separators a malformed path. Both must be rejected, otherwise /absolute/file would be treated as relative.</en>
+                // </lang>
+                if (segment.Length == 0)
+                {
+                    if (index == segments.Length - 1)
+                    {
+                        continue;
+                    }
+                    reason = "Archive entry name contains an empty path segment.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>'.' 与 '..' 是路径穿越的核心片段，拒绝而非规范化，避免把恶意输入「洗白」。</zh-CN>
+                //   <en>'.' and '..' are the core traversal fragments; reject rather than normalise so malicious input is never "washed clean".</en>
+                // </lang>
+                if (string.Equals(segment, ".", StringComparison.Ordinal) ||
+                    string.Equals(segment, "..", StringComparison.Ordinal))
+                {
+                    reason = "Archive entry name contains a traversal segment.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>前导点隐藏文件与尾随点/空格（Windows 会静默去除）均拒绝，防止落地名与校验名不一致。</zh-CN>
+                //   <en>Leading-dot hidden files and trailing dots/spaces (silently stripped on Windows) are rejected so the landed name cannot differ from the validated name.</en>
+                // </lang>
+                if (segment.StartsWith(".", StringComparison.Ordinal) ||
+                    segment.EndsWith(".", StringComparison.Ordinal) ||
+                    segment.EndsWith(" ", StringComparison.Ordinal))
+                {
+                    reason = "Archive entry name contains an unsafe path segment.";
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>校验 ZIP 条目的扩展名是否属于隔离暂存阶段硬允许集；目录条目（以分隔符结尾）单独放行。</zh-CN>
+        ///   <en>Validates a ZIP entry extension against the isolated-staging hard allow-list; directory entries (ending in a separator) are allowed separately.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="entryName"><l zh-CN="已通过 IsAllowedEntryName 的条目名。" en="Entry name that already passed IsAllowedEntryName." /></param>
+        /// <param name="reason"><l zh-CN="拒绝原因的稳定短语，不回显条目名。" en="Stable rejection phrase that never echoes the entry name." /></param>
+        /// <returns><l zh-CN="文件类型允许落地时为 true。" en="True when the file type may land in the staging area." /></returns>
+        public static bool IsAllowedEntryExtension(string entryName, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>目录条目无扩展名，属 ZIP 正常结构，放行；其路径边界仍由暂存器断言。</zh-CN>
+            //   <en>Directory entries have no extension and are a normal ZIP shape; their path boundary is still asserted by the staging class.</en>
+            // </lang>
+            if (entryName.EndsWith("/", StringComparison.Ordinal) || entryName.EndsWith("\\", StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>取末段扩展名并与硬允许集精确比对；无扩展名、双扩展名的末段不在集合内即拒绝。</zh-CN>
+            //   <en>Take the final extension and compare it exactly against the hard allow-list; extensionless names and the final extension of double extensions are rejected unless listed.</en>
+            // </lang>
+            string extension = Path.GetExtension(entryName);
+            if (string.IsNullOrEmpty(extension) || !AllowedEntryExtensions.Contains(extension))
+            {
+                reason = "Archive entry type is not allowed in the staging area.";
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按 ZIP 条目声明长度在解压前校验条目数、单条目上限与解压后累计上限（zip bomb 防护）。</zh-CN>
+        ///   <en>Validates entry count, per-entry cap, and cumulative decompressed size from declared ZIP entry lengths before extraction (zip-bomb defence).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="declaredLengths"><l zh-CN="每个条目的声明解压字节数序列，不能为 null。" en="Sequence of declared decompressed byte counts, one per entry; cannot be null." /></param>
+        /// <param name="reason"><l zh-CN="拒绝原因的稳定短语。" en="Stable rejection phrase." /></param>
+        /// <returns><l zh-CN="全部体积约束满足时为 true。" en="True when all size constraints are satisfied." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>Microsoft Learn 明确指出 ZipArchive 与 ExtractToDirectory 都不限制解压后总大小与条目数，必须由调用方自行强制；
+        ///   .NET Framework 4.8 不会在读取时自动校验 CRC-32，故本方法只依据声明长度做「上界预算」，完整性另由签名/哈希校验承担。</zh-CN>
+        ///   <en>Microsoft Learn states that neither ZipArchive nor ExtractToDirectory limits total decompressed size or entry count, so callers must enforce both;
+        ///   .NET Framework 4.8 does not auto-validate CRC-32 while reading, so this method only budgets an upper bound from declared lengths and integrity belongs to separate signature/hash checks.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool TryValidateDecompressedBudget(IList<long> declaredLengths, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>null 序列属于调用方错误，按拒绝处理，不解释为「零条目」。</zh-CN>
+            //   <en>A null sequence is a caller error and is rejected rather than interpreted as "zero entries".</en>
+            // </lang>
+            if (declaredLengths == null)
+            {
+                reason = "Archive entry length list is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>条目数上限在遍历前判定，避免为明显超量的中央目录分配任何工作。</zh-CN>
+            //   <en>The entry-count cap is checked before iteration so an obviously oversized central directory causes no further work.</en>
+            // </lang>
+            if (declaredLengths.Count == 0 || declaredLengths.Count > MaximumEntryCount)
+            {
+                reason = string.Format(CultureInfo.InvariantCulture, "Archive entry count is outside the 1..{0} limit.", MaximumEntryCount);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>累计解压字节数；用 checked 加法使溢出立即成为失败而非回绕成小数。</zh-CN>
+            //   <en>Cumulative decompressed byte count; checked addition makes overflow an immediate failure instead of wrapping to a small value.</en>
+            // </lang>
+            long total = 0L;
+            foreach (long declaredLength in declaredLengths)
+            {
+                // <lang>
+                //   <zh-CN>负长度是损坏或伪造的中央目录数据，一律拒绝。</zh-CN>
+                //   <en>A negative length is corrupt or forged central-directory data and is rejected.</en>
+                // </lang>
+                if (declaredLength < 0L)
+                {
+                    reason = "Archive entry declares a negative size.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>单条目上限防止「一个大条目」型炸弹，也把单次写入限制在可控范围。</zh-CN>
+                //   <en>The per-entry cap stops single-large-entry bombs and bounds each individual write.</en>
+                // </lang>
+                if (declaredLength > MaximumSingleEntryBytes)
+                {
+                    reason = string.Format(CultureInfo.InvariantCulture, "Archive entry exceeds the {0} byte per-entry limit.", MaximumSingleEntryBytes);
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>checked 累加后与总量上界比较，任何一步越界都在解压前终止。</zh-CN>
+                //   <en>Accumulate with checked arithmetic and compare against the total cap, terminating before extraction on any breach.</en>
+                // </lang>
+                try
+                {
+                    total = checked(total + declaredLength);
+                }
+                catch (OverflowException)
+                {
+                    reason = "Archive decompressed size overflows the supported range.";
+                    return false;
+                }
+
+                if (total > MaximumTotalDecompressedBytes)
+                {
+                    reason = string.Format(CultureInfo.InvariantCulture, "Archive exceeds the {0} byte total decompressed-size limit.", MaximumTotalDecompressedBytes);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>生成不依赖任何用户输入的物理存储文件名（GUID + 唯一允许扩展名）。</zh-CN>
+        ///   <en>Generates a physical storage file name (GUID plus the single allowed extension) that depends on no user input.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns><l zh-CN="形如 32 位十六进制小写串加 .zip 的存储名。" en="A storage name such as a 32-character lowercase hex string plus .zip." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>依据 OWASP「文件名由服务端生成，用户文件名只作元数据」；攻击者不控制落地路径，从而消除覆盖、8.3 短名别名与特殊设备名攻击面。</zh-CN>
+        ///   <en>Follows OWASP "generate the filename server-side, keep the user name as metadata only"; the attacker controls no landing path, eliminating overwrite, 8.3 short-name alias, and special device-name attacks.</en>
+        /// </lang>
+        /// </remarks>
+        public static string CreateStorageFileName()
+        {
+            // <lang>
+            //   <zh-CN>使用无连字符十六进制格式，得到纯字母数字主名，不含任何需要净化的字符。</zh-CN>
+            //   <en>The "N" format yields a purely alphanumeric stem with no characters requiring sanitisation.</en>
+            // </lang>
+            return Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture) + PackageExtension;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为一次上传生成全新的、应用自控的隔离子目录名。</zh-CN>
+        ///   <en>Generates a fresh, application-controlled isolated subdirectory name for one upload.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns><l zh-CN="形如 pkg- 加 32 位十六进制小写串的目录名。" en="A directory name such as pkg- plus a 32-character lowercase hex string." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>Microsoft Learn 要求不受信任归档解压到「全新的、应用自控的目录」，因为目标目录或其父级若已存在 junction/符号链接，
+        ///   即便路径断言通过仍会写到链接之外；每次上传使用新目录可把该风险限制在单次操作，且失败时可按目录整体清理。</zh-CN>
+        ///   <en>Microsoft Learn requires untrusted archives to be extracted into a fresh, application-controlled directory, because an existing junction or symbolic link
+        ///   in the destination or a parent can redirect writes outside even when path assertions pass; a new directory per upload confines that risk to one operation and allows whole-directory cleanup on failure.</en>
+        /// </lang>
+        /// </remarks>
+        public static string CreateIsolatedDirectoryName()
+        {
+            // <lang>
+            //   <zh-CN>前缀便于运维识别清理对象；GUID 保证与既有条目不冲突。</zh-CN>
+            //   <en>The prefix makes cleanup targets obvious to operators; the GUID guarantees no collision with existing entries.</en>
+            // </lang>
+            return "pkg-" + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>对 MIME 类型做快速一致性提示；返回 false 不表示文件恶意，仅表示与预期包类型不符。</zh-CN>
+        ///   <en>Provides a quick MIME consistency hint; a false result does not imply malice, only a mismatch with the expected package type.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="contentType"><l zh-CN="浏览器声明的 Content-Type，可为 null。" en="Browser-declared Content-Type; may be null." /></param>
+        /// <returns><l zh-CN="等于 application/zip（忽略大小写）时为 true。" en="True when it equals application/zip, ignoring case." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>OWASP 明确 Content-Type 可伪造、不得作为安全依据；本方法只用于给管理员一个早期提示，
+        ///   真正的类型判定由扩展名白名单与后续签名/扫描完成，调用方不得用本方法结果放行文件。</zh-CN>
+        ///   <en>OWASP states Content-Type is spoofable and must not be a security basis; this method only gives administrators an early hint,
+        ///   while the real type decision belongs to the extension allow-list and later signature/scanning. Callers must not use its result to accept a file.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool MatchesDeclaredContentType(string contentType)
+        {
+            // <lang>
+            //   <zh-CN>忽略大小写的精确比较，避免把带参数的复合类型误判为一致。</zh-CN>
+            //   <en>Exact case-insensitive comparison so compound types with parameters are not mistaken for a match.</en>
+            // </lang>
+            return string.Equals(contentType, PackageContentType, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+}

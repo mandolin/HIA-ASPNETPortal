@@ -50,6 +50,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <!-- <lang>
+      <zh-CN>单测用 ZipArchive 在内存中构造包夹具（含穿越条目、危险扩展名、超额体积、缺失清单），
+      因此需要 .NET Framework 4.8 自带的压缩程序集；不引入任何第三方测试依赖。</zh-CN>
+      <en>Unit tests build in-memory package fixtures with ZipArchive (traversal entries, dangerous extensions, oversized payloads, missing manifest),
+      so the .NET Framework 4.8 compression assemblies are referenced; no third-party test dependency is introduced.</en>
+    </lang> -->
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PortalPermissionRegistryTests.cs" />
@@ -78,6 +86,8 @@
     <Compile Include="PortalModuleAssemblyStateTests.cs" />
     <Compile Include="PortalModuleAssemblyAuditTests.cs" />
     <Compile Include="PortalAssemblyStatePermissionTests.cs" />
+    <Compile Include="PortalOnlinePackagePolicyTests.cs" />
+    <Compile Include="PortalOnlinePackageStagingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

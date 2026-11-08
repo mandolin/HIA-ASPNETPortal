@@ -1,0 +1,8 @@
+        public static string CreateIsolatedDirectoryName()
+        {
+            // <lang>
+            //   <zh-CN>前缀便于运维识别清理对象；GUID 保证与既有条目不冲突。</zh-CN>
+            //   <en>The prefix makes cleanup targets obvious to operators; the GUID guarantees no collision with existing entries.</en>
+            // </lang>
+            return "pkg-" + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
+        }

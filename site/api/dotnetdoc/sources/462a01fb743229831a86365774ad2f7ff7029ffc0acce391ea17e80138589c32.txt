@@ -93,6 +93,16 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <!-- <lang>
+      <zh-CN>`System.IO.Compression` 提供 ZipArchive/ZipArchiveEntry，`System.IO.Compression.FileSystem` 提供
+      ZipArchiveEntry.ExtractToFile 扩展方法。二者均为 .NET Framework 4.8 自带程序集，不引入任何第三方依赖；
+      隔离暂存器只使用 Read 模式的流式读取与 overwrite:false 的逐条目解压，不使用 convenience 的 ExtractToDirectory。</zh-CN>
+      <en>`System.IO.Compression` supplies ZipArchive/ZipArchiveEntry and `System.IO.Compression.FileSystem` supplies
+      the ZipArchiveEntry.ExtractToFile extension method. Both ship with .NET Framework 4.8, adding no third-party dependency;
+      the isolated staging class uses only Read-mode streaming and per-entry extraction with overwrite:false, never the convenience ExtractToDirectory.</en>
+    </lang> -->
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAnnouncementItem.cs" />
@@ -222,6 +232,8 @@
     <Compile Include="PortalModuleAssemblyState.cs" />
     <Compile Include="PortalModuleAssemblyAuditFormatter.cs" />
     <Compile Include="AuditSummaryTooLongException.cs" />
+    <Compile Include="PortalOnlinePackagePolicy.cs" />
+    <Compile Include="PortalOnlinePackageStaging.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
