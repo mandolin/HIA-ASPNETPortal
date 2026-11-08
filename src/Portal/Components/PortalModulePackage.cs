@@ -14,6 +14,26 @@ namespace ASPNET.StarterKit.Portal
     /// 已验证的受信任部署模块包元数据。
     /// Metadata for a validated trusted-deployment module package.
     /// </summary>
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>模块承载形态：区分本体核心模块与本体之外以独立能力模块形式提供的模块。</zh-CN>
+    ///   <en>Module hosting form: distinguishes core portal modules from modules provided externally as independent capability modules.</en>
+    /// </lang>
+    /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>缺省为 Core；manifest 仅在显式声明 Independent 时进入独立形态，后者须显式列入部署 Profile 允许集（不被通配符覆盖）。</zh-CN>
+    ///   <en>Defaults to Core; a manifest enters the independent form only when it explicitly declares Independent, which must be explicitly listed in the deployment profile allow-set (not covered by a wildcard).</en>
+    /// </lang>
+    /// </remarks>
+    public enum PortalModuleKind
+    {
+        /// <summary>本体核心模块（默认形态，兼容既有 9 个无 moduleKind 声明的模块）。</summary>
+        Core = 0,
+        /// <summary>本体之外以独立能力模块形式提供的模块；须显式列入部署 Profile 允许集。</summary>
+        Independent = 1
+    }
+
     public sealed class PortalModulePackage
     {
         /// <summary>
@@ -31,7 +51,8 @@ namespace ASPNET.StarterKit.Portal
             string desktopEntry,
             IList<string> resources,
             string capabilityId,
-            string capabilityRole)
+            string capabilityRole,
+            PortalModuleKind moduleKind)
         {
             DirectoryName = directoryName ?? string.Empty;
             PackageId = packageId ?? string.Empty;
@@ -42,6 +63,7 @@ namespace ASPNET.StarterKit.Portal
             Resources = new List<string>(resources ?? new List<string>()).AsReadOnly();
             CapabilityId = capabilityId ?? string.Empty;
             CapabilityRole = capabilityRole ?? string.Empty;
+            ModuleKind = moduleKind;
         }
 
         /// <summary>
@@ -101,6 +123,14 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public string CapabilityRole { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块承载形态：Core（本体核心模块，默认）或 Independent（本体之外以独立能力模块形式提供）。</zh-CN>
+        ///   <en>Module hosting form: Core (core portal module, default) or Independent (provided externally as an independent capability module).</en>
+        /// </lang>
+        /// </summary>
+        public PortalModuleKind ModuleKind { get; private set; }
     }
 
     /// <summary>
@@ -602,7 +632,7 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
-            if (!profile.IsPackageAllowed(package.PackageId))
+            if (!profile.IsPackageAllowed(package))
             {
                 // <lang>
                 //   <zh-CN>已验证部署包先受 Profile 环境边界限制，再考虑状态表；显式启用状态不能越过未允许的 Profile。</zh-CN>
@@ -956,6 +986,23 @@ namespace ASPNET.StarterKit.Portal
                     }
                 }
 
+                // <lang>
+                //   <zh-CN>可选 moduleKind 声明模块承载形态；缺省 Core（兼容既有无声明模块）。仅允许 Core/Independent（忽略大小写），其它值视为 manifest 无效，整包不进可信目录。</zh-CN>
+                //   <en>Optional moduleKind declares the hosting form; default Core (compatible with legacy undeclared modules). Only Core/Independent (case-insensitive) are allowed; any other value is an invalid manifest that keeps the whole package out of the trusted set.</en>
+                // </lang>
+                PortalModuleKind moduleKind = PortalModuleKind.Core;
+                JToken moduleKindToken = manifest["moduleKind"];
+                if (moduleKindToken != null)
+                {
+                    string moduleKindRaw = moduleKindToken.ToString().Trim();
+                    if (!Enum.TryParse<PortalModuleKind>(moduleKindRaw, true, out moduleKind) ||
+                        !Enum.IsDefined(typeof(PortalModuleKind), moduleKind))
+                    {
+                        reason = "Module manifest moduleKind is invalid.";
+                        return false;
+                    }
+                }
+
                 IList<string> resources = ReadAndValidateResources(manifest, packagePath);
                 package = new PortalModulePackage(
                     directoryName,
@@ -966,7 +1013,8 @@ namespace ASPNET.StarterKit.Portal
                     normalizedEntry,
                     resources,
                     capabilityId,
-                    capabilityRole);
+                    capabilityRole,
+                    moduleKind);
                 return true;
             }
             catch (Exception exception) when (

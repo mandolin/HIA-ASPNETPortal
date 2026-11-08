@@ -771,5 +771,43 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             return !string.IsNullOrWhiteSpace(packageId) && allowedPackageSet.Contains(packageId.Trim());
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断一个已解析模块包是否允许进入当前部署 Profile，并考虑其承载形态。</zh-CN>
+        ///   <en>Determines whether a resolved module package is allowed by the current deployment Profile, considering its hosting form.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="package">
+        /// <lang>
+        ///   <zh-CN>已解析模块包；其 ModuleKind 决定通配符是否覆盖。</zh-CN>
+        ///   <en>Resolved module package; its ModuleKind decides whether the wildcard covers it.</en>
+        /// </lang>
+        /// </param>
+        /// <returns>
+        /// <lang>
+        ///   <zh-CN>允许时为 true。</zh-CN>
+        ///   <en>true when allowed.</en>
+        /// </lang>
+        /// </returns>
+        public bool IsPackageAllowed(PortalModulePackage package)
+        {
+            // <lang>
+            //   <zh-CN>空白或空包不是允许包。显式 id 命中即允许；否则仅当 Profile 含通配符 '*' 且模块为 Core 形态时视为允许，Independent 模块必须显式列出。</zh-CN>
+            //   <en>A blank or null package is not allowed. An explicit id match is allowed; otherwise only when the profile contains the wildcard '*' and the module is Core is it treated as allowed; Independent modules must be explicitly listed.</en>
+            // </lang>
+            if (package == null || string.IsNullOrWhiteSpace(package.PackageId))
+            {
+                return false;
+            }
+
+            if (allowedPackageSet.Contains(package.PackageId.Trim()))
+            {
+                return true;
+            }
+
+            bool wildcard = allowedPackageSet.Contains("*");
+            return wildcard && package.ModuleKind == PortalModuleKind.Core;
+        }
     }
 }
