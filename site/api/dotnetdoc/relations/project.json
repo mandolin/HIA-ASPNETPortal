@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6014,
-  "relationCount": 5580,
+  "nodeCount": 6035,
+  "relationCount": 5600,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -4191,6 +4191,20 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength",
+      "kind": "entry",
+      "label": "PackageHashHexLength",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ticketlifetimeminutes",
+      "kind": "entry",
+      "label": "TicketLifetimeMinutes",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ticketlifetimeminutes",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrycount",
       "kind": "entry",
       "label": "MaximumEntryCount",
@@ -5070,6 +5084,20 @@
       "kind": "entry",
       "label": "ModuleDefinitionEdit",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm",
+      "kind": "entry",
+      "label": "ModuleOnlinePackageConfirm",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload",
+      "kind": "entry",
+      "label": "ModuleOnlinePackageUpload",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload",
       "view": "dotnet"
     },
     {
@@ -14880,6 +14908,48 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.fixedtimeequals-system.string-system.string",
+      "kind": "entry",
+      "label": "FixedTimeEquals",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.fixedtimeequals-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ishexsha256-system.string",
+      "kind": "entry",
+      "label": "IsHexSha256",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ishexsha256-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryconfirm-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string-system.string-system.string-system.string-system.boolean-system.datetime-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.boolean-system.string",
+      "kind": "entry",
+      "label": "TryConfirm",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryconfirm-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string-system.string-system.string-system.string-system.boolean-system.datetime-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.boolean-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryissue-system.string-system.string-system.string-system.datetime-system.string-system.boolean-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string",
+      "kind": "entry",
+      "label": "TryIssue",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryissue-system.string-system.string-system.string-system.datetime-system.string-system.boolean-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime",
+      "kind": "entry",
+      "label": "WithConsumed",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.createisolateddirectoryname",
       "kind": "entry",
       "label": "CreateIsolatedDirectoryName",
@@ -24572,6 +24642,62 @@
       "kind": "entry",
       "label": "RoleNames",
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationvisibilitycontext.rolenames",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname",
+      "kind": "entry",
+      "label": "ActorName",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken",
+      "kind": "entry",
+      "label": "AntiForgeryToken",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc",
+      "kind": "entry",
+      "label": "ConsumedUtc",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc",
+      "kind": "entry",
+      "label": "ExpiresUtc",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc",
+      "kind": "entry",
+      "label": "IssuedUtc",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce",
+      "kind": "entry",
+      "label": "Nonce",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash",
+      "kind": "entry",
+      "label": "PackageHash",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
+      "kind": "entry",
+      "label": "PackageStorageName",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
       "view": "dotnet"
     },
     {
@@ -36083,6 +36209,20 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
+      "kind": "entry",
+      "label": "PortalOnlinePackageConfirmationGate",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+      "kind": "entry",
+      "label": "PortalOnlinePackageConfirmationTicket",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy",
       "kind": "entry",
       "label": "PortalOnlinePackagePolicy",
@@ -40017,6 +40157,12 @@
       "kind": "source",
       "label": "src/Portal.Components/PortalNavigationVisibilityPolicy.cs",
       "path": "src/Portal.Components/PortalNavigationVisibilityPolicy.cs"
+    },
+    {
+      "id": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "path": "src/Portal.Components/PortalOnlinePackageConfirmation.cs"
     },
     {
       "id": "source:src/Portal.Components/PortalOnlinePackagePolicy.cs",
@@ -49410,6 +49556,32 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.packagehashhexlength",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 127,
+        "rangeEndLine": 127
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ticketlifetimeminutes->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ticketlifetimeminutes",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ticketlifetimeminutes",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 124,
+        "rangeEndLine": 124
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrycount->source:src/Portal.Components/PortalOnlinePackagePolicy.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.maximumentrycount",
@@ -50731,8 +50903,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentrawhtmledit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 407,
-        "rangeEndLine": 407
+        "rangeStartLine": 437,
+        "rangeEndLine": 437
       }
     },
     {
@@ -50744,8 +50916,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentuploadmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 415,
-        "rangeEndLine": 415
+        "rangeStartLine": 445,
+        "rangeEndLine": 445
       }
     },
     {
@@ -50900,8 +51072,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 452,
-        "rangeEndLine": 452
+        "rangeStartLine": 482,
+        "rangeEndLine": 482
       }
     },
     {
@@ -50913,8 +51085,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 460,
-        "rangeEndLine": 460
+        "rangeStartLine": 490,
+        "rangeEndLine": 490
       }
     },
     {
@@ -50926,8 +51098,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 436,
-        "rangeEndLine": 436
+        "rangeStartLine": 466,
+        "rangeEndLine": 466
       }
     },
     {
@@ -50939,8 +51111,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 444,
-        "rangeEndLine": 444
+        "rangeStartLine": 474,
+        "rangeEndLine": 474
       }
     },
     {
@@ -50952,8 +51124,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 468,
-        "rangeEndLine": 468
+        "rangeStartLine": 498,
+        "rangeEndLine": 498
       }
     },
     {
@@ -50965,8 +51137,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 476,
-        "rangeEndLine": 476
+        "rangeStartLine": 506,
+        "rangeEndLine": 506
       }
     },
     {
@@ -50978,8 +51150,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 428,
-        "rangeEndLine": 428
+        "rangeStartLine": 458,
+        "rangeEndLine": 458
       }
     },
     {
@@ -51048,6 +51220,32 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 413,
+        "rangeEndLine": 413
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 399,
+        "rangeEndLine": 399
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opsdiagnosticsdetail->source:src/Portal.Components/PortalPermissions.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opsdiagnosticsdetail",
@@ -51095,8 +51293,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portalmodulesedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 399,
-        "rangeEndLine": 399
+        "rangeStartLine": 429,
+        "rangeEndLine": 429
       }
     },
     {
@@ -51108,8 +51306,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 391,
-        "rangeEndLine": 391
+        "rangeStartLine": 421,
+        "rangeEndLine": 421
       }
     },
     {
@@ -69261,6 +69459,84 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.fixedtimeequals-system.string-system.string->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.fixedtimeequals-system.string-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.fixedtimeequals-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 433,
+        "rangeEndLine": 467
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ishexsha256-system.string->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ishexsha256-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.ishexsha256-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 391,
+        "rangeEndLine": 422
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryconfirm-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string-system.string-system.string-system.string-system.boolean-system.datetime-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.boolean-system.string->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryconfirm-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string-system.string-system.string-system.string-system.boolean-system.datetime-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.boolean-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryconfirm-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string-system.string-system.string-system.string-system.boolean-system.datetime-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.boolean-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 262,
+        "rangeEndLine": 381
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryissue-system.string-system.string-system.string-system.datetime-system.string-system.boolean-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryissue-system.string-system.string-system.string-system.datetime-system.string-system.boolean-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationgate.tryissue-system.string-system.string-system.string-system.datetime-system.string-system.boolean-aspnet.starterkit.portal.portalonlinepackageconfirmationticket-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 144,
+        "rangeEndLine": 233
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 55,
+        "rangeEndLine": 76
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 86,
+        "rangeEndLine": 96
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.createisolateddirectoryname->source:src/Portal.Components/PortalOnlinePackagePolicy.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagepolicy.createisolateddirectoryname",
@@ -69958,8 +70234,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 517,
-        "rangeEndLine": 522
+        "rangeStartLine": 547,
+        "rangeEndLine": 552
       }
     },
     {
@@ -69971,8 +70247,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 679,
-        "rangeEndLine": 682
+        "rangeStartLine": 720,
+        "rangeEndLine": 723
       }
     },
     {
@@ -69984,8 +70260,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 714,
-        "rangeEndLine": 730
+        "rangeStartLine": 755,
+        "rangeEndLine": 771
       }
     },
     {
@@ -69997,8 +70273,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 756,
-        "rangeEndLine": 769
+        "rangeStartLine": 797,
+        "rangeEndLine": 810
       }
     },
     {
@@ -87266,6 +87542,110 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 32,
+        "rangeEndLine": 32
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 29,
+        "rangeEndLine": 29
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 47,
+        "rangeEndLine": 47
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 44,
+        "rangeEndLine": 44
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 41,
+        "rangeEndLine": 41
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 26,
+        "rangeEndLine": 26
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 38,
+        "rangeEndLine": 38
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 35,
+        "rangeEndLine": 35
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditentry.action->source:src/Portal/Components/PortalOperationAudit.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditentry.action",
@@ -87716,8 +88096,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.category",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 538,
-        "rangeEndLine": 538
+        "rangeStartLine": 568,
+        "rangeEndLine": 568
       }
     },
     {
@@ -87729,8 +88109,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.description",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 546,
-        "rangeEndLine": 546
+        "rangeStartLine": 576,
+        "rangeEndLine": 576
       }
     },
     {
@@ -87742,8 +88122,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.key",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 530,
-        "rangeEndLine": 530
+        "rangeStartLine": 560,
+        "rangeEndLine": 560
       }
     },
     {
@@ -87755,8 +88135,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 650,
-        "rangeEndLine": 653
+        "rangeStartLine": 691,
+        "rangeEndLine": 694
       }
     },
     {
@@ -104799,7 +105179,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 264
+        "rangeEndLine": 265
       }
     },
     {
@@ -104838,7 +105218,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 105
+        "rangeEndLine": 107
       }
     },
     {
@@ -108638,6 +109018,32 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 121,
+        "rangeEndLine": 468
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket->source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+      "to": "source:src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 23,
+        "rangeEndLine": 97
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy->source:src/Portal.Components/PortalOnlinePackagePolicy.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagepolicy",
@@ -108867,8 +109273,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissiondefinition",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 485,
-        "rangeEndLine": 547
+        "rangeStartLine": 515,
+        "rangeEndLine": 577
       }
     },
     {
@@ -108893,8 +109299,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissionregistry",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 561,
-        "rangeEndLine": 770
+        "rangeStartLine": 591,
+        "rangeEndLine": 811
       }
     },
     {

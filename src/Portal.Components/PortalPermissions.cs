@@ -384,6 +384,36 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>发起在线能力包上传（第一步）：把包送入隔离暂存区并触发校验。与「确认安装」分离，且不与
+        ///   `Module.Catalog.Edit`（启停已部署包）、`Module.AssemblyState.Edit`（装配态声明）、`EnterpriseCapability.*`（能力层治理）混用。
+        ///   **A 级硬边界**：本键只表达「谁能发起上传」，不因包的来源声明或 `module.json` 中的 capability 字段自动授予；
+        ///   经此通道安装的第三方模块不得因此获得 `Admins` 角色，也不得自创能力条目。</zh-CN>
+        ///   <en>Initiate an online capability package upload (step one): send the package into the isolated staging area and trigger validation.
+        ///   Separate from "confirm install" and distinct from `Module.Catalog.Edit` (enable/disable deployed packages), `Module.AssemblyState.Edit`
+        ///   (assembly-state declarations), and `EnterpriseCapability.*` (capability-layer governance).
+        ///   **A-level hard boundary**: this key expresses only "who may initiate an upload"; it is never granted automatically from a package's
+        ///   origin claim or the capability field in module.json. A third-party module installed through this channel must not gain the
+        ///   `Admins` role or create capability entries of its own.</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleOnlinePackageUpload = "Module.OnlinePackage.Upload";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>确认安装已通过校验的隔离暂存包（第二步）：必须由独立账号动作显式触发，并与上传动作分离判定权限，
+        ///   防止「上传即安装」被单步跳过。与 `Module.OnlinePackage.Upload` 不共用同一键，确保双步确认闸可在服务端二次鉴权。
+        ///   **A 级硬边界**：来源与能力声明永不作为授权依据；本键不授予 `Admins` 角色，也不扩大任何角色到管理员作用域。</zh-CN>
+        ///   <en>Confirm installation of a validated, isolated staged package (step two): must be explicitly triggered by a separate account action,
+        ///   with permission judged independently of the upload action so "upload means installed" cannot be skipped in one step.
+        ///   It does not share a key with `Module.OnlinePackage.Upload`, letting the two-step gate re-authorize on the server.
+        ///   **A-level hard boundary**: origin and capability claims are never an authorization basis; this key grants no `Admins` role
+        ///   and extends no role into administrator scope.</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleOnlinePackageConfirm = "Module.OnlinePackage.Confirm";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>编辑门户 Tab。</zh-CN>
         ///   <en>Edit Portal Tabs.</en>
         /// </lang>
@@ -610,6 +640,17 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleDefinitionEdit, "Module", "编辑模块定义。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleAssemblyStateView, "Module", "查看模块装配态台账与装配态审计（与模块包管理、主题、内容编辑互不混用）。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleAssemblyStateEdit, "Module", "编辑模块装配态台账声明（本周期离线工具不连库、不切换装配态，暂未授予角色）。"),
+            // <lang>
+            //   <zh-CN>在线能力包双步确认键族落在 Module 域：`Upload` 与 `Confirm` 分离，服务端可二次鉴权。
+            //   这两条只登记为稳定定义，角色种子仅纳入 Admins 兼容授权，不向任何非管理员角色授予；
+            //   不复用能力层 `EnterpriseCapability.*`（语义为能力层治理，与上传/安装动作错配）。</zh-CN>
+            //   <en>The online-package two-step confirmation keys live in the Module domain: `Upload` and `Confirm` are separate
+            //   so the server can re-authorize. Both are registered as stable definitions only; the role seed adds them to the
+            //   Admins compatibility grant and grants them to no non-administrator role. The capability-layer `EnterpriseCapability.*`
+            //   family is not reused because it governs capability layers, not upload/install actions.</en>
+            // </lang>
+            new PortalPermissionDefinition(PortalPermissionKeys.ModuleOnlinePackageUpload, "Module", "发起在线能力包上传（第一步，仅送入隔离暂存区，不安装）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ModuleOnlinePackageConfirm, "Module", "确认安装已校验的隔离暂存包（第二步，显式动作，与上传分离）。"),
             new PortalPermissionDefinition(PortalPermissionKeys.PortalTabsEdit, "PortalStructure", "编辑门户 Tab。"),
             new PortalPermissionDefinition(PortalPermissionKeys.PortalModulesEdit, "PortalStructure", "编辑门户模块实例和布局。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ContentRawHtmlEdit, "Content", "编辑原始 HTML 内容。"),

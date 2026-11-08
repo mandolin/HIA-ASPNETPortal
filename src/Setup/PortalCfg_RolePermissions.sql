@@ -158,7 +158,18 @@ BEGIN
         (N'EnterpriseCapability.BasicBusiness.Manage'),
         (N'EnterpriseCapability.BasicBusiness.Review'),
         (N'EnterpriseCapability.Platform.Manage'),
-        (N'EnterpriseCapability.Platform.Review');
+        (N'EnterpriseCapability.Platform.Review'),
+        -- <lang>
+        --   <zh-CN>在线能力包双步确认键（Module 域）：仅纳入 Admins 兼容授权清单，与其余键同样只插入缺失映射。
+        --   **A 级硬边界**：不向任何非管理员角色授予；上传/确认权限不因包的来源声明或 capability 字段自动获得；
+        --   第三方模块不得借此获得 Admins 角色。两键分离使服务端可在确认阶段二次鉴权。</zh-CN>
+        --   <en>Online package two-step confirmation keys (Module domain): added only to the Admins compatibility grant,
+        --   inserting missing mappings exactly like the other keys. **A-level hard boundary**: granted to no non-administrator
+        --   role; upload/confirm permission is never inferred from a package origin claim or capability field; a third-party
+        --   module must not gain the Admins role through them. Keeping the keys separate lets the server re-authorize at confirmation.</en>
+        -- </lang>
+        (N'Module.OnlinePackage.Upload'),
+        (N'Module.OnlinePackage.Confirm');
 
     -- <lang>
     --   <zh-CN>只插入缺失授权，保留管理员已存在映射的启停状态、更新时间和备注。</zh-CN>

@@ -1,0 +1,75 @@
+    public sealed class PortalOnlinePackageConfirmationTicket
+    {
+        /// <summary><lang><zh-CN>一次性随机票据标识，用于索引与防重放。</zh-CN><en>One-time random ticket identifier used for lookup and replay defence.</en></lang></summary>
+        public string Nonce { get; private set; }
+
+        /// <summary><lang><zh-CN>防伪同步令牌（CSRF synchroniser token），与 Nonce 独立生成，须由表单隐藏字段回传。</zh-CN><en>Anti-forgery synchroniser token (CSRF), generated independently of the Nonce and returned through a hidden form field.</en></lang></summary>
+        public string AntiForgeryToken { get; private set; }
+
+        /// <summary><lang><zh-CN>发起上传的账号名；确认时必须一致。</zh-CN><en>Account name that initiated the upload; must match at confirmation.</en></lang></summary>
+        public string ActorName { get; private set; }
+
+        /// <summary><lang><zh-CN>隔离暂存区内服务端生成的包存储名，不来自用户文件名。</zh-CN><en>Server-generated package storage name in the isolated staging area, never derived from a user file name.</en></lang></summary>
+        public string PackageStorageName { get; private set; }
+
+        /// <summary><lang><zh-CN>包内容的 SHA-256 十六进制摘要；确认时须与暂存包当前哈希一致。</zh-CN><en>SHA-256 hex digest of package content; must match the staged package hash at confirmation.</en></lang></summary>
+        public string PackageHash { get; private set; }
+
+        /// <summary><lang><zh-CN>签发时间（UTC）。</zh-CN><en>Issue time (UTC).</en></lang></summary>
+        public DateTime IssuedUtc { get; private set; }
+
+        /// <summary><lang><zh-CN>过期时间（UTC），超过即拒绝确认。</zh-CN><en>Expiry time (UTC); confirmation is rejected afterwards.</en></lang></summary>
+        public DateTime ExpiresUtc { get; private set; }
+
+        /// <summary><lang><zh-CN>消费时间（UTC）；null 表示尚未消费，非空表示本票据已被一次性使用。</zh-CN><en>Consumption time (UTC); null means unused, non-null means this one-time ticket has been used.</en></lang></summary>
+        public DateTime? ConsumedUtc { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>由服务端签发构造票据；调用方须保证所有字段已通过校验。</zh-CN>
+        ///   <en>Constructs a ticket from a server-side issuance; callers must ensure every field passed validation.</en>
+        /// </lang>
+        /// </summary>
+        internal PortalOnlinePackageConfirmationTicket(
+            string nonce,
+            string antiForgeryToken,
+            string actorName,
+            string packageStorageName,
+            string packageHash,
+            DateTime issuedUtc,
+            DateTime expiresUtc)
+        {
+            // <lang>
+            //   <zh-CN>逐项赋值；不在此处做 Trim 或大小写折叠，保持服务端签发的原始值可被精确比对。</zh-CN>
+            //   <en>Assign each field without trimming or case folding, preserving the server-issued values for exact comparison.</en>
+            // </lang>
+            Nonce = nonce;
+            AntiForgeryToken = antiForgeryToken;
+            ActorName = actorName;
+            PackageStorageName = packageStorageName;
+            PackageHash = packageHash;
+            IssuedUtc = issuedUtc;
+            ExpiresUtc = expiresUtc;
+            ConsumedUtc = null;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>返回仅消费标记不同的新票据，原票据保持不变（不可变值对象）。</zh-CN>
+        ///   <en>Returns a new ticket differing only in the consumption marker, leaving the original unchanged (immutable value object).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="consumedUtc"><l zh-CN="消费时间（UTC）。" en="Consumption time (UTC)." /></param>
+        /// <returns><l zh-CN="已消费的新票据。" en="A new, consumed ticket." /></returns>
+        internal PortalOnlinePackageConfirmationTicket WithConsumed(DateTime consumedUtc)
+        {
+            // <lang>
+            //   <zh-CN>复用同一构造入口复制全部字段，再单独设置消费时间，避免字段漂移或漏拷。</zh-CN>
+            //   <en>Copy every field through the same constructor, then set consumption separately, so no field can drift or be omitted.</en>
+            // </lang>
+            PortalOnlinePackageConfirmationTicket copy = new PortalOnlinePackageConfirmationTicket(
+                Nonce, AntiForgeryToken, ActorName, PackageStorageName, PackageHash, IssuedUtc, ExpiresUtc);
+            copy.ConsumedUtc = consumedUtc;
+            return copy;
+        }
+    }

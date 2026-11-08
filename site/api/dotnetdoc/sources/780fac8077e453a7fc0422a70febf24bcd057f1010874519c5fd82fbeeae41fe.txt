@@ -1,0 +1,1 @@
+        public const int PackageHashHexLength = 64;

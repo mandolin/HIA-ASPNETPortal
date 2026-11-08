@@ -1,0 +1,90 @@
+        public static bool TryIssue(
+            string actorName,
+            string packageStorageName,
+            string packageHash,
+            DateTime issuedUtc,
+            string uploadPermissionKey,
+            bool uploadGranted,
+            out PortalOnlinePackageConfirmationTicket ticket,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证所有提前返回都不留下半签发票据或未初始化原因。</zh-CN>
+            //   <en>Initialise outputs to the failure state so no early return leaves a half-issued ticket or an uninitialised reason.</en>
+            // </lang>
+            ticket = null;
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>权限键必须是注册表内已定义且精确的上传键：既防止用确认键冒签，也防止传入角色名或来源声明冒充权限。</zh-CN>
+            //   <en>The key must be an exactly registered upload key: this prevents signing with the confirm key and blocks role names or origin claims from impersonating a permission.</en>
+            // </lang>
+            if (!PortalPermissionRegistry.IsDefined(uploadPermissionKey) ||
+                !string.Equals(uploadPermissionKey, PortalPermissionKeys.ModuleOnlinePackageUpload, StringComparison.Ordinal))
+            {
+                reason = "Upload permission key is not the registered online-package upload key.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>二次确认「页面层确实判定了权限」；不读取任何请求数据，权限结论只能由 EnsurePermission 传入。</zh-CN>
+            //   <en>Require the page-layer verdict as well; no request data is read, and the verdict can only come from EnsurePermission.</en>
+            // </lang>
+            if (!uploadGranted)
+            {
+                reason = "Online package upload permission is not granted.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>账号名、存储名与哈希都必须存在；空白账号会使票据失去「谁发起」的绑定。</zh-CN>
+            //   <en>Actor, storage name, and hash must all be present; a blank actor would break the "who initiated" binding.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(actorName) || string.IsNullOrWhiteSpace(packageStorageName) ||
+                string.IsNullOrWhiteSpace(packageHash))
+            {
+                reason = "Ticket binding input is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>哈希必须是定长十六进制，避免把任意文本（含伪造声明）当作内容摘要传入。</zh-CN>
+            //   <en>The hash must be fixed-length hexadecimal so arbitrary text (including forged claims) cannot be passed off as a content digest.</en>
+            // </lang>
+            if (!IsHexSha256(packageHash))
+            {
+                reason = "Package hash is not a SHA-256 hex digest.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>签发时间必须是 UTC 且不是默认值；时间由调用方提供，闸不读取系统时钟。</zh-CN>
+            //   <en>The issue time must be UTC and not the default value; time is caller-supplied and the gate reads no system clock.</en>
+            // </lang>
+            if (issuedUtc.Kind != DateTimeKind.Utc || issuedUtc == default(DateTime))
+            {
+                reason = "Issue time must be a non-default UTC value.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>Nonce 与防伪令牌分别独立生成，二者不可互相推导；使用 32 位十六进制无连字符 GUID。</zh-CN>
+            //   <en>Nonce and anti-forgery token are generated independently, neither derivable from the other; both are 32-character hyphen-free GUIDs.</en>
+            // </lang>
+            string nonce = Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
+            string antiForgeryToken = Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
+
+            // <lang>
+            //   <zh-CN>过期时间由固定有效期推导，不做自动续期；超时必须重新上传校验。</zh-CN>
+            //   <en>Expiry derives from a fixed lifetime with no renewal; a timeout requires re-uploading and re-validating.</en>
+            // </lang>
+            DateTime expiresUtc = issuedUtc.AddMinutes(TicketLifetimeMinutes);
+
+            // <lang>
+            //   <zh-CN>构造不可变票据并返回；签发本身不写任何存储，持久化由页面层负责。</zh-CN>
+            //   <en>Construct and return the immutable ticket; issuance writes nothing, and persistence belongs to the page layer.</en>
+            // </lang>
+            ticket = new PortalOnlinePackageConfirmationTicket(
+                nonce, antiForgeryToken, actorName, packageStorageName, packageHash, issuedUtc, expiresUtc);
+            return true;
+        }

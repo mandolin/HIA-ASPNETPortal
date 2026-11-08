@@ -1,0 +1,146 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.-ctor-system.string-system.string-system.string-system.string-system.string-system.datetime-system.datetime",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfir-82480810.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname",
+      "kind": "entry",
+      "label": "ActorName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.actorname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-8c98ec8b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken",
+      "kind": "entry",
+      "label": "AntiForgeryToken",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.antiforgerytoken",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-ed5cddfc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc",
+      "kind": "entry",
+      "label": "ConsumedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.consumedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-ea24233d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc",
+      "kind": "entry",
+      "label": "ExpiresUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.expiresutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-bf0f3875.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc",
+      "kind": "entry",
+      "label": "IssuedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.issuedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-4ac812a8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce",
+      "kind": "entry",
+      "label": "Nonce",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.nonce",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-14d63f42.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash",
+      "kind": "entry",
+      "label": "PackageHash",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagehash",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-1673d59d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
+      "kind": "entry",
+      "label": "PackageStorageName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfir-27490081.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime",
+      "kind": "entry",
+      "label": "WithConsumed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageconfirmationticket.withconsumed-system.datetime",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageconfir-3fa54dd7.html"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+        private static bool FixedTimeEquals(string expected, string actual)
+        {
+            // <lang>
+            //   <zh-CN>任一为 null 即不相等；仍走一次空值路径，避免为 null 建立提前返回的时序分支。</zh-CN>
+            //   <en>Null on either side means unequal, but the empty path is still taken so null does not create a distinguishable early-return timing branch.</en>
+            // </lang>
+            if (expected == null || actual == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>取较长者长度作为遍历上界，使比较耗时只取决于长度上界而非首个差异位置。</zh-CN>
+            //   <en>Use the longer length as the iteration bound, so cost depends on that bound rather than the first differing position.</en>
+            // </lang>
+            int length = Math.Max(expected.Length, actual.Length);
+
+            // <lang>
+            //   <zh-CN>累积差异位：长度不同时以 0 参与，但仍保持循环次数一致，最终结果必不为 0。</zh-CN>
+            //   <en>Accumulate differing bits; out-of-range positions contribute 0 yet keep the loop count identical, so the result is necessarily non-zero for unequal lengths.</en>
+            // </lang>
+            int difference = expected.Length ^ actual.Length;
+            for (int index = 0; index < length; index++)
+            {
+                // <lang>
+                //   <zh-CN>越界索引以 0 代替字符，不提前退出；异或累计保证任何差异都不会被后续位抵消。</zh-CN>
+                //   <en>Out-of-range indices substitute 0 without exiting early; XOR accumulation ensures no difference can be cancelled by later bits.</en>
+                // </lang>
+                char left = index < expected.Length ? expected[index] : '\0';
+                char right = index < actual.Length ? actual[index] : '\0';
+                difference |= left ^ right;
+            }
+
+            return difference == 0;
+        }

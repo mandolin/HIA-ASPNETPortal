@@ -1,0 +1,1 @@
+        public string AntiForgeryToken { get; private set; }

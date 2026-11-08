@@ -1,0 +1,32 @@
+        private static bool IsHexSha256(string value)
+        {
+            // <lang>
+            //   <zh-CN>长度不符直接拒绝，不做补全或 Trim，避免把形似摘要的文本洗成合法值。</zh-CN>
+            //   <en>Reject a wrong length outright without padding or trimming, so digest-like text is never washed into a valid value.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(value) || value.Length != PackageHashHexLength)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符限定在 0-9 / a-f / A-F；其它字符（含冒号、空白、Unicode 同形字符）一律拒绝。</zh-CN>
+            //   <en>Restrict every character to 0-9 / a-f / A-F; anything else (colons, whitespace, Unicode look-alikes) is rejected.</en>
+            // </lang>
+            foreach (char character in value)
+            {
+                // <lang>
+                //   <zh-CN>命中集合外字符即整体失败，不继续扫描。</zh-CN>
+                //   <en>A character outside the set fails the whole value immediately.</en>
+                // </lang>
+                bool isHex = (character >= '0' && character <= '9') ||
+                             (character >= 'a' && character <= 'f') ||
+                             (character >= 'A' && character <= 'F');
+                if (!isHex)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }

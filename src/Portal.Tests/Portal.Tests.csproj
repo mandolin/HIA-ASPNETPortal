@@ -88,6 +88,8 @@
     <Compile Include="PortalAssemblyStatePermissionTests.cs" />
     <Compile Include="PortalOnlinePackagePolicyTests.cs" />
     <Compile Include="PortalOnlinePackageStagingTests.cs" />
+    <Compile Include="PortalOnlinePackagePermissionTests.cs" />
+    <Compile Include="PortalOnlinePackageConfirmationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

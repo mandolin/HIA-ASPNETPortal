@@ -1890,6 +1890,34 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7b521793.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
+      "kind": "type",
+      "label": "PortalOnlinePackageConfirmationGate",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalonlinepackageconfirmationgate",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfir-c1aa2f1c.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-0a2260d2.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+      "kind": "type",
+      "label": "PortalOnlinePackageConfirmationTicket",
+      "entryCount": 11,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageConfirmation.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalonlinepackageconfirmationticket",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageconfir-aa9bf6e3.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-a81125a5.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagepolicy",
       "kind": "type",
       "label": "PortalOnlinePackagePolicy",
@@ -2019,7 +2047,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys",
       "kind": "type",
       "label": "PortalPermissionKeys",
-      "entryCount": 56,
+      "entryCount": 58,
       "views": [
         "dotnet"
       ],

@@ -1,0 +1,120 @@
+        public static bool TryConfirm(
+            PortalOnlinePackageConfirmationTicket ticket,
+            string antiForgeryToken,
+            string actorName,
+            string currentPackageHash,
+            string confirmPermissionKey,
+            bool confirmGranted,
+            DateTime confirmedUtc,
+            out PortalOnlinePackageConfirmationTicket consumedTicket,
+            out bool replayed,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证所有提前返回都不留下半消费票据或未初始化标志。</zh-CN>
+            //   <en>Initialise outputs to the failure state so no early return leaves a half-consumed ticket or uninitialised flags.</en>
+            // </lang>
+            consumedTicket = null;
+            replayed = false;
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>票据缺失即拒绝；闸不持有存储，无法替页面层「找回」票据。</zh-CN>
+            //   <en>A missing ticket is rejected; the gate holds no store and cannot "recover" one for the page layer.</en>
+            // </lang>
+            if (ticket == null)
+            {
+                reason = "Confirmation ticket is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>确认时间必须是 UTC 且非默认值；不早于签发时间（防时钟回拨伪造），不晚于过期时间。</zh-CN>
+            //   <en>Confirmation time must be UTC and non-default; not before issuance (clock-rollback forgery) and not after expiry.</en>
+            // </lang>
+            if (confirmedUtc.Kind != DateTimeKind.Utc || confirmedUtc == default(DateTime))
+            {
+                reason = "Confirmation time must be a non-default UTC value.";
+                return false;
+            }
+            if (confirmedUtc < ticket.IssuedUtc)
+            {
+                reason = "Confirmation time precedes ticket issuance.";
+                return false;
+            }
+            if (confirmedUtc > ticket.ExpiresUtc)
+            {
+                reason = "Confirmation ticket has expired; re-upload and re-validate the package.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>防伪同步令牌用固定时间比较，避免通过响应时延逐字节猜测令牌（CSRF 同步令牌模式）。</zh-CN>
+            //   <en>Compare the anti-forgery token in constant time so response timing cannot leak it byte by byte (CSRF synchroniser pattern).</en>
+            // </lang>
+            if (!FixedTimeEquals(ticket.AntiForgeryToken, antiForgeryToken))
+            {
+                reason = "Anti-forgery token does not match.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>账号绑定：换人确认即拒绝，防止票据被另一会话或另一账号截获使用。</zh-CN>
+            //   <en>Actor binding: confirmation by a different account is rejected, so a ticket cannot be used by another session or identity.</en>
+            // </lang>
+            if (!string.Equals(ticket.ActorName, actorName, StringComparison.Ordinal))
+            {
+                reason = "Confirmation actor does not match the issuing actor.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>包哈希绑定：确认时重算哈希并精确比对，防止在暂存区把已校验包换成另一个包（TOCTOU）。</zh-CN>
+            //   <en>Package-hash binding: recompute and compare exactly at confirmation, preventing a validated package from being swapped in staging (TOCTOU).</en>
+            // </lang>
+            if (!IsHexSha256(currentPackageHash) ||
+                !FixedTimeEquals(ticket.PackageHash, currentPackageHash))
+            {
+                reason = "Staged package hash no longer matches the validated package.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>权限键必须是注册表内已定义且精确的确认键；不能用上传键、其它模块键或角色名代替二次鉴权。</zh-CN>
+            //   <en>The key must be the exactly registered confirm key; the upload key, other module keys, or role names cannot substitute for re-authorization.</en>
+            // </lang>
+            if (!PortalPermissionRegistry.IsDefined(confirmPermissionKey) ||
+                !string.Equals(confirmPermissionKey, PortalPermissionKeys.ModuleOnlinePackageConfirm, StringComparison.Ordinal))
+            {
+                reason = "Confirm permission key is not the registered online-package confirm key.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>二次鉴权：即便上传阶段已授权，确认阶段仍须重新判定且结果为允许。</zh-CN>
+            //   <en>Re-authorization: even if upload was authorized, confirmation must be judged again and granted.</en>
+            // </lang>
+            if (!confirmGranted)
+            {
+                reason = "Online package confirm permission is not granted.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>幂等重放：票据已消费，且上述校验全部通过 → 返回原票据并标记 replayed，调用方不得再次安装。</zh-CN>
+            //   <en>Idempotent replay: the ticket is already consumed and every check passed → return the original ticket flagged as replayed; callers must not install again.</en>
+            // </lang>
+            if (ticket.ConsumedUtc.HasValue)
+            {
+                consumedTicket = ticket;
+                replayed = true;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>首次确认：返回仅消费标记不同的新票据；持久化新状态由页面层完成，闸本身不写存储。</zh-CN>
+            //   <en>First confirmation: return a new ticket differing only in the consumption marker; persisting the new state is the page layer's job, the gate writes no store.</en>
+            // </lang>
+            consumedTicket = ticket.WithConsumed(confirmedUtc);
+            return true;
+        }
