@@ -74,6 +74,10 @@
             <lifetime type="transient" />
         </register>
 
+        <register type="IFormBuilderDb" mapTo="FormBuilderDb">
+            <lifetime type="transient" />
+        </register>
+
         <register type="IEmployeeProfileCorrectionRequestDb" mapTo="EmployeeProfileCorrectionRequestDb">
             <lifetime type="transient" />
         </register>

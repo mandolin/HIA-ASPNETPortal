@@ -1,0 +1,11 @@
+/* Form Builder 独立模块基础样式（模块私有，仅承担布局；主题层颜色/边框由 6 套正式皮肤作用域决定） */
+.form-builder { padding: 12px; max-width: 640px; }
+.form-builder-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+.form-builder-message { display: block; margin: 6px 0; color: #b00000; }
+.form-builder-fields { display: grid; gap: 10px; }
+.form-builder-field { display: flex; flex-direction: column; gap: 4px; }
+.form-builder-label { font-weight: 500; }
+.form-builder-input { max-width: 480px; }
+.form-builder-field-textarea .form-builder-input { width: 480px; }
+.form-builder-required { color: #b00000; }
+.form-builder-actions { margin-top: 12px; }

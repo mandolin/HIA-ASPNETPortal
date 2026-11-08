@@ -89,6 +89,7 @@
     <Compile Include="EmployeeInfo.cs" />
     <Compile Include="EmployeeItem.cs" />
     <Compile Include="EmployeeProfileConfirmationDb.cs" />
+    <Compile Include="FormBuilderDb.cs" />
     <Compile Include="EmployeeProfileCorrectionRequestDb.cs" />
     <Compile Include="LeaveRequestDb.cs" />
     <Compile Include="ExpenseReimbursementDb.cs" />

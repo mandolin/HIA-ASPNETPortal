@@ -115,6 +115,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>费用报销能力键；P20 新增，复用既有 `Business.ExpenseReimbursement` 权限键族。</zh-CN><en>Expense-reimbursement capability key; added in P20, reusing the existing `Business.ExpenseReimbursement` permission-key family.</en></lang></summary>
         public const string ExpenseReimbursement = "BasicBusiness.ExpenseReimbursement";
 
+        /// <summary><lang><zh-CN>独立模块首证能力键：表单构建器（MVP），作为「本体之外提供的能力」被容纳机制装载；复用既有 `Business.FormBuilder` 权限键族，不获 Admins。</zh-CN><en>Independent-module first-evidence capability key: Form Builder (MVP), provided externally and loaded by the hosting mechanism; reuses the existing `Business.FormBuilder` permission-key family and never obtains Admins.</en></lang></summary>
+        public const string FormBuilder = "BasicBusiness.FormBuilder";
+
         private static readonly PortalCapabilityDefinition[] DefinitionArray =
         {
             new PortalCapabilityDefinition(
@@ -164,7 +167,15 @@ namespace ASPNET.StarterKit.Portal
                 "HIA.ExpenseReimbursement",
                 "Business.ExpenseReimbursement",
                 "费用报销",
-                "Expense Reimbursement")
+                "Expense Reimbursement"),
+            new PortalCapabilityDefinition(
+                FormBuilder,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.FormBuilder",
+                "Business.FormBuilder",
+                "表单构建器",
+                "Form Builder")
         };
 
         private static readonly IList<PortalCapabilityDefinition> ReadOnlyDefinitions =

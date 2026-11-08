@@ -242,6 +242,10 @@
     <Content Include="DesktopModules\ExpenseReimbursement\module.json" />
     <Content Include="DesktopModules\ExpenseReimbursement\ExpenseReimbursement.ascx" />
     <Content Include="DesktopModules\ExpenseReimbursement\Styles\ExpenseReimbursement.css" />
+    <Content Include="DesktopModules\FormBuilder\module.json" />
+    <Content Include="DesktopModules\FormBuilder\form.json" />
+    <Content Include="DesktopModules\FormBuilder\FormBuilder.ascx" />
+    <Content Include="DesktopModules\FormBuilder\Styles\FormBuilder.css" />
     <Content Include="DesktopModules\QuickLinks.ascx" />
     <Content Include="DesktopModules\Signin.ascx" />
     <Content Include="DesktopModules\ViewDocument.aspx" />
@@ -743,6 +747,13 @@
     </Compile>
     <Compile Include="DesktopModules\ModuleProbe\ModuleProbe.ascx.designer.cs">
       <DependentUpon>ModuleProbe.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\FormBuilder\FormBuilder.ascx.cs">
+      <DependentUpon>FormBuilder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\FormBuilder\FormBuilder.ascx.designer.cs">
+      <DependentUpon>FormBuilder.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\QuickLinks.ascx.cs">
       <DependentUpon>QuickLinks.ascx</DependentUpon>

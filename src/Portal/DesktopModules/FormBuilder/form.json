@@ -1,0 +1,17 @@
+{
+  "formId": "sample-feedback",
+  "title": { "zh-CN": "员工反馈表", "en": "Employee Feedback" },
+  "submitText": { "zh-CN": "提交", "en": "Submit" },
+  "successText": { "zh-CN": "已提交，谢谢！", "en": "Submitted. Thank you!" },
+  "fields": [
+    { "name": "fullName", "type": "text", "label": { "zh-CN": "姓名", "en": "Full name" }, "required": true, "maxLength": 100 },
+    { "name": "email", "type": "text", "label": { "zh-CN": "邮箱", "en": "Email" }, "required": true, "maxLength": 200 },
+    { "name": "category", "type": "select", "label": { "zh-CN": "类别", "en": "Category" }, "required": true, "options": [
+      { "value": "suggestion", "label": { "zh-CN": "建议", "en": "Suggestion" } },
+      { "value": "bug", "label": { "zh-CN": "问题", "en": "Bug" } },
+      { "value": "other", "label": { "zh-CN": "其他", "en": "Other" } }
+    ] },
+    { "name": "message", "type": "textarea", "label": { "zh-CN": "内容", "en": "Message" }, "required": true, "maxLength": 2000 },
+    { "name": "contactAllowed", "type": "checkbox", "label": { "zh-CN": "允许联系我", "en": "Allow contact" } }
+  ]
+}

@@ -47,13 +47,13 @@ namespace ASPNET.StarterKit.Portal.Tests
         public void Definitions_ContainsAllRegisteredCapabilities()
         {
             // <lang>
-            //   <zh-CN>只读集合用于断言条数：W73 新增两条 BasicBusiness 能力后应共四条；P20 再增请假申请与费用报销两条后共六条；新增能力不得改变既有条目，也不得引入重复键。</zh-CN>
-            //   <en>The read-only set asserts the entry count: four after W73's two BasicBusiness capabilities, then six after P20 adds leave-request and expense-reimbursement; a new capability must not alter existing entries nor introduce a duplicate key.</en>
+            //   <zh-CN>只读集合用于断言条数：W73 新增两条 BasicBusiness 能力后应共四条；P20 再增请假申请与费用报销两条后共六条；W-anp-P284 新增表单构建器后共七条；新增能力不得改变既有条目，也不得引入重复键。</zh-CN>
+            //   <en>The read-only set asserts the entry count: four after W73's two BasicBusiness capabilities, then six after P20 adds leave-request and expense-reimbursement, then seven after W-anp-P284 adds the Form Builder; a new capability must not alter existing entries nor introduce a duplicate key.</en>
             // </lang>
             Assert.AreEqual(
-                6,
+                7,
                 PortalCapabilityRegistry.Definitions.Count,
-                "W73 四条 + P20 两条后应共六条能力定义（Collaboration + ApplicationRequest + EmployeeProfileConfirm + EmployeeProfileCorrectionRequest + LeaveRequest + ExpenseReimbursement）。");
+                "W73 四条 + P20 两条 + W-anp-P284 一条后应共七条能力定义（Collaboration + ApplicationRequest + EmployeeProfileConfirm + EmployeeProfileCorrectionRequest + LeaveRequest + ExpenseReimbursement + FormBuilder）。");
 
             // <lang>
             //   <zh-CN>分别解析四条键，确认它们都可作为权威锚点被解析到——manifest 的 capabilityId 依赖词表解析，解析不到则该包不能声明该能力。</zh-CN>
@@ -91,6 +91,15 @@ namespace ASPNET.StarterKit.Portal.Tests
             Assert.AreEqual(PortalCapabilityLifecycleStates.Active, expenseReimbursement.LifecycleState, "已有主责模块实现的能力应为 Active。");
             Assert.AreEqual("HIA.ExpenseReimbursement", expenseReimbursement.PrimaryModuleId, "主责包标识必须与 manifest 的 packageId 一致。");
             Assert.AreEqual("Business.ExpenseReimbursement", expenseReimbursement.PermissionKeyPrefix, "权限键前缀必须与既有权限定义分类一致。");
+
+            PortalCapabilityDefinition formBuilder;
+            Assert.IsTrue(
+                PortalCapabilityRegistry.TryGet(PortalCapabilityRegistry.FormBuilder, out formBuilder),
+                "W-anp-P284 新增的表单构建器能力必须可解析（manifest 已声明它）。");
+            Assert.AreEqual("BasicBusiness", formBuilder.Layer, "表单构建器应归属 BasicBusiness 层。");
+            Assert.AreEqual(PortalCapabilityLifecycleStates.Active, formBuilder.LifecycleState, "已有主责模块实现的能力应为 Active。");
+            Assert.AreEqual("HIA.FormBuilder", formBuilder.PrimaryModuleId, "主责包标识必须与 manifest 的 packageId 一致。");
+            Assert.AreEqual("Business.FormBuilder", formBuilder.PermissionKeyPrefix, "权限键前缀必须与既有权限定义分类一致。");
 
             // <lang>
             //   <zh-CN>钉住两条新登记能力的关键字段：层、生命周期、主责包与权限键前缀必须与既有权限键分类一致，否则能力矩阵会显示错误的归属。</zh-CN>
