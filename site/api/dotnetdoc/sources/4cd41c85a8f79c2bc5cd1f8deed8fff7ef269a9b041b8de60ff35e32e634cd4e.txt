@@ -1,0 +1,11 @@
+    public enum PortalOnlinePackageRollbackScenario
+    {
+        /// <summary><lang><zh-CN>校验失败：安装前的完整性/签名/扫描判据未通过。</zh-CN><en>Validation failure: an integrity, signature, or scan criterion failed before installation.</en></lang></summary>
+        ValidationFailed,
+
+        /// <summary><lang><zh-CN>备份损坏：备份自身哈希与记录不符，禁止用它还原。</zh-CN><en>Backup corrupted: the backup hash differs from the record, so restoring from it is forbidden.</en></lang></summary>
+        BackupCorrupted,
+
+        /// <summary><lang><zh-CN>复核点未通过：封版前/部署前事件驱动复核点拒绝继续。</zh-CN><en>Checkpoint not passed: a pre-seal / pre-deployment event-driven checkpoint refused to continue.</en></lang></summary>
+        CheckpointRejected
+    }

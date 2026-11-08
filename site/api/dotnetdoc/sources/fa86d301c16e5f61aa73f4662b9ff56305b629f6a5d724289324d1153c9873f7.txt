@@ -1,0 +1,71 @@
+        public static bool TryValidateSnapshot(PortalOnlinePackageSnapshot snapshot, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>快照或清单缺失一律拒绝，不把「没有记录」解释为「无需还原」。</zh-CN>
+            //   <en>A missing snapshot or manifest rejects; "no records" is never interpreted as "nothing to restore".</en>
+            // </lang>
+            if (snapshot == null || snapshot.Entries == null || snapshot.Entries.Count == 0)
+            {
+                reason = "Rollback snapshot is missing or empty.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>Ordinal 精确比较路径，避免大小写折叠导致两条记录指向同一文件却都被接受。</zh-CN>
+            //   <en>Ordinal path comparison prevents two records pointing at the same file from both being accepted through case folding.</en>
+            // </lang>
+            ISet<string> seenPaths = new HashSet<string>(StringComparer.Ordinal);
+            foreach (PortalOnlinePackageSnapshotEntry entry in snapshot.Entries)
+            {
+                // <lang>
+                //   <zh-CN>条目为 null、路径空白、含冒号或含父级跳转片段都拒绝（与暂存条目名策略同向）。</zh-CN>
+                //   <en>Reject null entries, blank paths, colons, or parent-traversal segments (aligned with the staging entry-name policy).</en>
+                // </lang>
+                if (entry == null || string.IsNullOrWhiteSpace(entry.RelativePath) ||
+                    entry.RelativePath.IndexOf(':') >= 0 ||
+                    entry.RelativePath.Contains(".."))
+                {
+                    reason = "Rollback snapshot contains an invalid path.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>绝对路径或反斜杠开头的路径不接受；清单统一用 '/' 相对路径。</zh-CN>
+                //   <en>Rooted paths or backslash-leading paths are refused; manifests use '/' relative paths only.</en>
+                // </lang>
+                if (entry.RelativePath.StartsWith("/", StringComparison.Ordinal) ||
+                    entry.RelativePath.StartsWith("\\", StringComparison.Ordinal))
+                {
+                    reason = "Rollback snapshot path must be relative.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>长度非负、摘要必须是合法 SHA-256 hex；任一不符即整份快照不可用。</zh-CN>
+                //   <en>Length must be non-negative and the digest a valid SHA-256 hex; any mismatch invalidates the whole snapshot.</en>
+                // </lang>
+                if (entry.ByteLength < 0L || !PortalOnlinePackageIntegrity.IsSha256Hex(entry.Sha256Hex))
+                {
+                    reason = "Rollback snapshot entry has an invalid length or hash.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>重复路径会使「零残留」结论失真，直接拒绝。</zh-CN>
+                //   <en>A duplicate path would invalidate the zero-residue verdict, so reject it.</en>
+                // </lang>
+                if (!seenPaths.Add(entry.RelativePath))
+                {
+                    reason = "Rollback snapshot contains duplicate paths.";
+                    return false;
+                }
+            }
+
+            return true;
+        }

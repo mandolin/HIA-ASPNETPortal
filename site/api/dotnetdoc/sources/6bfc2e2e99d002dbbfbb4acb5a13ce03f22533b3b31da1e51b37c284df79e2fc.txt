@@ -1,0 +1,23 @@
+    public sealed class PortalOnlinePackageSnapshot
+    {
+        /// <summary><lang><zh-CN>快照条目的只读集合。</zh-CN><en>Read-only collection of snapshot entries.</en></lang></summary>
+        public IList<PortalOnlinePackageSnapshotEntry> Entries { get; private set; }
+
+        /// <summary><lang><zh-CN>快照生成时间（UTC）。</zh-CN><en>Snapshot creation time (UTC).</en></lang></summary>
+        public DateTime CreatedUtc { get; private set; }
+
+        /// <summary>
+        /// <lang><zh-CN>以已校验清单构造快照；内部复制为只读数组，避免共享可变来源。</zh-CN>
+        /// <en>Constructs a snapshot from a validated manifest, copying into a read-only array so no mutable source is shared.</en>
+        /// </lang>
+        /// </summary>
+        public PortalOnlinePackageSnapshot(IList<PortalOnlinePackageSnapshotEntry> entries, DateTime createdUtc)
+        {
+            // <lang>
+            //   <zh-CN>null 清单按空快照处理而非抛异常，便于调用方统一走 TryXxx 路径；调用方负责保证条目内容合法。</zh-CN>
+            //   <en>A null manifest becomes an empty snapshot rather than throwing, so callers uniformly follow the TryXxx path; callers ensure entry validity.</en>
+            // </lang>
+            Entries = new List<PortalOnlinePackageSnapshotEntry>(entries ?? new List<PortalOnlinePackageSnapshotEntry>()).AsReadOnly();
+            CreatedUtc = createdUtc;
+        }
+    }

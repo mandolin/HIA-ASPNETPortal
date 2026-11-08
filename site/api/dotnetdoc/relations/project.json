@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6082,
-  "relationCount": 5642,
+  "nodeCount": 6104,
+  "relationCount": 5663,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -4335,6 +4335,41 @@
       "kind": "entry",
       "label": "StagingVirtualDirectory",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagepolicy.stagingvirtualdirectory",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrejected",
+      "kind": "entry",
+      "label": "VerdictRejected",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrejected",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrestorable",
+      "kind": "entry",
+      "label": "VerdictRestorable",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrestorable",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.backupcorrupted",
+      "kind": "entry",
+      "label": "BackupCorrupted",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.backupcorrupted",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.checkpointrejected",
+      "kind": "entry",
+      "label": "CheckpointRejected",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.checkpointrejected",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.validationfailed",
+      "kind": "entry",
+      "label": "ValidationFailed",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.validationfailed",
       "view": "dotnet"
     },
     {
@@ -15118,6 +15153,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean",
+      "kind": "entry",
+      "label": "TryAggregate",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.byte",
       "kind": "entry",
       "label": "ComputeSha256Hex",
@@ -15223,10 +15265,45 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryevaluatescenario-aspnet.starterkit.portal.portalonlinepackagerollbackscenario-system.string-system.string",
+      "kind": "entry",
+      "label": "TryEvaluateScenario",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryevaluatescenario-aspnet.starterkit.portal.portalonlinepackagerollbackscenario-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryvalidatesnapshot-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.string",
+      "kind": "entry",
+      "label": "TryValidateSnapshot",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryvalidatesnapshot-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryverifyzeroresidue-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.string",
+      "kind": "entry",
+      "label": "TryVerifyZeroResidue",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryverifyzeroresidue-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.string",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string",
       "kind": "entry",
       "label": "TryAllowInstall",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string",
       "view": "dotnet"
     },
     {
@@ -24936,6 +25013,41 @@
       "kind": "entry",
       "label": "PackageStorageName",
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackageconfirmationticket.packagestoragename",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc",
+      "kind": "entry",
+      "label": "CreatedUtc",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.entries",
+      "kind": "entry",
+      "label": "Entries",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.entries",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength",
+      "kind": "entry",
+      "label": "ByteLength",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath",
+      "kind": "entry",
+      "label": "RelativePath",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex",
+      "kind": "entry",
+      "label": "Sha256Hex",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex",
       "view": "dotnet"
     },
     {
@@ -36489,6 +36601,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagefailureisolation",
+      "kind": "entry",
+      "label": "PortalOnlinePackageFailureIsolation",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagefailureisolation",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageintegrity",
       "kind": "entry",
       "label": "PortalOnlinePackageIntegrity",
@@ -36503,6 +36622,20 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackdrill",
+      "kind": "entry",
+      "label": "PortalOnlinePackageRollbackDrill",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackdrill",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackscenario",
+      "kind": "entry",
+      "label": "PortalOnlinePackageRollbackScenario",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackscenario",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagescanverdict",
       "kind": "entry",
       "label": "PortalOnlinePackageScanVerdict",
@@ -36514,6 +36647,20 @@
       "kind": "entry",
       "label": "PortalOnlinePackageSecurityGate",
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesecuritygate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshot",
+      "kind": "entry",
+      "label": "PortalOnlinePackageSnapshot",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshot",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry",
+      "kind": "entry",
+      "label": "PortalOnlinePackageSnapshotEntry",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry",
       "view": "dotnet"
     },
     {
@@ -40481,6 +40628,12 @@
       "kind": "source",
       "label": "src/Portal.Components/PortalOnlinePackagePolicy.cs",
       "path": "src/Portal.Components/PortalOnlinePackagePolicy.cs"
+    },
+    {
+      "id": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "path": "src/Portal.Components/PortalOnlinePackageRollback.cs"
     },
     {
       "id": "source:src/Portal.Components/PortalOnlinePackageScanning.cs",
@@ -50150,6 +50303,71 @@
         "language": "csharp",
         "rangeStartLine": 42,
         "rangeEndLine": 42
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrejected->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrejected",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrejected",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 116,
+        "rangeEndLine": 116
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrestorable->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrestorable",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.verdictrestorable",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 113,
+        "rangeEndLine": 113
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.backupcorrupted->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.backupcorrupted",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.backupcorrupted",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 19,
+        "rangeEndLine": 19
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.checkpointrejected->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.checkpointrejected",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.checkpointrejected",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 22,
+        "rangeEndLine": 22
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.validationfailed->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.validationfailed",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagerollbackscenario.validationfailed",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 16,
+        "rangeEndLine": 16
       }
     },
     {
@@ -70173,6 +70391,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 394,
+        "rangeEndLine": 454
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.byte->source:src/Portal.Components/PortalOnlinePackageIntegrity.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.byte",
@@ -70368,6 +70599,45 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryevaluatescenario-aspnet.starterkit.portal.portalonlinepackagerollbackscenario-system.string-system.string->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryevaluatescenario-aspnet.starterkit.portal.portalonlinepackagerollbackscenario-system.string-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryevaluatescenario-aspnet.starterkit.portal.portalonlinepackagerollbackscenario-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 323,
+        "rangeEndLine": 359
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryvalidatesnapshot-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.string->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryvalidatesnapshot-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryvalidatesnapshot-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 129,
+        "rangeEndLine": 199
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryverifyzeroresidue-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.string->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryverifyzeroresidue-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagerollbackdrill.tryverifyzeroresidue-aspnet.starterkit.portal.portalonlinepackagesnapshot-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 213,
+        "rangeEndLine": 309
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string->source:src/Portal.Components/PortalOnlinePackageScanning.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string",
@@ -70378,6 +70648,32 @@
         "language": "csharp",
         "rangeStartLine": 115,
         "rangeEndLine": 238
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 78,
+        "rangeEndLine": 86
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 45,
+        "rangeEndLine": 54
       }
     },
     {
@@ -88412,6 +88708,71 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 71,
+        "rangeEndLine": 71
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.entries->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.entries",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.entries",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 68,
+        "rangeEndLine": 68
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 37,
+        "rangeEndLine": 37
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 34,
+        "rangeEndLine": 34
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 40,
+        "rangeEndLine": 40
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditentry.action->source:src/Portal/Components/PortalOperationAudit.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditentry.action",
@@ -105945,7 +106306,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 269
+        "rangeEndLine": 270
       }
     },
     {
@@ -105984,7 +106345,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 109
+        "rangeEndLine": 110
       }
     },
     {
@@ -109862,6 +110223,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagefailureisolation->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagefailureisolation",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagefailureisolation",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 381,
+        "rangeEndLine": 455
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageintegrity->source:src/Portal.Components/PortalOnlinePackageIntegrity.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageintegrity",
@@ -109888,6 +110262,32 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackdrill->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackdrill",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackdrill",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 110,
+        "rangeEndLine": 360
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackscenario->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackscenario",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagerollbackscenario",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 13,
+        "rangeEndLine": 23
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagescanverdict->source:src/Portal.Components/PortalOnlinePackageScanning.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagescanverdict",
@@ -109911,6 +110311,32 @@
         "language": "csharp",
         "rangeStartLine": 97,
         "rangeEndLine": 239
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshot->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshot",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshot",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 65,
+        "rangeEndLine": 87
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry->source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry",
+      "to": "source:src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "label": "Source: src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 31,
+        "rangeEndLine": 55
       }
     },
     {

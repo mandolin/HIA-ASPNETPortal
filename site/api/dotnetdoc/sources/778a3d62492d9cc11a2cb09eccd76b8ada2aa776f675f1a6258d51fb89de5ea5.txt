@@ -1,0 +1,37 @@
+        public static bool TryEvaluateScenario(
+            PortalOnlinePackageRollbackScenario scenario,
+            out string verdict,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>默认结论为拒绝；只有显式传入「无故障」才会由调用方另行处理，本判定器不伪造放行。</zh-CN>
+            //   <en>The default verdict is rejection; only an explicit "no fault" path (handled elsewhere) could allow, and this evaluator never fabricates an allow.</en>
+            // </lang>
+            verdict = VerdictRejected;
+
+            // <lang>
+            //   <zh-CN>按情形给出可区分的稳定原因，全部拒绝继续；不把演练结果写成「安装已发生」。</zh-CN>
+            //   <en>Give a distinct stable reason per scenario, all refusing to continue; never describe a drill as "installation happened".</en>
+            // </lang>
+            switch (scenario)
+            {
+                case PortalOnlinePackageRollbackScenario.ValidationFailed:
+                    reason = "Validation failed; installation was not started and the staged package stays isolated.";
+                    break;
+                case PortalOnlinePackageRollbackScenario.BackupCorrupted:
+                    reason = "Backup is corrupted; restoring from it is forbidden and installation was not started.";
+                    break;
+                case PortalOnlinePackageRollbackScenario.CheckpointRejected:
+                    reason = "Event-driven checkpoint rejected continuation; installation was not started.";
+                    break;
+                default:
+                    // <lang>
+                    //   <zh-CN>枚举外的伪造值也按拒绝处理，不因未知输入放行（fail-closed）。</zh-CN>
+                    //   <en>Forged out-of-enum values also reject, so unknown input never allows (fail-closed).</en>
+                    // </lang>
+                    reason = "Unknown rollback drill scenario; rejected (fail-closed).";
+                    break;
+            }
+
+            return false;
+        }

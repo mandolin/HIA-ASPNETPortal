@@ -1,0 +1,10 @@
+        public PortalOnlinePackageSnapshotEntry(string relativePath, long byteLength, string sha256Hex)
+        {
+            // <lang>
+            //   <zh-CN>逐项赋值，不做 Trim 或大小写折叠，保持与实际文件口径逐字一致。</zh-CN>
+            //   <en>Assign each field without trimming or case folding, preserving exact agreement with the actual file.</en>
+            // </lang>
+            RelativePath = relativePath;
+            ByteLength = byteLength;
+            Sha256Hex = sha256Hex;
+        }

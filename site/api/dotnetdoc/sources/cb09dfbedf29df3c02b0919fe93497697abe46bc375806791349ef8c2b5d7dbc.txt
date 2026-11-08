@@ -1,0 +1,25 @@
+    public sealed class PortalOnlinePackageSnapshotEntry
+    {
+        /// <summary><lang><zh-CN>相对隔离根目录的路径，用 '/' 统一分隔。</zh-CN><en>Path relative to the isolation root, using '/' as the uniform separator.</en></lang></summary>
+        public string RelativePath { get; private set; }
+
+        /// <summary><lang><zh-CN>文件字节长度。</zh-CN><en>File byte length.</en></lang></summary>
+        public long ByteLength { get; private set; }
+
+        /// <summary><lang><zh-CN>SHA-256 小写十六进制摘要。</zh-CN><en>Lowercase SHA-256 hex digest.</en></lang></summary>
+        public string Sha256Hex { get; private set; }
+
+        /// <summary>
+        /// <lang><zh-CN>构造一条清单条目；调用方须保证三个字段已通过校验。</zh-CN><en>Constructs a manifest entry; callers must ensure all three fields passed validation.</en></lang>
+        /// </summary>
+        public PortalOnlinePackageSnapshotEntry(string relativePath, long byteLength, string sha256Hex)
+        {
+            // <lang>
+            //   <zh-CN>逐项赋值，不做 Trim 或大小写折叠，保持与实际文件口径逐字一致。</zh-CN>
+            //   <en>Assign each field without trimming or case folding, preserving exact agreement with the actual file.</en>
+            // </lang>
+            RelativePath = relativePath;
+            ByteLength = byteLength;
+            Sha256Hex = sha256Hex;
+        }
+    }

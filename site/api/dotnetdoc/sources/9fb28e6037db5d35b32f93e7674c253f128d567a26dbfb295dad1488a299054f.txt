@@ -1,0 +1,1 @@
+        public IList<PortalOnlinePackageSnapshotEntry> Entries { get; private set; }

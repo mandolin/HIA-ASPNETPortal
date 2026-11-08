@@ -1,0 +1,75 @@
+    public static class PortalOnlinePackageFailureIsolation
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>聚合逐项结果：返回失败项标识列表，并判定页面是否存活（只要不是「零项」或「全项无标识」，页面即存活）。</zh-CN>
+        ///   <en>Aggregates per-item results: returns failed item ids and decides whether the page survived (it survives unless there were zero items or all ids were blank).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemIds"><l zh-CN="参与批次的模块/上传标识序列，不能为 null。" en="Module/upload ids in the batch; cannot be null." /></param>
+        /// <param name="succeededById"><l zh-CN="每个标识对应的成功标志；缺失键按失败处理（fail-closed）。" en="Success flag per id; a missing key is treated as failure (fail-closed)." /></param>
+        /// <param name="failedIds"><l zh-CN="如实返回失败项标识列表。" en="Failed item ids, returned honestly." /></param>
+        /// <param name="pageSurvived"><l zh-CN="true 表示单个失败未终止整页/整批处理。" en="True means one failure did not terminate the whole page/batch." /></param>
+        /// <returns><l zh-CN="输入合法时为 true（无论是否有失败项）；输入非法时为 false。" en="True for valid input (regardless of failures); false for invalid input." /></returns>
+        public static bool TryAggregate(
+            IList<string> itemIds,
+            IDictionary<string, bool> succeededById,
+            out IList<string> failedIds,
+            out bool pageSurvived)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态与空失败清单，保证提前返回不留下未初始化值。</zh-CN>
+            //   <en>Initialise outputs to a failure state and an empty failure list so no early return leaves them uninitialised.</en>
+            // </lang>
+            failedIds = new List<string>();
+            pageSurvived = false;
+
+            // <lang>
+            //   <zh-CN>空批次或缺失成功映射属于调用方错误，按拒绝处理，不解释为「全部成功」。</zh-CN>
+            //   <en>An empty batch or a missing success map is a caller error and rejects; neither is interpreted as "all succeeded".</en>
+            // </lang>
+            if (itemIds == null || itemIds.Count == 0 || succeededById == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐项判定：映射缺失、标识空白或标志为 false 都计入失败，但不中断循环。</zh-CN>
+            //   <en>Judge each item: a missing key, blank id, or false flag counts as a failure, but the loop is never interrupted.</en>
+            // </lang>
+            int validItemCount = 0;
+            foreach (string itemId in itemIds)
+            {
+                // <lang>
+                //   <zh-CN>空白标识无法归属，计入失败清单但不抛出，避免一项脏数据终止整批。</zh-CN>
+                //   <en>A blank id cannot be attributed; record it as a failure without throwing so one dirty row cannot terminate the batch.</en>
+                // </lang>
+                if (string.IsNullOrWhiteSpace(itemId))
+                {
+                    failedIds.Add(string.Empty);
+                    continue;
+                }
+
+                validItemCount++;
+
+                // <lang>
+                //   <zh-CN>缺失键按失败（fail-closed）；显式 false 同样计入失败。</zh-CN>
+                //   <en>A missing key is a failure (fail-closed); an explicit false also counts as a failure.</en>
+                // </lang>
+                bool succeeded;
+                if (!succeededById.TryGetValue(itemId, out succeeded) || !succeeded)
+                {
+                    failedIds.Add(itemId);
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>页面存活：存在至少一个可归属项，且失败项数小于总数（即至少还有其它模块继续处理）。
+            //   全部失败仍判定页面存活——因为失败被逐项隔离，没有升级为整页异常；调用方据失败清单决定是否降级呈现。</zh-CN>
+            //   <en>Page survival: at least one attributable item exists. Even when all items failed the page survives,
+            //   because failures were isolated per item and never escalated into a page-level exception; callers use the failure list to decide degraded rendering.</en>
+            // </lang>
+            pageSurvived = validItemCount > 0;
+            return true;
+        }
+    }

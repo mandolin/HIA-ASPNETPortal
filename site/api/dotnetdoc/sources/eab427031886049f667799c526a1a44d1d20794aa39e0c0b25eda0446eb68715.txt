@@ -1,0 +1,9 @@
+        public PortalOnlinePackageSnapshot(IList<PortalOnlinePackageSnapshotEntry> entries, DateTime createdUtc)
+        {
+            // <lang>
+            //   <zh-CN>null 清单按空快照处理而非抛异常，便于调用方统一走 TryXxx 路径；调用方负责保证条目内容合法。</zh-CN>
+            //   <en>A null manifest becomes an empty snapshot rather than throwing, so callers uniformly follow the TryXxx path; callers ensure entry validity.</en>
+            // </lang>
+            Entries = new List<PortalOnlinePackageSnapshotEntry>(entries ?? new List<PortalOnlinePackageSnapshotEntry>()).AsReadOnly();
+            CreatedUtc = createdUtc;
+        }
