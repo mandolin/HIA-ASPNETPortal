@@ -1,0 +1,124 @@
+        public static bool TryAllowInstall(
+            string clientFileName,
+            byte[] content,
+            string expectedHash,
+            string publicKeyXml,
+            string signatureBase64,
+            bool requireSignature,
+            IPortalOnlinePackageScanner scanner,
+            string stagingName,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证所有提前返回都不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>内容缺失或暂存名缺失一律拒绝，不把 null 解释为「空包可放行」。</zh-CN>
+            //   <en>Missing content or staging name rejects; null is never interpreted as "an empty package is allowed".</en>
+            // </lang>
+            if (content == null || string.IsNullOrWhiteSpace(stagingName))
+            {
+                reason = "Package content or staging name is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>第一道：复用 [已脱敏] 的包级白名单（.zip 唯一、10 MiB 上限、文件名净化）。</zh-CN>
+            //   <en>First criterion: reuse the [已脱敏] package allow-list (only .zip, 10 MiB cap, filename sanitisation).</en>
+            // </lang>
+            string allowListReason;
+            if (!PortalOnlinePackagePolicy.TryValidatePackageFile(clientFileName, content.Length, out allowListReason))
+            {
+                reason = allowListReason;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>第二道：内容摘要必须与服务端记录一致，承担 4.8 无 CRC-32 自动校验所缺的完整性职责。</zh-CN>
+            //   <en>Second criterion: the content digest must match the server record, carrying the integrity duty missing from 4.8 CRC validation.</en>
+            // </lang>
+            string integrityReason;
+            if (!PortalOnlinePackageIntegrity.TryVerifyIntegrity(content, expectedHash, out integrityReason))
+            {
+                reason = integrityReason;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>第三道：签名。区分三种情形——材料齐备则必须验签通过；两项皆无则按「是否要求签名」决定；
+            //   **只有其中一项**（例如只给签名不给公钥）一律拒绝，不得当成「未提供」而静默放行。
+            //   否则攻击者可用孤立/伪造的签名材料绕过「可选签名」路径。</zh-CN>
+            //   <en>Third criterion: signature. Three cases — complete material must verify; neither supplied follows
+            //   "is signature required"; **exactly one item** (e.g. a signature with no public key) always rejects and is
+            //   never treated as "not supplied" and silently allowed. Otherwise an attacker could bypass the optional-signature
+            //   path with orphaned/forged signature material.</en>
+            // </lang>
+            bool hasCompleteMaterial = PortalOnlinePackageIntegrity.HasSignatureMaterial(publicKeyXml, signatureBase64);
+            bool hasPublicKey = !string.IsNullOrWhiteSpace(publicKeyXml);
+            bool hasSignature = !string.IsNullOrWhiteSpace(signatureBase64);
+            if (hasPublicKey != hasSignature)
+            {
+                reason = "Package signature material is incomplete.";
+                return false;
+            }
+            if (requireSignature && !hasCompleteMaterial)
+            {
+                reason = "Package signature is required but missing.";
+                return false;
+            }
+            if (hasCompleteMaterial)
+            {
+                string signatureReason;
+                if (!PortalOnlinePackageIntegrity.TryVerifySignature(content, publicKeyXml, signatureBase64, out signatureReason))
+                {
+                    reason = signatureReason;
+                    return false;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>第四道：扫描。null 适配视为不可用；异常与未知结果统一收敛为 Unavailable，绝不降级为 Clean。</zh-CN>
+            //   <en>Fourth criterion: scan. A null adapter is unavailable; exceptions and unknown results converge to Unavailable and never degrade to Clean.</en>
+            // </lang>
+            if (scanner == null)
+            {
+                reason = "Malware scanner is unavailable; the package is rejected (fail-closed).";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>承接扫描判定；任何适配层异常都在 catch 中收敛为稳定拒绝原因。</zh-CN>
+            //   <en>Holds the scan verdict; any adapter exception converges to a stable rejection reason in catch.</en>
+            // </lang>
+            PortalOnlinePackageScanVerdict verdict;
+            try
+            {
+                verdict = scanner.Scan(stagingName, content);
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>不回显异常细节，也不尝试第二次扫描，避免失败路径递归或泄露扫描器内部信息。</zh-CN>
+                //   <en>Do not echo exception details or retry scanning, avoiding recursive failure paths or scanner internals leakage.</en>
+                // </lang>
+                reason = "Malware scanner failed; the package is rejected (fail-closed).";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>只有显式 Clean 才放行；Infected、Unavailable 以及枚举外的伪造值一律拒绝。</zh-CN>
+            //   <en>Only an explicit Clean allows installation; Infected, Unavailable, and forged out-of-enum values all reject.</en>
+            // </lang>
+            if (verdict != PortalOnlinePackageScanVerdict.Clean)
+            {
+                reason = verdict == PortalOnlinePackageScanVerdict.Infected
+                    ? "Malware scanner detected malicious content."
+                    : "Malware scanner is unavailable; the package is rejected (fail-closed).";
+                return false;
+            }
+
+            return true;
+        }

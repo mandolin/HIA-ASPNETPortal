@@ -1,0 +1,29 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesecuritygate",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesecuritygate:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesecuritygate:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string",
+      "kind": "entry",
+      "label": "TryAllowInstall",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageScanning.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuri-d2a13c34.html"
+    }
+  ]
+}

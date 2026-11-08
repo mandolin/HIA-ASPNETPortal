@@ -1,0 +1,74 @@
+        public static bool TryVerifySignature(
+            byte[] content,
+            string publicKeyXml,
+            string signatureBase64,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>公钥、签名与内容三者缺一即拒绝；不尝试从包内解析替代公钥。</zh-CN>
+            //   <en>Reject if key, signature, or content is missing; never parse a substitute key from the package.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(publicKeyXml) ||
+                string.IsNullOrWhiteSpace(signatureBase64) ||
+                content == null)
+            {
+                reason = "Package signature material is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>Base64 解析与验签异常全部收敛为稳定失败短语，避免把密钥或异常细节泄漏到诊断。</zh-CN>
+            //   <en>Base64 parsing and verification exceptions all converge to a stable failure phrase so no key or exception detail leaks into diagnostics.</en>
+            // </lang>
+            try
+            {
+                // <lang>
+                //   <zh-CN>Base64 非法、公钥 XML 非法或签名长度异常都会在此抛出，统一按失败处理。</zh-CN>
+                //   <en>Invalid Base64, malformed public-key XML, or an abnormal signature length throws here and is handled uniformly as failure.</en>
+                // </lang>
+                byte[] signature = Convert.FromBase64String(signatureBase64);
+                using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+                {
+                    // <lang>
+                    //   <zh-CN>只导入公钥；FromXmlString 在 4.8 已有编译实例（登录密码加密路径），此处复用同一 API。</zh-CN>
+                    //   <en>Import only the public key; FromXmlString already has a compiled 4.8 instance (login-password encryption path), reused here.</en>
+                    // </lang>
+                    rsa.FromXmlString(publicKeyXml);
+                    using (SHA256 algorithm = SHA256.Create())
+                    {
+                        // <lang>
+                        //   <zh-CN>VerifyData 返回 false 即签名不匹配，不抛异常；仍按拒绝处理。</zh-CN>
+                        //   <en>VerifyData returns false for a mismatched signature without throwing; it is still rejected.</en>
+                        // </lang>
+                        if (!rsa.VerifyData(content, algorithm, signature))
+                        {
+                            reason = "Package signature is invalid.";
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                reason = "Package signature material is malformed.";
+                return false;
+            }
+            catch (CryptographicException)
+            {
+                reason = "Package signature could not be verified.";
+                return false;
+            }
+            catch (ArgumentException)
+            {
+                reason = "Package signature material is malformed.";
+                return false;
+            }
+
+            return true;
+        }

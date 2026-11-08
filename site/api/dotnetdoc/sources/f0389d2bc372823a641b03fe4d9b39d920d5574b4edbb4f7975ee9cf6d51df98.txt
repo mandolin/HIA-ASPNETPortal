@@ -1,0 +1,8 @@
+        public static string FormatByteLength(long length)
+        {
+            // <lang>
+            //   <zh-CN>使用不变区域性，避免不同区域设置改变证据文本。</zh-CN>
+            //   <en>Invariant culture keeps evidence text stable across regional settings.</en>
+            // </lang>
+            return length.ToString(CultureInfo.InvariantCulture);
+        }

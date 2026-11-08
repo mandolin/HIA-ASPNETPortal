@@ -1,0 +1,8 @@
+        public PortalOnlinePackageScanVerdict Scan(string stagingName, byte[] content)
+        {
+            // <lang>
+            //   <zh-CN>刻意忽略入参：默认实现不承担扫描职责，只表达「不可用」这一事实。</zh-CN>
+            //   <en>Inputs are deliberately ignored: the default implementation performs no scanning and only expresses "unavailable".</en>
+            // </lang>
+            return PortalOnlinePackageScanVerdict.Unavailable;
+        }

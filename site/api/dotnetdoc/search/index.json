@@ -40530,6 +40530,186 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string isregisteredoutcome dotnet-method determines whether an outcome belongs to the outcome whitelist of portalcfg_operationaudits (success/failure/skipped). public static bool aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome(string outcome) dotnet:m:aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageauditformatter t:aspnet.starterkit.portal.portalonlinepackageauditformatter dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageauditformatter.cs csharp 判断结果值是否属于 portalcfg_operationaudits 的 outcome 白名单（success/failure/skipped）。 determines whether an outcome belongs to the outcome whitelist of portalcfg_operationaudits (success/failure/skipped). 待判定结果值，可为 null。 outcome to check; may be null. 属于白名单时为 true。 true when whitelisted."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageintegrity",
+      "name": "PortalOnlinePackageIntegrity",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageintegr-b2d23aa1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageintegr-b2d23aa1.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageintegrity portalonlinepackageintegrity dotnet-type integrity and signature verification for online capability packages (pure functions; no config read, no database connection, no installation). it carries the integrity responsibility missing because `.net framework 4.8` does not auto-validate zip crc-32 while reading: a sha-256 content digest and a separate rsa-sha256 signature provide it, rather than runtime crc or package-declared claims. class aspnet.starterkit.portal.portalonlinepackageintegrity dotnet:t:aspnet.starterkit.portal.portalonlinepackageintegrity portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 在线能力包的完整性与签名校验（纯函数，不读取配置、不连接数据库、不执行安装）。 承担 `.net framework 4.8` 不会在读取 zip 时自动校验 crc-32 所缺的完整性职责： 由 sha-256 内容摘要与独立 rsa-sha256 签名提供，而不是依赖运行时 crc 或包内声明。 integrity and signature verification for online capability packages (pure functions; no config read, no database connection, no installation). it carries the integrity responsibility missing because `.net framework 4.8` does not auto-validate zip crc-32 while reading: a sha-256 content digest and a separate rsa-sha256 signature provide it, rather than runtime crc or package-declared claims. 哈希口径与离线工具 `invoke-portalmoduleassemblycheck.ps1` 的 `get-filesha256` **逐字一致**： sha256 计算后经 `bitconverter.tostring(...).replace(\"-\",\"\").tolowerinvariant()` 得到 64 位小写十六进制。 **a 级硬边界**：期望哈希只能来自服务端隔离暂存时记录的值，公钥只能来自服务端受信任部署配置； 二者**绝不**从包内容、包内 `module.json` 的来源声明或 capability 字段解析，也不因包「自称可信」而放宽。 所有校验 fail-closed：公钥/签名/摘要缺失、格式错、验证失败或异常一律拒绝，不回显不可信文本。 the digest format is **character-for-character identical** to `get-filesha256` in the offline tool `invoke-portalmoduleassemblycheck.ps1`: sha256 followed by `bitconverter.tostring(...).replace(\"-\",\"\").tolowerinvariant()`, yielding 64 lowercase hex characters. **a-level hard boundary**: the expected hash comes only from the server-side isolated staging record, and the public key only from trusted server-side deployment configuration; neither is parsed from package content, a `module.json` origin claim, or a capability field, and neither is relaxed because a package \"claims to be trusted\". every check fails closed: missing public key, signature, or digest, malformed input, verification failure, or an exception is rejected, and no untrusted text is echoed."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageintegrity.sha256hexlength",
+      "name": "Sha256HexLength",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackageintegr-28ca10ad.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackageintegr-28ca10ad.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageintegrity.sha256hexlength sha256hexlength dotnet-field fixed length of a sha-256 hex digest (64). public const int aspnet.starterkit.portal.portalonlinepackageintegrity.sha256hexlength dotnet:f:aspnet.starterkit.portal.portalonlinepackageintegrity.sha256hexlength portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp sha-256 十六进制摘要的固定长度（64）。 fixed length of a sha-256 hex digest (64)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.byte",
+      "name": "ComputeSha256Hex",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-619f0d11.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-619f0d11.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.byte computesha256hex dotnet-method computes the lowercase sha-256 hex digest of byte content, using the same format as the offline tool. public static string aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex(byte[] content) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.byte portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 计算字节内容的 sha-256 小写十六进制摘要；与离线工具同一口径。 computes the lowercase sha-256 hex digest of byte content, using the same format as the offline tool. 包内容字节，不能为 null；空数组也返回空数组的合法摘要。 package content bytes; cannot be null. an empty array still yields its valid digest. 64 位小写十六进制摘要。 64-character lowercase hex digest. content 为 null 时抛出。 thrown when content is null."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.io.stream",
+      "name": "ComputeSha256Hex",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-89aa4a97.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-89aa4a97.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.io.stream computesha256hex dotnet-method computes the lowercase sha-256 hex digest from a stream; the caller owns stream position and disposal. public static string aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex(system.io.stream stream) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.computesha256hex-system.io.stream portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 从流计算 sha-256 小写十六进制摘要；流位置由调用方负责，本方法不复位也不关闭流。 computes the lowercase sha-256 hex digest from a stream; the caller owns stream position and disposal. 可读流，不能为 null。 readable stream; cannot be null. 64 位小写十六进制摘要。 64-character lowercase hex digest. stream 为 null 时抛出。 thrown when stream is null."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.issha256hex-system.string",
+      "name": "IsSha256Hex",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-147cd029.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-147cd029.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.issha256hex-system.string issha256hex dotnet-method determines whether text is a fixed-length 64-character hex digest; no trimming or padding so malformed input is not washed into a valid value. public static bool aspnet.starterkit.portal.portalonlinepackageintegrity.issha256hex(string value) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.issha256hex-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 判断文本是否为定长 64 位十六进制摘要；不 trim、不补位，避免把畸形输入洗成合法值。 determines whether text is a fixed-length 64-character hex digest; no trimming or padding so malformed input is not washed into a valid value. 待判定文本，可为 null。 text to check; may be null. 长度与字符集合规时为 true。 true when length and character set comply."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifyintegrity-system.byte-system.string-system.string",
+      "name": "TryVerifyIntegrity",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-ab787bfd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-ab787bfd.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifyintegrity-system.byte-system.string-system.string tryverifyintegrity dotnet-method verifies the package content digest against the server-recorded expected hash (carrying the integrity duty absent from 4.8 crc validation). public static bool aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifyintegrity(byte[] content, string expectedhash, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifyintegrity-system.byte-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 校验包内容摘要与服务端记录的期望哈希一致（承担 4.8 无 crc 自动校验的完整性职责）。 verifies the package content digest against the server-recorded expected hash (carrying the integrity duty absent from 4.8 crc validation). 包内容字节。 package content bytes. 服务端隔离暂存时记录的期望摘要，不接受包内声明。 server-recorded expected digest from isolated staging; package-declared values are not accepted. 拒绝原因的稳定短语，不回显内容或哈希。 stable rejection phrase that echoes neither content nor hash. 摘要格式合规且完全一致时为 true。 true when the digest is well-formed and matches exactly."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifysignature-system.byte-system.string-system.string-system.string",
+      "name": "TryVerifySignature",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-77212e81.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-77212e81.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifysignature-system.byte-system.string-system.string-system.string tryverifysignature dotnet-method verifies the rsa-sha256 signature of package content with a server-trusted public key; fail-closed on any absence, exception, or verification failure. public static bool aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifysignature(byte[] content, string publickeyxml, string signaturebase64, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.tryverifysignature-system.byte-system.string-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 以服务端受信任公钥验证包内容的 rsa-sha256 签名；fail-closed，任何缺失/异常/验证失败都拒绝。 verifies the rsa-sha256 signature of package content with a server-trusted public key; fail-closed on any absence, exception, or verification failure. 使用 4.8 已有的 `rsacryptoserviceprovider.fromxmlstring` 与 `verifydata(byte[], object, byte[])`， 哈希算法对象显式用 `sha256.create()`；不引入 `signedcms` / pkcs 或 `system.security` 新引用（避免 4.8 可用面不确定）。 签名**可选**（q3）：是否要求签名由上层判定器决定，但一旦提供却无效，判定器也必须拒绝，避免伪造签名被忽略。 it uses `rsacryptoserviceprovider.fromxmlstring` and `verifydata(byte[], object, byte[])` already present on 4.8, with an explicit `sha256.create()` hash object; no `signedcms`/pkcs or new `system.security` reference is introduced (avoiding uncertain 4.8 api availability). signature is **optional** (q3): the upper gate decides whether to require it, but a supplied-yet-invalid signature must also be rejected so a forged one is never ignored. 被签名的包内容字节。 signed package content bytes. 服务端部署配置中的 rsa 公钥 xml（只含公钥），不接受包内声明。 rsa public-key xml from server deployment configuration (public part only); package-declared values are not accepted. base64 编码的签名值。 base64-encoded signature value. 拒绝原因的稳定短语，不回显公钥、签名或异常细节。 stable rejection phrase that echoes no key, signature, or exception detail. 签名有效时为 true。 true when the signature is valid."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.signpackage-system.byte-system.string",
+      "name": "SignPackage",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-7cad804c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-7cad804c.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.signpackage-system.byte-system.string signpackage dotnet-method produces an rsa-sha256 signature for the server-side packaging/publishing path (test fixtures also use it to build real signatures). the private key is caller-held only; this method reads no config and persists no key. public static string aspnet.starterkit.portal.portalonlinepackageintegrity.signpackage(byte[] content, string privatekeyxml) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.signpackage-system.byte-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 生成 rsa-sha256 签名，供服务端打包/发布侧使用（测试夹具也用它构造真实签名）。 私钥只由调用方持有，本方法不读取配置、不持久化密钥。 produces an rsa-sha256 signature for the server-side packaging/publishing path (test fixtures also use it to build real signatures). the private key is caller-held only; this method reads no config and persists no key. 待签名内容字节。 content bytes to sign. 调用方持有的 rsa 私钥 xml。 caller-held rsa private-key xml. base64 编码的签名值。 base64-encoded signature value. content 为 null 时抛出。 thrown when content is null."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.hassignaturematerial-system.string-system.string",
+      "name": "HasSignatureMaterial",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-441cf4e3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-441cf4e3.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.hassignaturematerial-system.string-system.string hassignaturematerial dotnet-method determines whether signature material is present (shape only, no verification) so the upper gate can distinguish \"not configured\" from \"supplied but invalid\". public static bool aspnet.starterkit.portal.portalonlinepackageintegrity.hassignaturematerial(string publickeyxml, string signaturebase64) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.hassignaturematerial-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 判断签名材料是否齐备（仅形状判断，不验签）；供上层判定器区分「未配置」与「已提供但无效」。 determines whether signature material is present (shape only, no verification) so the upper gate can distinguish \"not configured\" from \"supplied but invalid\". 公钥 xml。 public-key xml. base64 签名值。 base64 signature value. 两者均非空白时为 true。 true when both are non-blank."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.formatbytelength-system.int64",
+      "name": "FormatByteLength",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-56cd7da8.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegr-56cd7da8.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageintegrity.formatbytelength-system.int64 formatbytelength dotnet-method formats a byte length as invariant-culture stable text for diagnostics and evidence; not written into audit summaries. public static string aspnet.starterkit.portal.portalonlinepackageintegrity.formatbytelength(long length) dotnet:m:aspnet.starterkit.portal.portalonlinepackageintegrity.formatbytelength-system.int64 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageintegrity t:aspnet.starterkit.portal.portalonlinepackageintegrity dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackageintegrity.cs csharp 把字节长度格式化为不变区域性的稳定文本，供诊断与证据使用；不写入审计摘要。 formats a byte length as invariant-culture stable text for diagnostics and evidence; not written into audit summaries. 字节长度。 byte length. 不变区域性十进制文本。 invariant-culture decimal text."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagescanverdict",
+      "name": "PortalOnlinePackageScanVerdict",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagescanve-030248d0.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagescanve-030248d0.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagescanverdict portalonlinepackagescanverdict dotnet-type closed verdict vocabulary for malware scanning. `unavailable` and `infected` must never be treated as `clean`. enum aspnet.starterkit.portal.portalonlinepackagescanverdict dotnet:t:aspnet.starterkit.portal.portalonlinepackagescanverdict portal.components aspnet.starterkit.portal t:system.enum t:system.valuetype t:system.object t:system.icomparable t:system.iformattable t:system.iconvertible dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 恶意文件扫描的判定词表。三值封闭：`unavailable` 与 `infected` 都不得被当作 `clean`。 closed verdict vocabulary for malware scanning. `unavailable` and `infected` must never be treated as `clean`."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanverdict.clean",
+      "name": "Clean",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanve-819732d9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanve-819732d9.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanverdict.clean clean dotnet-field the scanner confirmed no malicious content. aspnet.starterkit.portal.portalonlinepackagescanverdict.clean dotnet:f:aspnet.starterkit.portal.portalonlinepackagescanverdict.clean portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagescanverdict t:aspnet.starterkit.portal.portalonlinepackagescanverdict dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 扫描器确认未命中恶意内容。 the scanner confirmed no malicious content."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanverdict.infected",
+      "name": "Infected",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanve-654cdea4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanve-654cdea4.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanverdict.infected infected dotnet-field the scanner detected malicious content. aspnet.starterkit.portal.portalonlinepackagescanverdict.infected dotnet:f:aspnet.starterkit.portal.portalonlinepackagescanverdict.infected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagescanverdict t:aspnet.starterkit.portal.portalonlinepackagescanverdict dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 扫描器命中恶意内容。 the scanner detected malicious content."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanverdict.unavailable",
+      "name": "Unavailable",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanve-c22214ca.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanve-c22214ca.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagescanverdict.unavailable unavailable dotnet-field the scanner is unavailable, timed out, or returned an unknown result; the gate rejects fail-closed. aspnet.starterkit.portal.portalonlinepackagescanverdict.unavailable dotnet:f:aspnet.starterkit.portal.portalonlinepackagescanverdict.unavailable portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagescanverdict t:aspnet.starterkit.portal.portalonlinepackagescanverdict dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 扫描器不可用、超时或返回未知结果；判定门按 fail-closed 拒绝。 the scanner is unavailable, timed out, or returned an unknown result; the gate rejects fail-closed."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalonlinepackagescanner",
+      "name": "IPortalOnlinePackageScanner",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportalonlinepackagescann-c0a8b269.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.iportalonlinepackagescann-c0a8b269.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalonlinepackagescanner iportalonlinepackagescanner dotnet-type adapter point for online capability package malware scanning. the adapter only answers a three-value verdict; it performs no installation, reads no config, and introduces no scanning-engine dependency. interface aspnet.starterkit.portal.iportalonlinepackagescanner dotnet:t:aspnet.starterkit.portal.iportalonlinepackagescanner portal.components aspnet.starterkit.portal dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 在线能力包恶意扫描适配点。适配层只回答三值判定，不执行安装、不读取配置、不引入任何扫描引擎依赖。 adapter point for online capability package malware scanning. the adapter only answers a three-value verdict; it performs no installation, reads no config, and introduces no scanning-engine dependency. q3 裁定「封装可降级、fail-closed、扫描器留适配点、不强制引入重依赖」。因此本接口是唯一切入点： 企业内网可接入既有扫描器或外部服务；未接线时调用方传入返回 `unavailable` 的实现，判定门据此拒绝， **不会**因为「还没接扫描器」而默认放行。适配层抛出的异常由判定门统一收敛为 `unavailable`。 q3 rules \"degradable, fail-closed, leave a scanner adapter point, do not force heavy dependencies\". this interface is the only hook: an enterprise network may wire an existing scanner or external service; when unwired, callers pass an implementation returning `unavailable` and the gate rejects, so a missing scanner never defaults to allow. exceptions from the adapter are converged to `unavailable` by the gate."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalonlinepackagescanner.scan-system.string-system.byte",
+      "name": "Scan",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalonlinepackagescann-f903a098.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iportalonlinepackagescann-f903a098.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalonlinepackagescanner.scan-system.string-system.byte scan dotnet-method scans isolated staged package content and returns a three-value verdict; implementations must never load untrusted content as executable code. aspnet.starterkit.portal.portalonlinepackagescanverdict aspnet.starterkit.portal.iportalonlinepackagescanner.scan(string stagingname, byte[] content) dotnet:m:aspnet.starterkit.portal.iportalonlinepackagescanner.scan-system.string-system.byte portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iportalonlinepackagescanner t:aspnet.starterkit.portal.iportalonlinepackagescanner dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 扫描已隔离暂存的包内容并返回三值判定；实现必须自行保证不把不可信内容当作可执行代码加载。 scans isolated staged package content and returns a three-value verdict; implementations must never load untrusted content as executable code. 服务端生成的隔离暂存名，仅作关联标识。 server-generated isolated staging name, used only as a correlation id. 包内容字节，可为 null（适配层应返回 unavailable）。 package content bytes; may be null (the adapter should return unavailable). 三值判定；任何不确定情形返回 unavailable。 three-value verdict; any uncertain case returns unavailable."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageunavailablescanner",
+      "name": "PortalOnlinePackageUnavailableScanner",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageunavai-33d74dc2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackageunavai-33d74dc2.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackageunavailablescanner portalonlinepackageunavailablescanner dotnet-type explicit \"unwired\" scanner implementation: always returns `unavailable`, so \"no scanner\" becomes a visible rejection reason rather than null or a default `clean`. this is the default realization of q3's \"degradable, fail-closed\" rule. class aspnet.starterkit.portal.portalonlinepackageunavailablescanner dotnet:t:aspnet.starterkit.portal.portalonlinepackageunavailablescanner portal.components aspnet.starterkit.portal t:system.object t:aspnet.starterkit.portal.iportalonlinepackagescanner dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 「未接线」扫描器的显式实现：恒定返回 `unavailable`，用于让「没有扫描器」成为可见的拒绝原因， 而不是 null 或默认 `clean`。这是 q3「可降级、fail-closed」的默认落地。 explicit \"unwired\" scanner implementation: always returns `unavailable`, so \"no scanner\" becomes a visible rejection reason rather than null or a default `clean`. this is the default realization of q3's \"degradable, fail-closed\" rule."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageunavailablescanner.scan-system.string-system.byte",
+      "name": "Scan",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageunavai-8708e455.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageunavai-8708e455.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageunavailablescanner.scan-system.string-system.byte scan dotnet-method always returns unavailable; reads no content and records no untrusted text. public aspnet.starterkit.portal.portalonlinepackagescanverdict aspnet.starterkit.portal.portalonlinepackageunavailablescanner.scan(string stagingname, byte[] content) dotnet:m:aspnet.starterkit.portal.portalonlinepackageunavailablescanner.scan-system.string-system.byte portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackageunavailablescanner t:aspnet.starterkit.portal.portalonlinepackageunavailablescanner dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 恒返回 unavailable；不读取内容、不记录不可信文本。 always returns unavailable; reads no content and records no untrusted text."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesecuritygate",
+      "name": "PortalOnlinePackageSecurityGate",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagesecuri-7c2dd67b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalonlinepackagesecuri-7c2dd67b.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalonlinepackagesecuritygate portalonlinepackagesecuritygate dotnet-type security gate for online capability packages: combines package allow-list, sha-256 integrity, optional rsa-sha256 signature, and malware scanning into the **single allow decision**; any failing criterion rejects. pure, stateless, no io. class aspnet.starterkit.portal.portalonlinepackagesecuritygate dotnet:t:aspnet.starterkit.portal.portalonlinepackagesecuritygate portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 在线能力包安全闸门：把「包级白名单 + sha-256 完整性 + rsa-sha256 签名（可选）+ 恶意扫描」四道判据 联合成**唯一放行入口**，任一不满足即拒绝（q3 三系统联合判定 + 完整性前置）。纯逻辑、无状态、不触 io。 security gate for online capability packages: combines package allow-list, sha-256 integrity, optional rsa-sha256 signature, and malware scanning into the **single allow decision**; any failing criterion rejects. pure, stateless, no io. 判定顺序固定：请求/内容 → 白名单 → 完整性 → 签名 → 扫描；每一步都在不产生副作用前完成。 签名可选语义：`requiresignature=true` 但公钥/签名缺失即拒绝；`requiresignature=false` 时若仍提供了签名材料， 则**必须验签通过**，否则拒绝——避免伪造签名被静默忽略。扫描器为 null、抛异常或返回 `unavailable` 一律拒绝（fail-closed）。 **a 级硬边界**：期望哈希、公钥均来自服务端受信任来源，接口不提供任何「从包内声明推导信任」的入口。 the order is fixed: request/content → allow-list → integrity → signature → scan; every step completes before any side effect. optional-signature semantics: `requiresignature=true` with missing key/signature rejects; with `requiresignature=false`, supplied signature material must still verify, so a forged signature is never silently ignored. a null scanner, an exception, or an `unavailable` verdict all reject (fail-closed). **a-level hard boundary**: expected hash and public key come from trusted server sources; the api offers no way to derive trust from package-declared claims."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string",
+      "name": "TryAllowInstall",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuri-d2a13c34.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuri-d2a13c34.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string tryallowinstall dotnet-method jointly decides whether an isolated staged package may enter installation; reason is empty on success. public static bool aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall(string clientfilename, byte[] content, string expectedhash, string publickeyxml, string signaturebase64, bool requiresignature, aspnet.starterkit.portal.iportalonlinepackagescanner scanner, string stagingname, out string reason) dotnet:m:aspnet.starterkit.portal.portalonlinepackagesecuritygate.tryallowinstall-system.string-system.byte-system.string-system.string-system.string-system.boolean-aspnet.starterkit.portal.iportalonlinepackagescanner-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalonlinepackagesecuritygate t:aspnet.starterkit.portal.portalonlinepackagesecuritygate dotnet hia-document api/portal.components.hia.json src/portal.components/portalonlinepackagescanning.cs csharp 联合判定是否允许把一个隔离暂存包送入安装流程；通过时 reason 为空字符串。 jointly decides whether an isolated staged package may enter installation; reason is empty on success. 浏览器提交的原始文件名，仅用于扩展名白名单，不参与路径构造。 raw browser file name, used only for extension allow-listing, never for path construction. 包内容字节。 package content bytes. 服务端隔离暂存时记录的期望 sha-256 摘要。 server-recorded expected sha-256 digest from isolated staging. 服务端受信任公钥 xml；无签名体系时传空。 server-trusted public-key xml; pass empty when no signature scheme is configured. base64 签名值；无签名时传空。 base64 signature value; pass empty when unsigned. true=本部署要求签名；false=签名可选但提供则必须有效。 true = this deployment requires signatures; false = optional, but supplied signatures must still be valid. 扫描适配实现；null 视为不可用并拒绝。 scanner adapter; null is treated as unavailable and rejected. 服务端生成的隔离暂存名，供扫描关联。 server-generated isolated staging name for scan correlation. 拒绝原因的稳定短语，不回显不可信文本。 stable rejection phrase that echoes no untrusted text. 四道判据全部通过时为 true。 true when all four criteria pass."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionitem",
       "name": "DiscussionItem",
       "kind": "dotnet-type",

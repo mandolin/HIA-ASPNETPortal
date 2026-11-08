@@ -1,0 +1,28 @@
+        public static bool IsSha256Hex(string value)
+        {
+            // <lang>
+            //   <zh-CN>长度不符直接拒绝；与票据校验的 64 位口径一致。</zh-CN>
+            //   <en>A wrong length is rejected outright, matching the ticket's 64-character contract.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(value) || value.Length != Sha256HexLength)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符限定在 0-9/a-f/A-F；冒号、空白与 Unicode 同形字符一律拒绝。</zh-CN>
+            //   <en>Restrict characters to 0-9/a-f/A-F; colons, whitespace, and Unicode look-alikes are rejected.</en>
+            // </lang>
+            foreach (char character in value)
+            {
+                bool isHex = (character >= '0' && character <= '9') ||
+                             (character >= 'a' && character <= 'f') ||
+                             (character >= 'A' && character <= 'F');
+                if (!isHex)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }

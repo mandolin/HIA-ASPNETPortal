@@ -1,0 +1,21 @@
+        public static string ComputeSha256Hex(Stream stream)
+        {
+            // <lang>
+            //   <zh-CN>拒绝 null，避免把空流误当作有内容的包。</zh-CN>
+            //   <en>Reject null so an absent stream is not mistaken for a package with content.</en>
+            // </lang>
+            if (stream == null)
+            {
+                throw new ArgumentNullException("stream");
+            }
+
+            // <lang>
+            //   <zh-CN>流式计算避免把大包整体载入内存；仍用同一小写 hex 口径。</zh-CN>
+            //   <en>Streaming avoids loading a large package wholly into memory while keeping the same lowercase hex format.</en>
+            // </lang>
+            using (SHA256 algorithm = SHA256.Create())
+            {
+                byte[] digest = algorithm.ComputeHash(stream);
+                return BitConverter.ToString(digest).Replace("-", string.Empty).ToLowerInvariant();
+            }
+        }

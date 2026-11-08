@@ -237,6 +237,8 @@
     <Compile Include="PortalOnlinePackageConfirmation.cs" />
     <Compile Include="PortalOnlinePackageAuditEvents.cs" />
     <Compile Include="PortalOnlinePackageAuditFormatter.cs" />
+    <Compile Include="PortalOnlinePackageIntegrity.cs" />
+    <Compile Include="PortalOnlinePackageScanning.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -1,0 +1,38 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageunavailablescanner",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageunavailablescanner:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageunavailablescanner:interface:t-aspnet.starterkit.portal.iportalonlinepackagescanner",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IPortalOnlinePackageScanner",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageunavailablescanner:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageunavailablescanner.scan-system.string-system.byte",
+      "kind": "entry",
+      "label": "Scan",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageunavailablescanner.scan-system.string-system.byte",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageScanning.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageunavailablescanner.scan-system.string-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageunavai-8708e455.html"
+    }
+  ]
+}

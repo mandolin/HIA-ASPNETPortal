@@ -1,0 +1,13 @@
+    public interface IPortalOnlinePackageScanner
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>扫描已隔离暂存的包内容并返回三值判定；实现必须自行保证不把不可信内容当作可执行代码加载。</zh-CN>
+        ///   <en>Scans isolated staged package content and returns a three-value verdict; implementations must never load untrusted content as executable code.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="stagingName"><l zh-CN="服务端生成的隔离暂存名，仅作关联标识。" en="Server-generated isolated staging name, used only as a correlation id." /></param>
+        /// <param name="content"><l zh-CN="包内容字节，可为 null（适配层应返回 Unavailable）。" en="Package content bytes; may be null (the adapter should return Unavailable)." /></param>
+        /// <returns><l zh-CN="三值判定；任何不确定情形返回 Unavailable。" en="Three-value verdict; any uncertain case returns Unavailable." /></returns>
+        PortalOnlinePackageScanVerdict Scan(string stagingName, byte[] content);
+    }
