@@ -13,6 +13,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>稳定包标识，须与 manifest 的 packageId 一致（如 HIA.FormBuilder）。</zh-CN><en>Stable package identifier, matching the manifest packageId (e.g. HIA.FormBuilder).</en></lang></summary>
         public string PackageId { get; set; }
 
+        /// <summary><lang><zh-CN>关联的能力标识（如 BasicBusiness.FormBuilder）；安装期据此在关闭的能力词表中校验，未登记或属管理级则拒绝（W-anp-P286 Admins 边界）。</zh-CN><en>Associated capability id (e.g. BasicBusiness.FormBuilder); used at install time to validate against the closed capability registry, rejecting unknown or administrative capabilities (W-anp-P286 Admins boundary).</en></lang></summary>
+        public string CapabilityId { get; set; }
+
         /// <summary><lang><zh-CN>模块类型后台显示名称。</zh-CN><en>Administration display name for the module type.</en></lang></summary>
         public string FriendlyName { get; set; }
 

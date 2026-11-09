@@ -55,6 +55,16 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>Admins 边界（W-anp-P286）：若请求携带能力标识，必须在关闭的能力词表中已登记（拒绝 capability 自创），且其权限键前缀不得为管理级（拒绝授予 Admins 角色/能力）。未携带则不阻断（兼容 SQL 安装路径，能力边界由词表本身兜底）。</zh-CN>
+            //   <en>Admins boundary (W-anp-P286): when a request carries a capability id it must already be registered in the closed capability registry (reject capability self-creation) and its permission-key prefix must not be administrative (reject granting the Admins role/capability). Absence is not blocked (the SQL provision path relies on the registry as the backstop).</en>
+            // </lang>
+            if (!string.IsNullOrWhiteSpace(request.CapabilityId)
+                && (!PortalCapabilityRegistry.TryGet(request.CapabilityId, out PortalCapabilityDefinition capDef) || IsAdminCapability(capDef)))
+            {
+                return false;
+            }
+
             try
             {
                 // <lang>
@@ -178,5 +188,22 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
         }
+
+        // <lang>
+        //   <zh-CN>判定能力是否为管理级：权限键前缀为 Admins / Admin / Business.Admin 之一即视为会授予模块 Admins 能力，须在安装期拒绝。</zh-CN>
+        //   <en>Decide whether a capability is administrative: a permission-key prefix of Admins / Admin / Business.Admin means the module would obtain an Admins capability and must be rejected at install time.</en>
+        // </lang>
+        private static bool IsAdminCapability(PortalCapabilityDefinition definition)
+        {
+            if (definition == null)
+            {
+                return true;
+            }
+            string prefix = definition.PermissionKeyPrefix ?? string.Empty;
+            return prefix.StartsWith("Admins", StringComparison.OrdinalIgnoreCase)
+                || prefix.StartsWith("Admin", StringComparison.OrdinalIgnoreCase)
+                || prefix.StartsWith("Business.Admin", StringComparison.OrdinalIgnoreCase);
+        }
+
     }
 }
