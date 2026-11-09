@@ -326,6 +326,71 @@ Administrator interaction regression uses `SecureString` password input and neve
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalExtensionSmoke.ps1 -IncludeAdmin -AdminUser admin
 ```
 
+## Independent modules (capabilities provided outside the core)
+
+The portal supports deploying business capabilities as **independent modules**: a package lives under `DesktopModules/<package>/` and is loaded by the hosting mechanism according to the trusted catalog, the deployment profile and the package enable state, so the core needs no code change for each new capability. Form Builder is the first example of this mechanism.
+
+### Package manifest (module.json)
+
+Every package directory must contain `module.json` whose fields match the runtime validation rules:
+
+```json
+{
+  "schemaVersion": 2,
+  "packageId": "HIA.FormBuilder",
+  "displayName": "表单构建器（独立模块）",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "moduleKind": "Independent",
+  "desktopEntry": "DesktopModules/FormBuilder/FormBuilder.ascx",
+  "resources": ["Styles/FormBuilder.css"],
+  "capability": { "capabilityId": "BasicBusiness.FormBuilder", "role": "Primary" }
+}
+```
+
+Key constraints (a mistake makes the package **silently stop rendering**, invisible to builds and unit tests):
+
+- `schemaVersion` must be a JSON **integer** `1` or `2`, never a string.
+- `desktopEntry` must stay inside this package directory and the entry file must exist.
+- `resources` must be **package-relative** paths with an extension in `.css`/`.png`/`.jpg`/`.jpeg`/`.gif`/`.webp`, whose files exist; a `DesktopModules/...` full path is invalid.
+- `capability` must be an **object** with `capabilityId` and `role`; the capability key must be registered in the authoritative `PortalCapabilityRegistry`, and the role must be one of `Primary`/`Contributor`/`Projection`/`Adapter`/`Block`. Top-level `capabilityId`/`capabilityRole` is invalid.
+- Fields such as `script`/`scripts`, `externalUrl`/`externalUrls`, `assembly`/`assemblies` and `packageUrl` are prohibited: a manifest declaration cannot change execution or download capability.
+- `moduleKind` may only be `Core` (the default) or `Independent`.
+
+### Deployment profile allow-lists
+
+The active profile comes from `Portal.ModuleProfiles.Active` in `Web.config`, then at start-up is overlaid in "base configuration plus environment override" order from `Config/appSettings.json` and `Config/appSettings.<environment>.json`. Every active profile's `Portal.ModuleProfiles.<Profile>.Packages` allow-list must **explicitly list** the `packageId` of an `Independent` module; the `*` wildcard covers only the `Core` form and must never implicitly allow an independent module.
+
+After changing an allow-list, restart the site (or trigger an application-domain recycle) for the new configuration to take effect. `Config/appSettings.dev.json` is a machine-local ignored file; register the change in `Config/appSettings.json` and `Config/appSettings.*.template.json` so other environments do not miss the package.
+
+### Install and uninstall
+
+The reusable implementation is `IPortalModuleProvisioner` / `PortalModuleProvisioner`, which writes or clears `PortalCfg_Tabs`, `PortalCfg_ModuleDefinitions`, `PortalCfg_Modules` and `PortalCfg_ModulePackageStates` with idempotent SQL. At deployment time you can run the scripts directly:
+
+```powershell
+# Install (idempotent)
+sqlcmd -S "(localdb)\MSSQLLocalDB" -d Portal -i src\Setup\PortalCfg_FormBuilder_Provision.sql
+# Uninstall (reverse cleanup)
+sqlcmd -S "(localdb)\MSSQLLocalDB" -d Portal -i src\Setup\PortalCfg_FormBuilder_Deprovision.sql
+```
+
+The uninstall script removes the module instance, reclaims a definition no longer referenced, deletes the package-state row, and removes the dedicated tab when it no longer hosts any module. Reverting the profile allow-list and removing physical files are deployment actions outside the SQL scripts.
+
+### Security boundary
+
+- A third-party module must **never** obtain the `Admins` role or an administrative capability. Installation performs a fail-closed check on the capability id: unregistered capabilities (capability self-creation) and administrative permission-key prefixes are rejected.
+- Source and capability declarations are never an authorization basis. A module instance's role settings (such as `EditRoles`) only decide who may edit that instance's content; they do not grant the module itself administrative permission.
+- A single module's installation failure does not affect other modules; runtime rendering failures are isolated by the host and do not fail the whole page.
+
+### Theme skins and legacy-browser compatibility
+
+When adding visible elements, supply `body.portal-theme-<theme> .<module-class>` scope rules in the `Default.css` of all six official skins, plus the `Default` fallback skin. Colours, borders and typography come from the theme layer through `--portal-*` semantic variables with legacy-kernel fallbacks; module-private CSS owns layout only and must not rely on flex/grid, `rem`, `calc` or other layouts unsupported by IE9, nor use raw colour literals outside `var()`.
+
+### Verification
+
+- Static contract gate: `dev/scripts/Test-PortalIndependentModuleGate.ps1` (L0, validating manifest contracts, profile allow-lists, the Admins boundary, uninstall symmetry and six-skin scope rules).
+- Browser-level runtime evidence: `dev/scripts/Invoke-PortalIndependentModuleRuntimeEvidence.ps1` drives `Test-PortalIndependentModuleRuntimeEvidence.mjs` and needs a running site, LocalDB, `mise`-provided node and development-only playwright. It collects screenshots and assertions for light/dark themes and Chinese/English locales; pass an output directory through the `-OutputDirectory` parameter for the artifacts.
+
 ## Online capabilities (online install/upload)
 
 Online capabilities mean installing or uploading a capability package (a `.zip` archive) into the portal host through a controlled channel without breaking existing security or approval boundaries. The carrier base, isolation channel, two-step confirmation gate, audit, signature and integrity checks, malware scanning, and rollback with failure isolation are all implemented in `Portal.Components` and `Portal` and verified by quality gates and unit tests.
@@ -462,4 +527,4 @@ To review the formal frontend inputs read-only without running Node/Gulp:
 - `src/Portal/.editorconfig` contains `root = true`, so `charset = utf-8` is set there separately.
 - The VSCode workspace sets `"files.encoding": "utf8"`, i.e. UTF-8 without signature.
 
-<!-- build-stamp: 78A89FBC655C -->
+<!-- build-stamp: 952DB721911B -->

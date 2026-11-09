@@ -1,0 +1,106 @@
+[
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "C1：把 Form Builder manifest 的 schemaVersion 从 JSON 整数 2 改回字符串 \"2.0\"（W-anp-P287 L2 实测的第一类根因），门禁应判红并点名 C1.SchemaVersionInteger。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/FormBuilder/module.json",
+        "mode": "replace",
+        "old": "\"schemaVersion\": 2,",
+        "content": "\"schemaVersion\": \"2.0\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "C3：把 resources 从包内相对路径改回 DesktopModules/... 全路径（第二类根因），门禁应判红并点名 C3.ResourcesPackageRelative。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/FormBuilder/module.json",
+        "mode": "replace",
+        "old": "\"Styles/FormBuilder.css\"",
+        "content": "\"DesktopModules/FormBuilder/Styles/FormBuilder.css\""
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "C2：在 manifest 追加顶层 capabilityId 旧写法（第三类根因：能力声明被运行时静默忽略），门禁应判红并点名 C2.CapabilityObjectAndRegistry。追加位置在 JSON 对象末尾前，保持可解析。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/FormBuilder/module.json",
+        "mode": "replace",
+        "old": "    \"role\": \"Primary\"\n  }\n}",
+        "content": "    \"role\": \"Primary\"\n  },\n  \"capabilityId\": \"BasicBusiness.FormBuilder\"\n}"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "P1：从基础 appSettings.json 的 BusinessWorkflow 允许集移除 HIA.FormBuilder（第四类根因：活动 Profile 未显式列出 Independent 包），逐源声明校验应判红并点名 P1.appSettings.json.BusinessWorkflow.Declares.HIA.FormBuilder。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/Config/appSettings.json",
+        "mode": "replace",
+        "old": "\"Portal.ModuleProfiles.BusinessWorkflow.Packages\": \"HIA.BusinessApplicationRequest,HIA.FormBuilder\",",
+        "content": "\"Portal.ModuleProfiles.BusinessWorkflow.Packages\": \"HIA.BusinessApplicationRequest\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "P1b：从 dev 环境模板的 BusinessWorkflow 允许集移除 HIA.FormBuilder（环境覆盖层漂移），门禁应判红并点名 P1.appSettings.dev.template.json.BusinessWorkflow.Declares.HIA.FormBuilder。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/Config/appSettings.dev.template.json",
+        "mode": "replace",
+        "old": "\"Portal.ModuleProfiles.BusinessWorkflow.Packages\": \"HIA.BusinessApplicationRequest,HIA.FormBuilder\",",
+        "content": "\"Portal.ModuleProfiles.BusinessWorkflow.Packages\": \"HIA.BusinessApplicationRequest\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "A1：把独立模块能力的权限键前缀改为管理级 Admins（A 级硬边界回归），门禁应判红并点名 A1.CapabilityPrefixNotAdmin。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalCapabilityRegistry.cs",
+        "mode": "replace",
+        "old": "\"Business.FormBuilder\",",
+        "content": "\"Admins\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "U1：从卸载脚本移除包状态表清理（卸载残留回归），门禁应判红并点名 U1.PortalCfg_ModulePackageStates.Symmetric。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Setup/PortalCfg_FormBuilder_Deprovision.sql",
+        "mode": "replace",
+        "old": "DELETE FROM [dbo].[PortalCfg_ModulePackageStates] WHERE [PackageId] = N'HIA.FormBuilder';",
+        "content": "-- injected: package-state cleanup removed"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalIndependentModuleGate.ps1",
+    "note": "T1：移除深色皮肤的主题作用域规则，门禁应判红并点名 T1.ThemeScope.enterprisedark。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/EnterpriseDark/Default.css",
+        "mode": "replace",
+        "old": "body.portal-theme-enterprisedark .form-builder {",
+        "content": "body.portal-theme-enterprisedark .form-builder-injected {"
+      }
+    ]
+  }
+]

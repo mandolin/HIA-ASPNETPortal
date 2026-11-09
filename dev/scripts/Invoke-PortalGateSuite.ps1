@@ -743,6 +743,23 @@ $gateLayers = [ordered]@{
         #     it would recurse forever).</en>
         # </lang>
         @{ File = 'Test-PortalReleaseReadiness.ps1';  Runner = 'ps1'; Kind = '封版前检查'; Args = @('-DailySelfCheck') }
+        # <lang>
+        #   <zh-CN>`W-anp-P287` 新增：**独立模块契约一致性**门禁（L0 静态）。起因是 C 级独立模块首证的
+        #   浏览器级 L2 运行期核验实测发现四类静默缺陷：manifest 的 schemaVersion 写成字符串、resources 写成全路径、
+        #   capability 写成顶层字段、以及活动 Profile 允许集登记在错误配置源；构建与单测全部看不见，
+        #   旧门禁却因口径与运行时不一致报「13 PASS」。本门禁把契约口径对齐 TryReadPackage，并逐源推导 Profile 允许集，
+        #   使同类偏差在 L0 即被拦住。8 例四步注入证明全部 proved（基线绿→注入红→还原绿）。
+        #   证明边界：只证静态契约自洽，运行期渲染由 Test-PortalIndependentModuleRuntimeEvidence.mjs 的 L2 证据承载。</zh-CN>
+        #   <en>`W-anp-P287` addition: the **independent-module contract consistency** gate (L0 static). The C-grade
+        #   independent-module first-evidence browser L2 verification measured four silent defects: schemaVersion written
+        #   as a string, resources as a full path, capability as top-level fields, and the active-profile allow-list
+        #   registered in the wrong configuration source; none were visible to builds or unit tests, while the old gate
+        #   reported "13 PASS" because its rules disagreed with the runtime. This gate aligns its contract with
+        #   TryReadPackage, derives profile allow-lists source by source, and blocks the same drift at L0. All eight
+        #   four-step injection proofs passed (green baseline → red injection → green restore).
+        #   Proof boundary: static contract self-consistency only; runtime rendering is carried by the L2 evidence script.</en>
+        # </lang>
+        @{ File = 'Test-PortalIndependentModuleGate.ps1'; Runner = 'ps1'; Kind = '独立模块契约一致性'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

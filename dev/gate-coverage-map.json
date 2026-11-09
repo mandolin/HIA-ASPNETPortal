@@ -418,6 +418,14 @@
       "coverage": "full",
       "gate": "Test-PortalOnlinePackageSecurityBoundaries.ps1",
       "boundary": "只证明在线能力各 B 级安全边界在源码中存在且契约一致（静态断言）；不证明运行期授权/验签/扫描判定正确（由运行期门禁与单测承载），不执行安装或数据库操作。"
+    },
+    {
+      "id": "independent-module-contract",
+      "name": "独立模块契约一致性（manifest v2 / Profile 允许集 / Admins 边界 / 卸载对称性 / 六皮肤主题作用域）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalIndependentModuleGate.ps1",
+      "boundary": "只证明静态契约自洽：manifest 与运行时 TryReadPackage 同口径、任一可能活动 Profile 的允许集显式列出 Independent 包、Admins 边界断言存在、卸载脚本表覆盖对称、6 套皮肤主题作用域规则存在；8 例四步注入证明全部 proved。**不证明**模块在站点上真的渲染、提交落库/审计、运行期授权判定或主题视觉正确（由 L2 浏览器证据 Test-PortalIndependentModuleRuntimeEvidence.mjs、Portal.Tests 与截图承载）。"
     }
   ],
   "boundaryRequiredGates": [
@@ -500,7 +508,8 @@
     "Test-PortalWorkItemReachabilityEvidence.mjs",
     "Test-PortalWorkItemSmoke.ps1",
     "Test-PortalXmlDocumentation.ps1",
-    "Test-PortalOnlinePackageSecurityBoundaries.ps1"
+    "Test-PortalOnlinePackageSecurityBoundaries.ps1",
+    "Test-PortalIndependentModuleGate.ps1"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
@@ -519,6 +528,8 @@
     { "id": "Invoke-PortalModuleAssemblyCheckRegression.ps1", "basis": "装配态离线校验工具的四步注入回归脚手架（C-anp-P48 / W-anp-P272）：基线绿 → 四类注入（未知装配态/开关关闭时 CodeFile/未知根字段/包标识腐化）均非 0 且点名对应判据 → 逐字节还原后回绿，finally 兜底杜绝半改状态。**证明边界**：只证明工具能抓到这四类注入缺陷与仓库洁净，不证明覆盖全部缺陷类别、运行期加载或审计已入库。按需手工执行、不进日常编排。Four-step injection regression scaffold: proves the check tool detects four injected defect classes and restores byte-clean; run manually on demand, not wired into daily orchestration." },
     { "id": "Test-PortalModuleAssemblyContractInjection.ps1", "basis": "W-anp-P274 装配态契约门禁的注入回归（非门禁本身，按需手工执行、不进日常编排）：对真实台账施加 A1+A2 违规与 A5 开关开启两类注入，断言门禁非 0 且点名对应判据，finally 兜底还原字节洁净；证明的是门禁判定逻辑而非运行期加载。Injection regression for the assembly-state contract gate (not a gate itself, manual on demand, not wired into daily orchestration): injects A1+A2 and A5 violations into the real ledger, asserts the gate exits non-zero and names the criteria, with a finally block restoring byte-clean; proves the gate decision logic, not runtime loading." },
     { "id": "Test-PortalModuleAssemblyE2E.ps1", "basis": "W-anp-P274 校验→备份→回滚端到端证据脚本（非门禁本身，按需手工执行、不进日常编排）：以正式契约门禁为校验器，对受治理台账做字节级备份、注入可抓回的偏离态、用备份逐字节还原并比对 SHA256 证明零残留，证据写入 work-zone/dev/evidence/module-assembly-e2e/。Verify→backup→rollback end-to-end evidence script (not a gate, manual on demand, not wired into daily orchestration): uses the contract gate as verifier, byte-level backups the governed ledger, injects a catchable divergence, restores byte-by-byte from backup and compares SHA256 to prove zero residue; evidence written to work-zone/dev/evidence/module-assembly-e2e/." },
+    { "id": "Invoke-PortalIndependentModuleRuntimeEvidence.ps1", "basis": "独立模块浏览器级 L2 运行期证据的编排入口（W-anp-P287，非门禁、按需手工执行、不进日常 L0/L1/L2 编排）：按库内事实推导页签 ID（不硬编码具体行），逐主题/语言切换全局主题并在 finally 按运行前快照逐字段还原（零残留），经环境变量参数化驱动 Test-PortalIndependentModuleRuntimeEvidence.mjs 采集 4 组证据（浅/深主题 × 中/英语言）。依赖运行中的 IIS Express + LocalDB + 外置连接串 + mise 提供的 node 与不入库的 playwright，故不适合日常编排；产物摘要写入 work-zone/dev/evidence/p50-independent-module-l2/。**证明边界**：只证明采集时刻当前部署配置下模块渲染出预期结构与本地化文案并留档截图，不证明跨机器像素一致、提交落库/审计、可访问性或运行期授权判定。Independent-module browser L2 evidence orchestrator (W-anp-P287, not a gate, run manually on demand, not wired into daily L0/L1/L2): derives the tab id from database facts instead of hard-coding a row, switches the global theme per theme/locale and restores the pre-run snapshot field-by-field in a finally block (zero residue), then drives the .mjs evidence script for four combinations (light/dark × zh/en). Requires a running IIS Express, LocalDB, an external connection string, mise-provided node and uncommitted playwright, hence excluded from daily orchestration; writes a summary under work-zone/dev/evidence/p50-independent-module-l2/. Proof boundary: only the rendered structure and localized copy at collection time, not cross-machine pixel equality, submission persistence/audit, accessibility, or runtime authorization decisions." },
+    { "id": "Test-PortalIndependentModuleRuntimeEvidence.mjs", "basis": "独立模块浏览器级 L2 运行期证据采集器（W-anp-P287，非门禁、按需手工执行、由 Invoke-PortalIndependentModuleRuntimeEvidence.ps1 驱动、不进日常编排）：对运行中的站点以管理员登录，经容纳机制访问独立模块页签，断言模块根/标题/字段/提交按钮渲染、主题作用域类生效、界面语言与 form.json 本地化文案一致（A1–A6），并留档整页截图与 JSON 摘要。参数全部经环境变量注入，不绑定具体页签 ID、主题或数据集。**证明边界**：只证明采集时刻当前数据集与部署配置下的渲染事实，不证明跨机器像素一致、提交后的落库与审计（由单测与数据层门禁承载）、可访问性与性能、或第三方权限边界的运行期判定（由 L0 Admins 边界门禁承载）。Independent-module browser L2 evidence collector (W-anp-P287, not a gate, run on demand, driven by the .ps1 orchestrator, not wired into daily orchestration): signs in against the running site, visits the independent module tab through the hosting mechanism, asserts module root/title/fields/submit-button rendering, theme-scope class and localized copy (A1–A6), and keeps a full-page screenshot plus JSON summary. All parameters arrive through environment variables; no tab id, theme or dataset is hard-coded. Proof boundary: rendering facts at collection time only, not cross-machine pixel equality, post-submit persistence/audit, accessibility/performance, or third-party authorization decisions." },
     { "id": "Invoke-PortalOnlinePackageRollbackDrill.ps1", "basis": "在线能力包「校验→备份→偏离→还原」回滚演练证据工具（C-anp-P49 / W-anp-P280，非门禁、按需手工执行、不进日常 L0/L1/L2 编排）：在隔离临时目录构造受控暂存包清单，做 SHA256 逐文件字节级备份、注入可抓回偏离（改文件+追加残留）、用备份逐字节还原并比对哈希清单证明与偏离前一致且零残留；校验失败/备份损坏/复核点未通过三种情形各产出独立 JSON 证据到 work-zone/dev/evidence/online-package-rollback/，try/finally 清理临时目录。**证明边界**：只证明快照可还原为零残留，不表示真实回滚、安装或运行期装配态切换发生；工具不代写运行时审计（只写可审阅 JSON，不调 PortalOperationAudit、不连库）。Online-package verify→backup→diverge→restore rollback drill evidence tool (not a gate, manual on demand, not wired into daily L0/L1/L2 orchestration): proves byte-identical zero-residue restoration for three drill scenarios with independent JSON evidence; tools never write runtime audit rows, only reviewable JSON." }
   ]
 }

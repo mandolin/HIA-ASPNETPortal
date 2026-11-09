@@ -2086,3 +2086,54 @@ body.portal-tab-1 .portal-pane-left .portal-checkline {
     bottom: 18px;
     margin: 0;
 }
+/* W-anp-P286: Form Builder 独立模块主题作用域（与门户类体系对齐，避免仅依赖模块私有 CSS 导致皮肤丢失主题化） */
+body.portal-theme-enterpriselight .form-builder {
+    margin: 0 0 8px 0;
+}
+body.portal-theme-enterpriselight .form-builder-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: inherit;
+}
+body.portal-theme-enterpriselight .form-builder-message {
+    margin: 8px 0;
+}
+body.portal-theme-enterpriselight .form-builder-actions {
+    margin-top: 12px;
+}
+body.portal-theme-enterpriselight .form-builder select,
+body.portal-theme-enterpriselight .form-builder textarea,
+body.portal-theme-enterpriselight .form-builder input[type="text"],
+body.portal-theme-enterpriselight .form-builder input[type="email"] {
+    max-width: 100%;
+}
+
+/* <lang>
+ *   <zh-CN>Form Builder 独立模块主题作用域：补齐全部语义类，颜色/边框/字体由主题层经 --portal-* 语义变量决定；
+ *   布局类只放占位规则（模块私有 CSS 承担布局），满足 7 套皮肤覆盖契约。与门户类体系对齐，避免深色皮肤丢主题化。</zh-CN>
+ *   <en>Form Builder independent-module theme scope: all semantic classes are covered; colours, borders and typography
+ *   come from themed --portal-* variables while layout-only classes carry documented placeholders (layout lives in the
+ *   module-private CSS), satisfying the seven-skin coverage contract and keeping dark skins themed.</en>
+ * </lang> */
+body.portal-theme-enterpriselight .form-builder {
+    color: #2f475f;
+    color: var(--portal-text, #2f475f);
+}
+body.portal-theme-enterpriselight .form-builder-title {
+    color: #2f475f;
+    color: var(--portal-text-strong, #2f475f);
+}
+body.portal-theme-enterpriselight .form-builder-message, 
+body.portal-theme-enterpriselight .form-builder-required {
+    color: #8a1f1f;
+    color: var(--portal-danger-text, #8a1f1f);
+}
+body.portal-theme-enterpriselight .form-builder-label {
+    color: #2f475f;
+    color: var(--portal-text-strong, #2f475f);
+}
+body.portal-theme-enterpriselight .form-builder-fields { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足覆盖门禁。</zh-CN><en>Layout-only class; no colour/border/font to provide; placeholder for the coverage gate.</en></lang> */ }
+body.portal-theme-enterpriselight .form-builder-field { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足覆盖门禁。</zh-CN><en>Layout-only class; no colour/border/font to provide; placeholder for the coverage gate.</en></lang> */ }
+body.portal-theme-enterpriselight .form-builder-field-textarea { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足覆盖门禁。</zh-CN><en>Layout-only class; no colour/border/font to provide; placeholder for the coverage gate.</en></lang> */ }
+body.portal-theme-enterpriselight .form-builder-input { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足覆盖门禁。</zh-CN><en>Layout-only class; no colour/border/font to provide; placeholder for the coverage gate.</en></lang> */ }
+body.portal-theme-enterpriselight .form-builder-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足覆盖门禁。</zh-CN><en>Layout-only class; no colour/border/font to provide; placeholder for the coverage gate.</en></lang> */ }

@@ -337,6 +337,71 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalExtensionSmoke.ps1 -IncludeAdmin -AdminUser admin
 ```
 
+## 独立模块（本体之外提供的能力）
+
+门户支持把业务能力以**独立模块**的形式部署：模块包位于 `DesktopModules/<包名>/`，由容纳机制按可信目录、部署 Profile 与包启用状态装载，本体不需要为每个新能力修改内核代码。Form Builder（表单构建器）是这一机制的首个示例。
+
+### 模块包清单（module.json）
+
+每个模块包目录必须含 `module.json`，字段与运行时校验口径一致：
+
+```json
+{
+  "schemaVersion": 2,
+  "packageId": "HIA.FormBuilder",
+  "displayName": "表单构建器（独立模块）",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "moduleKind": "Independent",
+  "desktopEntry": "DesktopModules/FormBuilder/FormBuilder.ascx",
+  "resources": ["Styles/FormBuilder.css"],
+  "capability": { "capabilityId": "BasicBusiness.FormBuilder", "role": "Primary" }
+}
+```
+
+关键约束（写错会导致包**静默不渲染**，构建与单元测试都发现不了）：
+
+- `schemaVersion` 必须是 JSON **整数** `1` 或 `2`，不能写成字符串。
+- `desktopEntry` 必须位于本包目录内且入口文件真实存在。
+- `resources` 必须是**包内相对路径**，扩展名限于 `.css`/`.png`/`.jpg`/`.jpeg`/`.gif`/`.webp`，且文件存在；不能写成 `DesktopModules/...` 全路径。
+- `capability` 必须是含 `capabilityId` 与 `role` 的**对象**；能力键必须在权威能力词表 `PortalCapabilityRegistry` 中登记，角色取 `Primary`/`Contributor`/`Projection`/`Adapter`/`Block` 之一。顶层 `capabilityId`/`capabilityRole` 是无效写法。
+- 禁止 `script`/`scripts`、`externalUrl`/`externalUrls`、`assembly`/`assemblies`、`packageUrl` 等字段：模块声明不能改变执行或下载能力。
+- `moduleKind` 只能是 `Core`（缺省）或 `Independent`。
+
+### 部署 Profile 允许集
+
+活动 Profile 由 `Web.config` 的 `Portal.ModuleProfiles.Active` 给出，并在启动时按「基础配置 + 环境覆盖」顺序由 `Config/appSettings.json` 与 `Config/appSettings.<环境>.json` 叠加。每个活动 Profile 的 `Portal.ModuleProfiles.<Profile>.Packages` 允许集必须**显式列出** `Independent` 模块的 `packageId`；通配符 `*` 只覆盖 `Core` 形态，不能让独立模块被隐含放行。
+
+修改允许集后需重启站点（或触发应用域回收）使新配置生效。`Config/appSettings.dev.json` 是本机忽略文件；正式登记应写入 `Config/appSettings.json` 与 `Config/appSettings.*.template.json`，避免只改本机文件导致其它环境缺包。
+
+### 安装与卸载
+
+安装/卸载的可复用实现为 `IPortalModuleProvisioner` / `PortalModuleProvisioner`，以幂等 SQL 写入或清理 `PortalCfg_Tabs`、`PortalCfg_ModuleDefinitions`、`PortalCfg_Modules` 与 `PortalCfg_ModulePackageStates`。部署期可直接执行：
+
+```powershell
+# 安装（幂等）
+sqlcmd -S "(localdb)\MSSQLLocalDB" -d Portal -i src\Setup\PortalCfg_FormBuilder_Provision.sql
+# 卸载（反向清理）
+sqlcmd -S "(localdb)\MSSQLLocalDB" -d Portal -i src\Setup\PortalCfg_FormBuilder_Deprovision.sql
+```
+
+卸载脚本会清理模块实例、回收不再被引用的定义、删除包状态行，并在专用页签无模块时移除该页签。部署 Profile 允许集回滚与物理文件移除属部署动作，不在 SQL 脚本内。
+
+### 安全边界
+
+- 第三方模块**不得**获得 `Admins` 角色或管理级能力；安装期对能力标识做 fail-closed 校验：未登记的能力（拒绝能力自创）与管理级权限键前缀一律拒绝。
+- 来源声明与能力声明永不作为授权依据；模块实例的角色设置（如 `EditRoles`）只决定谁可编辑该实例内容，不等于模块自身获得管理权限。
+- 单模块安装失败不影响其它模块；运行期模块渲染失败由宿主隔离，不会导致整页失败。
+
+### 主题皮肤与旧浏览器兼容
+
+新增可见元素时，必须在 6 套正式皮肤的 `Default.css` 中补齐 `body.portal-theme-<主题名> .<模块类>` 作用域规则，并同时覆盖 `Default` 回退皮肤。颜色、边框与字体由主题层经 `--portal-*` 语义变量提供并保留旧内核回退值；模块私有 CSS 只承担布局，且不得使用 flex/grid、`rem`、`calc` 等 IE9 不支持的基础布局，也不得在 `var()` 之外写裸色值。
+
+### 验证
+
+- 静态契约门禁：`dev/scripts/Test-PortalIndependentModuleGate.ps1`（L0，校验 manifest 契约、Profile 允许集、Admins 边界、卸载对称性与 6 套皮肤作用域）。
+- 浏览器级运行期证据：`dev/scripts/Invoke-PortalIndependentModuleRuntimeEvidence.ps1` 驱动 `Test-PortalIndependentModuleRuntimeEvidence.mjs`，需运行中的站点、LocalDB、`mise` 提供的 node 与开发期 playwright；按浅/深主题与中/英语言采集截图与断言，产物目录通过 `-OutputDirectory` 参数指定。
+
 ## 在线能力（在线安装/上传）
 
 在线能力指通过受控通道把能力包（`.zip` 归档）安全安装或上传到门户宿主，而不破坏既有安全与审批边界。承载基座、隔离通道、双步确认闸、审计、签名与完整性校验、恶意扫描、回滚与故障隔离均已在 `Portal.Components` 与 `Portal` 项目中实现，并由质量门禁与单元测试验证。
@@ -475,4 +540,4 @@ npm run assets:stop-watch
 - `src/Portal/.editorconfig` 因包含 `root = true`，也已单独设置 `charset = utf-8`。
 - VSCode 工作区已设置 `"files.encoding": "utf8"`，对应 UTF-8 无签名。
 
-<!-- build-stamp: 4596F70FDA89 -->
+<!-- build-stamp: 8B31AFA1794B -->

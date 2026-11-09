@@ -1,11 +1,25 @@
-/* Form Builder 独立模块基础样式（模块私有，仅承担布局；主题层颜色/边框由 6 套正式皮肤作用域决定） */
+/* <lang>
+ *   <zh-CN>Form Builder 独立模块基础样式：只承担布局，颜色一律取自主题语义变量（--portal-*）并保留旧内核回退值，
+ *   与门户 IE9+ 兼容基线一致（不使用 flex/grid、rem、calc 等旧浏览器不支持的基础布局）。
+ *   主题层 6 套正式皮肤 + Default 回退各自补 body.portal-theme-<名> .form-builder-* 作用域规则决定颜色/边框/字体。</zh-CN>
+ *   <en>Form Builder independent-module base styles: layout only. Colours always come from themed semantic variables
+ *   (--portal-*) with legacy-kernel fallbacks, aligned with the portal's IE9+ baseline (no flex/grid, rem or calc as
+ *   foundational layout). Each of the six official skins plus the Default fallback supplies its own
+ *   body.portal-theme-<name> .form-builder-* scope rules for colours, borders and typography.</en>
+ * </lang> */
 .form-builder { padding: 12px; max-width: 640px; }
-.form-builder-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
-.form-builder-message { display: block; margin: 6px 0; color: #b00000; }
-.form-builder-fields { display: grid; gap: 10px; }
-.form-builder-field { display: flex; flex-direction: column; gap: 4px; }
-.form-builder-label { font-weight: 500; }
+.form-builder-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.form-builder-message { display: block; margin: 6px 0; color: var(--portal-danger-text, #8a1f1f); }
+
+/* <lang>
+ *   <zh-CN>字段容器与单字段都用块级布局；旧 IE 无 flex/grid，靠 margin 形成纵向节奏，标签独占一行使必填标记始终可读。</zh-CN>
+ *   <en>Both the field container and each field use block layout; legacy IE has no flex/grid, so vertical rhythm comes
+ *   from margins and each label occupies its own row so the required marker stays readable.</en>
+ * </lang> */
+.form-builder-fields { display: block; }
+.form-builder-field { display: block; margin: 0 0 10px 0; }
+.form-builder-label { display: block; font-weight: 500; margin-bottom: 4px; }
 .form-builder-input { max-width: 480px; }
-.form-builder-field-textarea .form-builder-input { width: 480px; }
-.form-builder-required { color: #b00000; }
+.form-builder-field-textarea .form-builder-input { width: 480px; max-width: 100%; }
+.form-builder-required { color: var(--portal-danger-text, #8a1f1f); }
 .form-builder-actions { margin-top: 12px; }

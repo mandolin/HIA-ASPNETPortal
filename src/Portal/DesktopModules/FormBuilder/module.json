@@ -1,13 +1,16 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": 2,
   "packageId": "HIA.FormBuilder",
   "displayName": "表单构建器（独立模块）",
   "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
   "moduleKind": "Independent",
   "desktopEntry": "DesktopModules/FormBuilder/FormBuilder.ascx",
   "resources": [
-    "DesktopModules/FormBuilder/Styles/FormBuilder.css"
+    "Styles/FormBuilder.css"
   ],
-  "capabilityId": "BasicBusiness.FormBuilder",
-  "capabilityRole": "Primary"
+  "capability": {
+    "capabilityId": "BasicBusiness.FormBuilder",
+    "role": "Primary"
+  }
 }
