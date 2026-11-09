@@ -1,0 +1,141 @@
+    public sealed class PortalModuleProfileSnapshot
+    {
+        // <lang>
+        //   <zh-CN>内部集合从公开只读列表复制而来，用于大小写不敏感成员查询；不暴露给调用方，防止其修改影响解析快照。</zh-CN>
+        //   <en>Internal set copied from the public read-only list for case-insensitive membership queries; it is not exposed to callers so their mutation cannot affect the resolved snapshot.</en>
+        // </lang>
+        private readonly HashSet<string> allowedPackageSet;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一次部署 Profile 解析的不可变结果。</zh-CN>
+        ///   <en>Creates the immutable result of one deployment Profile resolution.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="activeProfile">
+        ///   <l>
+        ///     <zh-CN>已解析的活动 Profile；空值收敛为空字符串。</zh-CN>
+        ///     <en>Resolved active Profile; null converges to an empty string.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="allowedPackageIds">
+        ///   <l>
+        ///     <zh-CN>解析得到的包 id 列表；复制为只读快照。</zh-CN>
+        ///     <en>Resolved package-id list; copied into a read-only snapshot.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        ///   <l>
+        ///     <zh-CN>解析期间的受控问题摘要；复制为只读快照。</zh-CN>
+        ///     <en>Controlled issue summaries from parsing; copied into a read-only snapshot.</en>
+        ///   </l>
+        /// </param>
+        internal PortalModuleProfileSnapshot(
+            string activeProfile,
+            IList<string> allowedPackageIds,
+            IList<string> invalidEntries)
+        {
+            // <lang>
+            //   <zh-CN>将构造输入复制到只读集合，避免解析器完成后外部可变列表改变已发布的 Profile 结论。</zh-CN>
+            //   <en>Copy constructor inputs into read-only collections so externally mutable lists cannot alter a published Profile conclusion after resolution completes.</en>
+            // </lang>
+            ActiveProfile = activeProfile ?? string.Empty;
+            AllowedPackageIds = new List<string>(allowedPackageIds ?? new List<string>()).AsReadOnly();
+            InvalidEntries = new List<string>(invalidEntries ?? new List<string>()).AsReadOnly();
+
+            // <lang>
+            //   <zh-CN>成员集合以公开快照为唯一来源并使用大小写不敏感比较，保证列表与 IsPackageAllowed 的可见结论一致。</zh-CN>
+            //   <en>Build the membership set solely from the public snapshot with case-insensitive comparison so the list and IsPackageAllowed expose consistent conclusions.</en>
+            // </lang>
+            allowedPackageSet = new HashSet<string>(AllowedPackageIds, StringComparer.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前活动 Profile 名称。</zh-CN>
+        ///   <en>Current active Profile name.</en>
+        /// </lang>
+        /// </summary>
+        public string ActiveProfile { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前 Profile 允许的 package id 列表。</zh-CN>
+        ///   <en>Package id list allowed by the current Profile.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> AllowedPackageIds { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析时发现的非法 Profile、include 或 package id 条目。</zh-CN>
+        ///   <en>Invalid Profile, include, or package id entries found during resolution.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> InvalidEntries { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断 package id 是否允许进入当前部署 Profile。</zh-CN>
+        ///   <en>Determines whether a package id is allowed by the current deployment Profile.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="packageId">
+        /// <l>
+        ///   <zh-CN>待判断 package id。</zh-CN>
+        ///   <en>Package id to check.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>允许时为 true。</zh-CN>
+        ///   <en>True when allowed.</en>
+        /// </l>
+        /// </returns>
+        public bool IsPackageAllowed(string packageId)
+        {
+            // <lang>
+            //   <zh-CN>空白 id 不是允许包；其余值只去除边缘空白后查询不可变集合，本方法不检查模块启用状态或用户权限。</zh-CN>
+            //   <en>A blank id is not an allowed package; otherwise trim edge whitespace then query the immutable set, and do not check module enablement or user permissions here.</en>
+            // </lang>
+            return !string.IsNullOrWhiteSpace(packageId) && allowedPackageSet.Contains(packageId.Trim());
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断一个已解析模块包是否允许进入当前部署 Profile，并考虑其承载形态。</zh-CN>
+        ///   <en>Determines whether a resolved module package is allowed by the current deployment Profile, considering its hosting form.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="package">
+        /// <lang>
+        ///   <zh-CN>已解析模块包；其 ModuleKind 决定通配符是否覆盖。</zh-CN>
+        ///   <en>Resolved module package; its ModuleKind decides whether the wildcard covers it.</en>
+        /// </lang>
+        /// </param>
+        /// <returns>
+        /// <lang>
+        ///   <zh-CN>允许时为 true。</zh-CN>
+        ///   <en>true when allowed.</en>
+        /// </lang>
+        /// </returns>
+        public bool IsPackageAllowed(PortalModulePackage package)
+        {
+            // <lang>
+            //   <zh-CN>空白或空包不是允许包。显式 id 命中即允许；否则仅当 Profile 含通配符 '*' 且模块为 Core 形态时视为允许，Independent 模块必须显式列出。</zh-CN>
+            //   <en>A blank or null package is not allowed. An explicit id match is allowed; otherwise only when the profile contains the wildcard '*' and the module is Core is it treated as allowed; Independent modules must be explicitly listed.</en>
+            // </lang>
+            if (package == null || string.IsNullOrWhiteSpace(package.PackageId))
+            {
+                return false;
+            }
+
+            if (allowedPackageSet.Contains(package.PackageId.Trim()))
+            {
+                return true;
+            }
+
+            bool wildcard = allowedPackageSet.Contains("*");
+            return wildcard && package.ModuleKind == PortalModuleKind.Core;
+        }
+    }

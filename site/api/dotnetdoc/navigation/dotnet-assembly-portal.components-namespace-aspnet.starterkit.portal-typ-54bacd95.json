@@ -1,0 +1,198 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.cachetimeout",
+      "kind": "entry",
+      "label": "CacheTimeout",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.cachetimeout",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.cachetimeout",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ca-c6ddc6f6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.capabilityid",
+      "kind": "entry",
+      "label": "CapabilityId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.capabilityid",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.capabilityid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ca-3de306f4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.desktopsourcefile",
+      "kind": "entry",
+      "label": "DesktopSourceFile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.desktopsourcefile",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.desktopsourcefile",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.de-e48ba516.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.editroles",
+      "kind": "entry",
+      "label": "EditRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.editroles",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.editroles",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ed-1461eb04.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.friendlyname",
+      "kind": "entry",
+      "label": "FriendlyName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.friendlyname",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.friendlyname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.fr-cf16f87f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduleorder",
+      "kind": "entry",
+      "label": "ModuleOrder",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduleorder",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.moduleorder",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-f9849fd5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitle",
+      "kind": "entry",
+      "label": "ModuleTitle",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitle",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.moduletitle",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-adb3bb63.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitleen",
+      "kind": "entry",
+      "label": "ModuleTitleEn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitleen",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.moduletitleen",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-e9e40a14.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.packageid",
+      "kind": "entry",
+      "label": "PackageId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.packageid",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.packageid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.pa-ba39e138.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.panename",
+      "kind": "entry",
+      "label": "PaneName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.panename",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.panename",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.pa-d539b692.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.showmobile",
+      "kind": "entry",
+      "label": "ShowMobile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.showmobile",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.showmobile",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.sh-d4356c3c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabaccessroles",
+      "kind": "entry",
+      "label": "TabAccessRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabaccessroles",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.tabaccessroles",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-58a135e1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabname",
+      "kind": "entry",
+      "label": "TabName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabname",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.tabname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-d3872dbd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.taborder",
+      "kind": "entry",
+      "label": "TabOrder",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.taborder",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.taborder",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-72a3d0b6.html"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+    public interface IFormBuilderDb
+    {
+        /// <summary><lang><zh-CN>提交表结构是否就绪。</zh-CN><en>Whether the submission table schema is ready.</en></lang></summary>
+        bool IsSchemaAvailable();
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>持久化一条表单提交，返回新提交标识；结构缺失或入参非法时返回 0。</zh-CN>
+        ///   <en>Persists one form submission and returns the new submission id; returns 0 when the schema is missing or the input is invalid.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="submission">
+        /// <lang>
+        ///   <zh-CN>待持久化的提交数据。</zh-CN>
+        ///   <en>Submission data to persist.</en>
+        /// </lang>
+        /// </param>
+        long Submit(FormBuilderSubmission submission);
+    }

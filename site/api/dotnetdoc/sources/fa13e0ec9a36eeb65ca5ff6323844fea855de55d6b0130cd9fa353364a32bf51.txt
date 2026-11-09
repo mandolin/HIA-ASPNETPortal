@@ -1,0 +1,18 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            FormDefinition definition = LoadDefinition();
+            if (definition == null)
+            {
+                ShowMessage("Form definition is unavailable.");
+                SubmitButton.Visible = false;
+                return;
+            }
+
+            string locale = GetTwoLetterLocale();
+            if (!IsPostBack)
+            {
+                TitleLiteral.Text = Encode(definition.GetTitle(locale));
+                SubmitButton.Text = definition.GetSubmitText(locale);
+                FormLiteral.Text = RenderForm(definition, locale, null);
+            }
+        }

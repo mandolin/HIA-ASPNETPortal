@@ -1,0 +1,33 @@
+        public long Submit(FormBuilderSubmission submission)
+        {
+            if (submission == null || string.IsNullOrWhiteSpace(submission.FormId))
+            {
+                return 0;
+            }
+            if (!IsSchemaAvailable())
+            {
+                return 0;
+            }
+
+            try
+            {
+                var rows = context.Database.SqlQuery<long>(
+                    @"INSERT INTO [dbo].[PortalBiz_FormSubmissions]
+                        ([ModuleId], [FormId], [SubmittedByUserId], [SubmittedBy], [SubmittedUtc], [Data])
+                      OUTPUT INSERTED.[SubmissionId]
+                      VALUES (@ModuleId, @FormId, @SubmittedByUserId, @SubmittedBy, SYSUTCDATETIME(), @Data);",
+                    new SqlParameter("@ModuleId", submission.ModuleId),
+                    new SqlParameter("@FormId", submission.FormId ?? string.Empty),
+                    new SqlParameter("@SubmittedByUserId", submission.SubmittedByUserId),
+                    new SqlParameter("@SubmittedBy", (submission.SubmittedBy ?? string.Empty).Length > 100
+                        ? submission.SubmittedBy.Substring(0, 100)
+                        : (submission.SubmittedBy ?? string.Empty)),
+                    new SqlParameter("@Data", SqlDbType.NVarChar, -1) { Value = submission.Data ?? string.Empty })
+                    .ToList();
+                return rows.Count == 0 ? 0 : rows[0];
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }

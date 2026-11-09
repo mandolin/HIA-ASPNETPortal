@@ -1,0 +1,8 @@
+        public PortalModuleProvisioner(PortalCfgDbContext context)
+        {
+            // <lang>
+            //   <zh-CN>上下文为后续所有幂等写入的前提；空引用直接失败，不进入静默降级分支。</zh-CN>
+            //   <en>The context is the prerequisite for all subsequent idempotent writes; a null reference fails fast instead of entering a silent degraded branch.</en>
+            // </lang>
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
+        }

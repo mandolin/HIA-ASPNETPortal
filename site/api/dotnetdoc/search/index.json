@@ -7959,22 +7959,40 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string trydecryptsubmittedpasswords dotnet-method decrypts multiple encrypted fields from one password form. public static bool aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpasswords(system.web.httpcontext context, string[] encryptedpasswords, out string[] passwords, out string failurecode, out string eventid) dotnet:m:aspnet.starterkit.portal.portalpasswordsubmissioncrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalpasswordsubmissioncrypto t:aspnet.starterkit.portal.portalpasswordsubmissioncrypto dotnet hia-document api/portal.hia.json src/portal/components/portalloginpasswordcrypto.cs csharp 解密同一口令表单中的多个密文字段。 decrypts multiple encrypted fields from one password form. 当前 http 上下文。 current http context. 同一次提交中的密文字段。 ciphertext fields in the same submission. 解密后的当前请求内明文数组。 decrypted plain values for the current request. 失败分类。 failure category. 诊断事件编号。 diagnostics event id. 全部解密成功时为。 true when all fields decrypt successfully. true"
     },
     {
-      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepackage",
-      "name": "PortalModulePackage",
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulekind",
+      "name": "PortalModuleKind",
       "kind": "dotnet-type",
       "view": "dotnet",
-      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepackage-bac65203.html",
-      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepackage-bac65203.html",
-      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepackage portalmodulepackage dotnet-type 已验证的受信任部署模块包元数据。 metadata for a validated trusted-deployment module package. class aspnet.starterkit.portal.portalmodulepackage dotnet:t:aspnet.starterkit.portal.portalmodulepackage portal aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 已验证的受信任部署模块包元数据。 metadata for a validated trusted-deployment module package."
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulekind-18a55d1b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulekind-18a55d1b.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulekind portalmodulekind dotnet-type module hosting form: distinguishes core portal modules from modules provided externally as independent capability modules. 已验证的受信任部署模块包元数据。 metadata for a validated trusted-deployment module package. enum aspnet.starterkit.portal.portalmodulekind dotnet:t:aspnet.starterkit.portal.portalmodulekind portal aspnet.starterkit.portal t:system.enum t:system.valuetype t:system.object t:system.icomparable t:system.iformattable t:system.iconvertible dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 模块承载形态：区分本体核心模块与本体之外以独立能力模块形式提供的模块。 module hosting form: distinguishes core portal modules from modules provided externally as independent capability modules. 已验证的受信任部署模块包元数据。 metadata for a validated trusted-deployment module package. 缺省为 core；manifest 仅在显式声明 independent 时进入独立形态，后者须显式列入部署 profile 允许集（不被通配符覆盖）。 defaults to core; a manifest enters the independent form only when it explicitly declares independent, which must be explicitly listed in the deployment profile allow-set (not covered by a wildcard)."
     },
     {
-      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-system.string-system.string-system.string-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.string-system.string",
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulekind.core",
+      "name": "Core",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulekind.core-fd055b5a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulekind.core-fd055b5a.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulekind.core core dotnet-field 本体核心模块（默认形态，兼容既有 9 个无 modulekind 声明的模块）。 aspnet.starterkit.portal.portalmodulekind.core dotnet:f:aspnet.starterkit.portal.portalmodulekind.core portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulekind t:aspnet.starterkit.portal.portalmodulekind dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 本体核心模块（默认形态，兼容既有 9 个无 modulekind 声明的模块）。"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulekind.independent",
+      "name": "Independent",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulekind.independ-f4a20431.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulekind.independ-f4a20431.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulekind.independent independent dotnet-field 本体之外以独立能力模块形式提供的模块；须显式列入部署 profile 允许集。 aspnet.starterkit.portal.portalmodulekind.independent dotnet:f:aspnet.starterkit.portal.portalmodulekind.independent portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulekind t:aspnet.starterkit.portal.portalmodulekind dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 本体之外以独立能力模块形式提供的模块；须显式列入部署 profile 允许集。"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-system.string-system.string-system.string-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.string-system.string-aspnet.starterkit.portal.portalmodulekind",
       "name": "#ctor",
       "kind": "dotnet-method",
       "view": "dotnet",
-      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-b7bce989.html",
-      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-b7bce989.html",
-      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-system.string-system.string-system.string-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.string-system.string #ctor dotnet-method creates metadata for a module package that has passed manifest and resource validation. internal aspnet.starterkit.portal.portalmodulepackage.portalmodulepackage(string directoryname, string packageid, string displayname, string version, string minimumportalversion, string desktopentry, system.collections.generic.ilist<string> resources, string capabilityid, string capabilityrole) dotnet:m:aspnet.starterkit.portal.portalmodulepackage.-ctor-system.string-system.string-system.string-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.string-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulepackage t:aspnet.starterkit.portal.portalmodulepackage dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 创建一个已通过 manifest 和资源校验的模块包元数据对象。 creates metadata for a module package that has passed manifest and resource validation."
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-895cb5fc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-895cb5fc.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-system.string-system.string-system.string-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.string-system.string-aspnet.starterkit.portal.portalmodulekind #ctor dotnet-method creates metadata for a module package that has passed manifest and resource validation. internal aspnet.starterkit.portal.portalmodulepackage.portalmodulepackage(string directoryname, string packageid, string displayname, string version, string minimumportalversion, string desktopentry, system.collections.generic.ilist<string> resources, string capabilityid, string capabilityrole, aspnet.starterkit.portal.portalmodulekind modulekind) dotnet:m:aspnet.starterkit.portal.portalmodulepackage.-ctor-system.string-system.string-system.string-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.string-system.string-aspnet.starterkit.portal.portalmodulekind portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulepackage t:aspnet.starterkit.portal.portalmodulepackage dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 创建一个已通过 manifest 和资源校验的模块包元数据对象。 creates metadata for a module package that has passed manifest and resource validation."
     },
     {
       "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackage.directoryname",
@@ -8056,6 +8074,15 @@
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackage.capab-593d1b19.html",
       "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackage.capab-593d1b19.html",
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackage.capabilityrole capabilityrole dotnet-property role of the package within the capability; a stable empty string when no capability is declared. public string aspnet.starterkit.portal.portalmodulepackage.capabilityrole { get; private set; } dotnet:p:aspnet.starterkit.portal.portalmodulepackage.capabilityrole portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulepackage t:aspnet.starterkit.portal.portalmodulepackage dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 包在该能力中的角色；未声明能力时为稳定空文本。 role of the package within the capability; a stable empty string when no capability is declared."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackage.modulekind",
+      "name": "ModuleKind",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackage.modul-f822389d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackage.modul-f822389d.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackage.modulekind modulekind dotnet-property module hosting form: core (core portal module, default) or independent (provided externally as an independent capability module). public aspnet.starterkit.portal.portalmodulekind aspnet.starterkit.portal.portalmodulepackage.modulekind { get; private set; } dotnet:p:aspnet.starterkit.portal.portalmodulepackage.modulekind portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulepackage t:aspnet.starterkit.portal.portalmodulepackage dotnet hia-document api/portal.hia.json src/portal/components/portalmodulepackage.cs csharp 模块承载形态：core（本体核心模块，默认）或 independent（本体之外以独立能力模块形式提供）。 module hosting form: core (core portal module, default) or independent (provided externally as an independent capability module)."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulestyleresource",
@@ -8497,6 +8524,15 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-5ed9519e.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-5ed9519e.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-system.string ispackageallowed dotnet-method determines whether a package id is allowed by the current deployment profile. public bool aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed(string packageid) dotnet:m:aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleprofilesnapshot t:aspnet.starterkit.portal.portalmoduleprofilesnapshot dotnet hia-document api/portal.hia.json src/portal/components/portalmoduleprofileresolver.cs csharp 判断 package id 是否允许进入当前部署 profile。 determines whether a package id is allowed by the current deployment profile. 待判断 package id。 package id to check. 允许时为 true。 true when allowed."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-aspnet.starterkit.portal.portalmodulepackage",
+      "name": "IsPackageAllowed",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-e724bed0.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-e724bed0.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-aspnet.starterkit.portal.portalmodulepackage ispackageallowed dotnet-method determines whether a resolved module package is allowed by the current deployment profile, considering its hosting form. public bool aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed(aspnet.starterkit.portal.portalmodulepackage package) dotnet:m:aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-aspnet.starterkit.portal.portalmodulepackage portal aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleprofilesnapshot t:aspnet.starterkit.portal.portalmoduleprofilesnapshot dotnet hia-document api/portal.hia.json src/portal/components/portalmoduleprofileresolver.cs csharp 判断一个已解析模块包是否允许进入当前部署 profile，并考虑其承载形态。 determines whether a resolved module package is allowed by the current deployment profile, considering its hosting form. 已解析模块包；其 modulekind 决定通配符是否覆盖。 resolved module package; its modulekind decides whether the wildcard covers it. 允许时为 true。 true when allowed."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepackagestate",
@@ -18370,6 +18406,60 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduleprobe.renderedutcla-3c783110.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.moduleprobe.renderedutcla-3c783110.html",
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.moduleprobe.renderedutclabel renderedutclabel dotnet-field displays the module-render utc marker used only for cache verification. protected system.web.ui.webcontrols.label aspnet.starterkit.portal.moduleprobe.renderedutclabel dotnet:f:aspnet.starterkit.portal.moduleprobe.renderedutclabel portal aspnet.starterkit.portal aspnet.starterkit.portal.moduleprobe t:aspnet.starterkit.portal.moduleprobe dotnet hia-document api/portal.hia.json src/portal/desktopmodules/moduleprobe/moduleprobe.ascx.designer.cs csharp 显示模块渲染 utc 标记，仅用于缓存验收。 displays the module-render utc marker used only for cache verification."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuilder",
+      "name": "FormBuilder",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.formbuilder-dfb19050.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.formbuilder-dfb19050.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuilder formbuilder dotnet-type form builder module (independent-module mvp): renders a form from the trusted local form.json, collects submissions and persists them. the capability is provided externally as an independent module and loaded by the hosting mechanism, without becoming a kernel module. class aspnet.starterkit.portal.formbuilder dotnet:t:aspnet.starterkit.portal.formbuilder portal aspnet.starterkit.portal t:aspnet.starterkit.portal.portalmodulecontrol{aspnet.starterkit.portal.formbuilder} t:system.web.ui.usercontrol t:system.web.ui.templatecontrol t:system.web.ui.control t:system.object t:system.componentmodel.icomponent t:system.idisposable t:system.web.ui.iparseraccessor t:system.web.ui.iurlresolutionservice t:system.web.ui.idatabindingsaccessor t:system.web.ui.icontrolbuilderaccessor t:system.web.ui.icontroldesigneraccessor t:system.web.ui.iexpressionsaccessor t:system.web.ui.ifilterresolutionservice t:system.web.ui.iattributeaccessor t:system.web.ui.inonbindingcontainer t:system.web.ui.inamingcontainer t:system.web.ui.iusercontroldesigneraccessor t:aspnet.starterkit.portal.iportalmodulecontrol dotnet hia-document api/portal.hia.json src/portal/desktopmodules/formbuilder/formbuilder.ascx.cs csharp 表单构建器模块（独立模块 mvp）：依据可信本地 form.json 渲染表单、采集提交并落库。能力由本体之外以独立模块形式提供，经容纳机制装载运行，不退化成内核模块。 form builder module (independent-module mvp): renders a form from the trusted local form.json, collects submissions and persists them. the capability is provided externally as an independent module and loaded by the hosting mechanism, without becoming a kernel module."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.formbuilder.formdefinitionpath",
+      "name": "FormDefinitionPath",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.formbuilder.formdefinitio-4a960150.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.formbuilder.formdefinitio-4a960150.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.formbuilder.formdefinitionpath formdefinitionpath dotnet-field 表单定义相对路径；随模块包部署于 desktopmodules/formbuilder/form.json。 private const string aspnet.starterkit.portal.formbuilder.formdefinitionpath dotnet:f:aspnet.starterkit.portal.formbuilder.formdefinitionpath portal aspnet.starterkit.portal aspnet.starterkit.portal.formbuilder t:aspnet.starterkit.portal.formbuilder dotnet hia-document api/portal.hia.json src/portal/desktopmodules/formbuilder/formbuilder.ascx.cs csharp 表单定义相对路径；随模块包部署于 desktopmodules/formbuilder/form.json。"
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuilder.formbuilderdb",
+      "name": "FormBuilderDb",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuilder.formbuilderdb-eccbb299.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.formbuilder.formbuilderdb-eccbb299.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuilder.formbuilderdb formbuilderdb dotnet-property form submission data access. public aspnet.starterkit.portal.iformbuilderdb aspnet.starterkit.portal.formbuilder.formbuilderdb { private get; set; } dotnet:p:aspnet.starterkit.portal.formbuilder.formbuilderdb portal aspnet.starterkit.portal aspnet.starterkit.portal.formbuilder t:aspnet.starterkit.portal.formbuilder dotnet hia-document api/portal.hia.json src/portal/desktopmodules/formbuilder/formbuilder.ascx.cs csharp 表单提交数据访问。 form submission data access."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuilder.usersdb",
+      "name": "UsersDb",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuilder.usersdb-d6947e7c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.formbuilder.usersdb-d6947e7c.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuilder.usersdb usersdb dotnet-property user data access, used to resolve the current submitter identity. public aspnet.starterkit.portal.iusersdb aspnet.starterkit.portal.formbuilder.usersdb { private get; set; } dotnet:p:aspnet.starterkit.portal.formbuilder.usersdb portal aspnet.starterkit.portal aspnet.starterkit.portal.formbuilder t:aspnet.starterkit.portal.formbuilder dotnet hia-document api/portal.hia.json src/portal/desktopmodules/formbuilder/formbuilder.ascx.cs csharp 用户数据访问，用于解析当前提交者标识。 user data access, used to resolve the current submitter identity."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilder.page_load-system.object-system.eventargs",
+      "name": "Page_Load",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilder.page_load-sys-092fbd95.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilder.page_load-sys-092fbd95.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilder.page_load-system.object-system.eventargs page_load dotnet-method on first load, renders the form (title, submit-button text and fields). protected void aspnet.starterkit.portal.formbuilder.page_load(object sender, system.eventargs e) dotnet:m:aspnet.starterkit.portal.formbuilder.page_load-system.object-system.eventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.formbuilder t:aspnet.starterkit.portal.formbuilder dotnet hia-document api/portal.hia.json src/portal/desktopmodules/formbuilder/formbuilder.ascx.cs csharp 首次加载时渲染表单（标题、提交按钮文案、字段）。 on first load, renders the form (title, submit-button text and fields)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilder.submitbutton_click-system.object-system.eventargs",
+      "name": "SubmitButton_Click",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilder.submitbutton_-179016fe.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilder.submitbutton_-179016fe.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilder.submitbutton_click-system.object-system.eventargs submitbutton_click dotnet-method submission handler: collects and validates fields, ensures an authenticated identity, persists and audits; on failure re-renders entered values with a message. protected void aspnet.starterkit.portal.formbuilder.submitbutton_click(object sender, system.eventargs e) dotnet:m:aspnet.starterkit.portal.formbuilder.submitbutton_click-system.object-system.eventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.formbuilder t:aspnet.starterkit.portal.formbuilder dotnet hia-document api/portal.hia.json src/portal/desktopmodules/formbuilder/formbuilder.ascx.cs csharp 提交处理：采集并校验字段、确认已认证身份、落库并审计；失败时回填已输入值并提示。 submission handler: collects and validates fields, ensures an authenticated identity, persists and audits; on failure re-renders entered values with a message."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.quicklinks",
@@ -32601,6 +32691,249 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest confirmprofile dotnet-method writes one profile-confirmation record for the current user and employee. aspnet.starterkit.portal.employeeprofileconfirmationresult aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile(aspnet.starterkit.portal.employeeprofileconfirmationrequest request) dotnet:m:aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iemployeeprofileconfirmationdb t:aspnet.starterkit.portal.iemployeeprofileconfirmationdb dotnet hia-document api/portal.components.hia.json src/portal.components/iemployeeprofileconfirmationdb.cs csharp 为当前用户和员工写入一条资料确认记录。 writes one profile-confirmation record for the current user and employee. 确认请求。 confirmation request. 写入结果。 write result."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iformbuilderdb",
+      "name": "IFormBuilderDb",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iformbuilderdb-421b8445.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.iformbuilderdb-421b8445.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.iformbuilderdb iformbuilderdb dotnet-type data-access contract for form builder submissions. interface aspnet.starterkit.portal.iformbuilderdb dotnet:t:aspnet.starterkit.portal.iformbuilderdb portal.components aspnet.starterkit.portal dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 表单构建器提交数据访问契约。 data-access contract for form builder submissions."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.isschemaavailable",
+      "name": "IsSchemaAvailable",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iformbuilderdb.isschemaav-6ec74206.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iformbuilderdb.isschemaav-6ec74206.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.isschemaavailable isschemaavailable dotnet-method whether the submission table schema is ready. bool aspnet.starterkit.portal.iformbuilderdb.isschemaavailable() dotnet:m:aspnet.starterkit.portal.iformbuilderdb.isschemaavailable portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iformbuilderdb t:aspnet.starterkit.portal.iformbuilderdb dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 提交表结构是否就绪。 whether the submission table schema is ready."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "name": "Submit",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iformbuilderdb.submit-asp-41c222e2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iformbuilderdb.submit-asp-41c222e2.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission submit dotnet-method persists one form submission and returns the new submission id; returns 0 when the schema is missing or the input is invalid. long aspnet.starterkit.portal.iformbuilderdb.submit(aspnet.starterkit.portal.formbuildersubmission submission) dotnet:m:aspnet.starterkit.portal.iformbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iformbuilderdb t:aspnet.starterkit.portal.iformbuilderdb dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 持久化一条表单提交，返回新提交标识；结构缺失或入参非法时返回 0。 persists one form submission and returns the new submission id; returns 0 when the schema is missing or the input is invalid. 待持久化的提交数据。 submission data to persist."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuildersubmission",
+      "name": "FormBuilderSubmission",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.formbuildersubmission-46996414.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.formbuildersubmission-46996414.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuildersubmission formbuildersubmission dotnet-type persistence carrier for one form submission. class aspnet.starterkit.portal.formbuildersubmission dotnet:t:aspnet.starterkit.portal.formbuildersubmission portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 一条表单提交的持久化载体。 persistence carrier for one form submission."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.moduleid",
+      "name": "ModuleId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.mod-6db33793.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.mod-6db33793.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.moduleid moduleid dotnet-property owning module instance identifier. public int aspnet.starterkit.portal.formbuildersubmission.moduleid { get; set; } dotnet:p:aspnet.starterkit.portal.formbuildersubmission.moduleid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.formbuildersubmission t:aspnet.starterkit.portal.formbuildersubmission dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 来源模块实例标识。 owning module instance identifier."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.formid",
+      "name": "FormId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.for-6397d229.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.for-6397d229.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.formid formid dotnet-property form definition identifier (from form.json). public string aspnet.starterkit.portal.formbuildersubmission.formid { get; set; } dotnet:p:aspnet.starterkit.portal.formbuildersubmission.formid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.formbuildersubmission t:aspnet.starterkit.portal.formbuildersubmission dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 表单定义标识（取自 form.json）。 form definition identifier (from form.json)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedby",
+      "name": "SubmittedBy",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.sub-93b98846.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.sub-93b98846.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedby submittedby dotnet-property submitter login name. public string aspnet.starterkit.portal.formbuildersubmission.submittedby { get; set; } dotnet:p:aspnet.starterkit.portal.formbuildersubmission.submittedby portal.components aspnet.starterkit.portal aspnet.starterkit.portal.formbuildersubmission t:aspnet.starterkit.portal.formbuildersubmission dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 提交者登录名。 submitter login name."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedbyuserid",
+      "name": "SubmittedByUserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.sub-fe2879bc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.sub-fe2879bc.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedbyuserid submittedbyuserid dotnet-property submitter user id; 0 when unresolved. public int aspnet.starterkit.portal.formbuildersubmission.submittedbyuserid { get; set; } dotnet:p:aspnet.starterkit.portal.formbuildersubmission.submittedbyuserid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.formbuildersubmission t:aspnet.starterkit.portal.formbuildersubmission dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 提交者用户标识；未解析为 0。 submitter user id; 0 when unresolved."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.data",
+      "name": "Data",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.dat-6cc273c2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.dat-6cc273c2.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.data data dotnet-property field-value json (keys are field names, values are strings). public string aspnet.starterkit.portal.formbuildersubmission.data { get; set; } dotnet:p:aspnet.starterkit.portal.formbuildersubmission.data portal.components aspnet.starterkit.portal aspnet.starterkit.portal.formbuildersubmission t:aspnet.starterkit.portal.formbuildersubmission dotnet hia-document api/portal.components.hia.json src/portal.components/iformbuilderdb.cs csharp 字段值 json（键为字段名，值为字符串）。 field-value json (keys are field names, values are strings)."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.moduleprovisionrequest",
+      "name": "ModuleProvisionRequest",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.moduleprovisionrequest-dcc0588f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.moduleprovisionrequest-dcc0588f.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.moduleprovisionrequest moduleprovisionrequest dotnet-type optional parameter carrier for independent-module provisioning/deprovisioning; blank fields let the provider apply safe defaults. class aspnet.starterkit.portal.moduleprovisionrequest dotnet:t:aspnet.starterkit.portal.moduleprovisionrequest portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 独立模块安装/卸载请求的可选参数载体；所有字段为空字符串时由提供方使用安全默认值。 optional parameter carrier for independent-module provisioning/deprovisioning; blank fields let the provider apply safe defaults."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.packageid",
+      "name": "PackageId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.pa-ba39e138.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.pa-ba39e138.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.packageid packageid dotnet-property stable package identifier, matching the manifest packageid (e.g. hia.formbuilder). public string aspnet.starterkit.portal.moduleprovisionrequest.packageid { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.packageid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 稳定包标识，须与 manifest 的 packageid 一致（如 hia.formbuilder）。 stable package identifier, matching the manifest packageid (e.g. hia.formbuilder)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.capabilityid",
+      "name": "CapabilityId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ca-3de306f4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ca-3de306f4.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.capabilityid capabilityid dotnet-property associated capability id (e.g. basicbusiness.formbuilder); used at install time to validate against the closed capability registry, rejecting unknown or administrative capabilities (w-anp-p286 admins boundary). public string aspnet.starterkit.portal.moduleprovisionrequest.capabilityid { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.capabilityid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 关联的能力标识（如 basicbusiness.formbuilder）；安装期据此在关闭的能力词表中校验，未登记或属管理级则拒绝（w-anp-p286 admins 边界）。 associated capability id (e.g. basicbusiness.formbuilder); used at install time to validate against the closed capability registry, rejecting unknown or administrative capabilities (w-anp-p286 admins boundary)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.friendlyname",
+      "name": "FriendlyName",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.fr-cf16f87f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.fr-cf16f87f.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.friendlyname friendlyname dotnet-property administration display name for the module type. public string aspnet.starterkit.portal.moduleprovisionrequest.friendlyname { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.friendlyname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 模块类型后台显示名称。 administration display name for the module type."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.desktopsourcefile",
+      "name": "DesktopSourceFile",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.de-e48ba516.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.de-e48ba516.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.desktopsourcefile desktopsourcefile dotnet-property desktop control relative path, inside the trusted deployment boundary (e.g. desktopmodules/formbuilder/formbuilder.ascx). public string aspnet.starterkit.portal.moduleprovisionrequest.desktopsourcefile { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.desktopsourcefile portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 桌面端控件相对路径，必须落在受信任部署边界内（如 desktopmodules/formbuilder/formbuilder.ascx）。 desktop control relative path, inside the trusted deployment boundary (e.g. desktopmodules/formbuilder/formbuilder.ascx)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitle",
+      "name": "ModuleTitle",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-adb3bb63.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-adb3bb63.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitle moduletitle dotnet-property module instance title (chinese column and default fallback). public string aspnet.starterkit.portal.moduleprovisionrequest.moduletitle { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.moduletitle portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 模块实例标题（中文列兼默认回退）。 module instance title (chinese column and default fallback)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitleen",
+      "name": "ModuleTitleEn",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-e9e40a14.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-e9e40a14.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduletitleen moduletitleen dotnet-property english module instance title; falls back to moduletitle when blank. public string aspnet.starterkit.portal.moduleprovisionrequest.moduletitleen { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.moduletitleen portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 模块实例英文标题；为空回退到 moduletitle。 english module instance title; falls back to moduletitle when blank."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.panename",
+      "name": "PaneName",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.pa-d539b692.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.pa-d539b692.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.panename panename dotnet-property layout pane name (e.g. contentpane/leftpane/rightpane). public string aspnet.starterkit.portal.moduleprovisionrequest.panename { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.panename portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 布局 pane 名称（如 contentpane/leftpane/rightpane）。 layout pane name (e.g. contentpane/leftpane/rightpane)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.editroles",
+      "name": "EditRoles",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ed-1461eb04.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ed-1461eb04.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.editroles editroles dotnet-property semicolon-delimited edit-role string. public string aspnet.starterkit.portal.moduleprovisionrequest.editroles { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.editroles portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 分号分隔的编辑角色字符串。 semicolon-delimited edit-role string."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabname",
+      "name": "TabName",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-d3872dbd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-d3872dbd.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabname tabname dotnet-property tab that hosts the module instance; created from the request when missing. public string aspnet.starterkit.portal.moduleprovisionrequest.tabname { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.tabname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 承载模块实例的页签名称；不存在时按请求创建。 tab that hosts the module instance; created from the request when missing."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabaccessroles",
+      "name": "TabAccessRoles",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-58a135e1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-58a135e1.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.tabaccessroles tabaccessroles dotnet-property tab access-role string; defaults to all users; when blank. public string aspnet.starterkit.portal.moduleprovisionrequest.tabaccessroles { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.tabaccessroles portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 页签访问角色字符串；为空默认 all users;。 tab access-role string; defaults to all users; when blank."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.taborder",
+      "name": "TabOrder",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-72a3d0b6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ta-72a3d0b6.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.taborder taborder dotnet-property tab sort order. public int aspnet.starterkit.portal.moduleprovisionrequest.taborder { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.taborder portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 页签排序值。 tab sort order."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.cachetimeout",
+      "name": "CacheTimeout",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ca-c6ddc6f6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.ca-c6ddc6f6.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.cachetimeout cachetimeout dotnet-property output cache duration in seconds. public int aspnet.starterkit.portal.moduleprovisionrequest.cachetimeout { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.cachetimeout portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 输出缓存秒数。 output cache duration in seconds."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.showmobile",
+      "name": "ShowMobile",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.sh-d4356c3c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.sh-d4356c3c.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.showmobile showmobile dotnet-property whether the module is visible on mobile. public bool aspnet.starterkit.portal.moduleprovisionrequest.showmobile { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.showmobile portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 是否在移动端显示。 whether the module is visible on mobile."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduleorder",
+      "name": "ModuleOrder",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-f9849fd5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.mo-f9849fd5.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.moduleprovisionrequest.moduleorder moduleorder dotnet-property display order within the pane. public int aspnet.starterkit.portal.moduleprovisionrequest.moduleorder { get; set; } dotnet:p:aspnet.starterkit.portal.moduleprovisionrequest.moduleorder portal.components aspnet.starterkit.portal aspnet.starterkit.portal.moduleprovisionrequest t:aspnet.starterkit.portal.moduleprovisionrequest dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 同 pane 内显示顺序。 display order within the pane."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalmoduleprovisioner",
+      "name": "IPortalModuleProvisioner",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportalmoduleprovisioner-d2f79a84.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.iportalmoduleprovisioner-d2f79a84.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalmoduleprovisioner iportalmoduleprovisioner dotnet-type reusable contract for installing/uninstalling independent modules. install writes the module definition, tab/module instance and package state into the portal structural configuration so the hosting mechanism can actually load and run the module; uninstall reverses the cleanup without leaving residue. interface aspnet.starterkit.portal.iportalmoduleprovisioner dotnet:t:aspnet.starterkit.portal.iportalmoduleprovisioner portal.components aspnet.starterkit.portal dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 独立模块安装/卸载的可复用机制契约。安装把模块定义、页签/模块实例与包状态写入门户结构配置库，使容纳机制能实际装载运行；卸载做反向清理且不残留。 reusable contract for installing/uninstalling independent modules. install writes the module definition, tab/module instance and package state into the portal structural configuration so the hosting mechanism can actually load and run the module; uninstall reverses the cleanup without leaving residue."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32",
+      "name": "TryProvision",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.-1b669642.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.-1b669642.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32 tryprovision dotnet-method idempotent install: an existing tab/definition/instance/package-state is not inserted again. returns true on success and yields the module-instance primary key via the out parameter. bool aspnet.starterkit.portal.iportalmoduleprovisioner.tryprovision(aspnet.starterkit.portal.moduleprovisionrequest request, out int moduleid) dotnet:m:aspnet.starterkit.portal.iportalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iportalmoduleprovisioner t:aspnet.starterkit.portal.iportalmoduleprovisioner dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 幂等安装：已存在的页签/定义/实例/包状态不会重复插入。成功返回 true 并通过 out 参数给出模块实例主键。 idempotent install: an existing tab/definition/instance/package-state is not inserted again. returns true on success and yields the module-instance primary key via the out parameter. 安装请求参数。 provisioning request parameters. 成功时返回模块实例主键，否则为 0。 module-instance primary key on success, otherwise 0."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.trydeprovision-system.int32-system.string",
+      "name": "TryDeprovision",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.-33764403.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.-33764403.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.trydeprovision-system.int32-system.string trydeprovision dotnet-method uninstall: removes the module instance, and reclaims the definition when no instance references it; also clears the package state. returns whether it completed (a missing instance is treated as already cleaned). bool aspnet.starterkit.portal.iportalmoduleprovisioner.trydeprovision(int moduleid, string packageid) dotnet:m:aspnet.starterkit.portal.iportalmoduleprovisioner.trydeprovision-system.int32-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iportalmoduleprovisioner t:aspnet.starterkit.portal.iportalmoduleprovisioner dotnet hia-document api/portal.components.hia.json src/portal.components/iportalmoduleprovisioner.cs csharp 卸载：删除模块实例，并在其定义不再被任何实例引用时回收定义；同时清理包状态。返回是否已完成（实例不存在也视为已清理）。 uninstall: removes the module instance, and reclaims the definition when no instance references it; also clears the package state. returns whether it completed (a missing instance is treated as already cleaned). 要卸载的模块实例主键。 primary key of the module instance to uninstall. 关联的包标识，用于清理包状态；为空则跳过状态清理。 associated package identifier used to clear package state; skipped when blank."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb",
       "name": "IEmployeeProfileCorrectionRequestDb",
       "kind": "dotnet-type",
@@ -36541,6 +36874,15 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcapabilityregistry.-8705f5a8.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalcapabilityregistry.-8705f5a8.html",
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcapabilityregistry.expensereimbursement expensereimbursement dotnet-field expense-reimbursement capability key; added in p20, reusing the existing `business.expensereimbursement` permission-key family. public const string aspnet.starterkit.portal.portalcapabilityregistry.expensereimbursement dotnet:f:aspnet.starterkit.portal.portalcapabilityregistry.expensereimbursement portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalcapabilityregistry t:aspnet.starterkit.portal.portalcapabilityregistry dotnet hia-document api/portal.components.hia.json src/portal.components/portalcapabilityregistry.cs csharp 费用报销能力键；p20 新增，复用既有 `business.expensereimbursement` 权限键族。 expense-reimbursement capability key; added in p20, reusing the existing `business.expensereimbursement` permission-key family."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcapabilityregistry.formbuilder",
+      "name": "FormBuilder",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcapabilityregistry.-6eeb0fd1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalcapabilityregistry.-6eeb0fd1.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcapabilityregistry.formbuilder formbuilder dotnet-field independent-module first-evidence capability key: form builder (mvp), provided externally and loaded by the hosting mechanism; reuses the existing `business.formbuilder` permission-key family and never obtains admins. public const string aspnet.starterkit.portal.portalcapabilityregistry.formbuilder dotnet:f:aspnet.starterkit.portal.portalcapabilityregistry.formbuilder portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalcapabilityregistry t:aspnet.starterkit.portal.portalcapabilityregistry dotnet hia-document api/portal.components.hia.json src/portal.components/portalcapabilityregistry.cs csharp 独立模块首证能力键：表单构建器（mvp），作为「本体之外提供的能力」被容纳机制装载；复用既有 `business.formbuilder` 权限键族，不获 admins。 independent-module first-evidence capability key: form builder (mvp), provided externally and loaded by the hosting mechanism; reuses the existing `business.formbuilder` permission-key family and never obtains admins."
     },
     {
       "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcapabilityregistry.definitions",
@@ -44128,6 +44470,78 @@
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmati-7e2afc38.html",
       "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmati-7e2afc38.html",
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationdb.profileprojection.lastconfirmedutc lastconfirmedutc dotnet-property latest confirmation utc time. public system.datetime? aspnet.starterkit.portal.employeeprofileconfirmationdb.profileprojection.lastconfirmedutc { get; set; } dotnet:p:aspnet.starterkit.portal.employeeprofileconfirmationdb.profileprojection.lastconfirmedutc portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.employeeprofileconfirmationdb.profileprojection t:aspnet.starterkit.portal.employeeprofileconfirmationdb.profileprojection dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/employeeprofileconfirmationdb.cs csharp 最近一次确认 utc 时间。 latest confirmation utc time."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuilderdb",
+      "name": "FormBuilderDb",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.formbuilderdb-18f4be1a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.formbuilderdb-18f4be1a.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuilderdb formbuilderdb dotnet-type form builder submission data-access implementation (built on portalbizdbcontext, following the hastable guard pattern of existing module db classes). class aspnet.starterkit.portal.formbuilderdb dotnet:t:aspnet.starterkit.portal.formbuilderdb portal.components.data1 aspnet.starterkit.portal t:system.object t:aspnet.starterkit.portal.iformbuilderdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/formbuilderdb.cs csharp 表单构建器提交数据访问实现（基于 portalbizdbcontext，遵循既有模块 db 的 hastable 守卫生式）。 form builder submission data-access implementation (built on portalbizdbcontext, following the hastable guard pattern of existing module db classes)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.-ctor-aspne-7f0d1745.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.-ctor-aspne-7f0d1745.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext #ctor dotnet-method obtains the business data context via dependency injection. public aspnet.starterkit.portal.formbuilderdb.formbuilderdb(aspnet.starterkit.portal.portalbizdbcontext context) dotnet:m:aspnet.starterkit.portal.formbuilderdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.formbuilderdb t:aspnet.starterkit.portal.formbuilderdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/formbuilderdb.cs csharp 通过依赖注入获取业务数据上下文。 obtains the business data context via dependency injection. 业务数据上下文。 business data context."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.isschemaavailable",
+      "name": "IsSchemaAvailable",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.isschemaava-d234ce77.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.isschemaava-d234ce77.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.isschemaavailable isschemaavailable dotnet-method isschemaavailable public bool aspnet.starterkit.portal.formbuilderdb.isschemaavailable() dotnet:m:aspnet.starterkit.portal.formbuilderdb.isschemaavailable portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.formbuilderdb t:aspnet.starterkit.portal.formbuilderdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/formbuilderdb.cs csharp"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "name": "Submit",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.submit-aspn-519a7cbf.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.submit-aspn-519a7cbf.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission submit dotnet-method submit public long aspnet.starterkit.portal.formbuilderdb.submit(aspnet.starterkit.portal.formbuildersubmission submission) dotnet:m:aspnet.starterkit.portal.formbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.formbuilderdb t:aspnet.starterkit.portal.formbuilderdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/formbuilderdb.cs csharp"
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleprovisioner",
+      "name": "PortalModuleProvisioner",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleprovisioner-a23cc49f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleprovisioner-a23cc49f.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleprovisioner portalmoduleprovisioner dotnet-type reusable implementation of the independent-module install/uninstall mechanism, executing idempotent sql against the portal structural configuration context. install writes the module definition, tab/module instance and package state into the portalcfg_* tables so the hosting mechanism (trusted catalog + profile shape awareness + state-table isenabled) can actually load and run the module; uninstall reverses the cleanup without residue. together with the w-anp-p284 form builder module package it closes the r2 evidence loop for capabilities provided externally. class aspnet.starterkit.portal.portalmoduleprovisioner dotnet:t:aspnet.starterkit.portal.portalmoduleprovisioner portal.components.data1 aspnet.starterkit.portal t:system.object t:aspnet.starterkit.portal.iportalmoduleprovisioner dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/portalmoduleprovisioner.cs csharp 独立模块安装/卸载机制的可复用实现，基于门户结构配置上下文执行幂等 sql。 安装把模块定义、页签/模块实例与包状态写入 portalcfg_* 表，使容纳机制（可信目录 + profile 形态感知 + 状态表 isenabled）能实际装载运行； 卸载做反向清理且不残留。与 w-anp-p284 的 form builder 模块包配合，构成 r2「本体之外提供的能力」证据闭环的安装/卸载两端。 reusable implementation of the independent-module install/uninstall mechanism, executing idempotent sql against the portal structural configuration context. install writes the module definition, tab/module instance and package state into the portalcfg_* tables so the hosting mechanism (trusted catalog + profile shape awareness + state-table isenabled) can actually load and run the module; uninstall reverses the cleanup without residue. together with the w-anp-p284 form builder module package it closes the r2 evidence loop for capabilities provided externally."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.-ctor-aspnet.starterkit.portal.portalcfgdbcontext",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.--eef9b049.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.--eef9b049.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.-ctor-aspnet.starterkit.portal.portalcfgdbcontext #ctor dotnet-method injects the portal structural configuration context; the connection string comes from the startup-registered named instance. public aspnet.starterkit.portal.portalmoduleprovisioner.portalmoduleprovisioner(aspnet.starterkit.portal.portalcfgdbcontext context) dotnet:m:aspnet.starterkit.portal.portalmoduleprovisioner.-ctor-aspnet.starterkit.portal.portalcfgdbcontext portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleprovisioner t:aspnet.starterkit.portal.portalmoduleprovisioner dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/portalmoduleprovisioner.cs csharp 注入门户结构配置上下文；连接串由启动期注册的命名实例提供。 injects the portal structural configuration context; the connection string comes from the startup-registered named instance. 门户结构配置数据上下文。 portal structural configuration data context."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32",
+      "name": "TryProvision",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.t-55940a1f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.t-55940a1f.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32 tryprovision dotnet-method tryprovision public bool aspnet.starterkit.portal.portalmoduleprovisioner.tryprovision(aspnet.starterkit.portal.moduleprovisionrequest request, out int moduleid) dotnet:m:aspnet.starterkit.portal.portalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32 portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleprovisioner t:aspnet.starterkit.portal.portalmoduleprovisioner dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/portalmoduleprovisioner.cs csharp"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.trydeprovision-system.int32-system.string",
+      "name": "TryDeprovision",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.t-2e562576.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.t-2e562576.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprovisioner.trydeprovision-system.int32-system.string trydeprovision dotnet-method trydeprovision public bool aspnet.starterkit.portal.portalmoduleprovisioner.trydeprovision(int moduleid, string packageid) dotnet:m:aspnet.starterkit.portal.portalmoduleprovisioner.trydeprovision-system.int32-system.string portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleprovisioner t:aspnet.starterkit.portal.portalmoduleprovisioner dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/portalmoduleprovisioner.cs csharp"
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionrequestdb",

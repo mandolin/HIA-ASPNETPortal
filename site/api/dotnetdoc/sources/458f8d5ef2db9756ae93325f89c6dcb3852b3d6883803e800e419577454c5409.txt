@@ -1,0 +1,1 @@
+        bool TryProvision(ModuleProvisionRequest request, out int moduleId);

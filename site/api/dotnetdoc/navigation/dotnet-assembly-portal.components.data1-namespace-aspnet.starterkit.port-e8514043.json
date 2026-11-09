@@ -302,6 +302,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components.data1-namespace-aspnet.starterkit.port-0967873e.json"
     },
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilderdb",
+      "kind": "type",
+      "label": "FormBuilderDb",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuilderdb",
+      "sourcePath": "src/Portal.Components.Data1/FormBuilderDb.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.formbuilderdb",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.formbuilderdb-18f4be1a.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data1-namespace-aspnet.starterkit.port-a1dca933.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem",
       "kind": "type",
       "label": "GlobalItem",
@@ -586,6 +600,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalloginidentifierresolver",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalloginidentifierreso-e7aa13c7.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components.data1-namespace-aspnet.starterkit.port-d3cfdee6.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprovisioner",
+      "kind": "type",
+      "label": "PortalModuleProvisioner",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleprovisioner",
+      "sourcePath": "src/Portal.Components.Data1/PortalModuleProvisioner.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleprovisioner",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleprovisioner-a23cc49f.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data1-namespace-aspnet.starterkit.port-5f75b97a.json"
     },
     {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhash",

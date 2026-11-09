@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalmoduleprovisioner",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalmoduleprovisioner:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.trydeprovision-system.int32-system.string",
+      "kind": "entry",
+      "label": "TryDeprovision",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.trydeprovision-system.int32-system.string",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduleprovisioner.trydeprovision-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.-33764403.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalmoduleprovisioner:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32",
+      "kind": "entry",
+      "label": "TryProvision",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduleprovisioner.tryprovision-aspnet.starterkit.portal.moduleprovisionrequest-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduleprovisioner.-1b669642.html"
+    }
+  ]
+}

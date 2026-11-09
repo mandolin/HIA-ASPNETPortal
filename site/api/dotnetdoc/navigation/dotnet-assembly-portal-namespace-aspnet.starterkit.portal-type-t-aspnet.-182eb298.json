@@ -76,6 +76,19 @@
       "sourcePath": "src/Portal/Components/PortalModuleProfileResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-5ed9519e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-aspnet.starterkit.portal.portalmodulepackage",
+      "kind": "entry",
+      "label": "IsPackageAllowed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-aspnet.starterkit.portal.portalmodulepackage",
+      "sourcePath": "src/Portal/Components/PortalModuleProfileResolver.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-aspnet.starterkit.portal.portalmodulepackage",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-e724bed0.html"
     }
   ]
 }

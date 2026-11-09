@@ -550,6 +550,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-35d67b17.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission",
+      "kind": "type",
+      "label": "FormBuilderSubmission",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuildersubmission",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.formbuildersubmission",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.formbuildersubmission-46996414.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e457cd36.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iannouncementitem",
       "kind": "type",
       "label": "IAnnouncementItem",
@@ -816,6 +830,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2896e6d2.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iformbuilderdb",
+      "kind": "type",
+      "label": "IFormBuilderDb",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iformbuilderdb",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.iformbuilderdb",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iformbuilderdb-421b8445.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-023a1517.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iglobalitem",
       "kind": "type",
       "label": "IGlobalItem",
@@ -1010,6 +1038,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iportaldbconnectionfactory",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportaldbconnectionfactor-0322d288.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-faaefed2.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalmoduleprovisioner",
+      "kind": "type",
+      "label": "IPortalModuleProvisioner",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalmoduleprovisioner",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.iportalmoduleprovisioner",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportalmoduleprovisioner-d2f79a84.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e81fc36e.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalmoduletargetsource",
@@ -1334,6 +1376,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e0356b9f.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest",
+      "kind": "type",
+      "label": "ModuleProvisionRequest",
+      "entryCount": 15,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.moduleprovisionrequest",
+      "sourcePath": "src/Portal.Components/IPortalModuleProvisioner.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.moduleprovisionrequest",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.moduleprovisionrequest-dcc0588f.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-54bacd95.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationunitsaverequest",
       "kind": "type",
       "label": "OrganizationUnitSaveRequest",
@@ -1473,7 +1529,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilityregistry",
       "kind": "type",
       "label": "PortalCapabilityRegistry",
-      "entryCount": 9,
+      "entryCount": 10,
       "views": [
         "dotnet"
       ],

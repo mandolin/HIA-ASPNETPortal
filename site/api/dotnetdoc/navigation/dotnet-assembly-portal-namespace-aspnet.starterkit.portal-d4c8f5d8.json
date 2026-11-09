@@ -636,6 +636,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-3a0a221a.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilder",
+      "kind": "type",
+      "label": "FormBuilder",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.formbuilder",
+      "sourcePath": "src/Portal/DesktopModules/FormBuilder/FormBuilder.ascx.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.formbuilder",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.formbuilder-dfb19050.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-97b78ad2.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.genericerrorpage",
       "kind": "type",
       "label": "GenericErrorPage",
@@ -1332,6 +1346,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-70b0c1fe.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulekind",
+      "kind": "type",
+      "label": "PortalModuleKind",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulekind",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmodulekind",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulekind-18a55d1b.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-81c74db9.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackage",
       "kind": "type",
       "label": "PortalModulePackage",
@@ -1339,10 +1367,6 @@
       "views": [
         "dotnet"
       ],
-      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepackage",
-      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
-      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmodulepackage",
-      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepackage-bac65203.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-b7db5331.json"
     },
     {
@@ -1433,7 +1457,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot",
       "kind": "type",
       "label": "PortalModuleProfileSnapshot",
-      "entryCount": 6,
+      "entryCount": 7,
       "views": [
         "dotnet"
       ],
