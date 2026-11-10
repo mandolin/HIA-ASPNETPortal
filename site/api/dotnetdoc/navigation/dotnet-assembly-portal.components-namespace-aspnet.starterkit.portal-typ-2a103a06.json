@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.-ctor-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview-system.boolean-system.int32",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.-ctor-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview-system.boolean-system.int32",
+      "sourcePath": "src/Portal.Components/PortalNavigationGroupView.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.-ctor-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview-system.boolean-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-c9393602.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.degraded",
+      "kind": "entry",
+      "label": "Degraded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.degraded",
+      "sourcePath": "src/Portal.Components/PortalNavigationGroupView.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.degraded",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-3b4b4878.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.emptysectioncount",
+      "kind": "entry",
+      "label": "EmptySectionCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.emptysectioncount",
+      "sourcePath": "src/Portal.Components/PortalNavigationGroupView.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.emptysectioncount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-5dc9f281.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.sections",
+      "kind": "entry",
+      "label": "Sections",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.sections",
+      "sourcePath": "src/Portal.Components/PortalNavigationGroupView.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.sections",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-cb4319f2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.ungroupedtabs",
+      "kind": "entry",
+      "label": "UngroupedTabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.ungroupedtabs",
+      "sourcePath": "src/Portal.Components/PortalNavigationGroupView.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.ungroupedtabs",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-51f6f9f1.html"
+    }
+  ]
+}

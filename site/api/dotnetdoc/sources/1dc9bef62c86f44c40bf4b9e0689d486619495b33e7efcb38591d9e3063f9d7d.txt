@@ -1,0 +1,5 @@
+        protected string GetGroupDisplayName(object dataItem)
+        {
+            PortalNavigationGroupView.GroupSectionView section = dataItem as PortalNavigationGroupView.GroupSectionView;
+            return section == null ? string.Empty : HttpUtility.HtmlEncode(section.DisplayName);
+        }

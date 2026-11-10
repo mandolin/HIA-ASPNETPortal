@@ -258,6 +258,7 @@
     <Content Include="Scripts\Security\jsencrypt-ie6.LICENSE.txt" />
     <Content Include="Scripts\Security\jsencrypt-ie6.min.js" />
     <Content Include="Scripts\Security\PortalLoginPasswordEncryption.js" />
+    <Content Include="Scripts\Navigation\PortalNavigationGroups.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\AccessDenied.aspx.cs">

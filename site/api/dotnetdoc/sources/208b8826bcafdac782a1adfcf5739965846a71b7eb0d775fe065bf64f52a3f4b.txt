@@ -1,0 +1,6 @@
+                    <%--
+                        <lang>
+                            <zh-CN>不属于任何词表分组的页签（历史 Test.* 页签或尚未填写稳定键的模块页签）平铺在此，无 disclosure 按钮，绝不隐藏。</zh-CN>
+                            <en>Tabs belonging to no vocabulary group (legacy Test.* tabs or module tabs without a stable key yet) are rendered flat here with no disclosure button and are never hidden.</en>
+                        </lang>
+                    --%>

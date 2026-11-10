@@ -215,23 +215,79 @@ namespace ASPNET.StarterKit.Portal
                 }
 
                 // <lang>
-                //   <zh-CN>选中索引必须基于最终集合计算，否则被移除的 Tab 会导致高亮错位。</zh-CN>
-                //   <en>The selected index must be computed from the final collection, otherwise a removed tab would shift the highlight.</en>
+                //   <zh-CN>两级分组视图只消费「已完成授权过滤」的集合与部署别名配置；分组不参与授权，
+                //   也不改变页签在最终集合中的显示下标（`tabindex` 语义）。配置读取失败由读取层退化为空串，
+                //   等价于采用封闭词表默认分组，绝不把导航打空。</zh-CN>
+                //   <en>The two-level grouped view consumes only the already authorization-filtered collection and the
+                //   deployment alias configuration; grouping takes no part in authorization and never changes a tab's
+                //   display index (`tabindex` semantics). A configuration read failure degrades to an empty string in the
+                //   reader, equivalent to adopting the closed-vocabulary defaults, so navigation is never emptied.</en>
                 // </lang>
-                for (int i = 0; i < authorizedTabs.Count; i++)
-                {
-                    if (authorizedTabs[i].TabId == portalSettings.ActiveTab.TabId)
-                    {
-                        Tabs.SelectedIndex = i;
-                    }
-                }
+                PortalNavigationGroupView.NavigationView navigationView = PortalNavigationGroupView.Build(
+                    authorizedTabs,
+                    portalSettings.ActiveTab.TabId,
+                    PortalNavigationSettings.GroupAliases(Context),
+                    tabBlockedReasons,
+                    CultureInfo.CurrentUICulture);
 
+                if (navigationView.Degraded)
+                {
+                    // <lang>
+                    //   <zh-CN>非法配置触发 fail-closed：降级为改造前的一级平铺 DataList，输出逐字节一致，
+                    //   所有页签仍可达。选中索引必须基于最终集合计算，否则被移除的 Tab 会导致高亮错位。</zh-CN>
+                    //   <en>Invalid configuration triggers fail-closed: degrade to the pre-change flat DataList with
+                    //   byte-for-byte identical output and every tab still reachable. The selected index must be computed
+                    //   from the final collection, otherwise a removed tab would shift the highlight.</en>
+                    // </lang>
+                    for (int i = 0; i < authorizedTabs.Count; i++)
+                    {
+                        if (authorizedTabs[i].TabId == portalSettings.ActiveTab.TabId)
+                        {
+                            Tabs.SelectedIndex = i;
+                        }
+                    }
+
+                    Tabs.Visible = true;
+                    Tabs.DataSource = authorizedTabs;
+                    Tabs.DataBind();
+                    GroupedNavigation.Visible = false;
+
+                    // <lang>
+                    //   <zh-CN>只记录降级原因类别与页签数，不回显配置原文或用户身份。</zh-CN>
+                    //   <en>Record only the degradation category and tab count, never the raw configuration or user identity.</en>
+                    // </lang>
+                    PortalDiagnostics.Warn(
+                        "Navigation.GroupedLayoutDegraded",
+                        "Group alias configuration rejected; flat navigation rendered for " +
+                        authorizedTabs.Count.ToString(CultureInfo.InvariantCulture) + " tabs.");
+                }
+                else
+                {
+                    // <lang>
+                    //   <zh-CN>正常路径：分组与未分组页签分别绑定。未分组集合单独平铺，保证任何不属于词表的页签
+                    //   （历史 Test.* 页签、尚未填写稳定键的模块页签）都不会因分组而消失。</zh-CN>
+                    //   <en>Normal path: grouped sections and ungrouped tabs are bound separately. Ungrouped tabs render
+                    //   flat so any tab outside the vocabulary (legacy Test.* tabs or module tabs without a stable key yet)
+                    //   can never disappear because of grouping.</en>
+                    // </lang>
+                    GroupedNavigation.Visible = true;
+                    Tabs.Visible = false;
+
+                    NavigationGroups.DataSource = navigationView.Sections;
+                    NavigationGroups.DataBind();
+
+                    UngroupedTabs.DataSource = navigationView.UngroupedTabs;
+                    UngroupedTabs.DataBind();
+                }
+            }
+            else
+            {
                 // <lang>
-                //   <zh-CN>最终只绑定授权后的 Tab；主题 CSS 可以改变排列方式，但不应改变这里的角色过滤与 gate 判定结果。</zh-CN>
-                //   <en>Bind only authorized tabs at the end; theme CSS may change layout but must not alter the role-filtered or gated result.</en>
+                //   <zh-CN>ShowTabs 关闭时两种形态都不渲染；保留 this 分支避免分组容器输出空壳。</zh-CN>
+                //   <en>With ShowTabs off neither form renders; this branch prevents the grouped container from emitting an empty shell.</en>
                 // </lang>
-                Tabs.DataSource = authorizedTabs;
-                Tabs.DataBind();
+                Tabs.Visible = false;
+                GroupedNavigation.Visible = false;
             }
         }
 
@@ -242,6 +298,172 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         private string tabNameDiagnostic;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>取分组展示项，供模板辅助方法复用；类型不符时返回 null，调用方一律降级为「不渲染」，绝不猜测数据形态。</zh-CN>
+        ///   <en>Resolve a group tab view for the template helpers; a type mismatch returns null and every caller degrades
+        ///   to "render nothing" rather than guessing the data shape.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="Repeater 的绑定数据项。" en="Repeater data item." /></param>
+        /// <returns><l zh-CN="分组页签展示项或 null。" en="Group tab view or null." /></returns>
+        private PortalNavigationGroupView.GroupTabView AsGroupTab(object dataItem)
+        {
+            return dataItem as PortalNavigationGroupView.GroupTabView;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前界面文化返回分组显示名并做 HTML 编码；分组名来自封闭词表，编码是防御性措施而非信任边界。</zh-CN>
+        ///   <en>Return the localized group label for the current UI culture with HTML encoding; labels come from the closed
+        ///   vocabulary, so encoding is a defensive measure rather than a trust boundary.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="外层 Repeater 的分组数据项。" en="Outer Repeater group data item." /></param>
+        /// <returns><l zh-CN="已编码的分组显示名；类型不符时为空串。" en="Encoded group label; empty on a type mismatch." /></returns>
+        protected string GetGroupDisplayName(object dataItem)
+        {
+            PortalNavigationGroupView.GroupSectionView section = dataItem as PortalNavigationGroupView.GroupSectionView;
+            return section == null ? string.Empty : HttpUtility.HtmlEncode(section.DisplayName);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为分组页签构造地址，使用视图里保存的**最终集合显示下标**，而不是组内位置；
+        ///   否则两级分组会改变 `tabindex` 口径，使页面内匿名登录模块的注入启发式漂移。</zh-CN>
+        ///   <en>Build a group-tab URL using the view's **final collection display index** rather than the in-group position;
+        ///   otherwise two-level grouping would change `tabindex` semantics and drift the in-page anonymous-login heuristic.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="分组页签数据项。" en="Group tab data item." /></param>
+        /// <returns><l zh-CN="应用相对地址；数据项无效时为空串。" en="Application-relative URL; empty for an invalid data item." /></returns>
+        protected string BuildGroupTabUrl(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            return view == null ? string.Empty : BuildTabUrl(view.DisplayIndex, view.Tab);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>分组页签的本地化显示名；沿用既有解析器，保证与一级平铺路径中文/英文/其它语言三列口径一致。</zh-CN>
+        ///   <en>Localized display name of a group tab; reuses the existing resolver so Chinese / English / other-language
+        ///   columns stay consistent with the flat-navigation path.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="分组页签数据项。" en="Group tab data item." /></param>
+        /// <returns><l zh-CN="本地化后的页签名。" en="Localized tab name." /></returns>
+        protected string BuildGroupTabDisplayName(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            return view == null ? string.Empty : BuildTabDisplayName(view.Tab);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>普通链接仅在「非选中且未被 gate 禁用」时可见；其余两种形态由各自的可见性方法承担，
+        ///   三者互斥，保证一个页签只渲染一种形态。</zh-CN>
+        ///   <en>A normal link is visible only when the tab is neither selected nor gate-disabled; the other two forms have
+        ///   their own visibility helpers. The three are mutually exclusive, so each tab renders exactly one form.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="分组页签数据项。" en="Group tab data item." /></param>
+        /// <returns><l zh-CN="是否渲染普通链接。" en="Whether to render a normal link." /></returns>
+        protected bool IsGroupTabLinkVisible(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            return view != null && !view.IsSelected && !view.IsBlocked;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>选中态渲染成非链接 span，避免读屏器把当前页误报为可点击入口；与既有 SelectedItemTemplate 同口径。</zh-CN>
+        ///   <en>The selected state renders as a non-link span so screen readers do not report the current page as a
+        ///   clickable entry, matching the existing SelectedItemTemplate convention.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="分组页签数据项。" en="Group tab data item." /></param>
+        /// <returns><l zh-CN="是否渲染选中态。" en="Whether to render the selected state." /></returns>
+        protected bool IsGroupTabSelected(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            return view != null && view.IsSelected;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>入口 gate 阻断项仅在管理员可见时呈现禁用态（原因码已由授权阶段给出，本方法不判定权限）。</zh-CN>
+        ///   <en>A gate-blocked tab shows its disabled state only where administrators can see it (the reason code was
+        ///   produced by the authorization stage; this method decides no permission).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="分组页签数据项。" en="Group tab data item." /></param>
+        /// <returns><l zh-CN="是否渲染禁用态。" en="Whether to render the disabled state." /></returns>
+        protected bool IsGroupTabBlocked(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            return view != null && view.IsBlocked;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>禁用态工具提示由本地化页签名与原因码组成，与一级平铺路径一致；原因码不进入可见文本。</zh-CN>
+        ///   <en>The disabled tooltip combines the localized tab name and reason code, matching the flat path; the reason
+        ///   code never becomes visible text.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="dataItem"><l zh-CN="分组页签数据项。" en="Group tab data item." /></param>
+        /// <returns><l zh-CN="工具提示文本。" en="Tooltip text." /></returns>
+        protected string BuildGroupTabTooltip(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            if (view == null)
+            {
+                return string.Empty;
+            }
+
+            return BuildTabDisplayName(view.Tab) + " (" + view.BlockedReason + ")";
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>给禁用态补 `aria-disabled`：Web Forms 的 `asp:Label` 不会自动写该属性，
+        ///   而可见性绑定只控制 DOM 是否输出，两者职责不同，故在 ItemDataBound 里补一次。</zh-CN>
+        ///   <en>Add `aria-disabled` to the disabled state: the Web Forms `asp:Label` does not emit it automatically,
+        ///   while the visibility binding only controls whether the DOM is emitted. The two concerns are distinct, so
+        ///   this handler adds the attribute once at ItemDataBound.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l><zh-CN>事件源。</zh-CN><en>Event source.</en></l>
+        /// </param>
+        /// <param name="e">
+        /// <l><zh-CN>Repeater 行事件数据。</zh-CN><en>Repeater row event data.</en></l>
+        /// </param>
+        protected void GroupTab_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>非数据行直接忽略；数据项类型不符或未被阻断时不改动任何 DOM。</zh-CN>
+            //   <en>Non-item rows are ignored; a type mismatch or a non-blocked tab changes no DOM at all.</en>
+            // </lang>
+            if (e == null || e.Item == null ||
+                (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem))
+            {
+                return;
+            }
+
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(e.Item.DataItem);
+            if (view == null || !view.IsBlocked)
+            {
+                return;
+            }
+
+            Label disabledTab = e.Item.FindControl("GroupTabDisabled") as Label;
+            if (disabledTab != null)
+            {
+                disabledTab.Attributes["aria-disabled"] = "true";
+            }
+        }
 
         /// <summary>
         /// <lang>

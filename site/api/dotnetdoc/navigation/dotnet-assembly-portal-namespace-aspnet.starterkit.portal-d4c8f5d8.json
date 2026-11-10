@@ -247,7 +247,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopportalbanner",
       "kind": "type",
       "label": "DesktopPortalBanner",
-      "entryCount": 14,
+      "entryCount": 26,
       "views": [
         "dotnet"
       ],

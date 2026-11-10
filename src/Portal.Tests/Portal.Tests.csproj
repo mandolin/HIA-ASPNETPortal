@@ -71,6 +71,7 @@
     <Compile Include="PortalNavigationRendererGroupTests.cs" />
     <Compile Include="PortalNavigationTabGateTests.cs" />
     <Compile Include="PortalNavigationGroupAliasTests.cs" />
+    <Compile Include="PortalNavigationGroupViewTests.cs" />
     <Compile Include="PortalCapabilityPermissionMatrixTests.cs" />
     <Compile Include="PortalCapabilityRegistryTests.cs" />
     <Compile Include="PortalRoleParserTests.cs" />

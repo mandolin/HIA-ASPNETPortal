@@ -1,0 +1,5 @@
+        protected string BuildGroupTabDisplayName(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            return view == null ? string.Empty : BuildTabDisplayName(view.Tab);
+        }

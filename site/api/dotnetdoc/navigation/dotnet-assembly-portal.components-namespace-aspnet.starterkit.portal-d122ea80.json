@@ -584,6 +584,26 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d711c751.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview",
+      "kind": "type",
+      "label": "GroupSectionView",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e5d3a9de.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview",
+      "kind": "type",
+      "label": "GroupTabView",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4e45d47e.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iannouncementitem",
       "kind": "type",
       "label": "IAnnouncementItem",
@@ -1410,6 +1430,16 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-54bacd95.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview",
+      "kind": "type",
+      "label": "NavigationView",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2a103a06.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationunitsaverequest",
       "kind": "type",
       "label": "OrganizationUnitSaveRequest",
@@ -1922,6 +1952,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-e814d3f6.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-6f442224.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupview",
+      "kind": "type",
+      "label": "PortalNavigationGroupView",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview",
+      "sourcePath": "src/Portal.Components/PortalNavigationGroupView.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationgroupview.navigationview",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-d028e6b4.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c6c479a9.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate",

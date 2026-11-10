@@ -190,6 +190,7 @@
     <Compile Include="PortalNavigationRegistry.cs" />
     <Compile Include="PortalNavigationVisibilityPolicy.cs" />
     <Compile Include="PortalNavigationGroupAlias.cs" />
+    <Compile Include="PortalNavigationGroupView.cs" />
     <Compile Include="PortalReferenceDataSets.cs" />
     <Compile Include="PortalBusinessApplicationStatuses.cs" />
     <Compile Include="PortalCapabilityRegistry.cs" />

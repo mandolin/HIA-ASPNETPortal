@@ -1,0 +1,171 @@
+[
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R1：往分组视图注入真实授权调用（A 级硬边界破坏），门禁应判红并点名 R1.NoAuthorizationSymbols。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationGroupView.cs",
+        "mode": "replace",
+        "old": "    public static class PortalNavigationGroupView\n    {",
+        "content": "    public static class PortalNavigationGroupView\n    {\n        private static readonly string InjectedAuthorizationBasis = PortalSecurity.IsInRoles(\"Admins;\");"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R1：往分组视图注入父子表结构字段（Q1 裁定③明确排除），门禁应判红并点名 R1.NoParentChildSchema。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationGroupView.cs",
+        "mode": "replace",
+        "old": "    public static class PortalNavigationGroupView\n    {",
+        "content": "    public static class PortalNavigationGroupView\n    {\n        private const int ParentTabId = 0;"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R2：给分组按钮加 menu role（违反 W3C APG disclosure），门禁应判红并点名 R2.NoMenuRole。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx",
+        "mode": "replace",
+        "old": "<button type=\"button\" class=\"portal-nav-group-toggle\"",
+        "content": "<button type=\"button\" role=\"menu\" class=\"portal-nav-group-toggle\""
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R2：给分组按钮加内联 onclick（扩大注入面并违反 a11y A5），门禁应判红并点名 R2.NoInlineOnclick。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx",
+        "mode": "replace",
+        "old": "aria-expanded=\"true\" aria-controls=",
+        "content": "onclick=\"return false;\" aria-expanded=\"true\" aria-controls="
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R2：把服务端默认态改成分组默认折叠（无 JS 时页签不可达），门禁应判红并点名 R2.DefaultExpanded。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx",
+        "mode": "replace",
+        "old": "aria-expanded=\"true\" aria-controls=",
+        "content": "aria-expanded=\"false\" aria-controls="
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R2：删掉降级回滚用的平铺 DataList（非法配置再无回滚点），门禁应判红并点名 R2.FlatRollbackDataList。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx",
+        "mode": "replace",
+        "old": "                ID=\"Tabs\"",
+        "content": "                ID=\"TabsRenamed\""
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R3：把 EnterpriseDark 一整套分组规则的作用域前缀改错（深色皮肤丢失分组样式），门禁应判红并点名该主题的规则数/关键选择器/焦点样式。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/EnterpriseDark/Default.css",
+        "mode": "replace",
+        "old": "body.portal-theme-enterprisedark .portal-nav-group-toggle {",
+        "content": "body.portal-theme-enterprisedark-legacy .portal-nav-group-toggle {"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R3：把 Default 回退主题的隐藏类规则改成 visibility:hidden（折叠后链接仍在键盘 Tab 序列），门禁应判红并点名 R3.Default.HiddenDisplayNone。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/Default/Default.css",
+        "mode": "replace",
+        "old": "body.portal-theme-default .portal-nav-group-hidden {\n    display: none;\n}",
+        "content": "body.portal-theme-default .portal-nav-group-hidden {\n    visibility: hidden;\n}"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R4：在渐进增强脚本里引入 IE9 不支持的 classList，门禁应判红并点名 R4.NoClassList。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/Scripts/Navigation/PortalNavigationGroups.js",
+        "mode": "replace",
+        "old": "    var HIDDEN_CLASS = 'portal-nav-group-hidden';",
+        "content": "    var HIDDEN_CLASS = 'portal-nav-group-hidden';\n    var injectedClassList = document.body.classList;"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R4：把 Escape 键码改成 Enter（关闭并回焦契约失效），门禁应判红并点名 R4.EscapeKey。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/Scripts/Navigation/PortalNavigationGroups.js",
+        "mode": "replace",
+        "old": "evt.keyCode === 27",
+        "content": "evt.keyCode === 13"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R5：把 codebehind 的降级分支改成按分组数判断（非法配置不再触发一级平铺），门禁应判红并点名 R5.DegradedBranch。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx.cs",
+        "mode": "replace",
+        "old": "                if (navigationView.Degraded)",
+                "content": "                if (navigationView.Sections.Count == 0)"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R5：把 Web.config 的别名覆盖键改名（配置静默失效），门禁应判红并点名 R5.WebConfigKey。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/Web.config",
+        "mode": "replace",
+        "old": "<add key=\"Portal.Navigation.GroupAliases\" value=\"\" />",
+        "content": "<add key=\"Portal.Navigation.GroupsDisabled\" value=\"\" />"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupRender.ps1",
+    "note": "R5：把分组视图类从 csproj 摘掉（新逻辑不编译），门禁应判红并点名 R5.ViewClassRegistered。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/Portal.Components.csproj",
+        "mode": "replace",
+        "old": "    <Compile Include=\"PortalNavigationGroupView.cs\" />",
+        "content": "    <Compile Include=\"PortalNavigationGroupView_Renamed.cs\" />"
+      }
+    ]
+  }
+]

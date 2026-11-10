@@ -18966,6 +18966,87 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.tabnamediagnostic tabnamediagnostic dotnet-field fallback reason of the tab-name resolution; non-blank only when the json column is damaged, used for diagnostics and never for rendering. private string aspnet.starterkit.portal.desktopportalbanner.tabnamediagnostic dotnet:f:aspnet.starterkit.portal.desktopportalbanner.tabnamediagnostic portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 页签名解析的降级原因；仅 json 列损坏时非空，供诊断记录使用，不参与渲染。 fallback reason of the tab-name resolution; non-blank only when the json column is damaged, used for diagnostics and never for rendering."
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.asgrouptab-system.object",
+      "name": "AsGroupTab",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.asgro-b1fae057.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.asgro-b1fae057.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.asgrouptab-system.object asgrouptab dotnet-method resolve a group tab view for the template helpers; a type mismatch returns null and every caller degrades to \"render nothing\" rather than guessing the data shape. private aspnet.starterkit.portal.portalnavigationgroupview.grouptabview aspnet.starterkit.portal.desktopportalbanner.asgrouptab(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.asgrouptab-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 取分组展示项，供模板辅助方法复用；类型不符时返回 null，调用方一律降级为「不渲染」，绝不猜测数据形态。 resolve a group tab view for the template helpers; a type mismatch returns null and every caller degrades to \"render nothing\" rather than guessing the data shape. repeater 的绑定数据项。 repeater data item. 分组页签展示项或 null。 group tab view or null."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.getgroupdisplayname-system.object",
+      "name": "GetGroupDisplayName",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.getgr-f3d3af8d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.getgr-f3d3af8d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.getgroupdisplayname-system.object getgroupdisplayname dotnet-method return the localized group label for the current ui culture with html encoding; labels come from the closed vocabulary, so encoding is a defensive measure rather than a trust boundary. protected string aspnet.starterkit.portal.desktopportalbanner.getgroupdisplayname(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.getgroupdisplayname-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 按当前界面文化返回分组显示名并做 html 编码；分组名来自封闭词表，编码是防御性措施而非信任边界。 return the localized group label for the current ui culture with html encoding; labels come from the closed vocabulary, so encoding is a defensive measure rather than a trust boundary. 外层 repeater 的分组数据项。 outer repeater group data item. 已编码的分组显示名；类型不符时为空串。 encoded group label; empty on a type mismatch."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildgrouptaburl-system.object",
+      "name": "BuildGroupTabUrl",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.build-0c4c9d52.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.build-0c4c9d52.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildgrouptaburl-system.object buildgrouptaburl dotnet-method build a group-tab url using the view's **final collection display index** rather than the in-group position; otherwise two-level grouping would change `tabindex` semantics and drift the in-page anonymous-login heuristic. protected string aspnet.starterkit.portal.desktopportalbanner.buildgrouptaburl(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.buildgrouptaburl-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 为分组页签构造地址，使用视图里保存的**最终集合显示下标**，而不是组内位置； 否则两级分组会改变 `tabindex` 口径，使页面内匿名登录模块的注入启发式漂移。 build a group-tab url using the view's **final collection display index** rather than the in-group position; otherwise two-level grouping would change `tabindex` semantics and drift the in-page anonymous-login heuristic. 分组页签数据项。 group tab data item. 应用相对地址；数据项无效时为空串。 application-relative url; empty for an invalid data item."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildgrouptabdisplayname-system.object",
+      "name": "BuildGroupTabDisplayName",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.build-575e4ee6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.build-575e4ee6.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildgrouptabdisplayname-system.object buildgrouptabdisplayname dotnet-method localized display name of a group tab; reuses the existing resolver so chinese / english / other-language columns stay consistent with the flat-navigation path. protected string aspnet.starterkit.portal.desktopportalbanner.buildgrouptabdisplayname(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.buildgrouptabdisplayname-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 分组页签的本地化显示名；沿用既有解析器，保证与一级平铺路径中文/英文/其它语言三列口径一致。 localized display name of a group tab; reuses the existing resolver so chinese / english / other-language columns stay consistent with the flat-navigation path. 分组页签数据项。 group tab data item. 本地化后的页签名。 localized tab name."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgrouptablinkvisible-system.object",
+      "name": "IsGroupTabLinkVisible",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgro-b4d5fe2d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgro-b4d5fe2d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgrouptablinkvisible-system.object isgrouptablinkvisible dotnet-method a normal link is visible only when the tab is neither selected nor gate-disabled; the other two forms have their own visibility helpers. the three are mutually exclusive, so each tab renders exactly one form. protected bool aspnet.starterkit.portal.desktopportalbanner.isgrouptablinkvisible(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.isgrouptablinkvisible-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 普通链接仅在「非选中且未被 gate 禁用」时可见；其余两种形态由各自的可见性方法承担， 三者互斥，保证一个页签只渲染一种形态。 a normal link is visible only when the tab is neither selected nor gate-disabled; the other two forms have their own visibility helpers. the three are mutually exclusive, so each tab renders exactly one form. 分组页签数据项。 group tab data item. 是否渲染普通链接。 whether to render a normal link."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgrouptabselected-system.object",
+      "name": "IsGroupTabSelected",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgro-e391275e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgro-e391275e.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgrouptabselected-system.object isgrouptabselected dotnet-method the selected state renders as a non-link span so screen readers do not report the current page as a clickable entry, matching the existing selecteditemtemplate convention. protected bool aspnet.starterkit.portal.desktopportalbanner.isgrouptabselected(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.isgrouptabselected-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 选中态渲染成非链接 span，避免读屏器把当前页误报为可点击入口；与既有 selecteditemtemplate 同口径。 the selected state renders as a non-link span so screen readers do not report the current page as a clickable entry, matching the existing selecteditemtemplate convention. 分组页签数据项。 group tab data item. 是否渲染选中态。 whether to render the selected state."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgrouptabblocked-system.object",
+      "name": "IsGroupTabBlocked",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgro-7e957477.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgro-7e957477.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.isgrouptabblocked-system.object isgrouptabblocked dotnet-method a gate-blocked tab shows its disabled state only where administrators can see it (the reason code was produced by the authorization stage; this method decides no permission). protected bool aspnet.starterkit.portal.desktopportalbanner.isgrouptabblocked(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.isgrouptabblocked-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 入口 gate 阻断项仅在管理员可见时呈现禁用态（原因码已由授权阶段给出，本方法不判定权限）。 a gate-blocked tab shows its disabled state only where administrators can see it (the reason code was produced by the authorization stage; this method decides no permission). 分组页签数据项。 group tab data item. 是否渲染禁用态。 whether to render the disabled state."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildgrouptabtooltip-system.object",
+      "name": "BuildGroupTabTooltip",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.build-971cebc0.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.build-971cebc0.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildgrouptabtooltip-system.object buildgrouptabtooltip dotnet-method the disabled tooltip combines the localized tab name and reason code, matching the flat path; the reason code never becomes visible text. protected string aspnet.starterkit.portal.desktopportalbanner.buildgrouptabtooltip(object dataitem) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.buildgrouptabtooltip-system.object portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 禁用态工具提示由本地化页签名与原因码组成，与一级平铺路径一致；原因码不进入可见文本。 the disabled tooltip combines the localized tab name and reason code, matching the flat path; the reason code never becomes visible text. 分组页签数据项。 group tab data item. 工具提示文本。 tooltip text."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.grouptab_itemdatabound-system.object-system.web.ui.webcontrols.repeateritemeventargs",
+      "name": "GroupTab_ItemDataBound",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.group-7190259b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.group-7190259b.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.grouptab_itemdatabound-system.object-system.web.ui.webcontrols.repeateritemeventargs grouptab_itemdatabound dotnet-method add `aria-disabled` to the disabled state: the web forms `asp:label` does not emit it automatically, while the visibility binding only controls whether the dom is emitted. the two concerns are distinct, so this handler adds the attribute once at itemdatabound. protected void aspnet.starterkit.portal.desktopportalbanner.grouptab_itemdatabound(object sender, system.web.ui.webcontrols.repeateritemeventargs e) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.grouptab_itemdatabound-system.object-system.web.ui.webcontrols.repeateritemeventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 给禁用态补 `aria-disabled`：web forms 的 `asp:label` 不会自动写该属性， 而可见性绑定只控制 dom 是否输出，两者职责不同，故在 itemdatabound 里补一次。 add `aria-disabled` to the disabled state: the web forms `asp:label` does not emit it automatically, while the visibility binding only controls whether the dom is emitted. the two concerns are distinct, so this handler adds the attribute once at itemdatabound. 事件源。 event source. repeater 行事件数据。 repeater row event data."
+    },
+    {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildtaburl-system.int32-aspnet.starterkit.portal.itabitem",
       "name": "BuildTabUrl",
       "kind": "dotnet-method",
@@ -19026,7 +19107,34 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.tabs-debd02af.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.tabs-debd02af.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.tabs tabs dotnet-field datalist bound to the portal navigation-tab collection. protected system.web.ui.webcontrols.datalist aspnet.starterkit.portal.desktopportalbanner.tabs dotnet:f:aspnet.starterkit.portal.desktopportalbanner.tabs portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.designer.cs csharp 绑定门户导航页签集合的 datalist。 datalist bound to the portal navigation-tab collection."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.tabs tabs dotnet-field datalist bound to the portal navigation tabs; used only when invalid group configuration degrades to flat navigation, keeping pre-change behaviour as the rollback point. protected system.web.ui.webcontrols.datalist aspnet.starterkit.portal.desktopportalbanner.tabs dotnet:f:aspnet.starterkit.portal.desktopportalbanner.tabs portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.designer.cs csharp 绑定门户导航页签集合的 datalist；仅在分组配置非法而降级为一级平铺时使用，是行为与改造前一致的回滚点。 datalist bound to the portal navigation tabs; used only when invalid group configuration degrades to flat navigation, keeping pre-change behaviour as the rollback point."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.groupednavigation",
+      "name": "GroupedNavigation",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.group-2cd1e849.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.group-2cd1e849.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.groupednavigation groupednavigation dotnet-field placeholder wrapping two-level grouped navigation; hidden on degradation. protected system.web.ui.webcontrols.placeholder aspnet.starterkit.portal.desktopportalbanner.groupednavigation dotnet:f:aspnet.starterkit.portal.desktopportalbanner.groupednavigation portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.designer.cs csharp 包裹两级分组导航的占位容器；降级时隐藏。 placeholder wrapping two-level grouped navigation; hidden on degradation."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.navigationgroups",
+      "name": "NavigationGroups",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.navig-451dda41.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.navig-451dda41.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.navigationgroups navigationgroups dotnet-field outer repeater bound to the group section collection. protected system.web.ui.webcontrols.repeater aspnet.starterkit.portal.desktopportalbanner.navigationgroups dotnet:f:aspnet.starterkit.portal.desktopportalbanner.navigationgroups portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.designer.cs csharp 绑定分组定义集合的外层 repeater。 outer repeater bound to the group section collection."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.ungroupedtabs",
+      "name": "UngroupedTabs",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.ungro-93c1c656.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.desktopportalbanner.ungro-93c1c656.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.ungroupedtabs ungroupedtabs dotnet-field repeater bound to tabs that belong to no vocabulary group and must be rendered flat. protected system.web.ui.webcontrols.repeater aspnet.starterkit.portal.desktopportalbanner.ungroupedtabs dotnet:f:aspnet.starterkit.portal.desktopportalbanner.ungroupedtabs portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.designer.cs csharp 绑定不属于任何词表分组、必须平铺展示的页签集合。 repeater bound to tabs that belong to no vocabulary group and must be rendered flat."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.genericerrorpage",
@@ -36759,6 +36867,222 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.buildgroupedview-system.collections.generic.ienumerable-system.string-system.string-system.collections.generic.ilist-system.string-system.boolean buildgroupedview dotnet-method produce a read-only, presentation-ordered \"group → member tab key\" view for the `w-anp-p291` renderer. ungrouped tabs are rendered flat by the caller; this method reads no database or request context and performs no authorization. public static system.collections.generic.ilist<system.collections.generic.keyvaluepair<aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition, system.collections.generic.ilist<string>>> aspnet.starterkit.portal.portalnavigationgroupalias.buildgroupedview(system.collections.generic.ienumerable<string> navigationkeys, string configuration, out system.collections.generic.ilist<string> ungroupedkeys, out bool degraded) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.buildgroupedview-system.collections.generic.ienumerable-system.string-system.string-system.collections.generic.ilist-system.string-system.boolean portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 生成按展示顺序排列的「分组 → 成员页签键」只读视图，供 `w-anp-p291` 的渲染层消费。 未分组页签由调用方平铺展示；本方法不读数据库、不读请求上下文、不做授权判定。 produce a read-only, presentation-ordered \"group → member tab key\" view for the `w-anp-p291` renderer. ungrouped tabs are rendered flat by the caller; this method reads no database or request context and performs no authorization. 本次要展示的页签 navigationkey 序列。 tab navigationkey sequence to present. 部署别名配置文本，可为 null。 deployment alias configuration text, may be null. 未能归入任何分组的页签键（平铺展示）。 tab keys that belong to no group (rendered flat). 配置非法导致回退默认词表时为 true。 true when invalid configuration caused a fallback to defaults. 分组定义及该组成员页签键的只读列表。 read-only list of groups with their member tab keys."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview",
+      "name": "PortalNavigationGroupView",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-d657a863.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-d657a863.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview portalnavigationgroupview dotnet-type presentation view model for two-level main-navigation groups: combines the already authorization-filtered tab collection with the closed vocabulary in `portalnavigationgroupalias`, producing a read-only \"group → member tabs\" view plus flat ungrouped tabs for `desktopportalbanner.ascx` to bind. this class reads no database or request context and calls neither `portalsecurity.isinroles` nor any permission check; groups decide only presentation order and collapse ownership, **never hide an authorized tab**, and never change the `portalcfg_tabs` schema (class-a hard boundary). class aspnet.starterkit.portal.portalnavigationgroupview dotnet:t:aspnet.starterkit.portal.portalnavigationgroupview portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 主导航两级分组的展示视图模型：把「已完成授权过滤的页签集合」与 `portalnavigationgroupalias` 的封闭词表 结合，产出「分组 → 组内页签」以及「未分组平铺页签」的只读视图，供 `desktopportalbanner.ascx` 绑定渲染。 本类不读数据库、不读请求上下文、不调用 `portalsecurity.isinroles` 或任何权限判定；分组只决定展示顺序与折叠归属， **绝不隐藏任何已授权页签**，也不改变 `portalcfg_tabs` 表结构（a 级硬边界）。 presentation view model for two-level main-navigation groups: combines the already authorization-filtered tab collection with the closed vocabulary in `portalnavigationgroupalias`, producing a read-only \"group → member tabs\" view plus flat ungrouped tabs for `desktopportalbanner.ascx` to bind. this class reads no database or request context and calls neither `portalsecurity.isinroles` nor any permission check; groups decide only presentation order and collapse ownership, **never hide an authorized tab**, and never change the `portalcfg_tabs` schema (class-a hard boundary). 与 `portalnavigationgroupalias` 的分工：后者是词表与配置覆盖的**数据契约**（fail-closed），本类是 **渲染数据装配**（保留每个页签在最终授权集合中的显示下标，因为 `portaldesktoptaburl` 的 `tabindex` 用它； 分组重排不得改变它，否则页面内匿名登录模块的注入启发式会漂移）。 division of labour with `portalnavigationgroupalias`: the latter is the **data contract** for the vocabulary and configuration overrides (fail-closed); this class **assembles rendering data**, preserving each tab's display index in the final authorized collection because `portaldesktoptaburl` uses it for `tabindex`. group reordering must not change that index, or the in-page anonymous-login injection heuristic drifts."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview",
+      "name": "GroupTabView",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-cb74f400.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-cb74f400.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview grouptabview dotnet-type one tab's presentation item inside a group: keeps the original `itabitem` (the renderer takes the localized name and url from it), the display index in the final collection, the selected flag, and the disabled state and reason code already decided by the entry gate. the reason code feeds a tooltip only and never becomes visible copy. class aspnet.starterkit.portal.portalnavigationgroupview.grouptabview dotnet:t:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview t:aspnet.starterkit.portal.portalnavigationgroupview t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 组内一个页签的展示项：保留原始 `itabitem`（渲染层据此取本地化名与地址）、最终集合中的显示下标、 选中标记，以及入口 gate 已判定的禁用态与原因码。禁用原因码只供工具提示，不成为可见文案。 one tab's presentation item inside a group: keeps the original `itabitem` (the renderer takes the localized name and url from it), the display index in the final collection, the selected flag, and the disabled state and reason code already decided by the entry gate. the reason code feeds a tooltip only and never becomes visible copy."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.tab",
+      "name": "Tab",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-c22555b5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-c22555b5.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.tab tab dotnet-property original tab; the renderer resolves localized names and the tab id from it. public aspnet.starterkit.portal.itabitem aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.tab { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.tab portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.grouptabview t:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 原始页签；渲染层用它解析中英显示名与页签 id。 original tab; the renderer resolves localized names and the tab id from it."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.displayindex",
+      "name": "DisplayIndex",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-0eb36a90.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-0eb36a90.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.displayindex displayindex dotnet-property display index in the final authorized collection, used for `tabindex`; grouping never changes it. public int aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.displayindex { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.displayindex portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.grouptabview t:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 页签在最终授权集合中的显示下标，用于 `tabindex`；分组不改变它。 display index in the final authorized collection, used for `tabindex`; grouping never changes it."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isselected",
+      "name": "IsSelected",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-5b552023.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-5b552023.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isselected isselected dotnet-property whether this is the active tab; when true it renders as a non-link selected state. public bool aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isselected { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isselected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.grouptabview t:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 是否为当前活动页签；为 true 时渲染成非链接的选中态。 whether this is the active tab; when true it renders as a non-link selected state."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isblocked",
+      "name": "IsBlocked",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-db8ff6ce.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-db8ff6ce.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isblocked isblocked dotnet-property whether the entry gate marked this tab disabled (the disabled state is visible to administrators only). public bool aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isblocked { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.isblocked portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.grouptabview t:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 入口 gate 是否把该页签标为禁用（仅管理员可见禁用态）。 whether the entry gate marked this tab disabled (the disabled state is visible to administrators only)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.blockedreason",
+      "name": "BlockedReason",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-cf660916.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-cf660916.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.blockedreason blockedreason dotnet-property disabled reason code; for the `title` tooltip only, never visible text. public string aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.blockedreason { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.blockedreason portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.grouptabview t:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 禁用原因码；仅供 `title` 工具提示，不进入可见文本。 disabled reason code; for the `title` tooltip only, never visible text."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.-ctor-aspnet.starterkit.portal.itabitem-system.int32-system.boolean-system.boolean-system.string",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-a4e85f1d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-a4e85f1d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.-ctor-aspnet.starterkit.portal.itabitem-system.int32-system.boolean-system.boolean-system.string #ctor dotnet-method build an immutable presentation item; a blank reason is normalized to an empty string so template binding never sees a `null` attribute. public aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.grouptabview(aspnet.starterkit.portal.itabitem tab, int displayindex, bool isselected, bool isblocked, string blockedreason) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview.-ctor-aspnet.starterkit.portal.itabitem-system.int32-system.boolean-system.boolean-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.grouptabview t:aspnet.starterkit.portal.portalnavigationgroupview.grouptabview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 构造不可变展示项；原因码为空时统一为空串，避免模板绑定出现 `null` 属性。 build an immutable presentation item; a blank reason is normalized to an empty string so template binding never sees a `null` attribute. 原始页签。 original tab. 最终集合中的显示下标。 display index in the final collection. 是否活动页签。 whether it is the active tab. 是否被 gate 标为禁用。 whether the gate marked it disabled. 禁用原因码，可为 null。 disabled reason code, may be null."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview",
+      "name": "GroupSectionView",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-2027955c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-2027955c.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview groupsectionview dotnet-type one presentation group: stable key, localized label, a stable container id for `aria-controls`, and member tabs. only groups with at least one tab are rendered; empty groups are counted in `navigationview.emptysectioncount` as evidence rather than emitting blank disclosure buttons. class aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview dotnet:t:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview t:aspnet.starterkit.portal.portalnavigationgroupview t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 一个展示分组：稳定键、已本地化的显示名、供 `aria-controls` 使用的稳定容器 id，以及组内页签。 只渲染至少有一个页签的分组；空分组由 `navigationview.emptysectioncount` 计数留证，不输出空白 disclosure 按钮。 one presentation group: stable key, localized label, a stable container id for `aria-controls`, and member tabs. only groups with at least one tab are rendered; empty groups are counted in `navigationview.emptysectioncount` as evidence rather than emitting blank disclosure buttons."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.groupkey",
+      "name": "GroupKey",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-79940724.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-79940724.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.groupkey groupkey dotnet-property stable group key (vocabulary key, not configuration text). public string aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.groupkey { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.groupkey portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview t:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 分组稳定键（词表键，非配置文本）。 stable group key (vocabulary key, not configuration text)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.displayname",
+      "name": "DisplayName",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-0883da83.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-0883da83.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.displayname displayname dotnet-property group label resolved for the ui culture. public string aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.displayname { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.displayname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview t:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 按界面文化解析后的分组显示名。 group label resolved for the ui culture."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.containerid",
+      "name": "ContainerId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-1d51456c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-1d51456c.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.containerid containerid dotnet-property stable html id of the in-group link container, targeted by the disclosure button's `aria-controls`. public string aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.containerid { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.containerid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview t:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 组内链接容器的稳定 html id，供 disclosure 按钮 `aria-controls` 指向。 stable html id of the in-group link container, targeted by the disclosure button's `aria-controls`."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabcount",
+      "name": "TabCount",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-19135790.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-19135790.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabcount tabcount dotnet-property member tab count, used for the group header count badge. public int aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabcount { get; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabcount portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview t:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 组内页签数，用于分组标题的计数徽标。 member tab count, used for the group header count badge."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabs",
+      "name": "Tabs",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-6c79c66e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-6c79c66e.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabs tabs dotnet-property read-only member tabs, ordered as in the final authorized collection. public system.collections.generic.ilist<aspnet.starterkit.portal.portalnavigationgroupview.grouptabview> aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabs { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.tabs portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview t:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 组内页签只读集合，顺序沿用最终授权集合的顺序。 read-only member tabs, ordered as in the final authorized collection."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.-ctor-system.string-system.string-system.string-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-5baa8d1c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-5baa8d1c.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.-ctor-system.string-system.string-system.string-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview #ctor dotnet-method build an immutable group; the member collection is frozen so the template or caller cannot mutate it during binding. public aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.groupsectionview(string groupkey, string displayname, string containerid, system.collections.generic.ienumerable<aspnet.starterkit.portal.portalnavigationgroupview.grouptabview> tabs) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview.-ctor-system.string-system.string-system.string-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview t:aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 构造不可变分组；成员集合冻结，防止模板或调用方在绑定过程中改写。 build an immutable group; the member collection is frozen so the template or caller cannot mutate it during binding. 分组稳定键。 stable group key. 已本地化的显示名。 localized label. 组内容器稳定 id。 stable in-group container id. 组内页签序列。 member tab sequence."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview",
+      "name": "NavigationView",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-d028e6b4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview-d028e6b4.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupview.navigationview navigationview dotnet-type complete read-only view for one navigation render. on invalid configuration (`degraded`) the caller falls back to flat navigation with every tab still reachable; ungrouped tabs are always rendered flat and are never hidden for lacking a vocabulary group. class aspnet.starterkit.portal.portalnavigationgroupview.navigationview dotnet:t:aspnet.starterkit.portal.portalnavigationgroupview.navigationview portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview t:aspnet.starterkit.portal.portalnavigationgroupview t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 一次导航渲染的完整只读视图。配置非法（`degraded`）时调用方改为一级平铺，所有页签仍可达； 未分组页签始终平铺输出，绝不因为不属于任何词表分组而被隐藏。 complete read-only view for one navigation render. on invalid configuration (`degraded`) the caller falls back to flat navigation with every tab still reachable; ungrouped tabs are always rendered flat and are never hidden for lacking a vocabulary group."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.sections",
+      "name": "Sections",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-cb4319f2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-cb4319f2.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.sections sections dotnet-property non-empty presentation groups in vocabulary order. public system.collections.generic.ilist<aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview> aspnet.starterkit.portal.portalnavigationgroupview.navigationview.sections { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.sections portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.navigationview t:aspnet.starterkit.portal.portalnavigationgroupview.navigationview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 非空的展示分组，按词表顺序排列。 non-empty presentation groups in vocabulary order."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.ungroupedtabs",
+      "name": "UngroupedTabs",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-51f6f9f1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-51f6f9f1.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.ungroupedtabs ungroupedtabs dotnet-property tabs belonging to no group, rendered flat in original order. public system.collections.generic.ilist<aspnet.starterkit.portal.portalnavigationgroupview.grouptabview> aspnet.starterkit.portal.portalnavigationgroupview.navigationview.ungroupedtabs { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.ungroupedtabs portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.navigationview t:aspnet.starterkit.portal.portalnavigationgroupview.navigationview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 不属于任何分组的页签，按原顺序平铺展示。 tabs belonging to no group, rendered flat in original order."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.degraded",
+      "name": "Degraded",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-3b4b4878.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-3b4b4878.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.degraded degraded dotnet-property true when alias configuration was invalid and fail-closed fallback to defaults occurred; the caller degrades to flat navigation. public bool aspnet.starterkit.portal.portalnavigationgroupview.navigationview.degraded { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.degraded portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.navigationview t:aspnet.starterkit.portal.portalnavigationgroupview.navigationview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 别名配置非法、已 fail-closed 回退默认词表时为 true；调用方据此降级为一级平铺。 true when alias configuration was invalid and fail-closed fallback to defaults occurred; the caller degrades to flat navigation."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.emptysectioncount",
+      "name": "EmptySectionCount",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-5dc9f281.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview-5dc9f281.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.emptysectioncount emptysectioncount dotnet-property number of filtered-out empty groups, kept as evidence; it never affects tab visibility. public int aspnet.starterkit.portal.portalnavigationgroupview.navigationview.emptysectioncount { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.emptysectioncount portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.navigationview t:aspnet.starterkit.portal.portalnavigationgroupview.navigationview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 被过滤掉的空分组数量，留作证据（不影响任何页签可见性）。 number of filtered-out empty groups, kept as evidence; it never affects tab visibility."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.-ctor-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview-system.boolean-system.int32",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-c9393602.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-c9393602.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.navigationview.-ctor-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview-system.boolean-system.int32 #ctor dotnet-method build an immutable view; both the group and ungrouped collections are frozen. public aspnet.starterkit.portal.portalnavigationgroupview.navigationview.navigationview(system.collections.generic.ienumerable<aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview> sections, system.collections.generic.ienumerable<aspnet.starterkit.portal.portalnavigationgroupview.grouptabview> ungroupedtabs, bool degraded, int emptysectioncount) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupview.navigationview.-ctor-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.groupsectionview-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationgroupview.grouptabview-system.boolean-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview.navigationview t:aspnet.starterkit.portal.portalnavigationgroupview.navigationview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 构造不可变视图；分组与未分组集合均冻结。 build an immutable view; both the group and ungrouped collections are frozen. 非空分组序列。 non-empty group sequence. 未分组页签序列。 ungrouped tab sequence. 是否因配置非法而降级。 whether invalid configuration caused degradation. 被过滤的空分组数。 count of filtered empty groups."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupview.containeridprefix",
+      "name": "ContainerIdPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupview-f409890d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupview-f409890d.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupview.containeridprefix containeridprefix dotnet-field container id prefix, from the same family as the theme scope classes; it is a static constant with no request data. public const string aspnet.starterkit.portal.portalnavigationgroupview.containeridprefix dotnet:f:aspnet.starterkit.portal.portalnavigationgroupview.containeridprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview t:aspnet.starterkit.portal.portalnavigationgroupview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 容器 id 前缀；与主题作用域类同名族，值是静态常量，不含请求数据。 container id prefix, from the same family as the theme scope classes; it is a static constant with no request data."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.build-system.collections.generic.ilist-aspnet.starterkit.portal.itabitem-system.int32-system.string-system.collections.generic.idictionary-system.int32-system.string-system.globalization.cultureinfo",
+      "name": "Build",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-36597885.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-36597885.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.build-system.collections.generic.ilist-aspnet.starterkit.portal.itabitem-system.int32-system.string-system.collections.generic.idictionary-system.int32-system.string-system.globalization.cultureinfo build dotnet-method build the two-level grouped view from an already authorized tab collection. authorization filtering must be completed by the caller **before** this call; this method only looks up `navigationkey` in the closed vocabulary and deployment alias overrides, never changing the collection or deciding permissions. public static aspnet.starterkit.portal.portalnavigationgroupview.navigationview aspnet.starterkit.portal.portalnavigationgroupview.build(system.collections.generic.ilist<aspnet.starterkit.portal.itabitem> authorizedtabs, int activetabid, string configuration, system.collections.generic.idictionary<int, string> blockedreasons, system.globalization.cultureinfo culture) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupview.build-system.collections.generic.ilist-aspnet.starterkit.portal.itabitem-system.int32-system.string-system.collections.generic.idictionary-system.int32-system.string-system.globalization.cultureinfo portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview t:aspnet.starterkit.portal.portalnavigationgroupview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 从已授权页签集合构造两级分组视图。授权过滤必须在此**之前**由调用方完成；本方法只按 `navigationkey` 查封闭词表与部署别名覆盖，不改变页签集合、不做权限判定。 build the two-level grouped view from an already authorized tab collection. authorization filtering must be completed by the caller **before** this call; this method only looks up `navigationkey` in the closed vocabulary and deployment alias overrides, never changing the collection or deciding permissions. 已完成角色过滤与入口 gate 判定的页签集合；为 null 时按空集合处理。 tabs that already passed role filtering and the entry gate; null is treated as empty. 当前活动页签 id，用于选中态。 current active tab id, used for the selected state. 部署别名覆盖文本，可为 null。 deployment alias override text, may be null. 入口 gate 已判定的禁用原因码（按 tabid 索引），可为 null。 disabled reason codes already decided by the entry gate (keyed by tabid), may be null. 界面文化；为 null 时取当前线程界面文化。 ui culture; null uses the current thread ui culture. 只读分组视图，含未分组平铺页签与降级标记。 read-only grouped view with flat ungrouped tabs and a degradation flag."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.normalizeidpart-system.string",
+      "name": "NormalizeIdPart",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-369c809e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview-369c809e.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupview.normalizeidpart-system.string normalizeidpart dotnet-method normalize a vocabulary key into a lowercase ascii-alphanumeric string for an html id; invalid characters become `-` and an empty result falls back to `group`. this is presentation-only string shaping and changes neither group membership nor any configuration semantics. private static string aspnet.starterkit.portal.portalnavigationgroupview.normalizeidpart(string groupkey) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupview.normalizeidpart-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupview t:aspnet.starterkit.portal.portalnavigationgroupview dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupview.cs csharp 把词表键归一为小写 ascii 字母数字串，用于 html id；非法字符以 `-` 替代，空结果回退 `group`。 这是纯展示用途的字符串整形，不改变分组归属或任何配置语义。 normalize a vocabulary key into a lowercase ascii-alphanumeric string for an html id; invalid characters become `-` and an empty result falls back to `group`. this is presentation-only string shaping and changes neither group membership nor any configuration semantics. 分组稳定键。 stable group key. 可用于 html id 的片段。 fragment usable in an html id."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalreferencedatasets",
       "name": "PortalReferenceDataSets",
       "kind": "dotnet-type",
@@ -51381,7 +51705,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-124b51ea.html",
       "noScriptPagePath": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-124b51ea.html",
-      "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5 desktopportalbanner.ascx webforms-server-comment 5 dotnet-markup-comment the tabs data source comes from portal configuration; each navigation url combines the application path, index, and tabid, while visibility and access remain server-controlled. dotnetdoc:markup-comment:src-portal-desktopportalbanner.ascx:5 dotnet hia-document markup/portal.hia.json src/portal/desktopportalbanner.ascx ascx tabs 数据源来自门户配置；每个导航 url 由应用路径、索引和 tabid 组合，实际可见性与访问权限仍由服务器控制。 the tabs data source comes from portal configuration; each navigation url combines the application path, index, and tabid, while visibility and access remain server-controlled."
+      "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5 desktopportalbanner.ascx webforms-server-comment 5 dotnet-markup-comment the tabs data source comes from portal configuration; each navigation url combines the application path, index, and tabid, while visibility and access remain server-controlled.\n    when group configuration is invalid this datalist carries the flat-navigation degradation: its output is byte-for-byte identical to before the two-level change, serving as the runtime rollback point. dotnetdoc:markup-comment:src-portal-desktopportalbanner.ascx:5 dotnet hia-document markup/portal.hia.json src/portal/desktopportalbanner.ascx ascx tabs 数据源来自门户配置；每个导航 url 由应用路径、索引和 tabid 组合，实际可见性与访问权限仍由服务器控制。\n    分组配置非法时本 datalist 承担「一级平铺」降级：此时输出与两级分组改造前逐字节一致，是运行期回滚点。 the tabs data source comes from portal configuration; each navigation url combines the application path, index, and tabid, while visibility and access remain server-controlled.\n    when group configuration is invalid this datalist carries the flat-navigation degradation: its output is byte-for-byte identical to before the two-level change, serving as the runtime rollback point."
     },
     {
       "id": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6",
@@ -51391,6 +51715,24 @@
       "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-114b5057.html",
       "noScriptPagePath": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-114b5057.html",
       "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6 desktopportalbanner.ascx webforms-server-comment 6 dotnet-markup-comment a regular tab item renders the server-bound name and url; the template presents navigation and does not treat bound values as client-side authorization decisions. the url is now produced by a code-behind method because a <%= %> code block is not allowed inside a server-control attribute in web forms. each item also emits a hidden disabled element that the tab gate can reveal for administrators together with the blocked reason; because it defaults to hidden it emits no html at all while the gate is off.\n    the name likewise goes through a code-behind method (`buildtabdisplayname`): tab names now support chinese / english / other-languages columns, so binding the chinese column directly would produce reverse mixing in english uis. dotnetdoc:markup-comment:src-portal-desktopportalbanner.ascx:6 dotnet hia-document markup/portal.hia.json src/portal/desktopportalbanner.ascx ascx 普通 tab 项输出服务器绑定的名称与 url；模板只呈现导航，不把绑定值当作客户端权限判断。url 改由 code-behind 方法生成，避免在服务器控件属性中使用 <%= %> 代码块（web forms 不允许）。每项同时输出一个默认隐藏的禁用态元素，供 tab 门控在管理员可见时替换显示并携带阻断原因；默认隐藏使其在门控关闭时完全不输出 html。\n    名称同样走 code-behind 方法（`buildtabdisplayname`）：页签名已支持中/英/其它语言三列，直接绑定中文列会让英文界面出现反向混排。 a regular tab item renders the server-bound name and url; the template presents navigation and does not treat bound values as client-side authorization decisions. the url is now produced by a code-behind method because a <%= %> code block is not allowed inside a server-control attribute in web forms. each item also emits a hidden disabled element that the tab gate can reveal for administrators together with the blocked reason; because it defaults to hidden it emits no html at all while the gate is off.\n    the name likewise goes through a code-behind method (`buildtabdisplayname`): tab names now support chinese / english / other-languages columns, so binding the chinese column directly would produce reverse mixing in english uis."
+    },
+    {
+      "id": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-7",
+      "name": "DesktopPortalBanner.ascx webforms-server-comment 7",
+      "kind": "dotnet-markup-comment",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-104b4ec4.html",
+      "noScriptPagePath": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-104b4ec4.html",
+      "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-7 desktopportalbanner.ascx webforms-server-comment 7 dotnet-markup-comment two-level grouped navigation: each group header is a native button (disclosure with aria-expanded / aria-controls) and each group still contains flat .portal-tab links.\n    per w3c wai-aria apg, site navigation uses no menu / menubar role. groups decide only presentation and collapse, never authorization; permissions stay with accessroles and the per-tab entry gate.\n    without javascript every group is emitted with aria-expanded=\"true\" and no hidden class on its links, so progressive enhancement keeps all tabs reachable; collapsing and escape focus return are bound by an external script (no inline onclick, avoiding accessibility-gate violations and script-injection surface). dotnetdoc:markup-comment:src-portal-desktopportalbanner.ascx:7 dotnet hia-document markup/portal.hia.json src/portal/desktopportalbanner.ascx ascx 两级分组导航：分组标题是原生 button（disclosure，aria-expanded / aria-controls），组内仍是平铺的 .portal-tab 链接。\n    按 w3c wai-aria apg，站点导航不用 menu / menubar role。分组只决定展示与折叠，不参与授权；权限仍由 accessroles 与入口 gate 逐页签判定。\n    无 js 时所有分组以 aria-expanded=\"true\" 输出且组内链接不加隐藏类，渐进增强保证页签始终可达；折叠与 escape 回焦由外置脚本绑定（不用内联 onclick，避免可访问性门禁违规与脚本注入面）。 two-level grouped navigation: each group header is a native button (disclosure with aria-expanded / aria-controls) and each group still contains flat .portal-tab links.\n    per w3c wai-aria apg, site navigation uses no menu / menubar role. groups decide only presentation and collapse, never authorization; permissions stay with accessroles and the per-tab entry gate.\n    without javascript every group is emitted with aria-expanded=\"true\" and no hidden class on its links, so progressive enhancement keeps all tabs reachable; collapsing and escape focus return are bound by an external script (no inline onclick, avoiding accessibility-gate violations and script-injection surface)."
+    },
+    {
+      "id": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-8",
+      "name": "DesktopPortalBanner.ascx webforms-server-comment 8",
+      "kind": "dotnet-markup-comment",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-074b4099.html",
+      "noScriptPagePath": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-074b4099.html",
+      "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-8 desktopportalbanner.ascx webforms-server-comment 8 dotnet-markup-comment tabs belonging to no vocabulary group (legacy test.* tabs or module tabs without a stable key yet) are rendered flat here with no disclosure button and are never hidden. dotnetdoc:markup-comment:src-portal-desktopportalbanner.ascx:8 dotnet hia-document markup/portal.hia.json src/portal/desktopportalbanner.ascx ascx 不属于任何词表分组的页签（历史 test.* 页签或尚未填写稳定键的模块页签）平铺在此，无 disclosure 按钮，绝不隐藏。 tabs belonging to no vocabulary group (legacy test.* tabs or module tabs without a stable key yet) are rendered flat here with no disclosure button and are never hidden."
     },
     {
       "id": "hia-document:dotnetdoc-markup-comment-src-portal-genericerrorpage.aspx-1",

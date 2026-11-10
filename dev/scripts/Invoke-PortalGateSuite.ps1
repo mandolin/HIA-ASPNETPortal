@@ -761,6 +761,7 @@ $gateLayers = [ordered]@{
         # </lang>
         @{ File = 'Test-PortalIndependentModuleGate.ps1'; Runner = 'ps1'; Kind = '独立模块契约一致性'; Args = @() }
         @{ File = 'Test-PortalNavigationGroupContract.ps1'; Runner = 'ps1'; Kind = '主导航分组配置别名契约'; Args = @() }
+        @{ File = 'Test-PortalNavigationGroupRender.ps1'; Runner = 'ps1'; Kind = '主导航两级分组渲染契约'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

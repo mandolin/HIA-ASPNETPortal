@@ -1,0 +1,8 @@
+            public GroupTabView(ITabItem tab, int displayIndex, bool isSelected, bool isBlocked, string blockedReason)
+            {
+                Tab = tab;
+                DisplayIndex = displayIndex;
+                IsSelected = isSelected;
+                IsBlocked = isBlocked;
+                BlockedReason = blockedReason ?? string.Empty;
+            }

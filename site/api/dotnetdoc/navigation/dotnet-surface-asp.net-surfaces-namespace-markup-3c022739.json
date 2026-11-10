@@ -264,6 +264,26 @@
       "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f6d6e016.json"
     },
     {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-7",
+      "kind": "type",
+      "label": "DesktopPortalBanner",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f7d6e1a9.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-8",
+      "kind": "type",
+      "label": "DesktopPortalBanner",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-00d6efd4.json"
+    },
+    {
       "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-genericerrorpage.aspx-1",
       "kind": "type",
       "label": "GenericErrorPage",

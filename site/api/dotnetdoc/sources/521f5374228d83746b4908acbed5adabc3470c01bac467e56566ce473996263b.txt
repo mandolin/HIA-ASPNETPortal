@@ -1,0 +1,8 @@
+            <%--
+                <lang>
+                    <zh-CN>Tabs 数据源来自门户配置；每个导航 URL 由应用路径、索引和 TabId 组合，实际可见性与访问权限仍由服务器控制。
+                    分组配置非法时本 DataList 承担「一级平铺」降级：此时输出与两级分组改造前逐字节一致，是运行期回滚点。</zh-CN>
+                    <en>The Tabs data source comes from portal configuration; each navigation URL combines the application path, index, and TabId, while visibility and access remain server-controlled.
+                    When group configuration is invalid this DataList carries the flat-navigation degradation: its output is byte-for-byte identical to before the two-level change, serving as the runtime rollback point.</en>
+                </lang>
+            --%>

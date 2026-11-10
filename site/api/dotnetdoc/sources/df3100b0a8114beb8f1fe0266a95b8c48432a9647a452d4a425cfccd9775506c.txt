@@ -1,0 +1,155 @@
+        public static NavigationView Build(
+            IList<ITabItem> authorizedTabs,
+            int activeTabId,
+            string configuration,
+            IDictionary<int, string> blockedReasons,
+            CultureInfo culture)
+        {
+            // <lang>
+            //   <zh-CN>输入集合只为 null 时归一为空列表；不去重、不排序、不删除任何项 —— 去重会静默丢掉
+            //   共享稳定键的页签，排序会改变 `tabindex` 语义，二者都违反「绝不隐藏页签」的边界。</zh-CN>
+            //   <en>Normalize only a null input to an empty list; never de-duplicate, sort, or remove an item. De-duplication
+            //   would silently drop tabs sharing a stable key and sorting would change `tabindex` semantics, both violating
+            //   the "never hide a tab" boundary.</en>
+            // </lang>
+            IList<ITabItem> safeTabs = authorizedTabs ?? new List<ITabItem>();
+
+            // <lang>
+            //   <zh-CN>原因码字典同样只做 null 归一；它已是授权阶段的结果，本方法只读不判定。</zh-CN>
+            //   <en>The reason-code dictionary is only null-normalized; it is already an authorization-stage result, read but never decided here.</en>
+            // </lang>
+            IDictionary<int, string> safeReasons = blockedReasons ?? new Dictionary<int, string>();
+
+            // <lang>
+            //   <zh-CN>调用 P290 的权威 API 取得分组骨架与降级标记：组顺序来自封闭词表，不依赖数据库排序；
+            //   `degraded` 为 true 表示配置被整份拒绝、已回退默认词表，渲染层据此降级为一级平铺。</zh-CN>
+            //   <en>Call the authoritative P290 API for the group skeleton and degradation flag: group order comes from the
+            //   closed vocabulary rather than database ordering; a true `degraded` means the configuration was rejected
+            //   wholesale and defaults were used, so the renderer falls back to flat navigation.</en>
+            // </lang>
+            IList<string> keys = safeTabs.Select(tab => tab == null ? string.Empty : (tab.NavigationKey ?? string.Empty)).ToList();
+            IList<string> ungroupedKeys;
+            bool degraded;
+            IList<KeyValuePair<PortalNavigationGroupAlias.GroupDefinition, IList<string>>> skeleton =
+                PortalNavigationGroupAlias.BuildGroupedView(keys, configuration, out ungroupedKeys, out degraded);
+
+            // <lang>
+            //   <zh-CN>从骨架反建「稳定键 → 分组定义」映射。`BuildGroupedView` 已处理别名覆盖，故这里不需要
+            //   再解析配置文本，避免两处口径分叉；同键重复出现时以骨架最后一次归属为准（词表成员互斥，正常不冲突）。</zh-CN>
+            //   <en>Rebuild a "stable key → group definition" map from the skeleton. `BuildGroupedView` already applied alias
+            //   overrides, so parsing the configuration again here would create a second interpretation. For a duplicated key
+            //   the skeleton's last assignment wins (vocabulary members are disjoint, so this normally cannot collide).</en>
+            // </lang>
+            Dictionary<string, PortalNavigationGroupAlias.GroupDefinition> keyToGroup =
+                new Dictionary<string, PortalNavigationGroupAlias.GroupDefinition>(StringComparer.OrdinalIgnoreCase);
+            foreach (KeyValuePair<PortalNavigationGroupAlias.GroupDefinition, IList<string>> pair in skeleton)
+            {
+                foreach (string memberKey in pair.Value)
+                {
+                    keyToGroup[memberKey] = pair.Key;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>按骨架顺序为每个分组预建可变成员桶；桶与骨架一一对应，最后再统一冻结成只读视图。</zh-CN>
+            //   <en>Pre-create a mutable member bucket per group in skeleton order; buckets map one-to-one to the skeleton and are frozen into read-only views at the end.</en>
+            // </lang>
+            List<PortalNavigationGroupAlias.GroupDefinition> definitions = new List<PortalNavigationGroupAlias.GroupDefinition>();
+            Dictionary<string, List<GroupTabView>> buckets = new Dictionary<string, List<GroupTabView>>(StringComparer.OrdinalIgnoreCase);
+            foreach (KeyValuePair<PortalNavigationGroupAlias.GroupDefinition, IList<string>> pair in skeleton)
+            {
+                definitions.Add(pair.Key);
+                buckets[pair.Key.GroupKey] = new List<GroupTabView>();
+            }
+
+            // <lang>
+            //   <zh-CN>未分组页签单独收集，按原顺序平铺；它们多为历史 `Test.*` 页签或尚未填写稳定键的模块页签，
+            //   分组机制不得把它们藏起来（A 级硬边界）。</zh-CN>
+            //   <en>Ungrouped tabs are collected separately and rendered flat in original order; they are mostly legacy
+            //   `Test.*` tabs or module tabs without a stable key yet, and grouping must never hide them (class-A boundary).</en>
+            // </lang>
+            List<GroupTabView> ungrouped = new List<GroupTabView>();
+
+            // <lang>
+            //   <zh-CN>逐页签装配：下标用循环变量（即最终授权集合中的原始位置），而不是分组后的组内位置；
+            //   这样 `BuildTabUrl` 产出的 `tabindex` 与改造前逐字节一致。</zh-CN>
+            //   <en>Assemble tab by tab: the index comes from the loop variable (the original position in the final authorized
+            //   collection), not the position after grouping, so `BuildTabUrl` produces a `tabindex` byte-for-byte identical to before.</en>
+            // </lang>
+            for (int displayIndex = 0; displayIndex < safeTabs.Count; displayIndex++)
+            {
+                ITabItem tab = safeTabs[displayIndex];
+                if (tab == null)
+                {
+                    continue;
+                }
+
+                // <lang>
+                //   <zh-CN>选中态只按 TabId 比对；禁用态与原因码直接取授权阶段的结果，本方法不重新判定权限。</zh-CN>
+                //   <en>The selected state compares TabId only; the disabled state and reason code come straight from the
+                //   authorization stage, with no permission decision repeated here.</en>
+                // </lang>
+                bool isSelected = tab.TabId == activeTabId;
+                string reason;
+                bool isBlocked = safeReasons.TryGetValue(tab.TabId, out reason);
+                GroupTabView item = new GroupTabView(tab, displayIndex, isSelected, isBlocked, isBlocked ? reason : string.Empty);
+
+                // <lang>
+                //   <zh-CN>空稳定键一律进平铺区；非空键查映射，查不到同样进平铺区，绝不丢弃。</zh-CN>
+                //   <en>A blank stable key always goes to the flat area; a non-blank key is looked up and an unknown key
+                //   likewise goes to the flat area, so nothing is ever dropped.</en>
+                // </lang>
+                string navigationKey = (tab.NavigationKey ?? string.Empty).Trim();
+                PortalNavigationGroupAlias.GroupDefinition definition;
+                if (navigationKey.Length > 0 && keyToGroup.TryGetValue(navigationKey, out definition))
+                {
+                    buckets[definition.GroupKey].Add(item);
+                }
+                else
+                {
+                    ungrouped.Add(item);
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>界面文化缺省取当前线程值，与 `GroupDefinition.GetDisplayName` 的口径一致。</zh-CN>
+            //   <en>A missing culture falls back to the current thread value, matching `GroupDefinition.GetDisplayName`.</en>
+            // </lang>
+            CultureInfo effectiveCulture = culture ?? CultureInfo.CurrentUICulture;
+
+            // <lang>
+            //   <zh-CN>只输出有成员的分组；空组计数留证但不渲染，避免匿名态出现多个点了却什么都没有的 disclosure 按钮。
+            //   这与原型状态①「保留空组标题」有偏差，理由与边界见 `works/[已脱敏].md`（据实纠正，不虚报已实现 8 态）。</zh-CN>
+            //   <en>Only groups with members are emitted; empty groups are counted as evidence but not rendered, so anonymous
+            //   sessions do not see several disclosure buttons that reveal nothing. This deviates from prototype state 1
+            //   ("keep empty group headers"); rationale and boundary are recorded in `works/[已脱敏].md` (honest correction,
+            //   no claim that all eight prototype states are implemented).</en>
+            // </lang>
+            List<GroupSectionView> sections = new List<GroupSectionView>();
+            int emptySectionCount = 0;
+            foreach (PortalNavigationGroupAlias.GroupDefinition definition in definitions)
+            {
+                List<GroupTabView> members = buckets[definition.GroupKey];
+                if (members.Count == 0)
+                {
+                    emptySectionCount++;
+                    continue;
+                }
+
+                // <lang>
+                //   <zh-CN>容器 id 由静态前缀 + 归一化后的词表键构成，只保留 ASCII 字母数字，绝不拼接请求参数；
+                //   同一页只挂一个 Banner，故 id 稳定且唯一，可供 `aria-controls` 精确指向。</zh-CN>
+                //   <en>The container id is a static prefix plus a normalized vocabulary key, keeping ASCII alphanumerics only
+                //   and never concatenating request parameters. A page hosts exactly one Banner, so the id is stable and unique
+                //   and `aria-controls` can target it precisely.</en>
+                // </lang>
+                string containerId = ContainerIdPrefix + NormalizeIdPart(definition.GroupKey);
+                sections.Add(new GroupSectionView(
+                    definition.GroupKey,
+                    definition.GetDisplayName(effectiveCulture),
+                    containerId,
+                    members));
+            }
+
+            return new NavigationView(sections, ungrouped, degraded, emptySectionCount);
+        }

@@ -433,9 +433,18 @@
       "coverage": "full",
       "gate": "Test-PortalNavigationGroupContract.ps1",
       "boundary": "只证明静态契约自洽：分组词表默认成员恰好覆盖种子 8 个 NavigationKey、配置键四处登记齐备且解析为整份 fail-closed 拒绝、分组机制不含授权符号且 PortalCfg_Tabs 无父子列、主题设置别名条目与可达页同组且台账标记已覆盖；9 例四步注入证明全部 proved。**不证明**运行期浏览器点击可达（由 L2 运行期证据承载）、分组名翻译贴切、或任何授权判定正确（由 PortalNavigationGroupAliasTests 单测承载）。"
+    },
+    {
+      "id": "navigation-group-render-contract",
+      "name": "主导航两级分组渲染（disclosure / 七套皮肤作用域 / 渐进增强 / 降级回滚）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalNavigationGroupRender.ps1",
+      "boundary": "只证明静态契约自洽：分组视图不含授权符号且保留未分组平铺/显示下标/降级标记、banner 为原生 button disclosure 且不用 menu role 或内联 onclick、7 套皮肤各有 ≥8 条分组作用域规则与 :focus/隐藏类、渐进增强脚本为 ES5 且含 Escape 回焦与幂等绑定、csproj/配置/降级分支接线齐备。**不证明**运行期真的渲染出分组 HTML、键盘交互与 Escape 回焦生效、浅/深主题视觉正确或中英各自截图（由 L2 运行期证据 Test-PortalNavigationGroupRenderEvidence.mjs 承载），也不证明任何授权判定正确（由 PortalNavigationGroupViewTests 单测承载）。"
     }
   ],
   "boundaryRequiredGates": [
+    "Test-PortalNavigationGroupRender.ps1",
     "Test-PortalNavigationGroupContract.ps1",
     "Test-PortalAccessibilityBaseline.ps1",
     "Test-PortalPerformanceBaseline.mjs",
@@ -520,6 +529,7 @@
     "Test-PortalIndependentModuleGate.ps1"
   ],
   "tooling": [
+    { "id": "Test-PortalNavigationGroupRenderEvidence.mjs", "basis": "主导航两级分组浏览器级 L2 运行期证据采集器（W-anp-P291，非门禁、按需手工执行、不进日常编排）：对运行中的站点以管理员登录，断言 disclosure 结构（原生 button / aria-expanded / aria-controls / 无 menu role / 无内联 onclick）、实际点击折叠与展开、Escape 关闭并回焦、中英分组名各自渲染、7 套皮肤切换 body class 后的计算样式与焦点轮廓、另起禁用 JavaScript 的上下文验证页签仍可达；中英各自出图、文件名带语言、不共用同一张。参数经环境变量注入，凭据取不入库的 dev 上下文 JSON。**证明边界**：只证明采集时刻当前数据集与部署配置下分组导航按契约渲染与交互；不证明读屏器实测（a11y-runtime 仍未覆盖）、不证明真实部署下每套皮肤都由主题解析器选中（本证据以切换 body class 验证 CSS 作用域规则）、不证明跨机器像素一致、不证明写入/审计链路。依赖运行中的站点 + 凭据上下文 + mise node，故不进日常编排。Grouped-navigation browser L2 evidence collector (W-anp-P291, not a gate, run manually on demand): signs in, asserts disclosure structure, real collapse/expand clicks, Escape focus return, per-locale group labels, computed styles across seven skins, and a JavaScript-disabled context for reachability; separate screenshots per locale. Proof boundary: rendering and interaction at collection time only, not screen-reader testing, resolver-driven skin selection, pixel equality, or write/audit flows." },
     { "id": "Test-PortalThemeSettingsEntryEvidence.mjs", "basis": "主题设置入链浏览器级 L2 运行期证据采集器（W-anp-P290，非门禁、按需手工执行、不进日常 L0/L1/L2 编排）：对运行中的站点以管理员登录，访问既有可达页 Admin/SystemHealth.aspx，断言动作区渲染出指向 Admin/ThemeSettings.aspx 的真实链接（不伪造 URL），实际点击进入并断言主题设置页标题与权限门控通过（A1–A6），留档整页截图与 JSON 摘要；参数经环境变量注入，凭据取不入库的 dev 上下文 JSON，playwright 为开发期依赖。**证明边界**：只证明采集时刻当前数据集与部署配置下管理员能经动作区点击可达；不证明匿名/普通用户可达（AdminOnly 本就不应可达）、不证明两级分组导航渲染（归 W-anp-P291）、不证明主题写入/审计链路、不证明跨机器像素一致或可访问性运行期实测。依赖运行中的站点 + 凭据上下文 + mise node，故不进日常编排。Theme-settings inbound-link browser L2 evidence collector (W-anp-P290, not a gate, run manually on demand, not wired into daily orchestration): signs in against the running site, asserts a genuine ThemeSettings.aspx link in the SystemHealth action area, clicks through and checks the title/permission gate (A1–A6), keeping a screenshot and JSON summary; all parameters via environment variables, credentials from an uncommitted dev context. Proof boundary: administrator click-through at collection time only, not anonymous reachability, two-level rendering, theme write/audit, cross-machine pixel equality, or runtime accessibility." },
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
     { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）双向证明工具，按需手工执行，不进日常编排：四步（基线 exit 0 → 施加注入 → 注入后非 0 → 还原后 0），任一步不符即判证明不成立。2026-11-03（`W-anp-P267`）修复了两处工具缺陷——夹具未声明 args 时会把空字符串当参数传给门禁（使声明 `param()` 空参的门禁基线必红、被误判为不可证明），以及空数组在 PowerShell 输出流被丢弃成 `$null` 的取参路径；并把覆盖口径从「夹具里出现过门禁名」改为「存在 `verdict = proved` 的真实证明记录」。覆盖数字**不在本文件写死**（批次推进后必然过时），一律以 `dev/gate-injection-proof-index.json` 为准：该索引由 `Update-PortalGateInjectionProofIndex.ps1` 生成，并由 `Test-PortalGateCoverageMap.ps1` 的 M7 机器核对。Coverage numbers are never frozen here; the index is the single source of truth." },

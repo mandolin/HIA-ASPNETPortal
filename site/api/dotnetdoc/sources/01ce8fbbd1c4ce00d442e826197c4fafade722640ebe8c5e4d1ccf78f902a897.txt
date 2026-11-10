@@ -1,0 +1,10 @@
+            <%--
+                <lang>
+                    <zh-CN>两级分组导航：分组标题是原生 button（disclosure，aria-expanded / aria-controls），组内仍是平铺的 .portal-tab 链接。
+                    按 W3C WAI-ARIA APG，站点导航不用 menu / menubar role。分组只决定展示与折叠，不参与授权；权限仍由 AccessRoles 与入口 gate 逐页签判定。
+                    无 JS 时所有分组以 aria-expanded="true" 输出且组内链接不加隐藏类，渐进增强保证页签始终可达；折叠与 Escape 回焦由外置脚本绑定（不用内联 onclick，避免可访问性门禁违规与脚本注入面）。</zh-CN>
+                    <en>Two-level grouped navigation: each group header is a native button (disclosure with aria-expanded / aria-controls) and each group still contains flat .portal-tab links.
+                    Per W3C WAI-ARIA APG, site navigation uses no menu / menubar role. Groups decide only presentation and collapse, never authorization; permissions stay with AccessRoles and the per-tab entry gate.
+                    Without JavaScript every group is emitted with aria-expanded="true" and no hidden class on its links, so progressive enhancement keeps all tabs reachable; collapsing and Escape focus return are bound by an external script (no inline onclick, avoiding accessibility-gate violations and script-injection surface).</en>
+                </lang>
+            --%>

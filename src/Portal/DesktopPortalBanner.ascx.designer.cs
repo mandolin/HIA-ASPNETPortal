@@ -18,7 +18,16 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>显示当前站点名称的标签。</zh-CN><en>Label that displays the current site name.</en></lang></summary>
         protected global::System.Web.UI.WebControls.Label SiteName;
 
-        /// <summary><lang><zh-CN>绑定门户导航页签集合的 DataList。</zh-CN><en>DataList bound to the portal navigation-tab collection.</en></lang></summary>
+        /// <summary><lang><zh-CN>绑定门户导航页签集合的 DataList；仅在分组配置非法而降级为一级平铺时使用，是行为与改造前一致的回滚点。</zh-CN><en>DataList bound to the portal navigation tabs; used only when invalid group configuration degrades to flat navigation, keeping pre-change behaviour as the rollback point.</en></lang></summary>
         protected global::System.Web.UI.WebControls.DataList Tabs;
+
+        /// <summary><lang><zh-CN>包裹两级分组导航的占位容器；降级时隐藏。</zh-CN><en>Placeholder wrapping two-level grouped navigation; hidden on degradation.</en></lang></summary>
+        protected global::System.Web.UI.WebControls.PlaceHolder GroupedNavigation;
+
+        /// <summary><lang><zh-CN>绑定分组定义集合的外层 Repeater。</zh-CN><en>Outer Repeater bound to the group section collection.</en></lang></summary>
+        protected global::System.Web.UI.WebControls.Repeater NavigationGroups;
+
+        /// <summary><lang><zh-CN>绑定不属于任何词表分组、必须平铺展示的页签集合。</zh-CN><en>Repeater bound to tabs that belong to no vocabulary group and must be rendered flat.</en></lang></summary>
+        protected global::System.Web.UI.WebControls.Repeater UngroupedTabs;
     }
 }

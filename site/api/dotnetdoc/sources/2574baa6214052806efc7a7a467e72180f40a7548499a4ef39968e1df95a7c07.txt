@@ -1,0 +1,7 @@
+            public NavigationView(IEnumerable<GroupSectionView> sections, IEnumerable<GroupTabView> ungroupedTabs, bool degraded, int emptySectionCount)
+            {
+                Sections = new ReadOnlyCollection<GroupSectionView>((sections ?? Enumerable.Empty<GroupSectionView>()).ToList());
+                UngroupedTabs = new ReadOnlyCollection<GroupTabView>((ungroupedTabs ?? Enumerable.Empty<GroupTabView>()).ToList());
+                Degraded = degraded;
+                EmptySectionCount = emptySectionCount;
+            }

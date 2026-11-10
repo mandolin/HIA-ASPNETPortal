@@ -48,12 +48,15 @@
         <div class="portal-nav-row">
             <%--
                 <lang>
-                    <zh-CN>Tabs 数据源来自门户配置；每个导航 URL 由应用路径、索引和 TabId 组合，实际可见性与访问权限仍由服务器控制。</zh-CN>
-                    <en>The Tabs data source comes from portal configuration; each navigation URL combines the application path, index, and TabId, while visibility and access remain server-controlled.</en>
+                    <zh-CN>Tabs 数据源来自门户配置；每个导航 URL 由应用路径、索引和 TabId 组合，实际可见性与访问权限仍由服务器控制。
+                    分组配置非法时本 DataList 承担「一级平铺」降级：此时输出与两级分组改造前逐字节一致，是运行期回滚点。</zh-CN>
+                    <en>The Tabs data source comes from portal configuration; each navigation URL combines the application path, index, and TabId, while visibility and access remain server-controlled.
+                    When group configuration is invalid this DataList carries the flat-navigation degradation: its output is byte-for-byte identical to before the two-level change, serving as the runtime rollback point.</en>
                 </lang>
             --%>
             <asp:DataList
                 ID="Tabs"
+                Visible="false"
                 CssClass="portal-tabs OtherTabsBg"
                 RepeatDirection="Horizontal"
                 RepeatLayout="Flow"
@@ -78,6 +81,70 @@
                     <span class="portal-tab portal-tab-selected SelectedTab"><%# BuildTabDisplayName((ITabItem) Container.DataItem) %></span>
                 </SelectedItemTemplate>
             </asp:DataList>
+
+            <%--
+                <lang>
+                    <zh-CN>两级分组导航：分组标题是原生 button（disclosure，aria-expanded / aria-controls），组内仍是平铺的 .portal-tab 链接。
+                    按 W3C WAI-ARIA APG，站点导航不用 menu / menubar role。分组只决定展示与折叠，不参与授权；权限仍由 AccessRoles 与入口 gate 逐页签判定。
+                    无 JS 时所有分组以 aria-expanded="true" 输出且组内链接不加隐藏类，渐进增强保证页签始终可达；折叠与 Escape 回焦由外置脚本绑定（不用内联 onclick，避免可访问性门禁违规与脚本注入面）。</zh-CN>
+                    <en>Two-level grouped navigation: each group header is a native button (disclosure with aria-expanded / aria-controls) and each group still contains flat .portal-tab links.
+                    Per W3C WAI-ARIA APG, site navigation uses no menu / menubar role. Groups decide only presentation and collapse, never authorization; permissions stay with AccessRoles and the per-tab entry gate.
+                    Without JavaScript every group is emitted with aria-expanded="true" and no hidden class on its links, so progressive enhancement keeps all tabs reachable; collapsing and Escape focus return are bound by an external script (no inline onclick, avoiding accessibility-gate violations and script-injection surface).</en>
+                </lang>
+            --%>
+            <asp:PlaceHolder ID="GroupedNavigation" runat="server">
+                <span class="portal-tabs OtherTabsBg portal-tabs-grouped">
+                    <asp:Repeater ID="NavigationGroups" runat="server">
+                        <ItemTemplate>
+                            <div class="portal-nav-group">
+                                <button type="button" class="portal-nav-group-toggle"
+                                    aria-expanded="true" aria-controls='<%# Eval("ContainerId") %>'>
+                                    <span class="portal-nav-group-caret">&#9662;</span><%# GetGroupDisplayName(Container.DataItem) %><span class="portal-nav-group-count"><%# Eval("TabCount") %></span>
+                                </button>
+                                <span id='<%# Eval("ContainerId") %>' class="portal-nav-group-tabs">
+                                    <asp:Repeater ID="GroupTabs" runat="server" DataSource='<%# Eval("Tabs") %>' OnItemDataBound="GroupTab_ItemDataBound">
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="GroupTabLink" runat="server" CssClass="portal-tab OtherTabs"
+                                                NavigateUrl='<%# BuildGroupTabUrl(Container.DataItem) %>'
+                                                Text='<%# BuildGroupTabDisplayName(Container.DataItem) %>'
+                                                Visible='<%# IsGroupTabLinkVisible(Container.DataItem) %>' />
+                                            <asp:Label ID="GroupTabSelected" runat="server" CssClass="portal-tab portal-tab-selected SelectedTab"
+                                                Text='<%# BuildGroupTabDisplayName(Container.DataItem) %>'
+                                                Visible='<%# IsGroupTabSelected(Container.DataItem) %>' />
+                                            <asp:Label ID="GroupTabDisabled" runat="server" CssClass="portal-tab portal-tab-disabled"
+                                                Text='<%# BuildGroupTabDisplayName(Container.DataItem) %>'
+                                                ToolTip='<%# BuildGroupTabTooltip(Container.DataItem) %>'
+                                                Visible='<%# IsGroupTabBlocked(Container.DataItem) %>' />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </span>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                    <%--
+                        <lang>
+                            <zh-CN>不属于任何词表分组的页签（历史 Test.* 页签或尚未填写稳定键的模块页签）平铺在此，无 disclosure 按钮，绝不隐藏。</zh-CN>
+                            <en>Tabs belonging to no vocabulary group (legacy Test.* tabs or module tabs without a stable key yet) are rendered flat here with no disclosure button and are never hidden.</en>
+                        </lang>
+                    --%>
+                    <asp:Repeater ID="UngroupedTabs" runat="server" OnItemDataBound="GroupTab_ItemDataBound">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="GroupTabLink" runat="server" CssClass="portal-tab OtherTabs"
+                                NavigateUrl='<%# BuildGroupTabUrl(Container.DataItem) %>'
+                                Text='<%# BuildGroupTabDisplayName(Container.DataItem) %>'
+                                Visible='<%# IsGroupTabLinkVisible(Container.DataItem) %>' />
+                            <asp:Label ID="GroupTabSelected" runat="server" CssClass="portal-tab portal-tab-selected SelectedTab"
+                                Text='<%# BuildGroupTabDisplayName(Container.DataItem) %>'
+                                Visible='<%# IsGroupTabSelected(Container.DataItem) %>' />
+                            <asp:Label ID="GroupTabDisabled" runat="server" CssClass="portal-tab portal-tab-disabled"
+                                Text='<%# BuildGroupTabDisplayName(Container.DataItem) %>'
+                                ToolTip='<%# BuildGroupTabTooltip(Container.DataItem) %>'
+                                Visible='<%# IsGroupTabBlocked(Container.DataItem) %>' />
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </span>
+            </asp:PlaceHolder>
+            <script type="text/javascript" src="<%= Global.GetApplicationPath(Request) %>/Scripts/Navigation/PortalNavigationGroups.js"></script>
         </div>
     </div>
 </div>
