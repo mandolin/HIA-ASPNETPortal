@@ -1,0 +1,7 @@
+        public static IList<GroupDefinition> GetGroups()
+        {
+            return new ReadOnlyCollection<GroupDefinition>(
+                DefinitionArray.OrderBy(definition => definition.SortOrder)
+                    .ThenBy(definition => definition.GroupKey, StringComparer.OrdinalIgnoreCase)
+                    .ToList());
+        }

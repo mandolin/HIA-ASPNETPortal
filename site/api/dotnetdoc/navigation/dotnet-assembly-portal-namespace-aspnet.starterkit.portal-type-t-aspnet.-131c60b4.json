@@ -39,6 +39,19 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-5f60b17f.html"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.groupaliases-system.web.httpcontext",
+      "kind": "entry",
+      "label": "GroupAliases",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.groupaliases-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.groupaliases-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-a36b4e93.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
       "kind": "entry",
       "label": "HiddenNavigationKeys",

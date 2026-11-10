@@ -1,0 +1,71 @@
+        public static bool TryParseAliases(string configuration, out IDictionary<string, string> aliases, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>空配置是合法的无覆盖状态：返回空映射而非失败，保证默认部署不需要任何配置即可工作。</zh-CN>
+            //   <en>An empty configuration is a legal no-override state: return an empty map rather than failing, so a default deployment needs no configuration at all.</en>
+            // </lang>
+            aliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            reason = string.Empty;
+            if (string.IsNullOrWhiteSpace(configuration))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>按逗号切分条目；每段必须恰有一个等号，且等号两侧都非空，避免宽松解析把畸形文本当成有效别名。</zh-CN>
+            //   <en>Split entries by comma; each segment must contain exactly one '=' with both sides nonblank, so lenient parsing never treats malformed text as a valid alias.</en>
+            // </lang>
+            string[] segments = configuration.Split(',');
+            foreach (string segment in segments)
+            {
+                string pair = (segment ?? string.Empty).Trim();
+                if (pair.Length == 0)
+                {
+                    continue;
+                }
+
+                int separator = pair.IndexOf('=');
+                if (separator <= 0 || separator != pair.LastIndexOf('=') || separator == pair.Length - 1)
+                {
+                    aliases = null;
+                    reason = "MalformedPair";
+                    return false;
+                }
+
+                string navigationKey = pair.Substring(0, separator).Trim();
+                string groupKey = pair.Substring(separator + 1).Trim();
+                if (navigationKey.Length == 0 || groupKey.Length == 0)
+                {
+                    aliases = null;
+                    reason = "BlankPairPart";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>分组键必须来自封闭词表：未知键拒绝，防止配置悄悄把页签塞进未定义的组后被隐藏。</zh-CN>
+                //   <en>The group key must come from the closed vocabulary: unknown keys are refused so configuration cannot quietly place tabs into an undefined group and hide them.</en>
+                // </lang>
+                GroupDefinition definition;
+                if (!TryFindByKey(groupKey, out definition))
+                {
+                    aliases = null;
+                    reason = "UnknownGroupKey";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>同一页签出现两次覆盖时拒绝整份配置，避免顺序依赖导致部署结果不可复现。</zh-CN>
+                //   <en>A tab overridden twice fails the whole configuration, preventing order-dependent deployment results.</en>
+                // </lang>
+                if (aliases.ContainsKey(navigationKey))
+                {
+                    aliases = null;
+                    reason = "DuplicateNavigationKey";
+                    return false;
+                }
+
+                aliases.Add(navigationKey, definition.GroupKey);
+            }
+
+            return true;
+        }

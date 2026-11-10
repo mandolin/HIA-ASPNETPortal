@@ -232,5 +232,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string NavigationAnonymousHiddenNavigationKeys = "Portal.Navigation.AnonymousHiddenNavigationKeys";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>主导航分组配置别名覆盖键；值与封闭词表一起由 `PortalNavigationGroupAlias` 解析，
+        ///   仅影响展示分组归属，不参与授权判定、不改变 `PortalCfg_Tabs` 表结构。</zh-CN>
+        ///   <en>Main-navigation group configuration alias override key; its value is parsed together with the closed
+        ///   vocabulary by `PortalNavigationGroupAlias`. It affects presentation grouping only, takes no part in
+        ///   authorization, and does not change the `PortalCfg_Tabs` schema.</en>
+        /// </lang>
+        /// </summary>
+        public const string NavigationGroupAliases = PortalNavigationGroupAlias.ConfigurationKey;
     }
 }

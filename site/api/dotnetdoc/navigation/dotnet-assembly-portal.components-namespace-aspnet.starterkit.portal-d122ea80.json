@@ -564,6 +564,26 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e457cd36.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition",
+      "kind": "type",
+      "label": "GroupDefinition",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-66c9a794.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys",
+      "kind": "type",
+      "label": "GroupKeys",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d711c751.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iannouncementitem",
       "kind": "type",
       "label": "IAnnouncementItem",
@@ -1888,6 +1908,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationentrykind",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationentrykind-502115db.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-b269fd55.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationgroupalias",
+      "kind": "type",
+      "label": "PortalNavigationGroupAlias",
+      "entryCount": 10,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition",
+      "sourcePath": "src/Portal.Components/PortalNavigationGroupAlias.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-e814d3f6.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-6f442224.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate",

@@ -1,0 +1,119 @@
+[
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G1：把词表「门户与帮助」组的 Home 成员删掉（种子页签静默失去分组），门禁应判红并点名 G1.SeedCovered。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationGroupAlias.cs",
+        "mode": "replace",
+        "old": "new[] { \"Home\", \"Help\" }),",
+        "content": "new[] { \"Help\" }),"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G1：往词表塞入种子中不存在的 NavigationKey（未知页签被误分组），门禁应判红并点名 G1.NoUnknownMember。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationGroupAlias.cs",
+        "mode": "replace",
+        "old": "new[] { \"Admin\", \"CapabilityWorkbench\" })",
+        "content": "new[] { \"Admin\", \"CapabilityWorkbench\", \"GhostTab\" })"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G2：移除「未知分组键」分支的整份拒绝赋值（宽松接受部分覆盖），门禁应判红并点名 G2.WholeConfigRejection。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationGroupAlias.cs",
+        "mode": "replace",
+        "old": "                    aliases = null;\n                    reason = \"UnknownGroupKey\";",
+        "content": "                    reason = \"UnknownGroupKey\";"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G2：把设置定义从 AllDefinitions 清单中摘掉（配置键静默失效、DB 覆盖不生效），门禁应判红并点名 G2.SettingInAllList。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/Components/PortalSettingsRegistry.cs",
+        "mode": "replace",
+        "old": "                NavigationAnonymousHiddenNavigationKeys,\n                NavigationGroupAliases\n            }.AsReadOnly();",
+        "content": "                NavigationAnonymousHiddenNavigationKeys\n            }.AsReadOnly();"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G3：往分组别名类注入一行真实授权调用（A 级硬边界破坏：分组变成授权依据），门禁应判红并点名 G3.NoAuthorizationSymbols。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationGroupAlias.cs",
+        "mode": "replace",
+        "old": "    public static class PortalNavigationGroupAlias\n    {",
+        "content": "    public static class PortalNavigationGroupAlias\n    {\n        private static readonly string InjectedAuthorizationBasis = PortalSecurity.IsInRoles(\"Admins;\");"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G3：在 PortalCfg_Tabs 建表段内加父子列（结构性父子页签，违反 Q1 裁定 ③ 不改表结构），门禁应判红并点名 G3.NoParentColumn。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Setup/Portal_CreateDB.sql",
+        "mode": "replace",
+        "old": "\t[PortalId] [int] NULL,\n CONSTRAINT [PK_PortalCfg_Tabs]",
+        "content": "\t[PortalId] [int] NULL,\n\t[ParentTabId] [int] NULL,\n CONSTRAINT [PK_PortalCfg_Tabs]"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G4：把主题设置别名条目的 Target 改掉（入链指向错误页面），门禁应判红并点名 G4.AliasTarget。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationRegistry.cs",
+        "mode": "replace",
+        "old": "                \"Admin/ThemeSettings.aspx\",\n                PortalNavigationVisibilityMode.AdminOnly,\n                PortalNavigationLifecycleState.Active,\n                310,",
+        "content": "                \"Admin/NotImplemented.aspx\",\n                PortalNavigationVisibilityMode.AdminOnly,\n                PortalNavigationLifecycleState.Active,\n                310,"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G4：删掉别名条目的 ThemeView 权限要求（因别名放宽授权），门禁应判红并点名 G4.AliasThemeViewPermission。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalNavigationRegistry.cs",
+        "mode": "replace",
+        "old": "                new[] { PortalPermissionKeys.ThemeView },\n                new string[0],\n                new string[0],\n                \"Grouped navigation alias in the reachable Admin.Ops group",
+        "content": "                new string[0],\n                new string[0],\n                new string[0],\n                \"Grouped navigation alias in the reachable Admin.Ops group"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNavigationGroupContract.ps1",
+    "note": "G4：把 evidence-coverage.json 的主题设置行改回 covered=false（台账漂移），门禁应判红并点名 G4.EvidenceCovered。",
+    "args": [],
+    "patches": [
+      {
+        "file": "dev/evidence-coverage.json",
+        "mode": "replace",
+        "old": "{ \"id\": \"Admin/ThemeSettings.aspx\", \"covered\": true,",
+        "content": "{ \"id\": \"Admin/ThemeSettings.aspx\", \"covered\": false,"
+      }
+    ]
+  }
+]

@@ -831,6 +831,38 @@ namespace ASPNET.StarterKit.Portal
                 "Existing theme administration entry."),
 
             // <lang>
+            //   <zh-CN>主题设置导航入口别名：`Admin.ThemeSettings` 稳定键不可改写，其既有分组 `Admin.Presentation`
+            //   内原本没有兄弟条目，`GetRelatedEntries` 因而从不产出到本页的入链（后台页全仓 0 入链、运行期不可达）。
+            //   本条别名挂到**已有活跃且运行期可达**的 `Admin.Ops.` 组（系统健康 / 诊断日志 / 运营审计页均调用
+            //   `RenderActions`），由前缀判定自动归入同组；既有渲染器会把同组候选渲染成一条指向
+            //   `Admin/ThemeSettings.aspx` 的链接，使主题设置从可达的后台入口被发现。别名只承载展示入口，
+            //   角色与权限要求与既有条目完全一致，不改变任何授权判定，也不改 `PortalCfg_Tabs` 表结构。</zh-CN>
+            //   <en>Theme-settings navigation entry alias: the stable key `Admin.ThemeSettings` must not be rewritten,
+            //   and its group `Admin.Presentation` had no sibling entries, so `GetRelatedEntries` never produced an
+            //   inbound link to this page (zero inbound links across the repository, unreachable at runtime). This alias
+            //   joins the **already active and reachable** `Admin.Ops.` group (System Health / Diagnostics Logs /
+            //   Operation Audits pages all call `RenderActions`), and prefix matching groups it automatically; the existing
+            //   renderer turns same-group candidates into a link to `Admin/ThemeSettings.aspx`, making theme settings
+            //   discoverable from a reachable admin entry. The alias carries presentation only: role and permission
+            //   requirements match the existing entry, no authorization decision is changed, and the `PortalCfg_Tabs`
+            //   schema is untouched.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Ops.ThemeSettingsEntry",
+                PortalNavigationEntryKind.AdminPage,
+                "主题设置",
+                "Theme Settings",
+                "Admin/ThemeSettings.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                310,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.ThemeView },
+                new string[0],
+                new string[0],
+                "Grouped navigation alias in the reachable Admin.Ops group that exposes an inbound link to the existing theme settings page."),
+
+            // <lang>
             //   <zh-CN>旧注册入口仅为治理/诊断登记且不进入普通导航；它不改变实际注册流程的可用性或账户策略。</zh-CN>
             //   <en>Legacy registration is registered only for governance/diagnostics and stays out of ordinary navigation; it does not alter the actual registration flow's availability or account policy.</en>
             // </lang>

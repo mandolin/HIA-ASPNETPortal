@@ -760,6 +760,7 @@ $gateLayers = [ordered]@{
         #   Proof boundary: static contract self-consistency only; runtime rendering is carried by the L2 evidence script.</en>
         # </lang>
         @{ File = 'Test-PortalIndependentModuleGate.ps1'; Runner = 'ps1'; Kind = '独立模块契约一致性'; Args = @() }
+        @{ File = 'Test-PortalNavigationGroupContract.ps1'; Runner = 'ps1'; Kind = '主导航分组配置别名契约'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

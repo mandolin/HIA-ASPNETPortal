@@ -406,10 +406,9 @@
     {
       "id": "theme-settings-entry",
       "name": "Admin/ThemeSettings.aspx 可达入口",
-      "coverage": "uncovered",
-      "owner": "项目维护者",
-      "reEntry": "补导航链接须先出原型/设计稿（导航属界面改动，硬性前置），或裁定为主题运维直链专用。",
-      "basis": "W-anp-P138 运行期核实全仓 0 入链、运行期不可达；已登记进 dev/evidence-coverage.json 未覆盖清单。"
+      "coverage": "full",
+      "gate": "Test-PortalNavigationGroupContract.ps1",
+      "basis": "C-anp-P51 / W-anp-P290：原型与设计稿经用户确认后，新增注册表别名条目 Admin.Ops.ThemeSettingsEntry（挂到运行期可达的 Admin.Ops 组、Target=Admin/ThemeSettings.aspx、AdminOnly + ThemeView，角色/权限与既有条目一致），由既有 PortalNavigationEntryRenderer.RenderActions 从 SystemHealth.aspx 等可达页自动产出入链；dev/evidence-coverage.json 同步标记为 covered 并登记 entry。证明边界：只证明静态入链与注册表/单测契约一致，不证明浏览器级点击可达（由 L2 运行期证据承载）。"
     },
     {
       "id": "online-package-security-boundaries",
@@ -426,9 +425,18 @@
       "coverage": "full",
       "gate": "Test-PortalIndependentModuleGate.ps1",
       "boundary": "只证明静态契约自洽：manifest 与运行时 TryReadPackage 同口径、任一可能活动 Profile 的允许集显式列出 Independent 包、Admins 边界断言存在、卸载脚本表覆盖对称、6 套皮肤主题作用域规则存在；8 例四步注入证明全部 proved。**不证明**模块在站点上真的渲染、提交落库/审计、运行期授权判定或主题视觉正确（由 L2 浏览器证据 Test-PortalIndependentModuleRuntimeEvidence.mjs、Portal.Tests 与截图承载）。"
+    },
+    {
+      "id": "navigation-group-alias-contract",
+      "name": "主导航分组配置别名与主题设置入链（词表覆盖 / fail-closed / A 级边界 / 可达入口）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalNavigationGroupContract.ps1",
+      "boundary": "只证明静态契约自洽：分组词表默认成员恰好覆盖种子 8 个 NavigationKey、配置键四处登记齐备且解析为整份 fail-closed 拒绝、分组机制不含授权符号且 PortalCfg_Tabs 无父子列、主题设置别名条目与可达页同组且台账标记已覆盖；9 例四步注入证明全部 proved。**不证明**运行期浏览器点击可达（由 L2 运行期证据承载）、分组名翻译贴切、或任何授权判定正确（由 PortalNavigationGroupAliasTests 单测承载）。"
     }
   ],
   "boundaryRequiredGates": [
+    "Test-PortalNavigationGroupContract.ps1",
     "Test-PortalAccessibilityBaseline.ps1",
     "Test-PortalPerformanceBaseline.mjs",
     "Test-PortalDependencyVulnerabilityBaseline.ps1",
@@ -512,6 +520,7 @@
     "Test-PortalIndependentModuleGate.ps1"
   ],
   "tooling": [
+    { "id": "Test-PortalThemeSettingsEntryEvidence.mjs", "basis": "主题设置入链浏览器级 L2 运行期证据采集器（W-anp-P290，非门禁、按需手工执行、不进日常 L0/L1/L2 编排）：对运行中的站点以管理员登录，访问既有可达页 Admin/SystemHealth.aspx，断言动作区渲染出指向 Admin/ThemeSettings.aspx 的真实链接（不伪造 URL），实际点击进入并断言主题设置页标题与权限门控通过（A1–A6），留档整页截图与 JSON 摘要；参数经环境变量注入，凭据取不入库的 dev 上下文 JSON，playwright 为开发期依赖。**证明边界**：只证明采集时刻当前数据集与部署配置下管理员能经动作区点击可达；不证明匿名/普通用户可达（AdminOnly 本就不应可达）、不证明两级分组导航渲染（归 W-anp-P291）、不证明主题写入/审计链路、不证明跨机器像素一致或可访问性运行期实测。依赖运行中的站点 + 凭据上下文 + mise node，故不进日常编排。Theme-settings inbound-link browser L2 evidence collector (W-anp-P290, not a gate, run manually on demand, not wired into daily orchestration): signs in against the running site, asserts a genuine ThemeSettings.aspx link in the SystemHealth action area, clicks through and checks the title/permission gate (A1–A6), keeping a screenshot and JSON summary; all parameters via environment variables, credentials from an uncommitted dev context. Proof boundary: administrator click-through at collection time only, not anonymous reachability, two-level rendering, theme write/audit, cross-machine pixel equality, or runtime accessibility." },
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
     { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）双向证明工具，按需手工执行，不进日常编排：四步（基线 exit 0 → 施加注入 → 注入后非 0 → 还原后 0），任一步不符即判证明不成立。2026-11-03（`W-anp-P267`）修复了两处工具缺陷——夹具未声明 args 时会把空字符串当参数传给门禁（使声明 `param()` 空参的门禁基线必红、被误判为不可证明），以及空数组在 PowerShell 输出流被丢弃成 `$null` 的取参路径；并把覆盖口径从「夹具里出现过门禁名」改为「存在 `verdict = proved` 的真实证明记录」。覆盖数字**不在本文件写死**（批次推进后必然过时），一律以 `dev/gate-injection-proof-index.json` 为准：该索引由 `Update-PortalGateInjectionProofIndex.ps1` 生成，并由 `Test-PortalGateCoverageMap.ps1` 的 M7 机器核对。Coverage numbers are never frozen here; the index is the single source of truth." },
     { "id": "Update-PortalGateInjectionProofIndex.ps1", "basis": "注入证明覆盖索引的**正式重算入口**（非门禁，按需手工执行）：把早期批次靠会话里手敲 PowerShell 重算索引的做法固化为可重复、已入库的脚本，以证据记录、套件注册集、`dev/gate-injection-proof-not-applicable.json` 台账三方为事实源，产出 `dev/gate-injection-proof-index.json`；支持 `-WhatIf` 只算不写，并在四类清单与 notApplicable 的并集不等于已接入门禁集时抛错拒绝写出。Committed, repeatable recomputation of the injection-proof index from evidence, the wired set and the not-applicable ledger; -WhatIf previews, and a mismatched union aborts the write." },

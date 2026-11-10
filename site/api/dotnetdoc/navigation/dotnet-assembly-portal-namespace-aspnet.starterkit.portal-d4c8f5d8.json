@@ -1537,7 +1537,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings",
       "kind": "type",
       "label": "PortalNavigationSettings",
-      "entryCount": 8,
+      "entryCount": 9,
       "views": [
         "dotnet"
       ],
@@ -1771,7 +1771,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingkeys",
       "kind": "type",
       "label": "PortalSettingKeys",
-      "entryCount": 28,
+      "entryCount": 29,
       "views": [
         "dotnet"
       ],
@@ -1813,7 +1813,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry",
       "kind": "type",
       "label": "PortalSettingsRegistry",
-      "entryCount": 31,
+      "entryCount": 32,
       "views": [
         "dotnet"
       ],

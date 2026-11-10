@@ -76,6 +76,51 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>主导航分组配置别名覆盖文本；由 `PortalNavigationGroupAlias` 严格解析，非法值 fail-closed 回退默认词表，
+        ///   绝不隐藏页签。该值只影响展示分组，不参与授权判定，也不改变 `PortalCfg_Tabs` 表结构。</zh-CN>
+        ///   <en>Main-navigation group configuration alias override text; parsed strictly by `PortalNavigationGroupAlias`,
+        ///   with invalid values failing closed back to the default vocabulary so no tab is ever hidden. The value affects
+        ///   presentation grouping only, takes no part in authorization, and does not change the `PortalCfg_Tabs` schema.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受控诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>配置原文；底层存储不可用或读取异常时为空字符串（等价于采用词表默认分组）。</zh-CN>
+        ///   <en>Raw configuration text; an empty string when storage is unavailable or a read fails (equivalent to adopting vocabulary defaults).</en>
+        /// </l>
+        /// </returns>
+        public static string GroupAliases(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>读取与布尔/列表方法同样包在 try 中：配置源不可用不得把异常抛到导航渲染路径。</zh-CN>
+            //   <en>Like the boolean/list readers, the read is wrapped in try: an unavailable configuration source must never throw into the navigation rendering path.</en>
+            // </lang>
+            try
+            {
+                // <lang>
+                //   <zh-CN>取有效值后不做任何预解析：严格校验与 fail-closed 回退属于 `PortalNavigationGroupAlias` 的职责，避免两处口径分叉。</zh-CN>
+                //   <en>Take the effective value without pre-parsing: strict validation and fail-closed fallback belong to `PortalNavigationGroupAlias`, preventing two divergent interpretations.</en>
+                // </lang>
+                return PortalRuntimeSettings.GetEffectiveValue(PortalSettingsRegistry.NavigationGroupAliases, context).Value ?? string.Empty;
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>异常时返回空串，等价于采用封闭词表默认分组；不隐藏任何页签。</zh-CN>
+                //   <en>On failure return an empty string, equivalent to adopting the closed vocabulary defaults; no tab is hidden.</en>
+                // </lang>
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>按 NavigationKey 前缀整类隐藏的页签前缀集合。</zh-CN>
         ///   <en>NavigationKey prefixes whose tabs are hidden as a whole.</en>
         /// </lang>

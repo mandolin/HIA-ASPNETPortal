@@ -43,7 +43,7 @@
         { "id": "Admin/WorkItems.aspx", "covered": true, "entry": "注册表动作区互链（Admin.WorkItems）+ 自身动作区硬链 3 页（WorkItems.aspx:31-33）" },
         { "id": "Admin/LeaveRequests.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Capability.LeaveRequests）+ WorkItems.aspx.cs 业务类型路由（LeaveRequest→LeaveRequests.aspx）+ 后台管理页签可达（D23）" },
         { "id": "Admin/ExpenseReimbursements.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Capability.ExpenseReimbursements）+ WorkItems.aspx.cs 业务类型路由（ExpenseReimbursement→ExpenseReimbursements.aspx）+ 后台管理页签可达（D23）" },
-        { "id": "Admin/ThemeSettings.aspx", "covered": false, "owner": "项目维护者", "reEntry": "①进入导航/UI 类周期补导航链接（硬性前置：先出原型与设计稿并经确认）；或②裁定为主题运维直链专用页，维持「直链可达、不入导航」口径并同步站点文档", "basis": "全仓入链审计 0 处引用（除注册条目 PortalNavigationRegistry.cs:818-831 与自身文件）；W-anp-P138 运行期锚点爬取不可达；无 postback 入口（works/W-anp-P138-admin-module-access-entries.md 第五节）" }
+        { "id": "Admin/ThemeSettings.aspx", "covered": true, "entry": "注册表动作区入链：新增 Admin.Ops.ThemeSettingsEntry 别名条目（PortalNavigationRegistry.cs，挂到运行期可达的 Admin.Ops 组、Target=Admin/ThemeSettings.aspx、AdminOnly + ThemeView，角色/权限与既有 Admin.ThemeSettings 完全一致），由既有 PortalNavigationEntryRenderer.RenderActions 从 SystemHealth.aspx / DiagnosticsLogs.aspx / OperationAudits.aspx 等可达页自动渲染出链接；静态契约由 dev/scripts/Test-PortalNavigationGroupContract.ps1 G4 断言，同组关系由 PortalNavigationGroupAliasTests.ThemeSettingsAlias_ProducesInboundLinkWithoutRelaxingAuthorization 单测锁定。C-anp-P51 / W-anp-P290：原型与设计稿经用户确认后落地；证明边界为静态入链与契约一致，浏览器级点击可达由 L2 运行期证据承载。" }
       ],
       "excluded": [
         { "id": "Admin/AccessDenied.aspx", "basis": "基础设施页（访问拒绝占位），无导航入口需求" },

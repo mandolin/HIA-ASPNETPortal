@@ -325,3 +325,21 @@ BEGIN
         (N'Portal.Navigation.AnonymousHiddenNavigationKeys', N'MyWorkItems,LeaveAndExpense,BusinessRequests,MyProfile', N'String', N'Database', 1, N'system', SYSUTCDATETIME())
 END
 GO
+
+-- <lang>
+--   <zh-CN>主导航分组配置别名覆盖：默认空，采用 `PortalNavigationGroupAlias` 封闭词表的默认功能族分组。
+--   逗号分隔的 `NavigationKey=GroupKey` 覆盖项由解析层严格校验，非法配置 fail-closed 回退默认且绝不隐藏页签；
+--   该值只影响展示层级，不作为授权依据，也不改变 `PortalCfg_Tabs` 表结构。</zh-CN>
+--   <en>Main-navigation group configuration alias override: empty by default, adopting the closed vocabulary defaults in
+--   `PortalNavigationGroupAlias`. Comma-separated `NavigationKey=GroupKey` pairs are strictly validated by the parser;
+--   invalid configuration fails closed back to defaults and never hides a tab. The value affects presentation hierarchy only,
+--   is never an authorization basis, and does not change the `PortalCfg_Tabs` schema.</en>
+-- </lang>
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Navigation.GroupAliases')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Navigation.GroupAliases', N'', N'String', N'Database', 1, N'system', SYSUTCDATETIME())
+END
+GO

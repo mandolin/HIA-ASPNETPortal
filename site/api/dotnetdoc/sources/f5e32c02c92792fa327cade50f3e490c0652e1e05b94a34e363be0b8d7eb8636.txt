@@ -1,0 +1,36 @@
+        public static bool TryResolveGroup(string navigationKey, string configuration, out GroupDefinition definition, out bool degraded)
+        {
+            // <lang>
+            //   <zh-CN>先解析整份配置：失败时清空覆盖、置降级标记，但仍继续走默认词表，不提前返回。</zh-CN>
+            //   <en>Parse the whole configuration first: on failure clear overrides and set the degraded flag, yet still continue with defaults instead of returning early.</en>
+            // </lang>
+            IDictionary<string, string> aliases;
+            string reason;
+            degraded = !TryParseAliases(configuration, out aliases, out reason);
+            if (aliases == null)
+            {
+                aliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            definition = null;
+            if (string.IsNullOrWhiteSpace(navigationKey))
+            {
+                return false;
+            }
+
+            string trimmedKey = navigationKey.Trim();
+
+            // <lang>
+            //   <zh-CN>覆盖优先级高于默认；命中后仍按稳定键取词表定义，避免把配置文本里的大小写差异带进显示层。</zh-CN>
+            //   <en>Overrides take precedence over defaults; a hit still resolves the vocabulary definition by stable key so casing from configuration text never leaks into the presentation layer.</en>
+            // </lang>
+            string overriddenGroupKey;
+            if (aliases.TryGetValue(trimmedKey, out overriddenGroupKey))
+            {
+                return TryFindByKey(overriddenGroupKey, out definition);
+            }
+
+            definition = DefinitionArray.FirstOrDefault(candidate =>
+                candidate.DefaultNavigationKeys.Contains(trimmedKey, StringComparer.OrdinalIgnoreCase));
+            return definition != null;
+        }

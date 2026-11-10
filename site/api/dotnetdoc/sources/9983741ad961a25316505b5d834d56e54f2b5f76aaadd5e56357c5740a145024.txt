@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition NavigationGroupAliases =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationGroupAliases,
+                "导航分组别名",
+                "逗号分隔的 NavigationKey=GroupKey 覆盖项；空值采用词表默认分组。仅影响展示分组，不参与授权。",
+                PortalSettingValueType.String,
+                "",
+                true,
+                false,
+                "Admins",
+                "Navigation");

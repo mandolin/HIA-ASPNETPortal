@@ -10308,6 +10308,15 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext hiddennavigationkeys dotnet-method explicitly hidden navigation tab keys; navigationkey takes precedence, with the consumer falling back to tabid when blank. public static system.collections.generic.ilist<string> aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 显式隐藏的导航页签键集合；navigationkey 优先，为空时由消费方回退 tabid。 explicitly hidden navigation tab keys; navigationkey takes precedence, with the consumer falling back to tabid when blank. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 规范化后的只读集合；缺失或非法时为空集合（不隐藏任何页签）。 read-only normalized collection; empty when absent or invalid (hide nothing)."
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.groupaliases-system.web.httpcontext",
+      "name": "GroupAliases",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-a36b4e93.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-a36b4e93.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.groupaliases-system.web.httpcontext groupaliases dotnet-method main-navigation group configuration alias override text; parsed strictly by `portalnavigationgroupalias`, with invalid values failing closed back to the default vocabulary so no tab is ever hidden. the value affects presentation grouping only, takes no part in authorization, and does not change the `portalcfg_tabs` schema. public static string aspnet.starterkit.portal.portalnavigationsettings.groupaliases(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.groupaliases-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 主导航分组配置别名覆盖文本；由 `portalnavigationgroupalias` 严格解析，非法值 fail-closed 回退默认词表， 绝不隐藏页签。该值只影响展示分组，不参与授权判定，也不改变 `portalcfg_tabs` 表结构。 main-navigation group configuration alias override text; parsed strictly by `portalnavigationgroupalias`, with invalid values failing closed back to the default vocabulary so no tab is ever hidden. the value affects presentation grouping only, takes no part in authorization, and does not change the `portalcfg_tabs` schema. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 配置原文；底层存储不可用或读取异常时为空字符串（等价于采用词表默认分组）。 raw configuration text; an empty string when storage is unavailable or a read fails (equivalent to adopting vocabulary defaults)."
+    },
+    {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
       "name": "ExcludedNavigationKeyPrefixes",
       "kind": "dotnet-method",
@@ -11982,6 +11991,15 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationanonymoushiddennavigationkeys navigationanonymoushiddennavigationkeys dotnet-field navigation tab keys hidden **from anonymous visitors only**. business-capability tabs belong here: signed-in users see them while anonymous visitors do not, which prevents \"anonymous sees the entry but the page has no content because it is unauthenticated\" (adr 0027). public const string aspnet.starterkit.portal.portalsettingkeys.navigationanonymoushiddennavigationkeys dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationanonymoushiddennavigationkeys portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp **仅对匿名访客**隐藏的导航页签键集合。业务功能页签应列在此处： 登录用户看得见、匿名看不见 —— 避免\"匿名看到入口、点进去却因未认证而无内容\"（adr 0027）。 navigation tab keys hidden **from anonymous visitors only**. business-capability tabs belong here: signed-in users see them while anonymous visitors do not, which prevents \"anonymous sees the entry but the page has no content because it is unauthenticated\" (adr 0027)."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationgroupaliases",
+      "name": "NavigationGroupAliases",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-e37bc47e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-e37bc47e.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationgroupaliases navigationgroupaliases dotnet-field main-navigation group configuration alias override key; its value is parsed together with the closed vocabulary by `portalnavigationgroupalias`. it affects presentation grouping only, takes no part in authorization, and does not change the `portalcfg_tabs` schema. public const string aspnet.starterkit.portal.portalsettingkeys.navigationgroupaliases dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationgroupaliases portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 主导航分组配置别名覆盖键；值与封闭词表一起由 `portalnavigationgroupalias` 解析， 仅影响展示分组归属，不参与授权判定、不改变 `portalcfg_tabs` 表结构。 main-navigation group configuration alias override key; its value is parsed together with the closed vocabulary by `portalnavigationgroupalias`. it affects presentation grouping only, takes no part in authorization, and does not change the `portalcfg_tabs` schema."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaboundarysettings",
       "name": "PortalHiaBoundarySettings",
       "kind": "dotnet-type",
@@ -12340,6 +12358,15 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-6d1dd86a.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-6d1dd86a.html",
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys navigationanonymoushiddennavigationkeys dotnet-field navigation tab keys hidden from anonymous visitors only (adr 0027). business-capability tabs are registered here: visible to signed-in users, invisible to anonymous ones. a missing or invalid value yields an empty set, meaning \"no additional hiding for anyone\". public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 仅对匿名访客隐藏的导航页签键集合（adr 0027）。业务功能页签应登记在此： 登录用户可见、匿名不可见。缺失或非法时为空集合，即\"不对任何人额外隐藏\"。 navigation tab keys hidden from anonymous visitors only (adr 0027). business-capability tabs are registered here: visible to signed-in users, invisible to anonymous ones. a missing or invalid value yields an empty set, meaning \"no additional hiding for anyone\"."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationgroupaliases",
+      "name": "NavigationGroupAliases",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-1a4666aa.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-1a4666aa.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationgroupaliases navigationgroupaliases dotnet-field main-navigation group configuration alias override; an empty default adopts the closed vocabulary defaults in `portalnavigationgroupalias`. invalid configuration fails closed in the parser and never hides a tab; this setting affects presentation hierarchy only and is never an authorization basis. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationgroupaliases dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationgroupaliases portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 主导航分组配置别名覆盖；默认空表示采用 `portalnavigationgroupalias` 封闭词表的默认分组。 非法配置由解析层 fail-closed 回退，绝不隐藏页签；该设置只影响展示层级，不作为授权依据。 main-navigation group configuration alias override; an empty default adopts the closed vocabulary defaults in `portalnavigationgroupalias`. invalid configuration fails closed in the parser and never hides a tab; this setting affects presentation hierarchy only and is never an authorization basis."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alldefinitions",
@@ -36541,6 +36568,195 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-1679f5ea.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-1679f5ea.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isprofileactive-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext isprofileactive dotnet-method decide whether a profile is active: it matches when the active profile or any transitively included profile equals it. private static bool aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isprofileactive(string profile, aspnet.starterkit.portal.portalnavigationvisibilitycontext context) dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isprofileactive-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationvisibilitypolicy t:aspnet.starterkit.portal.portalnavigationvisibilitypolicy dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationvisibilitypolicy.cs csharp 判断 profile 是否生效：当前 profile 或其 includes 传递包含的 profile 命中即生效。 decide whether a profile is active: it matches when the active profile or any transitively included profile equals it."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalias",
+      "name": "PortalNavigationGroupAlias",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-b2baaec6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-b2baaec6.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalias portalnavigationgroupalias dotnet-type closed vocabulary of main-navigation group configuration aliases. a group describes only presentation order and collapse membership; it describes no parent/child table structure and takes no part in authorization. tab visibility is still decided per tab by `portalcfg_tabs.accessroles` and the existing tab gate (class-a boundary). class aspnet.starterkit.portal.portalnavigationgroupalias dotnet:t:aspnet.starterkit.portal.portalnavigationgroupalias portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 主导航「分组配置别名」的封闭词表。分组只描述展示顺序与折叠归属，不描述父子表结构、不参与授权判定； 页签可见性仍由 `portalcfg_tabs.accessroles` 与既有的 tab gate 逐项判定（a 级硬边界）。 closed vocabulary of main-navigation group configuration aliases. a group describes only presentation order and collapse membership; it describes no parent/child table structure and takes no part in authorization. tab visibility is still decided per tab by `portalcfg_tabs.accessroles` and the existing tab gate (class-a boundary). 设计依据（`c-anp-p51` q1 裁定 ③）：r4 的「两级菜单」以配置别名分组达成，不改 `portalcfg_tabs` 表结构、 不加父子列、不做深度/环检测；分组名沿用 `portalnavigationentry.getdisplayname(cultureinfo)` 的中英列范式做本地化， 不引入新的 .resx 键。部署侧可用 `portal.navigation.groupaliases` 配置键覆盖个别页签的分组归属； 配置非法时 fail-closed 回退到本词表，**不隐藏任何页签**（降级为一级平铺）。 rationale (`c-anp-p51` q1 ruling ③): r4's two-level menu is achieved through configuration aliases without changing the `portalcfg_tabs` schema, adding a parent column, or introducing depth/cycle checks. group labels are localized through the same chinese/english column convention as `portalnavigationentry.getdisplayname(cultureinfo)`; no new .resx keys are introduced. deployments may override a tab's group with the `portal.navigation.groupaliases` setting; invalid configuration fails closed back to this vocabulary and never hides a tab (degrade to flat navigation)."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys",
+      "name": "GroupKeys",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-86cd7d83.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-86cd7d83.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys groupkeys dotnet-type stable keys for functional-family groups; a key is the only legal value of a configuration alias, never a display name or index. class aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys dotnet:t:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 按稳定键划分的功能族分组标识；键是配置别名的唯一合法取值，不用显示名或序号做键。 stable keys for functional-family groups; a key is the only legal value of a configuration alias, never a display name or index."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.workandapproval",
+      "name": "WorkAndApproval",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-44c3d096.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-44c3d096.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.workandapproval workandapproval dotnet-field work and approval: work items, leave and expense. public const string aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.workandapproval dotnet:f:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.workandapproval portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys t:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 工作与审批：待办、请假与报销。 work and approval: work items, leave and expense."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.business",
+      "name": "Business",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-62924167.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-62924167.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.business business dotnet-field business: business requests, my profile. public const string aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.business dotnet:f:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.business portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys t:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 业务办理：业务申请、我的信息。 business: business requests, my profile."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.portalandhelp",
+      "name": "PortalAndHelp",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-4b362de3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-4b362de3.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.portalandhelp portalandhelp dotnet-field portal and help: home, help. public const string aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.portalandhelp dotnet:f:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.portalandhelp portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys t:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 门户与帮助：首页、帮助。 portal and help: home, help."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.systemadministration",
+      "name": "SystemAdministration",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-ed14fc2e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-ed14fc2e.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.systemadministration systemadministration dotnet-field system administration: admin tab, enterprise capability workbench. public const string aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.systemadministration dotnet:f:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys.systemadministration portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys t:aspnet.starterkit.portal.portalnavigationgroupalias.groupkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 系统管理：后台管理、企业能力工作台。 system administration: admin tab, enterprise capability workbench."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.configurationkey",
+      "name": "ConfigurationKey",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-f5b76c6f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-f5b76c6f.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.configurationkey configurationkey dotnet-field setting key overriding individual tab group assignments; the value holds comma-separated `navigationkey=groupkey` pairs; an empty value means all defaults from the vocabulary apply. public const string aspnet.starterkit.portal.portalnavigationgroupalias.configurationkey dotnet:f:aspnet.starterkit.portal.portalnavigationgroupalias.configurationkey portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 覆盖个别页签分组归属的配置键；值为 `navigationkey=groupkey` 条目，逗号分隔；空值表示全部采用词表默认。 setting key overriding individual tab group assignments; the value holds comma-separated `navigationkey=groupkey` pairs; an empty value means all defaults from the vocabulary apply."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition",
+      "name": "GroupDefinition",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-e814d3f6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalia-e814d3f6.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition groupdefinition dotnet-type presentation contract of one group: stable key, chinese/english labels, sort order, and default member tab keys; it carries no role, permission, or authorization method. class aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet:t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 一个分组的展示契约：稳定键、中英显示名、排序与默认成员页签键集合；不含任何角色、权限或授权方法。 presentation contract of one group: stable key, chinese/english labels, sort order, and default member tab keys; it carries no role, permission, or authorization method."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.groupkey",
+      "name": "GroupKey",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-5e1438e6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-5e1438e6.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.groupkey groupkey dotnet-property stable group key. public string aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.groupkey { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.groupkey portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 分组稳定键。 stable group key."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynamezhcn",
+      "name": "DisplayNameZhCn",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-131b292a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-131b292a.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynamezhcn displaynamezhcn dotnet-property chinese ui label. public string aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynamezhcn { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynamezhcn portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 中文界面显示名。 chinese ui label."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynameen",
+      "name": "DisplayNameEn",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-895bf86e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-895bf86e.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynameen displaynameen dotnet-property english ui label. public string aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynameen { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.displaynameen portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 英文界面显示名。 english ui label."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.sortorder",
+      "name": "SortOrder",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-65a1e090.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-65a1e090.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.sortorder sortorder dotnet-property presentation order, smaller first. public int aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.sortorder { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.sortorder portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 展示顺序，小者在前。 presentation order, smaller first."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.defaultnavigationkeys",
+      "name": "DefaultNavigationKeys",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-cfb16ecf.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalia-cfb16ecf.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.defaultnavigationkeys defaultnavigationkeys dotnet-property read-only default member tab navigationkey collection. public system.collections.generic.ilist<string> aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.defaultnavigationkeys { get; private set; } dotnet:p:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.defaultnavigationkeys portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 默认成员页签 navigationkey 只读集合。 read-only default member tab navigationkey collection."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.-ctor-system.string-system.string-system.string-system.int32-system.collections.generic.ienumerable-system.string",
+      "name": "#ctor",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-dcc25077.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-dcc25077.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.-ctor-system.string-system.string-system.string-system.int32-system.collections.generic.ienumerable-system.string #ctor dotnet-method build an immutable group definition; member keys are trimmed, de-duplicated and frozen so callers cannot mutate the alias table later. public aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.groupdefinition(string groupkey, string displaynamezhcn, string displaynameen, int sortorder, system.collections.generic.ienumerable<string> defaultnavigationkeys) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.-ctor-system.string-system.string-system.string-system.int32-system.collections.generic.ienumerable-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 构造不可变分组定义；成员键集合去重、去空白后冻结，防止别名表被后续调用方改写。 build an immutable group definition; member keys are trimmed, de-duplicated and frozen so callers cannot mutate the alias table later. 分组稳定键。 stable group key. 中文显示名。 chinese label. 英文显示名。 english label. 展示顺序。 presentation order. 默认成员页签键。 default member tab keys."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.getdisplayname-system.globalization.cultureinfo",
+      "name": "GetDisplayName",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-24c7e399.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-24c7e399.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.getdisplayname-system.globalization.cultureinfo getdisplayname dotnet-method return the localized group label for a ui culture, using the same convention as `portalnavigationentry.getdisplayname` (two-letter code decides chinese); a missing side falls back to the other, and both missing fall back to the stable key, so the label is never empty. public string aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.getdisplayname(system.globalization.cultureinfo culture) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition.getdisplayname-system.globalization.cultureinfo portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition t:aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 按界面文化返回分组显示名；与 `portalnavigationentry.getdisplayname` 同口径（两字母语言码判定中文）， 单侧缺失回落另一侧，两侧都缺失回落稳定键，绝不返回空标签。 return the localized group label for a ui culture, using the same convention as `portalnavigationentry.getdisplayname` (two-letter code decides chinese); a missing side falls back to the other, and both missing fall back to the stable key, so the label is never empty. 界面文化；为 null 时取当前线程界面文化。 ui culture; null uses the current thread ui culture. 本地化后的显示名。 localized label."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.definitionarray",
+      "name": "DefinitionArray",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-a78a9718.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalia-a78a9718.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationgroupalias.definitionarray definitionarray dotnet-field closed vocabulary: four functional-family groups covering the eight `navigationkey` values in `portal_navigationseed.sql`; declaration order is presentation order. private static readonly aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition[] aspnet.starterkit.portal.portalnavigationgroupalias.definitionarray dotnet:f:aspnet.starterkit.portal.portalnavigationgroupalias.definitionarray portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 封闭词表：四个功能族分组，覆盖 `portal_navigationseed.sql` 的八个 `navigationkey`；声明顺序即展示顺序。 closed vocabulary: four functional-family groups covering the eight `navigationkey` values in `portal_navigationseed.sql`; declaration order is presentation order."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.getgroups",
+      "name": "GetGroups",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-75f10dcb.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-75f10dcb.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.getgroups getgroups dotnet-method return all group definitions in presentation order as a new read-only copy; callers cannot mutate the vocabulary. public static system.collections.generic.ilist<aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition> aspnet.starterkit.portal.portalnavigationgroupalias.getgroups() dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.getgroups portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 按展示顺序返回全部只读分组定义；每次返回新的只读副本，调用方不能改写词表。 return all group definitions in presentation order as a new read-only copy; callers cannot mutate the vocabulary. 分组定义只读集合。 read-only group definition collection."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.tryfindbykey-system.string-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition",
+      "name": "TryFindByKey",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-e461c316.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-e461c316.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.tryfindbykey-system.string-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition tryfindbykey dotnet-method find a group definition by stable key, ignoring case and surrounding whitespace; unknown keys return false and no group is guessed. public static bool aspnet.starterkit.portal.portalnavigationgroupalias.tryfindbykey(string groupkey, out aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition definition) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.tryfindbykey-system.string-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 按稳定键精确查找分组定义；忽略大小写、去除首尾空白；未知键返回 false，绝不猜测分组。 find a group definition by stable key, ignoring case and surrounding whitespace; unknown keys return false and no group is guessed. 分组稳定键。 stable group key. 命中时返回分组定义，否则为 null。 matched definition, or null. 是否命中。 whether a match was found."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.tryparsealiases-system.string-system.collections.generic.idictionary-system.string-system.string-system.string",
+      "name": "TryParseAliases",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-cdcb1170.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-cdcb1170.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.tryparsealiases-system.string-system.collections.generic.idictionary-system.string-system.string-system.string tryparsealiases dotnet-method parse the deployment `portal.navigation.groupaliases` override text into a tab-key to group-key alias map. only vocabulary group keys and `navigationkey=groupkey` pairs are accepted; duplicate tab keys or unknown group keys make the **entire configuration fail closed** (no partial override is adopted), so the caller falls back to defaults and keeps every tab reachable. public static bool aspnet.starterkit.portal.portalnavigationgroupalias.tryparsealiases(string configuration, out system.collections.generic.idictionary<string, string> aliases, out string reason) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.tryparsealiases-system.string-system.collections.generic.idictionary-system.string-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 解析部署侧 `portal.navigation.groupaliases` 覆盖文本，产出「页签键 → 分组键」的别名映射。 仅接受词表内的分组键与 `navigationkey=groupkey` 形态；重复页签键或未知分组键一律判为非法， **整份配置 fail-closed 拒绝**（不采用部分覆盖），调用方据此回退默认词表并保持页签全部可达。 parse the deployment `portal.navigation.groupaliases` override text into a tab-key to group-key alias map. only vocabulary group keys and `navigationkey=groupkey` pairs are accepted; duplicate tab keys or unknown group keys make the **entire configuration fail closed** (no partial override is adopted), so the caller falls back to defaults and keeps every tab reachable. 配置文本；null 或空白表示无覆盖。 configuration text; null or blank means no override. 解析成功时的别名映射；失败时为 null。 alias map on success; null on failure. 失败原因代码，便于诊断而不回显配置内容。 failure reason code for diagnostics without echoing the configuration. 是否解析成功（含空配置的成功）。 whether parsing succeeded, including an empty configuration."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.tryresolvegroup-system.string-system.string-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition-system.boolean",
+      "name": "TryResolveGroup",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-699c81af.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-699c81af.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.tryresolvegroup-system.string-system.string-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition-system.boolean tryresolvegroup dotnet-method resolve one tab's group: deployment alias override first, then vocabulary default membership; an unknown tab returns false and the caller renders it ungrouped (never hidden). a failed configuration parse also falls back to defaults, so the \"alias parse failed → flat navigation\" degradation path never loses a tab. public static bool aspnet.starterkit.portal.portalnavigationgroupalias.tryresolvegroup(string navigationkey, string configuration, out aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition definition, out bool degraded) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.tryresolvegroup-system.string-system.string-aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition-system.boolean portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 解析一个页签的分组归属：先看部署别名覆盖，再看词表默认成员；未知页签返回 false（调用方按未分组平铺展示， 绝不隐藏）。配置解析失败时同样回退默认词表，保证「别名解析失败 → 一级平铺」的降级路径永不丢页签。 resolve one tab's group: deployment alias override first, then vocabulary default membership; an unknown tab returns false and the caller renders it ungrouped (never hidden). a failed configuration parse also falls back to defaults, so the \"alias parse failed → flat navigation\" degradation path never loses a tab. 页签 navigationkey。 tab navigationkey. 部署别名配置文本，可为 null。 deployment alias configuration text, may be null. 命中时返回分组定义，否则为 null。 matched definition, or null. 配置非法导致回退默认词表时为 true。 true when invalid configuration caused a fallback to defaults. 是否找到分组归属。 whether a group membership was found."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.buildgroupedview-system.collections.generic.ienumerable-system.string-system.string-system.collections.generic.ilist-system.string-system.boolean",
+      "name": "BuildGroupedView",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-5b5a6e9d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalia-5b5a6e9d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationgroupalias.buildgroupedview-system.collections.generic.ienumerable-system.string-system.string-system.collections.generic.ilist-system.string-system.boolean buildgroupedview dotnet-method produce a read-only, presentation-ordered \"group → member tab key\" view for the `w-anp-p291` renderer. ungrouped tabs are rendered flat by the caller; this method reads no database or request context and performs no authorization. public static system.collections.generic.ilist<system.collections.generic.keyvaluepair<aspnet.starterkit.portal.portalnavigationgroupalias.groupdefinition, system.collections.generic.ilist<string>>> aspnet.starterkit.portal.portalnavigationgroupalias.buildgroupedview(system.collections.generic.ienumerable<string> navigationkeys, string configuration, out system.collections.generic.ilist<string> ungroupedkeys, out bool degraded) dotnet:m:aspnet.starterkit.portal.portalnavigationgroupalias.buildgroupedview-system.collections.generic.ienumerable-system.string-system.string-system.collections.generic.ilist-system.string-system.boolean portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationgroupalias t:aspnet.starterkit.portal.portalnavigationgroupalias dotnet hia-document api/portal.components.hia.json src/portal.components/portalnavigationgroupalias.cs csharp 生成按展示顺序排列的「分组 → 成员页签键」只读视图，供 `w-anp-p291` 的渲染层消费。 未分组页签由调用方平铺展示；本方法不读数据库、不读请求上下文、不做授权判定。 produce a read-only, presentation-ordered \"group → member tab key\" view for the `w-anp-p291` renderer. ungrouped tabs are rendered flat by the caller; this method reads no database or request context and performs no authorization. 本次要展示的页签 navigationkey 序列。 tab navigationkey sequence to present. 部署别名配置文本，可为 null。 deployment alias configuration text, may be null. 未能归入任何分组的页签键（平铺展示）。 tab keys that belong to no group (rendered flat). 配置非法导致回退默认词表时为 true。 true when invalid configuration caused a fallback to defaults. 分组定义及该组成员页签键的只读列表。 read-only list of groups with their member tab keys."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalreferencedatasets",

@@ -1,0 +1,25 @@
+            public string GetDisplayName(CultureInfo culture)
+            {
+                // <lang>
+                //   <zh-CN>未显式传文化时取当前线程界面文化，保证调用方无需自行读取全球化配置。</zh-CN>
+                //   <en>When no culture is supplied, use the current thread UI culture so callers need not read globalization configuration.</en>
+                // </lang>
+                CultureInfo effective = culture ?? CultureInfo.CurrentUICulture;
+                bool preferChinese = effective != null &&
+                    string.Equals(effective.TwoLetterISOLanguageName, "zh", StringComparison.OrdinalIgnoreCase);
+
+                string preferred = preferChinese ? DisplayNameZhCn : DisplayNameEn;
+                string fallback = preferChinese ? DisplayNameEn : DisplayNameZhCn;
+
+                if (!string.IsNullOrWhiteSpace(preferred))
+                {
+                    return preferred;
+                }
+
+                if (!string.IsNullOrWhiteSpace(fallback))
+                {
+                    return fallback;
+                }
+
+                return GroupKey ?? string.Empty;
+            }

@@ -584,6 +584,27 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>主导航分组配置别名覆盖；默认空表示采用 `PortalNavigationGroupAlias` 封闭词表的默认分组。
+        ///   非法配置由解析层 fail-closed 回退，绝不隐藏页签；该设置只影响展示层级，不作为授权依据。</zh-CN>
+        ///   <en>Main-navigation group configuration alias override; an empty default adopts the closed vocabulary defaults
+        ///   in `PortalNavigationGroupAlias`. Invalid configuration fails closed in the parser and never hides a tab;
+        ///   this setting affects presentation hierarchy only and is never an authorization basis.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition NavigationGroupAliases =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationGroupAliases,
+                "导航分组别名",
+                "逗号分隔的 NavigationKey=GroupKey 覆盖项；空值采用词表默认分组。仅影响展示分组，不参与授权。",
+                PortalSettingValueType.String,
+                "",
+                true,
+                false,
+                "Admins",
+                "Navigation");
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>按稳定声明顺序保存的全部受控设置定义只读集合。</zh-CN>
         ///   <en>Read-only collection of all controlled setting definitions in stable declaration order.</en>
         /// </lang>
@@ -627,7 +648,8 @@ namespace ASPNET.StarterKit.Portal
                 NavigationHiddenNavigationKeys,
                 NavigationExcludedNavigationKeyPrefixes,
                 NavigationLogHiddenTabs,
-                NavigationAnonymousHiddenNavigationKeys
+                NavigationAnonymousHiddenNavigationKeys,
+                NavigationGroupAliases
             }.AsReadOnly();
 
         /// <summary>
