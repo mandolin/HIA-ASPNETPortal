@@ -6,6 +6,15 @@
 
 ## [Unreleased]
 
+## [v3.0.0] - 2026-11-11
+
+### 变更
+- **v3.0 平台就绪里程碑封版**：R1–R6 全部满足——R1 容纳底座、R2 独立模块首证、R3 B 级在线能力、R4 企业级界面、R5 业务纵深（审批生命周期标准化 + BasicBusiness 加厚，单测 242/242、A4 边界门禁 [PASS]）、R6 治理与口径（能力↔模块↔入口↔权限键 治理视图 L0 门禁 + 版本锚点/文档就绪度/开源就绪度三就绪度零漂移）。
+- 治理视图机器门禁 `Test-PortalGovernanceView` 落地（只读对账能力/模块/权限键/入口四源，FAIL=0/WARN=5；C3 暴露 5 条权限键漂移——EmployeeProfileConfirm/EmployeeProfileCorrectionRequest 注册表多写 `Business.` 前缀、LeaveRequest/ExpenseReimbursement/FormBuilder 无对应键族，属安全契约变更信号、待独立裁决）。
+- 代码文档快照刷新（`site/api/dotnetdoc/`），修复 `Test-PortalCodeDocs` B2 源指纹漂移；文档就绪度套件（DocumentationReadiness/PublicDocumentation/SiteMirrorConsistency/I18nContentParity/CodeDocs）全 PASS。
+- 开源就绪度套件（`Test-PortalSecretLeakage` 6630 文件无非高置信度密钥、`Test-PortalComplianceBaseline` 安全头/密码策略 PBKDF2 基线全过）全 PASS；根目录 LICENSE(MIT)/README/`.gitignore`/CONTRIBUTING 齐备。
+- 诚实边界（据实登记）：R5 的 L2 运行期证据因环境阻断（门户未连库、无种子数据/凭据）未产出、未编造；5 条权限键漂移待安全契约复核；上述均不阻断封版触发条件。
+
 ## [v2.2.0] - 2026-11-06
 **请假与报销「重新提交」与首页布局改为「上二下一」**：被退回 / 已拒绝的申请可在原记录上修改后再次提交；首页内容区按产品草图从"三栏并排"改为"第一行账户登录 + 门户公告、第二行帮助与说明通栏"，并同步重拍文档站首页截图。
 ### 变更
