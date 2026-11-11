@@ -62,7 +62,7 @@ foreach ($m in [regex]::Matches($capText, 'public const string (\w+) = "([^"]+)"
 $capIds = $capConst.Values | Where-Object { $_ -match '^BasicBusiness\.\w+$' } | Sort-Object -Unique
 
 $caps = @()
-foreach ($m in [regex]::Matches($capText, 'new PortalCapabilityDefinition\(\s*(\w+),\s*"([^"]+)",\s*\w+\.[A-Za-z]+,\s*"([^"]+)",\s*"([^"]+)",')) {
+foreach ($m in [regex]::Matches($capText, 'new PortalCapabilityDefinition\(\s*(\w+),\s*"([^"]*)",\s*\w+\.[A-Za-z]+,\s*"([^"]*)",\s*"([^"]*)",')) {
     $id = $capConst[$m.Groups[1].Value]
     if (-not $id) { continue }
     $caps += [PSCustomObject]@{
@@ -193,7 +193,7 @@ Write-Host ''
 Write-Host '[C5] 命名纪律（能力键 / 模块包标识 / 权限键 形态）' -ForegroundColor Cyan
 $capLayerRe = '^BasicBusiness\.\w+$'
 $modPkgRe    = '^HIA\.\w+$'
-$permLayerOk = @('Admin','Ops','Settings','Theme','Module','Content','Business','EmployeeDirectory','EmployeeProfileConfirm','EmployeeProfileCorrectionRequest','EnterpriseCapability','Audit','Portal')
+$permLayerOk = @('Admin','Ops','Settings','Theme','Module','Content','Business','EmployeeDirectory','EmployeeProfileConfirm','EmployeeProfileCorrectionRequest','LeaveRequest','ExpenseReimbursement','EnterpriseCapability','Audit','Portal')
 foreach ($c in $caps) {
     if ($c.Id -match $capLayerRe) { Emit 'OK' ("能力键 {0} 符合 BasicBusiness.<类> 形态" -f $c.Id) }
     else { Emit 'WARN' ("能力键 {0} 不符合 BasicBusiness.<类> 形态" -f $c.Id) }

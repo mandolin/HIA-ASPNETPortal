@@ -86,11 +86,11 @@ namespace ASPNET.StarterKit.Portal.Tests
             Assert.AreEqual("BasicBusiness", leaveRequest.Layer, "请假申请应归属 BasicBusiness 层。");
             Assert.AreEqual(PortalCapabilityLifecycleStates.Active, leaveRequest.LifecycleState, "已有主责模块实现的能力应为 Active。");
             Assert.AreEqual("HIA.LeaveRequest", leaveRequest.PrimaryModuleId, "主责包标识必须与 manifest 的 packageId 一致。");
-            Assert.AreEqual("Business.LeaveRequest", leaveRequest.PermissionKeyPrefix, "权限键前缀必须与既有权限定义分类一致。");
+            Assert.AreEqual("LeaveRequest", leaveRequest.PermissionKeyPrefix, "权限键前缀必须与实际权限键族一致（Policy 2：注册表对齐实际键）。");
             Assert.AreEqual("BasicBusiness", expenseReimbursement.Layer, "费用报销应归属 BasicBusiness 层。");
             Assert.AreEqual(PortalCapabilityLifecycleStates.Active, expenseReimbursement.LifecycleState, "已有主责模块实现的能力应为 Active。");
             Assert.AreEqual("HIA.ExpenseReimbursement", expenseReimbursement.PrimaryModuleId, "主责包标识必须与 manifest 的 packageId 一致。");
-            Assert.AreEqual("Business.ExpenseReimbursement", expenseReimbursement.PermissionKeyPrefix, "权限键前缀必须与既有权限定义分类一致。");
+            Assert.AreEqual("ExpenseReimbursement", expenseReimbursement.PermissionKeyPrefix, "权限键前缀必须与实际权限键族一致（Policy 2：注册表对齐实际键）。");
 
             PortalCapabilityDefinition formBuilder;
             Assert.IsTrue(
@@ -99,7 +99,7 @@ namespace ASPNET.StarterKit.Portal.Tests
             Assert.AreEqual("BasicBusiness", formBuilder.Layer, "表单构建器应归属 BasicBusiness 层。");
             Assert.AreEqual(PortalCapabilityLifecycleStates.Active, formBuilder.LifecycleState, "已有主责模块实现的能力应为 Active。");
             Assert.AreEqual("HIA.FormBuilder", formBuilder.PrimaryModuleId, "主责包标识必须与 manifest 的 packageId 一致。");
-            Assert.AreEqual("Business.FormBuilder", formBuilder.PermissionKeyPrefix, "权限键前缀必须与既有权限定义分类一致。");
+            Assert.AreEqual(string.Empty, formBuilder.PermissionKeyPrefix, "表单构建器为宿主型 MVP 模块，无细粒度权限键族（keyless，Policy 2）。");
 
             // <lang>
             //   <zh-CN>钉住两条新登记能力的关键字段：层、生命周期、主责包与权限键前缀必须与既有权限键分类一致，否则能力矩阵会显示错误的归属。</zh-CN>
@@ -112,7 +112,7 @@ namespace ASPNET.StarterKit.Portal.Tests
                 "已有主责模块实现的能力应为 Active。");
             Assert.AreEqual("HIA.EmployeeProfileConfirm", confirm.PrimaryModuleId, "主责包标识必须与 manifest 的 packageId 一致。");
             Assert.AreEqual(
-                "Business.EmployeeProfileConfirm",
+                "EmployeeProfileConfirm",
                 confirm.PermissionKeyPrefix,
                 "权限键前缀必须与既有权限定义分类一致。");
             Assert.AreEqual("BasicBusiness", correctionRequest.Layer, "员工资料更正应归属 BasicBusiness 层。");
@@ -125,7 +125,7 @@ namespace ASPNET.StarterKit.Portal.Tests
                 correctionRequest.PrimaryModuleId,
                 "主责包标识必须与 manifest 的 packageId 一致。");
             Assert.AreEqual(
-                "Business.EmployeeProfileCorrectionRequest",
+                "EmployeeProfileCorrectionRequest",
                 correctionRequest.PermissionKeyPrefix,
                 "权限键前缀必须与既有权限定义分类一致。");
         }

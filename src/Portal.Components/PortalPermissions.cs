@@ -196,6 +196,38 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>提交请假申请。</zh-CN>
+        ///   <en>Submit a leave request.</en>
+        /// </lang>
+        /// </summary>
+        public const string LeaveRequestSubmit = "LeaveRequest.Submit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>重新提交请假申请。</zh-CN>
+        ///   <en>Resubmit a leave request.</en>
+        /// </lang>
+        /// </summary>
+        public const string LeaveRequestResubmit = "LeaveRequest.Resubmit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交费用报销。</zh-CN>
+        ///   <en>Submit an expense reimbursement.</en>
+        /// </lang>
+        /// </summary>
+        public const string ExpenseReimbursementSubmit = "ExpenseReimbursement.Submit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>重新提交费用报销。</zh-CN>
+        ///   <en>Resubmit an expense reimbursement.</en>
+        /// </lang>
+        /// </summary>
+        public const string ExpenseReimbursementResubmit = "ExpenseReimbursement.Resubmit";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查看业务待办。</zh-CN>
         ///   <en>View business work items.</en>
         /// </lang>
@@ -610,14 +642,18 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryView, "EnterpriseDirectory", "查看员工、组织和账号绑定目录。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryEdit, "EnterpriseDirectory", "编辑员工与组织主数据。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryBind, "EnterpriseDirectory", "绑定或解绑门户账号与员工。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmView, "Business.EmployeeProfileConfirm", "查看员工资料确认模块。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmConfirm, "Business.EmployeeProfileConfirm", "确认自己的员工资料。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmAdmin, "Business.EmployeeProfileConfirm", "管理员查看和处理员工资料确认记录。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestView, "Business.EmployeeProfileCorrectionRequest", "查看员工资料更正请求模块。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit, "Business.EmployeeProfileCorrectionRequest", "提交自己的员工资料更正请求。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestReview, "Business.EmployeeProfileCorrectionRequest", "审核员工资料更正请求。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestCancel, "Business.EmployeeProfileCorrectionRequest", "取消或关闭员工资料更正请求。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin, "Business.EmployeeProfileCorrectionRequest", "员工资料更正请求旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmView, "EmployeeProfileConfirm", "查看员工资料确认模块。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmConfirm, "EmployeeProfileConfirm", "确认自己的员工资料。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmAdmin, "EmployeeProfileConfirm", "管理员查看和处理员工资料确认记录。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestView, "EmployeeProfileCorrectionRequest", "查看员工资料更正请求模块。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit, "EmployeeProfileCorrectionRequest", "提交自己的员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestReview, "EmployeeProfileCorrectionRequest", "审核员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestCancel, "EmployeeProfileCorrectionRequest", "取消或关闭员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin, "EmployeeProfileCorrectionRequest", "员工资料更正请求旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.LeaveRequestSubmit, "LeaveRequest", "提交请假申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.LeaveRequestResubmit, "LeaveRequest", "重新提交请假申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ExpenseReimbursementSubmit, "ExpenseReimbursement", "提交费用报销。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ExpenseReimbursementResubmit, "ExpenseReimbursement", "重新提交费用报销。"),
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsView, "Business.WorkItems", "查看业务待办。"),
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsHandle, "Business.WorkItems", "处理业务待办。"),
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsAdmin, "Business.WorkItems", "业务待办旧聚合管理权限。"),

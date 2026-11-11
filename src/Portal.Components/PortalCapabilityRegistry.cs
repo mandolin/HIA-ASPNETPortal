@@ -141,7 +141,7 @@ namespace ASPNET.StarterKit.Portal
                 "BasicBusiness",
                 PortalCapabilityLifecycleStates.Active,
                 "HIA.EmployeeProfileConfirm",
-                "Business.EmployeeProfileConfirm",
+                "EmployeeProfileConfirm",
                 "员工资料确认",
                 "Employee Profile Confirmation"),
             new PortalCapabilityDefinition(
@@ -149,7 +149,7 @@ namespace ASPNET.StarterKit.Portal
                 "BasicBusiness",
                 PortalCapabilityLifecycleStates.Active,
                 "HIA.EmployeeProfileCorrectionRequest",
-                "Business.EmployeeProfileCorrectionRequest",
+                "EmployeeProfileCorrectionRequest",
                 "员工资料更正请求",
                 "Employee Profile Correction Request"),
             new PortalCapabilityDefinition(
@@ -157,7 +157,7 @@ namespace ASPNET.StarterKit.Portal
                 "BasicBusiness",
                 PortalCapabilityLifecycleStates.Active,
                 "HIA.LeaveRequest",
-                "Business.LeaveRequest",
+                "LeaveRequest",
                 "请假申请",
                 "Leave Request"),
             new PortalCapabilityDefinition(
@@ -165,7 +165,7 @@ namespace ASPNET.StarterKit.Portal
                 "BasicBusiness",
                 PortalCapabilityLifecycleStates.Active,
                 "HIA.ExpenseReimbursement",
-                "Business.ExpenseReimbursement",
+                "ExpenseReimbursement",
                 "费用报销",
                 "Expense Reimbursement"),
             new PortalCapabilityDefinition(
@@ -173,7 +173,7 @@ namespace ASPNET.StarterKit.Portal
                 "BasicBusiness",
                 PortalCapabilityLifecycleStates.Active,
                 "HIA.FormBuilder",
-                "Business.FormBuilder",
+                "",
                 "表单构建器",
                 "Form Builder")
         };
