@@ -1,0 +1,6 @@
+        private bool BindingExists(int bindingId)
+        {
+            return ScalarInt(
+                "SELECT COUNT(*) FROM [dbo].[PortalBiz_UserEmployeeBindings] WHERE [BindingId] = @BindingId",
+                IntParameter("@BindingId", bindingId)) > 0;
+        }

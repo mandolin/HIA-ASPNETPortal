@@ -1,0 +1,18 @@
+    public sealed class PortalHiaProducerDescriptor
+    {
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>producer 稳定标识。</zh-CN>
+        ///   <en>Stable producer identifier.</en>
+        /// </l>
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>producer 的语义版本文本。</zh-CN>
+        ///   <en>Semantic version text of the producer.</en>
+        /// </l>
+        /// </summary>
+        public string Version { get; set; }
+    }

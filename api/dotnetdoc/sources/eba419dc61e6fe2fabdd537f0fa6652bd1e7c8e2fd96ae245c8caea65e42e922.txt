@@ -1,0 +1,4 @@
+        internal static PortalLoginIdentifierResolution CreateFound(int userId)
+        {
+            return new PortalLoginIdentifierResolution(true, false, true, userId);
+        }

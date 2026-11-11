@@ -1,0 +1,7 @@
+                <%--
+                    <lang>
+                        <zh-CN>模块标题多语言区：中文标题就是上面的 `moduleTitle`（中文列兼默认回退列），
+                        这里只补英文列与"其它语言" JSON 列，两个字段都只在管理员显式填写时才写入。</zh-CN>
+                        <en>Module-title multilingual area: the Chinese title is the `moduleTitle` field above (Chinese column and default fallback); only the English column and the "other languages" JSON column are added here, and both are written only when an administrator fills them in explicitly.</en>
+                    </lang>
+                --%>

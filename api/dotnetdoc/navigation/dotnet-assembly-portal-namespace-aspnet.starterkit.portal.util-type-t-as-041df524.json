@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadappsettings-newtonsoft.json.linq.jobject-system.boolean",
+      "kind": "entry",
+      "label": "LoadAppSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadappsettings-newtonsoft.json.linq.jobject-system.boolean",
+      "sourcePath": "src/Portal/Util/AppSettingsLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.appsettingsloader.loadappsettings-newtonsoft.json.linq.jobject-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.lo-f1e28f36.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadconfig-system.string-system.boolean-system.boolean",
+      "kind": "entry",
+      "label": "LoadConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadconfig-system.string-system.boolean-system.boolean",
+      "sourcePath": "src/Portal/Util/AppSettingsLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.appsettingsloader.loadconfig-system.string-system.boolean-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.lo-95abaeec.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadconfigfile-system.string-system.boolean-system.boolean",
+      "kind": "entry",
+      "label": "LoadConfigFile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadconfigfile-system.string-system.boolean-system.boolean",
+      "sourcePath": "src/Portal/Util/AppSettingsLoader.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.util.appsettingsloader.loadconfigfile-system.string-system.boolean-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.lo-1c07676e.html"
+    }
+  ]
+}

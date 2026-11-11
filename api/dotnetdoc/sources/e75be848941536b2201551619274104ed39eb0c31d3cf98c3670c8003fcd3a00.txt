@@ -1,0 +1,5 @@
+        internal static string Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc", resourceCulture);
+            }
+        }

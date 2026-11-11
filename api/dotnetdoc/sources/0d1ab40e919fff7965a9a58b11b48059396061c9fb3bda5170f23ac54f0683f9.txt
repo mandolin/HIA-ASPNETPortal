@@ -1,0 +1,75 @@
+        protected void EndBindingButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryBind))
+            {
+                return;
+            }
+
+            int bindingId;
+            if (!int.TryParse(ActiveBindingId.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out bindingId) ||
+                bindingId <= 0)
+            {
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageNoActiveBindingToEnd, true);
+                return;
+            }
+
+            IUserEmployeeBindingInfo binding = BindingAdminDb.GetBindingById(bindingId);
+            if (binding == null)
+            {
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBindingGone, true);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>解绑使用当前隐藏域记录的绑定标识，并在写入前重新读取绑定，避免对已删除或已变化记录继续操作。</zh-CN>
+                //   <en>Unbinding uses the binding identifier stored in the hidden field and reloads the binding before writing so deleted or changed rows are not processed blindly.</en>
+                // </lang>
+                EmployeeDirectoryWriteResult result = BindingAdminDb.EndBinding(new UserEmployeeBindingEndRequest
+                {
+                    BindingId = bindingId,
+                    Reason = ReasonTextBox.Text,
+                    ActorName = GetCurrentActor()
+                });
+
+                if (!result.Succeeded)
+                {
+                    // <lang>
+                    //   <zh-CN>解绑服务失败时保留当前绑定摘要并返回，不递增安全版本或记录成功审计。</zh-CN>
+                    //   <en>When the unbind service fails, retain the current binding summary and return without incrementing the security version or recording success audit.</en>
+                    // </lang>
+                    ShowMessage(result.Message, true);
+                    RefreshCurrentState(binding.UserId, binding.EmployeeCode);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>解绑同样递增目标用户安全版本，因为员工身份绑定会影响后续权限和资料上下文。</zh-CN>
+                //   <en>Unbinding also increments the target user's security version because employee identity binding affects later permissions and profile context.</en>
+                // </lang>
+                UsersDb.IncrementSecurityVersion(binding.UserId, "EmployeeBindingChanged");
+                // <lang>
+                //   <zh-CN>解绑写入、安全版本递增和审计仍是连续步骤；后续异常不代表前一步写入已自动回滚。</zh-CN>
+                //   <en>Unbind persistence, security-version increment, and audit remain sequential steps; a later exception does not mean the earlier write was automatically rolled back.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.EnterpriseDirectoryCategory,
+                    PortalOperationAuditEvents.UserEmployeeUnbound,
+                    PortalOperationAuditEvents.UserEmployeeBindingTargetType,
+                    bindingId.ToString(CultureInfo.InvariantCulture),
+                    "Ended employee binding for user id " + binding.UserId.ToString(CultureInfo.InvariantCulture) + ".",
+                    Context);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBindingEnded, false);
+                RefreshCurrentState(binding.UserId, binding.EmployeeCode);
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.UserEmployeeBindingEdit.End",
+                    "Ending user employee binding failed. BindingId=" + bindingId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_UserEmployeeBindingEdit_MessageUnbindFailed, eventId), true);
+            }
+        }

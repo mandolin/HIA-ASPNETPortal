@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_MessageResubmitted {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageResubmitted", resourceCulture);
+            }
+        }

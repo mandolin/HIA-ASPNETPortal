@@ -1,0 +1,20 @@
+        private static bool ExistsForUpdate(SqlConnection connection, SqlTransaction transaction, int tabId)
+        {
+            // <lang>
+            //   <zh-CN>创建事务内存在性检查命令，UPDLOCK/HOLDLOCK 保护后续的条件写入选择。</zh-CN>
+            //   <en>Create the in-transaction existence-check command; UPDLOCK/HOLDLOCK protects subsequent conditional-write selection.</en>
+            // </lang>
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.Transaction = transaction;
+                command.CommandText = @"
+SELECT CASE WHEN EXISTS
+(
+    SELECT 1
+    FROM [dbo].[PortalCfg_TabThemeOverrides] WITH (UPDLOCK, HOLDLOCK)
+    WHERE [TabId] = @TabId
+) THEN 1 ELSE 0 END;";
+                command.Parameters.Add("@TabId", SqlDbType.Int).Value = tabId;
+                return Convert.ToInt32(command.ExecuteScalar()) == 1;
+            }
+        }

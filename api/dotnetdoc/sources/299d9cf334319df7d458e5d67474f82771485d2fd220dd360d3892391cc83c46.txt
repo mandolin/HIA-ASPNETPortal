@@ -1,0 +1,9 @@
+        public static bool IsValidEventId(string eventId)
+        {
+            // <lang>
+            //   <zh-CN>只复用受控格式/日期解析并返回布尔事实，不访问日志目录、读取文件或将外部事件编号视为授权凭据。</zh-CN>
+            //   <en>Reuse only controlled format/date parsing and return a Boolean fact; do not access the log directory, read a file, or treat an external event id as an authorization credential.</en>
+            // </lang>
+            DateTime eventDate;
+            return TryGetEventDate(eventId, out eventDate);
+        }

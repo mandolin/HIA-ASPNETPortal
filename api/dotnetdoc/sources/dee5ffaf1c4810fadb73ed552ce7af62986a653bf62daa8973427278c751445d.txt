@@ -1,0 +1,1 @@
+        string FriendlyName { get; set; }

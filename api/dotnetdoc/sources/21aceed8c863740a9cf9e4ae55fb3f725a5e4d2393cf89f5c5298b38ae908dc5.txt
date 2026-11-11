@@ -1,0 +1,1 @@
+        public const string DiagnosticsAllowAdminDetailView = "Portal.Diagnostics.AllowAdminDetailView";

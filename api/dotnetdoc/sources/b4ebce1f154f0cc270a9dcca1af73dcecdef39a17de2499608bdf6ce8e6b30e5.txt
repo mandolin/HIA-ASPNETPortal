@@ -1,0 +1,10 @@
+        private static string NormalizeReason(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return "Unspecified";
+            }
+
+            string normalized = value.Trim();
+            return normalized.Substring(0, Math.Min(normalized.Length, 100));
+        }

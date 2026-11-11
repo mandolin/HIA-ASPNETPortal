@@ -1,0 +1,4 @@
+        public static IList<PortalCapabilityDefinition> Definitions
+        {
+            get { return ReadOnlyDefinitions; }
+        }

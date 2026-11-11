@@ -1,0 +1,32 @@
+        protected void Apply_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>应用按钮先验证并保存 Tab 设置，再定位受保护后台 Tab 作为回跳目标。</zh-CN>
+            //   <en>The apply button validates and saves Tab settings before locating the protected administration Tab for return navigation.</en>
+            // </lang>
+            if (!TryInitializeRequest() || !SaveTabData())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>后台 Tab 由受保护名称策略识别，不从请求参数直接指定。</zh-CN>
+            //   <en>Identify the administration Tab through the protected-name policy rather than taking it from request parameters.</en>
+            // </lang>
+            ITabItem administrationTab = currentPortalSettings.DesktopTabs.FirstOrDefault(tab =>
+                PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName, tab.NavigationKey));
+            if (administrationTab == null)
+            {
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/DesktopDefault.aspx"));
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>用当前桌面 Tab 集合计算稳定索引并构造站内回跳地址。</zh-CN>
+            //   <en>Compute the stable index from the current desktop-tab set and build an in-site return URL.</en>
+            // </lang>
+            int administrationIndex = currentPortalSettings.DesktopTabs.IndexOf(administrationTab);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                Context,
+                ResolveUrl("~/DesktopDefault.aspx?tabindex=" + administrationIndex + "&tabid=" + administrationTab.TabId));
+        }

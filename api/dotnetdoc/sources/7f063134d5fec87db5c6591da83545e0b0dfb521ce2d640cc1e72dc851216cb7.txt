@@ -1,0 +1,5 @@
+        internal static string Common_PasswordMessageWeakDictionaryMatch {
+            get {
+                return ResourceManager.GetString("Common_PasswordMessageWeakDictionaryMatch", resourceCulture);
+            }
+        }

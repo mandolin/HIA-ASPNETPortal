@@ -1,0 +1,12 @@
+        public static IList<string> AllowedFromStatuses(string actionKey)
+        {
+            foreach (PortalBusinessApplicationTransition transition in All)
+            {
+                if (string.Equals(transition.ActionKey, actionKey, StringComparison.Ordinal))
+                {
+                    return transition.FromStatuses;
+                }
+            }
+
+            return new List<string>().AsReadOnly();
+        }

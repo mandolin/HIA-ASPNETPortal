@@ -1,0 +1,4 @@
+        public static string LocalizeLeaveStatus(string status)
+        {
+            return LocalizeCanonical(BusinessApplicationLifecycle.NormalizeToCanonical(status));
+        }

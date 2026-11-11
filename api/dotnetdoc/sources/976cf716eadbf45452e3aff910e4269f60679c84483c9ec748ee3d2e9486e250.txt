@@ -1,0 +1,89 @@
+        private static void AddDatabaseCheck(IList<PortalHealthCheckResult> checks, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>本检查需要健康状态和关联事件编号，不能复用仅记录结果的 PortalDiagnostics.CheckSqlConnection。</zh-CN>
+            //   <en>This check needs a health status and correlated event id, so it cannot reuse the record-only PortalDiagnostics.CheckSqlConnection.</en>
+            // </lang>
+            string connectionString;
+            try
+            {
+                connectionString = Global.Container == null
+                    ? null
+                    : Global.Container.Resolve<string>(ExternalConnectionStringLoader.UnityConnectionStringName);
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>连接串解析异常先生成受限事件编号，再加入固定错误结果；调用方永远只看到健康状态和安全摘要。</zh-CN>
+                //   <en>Generate a restricted event id for connection-string resolution failures before adding a fixed error result; callers see only health state and a safe summary.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "SystemHealth.Database",
+                    "Database connection string resolve failed.",
+                    exception,
+                    context);
+
+                checks.Add(new PortalHealthCheckResult(
+                    "Database",
+                    "数据库连接",
+                    PortalHealthStatus.Error,
+                    "无法从 Unity 容器解析数据库连接串。",
+                    exception.Message,
+                    eventId));
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                checks.Add(new PortalHealthCheckResult(
+                    "Database",
+                    "数据库连接",
+                    PortalHealthStatus.Warning,
+                    "数据库连接串未配置。",
+                    "Unity named instance '" + ExternalConnectionStringLoader.UnityConnectionStringName + "' is empty."));
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>用未打开的连接和固定 SELECT 1 执行轻量连通性检查；连接对象由 using 管理，不保存连接串。</zh-CN>
+                //   <en>Run a lightweight connectivity check with an unopened connection and fixed SELECT 1; using owns the connection and no connection string is retained.</en>
+                // </lang>
+                using (var connection = new SqlConnection(connectionString))
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT 1";
+                    command.CommandTimeout = 5;
+                    connection.Open();
+                    command.ExecuteScalar();
+                }
+
+                checks.Add(new PortalHealthCheckResult(
+                    "Database",
+                    "数据库连接",
+                    PortalHealthStatus.Healthy,
+                    "数据库轻量连接测试通过。",
+                    "Executed SELECT 1 without exposing the connection string."));
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>数据库检查异常转换为受限事件和错误结果，不向健康输出拼接连接串或 SQL 详情。</zh-CN>
+                //   <en>Convert database-check exceptions into a restricted event and error result without adding connection-string or SQL detail to health output.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "SystemHealth.Database",
+                    "Database health check failed.",
+                    exception,
+                    context);
+
+                checks.Add(new PortalHealthCheckResult(
+                    "Database",
+                    "数据库连接",
+                    PortalHealthStatus.Error,
+                    "数据库轻量连接测试失败。",
+                    exception.Message,
+                    eventId));
+            }
+        }

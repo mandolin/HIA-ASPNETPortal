@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>标题控件使用站内 EditLinks 页面作为修复旧链接的入口，标记层不直接承载保存或授权逻辑。</zh-CN>
+        <en>The title control uses the in-site EditLinks page to repair legacy links; the markup does not contain save or authorization logic.</en>
+    </lang>
+--%>

@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_ButtonConfirm {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_ButtonConfirm", resourceCulture);
+            }
+        }

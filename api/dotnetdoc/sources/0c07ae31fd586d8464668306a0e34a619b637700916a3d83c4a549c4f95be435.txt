@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>注册元数据区只读展示邀请、员工和时间信息；这些值由后台加载，不作为账号更新表单的可编辑输入。</zh-CN>
+            <en>The registration-metadata section renders invitation, employee, and timestamp information read-only; code-behind loads these values and the markup does not treat them as editable account-update inputs.</en>
+          </lang>
+        --%>

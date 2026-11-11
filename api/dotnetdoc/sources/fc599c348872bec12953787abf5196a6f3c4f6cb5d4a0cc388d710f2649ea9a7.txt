@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>P6.3-S5 门户账号与员工单条绑定维护页。</zh-CN>
+        <en>P6.3-S5 single binding maintenance page between a portal account and an employee record.</en>
+    </lang>
+--%>

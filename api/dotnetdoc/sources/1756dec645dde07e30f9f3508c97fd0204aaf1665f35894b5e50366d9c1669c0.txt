@@ -1,0 +1,33 @@
+        private void BindCurrentBinding(int userId, string employeeCode)
+        {
+            IUserEmployeeBindingInfo binding = null;
+            if (userId > 0)
+            {
+                binding = EmployeeDirectoryDb.GetActiveBindingByUserId(userId);
+            }
+
+            if (binding == null && !string.IsNullOrWhiteSpace(employeeCode))
+            {
+                binding = EmployeeDirectoryDb.GetActiveBindingByEmployeeCode(employeeCode);
+            }
+
+            if (binding == null)
+            {
+                ActiveBindingId.Value = string.Empty;
+                CurrentBindingText.Text = lang.Admin_UserEmployeeBindingEdit_MessageNoActiveBinding;
+                EndBindingButton.Visible = false;
+                BindButton.Visible = true;
+                return;
+            }
+
+            ActiveBindingId.Value = binding.BindingId.ToString(CultureInfo.InvariantCulture);
+            CurrentBindingText.Text = Server.HtmlEncode(
+                "#" + binding.BindingId.ToString(CultureInfo.InvariantCulture) +
+                " User " + binding.UserId.ToString(CultureInfo.InvariantCulture) +
+                " / " + binding.UserName +
+                " -> " + binding.EmployeeCode +
+                " / " + binding.EmployeeDisplayName +
+                " (" + binding.BindingStatus + ")");
+            EndBindingButton.Visible = true;
+            BindButton.Visible = false;
+        }

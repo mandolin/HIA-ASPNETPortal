@@ -1,0 +1,5 @@
+        public CollaborationItemParticipantResult(bool success, string message)
+        {
+            Success = success;
+            Message = message ?? string.Empty;
+        }

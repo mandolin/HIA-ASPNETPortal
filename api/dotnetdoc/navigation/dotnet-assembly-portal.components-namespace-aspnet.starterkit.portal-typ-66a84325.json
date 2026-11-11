@@ -1,0 +1,29 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldesktoptaburl",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldesktoptaburl:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldesktoptaburl:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldesktoptaburl.build-system.string-system.int32-system.int32",
+      "kind": "entry",
+      "label": "Build",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldesktoptaburl.build-system.string-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/PortalDesktopTabUrl.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldesktoptaburl.build-system.string-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldesktoptaburl.build-82daea95.html"
+    }
+  ]
+}

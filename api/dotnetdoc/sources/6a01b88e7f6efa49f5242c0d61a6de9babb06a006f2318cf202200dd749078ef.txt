@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_SectionFollowUp {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_SectionFollowUp", resourceCulture);
+            }
+        }

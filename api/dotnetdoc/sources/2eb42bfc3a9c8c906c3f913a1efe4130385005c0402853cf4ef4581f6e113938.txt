@@ -1,0 +1,6 @@
+        private bool UserExists(int userId)
+        {
+            return ScalarInt(
+                "SELECT COUNT(*) FROM [dbo].[Portal_Users] WHERE [UserID] = @UserId",
+                IntParameter("@UserId", userId)) > 0;
+        }

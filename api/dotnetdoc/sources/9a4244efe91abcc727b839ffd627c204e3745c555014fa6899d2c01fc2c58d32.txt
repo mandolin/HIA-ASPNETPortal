@@ -1,0 +1,13 @@
+        private EmployeeBindingProjection GetEmployeeByCode(string employeeCode)
+        {
+            return _context.Database.SqlQuery<EmployeeBindingProjection>(
+                @"
+SELECT TOP (1)
+    [EmployeeId],
+    [EmployeeCode],
+    [DisplayName],
+    [EmploymentStatus]
+FROM [dbo].[PortalBiz_Employees]
+WHERE [EmployeeCode] = @EmployeeCode;",
+                TextParameter("@EmployeeCode", employeeCode, 64)).SingleOrDefault();
+        }

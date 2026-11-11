@@ -1,0 +1,19 @@
+        private void EnsureSecurityState(int userId, string reason)
+        {
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                @"
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Portal_UserSecurityStates] WHERE [UserId] = @p0)
+BEGIN
+    INSERT INTO [dbo].[Portal_UserSecurityStates] ([UserId], [SecurityVersion], [ChangedUtc], [ChangeReason])
+    SELECT @p0, @p2, SYSUTCDATETIME(), @p1
+    WHERE EXISTS (SELECT 1 FROM [dbo].[Portal_Users] WHERE [UserID] = @p0);
+END",
+                userId,
+                NormalizeReason(reason),
+                InitialSecurityVersion);
+        }

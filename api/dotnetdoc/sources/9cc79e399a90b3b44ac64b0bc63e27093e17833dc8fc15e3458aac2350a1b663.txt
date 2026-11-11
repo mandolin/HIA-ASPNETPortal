@@ -1,0 +1,16 @@
+        private void ShowUnavailable(string message)
+        {
+            // <lang>
+            //   <zh-CN>不可用路径不暴露数据服务内部异常，也不保留旧列表内容。</zh-CN>
+            //   <en>The unavailable path does not expose data-service internals and does not retain stale list content.</en>
+            // </lang>
+            MessageLabel.Text = message ?? string.Empty;
+            ResultLabel.Text = string.Empty;
+            // <lang>
+            //   <zh-CN>显式抑制空态：本页失败时表格仍然可见，若再渲染"暂无协同事项"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state explicitly: this page keeps the table visible on failure, so rendering "no collaboration items" would contradict the error message shown above.</en>
+            // </lang>
+            itemsEmptyStateRowCount = null;
+            ItemsRepeater.DataSource = Enumerable.Empty<CollaborationItemAdminRow>();
+            ItemsRepeater.DataBind();
+        }

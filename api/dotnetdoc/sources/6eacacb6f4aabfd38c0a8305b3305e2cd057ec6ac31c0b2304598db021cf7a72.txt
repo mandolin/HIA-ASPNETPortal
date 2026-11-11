@@ -1,0 +1,16 @@
+        private static ReferenceDataItem CreateItem(string referenceSetKey, string valueKey, string displayName, int sortOrder)
+        {
+            // <lang>
+            //   <zh-CN>兼容项不分配数据库标识，也不携带说明字段，避免被误解为已经持久化的运营目录记录。</zh-CN>
+            //   <en>Compatibility items do not assign database identifiers or descriptions, avoiding confusion with persisted operational catalog records.</en>
+            // </lang>
+            return new ReferenceDataItem
+            {
+                ReferenceSetKey = referenceSetKey,
+                ValueKey = valueKey,
+                DisplayName = displayName,
+                SortOrder = sortOrder,
+                IsActive = true,
+                IsSystemSeed = true
+            };
+        }

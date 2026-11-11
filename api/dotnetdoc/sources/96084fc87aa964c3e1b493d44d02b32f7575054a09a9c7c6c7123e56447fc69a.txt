@@ -1,0 +1,8 @@
+        public static bool MatchesDeclaredContentType(string contentType)
+        {
+            // <lang>
+            //   <zh-CN>忽略大小写的精确比较，避免把带参数的复合类型误判为一致。</zh-CN>
+            //   <en>Exact case-insensitive comparison so compound types with parameters are not mistaken for a match.</en>
+            // </lang>
+            return string.Equals(contentType, PackageContentType, StringComparison.OrdinalIgnoreCase);
+        }

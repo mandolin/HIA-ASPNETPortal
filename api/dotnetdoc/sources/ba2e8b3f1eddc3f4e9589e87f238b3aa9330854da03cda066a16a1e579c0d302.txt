@@ -1,0 +1,13 @@
+        protected void CancelBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>取消不写入数据，只在上下文有效时回到已校验的门户内地址。</zh-CN>
+            //   <en>Cancel performs no data write and returns to a verified in-Portal address only when the context is valid.</en>
+            // </lang>
+            if (!_hasValidEditContext)
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

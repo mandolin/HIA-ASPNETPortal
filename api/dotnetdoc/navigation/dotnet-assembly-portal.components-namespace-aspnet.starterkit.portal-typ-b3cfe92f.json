@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaluserregistrationstatuses",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaluserregistrationstatuses:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaluserregistrationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaluserregistrationstatuses.approved",
+      "kind": "entry",
+      "label": "Approved",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaluserregistrationstatuses.approved",
+      "sourcePath": "src/Portal.Components/PortalUserRegistrationStatuses.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaluserregistrationstatuses.approved",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaluserregistrationsta-e52e0b18.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaluserregistrationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaluserregistrationstatuses.pendingapproval",
+      "kind": "entry",
+      "label": "PendingApproval",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaluserregistrationstatuses.pendingapproval",
+      "sourcePath": "src/Portal.Components/PortalUserRegistrationStatuses.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaluserregistrationstatuses.pendingapproval",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaluserregistrationsta-1aa2323d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaluserregistrationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaluserregistrationstatuses.rejected",
+      "kind": "entry",
+      "label": "Rejected",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaluserregistrationstatuses.rejected",
+      "sourcePath": "src/Portal.Components/PortalUserRegistrationStatuses.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaluserregistrationstatuses.rejected",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaluserregistrationsta-c4f05005.html"
+    }
+  ]
+}

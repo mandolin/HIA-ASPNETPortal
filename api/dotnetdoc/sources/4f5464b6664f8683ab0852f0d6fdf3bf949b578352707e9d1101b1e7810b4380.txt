@@ -1,0 +1,1 @@
+        IList<PortalWorkItemInfo> GetAdminWorkItems(string status, int take);

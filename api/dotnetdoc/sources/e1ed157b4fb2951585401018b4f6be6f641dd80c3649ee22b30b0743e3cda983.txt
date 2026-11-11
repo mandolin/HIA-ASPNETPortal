@@ -1,0 +1,42 @@
+    public sealed class PortalWorkItemQueryResult
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>指示本次查询是否成功完成；失败时 <see cref="Items"/> 为空且不表示"确实没有待办"。</zh-CN>
+        ///   <en>Indicates whether the query completed successfully. When it is <c>false</c>, <see cref="Items"/> is empty and does not mean "there are definitely no work items".</en>
+        /// </lang>
+        /// </summary>
+        public bool Succeeded { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最新优先的待办投影列表；成功且无命中时为空列表，永不为空引用。</zh-CN>
+        ///   <en>A newest-first list of work-item projections. It is an empty list on a successful query with no matches and is never a null reference.</en>
+        /// </lang>
+        /// </summary>
+        public IList<PortalWorkItemInfo> Items { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用成功标记与投影列表初始化查询结果；列表为空引用时归一化为只读空列表。</zh-CN>
+        ///   <en>Initializes the query result with a success flag and a projection list; a null list is normalized to an empty read-only list.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="succeeded">
+        /// <l>
+        ///   <zh-CN>查询是否成功完成。</zh-CN>
+        ///   <en>Whether the query completed successfully.</en>
+        /// </l>
+        /// </param>
+        /// <param name="items">
+        /// <l>
+        ///   <zh-CN>待办投影列表；可为空引用，此时归一化为只读空列表。</zh-CN>
+        ///   <en>The work-item projection list; it may be null, in which case it is normalized to an empty read-only list.</en>
+        /// </l>
+        /// </param>
+        public PortalWorkItemQueryResult(bool succeeded, IList<PortalWorkItemInfo> items)
+        {
+            Succeeded = succeeded;
+            Items = items ?? (IList<PortalWorkItemInfo>)new List<PortalWorkItemInfo>();
+        }
+    }

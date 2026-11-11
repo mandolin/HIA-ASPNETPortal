@@ -1,0 +1,14 @@
+        internal PortalModuleStyleResource(string packageId, string virtualPath)
+        {
+            // <lang>
+            //   <zh-CN>稳定包标识仅用于把输出样式归属到 catalog 已解析的包；空值兼容旧调用方，且不在此处推断授权或包存在性。</zh-CN>
+            //   <en>The stable package identifier only associates the output style with the package resolved by the catalog; an empty value preserves caller compatibility and does not infer authorization or package existence here.</en>
+            // </lang>
+            PackageId = packageId ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>虚拟路径是页面注入器随后解析的站内引用；其 manifest/路径信任已由上游建立，本 DTO 不进行第二次路径处理。</zh-CN>
+            //   <en>The virtual path is a site-local reference later resolved by the page injector; its manifest and path trust were established upstream, so this DTO performs no second path transformation.</en>
+            // </lang>
+            VirtualPath = virtualPath ?? string.Empty;
+        }

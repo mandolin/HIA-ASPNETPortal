@@ -1,0 +1,95 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:base:t-system.exception",
+      "kind": "relation",
+      "label": "Base: System.Exception",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:interface:t-system.runtime.interopservices._exception",
+      "kind": "relation",
+      "label": "Interface: System.Runtime.InteropServices._Exception",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:interface:t-system.runtime.serialization.iserializable",
+      "kind": "relation",
+      "label": "Interface: System.Runtime.Serialization.ISerializable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/AuditSummaryTooLongException.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexcept-e05bf7bf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:entry:hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string",
+      "sourcePath": "src/Portal.Components/AuditSummaryTooLongException.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.auditsummarytoolongexception.-ctor-system.int32-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.auditsummarytoolongexcept-f984d71e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "kind": "entry",
+      "label": "ActualLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "sourcePath": "src/Portal.Components/AuditSummaryTooLongException.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.auditsummarytoolongexception.actuallength",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexcept-97d6086d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.auditsummarytoolongexception:entry:hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
+      "kind": "entry",
+      "label": "MaxLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
+      "sourcePath": "src/Portal.Components/AuditSummaryTooLongException.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.auditsummarytoolongexception.maxlength",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.auditsummarytoolongexcept-97449edf.html"
+    }
+  ]
+}

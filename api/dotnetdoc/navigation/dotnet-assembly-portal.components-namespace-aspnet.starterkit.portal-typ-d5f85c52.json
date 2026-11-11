@@ -1,0 +1,85 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
+      "kind": "entry",
+      "label": "CreateRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createreq-97fcce90.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getadminrequests-system.string-system.int32",
+      "kind": "entry",
+      "label": "GetAdminRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getadminrequests-system.string-system.int32",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.getadminrequests-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getadminr-52dc05e3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
+      "kind": "entry",
+      "label": "GetRecentByUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecent-2e9a040e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaa-67f3de9d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "kind": "entry",
+      "label": "ResubmitRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitr-0438037e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "kind": "entry",
+      "label": "ReviewRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewreq-97fd26b4.html"
+    }
+  ]
+}

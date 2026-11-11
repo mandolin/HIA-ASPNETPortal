@@ -1,0 +1,5 @@
+        internal static string Common_StatusClosed {
+            get {
+                return ResourceManager.GetString("Common_StatusClosed", resourceCulture);
+            }
+        }

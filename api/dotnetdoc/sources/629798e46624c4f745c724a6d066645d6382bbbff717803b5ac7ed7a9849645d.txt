@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_LabelEmploymentStatus {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelEmploymentStatus", resourceCulture);
+            }
+        }

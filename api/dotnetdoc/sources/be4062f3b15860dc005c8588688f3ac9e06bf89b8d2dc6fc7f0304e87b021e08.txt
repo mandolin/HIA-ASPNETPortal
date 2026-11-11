@@ -1,0 +1,5 @@
+        internal static string EditDocs_SectionBrowseUrl {
+            get {
+                return ResourceManager.GetString("EditDocs_SectionBrowseUrl", resourceCulture);
+            }
+        }

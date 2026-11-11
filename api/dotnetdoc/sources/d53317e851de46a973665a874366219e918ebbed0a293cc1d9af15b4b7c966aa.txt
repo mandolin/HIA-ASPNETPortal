@@ -1,0 +1,8 @@
+        public static IEnumerable<PortalSettingDefinition> GetAll()
+        {
+            // <lang>
+            //   <zh-CN>返回同一只读集合而非可变副本；定义和顺序保持 registry 的静态契约，调用方只能枚举，不能借此改变策略。</zh-CN>
+            //   <en>Return the same read-only collection rather than a mutable copy; definitions and order retain the registry's static contract, so callers can enumerate but cannot change policy through it.</en>
+            // </lang>
+            return AllDefinitions;
+        }

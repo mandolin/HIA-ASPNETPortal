@@ -1,0 +1,73 @@
+        public static void WriteRolesCookie(
+            HttpResponse response,
+            HttpRequest request,
+            string userName,
+            long securityVersion,
+            string[] roles,
+            bool isPersistent)
+        {
+            // <lang>
+            //   <zh-CN>Forms Authentication 票据和持久 Cookie 使用同一 timeout，避免二者产生不同过期边界。</zh-CN>
+            //   <en>Use the same timeout for the Forms Authentication ticket and persistent cookie to avoid divergent expiration boundaries.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>记录角色票据签发时间，与主身份票据使用同一 Forms Authentication timeout。</zh-CN>
+            //   <en>Record the role-ticket issuance time using the same Forms Authentication timeout as the main identity ticket.</en>
+            // </lang>
+            DateTime issuedAt = DateTime.Now;
+
+            // <lang>
+            //   <zh-CN>计算角色票据过期边界，持久 Cookie 只复用该时间而不自行延长。</zh-CN>
+            //   <en>Compute the role-ticket expiration boundary; a persistent cookie reuses it without extending it.</en>
+            // </lang>
+            DateTime expiresAt = issuedAt.Add(FormsAuthentication.Timeout);
+
+            // <lang>
+            //   <zh-CN>将安全版本和角色集合编码为兼容 UserData；角色列表由受控解析器规范化。</zh-CN>
+            //   <en>Encode security version and roles into compatible UserData; the controlled role parser owns normalization.</en>
+            // </lang>
+            string roleData = BuildRoleData(securityVersion, roles);
+
+            // <lang>
+            //   <zh-CN>创建加密角色票据，生命周期和持久性由调用方显式选择。</zh-CN>
+            //   <en>Create the encrypted role ticket with lifetime and persistence explicitly selected by the caller.</en>
+            // </lang>
+            var ticket = new FormsAuthenticationTicket(
+                1,
+                userName,
+                issuedAt,
+                expiresAt,
+                isPersistent,
+                roleData);
+
+            // <lang>
+            //   <zh-CN>当前保持 HttpOnly 与虚拟目录 Path；Secure/SameSite 由传输安全策略统一应用，默认与历史行为一致（均不下发）。</zh-CN>
+            //   <en>Keep HttpOnly and the virtual-directory Path; Secure/SameSite are applied centrally by the transport-security policy and default to historical behavior (neither emitted).</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>封装加密票据为角色 Cookie，并复用 Path 规则；不把角色文本直接写入 Cookie value。</zh-CN>
+            //   <en>Wrap the encrypted ticket as the role cookie and reuse the Path rule; never write role text directly to the cookie value.</en>
+            // </lang>
+            var cookie = new HttpCookie(RolesCookieName, FormsAuthentication.Encrypt(ticket))
+            {
+                HttpOnly = true,
+                Path = GetCookiePath(request)
+            };
+
+            // <lang>
+            //   <zh-CN>应用传输安全策略，使角色 Cookie 与身份票据在 Secure/SameSite 上保持一致；默认不额外下发任何属性。</zh-CN>
+            //   <en>Apply the transport-security policy so the role cookie stays consistent with the identity ticket for Secure/SameSite; by default no extra attribute is emitted.</en>
+            // </lang>
+            PortalAuthenticationCookieSettings.ApplyTo(cookie);
+
+            if (isPersistent)
+            {
+                // <lang>
+                //   <zh-CN>仅持久登录写入过期时间；会话登录保持浏览器会话 Cookie 语义。</zh-CN>
+                //   <en>Write an expiration only for persistent sign-in; session sign-in retains browser-session cookie semantics.</en>
+                // </lang>
+                cookie.Expires = expiresAt;
+            }
+
+            response.Cookies.Add(cookie);
+        }

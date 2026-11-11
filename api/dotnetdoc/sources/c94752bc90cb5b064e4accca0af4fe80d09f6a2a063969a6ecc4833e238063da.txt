@@ -1,0 +1,16 @@
+        private static bool ContainsControlCharacter(string value)
+        {
+            // <lang>
+            //   <zh-CN>逐字符检查以覆盖换行、制表等不可进入单行字段的控制码；调用方已保证 value 非空。</zh-CN>
+            //   <en>Inspect each character to cover newline, tab, and other control codes excluded from single-line fields; callers provide a non-null value.</en>
+            // </lang>
+            foreach (char character in value)
+            {
+                if (char.IsControl(character))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }

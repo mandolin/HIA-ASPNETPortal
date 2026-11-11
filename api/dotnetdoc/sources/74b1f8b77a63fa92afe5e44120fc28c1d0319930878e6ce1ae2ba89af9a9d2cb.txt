@@ -1,0 +1,28 @@
+        public static string SignPackage(byte[] content, string privateKeyXml)
+        {
+            // <lang>
+            //   <zh-CN>拒绝 null 内容，避免对「未取到内容」生成签名。</zh-CN>
+            //   <en>Reject null content so a signature is never produced for "content not obtained".</en>
+            // </lang>
+            if (content == null)
+            {
+                throw new ArgumentNullException("content");
+            }
+
+            // <lang>
+            //   <zh-CN>私钥文本缺失交由 FromXmlString 抛 CryptographicException，由调用方处理；不在本方法内吞掉。</zh-CN>
+            //   <en>A missing key is left to FromXmlString to raise CryptographicException for the caller; it is not swallowed here.</en>
+            // </lang>
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(privateKeyXml);
+                using (SHA256 algorithm = SHA256.Create())
+                {
+                    // <lang>
+                    //   <zh-CN>与验签使用同一哈希算法对象类型，确保签名/验签口径一致。</zh-CN>
+                    //   <en>Use the same hash-algorithm object type as verification so signing and verifying share one format.</en>
+                    // </lang>
+                    return Convert.ToBase64String(rsa.SignData(content, algorithm));
+                }
+            }
+        }

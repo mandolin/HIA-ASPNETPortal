@@ -1,0 +1,6 @@
+                            <%--
+                              <lang>
+                                <zh-CN>密码与确认密码的隐藏密文字段仅用于提交前保护，仍属于客户端回传；服务器必须重新验证匹配、策略和安全存储。</zh-CN>
+                                <en>The password and confirmation ciphertext fields only support pre-submit protection and remain client-posted data; the server must revalidate matching, policy, and secure storage.</en>
+                              </lang>
+                            --%>

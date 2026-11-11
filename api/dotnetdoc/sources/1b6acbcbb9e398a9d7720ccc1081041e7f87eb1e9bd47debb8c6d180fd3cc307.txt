@@ -1,0 +1,7 @@
+        private void IncrementSecurityVersions(IEnumerable<int> userIds, string reason)
+        {
+            foreach (int userId in userIds.Distinct())
+            {
+                IncrementSecurityVersion(userId, reason);
+            }
+        }

@@ -1,0 +1,11 @@
+        public static bool IsRegisteredAction(string action)
+        {
+            // <lang>
+            //   <zh-CN>Ordinal 精确比较，不 Trim、不折叠大小写，避免相似字符串被误当作已登记动作。</zh-CN>
+            //   <en>Ordinal exact comparison without trimming or case folding so merely similar strings are not mistaken for registered actions.</en>
+            // </lang>
+            return string.Equals(action, PortalOnlinePackageAuditEvents.UploadValidated, StringComparison.Ordinal) ||
+                   string.Equals(action, PortalOnlinePackageAuditEvents.InstallConfirmed, StringComparison.Ordinal) ||
+                   string.Equals(action, PortalOnlinePackageAuditEvents.StagedPackageDiscarded, StringComparison.Ordinal) ||
+                   string.Equals(action, PortalOnlinePackageAuditEvents.RollbackDrill, StringComparison.Ordinal);
+        }

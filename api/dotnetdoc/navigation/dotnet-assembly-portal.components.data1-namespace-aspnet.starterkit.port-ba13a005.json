@@ -1,0 +1,121 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:base:t-system.data.entity.dbcontext",
+      "kind": "relation",
+      "label": "Base: System.Data.Entity.DbContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:interface:t-system.data.entity.infrastructure.iobjectcontextadapter",
+      "kind": "relation",
+      "label": "Interface: System.Data.Entity.Infrastructure.IObjectContextAdapter",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcfgdbcontext.-ctor-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcfgdbcontext.-ctor-system.string",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcfgdbcontext.-ctor-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcfgdbcontext.-ctor--66e6e657.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.globals",
+      "kind": "entry",
+      "label": "Globals",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.globals",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.globals",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.global-44898630.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.moduledefinitions",
+      "kind": "entry",
+      "label": "ModuleDefinitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.moduledefinitions",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.moduledefinitions",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.module-cb5701fa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.modules",
+      "kind": "entry",
+      "label": "Modules",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.modules",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.modules",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.module-0d75be55.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.settings",
+      "kind": "entry",
+      "label": "Settings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.settings",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.settings",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.settin-23fb0e71.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.tabs",
+      "kind": "entry",
+      "label": "Tabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.tabs",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.tabs",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.tabs-e4f84768.html"
+    }
+  ]
+}

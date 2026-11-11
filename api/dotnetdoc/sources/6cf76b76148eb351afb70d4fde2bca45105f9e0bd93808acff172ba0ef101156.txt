@@ -1,0 +1,1 @@
+        IEventItem GetSingleEvent(int itemId);

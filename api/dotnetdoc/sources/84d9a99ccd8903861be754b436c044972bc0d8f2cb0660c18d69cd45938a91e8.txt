@@ -1,0 +1,4 @@
+        public static PortalLoginPasswordPublicKey IssuePasswordSubmissionKey(HttpContext context)
+        {
+            return PortalLoginPasswordCrypto.IssueLoginPasswordKey(context);
+        }

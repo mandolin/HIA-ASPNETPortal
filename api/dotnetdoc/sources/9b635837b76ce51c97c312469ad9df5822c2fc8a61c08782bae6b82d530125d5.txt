@@ -1,0 +1,184 @@
+        public static bool TryDecryptSubmittedPasswords(
+            HttpContext context,
+            string[] encryptedPasswords,
+            out string[] passwords,
+            out string failureCode,
+            out string eventId)
+        {
+            // <lang>
+            //   <zh-CN>初始化全部 out 参数，避免 Session、输入或解密失败时泄露上一次调用的数据。</zh-CN>
+            //   <en>Initialize all out parameters so Session, input, or decryption failures cannot leak data from a prior call.</en>
+            // </lang>
+            passwords = new string[0];
+            failureCode = string.Empty;
+            eventId = string.Empty;
+
+            // <lang>
+            //   <zh-CN>Session 是一次性私钥的存储边界；上下文或 Session 缺失时不尝试读取密文。</zh-CN>
+            //   <en>Session is the storage boundary for the one-time private key; when context or Session is missing, do not process ciphertext.</en>
+            // </lang>
+            if (context == null || context.Session == null)
+            {
+                // <lang>
+                //   <zh-CN>失败码只表达缺少运行条件，诊断消息不包含密码或密文。</zh-CN>
+                //   <en>The failure code describes only the missing runtime condition; the diagnostic message contains no password or ciphertext.</en>
+                // </lang>
+                failureCode = "NoSession";
+                eventId = PortalDiagnostics.Warn(
+                    "LoginPasswordEncryption",
+                    "Encrypted password submission could not be decrypted because Session is unavailable.",
+                    context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>没有字段就没有可消费的密文；拒绝空数组以免误把空输入当作成功。</zh-CN>
+            //   <en>With no fields there is no ciphertext to consume; reject an empty array rather than treating empty input as success.</en>
+            // </lang>
+            if (encryptedPasswords == null || encryptedPasswords.Length == 0)
+            {
+                failureCode = "MissingCiphertext";
+                eventId = PortalDiagnostics.Warn(
+                    "LoginPasswordEncryption",
+                    "Encrypted password submission did not contain any ciphertext fields.",
+                    context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>为每个字段建立去除首尾空白的临时数组；原始请求数组不被改写，明文仍只在后续当前请求范围内生成。</zh-CN>
+            //   <en>Build a trimmed temporary array for each field; do not mutate the request array, and create plaintext only within the later current-request scope.</en>
+            // </lang>
+            string[] trimmedEncryptedPasswords = new string[encryptedPasswords.Length];
+            for (int index = 0; index < encryptedPasswords.Length; index++)
+            {
+                // <lang>
+                //   <zh-CN>把 null 统一成空字符串再检查，保持字段数量和调用方顺序不变。</zh-CN>
+                //   <en>Normalize null to an empty string before checking so field count and caller order remain unchanged.</en>
+                // </lang>
+                trimmedEncryptedPasswords[index] = encryptedPasswords[index] == null
+                    ? string.Empty
+                    : encryptedPasswords[index].Trim();
+
+                if (trimmedEncryptedPasswords[index].Length == 0)
+                {
+                    // <lang>
+                    //   <zh-CN>任一字段缺失都会拒绝整次提交，避免部分解密结果被调用方误用。</zh-CN>
+                    //   <en>Reject the whole submission when any field is missing so callers cannot misuse a partial decryption result.</en>
+                    // </lang>
+                    failureCode = "MissingCiphertext";
+                    eventId = PortalDiagnostics.Warn(
+                        "LoginPasswordEncryption",
+                        "Encrypted password submission was missing one or more ciphertext fields.",
+                        context);
+                    return false;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>先取出私钥和签发时间，再立即清除 Session；无论后续校验或 RSA 解密结果如何，该密钥都只能消费一次。</zh-CN>
+            //   <en>Read the private key and issue time, then clear Session immediately; regardless of later validation or RSA results, the key is consumed only once.</en>
+            // </lang>
+            string privateKeyXml = context.Session[PrivateKeySessionKey] as string;
+            object issuedUtcValue = context.Session[IssuedUtcSessionKey];
+            ClearLoginPasswordKey(context);
+
+            if (string.IsNullOrWhiteSpace(privateKeyXml))
+            {
+                // <lang>
+                //   <zh-CN>私钥缺失表示提交无法与当前 Session 配对，按低敏失败分类结束。</zh-CN>
+                //   <en>A missing private key means the post cannot be paired with the current Session; finish with a low-sensitivity failure category.</en>
+                // </lang>
+                failureCode = "MissingPrivateKey";
+                eventId = PortalDiagnostics.Warn(
+                    "LoginPasswordEncryption",
+                    "Encrypted password submission could not be decrypted because the one-time private key was missing.",
+                    context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>只接受 DateTime 且未超过五分钟的签发记录；类型不符或过期都拒绝解密。</zh-CN>
+            //   <en>Accept only a DateTime issue record within five minutes; reject decryption for a wrong type or an expired record.</en>
+            // </lang>
+            if (!(issuedUtcValue is DateTime) || DateTime.UtcNow - (DateTime)issuedUtcValue > KeyLifetime)
+            {
+                // <lang>
+                //   <zh-CN>过期私钥不能回退为明文或重试同一密文，调用方只能重新获取公钥。</zh-CN>
+                //   <en>An expired private key must not fall back to plaintext or retry the same ciphertext; callers must obtain a new public key.</en>
+                // </lang>
+                failureCode = "ExpiredPrivateKey";
+                eventId = PortalDiagnostics.Warn(
+                    "LoginPasswordEncryption",
+                    "Encrypted password submission could not be decrypted because the one-time private key expired.",
+                    context);
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>仅在 Session、字段和时效门禁全部通过后分配明文数组，降低明文驻留范围。</zh-CN>
+                //   <en>Allocate the plaintext array only after Session, field, and lifetime gates pass, minimizing plaintext residency.</en>
+                // </lang>
+                passwords = new string[trimmedEncryptedPasswords.Length];
+
+                // <lang>
+                //   <zh-CN>从一次性 XML 私钥恢复 RSA 解密器，生命周期限制在当前 try 块。</zh-CN>
+                //   <en>Restore the RSA decryptor from the one-time XML private key and limit its lifetime to the current try block.</en>
+                // </lang>
+                using (var rsa = new RSACryptoServiceProvider())
+                {
+                    // <lang>
+                    //   <zh-CN>导入私钥仅用于当前批次，不把密钥写回 Session 或任何输出。</zh-CN>
+                    //   <en>Import the private key only for this batch; never write it back to Session or any output.</en>
+                    // </lang>
+                    rsa.FromXmlString(privateKeyXml);
+                    for (int index = 0; index < trimmedEncryptedPasswords.Length; index++)
+                    {
+                        // <lang>
+                        //   <zh-CN>按提交顺序解码每个 Base64 密文并使用既有 RSA PKCS#1 v1.5 参数解密。</zh-CN>
+                        //   <en>Decode each Base64 ciphertext in submission order and decrypt it with the existing RSA PKCS#1 v1.5 setting.</en>
+                        // </lang>
+                        byte[] cipherBytes = Convert.FromBase64String(trimmedEncryptedPasswords[index]);
+
+                        // <lang>
+                        //   <zh-CN>明文只转换为 UTF-8 字符串并放入当前 out 数组，不记录、不持久化。</zh-CN>
+                        //   <en>Convert plaintext only to a UTF-8 string in the current out array; do not log or persist it.</en>
+                        // </lang>
+                        byte[] plainBytes = rsa.Decrypt(cipherBytes, false);
+                        passwords[index] = Encoding.UTF8.GetString(plainBytes);
+                    }
+                }
+
+                return true;
+            }
+            catch (FormatException exception)
+            {
+                // <lang>
+                //   <zh-CN>Base64 格式错误只映射为稳定失败码和诊断事件，异常对象交给低敏诊断层处理。</zh-CN>
+                //   <en>Map invalid Base64 only to a stable failure code and diagnostic event; let the low-sensitivity diagnostics layer handle the exception object.</en>
+                // </lang>
+                failureCode = "InvalidCiphertext";
+                eventId = PortalDiagnostics.Error(
+                    "LoginPasswordEncryption",
+                    "Encrypted password submission was not valid Base64.",
+                    exception,
+                    context);
+                return false;
+            }
+            catch (CryptographicException exception)
+            {
+                // <lang>
+                //   <zh-CN>RSA 解密失败不回退为明文；返回稳定分类并清除已消费的密钥。</zh-CN>
+                //   <en>Do not fall back to plaintext after RSA decryption fails; return a stable category while the consumed key remains cleared.</en>
+                // </lang>
+                failureCode = "DecryptFailed";
+                eventId = PortalDiagnostics.Error(
+                    "LoginPasswordEncryption",
+                    "Encrypted password submission RSA decryption failed.",
+                    exception,
+                    context);
+                return false;
+            }
+        }

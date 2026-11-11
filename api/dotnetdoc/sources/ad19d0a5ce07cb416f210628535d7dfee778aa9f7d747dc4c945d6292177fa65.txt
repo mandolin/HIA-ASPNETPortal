@@ -1,0 +1,8 @@
+        public static bool AreDetailedErrorsEnabled()
+        {
+            // <lang>
+            //   <zh-CN>只读取既有注册设置并返回其布尔事实；不读取错误正文、改变 ASP.NET 配置或决定当前请求的访问权。</zh-CN>
+            //   <en>Read only the established registered setting and return its Boolean fact; do not read error bodies, alter ASP.NET configuration, or decide current-request access.</en>
+            // </lang>
+            return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.DiagnosticsDetailedErrors);
+        }

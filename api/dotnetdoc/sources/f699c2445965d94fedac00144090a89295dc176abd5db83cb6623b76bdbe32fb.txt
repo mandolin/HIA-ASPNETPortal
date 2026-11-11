@@ -1,0 +1,8 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>所有提示先 HTML 编码并将空值归一化，避免异常文本进入标记输出。</zh-CN>
+            //   <en>HTML-encode every message and normalize null to an empty string before it reaches markup output.</en>
+            // </lang>
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

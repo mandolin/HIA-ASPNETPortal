@@ -1,0 +1,8 @@
+        public IEnumerable<IEventItem> GetEvents(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>沿用旧门户语义，事件过期判断使用服务器本地时间；时区统一治理由更高层运行环境负责。</zh-CN>
+            //   <en>Keep the legacy portal semantics where event expiration uses server local time; timezone unification is handled by the higher-level runtime environment.</en>
+            // </lang>
+            return _context.Events.Where(i => i.ModuleId == moduleId && i.ExpireDate > DateTime.Now).ToList<IEventItem>();
+        }

@@ -1,0 +1,18 @@
+    public partial class EditAccessDenied : PortalPage<EditAccessDenied>
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>保持页面进入统一门户生命周期；该空处理器不把 UI 提示升级为写权限。</zh-CN>
+        ///   <en>Keeps the page in the shared portal-page lifecycle without upgrading a UI message into write permission.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l zh-CN="事件源。" en="Event source." />
+        /// </param>
+        /// <param name="e">
+        /// <l zh-CN="事件参数。" en="Event arguments." />
+        /// </param>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
+    }

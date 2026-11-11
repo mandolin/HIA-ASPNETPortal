@@ -1,0 +1,10 @@
+        public TabsDb(PortalCfgDbContext context, IPortalDb portalDb)
+        {
+            _portalDb = portalDb;
+            _context = context;
+            // <lang>
+            //   <zh-CN>构造期保留一份 Tab 快照；写入方法会显式刷新，避免旧后台同一请求内读到过期排序或角色串。</zh-CN>
+            //   <en>The constructor keeps a Tab snapshot; write methods refresh it explicitly so the legacy admin flow does not read stale ordering or role strings within the same request.</en>
+            // </lang>
+            _tabs = _context.Tabs.ToList();
+        }

@@ -1,0 +1,24 @@
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>事件回调不能仅依赖首次加载的授权结果；每次提交均重新确认查看权限或兼容管理权限。</zh-CN>
+            //   <en>An event callback cannot rely only on authorization from the initial load; re-confirm the view permission or compatible administration permission on every submission.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessWorkItemsView,
+                PortalPermissionKeys.BusinessWorkItemsAdmin))
+            {
+                // <lang>
+                //   <zh-CN>授权组件已处理拒绝响应；立即返回，避免未授权 postback 使用其提交的筛选值触发任何数据绑定。</zh-CN>
+                //   <en>The authorization component has handled the denial response; return immediately so an unauthorized postback cannot use its submitted filter value to trigger any data binding.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>复用当前控件状态刷新列表，不重置筛选默认值；默认值初始化仍仅属于首次加载路径。</zh-CN>
+            //   <en>Refresh the list from current control state without resetting the filter default; default initialization remains solely on the initial-load path.</en>
+            // </lang>
+            BindWorkItems();
+        }

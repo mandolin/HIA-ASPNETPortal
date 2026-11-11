@@ -1,0 +1,34 @@
+        private static IEnumerable<string> GetCultureCandidateKeys(CultureInfo culture)
+        {
+            var keys = new List<string>();
+            if (culture == null)
+            {
+                return keys;
+            }
+
+            // <lang>
+            //   <zh-CN>完整文化名优先：管理员按 `ja-JP` 填写时不应被 `ja` 抢先命中，地区差异才有意义。</zh-CN>
+            //   <en>The full culture name comes first: when an administrator writes `ja-JP`, a bare `ja` must not win, so regional differences stay meaningful.</en>
+            // </lang>
+            if (!string.IsNullOrWhiteSpace(culture.Name))
+            {
+                keys.Add(culture.Name);
+            }
+
+            // <lang>
+            //   <zh-CN>父文化名：非特定文化（Invariant）没有意义，跳过以避免用空键去匹配。</zh-CN>
+            //   <en>Parent culture name: the invariant culture carries no meaning and is skipped so no empty key is matched.</en>
+            // </lang>
+            CultureInfo parent = culture.Parent;
+            if (parent != null && !string.IsNullOrWhiteSpace(parent.Name))
+            {
+                keys.Add(parent.Name);
+            }
+
+            if (!string.IsNullOrWhiteSpace(culture.TwoLetterISOLanguageName))
+            {
+                keys.Add(culture.TwoLetterISOLanguageName);
+            }
+
+            return keys;
+        }

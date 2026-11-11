@@ -1,0 +1,11 @@
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrganizationUnitItem>()
+                .HasKey(item => item.OrganizationUnitId);
+
+            modelBuilder.Entity<EmployeeItem>()
+                .HasKey(item => item.EmployeeId);
+
+            modelBuilder.Entity<UserEmployeeBindingItem>()
+                .HasKey(item => item.BindingId);
+        }

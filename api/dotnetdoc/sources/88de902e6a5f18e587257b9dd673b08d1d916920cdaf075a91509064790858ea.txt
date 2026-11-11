@@ -1,0 +1,55 @@
+        public EmployeeDirectoryWriteResult BindUserToEmployee(UserEmployeeBindingSaveRequest request)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return EmployeeDirectoryWriteResult.Failed("P6.3 binding schema is unavailable.");
+            }
+
+            UserEmployeeBindingSaveRequest normalized = NormalizeSaveRequest(request);
+            string validationMessage;
+            if (!TryValidateSaveRequest(normalized, out validationMessage))
+            {
+                return EmployeeDirectoryWriteResult.Failed(validationMessage);
+            }
+
+            if (!UserExists(normalized.UserId))
+            {
+                return EmployeeDirectoryWriteResult.Missing("The Portal user does not exist.");
+            }
+
+            EmployeeBindingProjection employee = GetEmployeeByCode(normalized.EmployeeCode);
+            if (employee == null)
+            {
+                return EmployeeDirectoryWriteResult.Missing("The employee does not exist.");
+            }
+
+            if (!IsEmployeeStatusAllowedForActiveBinding(employee.EmploymentStatus))
+            {
+                return EmployeeDirectoryWriteResult.Failed("Only Active or Pending employees may receive an active binding.");
+            }
+
+            if (HasActiveBindingForUser(normalized.UserId))
+            {
+                return EmployeeDirectoryWriteResult.Failed("The Portal user already has an active employee binding.");
+            }
+
+            if (HasActiveBindingForEmployee(employee.EmployeeId))
+            {
+                return EmployeeDirectoryWriteResult.Failed("The employee already has an active Portal-user binding.");
+            }
+
+            int bindingId = _context.Database.SqlQuery<int>(
+                @"
+INSERT INTO [dbo].[PortalBiz_UserEmployeeBindings]
+    ([UserId], [EmployeeId], [BindingStatus], [BoundBy], [Reason], [UpdatedBy])
+VALUES
+    (@UserId, @EmployeeId, N'Active', @ActorName, @Reason, @ActorName);
+
+SELECT CAST(SCOPE_IDENTITY() AS INT);",
+                IntParameter("@UserId", normalized.UserId),
+                IntParameter("@EmployeeId", employee.EmployeeId),
+                TextParameter("@ActorName", normalized.ActorName, 100),
+                TextParameter("@Reason", normalized.Reason, 200)).Single();
+
+            return EmployeeDirectoryWriteResult.Success(bindingId, "Employee binding saved.");
+        }

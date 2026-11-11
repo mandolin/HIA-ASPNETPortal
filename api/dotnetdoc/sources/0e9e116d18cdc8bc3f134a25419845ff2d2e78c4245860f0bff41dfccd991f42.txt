@@ -1,0 +1,23 @@
+        private void ShowUnavailable(string message)
+        {
+            // <lang>
+            //   <zh-CN>不可用状态清除三组结果，避免用户看到上一次成功读取的陈旧目录数据。</zh-CN>
+            //   <en>The unavailable state clears all three result sets so users cannot see stale data from a previous successful read.</en>
+            // </lang>
+            MessageLabel.Text = message ?? string.Empty;
+            SchemaStatusLabel.Text = lang.Admin_EmployeeDirectory_MessageSchemaUnavailableShort;
+            ResultLabel.Text = string.Empty;
+            // <lang>
+            //   <zh-CN>显式抑制三个列表的空态：本页失败时表格仍然可见，若再渲染"暂无…"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state for all three lists explicitly: this page keeps the tables visible on failure, so rendering "nothing here" would contradict the error message shown above.</en>
+            // </lang>
+            organizationsEmptyStateRowCount = null;
+            employeesEmptyStateRowCount = null;
+            bindingsEmptyStateRowCount = null;
+            OrganizationsRepeater.DataSource = Enumerable.Empty<OrganizationDirectoryRow>();
+            OrganizationsRepeater.DataBind();
+            EmployeesRepeater.DataSource = Enumerable.Empty<EmployeeDirectoryRow>();
+            EmployeesRepeater.DataBind();
+            BindingsRepeater.DataSource = Enumerable.Empty<UserEmployeeBindingDirectoryRow>();
+            BindingsRepeater.DataBind();
+        }

@@ -1,0 +1,1 @@
+        public IList<string> RoleNames { get; private set; }

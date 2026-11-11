@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>新增角色是写库入口，仍通过 AddRole_Click 执行服务器端创建、命名约束和授权边界。</zh-CN>
+                    <en>Adding a role is a persistence entry point and still uses AddRole_Click for server-side creation, naming constraints, and authorization boundaries.</en>
+                </lang>
+            --%>

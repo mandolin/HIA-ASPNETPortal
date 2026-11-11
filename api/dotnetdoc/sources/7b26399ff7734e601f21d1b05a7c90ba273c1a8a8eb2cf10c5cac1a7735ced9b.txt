@@ -1,0 +1,43 @@
+        private static IEnumerable<string> ReadProfileIncludes(string profileName, IList<string> invalidEntries)
+        {
+            // <lang>
+            //   <zh-CN>该键只由已经通过稳定名称门禁的 Profile 与固定后缀组成，避免未验证配置文本控制 appSettings 读取位置。</zh-CN>
+            //   <en>This key consists only of a Profile that already passed the stable-name gate and a fixed suffix, preventing unvalidated configuration text from controlling the appSettings read location.</en>
+            // </lang>
+            string key = ProfileKeyPrefix + profileName + ProfileIncludesSuffix;
+
+            // <lang>
+            //   <zh-CN>部署配置优先；只有空白时才使用同名内置默认 include，不把缺失配置解释为任意包或任意 Profile。</zh-CN>
+            //   <en>Deployment configuration takes precedence; use the same-name built-in default include only when blank, never interpreting a missing entry as arbitrary packages or Profiles.</en>
+            // </lang>
+            string configured = ConfigurationManager.AppSettings[key];
+            if (string.IsNullOrWhiteSpace(configured) && DefaultProfileIncludes.ContainsKey(profileName))
+            {
+                configured = DefaultProfileIncludes[profileName];
+            }
+
+            // <lang>
+            //   <zh-CN>保留顺序化直接 include 列表供递归器处理；跨分支去重和循环判断由调用方的集合承担。</zh-CN>
+            //   <en>Keep an ordered direct-include list for the recursive expander; cross-branch deduplication and cycle detection belong to the caller's sets.</en>
+            // </lang>
+            var includes = new List<string>();
+            foreach (string include in SplitCsv(configured))
+            {
+                // <lang>
+                //   <zh-CN>每个 CSV 片段再次通过稳定名称验证，并以当前配置键记载受控问题摘要而不抛出原始配置内容。</zh-CN>
+                //   <en>Each CSV segment passes stable-name validation again and records a controlled issue summary under the current configuration key without throwing raw configuration content.</en>
+                // </lang>
+                string normalized = NormalizeStableName(include, string.Empty, invalidEntries, key);
+                if (!string.IsNullOrEmpty(normalized) &&
+                    !string.Equals(normalized, profileName, StringComparison.OrdinalIgnoreCase))
+                {
+                    // <lang>
+                    //   <zh-CN>直接自包含没有能力增益且会干扰递归图；将其静默排除，较长循环仍由展开栈报告。</zh-CN>
+                    //   <en>A direct self-include adds no capability and obscures the recursive graph; filter it silently while longer cycles remain reported by the expansion stack.</en>
+                    // </lang>
+                    includes.Add(normalized);
+                }
+            }
+
+            return includes;
+        }

@@ -1,0 +1,303 @@
+    public static class PortalOnlinePackageStaging
+    {
+        /// <summary><lang><zh-CN>清单文件固定名，与 manifest v2 解析链一致。</zh-CN><en>Fixed manifest file name, consistent with the manifest v2 parser.</en></lang></summary>
+        public const string ManifestFileName = "module.json";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把一个 ZIP 包安全解压到隔离根目录下的全新子目录；任何失败都不留下半解压内容。</zh-CN>
+        ///   <en>Safely extracts a ZIP into a fresh subdirectory beneath the isolation root; no failure leaves partially extracted content behind.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="archivePath"><l zh-CN="已落地的包压缩文件绝对路径。" en="Absolute path of the landed compressed package file." /></param>
+        /// <param name="isolationRoot"><l zh-CN="应用自控的隔离根目录绝对路径，不得为 null 或相对路径。" en="Absolute path of the application-controlled isolation root; must not be null or relative." /></param>
+        /// <param name="extractedDirectory"><l zh-CN="成功时为新建的隔离子目录绝对路径，失败时为 null。" en="On success, the absolute path of the new isolated subdirectory; null on failure." /></param>
+        /// <param name="reason"><l zh-CN="失败原因的稳定短语，不回显不可信条目名；成功时为空字符串。" en="Stable failure phrase that never echoes untrusted entry names; empty on success." /></param>
+        /// <returns><l zh-CN="整包解压成功且清单存在时为 true。" en="True when the whole archive extracted successfully and the manifest is present." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>调用方须先完成上传白名单与权限校验；本方法不实施页面授权，也不验证清单语义（由 manifest v2 解析链在后续包负责）。
+        ///   返回的隔离子目录由调用方负责在「确认安装」或「放弃」后清理，本类只在失败路径上自动清理。</zh-CN>
+        ///   <en>Callers must complete upload allow-list and authorisation checks first; this method enforces no page authorisation and does not validate manifest semantics (the manifest v2 parser owns that in later packages).
+        ///   The returned isolated directory is cleaned up by the caller after "confirm install" or "discard"; this class cleans up automatically only on the failure path.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool TryStage(string archivePath, string isolationRoot, out string extractedDirectory, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证所有提前返回都不留下半成功路径或未初始化的原因。</zh-CN>
+            //   <en>Initialise outputs to the failure state so every early return leaves neither a half-success path nor an uninitialised reason.</en>
+            // </lang>
+            extractedDirectory = null;
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>两个输入都必须是非空白文本；空输入按拒绝处理而非抛异常到调用页面。</zh-CN>
+            //   <en>Both inputs must be non-blank text; blank input is rejected rather than thrown to the calling page.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(archivePath) || string.IsNullOrWhiteSpace(isolationRoot))
+            {
+                reason = "Archive path or isolation root is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>隔离根必须是绝对路径；相对路径会把解压目标绑定到进程当前目录，属不可控位置。</zh-CN>
+            //   <en>The isolation root must be absolute; a relative path would bind the destination to the process working directory, an uncontrolled location.</en>
+            // </lang>
+            if (!Path.IsPathRooted(isolationRoot))
+            {
+                reason = "Isolation root must be an absolute path.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>包压缩文件必须已存在，且路径必须是绝对路径；本方法不接受流，以确保「先落地、再校验、再解压」的顺序。</zh-CN>
+            //   <en>The compressed package must already exist at an absolute path; this method takes no stream, preserving the "land, validate, then extract" order.</en>
+            // </lang>
+            if (!Path.IsPathRooted(archivePath) || !File.Exists(archivePath))
+            {
+                reason = "Archive file is missing or its path is not absolute.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>把隔离根解析为规范绝对路径并补尾部分隔符；缺少尾部分隔符会让 /safe-dir-evil/ 误匹配 /safe-dir。</zh-CN>
+            //   <en>Resolve the isolation root to a canonical absolute path and append the trailing separator; without it, /safe-dir-evil/ would incorrectly match /safe-dir.</en>
+            // </lang>
+            string canonicalRoot = Path.GetFullPath(isolationRoot);
+            if (!canonicalRoot.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+            {
+                canonicalRoot += Path.DirectorySeparatorChar;
+            }
+
+            // <lang>
+            //   <zh-CN>为本次上传新建唯一子目录，不在既有目录内解压；这既满足「全新受控目标目录」，也让失败清理可按目录整体删除。</zh-CN>
+            //   <en>Create a unique subdirectory for this upload rather than extracting into an existing one; this satisfies the "fresh controlled destination" rule and allows whole-directory cleanup on failure.</en>
+            // </lang>
+            string targetDirectory = Path.Combine(canonicalRoot, PortalOnlinePackagePolicy.CreateIsolatedDirectoryName());
+
+            // <lang>
+            //   <zh-CN>目标目录同样规范化并补尾部分隔符，作为后续每个条目的 StartsWith 边界基准。</zh-CN>
+            //   <en>Normalise the target directory and append the trailing separator as the StartsWith boundary baseline for every entry.</en>
+            // </lang>
+            string canonicalTarget = Path.GetFullPath(targetDirectory);
+            if (!canonicalTarget.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+            {
+                canonicalTarget += Path.DirectorySeparatorChar;
+            }
+
+            // <lang>
+            //   <zh-CN>标记本次是否已成功完成全部解压；finally 依据它决定是否需要清理，避免成功产物被误删。</zh-CN>
+            //   <en>Tracks whether all extraction completed successfully; the finally block uses it to decide on cleanup so a successful result is never deleted.</en>
+            // </lang>
+            bool succeeded = false;
+            try
+            {
+                // <lang>
+                //   <zh-CN>GUID 目录理论上不与既有目录冲突；仍显式判断，冲突即失败而不复用已有目录（避免向链接/污染目录写入）。</zh-CN>
+                //   <en>A GUID directory should never collide; still check explicitly and fail rather than reuse an existing directory (which could be a link or a polluted one).</en>
+                // </lang>
+                if (Directory.Exists(canonicalTarget))
+                {
+                    reason = "Isolated target directory already exists.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>建立隔离根目录与本次子目录；两者都由应用创建，不使用外部可写或复用位置。</zh-CN>
+                //   <en>Create both the isolation root and this upload's subdirectory; both are application-created, never externally writable or reused locations.</en>
+                // </lang>
+                Directory.CreateDirectory(canonicalTarget);
+
+                // <lang>
+                //   <zh-CN>以只读方式打开 ZIP；ZipArchive 在 Read 模式下按流读取条目数据，不把整包载入内存。</zh-CN>
+                //   <en>Open the ZIP read-only; ZipArchive in Read mode streams entry data instead of buffering the whole archive in memory.</en>
+                // </lang>
+                using (FileStream archiveStream = new FileStream(archivePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (ZipArchive archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, false))
+                {
+                    // <lang>
+                    //   <zh-CN>承接声明长度列表，交给策略类在解压前做条目数与体积预算判定。</zh-CN>
+                    //   <en>Holds declared lengths for the policy class to validate entry count and size budget before extraction.</en>
+                    // </lang>
+                    IList<long> declaredLengths = new List<long>(archive.Entries.Count);
+                    foreach (ZipArchiveEntry budgetEntry in archive.Entries)
+                    {
+                        declaredLengths.Add(budgetEntry.Length);
+                    }
+
+                    // <lang>
+                    //   <zh-CN>体积预算不通过即在写入任何文件前终止；不回显条目名。</zh-CN>
+                    //   <en>A failed size budget terminates before any file is written; no entry name is echoed.</en>
+                    // </lang>
+                    string budgetReason;
+                    if (!PortalOnlinePackagePolicy.TryValidateDecompressedBudget(declaredLengths, out budgetReason))
+                    {
+                        reason = budgetReason;
+                        return false;
+                    }
+
+                    // <lang>
+                    //   <zh-CN>标记清单文件是否出现；清单缺失的包不进入后续安装流程。</zh-CN>
+                    //   <en>Tracks whether the manifest file appeared; a package without one must not enter the later installation flow.</en>
+                    // </lang>
+                    bool manifestFound = false;
+
+                    // <lang>
+                    //   <zh-CN>手工迭代每个条目，逐条执行名字、类型与路径边界校验；不使用任何 convenience 解压 API。</zh-CN>
+                    //   <en>Iterate every entry manually, applying name, type, and destination-boundary checks one by one; no convenience extraction API is used.</en>
+                    // </lang>
+                    foreach (ZipArchiveEntry entry in archive.Entries)
+                    {
+                        // <lang>
+                        //   <zh-CN>条目名来自不可信归档，先做策略白名单校验，失败即整包拒绝。</zh-CN>
+                        //   <en>Entry names come from an untrusted archive; validate against the policy allow-list first and reject the whole package on failure.</en>
+                        // </lang>
+                        string nameReason;
+                        if (!PortalOnlinePackagePolicy.IsAllowedEntryName(entry.FullName, out nameReason))
+                        {
+                            reason = nameReason;
+                            return false;
+                        }
+
+                        // <lang>
+                        //   <zh-CN>条目类型白名单：危险文件（含 .config）连隔离目录都不允许落入。</zh-CN>
+                        //   <en>Entry-type allow-list: dangerous files (including .config) may not land even in the isolated directory.</en>
+                        // </lang>
+                        string typeReason;
+                        if (!PortalOnlinePackagePolicy.IsAllowedEntryExtension(entry.FullName, out typeReason))
+                        {
+                            reason = typeReason;
+                            return false;
+                        }
+
+                        // <lang>
+                        //   <zh-CN>Path.Combine（4.8 可用）后用 Path.GetFullPath 规范化掉任何 ../ 段，再断言仍在目标目录内。</zh-CN>
+                        //   <en>Path.Combine (available on 4.8) followed by Path.GetFullPath normalises any ../ segment before asserting the result stays inside the target directory.</en>
+                        // </lang>
+                        string destinationPath = Path.GetFullPath(Path.Combine(canonicalTarget, entry.FullName));
+
+                        // <lang>
+                        //   <zh-CN>Ordinal 精确比较且基准带尾部分隔符，是 Zip Slip 的最终边界断言；与名字层的穿越拒绝构成纵深防御。</zh-CN>
+                        //   <en>Ordinal exact comparison against a trailing-separator baseline is the final Zip Slip assertion, forming defence in depth with the name-level traversal rejection.</en>
+                        // </lang>
+                        if (!destinationPath.StartsWith(canonicalTarget, StringComparison.Ordinal))
+                        {
+                            reason = "Archive entry would extract outside the isolated directory.";
+                            return false;
+                        }
+
+                        // <lang>
+                        //   <zh-CN>目录条目以空文件名区分；只创建目录，不做写入。</zh-CN>
+                        //   <en>Directory entries are distinguished by an empty file name; create the directory only, with no write.</en>
+                        // </lang>
+                        if (string.IsNullOrEmpty(Path.GetFileName(destinationPath)))
+                        {
+                            Directory.CreateDirectory(destinationPath);
+                            continue;
+                        }
+
+                        // <lang>
+                        //   <zh-CN>清单文件必须位于隔离目录根部，防止把深层同名文件误当作包清单。</zh-CN>
+                        //   <en>The manifest must sit at the isolated directory root so a same-named file deep in the tree is not mistaken for the package manifest.</en>
+                        // </lang>
+                        if (string.Equals(Path.GetFileName(destinationPath), ManifestFileName, StringComparison.OrdinalIgnoreCase) &&
+                            string.Equals(Path.GetDirectoryName(destinationPath).TrimEnd(Path.DirectorySeparatorChar),
+                                          canonicalTarget.TrimEnd(Path.DirectorySeparatorChar), StringComparison.OrdinalIgnoreCase))
+                        {
+                            manifestFound = true;
+                        }
+
+                        // <lang>
+                        //   <zh-CN>确保父目录存在；不使用 overwrite:true，重复条目会因 ExtractToFile 抛错而整包失败并清理。</zh-CN>
+                        //   <en>Ensure parent directories exist; overwrite:true is never used, so duplicate entries make ExtractToFile throw and the whole package fails and is cleaned up.</en>
+                        // </lang>
+                        string parentDirectory = Path.GetDirectoryName(destinationPath);
+                        Directory.CreateDirectory(parentDirectory);
+
+                        // <lang>
+                        //   <zh-CN>.NET Framework 4.8 不会自动校验 CRC-32，且 ZipArchiveEntry.ExternalAttributes 在此目标框架下的可写性未经编译实测，
+                        //   故本方法不设置权限位；完整性由后续独立签名/哈希校验承担（不在此处假装已完成）。</zh-CN>
+                        //   <en>.NET Framework 4.8 does not auto-validate CRC-32, and the writability of ZipArchiveEntry.ExternalAttributes on this target is not compiler-verified,
+                        //   so this method sets no permission bits; integrity belongs to separate later signature/hash checks (not claimed as done here).</en>
+                        // </lang>
+                        entry.ExtractToFile(destinationPath, false);
+                    }
+
+                    // <lang>
+                    //   <zh-CN>清单缺失即整包失败；不把「解压成功」等同于「可进入安装流程」。</zh-CN>
+                    //   <en>A missing manifest fails the whole package; successful extraction is not equated with readiness for installation.</en>
+                    // </lang>
+                    if (!manifestFound)
+                    {
+                        reason = "Package manifest is missing at the isolated root.";
+                        return false;
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>全部条目成功且清单就位后才置成功标记；finally 据此保留产物。</zh-CN>
+                //   <en>The success flag is set only after all entries succeeded and the manifest is present; the finally block preserves the result accordingly.</en>
+                // </lang>
+                succeeded = true;
+                extractedDirectory = canonicalTarget.TrimEnd(Path.DirectorySeparatorChar);
+                return true;
+            }
+            catch (InvalidDataException)
+            {
+                // <lang>
+                //   <zh-CN>损坏或非 ZIP 内容统一收敛为稳定失败短语，不回显异常原文。</zh-CN>
+                //   <en>Corrupt or non-ZIP content converges to a stable failure phrase; raw exception text is never echoed.</en>
+                // </lang>
+                reason = "Package archive is malformed.";
+                return false;
+            }
+            catch (IOException)
+            {
+                // <lang>
+                //   <zh-CN>磁盘、路径或重复条目导致的 I/O 失败同样收敛，避免泄露物理路径。</zh-CN>
+                //   <en>I/O failures from disk, paths, or duplicate entries converge likewise so physical paths are not leaked.</en>
+                // </lang>
+                reason = "Package could not be staged.";
+                return false;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // <lang>
+                //   <zh-CN>权限不足属环境配置问题，按失败处理并清理，不向调用方暴露目录细节。</zh-CN>
+                //   <en>Insufficient permission is an environment issue; fail and clean up without exposing directory details.</en>
+                // </lang>
+                reason = "Package could not be staged.";
+                return false;
+            }
+            finally
+            {
+                // <lang>
+                //   <zh-CN>失败隔离：只要未整体成功，就删除本次新建的隔离子目录，确保单次上传失败不污染核心目录、
+                //   也不留下可被后续请求引用的半解压内容。清理失败不改变已判定的失败结论，但写入稳定的补充原因。</zh-CN>
+                //   <en>Failure isolation: unless the whole operation succeeded, delete this upload's isolated subdirectory so one failed upload never pollutes the core
+                //   and leaves no partially extracted content for later requests. A cleanup failure does not change the already-decided failure verdict, but appends a stable note.</en>
+                // </lang>
+                if (!succeeded && Directory.Exists(canonicalTarget))
+                {
+                    try
+                    {
+                        Directory.Delete(canonicalTarget, true);
+                    }
+                    catch (IOException)
+                    {
+                        // <lang>
+                        //   <zh-CN>清理失败只补充说明，不覆盖原始拒绝原因，也不抛出新异常掩盖失败结论。</zh-CN>
+                        //   <en>A cleanup failure only appends a note; it never overwrites the original rejection reason or throws a new exception that would mask the verdict.</en>
+                        // </lang>
+                        reason = string.Format(CultureInfo.InvariantCulture, "{0} Isolated directory cleanup is incomplete.", reason);
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        reason = string.Format(CultureInfo.InvariantCulture, "{0} Isolated directory cleanup is incomplete.", reason);
+                    }
+                }
+            }
+        }
+    }

@@ -1,0 +1,55 @@
+        public static bool TryReadRoles(HttpRequest request, long expectedSecurityVersion, out string[] roles)
+        {
+            // <lang>
+            //   <zh-CN>先以空数组建立失败输出，确保 Cookie 缺失、过期、解密失败或版本不匹配时不泄露旧角色状态。</zh-CN>
+            //   <en>Initialize an empty failure output so missing, expired, undecryptable, or version-mismatched cookies never leak stale roles.</en>
+            // </lang>
+            roles = new string[0];
+
+            // <lang>
+            //   <zh-CN>只读取固定角色 Cookie 的密文文本，不把请求其它 Cookie 或原始票据内容带入解析。</zh-CN>
+            //   <en>Read only the fixed role-cookie ciphertext and bring no other request cookies or raw ticket content into parsing.</en>
+            // </lang>
+            string encryptedTicket = request?.Cookies[RolesCookieName]?.Value;
+            if (string.IsNullOrWhiteSpace(encryptedTicket))
+            {
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>解密 Forms Authentication 票据并立即检查存在性和过期状态，失败即拒绝角色恢复。</zh-CN>
+                //   <en>Decrypt the Forms Authentication ticket and immediately check presence and expiration, rejecting role recovery on failure.</en>
+                // </lang>
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(encryptedTicket);
+                if (ticket == null || ticket.Expired)
+                {
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>承接角色票据内的安全版本和角色片段，仅在当前读取调用中短暂使用。</zh-CN>
+                //   <en>Receive the ticket security version and role segment only for the current read call.</en>
+                // </lang>
+                long securityVersion;
+
+                // <lang>
+                //   <zh-CN>保存未解析角色数据片段；它必须先通过版本匹配和角色解析器才能进入输出数组。</zh-CN>
+                //   <en>Keep the unparsed role-data segment; it must pass version matching and the role parser before entering output.</en>
+                // </lang>
+                string roleData;
+                if (!TryParseRoleData(ticket.UserData, out securityVersion, out roleData) ||
+                    securityVersion != expectedSecurityVersion)
+                {
+                    return false;
+                }
+
+                roles = PortalRoleParser.Parse(roleData);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string EditDocs_UploadSizeLimitPrefix {
+            get {
+                return ResourceManager.GetString("EditDocs_UploadSizeLimitPrefix", resourceCulture);
+            }
+        }

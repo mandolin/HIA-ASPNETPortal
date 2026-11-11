@@ -1,0 +1,10 @@
+        private bool IsAdminPage()
+        {
+            // <lang>
+            //   <zh-CN>取 `AppRelativeVirtualPath` 而不是请求 URL：后者含主机名与调试端口，前台换端口即失配；前者是稳定的应用相对路径。</zh-CN>
+            //   <en>`AppRelativeVirtualPath` is read rather than the request URL: the latter carries the host name and debug
+            //   port and would stop matching whenever the front-office port changes, while the former is a stable app-relative path.</en>
+            // </lang>
+            string path = Page != null ? Page.AppRelativeVirtualPath : string.Empty;
+            return path.StartsWith("~/Admin/", StringComparison.OrdinalIgnoreCase);
+        }

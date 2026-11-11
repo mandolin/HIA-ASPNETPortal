@@ -1,0 +1,5 @@
+        internal static string Admin_LeaveRequests_InlineLatestReview {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineLatestReview", resourceCulture);
+            }
+        }

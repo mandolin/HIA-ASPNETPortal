@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-3",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-3:entry:hia-document:dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-3",
+      "kind": "entry",
+      "label": "ThemeSettings.aspx webforms-server-comment 3",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-3",
+      "sourcePath": "src/Portal/Admin/ThemeSettings.aspx",
+      "symbolId": "dotnetdoc:markup-comment:src-portal-admin-themesettings.aspx:3",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.asp-07a51cf5.html"
+    }
+  ]
+}

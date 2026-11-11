@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-11",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-11:entry:hia-document:dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-11",
+      "kind": "entry",
+      "label": "ManageUsers.aspx webforms-server-comment 11",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-11",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx",
+      "symbolId": "dotnetdoc:markup-comment:src-portal-admin-manageusers.aspx:11",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx--e0a9a4ab.html"
+    }
+  ]
+}

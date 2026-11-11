@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>审计筛选控件只收集展示查询条件；日期、分类、动作和目标编号的解析、范围限制及管理员授权仍由 code-behind 完成。</zh-CN>
+            <en>The audit filter controls only collect display-query criteria; code-behind remains responsible for parsing, range limits, and administrator authorization for dates, category, action, and target id.</en>
+          </lang>
+        --%>

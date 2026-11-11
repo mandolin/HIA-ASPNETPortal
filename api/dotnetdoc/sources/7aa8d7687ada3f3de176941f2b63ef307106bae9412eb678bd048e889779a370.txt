@@ -1,0 +1,27 @@
+        private static ISet<string> GetConfiguredAllowedExtensions()
+        {
+            // <lang>
+            //   <zh-CN>读取低敏设置原文；缺失按空配置处理，不把缺失解释为放开全部类型。</zh-CN>
+            //   <en>Read the low-sensitivity setting text; treat missing input as empty rather than opening every type.</en>
+            // </lang>
+            string configured = PortalRuntimeSettings.GetString(PortalSettingsRegistry.AllowedDocumentExtensions);
+            // <lang>
+            //   <zh-CN>使用不区分大小写集合去重，并为后续 Contains 保持稳定比较语义。</zh-CN>
+            //   <en>Use a case-insensitive set for deduplication and stable comparison semantics for later Contains checks.</en>
+            // </lang>
+            var extensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string token in (configured ?? string.Empty).Split(','))
+            {
+                // <lang>
+                //   <zh-CN>每个配置 token 先规范为带点小写扩展名，只有硬允许类型才可加入有效集合。</zh-CN>
+                //   <en>Normalize each configuration token to a dotted lowercase extension, adding it only when it is hard-allowed.</en>
+                // </lang>
+                string normalized = NormalizeConfiguredExtension(token);
+                if (!string.IsNullOrEmpty(normalized) && HardAllowedExtensions.Contains(normalized))
+                {
+                    extensions.Add(normalized);
+                }
+            }
+
+            return extensions;
+        }

@@ -1,0 +1,13 @@
+        private static void GetEffectiveSettingValue(
+            PortalSettingDefinition definition,
+            out string currentValue,
+            out string source)
+        {
+            // <lang>
+            //   <zh-CN>复用运行期解析器获取已经过类型/范围门禁的结果，不在健康层重新实现来源优先级。</zh-CN>
+            //   <en>Reuse the runtime resolver's type/range-gated result instead of reimplementing source precedence in the health layer.</en>
+            // </lang>
+            PortalRuntimeSettingValue effectiveValue = PortalRuntimeSettings.GetEffectiveValue(definition);
+            currentValue = effectiveValue.Value;
+            source = effectiveValue.Source.ToString();
+        }

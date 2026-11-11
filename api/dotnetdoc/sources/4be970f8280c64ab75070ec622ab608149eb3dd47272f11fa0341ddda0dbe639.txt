@@ -1,0 +1,22 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>历史编辑页会先编码再入库；展示时必须显式解码，才能保持旧 HTML 模块的可视效果。</zh-CN>
+            //   <en>The legacy edit page encodes before persistence; display must explicitly decode to preserve the visual behavior of the old HTML module.</en>
+            // </lang>
+            IHtmlTextItem item = HtmlTextDB.GetHtmlText(ModuleId);
+            if (item == null || string.IsNullOrEmpty(item.DesktopHtml))
+            {
+                // <lang>
+                //   <zh-CN>缺失记录和空 HTML 都保持静默输出，避免在普通门户页面暴露配置状态。</zh-CN>
+                //   <en>Missing records and empty HTML both remain silent, avoiding disclosure of configuration state on the ordinary portal page.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>这里故意使用 LiteralControl 输出受信任 HTML；不要把普通用户提交内容接入此路径。</zh-CN>
+            //   <en>This intentionally uses LiteralControl for trusted HTML output; do not route general-user submissions into this path.</en>
+            // </lang>
+            HtmlHolder.Controls.Add(new LiteralControl(Server.HtmlDecode(item.DesktopHtml)));
+        }

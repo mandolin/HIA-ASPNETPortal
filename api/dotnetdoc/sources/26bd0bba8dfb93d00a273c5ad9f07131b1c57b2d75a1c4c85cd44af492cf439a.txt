@@ -1,0 +1,4 @@
+        protected int RecentItemCount
+        {
+            get { return recentItemRowCount; }
+        }

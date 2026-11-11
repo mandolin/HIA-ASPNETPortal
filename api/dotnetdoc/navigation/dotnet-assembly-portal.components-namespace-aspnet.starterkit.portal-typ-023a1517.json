@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iformbuilderdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iformbuilderdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iformbuilderdb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iformbuilderdb.isschemaav-6ec74206.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iformbuilderdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "kind": "entry",
+      "label": "Submit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iformbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iformbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iformbuilderdb.submit-asp-41c222e2.html"
+    }
+  ]
+}

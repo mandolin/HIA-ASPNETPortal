@@ -1,0 +1,1 @@
+        public string Notes { get; private set; }

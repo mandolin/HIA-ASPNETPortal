@@ -1,0 +1,5 @@
+        internal static string Admin_EmployeeDirectory_ButtonManage {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_ButtonManage", resourceCulture);
+            }
+        }

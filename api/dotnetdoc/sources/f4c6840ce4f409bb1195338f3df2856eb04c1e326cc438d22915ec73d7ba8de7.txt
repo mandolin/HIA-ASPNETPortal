@@ -1,0 +1,22 @@
+        public static bool RecordUploadValidated(
+            string targetId,
+            string stagingName,
+            string packageHash,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>上传前没有旧哈希，hashBefore 固定为空串；六要素仍完整保留该键位。</zh-CN>
+            //   <en>An upload has no prior hash, so hashBefore is a fixed empty string while the key position stays part of the six elements.</en>
+            // </lang>
+            string summary = PortalOnlinePackageAuditFormatter.FormatSixElementSummary(
+                stagingName, string.Empty, packageHash, actor, startUtc, endUtc, verification,
+                PortalOnlinePackageAuditEvents.UploadValidated);
+
+            return TryRecord(
+                PortalOnlinePackageAuditEvents.UploadValidated, targetId, summary,
+                PortalOnlinePackageAuditEvents.OutcomeSuccess, context);
+        }

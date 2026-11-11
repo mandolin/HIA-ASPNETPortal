@@ -1,0 +1,38 @@
+        private bool TryResolveSubmittedPassword(out string submittedPassword)
+        {
+            submittedPassword = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(EncryptedPassword.Value))
+            {
+                string failureCode;
+                string eventId;
+                if (PortalPasswordSubmissionCrypto.TryDecryptSubmittedPassword(
+                    Context,
+                    EncryptedPassword.Value,
+                    out submittedPassword,
+                    out failureCode,
+                    out eventId))
+                {
+                    return true;
+                }
+
+                // <lang>
+                //   <zh-CN>只展示通用失败提示；详细分类和事件编号留在诊断日志中。</zh-CN>
+                //   <en>Show only the generic failure message; detailed category and event id remain in diagnostics logs.</en>
+                // </lang>
+                return false;
+            }
+
+            if (PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                PortalDiagnostics.Warn(
+                    "LoginPasswordEncryption",
+                    "Login password was submitted without the required encrypted field.",
+                    Context);
+
+                return false;
+            }
+
+            submittedPassword = password.Text;
+            return true;
+        }

@@ -1,0 +1,38 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>xmlPath 是通过站内部署资源策略后的应用相对路径；失败时不会包含原始设置值。</zh-CN>
+            //   <en>xmlPath is the application-relative path after in-site deployment-resource policy validation; on failure it does not contain the raw setting value.</en>
+            // </lang>
+            string xmlPath;
+            if (TryGetExistingResource(Settings["xmlsrc"] as string, out xmlPath))
+            {
+                // <lang>
+                //   <zh-CN>只有策略和物理文件存在性都通过后，才把 XML 数据源交给 Web Forms Xml 控件。</zh-CN>
+                //   <en>The XML source is assigned to the Web Forms Xml control only after both policy and physical file-existence checks pass.</en>
+                // </lang>
+                xml1.DocumentSource = xmlPath;
+            }
+            else if (!string.IsNullOrWhiteSpace(Settings["xmlsrc"] as string))
+            {
+                AddConfigurationMessage(lang.Legacy_XmlModule_MessageXmlUnavailable);
+            }
+
+            // <lang>
+            //   <zh-CN>xslPath 独立于 XML 数据源校验，允许无转换的纯 XML 配置继续工作。</zh-CN>
+            //   <en>xslPath is validated independently from the XML data source, allowing XML-only configuration to keep working without a transform.</en>
+            // </lang>
+            string xslPath;
+            if (TryGetExistingResource(Settings["xslsrc"] as string, out xslPath))
+            {
+                // <lang>
+                //   <zh-CN>转换源同样只接受站内受信任文件，避免远程样式表进入 XSL/T 执行路径。</zh-CN>
+                //   <en>The transform source also accepts only trusted in-site files, avoiding remote stylesheets entering the XSL/T execution path.</en>
+                // </lang>
+                xml1.TransformSource = xslPath;
+            }
+            else if (!string.IsNullOrWhiteSpace(Settings["xslsrc"] as string))
+            {
+                AddConfigurationMessage(lang.Legacy_XmlModule_MessageXsltUnavailable);
+            }
+        }

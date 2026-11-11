@@ -1,0 +1,9 @@
+        private static bool IsGenericErrorPageRequest(HttpRequest request)
+        {
+            // <lang>
+            //   <zh-CN>只比较 ASP.NET 应用相对执行路径且忽略大小写；查询串和事件编号不参与判断，避免错误页链接参数改变全局短路语义。</zh-CN>
+            //   <en>Compare only the ASP.NET application-relative execution path case-insensitively; query strings and event ids do not affect the decision, so error-page parameters cannot change the global short-circuit semantics.</en>
+            // </lang>
+            string appRelativePath = request?.AppRelativeCurrentExecutionFilePath;
+            return string.Equals(appRelativePath, "~/GenericErrorPage.aspx", StringComparison.OrdinalIgnoreCase);
+        }

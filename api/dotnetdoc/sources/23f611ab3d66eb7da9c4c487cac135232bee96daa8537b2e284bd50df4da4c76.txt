@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>编辑地址只在 IsEditable 上下文使用站内 ItemID 路径；浏览地址必须通过导航策略，非法旧值回退为编码文本。</zh-CN>
+                    <en>The edit address uses an in-site ItemID path only in the IsEditable context; browse URLs must pass navigation policy, with invalid legacy values falling back to encoded text.</en>
+                </lang>
+            --%>

@@ -1,0 +1,5 @@
+        internal static string EditDocs_MessageDatabaseStorageDisabled {
+            get {
+                return ResourceManager.GetString("EditDocs_MessageDatabaseStorageDisabled", resourceCulture);
+            }
+        }

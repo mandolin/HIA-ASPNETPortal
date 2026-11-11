@@ -1,0 +1,9 @@
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            if (!EnsureCanViewItems())
+            {
+                return;
+            }
+
+            BindItems();
+        }

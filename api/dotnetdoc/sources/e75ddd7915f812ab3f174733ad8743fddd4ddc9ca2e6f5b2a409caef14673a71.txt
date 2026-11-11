@@ -1,0 +1,22 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            if (!TryAuthorizeEditorForCurrentItem())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>旧讨论模块以“写入时编码、读取时规范化”的方式保存普通文本；这里继续保持该兼容语义，不允许把原始 HTML 作为讨论正文写入。</zh-CN>
+            //   <en>The legacy discussion module stores ordinary text using "encode on write, normalize on read"; this keeps that compatibility behavior and does not allow raw HTML as discussion body content.</en>
+            // </lang>
+            itemId = DiscussionDB.AddMessage(moduleId, itemId, User.Identity.Name,
+                Server.HtmlEncode(TitleField.Text), Server.HtmlEncode(BodyField.Text));
+
+            // <lang>
+            //   <zh-CN>写入成功后用新消息标识重新显示详情，避免用户停留在可重复提交的编辑面板。</zh-CN>
+            //   <en>After a successful write, the new message identifier is used to redisplay details so the user does not remain on a repeatedly submittable editor.</en>
+            // </lang>
+            EditPanel.Visible = false;
+            ButtonPanel.Visible = true;
+            BindData();
+        }

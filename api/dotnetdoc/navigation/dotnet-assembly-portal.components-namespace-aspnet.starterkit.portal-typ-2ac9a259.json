@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ihtmltextsdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ihtmltextsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ihtmltextsdb.gethtmltext-system.int32",
+      "kind": "entry",
+      "label": "GetHtmlText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ihtmltextsdb.gethtmltext-system.int32",
+      "sourcePath": "src/Portal.Components/IHtmlTextDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ihtmltextsdb.gethtmltext-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ihtmltextsdb.gethtmltext--ba8c07bc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ihtmltextsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ihtmltextsdb.updatehtmltext-system.int32-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "UpdateHtmlText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ihtmltextsdb.updatehtmltext-system.int32-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/IHtmlTextDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ihtmltextsdb.updatehtmltext-system.int32-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ihtmltextsdb.updatehtmlte-891d715e.html"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+        internal static string Common_StatusRejected {
+            get {
+                return ResourceManager.GetString("Common_StatusRejected", resourceCulture);
+            }
+        }

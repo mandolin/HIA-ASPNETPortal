@@ -1,0 +1,20 @@
+        private static readonly string[] WeakPasswordDictionary =
+        {
+            "123456",
+            "12345678",
+            "123456789",
+            "111111",
+            "000000",
+            "888888",
+            "password",
+            "password1",
+            "password123",
+            "admin",
+            "admin123",
+            "administrator",
+            "qwerty",
+            "abc123",
+            "welcome",
+            "letmein",
+            "iloveyou"
+        };

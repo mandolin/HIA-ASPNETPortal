@@ -1,0 +1,1 @@
+        public const string EnterpriseCapabilityPlatformReview = "EnterpriseCapability.Platform.Review";

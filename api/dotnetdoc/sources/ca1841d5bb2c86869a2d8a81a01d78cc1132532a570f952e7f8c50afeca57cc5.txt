@@ -1,0 +1,5 @@
+        internal static string Admin_User_DelUser {
+            get {
+                return ResourceManager.GetString("Admin_User_DelUser", resourceCulture);
+            }
+        }

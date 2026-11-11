@@ -1,0 +1,29 @@
+        private static void AddApplicationChecks(IList<PortalHealthCheckResult> checks, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>把应用域基目录和虚拟路径作为只读部署事实输出，不读取或暴露应用配置内容。</zh-CN>
+            //   <en>Project the application-domain base and virtual paths as read-only deployment facts without reading or exposing configuration content.</en>
+            // </lang>
+            checks.Add(new PortalHealthCheckResult(
+                "Application",
+                "应用路径",
+                PortalHealthStatus.Healthy,
+                "应用域路径已解析。",
+                "BaseDirectory=" + AppDomain.CurrentDomain.BaseDirectory +
+                "; VirtualPath=" + HttpRuntime.AppDomainAppVirtualPath));
+
+            // <lang>
+            //   <zh-CN>仅当请求上下文和 Request 同时存在时附加请求路径事实；不构造请求、不访问请求正文或凭据。</zh-CN>
+            //   <en>Append request-path facts only when both context and Request exist; do not construct a request or access its body or credentials.</en>
+            // </lang>
+            if (context != null && context.Request != null)
+            {
+                checks.Add(new PortalHealthCheckResult(
+                    "Application",
+                    "当前请求",
+                    PortalHealthStatus.Healthy,
+                    "当前请求上下文可用。",
+                    "Url=" + context.Request.Url +
+                    "; AppRelativePath=" + context.Request.AppRelativeCurrentExecutionFilePath));
+            }
+        }

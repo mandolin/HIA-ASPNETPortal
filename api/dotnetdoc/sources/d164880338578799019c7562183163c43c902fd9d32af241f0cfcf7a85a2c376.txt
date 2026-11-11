@@ -1,0 +1,5 @@
+        internal static string Common_ModulePathMessageOutsideAllowedDirectories {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageOutsideAllowedDirectories", resourceCulture);
+            }
+        }

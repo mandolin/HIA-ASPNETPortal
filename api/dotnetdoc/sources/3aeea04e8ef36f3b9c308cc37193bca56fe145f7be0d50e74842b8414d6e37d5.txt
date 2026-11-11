@@ -1,0 +1,19 @@
+        public bool IsPackageAllowed(PortalModulePackage package)
+        {
+            // <lang>
+            //   <zh-CN>空白或空包不是允许包。显式 id 命中即允许；否则仅当 Profile 含通配符 '*' 且模块为 Core 形态时视为允许，Independent 模块必须显式列出。</zh-CN>
+            //   <en>A blank or null package is not allowed. An explicit id match is allowed; otherwise only when the profile contains the wildcard '*' and the module is Core is it treated as allowed; Independent modules must be explicitly listed.</en>
+            // </lang>
+            if (package == null || string.IsNullOrWhiteSpace(package.PackageId))
+            {
+                return false;
+            }
+
+            if (allowedPackageSet.Contains(package.PackageId.Trim()))
+            {
+                return true;
+            }
+
+            bool wildcard = allowedPackageSet.Contains("*");
+            return wildcard && package.ModuleKind == PortalModuleKind.Core;
+        }

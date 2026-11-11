@@ -1,0 +1,125 @@
+        public static PortalDiagnosticQueryResult Query(PortalDiagnosticQuery query)
+        {
+            // <lang>
+            //   <zh-CN>先归一化调用方 DTO，使日期、过滤器和分页均落入既有受限范围；原始 DTO 不会直接驱动文件扫描。</zh-CN>
+            //   <en>Normalize the caller DTO first so date, filters, and paging fall within established restricted bounds; the raw DTO never drives file scanning directly.</en>
+            // </lang>
+            PortalDiagnosticQuery normalized = NormalizeQuery(query);
+
+            // <lang>
+            //   <zh-CN>只收集已解析且匹配的内存条目，并分别记录扫描上限事实；集合不含原始 NDJSON 行或文件路径。</zh-CN>
+            //   <en>Collect only parsed matching entries in memory and separately record the scan-cap fact; the collection contains neither raw NDJSON lines nor file paths.</en>
+            // </lang>
+            var matches = new List<PortalDiagnosticEntry>();
+
+            // <lang>
+            //   <zh-CN>记录是否因条目扫描上限而截断；该事实独立于是否还有下一页。</zh-CN>
+            //   <en>Record whether the entry scan hit its cap; this fact is independent of whether another page exists.</en>
+            // </lang>
+            bool wasTruncated = false;
+
+            // <lang>
+            //   <zh-CN>累计整个查询已读取的条目数，生命周期覆盖所有候选文件而非单个文件。</zh-CN>
+            //   <en>Count entries read across the entire query, spanning all candidate files rather than one file.</en>
+            // </lang>
+            int scannedEntries = 0;
+
+            // <lang>
+            //   <zh-CN>日志目录只由 PortalDiagnostics 解析，不接受调用方路径；目录缺失是空结果而非异常，避免后台页因尚无日志失败。</zh-CN>
+            //   <en>Resolve the log directory only through PortalDiagnostics and accept no caller path; a missing directory is an empty result rather than an exception so an administration page does not fail merely because no log exists yet.</en>
+            // </lang>
+            string logDirectory = PortalDiagnostics.ResolveLogDirectory();
+            if (!Directory.Exists(logDirectory))
+            {
+                return new PortalDiagnosticQueryResult(matches, false, false);
+            }
+
+            // <lang>
+            //   <zh-CN>只遍历由固定文件名/日期窗口筛出的日志文件，并保持文件数硬上限。</zh-CN>
+            //   <en>Traverse only log files filtered by the fixed filename/date window while retaining the file-count cap.</en>
+            // </lang>
+            foreach (FileInfo logFile in GetLogFiles(logDirectory, normalized.StartUtc, normalized.EndUtcExclusive))
+            {
+                try
+                {
+                    foreach (string line in File.ReadLines(logFile.FullName))
+                    {
+                        // <lang>
+                        //   <zh-CN>当前行只在扫描预算允许时解析为受控诊断条目；原始行不进入结果集合。</zh-CN>
+                        //   <en>Parse the current line into a controlled diagnostics entry only while the scan budget allows; never place the raw line in results.</en>
+                        // </lang>
+                        // <lang>
+                        //   <zh-CN>在处理下一行前累计全查询扫描量；越过固定上限即停止后续文件，明确向结果暴露截断而不无限读取日志。</zh-CN>
+                        //   <en>Count the next line against the whole-query scan budget before processing it; crossing the fixed cap stops later files and exposes truncation in the result instead of reading logs without bound.</en>
+                        // </lang>
+                        scannedEntries++;
+                        if (scannedEntries > MaximumScannedEntries)
+                        {
+                            wasTruncated = true;
+                            break;
+                        }
+
+                        // <lang>
+                        //   <zh-CN>保存单行解析结果；格式错误返回 null 并由 ParseEntry 的受控警告路径处理。</zh-CN>
+                        //   <en>Keep the single-line parse result; malformed input becomes null and is handled by ParseEntry's controlled warning path.</en>
+                        // </lang>
+                        PortalDiagnosticEntry entry = ParseEntry(line, logFile.Name);
+                        if (entry != null && Matches(entry, normalized))
+                        {
+                            matches.Add(entry);
+                        }
+                    }
+                }
+                // <lang>
+                //   <zh-CN>隔离单个文件读取异常，使其它候选文件继续遵守同一查询预算。</zh-CN>
+                //   <en>Isolate one file-read exception so other candidate files continue under the same query budget.</en>
+                // </lang>
+                catch (Exception exception)
+                {
+                    // <lang>
+                    //   <zh-CN>单个不可读文件不会阻断受控后台查询；警告只含文件名和已净化截断的异常文本，不写入文件路径或原始内容。</zh-CN>
+                    //   <en>One unreadable file cannot block the controlled administration query; the warning contains only file name and sanitized truncated exception text, never file path or raw content.</en>
+                    // </lang>
+                    Trace.TraceWarning(
+                        "Portal diagnostic query skipped file '{0}'. Error={1}",
+                        logFile.Name,
+                        PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 500));
+                }
+
+                if (wasTruncated)
+                {
+                    break;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>以 UTC 时间倒序并以 ordinal 事件编号稳定打破并列，随后在内存中分页；HasMore 只描述受限匹配集合，WasTruncated 仍单独保留。</zh-CN>
+            //   <en>Order by UTC time descending with ordinal event id as stable tie-breaker, then page in memory; HasMore describes only the restricted match collection while WasTruncated remains separate.</en>
+            // </lang>
+            matches = matches
+                .OrderByDescending(item => item.UtcTime)
+                .ThenByDescending(item => item.EventId, StringComparer.Ordinal)
+                .ToList();
+
+            // <lang>
+            //   <zh-CN>根据已归一化页码计算内存跳过量；页码和大小已先受硬上限约束。</zh-CN>
+            //   <en>Compute the in-memory skip from already bounded page number and size.</en>
+            // </lang>
+            int skip = normalized.Page * normalized.PageSize;
+
+            // <lang>
+            //   <zh-CN>只在受限匹配集合仍有下一页时标记 HasMore，不把扫描截断误报为完整分页。</zh-CN>
+            //   <en>Set HasMore only when the restricted match set has another page; do not report a truncated scan as complete paging.</en>
+            // </lang>
+            bool hasMore = matches.Count > skip + normalized.PageSize;
+
+            // <lang>
+            //   <zh-CN>构造当前页副本；超出集合时返回新的空集合，避免暴露内部匹配列表。</zh-CN>
+            //   <en>Build a current-page copy and return a new empty collection when beyond the set, without exposing the internal match list.</en>
+            // </lang>
+            IList<PortalDiagnosticEntry> page = skip >= matches.Count
+                ? new List<PortalDiagnosticEntry>()
+                : matches.Skip(skip).Take(normalized.PageSize).ToList();
+
+            return new PortalDiagnosticQueryResult(page, hasMore, wasTruncated);
+        }

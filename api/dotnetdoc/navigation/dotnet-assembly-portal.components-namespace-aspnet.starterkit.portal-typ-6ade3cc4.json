@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalroleparser",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalroleparser:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalroleparser:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalroleparser.contains-system.string-system.string",
+      "kind": "entry",
+      "label": "Contains",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalroleparser.contains-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalRoles.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalroleparser.contains-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalroleparser.contains-daa28af8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalroleparser:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalroleparser.join-system.collections.generic.ienumerable-system.string",
+      "kind": "entry",
+      "label": "Join",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalroleparser.join-system.collections.generic.ienumerable-system.string",
+      "sourcePath": "src/Portal.Components/PortalRoles.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalroleparser.join-system.collections.generic.ienumerable-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalroleparser.join-sys-cdc8cde7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalroleparser:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalroleparser.parse-system.string",
+      "kind": "entry",
+      "label": "Parse",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalroleparser.parse-system.string",
+      "sourcePath": "src/Portal.Components/PortalRoles.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalroleparser.parse-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalroleparser.parse-sy-e63f0fa9.html"
+    }
+  ]
+}

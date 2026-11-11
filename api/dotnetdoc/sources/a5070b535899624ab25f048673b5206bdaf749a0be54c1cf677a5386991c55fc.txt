@@ -1,0 +1,4 @@
+        public static bool IsVisible(PortalNavigationEntry entry, PortalNavigationVisibilityContext context)
+        {
+            return string.IsNullOrEmpty(GetBlockedReason(entry, context));
+        }

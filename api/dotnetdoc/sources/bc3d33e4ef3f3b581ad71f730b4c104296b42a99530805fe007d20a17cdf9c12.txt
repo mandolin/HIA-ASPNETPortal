@@ -1,0 +1,10 @@
+        public static void RecordCheck(string targetId, string summary, string actor, HttpContext context = null)
+        {
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.ModuleAssemblyCategory,
+                PortalOperationAuditEvents.ModuleAssemblyStateCheck,
+                PortalOperationAuditEvents.ModuleAssemblyStateTargetType,
+                targetId,
+                summary,
+                context);
+        }

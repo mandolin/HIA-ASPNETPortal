@@ -1,0 +1,120 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.expireauthenticationcookie-system.web.httpresponse-system.web.httprequest",
+      "kind": "entry",
+      "label": "ExpireAuthenticationCookie",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.expireauthenticationcookie-system.web.httpresponse-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.expireauthenticationcookie-system.web.httpresponse-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-3b38a470.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.formatsecurityversion-system.int64",
+      "kind": "entry",
+      "label": "FormatSecurityVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.formatsecurityversion-system.int64",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.formatsecurityversion-system.int64",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-422b756f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.getcookiepath-system.web.httprequest",
+      "kind": "entry",
+      "label": "GetCookiePath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.getcookiepath-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.getcookiepath-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-554aac23.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "kind": "entry",
+      "label": "ShouldRevokeForSecurityVersionMismatch",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-bbf3534f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.signin-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.boolean",
+      "kind": "entry",
+      "label": "SignIn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.signin-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.boolean",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.signin-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-16f66155.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.signout-system.web.httpresponse-system.web.httprequest",
+      "kind": "entry",
+      "label": "SignOut",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.signout-system.web.httpresponse-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.signout-system.web.httpresponse-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-203ceefc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.tryparsesecurityversion-system.string-system.int64",
+      "kind": "entry",
+      "label": "TryParseSecurityVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.tryparsesecurityversion-system.string-system.int64",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.tryparsesecurityversion-system.string-system.int64",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-bb2f4a03.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.tryreadsecurityversion-system.web.security.formsidentity-system.int64",
+      "kind": "entry",
+      "label": "TryReadSecurityVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.tryreadsecurityversion-system.web.security.formsidentity-system.int64",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationService.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.tryreadsecurityversion-system.web.security.formsidentity-system.int64",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-3246ba30.html"
+    }
+  ]
+}

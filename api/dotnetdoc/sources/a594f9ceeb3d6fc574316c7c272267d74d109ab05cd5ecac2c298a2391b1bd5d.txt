@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_EmptyNone {
+            get {
+                return ResourceManager.GetString("MyWorkItems_EmptyNone", resourceCulture);
+            }
+        }

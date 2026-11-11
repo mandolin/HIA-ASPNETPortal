@@ -1,0 +1,2 @@
+        [Dependency]
+        public IDocumentsDb DocumentDB { private get; set; }

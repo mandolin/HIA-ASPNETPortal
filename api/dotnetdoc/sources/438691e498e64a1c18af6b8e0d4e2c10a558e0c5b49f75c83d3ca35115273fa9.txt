@@ -1,0 +1,1 @@
+        public string InviteCode { get; private set; }

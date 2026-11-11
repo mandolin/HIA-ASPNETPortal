@@ -1,0 +1,35 @@
+        public sealed class GroupSectionView
+        {
+            /// <summary><lang><zh-CN>分组稳定键（词表键，非配置文本）。</zh-CN><en>Stable group key (vocabulary key, not configuration text).</en></lang></summary>
+            public string GroupKey { get; private set; }
+
+            /// <summary><lang><zh-CN>按界面文化解析后的分组显示名。</zh-CN><en>Group label resolved for the UI culture.</en></lang></summary>
+            public string DisplayName { get; private set; }
+
+            /// <summary><lang><zh-CN>组内链接容器的稳定 HTML id，供 disclosure 按钮 `aria-controls` 指向。</zh-CN><en>Stable HTML id of the in-group link container, targeted by the disclosure button's `aria-controls`.</en></lang></summary>
+            public string ContainerId { get; private set; }
+
+            /// <summary><lang><zh-CN>组内页签数，用于分组标题的计数徽标。</zh-CN><en>Member tab count, used for the group header count badge.</en></lang></summary>
+            public int TabCount { get { return Tabs.Count; } }
+
+            /// <summary><lang><zh-CN>组内页签只读集合，顺序沿用最终授权集合的顺序。</zh-CN><en>Read-only member tabs, ordered as in the final authorized collection.</en></lang></summary>
+            public IList<GroupTabView> Tabs { get; private set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>构造不可变分组；成员集合冻结，防止模板或调用方在绑定过程中改写。</zh-CN>
+            ///   <en>Build an immutable group; the member collection is frozen so the template or caller cannot mutate it during binding.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="groupKey"><l zh-CN="分组稳定键。" en="Stable group key." /></param>
+            /// <param name="displayName"><l zh-CN="已本地化的显示名。" en="Localized label." /></param>
+            /// <param name="containerId"><l zh-CN="组内容器稳定 id。" en="Stable in-group container id." /></param>
+            /// <param name="tabs"><l zh-CN="组内页签序列。" en="Member tab sequence." /></param>
+            public GroupSectionView(string groupKey, string displayName, string containerId, IEnumerable<GroupTabView> tabs)
+            {
+                GroupKey = groupKey;
+                DisplayName = displayName;
+                ContainerId = containerId;
+                Tabs = new ReadOnlyCollection<GroupTabView>((tabs ?? Enumerable.Empty<GroupTabView>()).ToList());
+            }
+        }

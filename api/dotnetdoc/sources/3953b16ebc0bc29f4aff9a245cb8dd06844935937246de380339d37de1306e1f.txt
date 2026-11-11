@@ -1,0 +1,1 @@
+        public byte[] PasswordHash { get; set; }

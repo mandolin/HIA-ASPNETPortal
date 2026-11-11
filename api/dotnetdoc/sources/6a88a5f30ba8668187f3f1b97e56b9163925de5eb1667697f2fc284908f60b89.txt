@@ -1,0 +1,16 @@
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeDirectoryView,
+                PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>搜索动作重新复核查看/编辑任一权限，防止页面加载后的权限变化继续读取目录数据。</zh-CN>
+            //   <en>Recheck either view or edit permission for search so a permission change after page load cannot continue directory reads.</en>
+            // </lang>
+            BindDirectory();
+        }

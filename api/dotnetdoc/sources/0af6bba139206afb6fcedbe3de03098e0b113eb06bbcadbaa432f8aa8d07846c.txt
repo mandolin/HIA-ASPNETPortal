@@ -1,0 +1,98 @@
+        public sealed class GroupDefinition
+        {
+            /// <summary><lang><zh-CN>分组稳定键。</zh-CN><en>Stable group key.</en></lang></summary>
+            public string GroupKey { get; private set; }
+
+            /// <summary><lang><zh-CN>中文界面显示名。</zh-CN><en>Chinese UI label.</en></lang></summary>
+            public string DisplayNameZhCn { get; private set; }
+
+            /// <summary><lang><zh-CN>英文界面显示名。</zh-CN><en>English UI label.</en></lang></summary>
+            public string DisplayNameEn { get; private set; }
+
+            /// <summary><lang><zh-CN>展示顺序，小者在前。</zh-CN><en>Presentation order, smaller first.</en></lang></summary>
+            public int SortOrder { get; private set; }
+
+            /// <summary><lang><zh-CN>默认成员页签 NavigationKey 只读集合。</zh-CN><en>Read-only default member tab NavigationKey collection.</en></lang></summary>
+            public IList<string> DefaultNavigationKeys { get; private set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>构造不可变分组定义；成员键集合去重、去空白后冻结，防止别名表被后续调用方改写。</zh-CN>
+            ///   <en>Build an immutable group definition; member keys are trimmed, de-duplicated and frozen so callers cannot mutate the alias table later.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="groupKey"><l zh-CN="分组稳定键。" en="Stable group key." /></param>
+            /// <param name="displayNameZhCn"><l zh-CN="中文显示名。" en="Chinese label." /></param>
+            /// <param name="displayNameEn"><l zh-CN="英文显示名。" en="English label." /></param>
+            /// <param name="sortOrder"><l zh-CN="展示顺序。" en="Presentation order." /></param>
+            /// <param name="defaultNavigationKeys"><l zh-CN="默认成员页签键。" en="Default member tab keys." /></param>
+            public GroupDefinition(string groupKey, string displayNameZhCn, string displayNameEn, int sortOrder, IEnumerable<string> defaultNavigationKeys)
+            {
+                // <lang>
+                //   <zh-CN>稳定键与双语显示名是展示契约的最小必需项；空白即拒绝构造，避免运行时出现无名分组。</zh-CN>
+                //   <en>The stable key and both labels are the minimal presentation contract; blank values are refused so no nameless group can appear at runtime.</en>
+                // </lang>
+                if (string.IsNullOrWhiteSpace(groupKey) || string.IsNullOrWhiteSpace(displayNameZhCn) || string.IsNullOrWhiteSpace(displayNameEn))
+                {
+                    throw new ArgumentException("A navigation group requires a stable key and both localized labels.");
+                }
+
+                GroupKey = groupKey.Trim();
+                DisplayNameZhCn = displayNameZhCn.Trim();
+                DisplayNameEn = displayNameEn.Trim();
+                SortOrder = sortOrder;
+
+                // <lang>
+                //   <zh-CN>成员键按忽略大小写去重；空集合是合法值（空态分组），但不得为 null 以免漏掉配置校验。</zh-CN>
+                //   <en>Member keys are de-duplicated case-insensitively; an empty set is legal (empty-state group) but null is not, so configuration validation is never skipped.</en>
+                // </lang>
+                if (defaultNavigationKeys == null)
+                {
+                    throw new ArgumentNullException("defaultNavigationKeys");
+                }
+
+                List<string> normalized = defaultNavigationKeys
+                    .Where(key => !string.IsNullOrWhiteSpace(key))
+                    .Select(key => key.Trim())
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList();
+                DefaultNavigationKeys = new ReadOnlyCollection<string>(normalized);
+            }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>按界面文化返回分组显示名；与 `PortalNavigationEntry.GetDisplayName` 同口径（两字母语言码判定中文），
+            ///   单侧缺失回落另一侧，两侧都缺失回落稳定键，绝不返回空标签。</zh-CN>
+            ///   <en>Return the localized group label for a UI culture, using the same convention as
+            ///   `PortalNavigationEntry.GetDisplayName` (two-letter code decides Chinese); a missing side falls back to the other,
+            ///   and both missing fall back to the stable key, so the label is never empty.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="culture"><l zh-CN="界面文化；为 null 时取当前线程界面文化。" en="UI culture; null uses the current thread UI culture." /></param>
+            /// <returns><l zh-CN="本地化后的显示名。" en="Localized label." /></returns>
+            public string GetDisplayName(CultureInfo culture)
+            {
+                // <lang>
+                //   <zh-CN>未显式传文化时取当前线程界面文化，保证调用方无需自行读取全球化配置。</zh-CN>
+                //   <en>When no culture is supplied, use the current thread UI culture so callers need not read globalization configuration.</en>
+                // </lang>
+                CultureInfo effective = culture ?? CultureInfo.CurrentUICulture;
+                bool preferChinese = effective != null &&
+                    string.Equals(effective.TwoLetterISOLanguageName, "zh", StringComparison.OrdinalIgnoreCase);
+
+                string preferred = preferChinese ? DisplayNameZhCn : DisplayNameEn;
+                string fallback = preferChinese ? DisplayNameEn : DisplayNameZhCn;
+
+                if (!string.IsNullOrWhiteSpace(preferred))
+                {
+                    return preferred;
+                }
+
+                if (!string.IsNullOrWhiteSpace(fallback))
+                {
+                    return fallback;
+                }
+
+                return GroupKey ?? string.Empty;
+            }
+        }

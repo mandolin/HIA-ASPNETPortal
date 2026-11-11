@@ -1,0 +1,2 @@
+        [Dependency]
+        public new IModulesDb ModulesConfig { private get; set; }

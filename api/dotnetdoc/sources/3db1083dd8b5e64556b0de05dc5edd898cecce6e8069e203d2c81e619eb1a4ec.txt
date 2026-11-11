@@ -1,0 +1,6 @@
+    <%--
+    <lang>
+      <zh-CN>运营审计页只调整筛选区、分页区和结果表格的展示结构，查询条件解析、分页边界和管理员权限逻辑仍由 code-behind 控制。</zh-CN>
+      <en>The operation-audit page only adjusts the display structure for filters, paging, and the result table; query parsing, paging boundaries, and administrator authorization remain controlled by the code-behind.</en>
+    </lang>
+    --%>

@@ -1,0 +1,22 @@
+        internal PortalOnlinePackageConfirmationTicket(
+            string nonce,
+            string antiForgeryToken,
+            string actorName,
+            string packageStorageName,
+            string packageHash,
+            DateTime issuedUtc,
+            DateTime expiresUtc)
+        {
+            // <lang>
+            //   <zh-CN>逐项赋值；不在此处做 Trim 或大小写折叠，保持服务端签发的原始值可被精确比对。</zh-CN>
+            //   <en>Assign each field without trimming or case folding, preserving the server-issued values for exact comparison.</en>
+            // </lang>
+            Nonce = nonce;
+            AntiForgeryToken = antiForgeryToken;
+            ActorName = actorName;
+            PackageStorageName = packageStorageName;
+            PackageHash = packageHash;
+            IssuedUtc = issuedUtc;
+            ExpiresUtc = expiresUtc;
+            ConsumedUtc = null;
+        }

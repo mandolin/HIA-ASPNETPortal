@@ -1,0 +1,31 @@
+        public string GetMode(string packageId)
+        {
+            // <lang>
+            //   <zh-CN>空白标识不可能是受信任包，直接走缺省，避免无意义的键查找。</zh-CN>
+            //   <en>A blank identifier cannot be a trusted package, so take the default directly instead of a pointless lookup.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(packageId))
+            {
+                return PortalModuleAssemblyModes.CodeBehind;
+            }
+
+            // <lang>
+            //   <zh-CN>承接精确键查找结果；局部值不缓存任何外部状态。</zh-CN>
+            //   <en>Holds the exact-key lookup result; this local caches no external state.</en>
+            // </lang>
+            string mode;
+            if (_modesByPackageId.TryGetValue(packageId, out mode))
+            {
+                // <lang>
+                //   <zh-CN>映射在构造前已通过封闭词表校验，按不变量返回而不重复解析文本。</zh-CN>
+                //   <en>The map passed closed-vocabulary validation before construction, so return it by invariant without re-parsing text.</en>
+                // </lang>
+                return mode;
+            }
+
+            // <lang>
+            //   <zh-CN>无条目即生产缺省态，这是 B 裁定的显式语义而非"未知状态"。</zh-CN>
+            //   <en>No entry means the production default; this is ruling B's explicit semantics, not an "unknown state".</en>
+            // </lang>
+            return PortalModuleAssemblyModes.CodeBehind;
+        }

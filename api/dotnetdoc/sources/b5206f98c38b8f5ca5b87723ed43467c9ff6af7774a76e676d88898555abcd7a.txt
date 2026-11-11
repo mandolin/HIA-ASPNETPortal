@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_OverdueDays {
+            get {
+                return ResourceManager.GetString("MyWorkItems_OverdueDays", resourceCulture);
+            }
+        }

@@ -1,0 +1,4 @@
+            public bool Allows(string key)
+            {
+                return _allowedKeys.Contains(key ?? string.Empty);
+            }

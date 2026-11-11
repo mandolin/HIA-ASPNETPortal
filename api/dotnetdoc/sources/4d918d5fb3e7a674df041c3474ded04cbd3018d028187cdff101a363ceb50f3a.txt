@@ -1,0 +1,12 @@
+        private void BindStatusList()
+        {
+            // <lang>
+            //   <zh-CN>重建状态选项而非依赖页面标记层，确保回发/模板变化不会引入未批准的状态值。</zh-CN>
+            //   <en>Rebuild the status options instead of trusting markup, preventing postbacks or template changes from introducing unapproved status values.</en>
+            // </lang>
+            EmploymentStatusList.Items.Clear();
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Active, PortalEmployeeStatuses.Active));
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Pending, PortalEmployeeStatuses.Pending));
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Suspended, PortalEmployeeStatuses.Suspended));
+            EmploymentStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Left, PortalEmployeeStatuses.Left));
+        }

@@ -1,0 +1,5 @@
+        internal static string Signin_LoginFaild {
+            get {
+                return ResourceManager.GetString("Signin_LoginFaild", resourceCulture);
+            }
+        }

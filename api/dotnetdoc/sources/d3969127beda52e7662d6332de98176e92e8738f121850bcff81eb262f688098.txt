@@ -1,0 +1,69 @@
+        private static IList<string> ReadAndValidateResources(JObject manifest, string packagePath)
+        {
+            // <lang>
+            //   <zh-CN>资源必须以非空 JSON 数组声明；缺失数组不是“无资源”成功状态。</zh-CN>
+            //   <en>Resources must be declared as a nonempty JSON array; a missing array is not a successful “no resources” state.</en>
+            // </lang>
+            JArray resources = manifest["resources"] as JArray;
+            if (resources == null || resources.Count == 0)
+            {
+                throw new InvalidOperationException("Theme resources are missing.");
+            }
+
+            // <lang>
+            //   <zh-CN>只累积已通过路径、存在性、脚本排除和 Default.css 契约的资源相对路径。</zh-CN>
+            //   <en>Accumulate only resource-relative paths that pass path, existence, script exclusion, and Default.css contract checks.</en>
+            // </lang>
+            var validatedResources = new List<string>();
+            // <lang>
+            //   <zh-CN>Default.css 是主题包最小样式入口，循环结束前必须被显式声明。</zh-CN>
+            //   <en>Default.css is the package's minimum style entry point and must be explicitly declared before the loop completes.</en>
+            // </lang>
+            bool containsDefaultCss = false;
+            foreach (JToken token in resources)
+            {
+                if (token.Type != JTokenType.String)
+                {
+                    throw new InvalidOperationException("Theme resource is invalid.");
+                }
+
+                // <lang>
+                //   <zh-CN>把资源声明规范为斜杠相对路径；后续白名单和物理映射均基于该规范值。</zh-CN>
+                //   <en>Normalize the resource declaration to a slash-separated relative path; later allowlist and physical mapping use this normalized value.</en>
+                // </lang>
+                string resource = token.Value<string>().Trim().Replace('\\', '/');
+                if (!IsValidResourcePath(resource))
+                {
+                    throw new InvalidOperationException("Theme resource path is not allowed.");
+                }
+
+                // <lang>
+                //   <zh-CN>把已通过相对路径检查的资源映射回包根目录；GetChildPath 再次执行规范化前缀边界检查。</zh-CN>
+                //   <en>Map the validated relative resource under the package root; GetChildPath performs the normalized-prefix boundary check again.</en>
+                // </lang>
+                string physicalResourcePath = GetChildPath(packagePath, resource.Replace('/', Path.DirectorySeparatorChar));
+                if (!File.Exists(physicalResourcePath))
+                {
+                    throw new InvalidOperationException("Theme resource does not exist.");
+                }
+
+                if (resource.EndsWith(".js", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidOperationException("Theme JavaScript is not supported.");
+                }
+
+                if (string.Equals(resource, "Default.css", StringComparison.OrdinalIgnoreCase))
+                {
+                    containsDefaultCss = true;
+                }
+
+                validatedResources.Add(resource);
+            }
+
+            if (!containsDefaultCss)
+            {
+                throw new InvalidOperationException("Default.css must be declared as a theme resource.");
+            }
+
+            return validatedResources.AsReadOnly();
+        }

@@ -1,0 +1,77 @@
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            FormDefinition definition = LoadDefinition();
+            if (definition == null)
+            {
+                ShowMessage("Form definition is unavailable.");
+                return;
+            }
+
+            string locale = GetTwoLetterLocale();
+            var values = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var errors = new List<string>();
+
+            foreach (FieldDefinition field in definition.Fields)
+            {
+                string raw = Context.Request.Form[field.Name] ?? string.Empty;
+                string trimmed = raw.Trim();
+                if (field.Required && string.IsNullOrEmpty(trimmed))
+                {
+                    errors.Add(definition.GetLabel(field, locale) + (locale == "zh-CN" ? " 为必填项。" : " is required."));
+                    values[field.Name] = raw;
+                    continue;
+                }
+                if (field.MaxLength > 0 && trimmed.Length > field.MaxLength)
+                {
+                    trimmed = trimmed.Substring(0, field.MaxLength);
+                }
+                values[field.Name] = trimmed;
+            }
+
+            if (errors.Count > 0)
+            {
+                FormLiteral.Text = RenderForm(definition, locale, values);
+                ShowMessage(string.Join(" ", errors));
+                return;
+            }
+
+            if (!IsAuthenticated())
+            {
+                FormLiteral.Text = RenderForm(definition, locale, values);
+                ShowMessage(locale == "zh-CN" ? "请先登录后再提交。" : "Please sign in before submitting.");
+                return;
+            }
+
+            int userId = GetCurrentUserId();
+            string userName = GetCurrentUserName();
+            string dataJson = Serialize(values);
+
+            try
+            {
+                long id = FormBuilderDb.Submit(new FormBuilderSubmission
+                {
+                    ModuleId = ModuleId,
+                    FormId = definition.FormId,
+                    SubmittedBy = userName,
+                    SubmittedByUserId = userId,
+                    Data = dataJson
+                });
+
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.BusinessModuleCategory,
+                    "FormBuilderSubmitted",
+                    "FormBuilder",
+                    id.ToString(CultureInfo.InvariantCulture),
+                    "Form submitted. FormId=" + definition.FormId + " ModuleId=" + ModuleId.ToString(CultureInfo.InvariantCulture),
+                    Context);
+
+                FormLiteral.Text = string.Empty;
+                SubmitButton.Visible = false;
+                ShowMessage(definition.GetSuccessText(locale));
+            }
+            catch (Exception)
+            {
+                FormLiteral.Text = RenderForm(definition, locale, values);
+                ShowMessage(locale == "zh-CN" ? "提交失败，请稍后重试。" : "Submission failed. Please try again later.");
+            }
+        }

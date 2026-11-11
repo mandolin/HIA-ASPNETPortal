@@ -1,0 +1,114 @@
+        public static string Render(
+            IEnumerable<PortalPermissionDefinition> definitions,
+            IEnumerable<RolePermissionEntry> grants,
+            Func<string, string> localize)
+        {
+            // <lang>
+            //   <zh-CN>统一文案入口：调用方未提供委托时退回内建英文兜底，保证渲染器独立可用且不抛异常。</zh-CN>
+            //   <en>Single copy entry point: when the caller supplies no delegate, fall back to built-in English so the renderer stays independently usable and never throws.</en>
+            // </lang>
+            Func<string, string> text = localize ?? (key => key);
+
+            // <lang>
+            //   <zh-CN>定义集合是矩阵的唯一权威来源；无定义时输出空态而不是空表头。</zh-CN>
+            //   <en>The definition collection is the sole authority for the matrix; without definitions, emit the empty state instead of an empty header.</en>
+            // </lang>
+            List<PortalPermissionDefinition> definitionList = definitions == null
+                ? new List<PortalPermissionDefinition>()
+                : definitions.Where(definition => definition != null).ToList();
+
+            if (definitionList.Count == 0)
+            {
+                return "<p class=\"Normal portal-matrix-empty\">" + HttpUtility.HtmlEncode(text("EmptyDefinitions")) + "</p>";
+            }
+
+            // <lang>
+            //   <zh-CN>映射集合按"角色名 + 权限键"建立查找表；同一组合出现多行时以后者为准（数据库主键已保证唯一，此处仅防御性处理）。</zh-CN>
+            //   <en>Build a lookup keyed by role name plus permission key; when a pair repeats, the later row wins (the database primary key already guarantees uniqueness, so this is defensive only).</en>
+            // </lang>
+            Dictionary<string, RolePermissionEntry> grantLookup = new Dictionary<string, RolePermissionEntry>(StringComparer.OrdinalIgnoreCase);
+            List<RolePermissionEntry> grantList = grants == null
+                ? new List<RolePermissionEntry>()
+                : grants.Where(grant => grant != null && !string.IsNullOrWhiteSpace(grant.RoleName) && !string.IsNullOrWhiteSpace(grant.PermissionKey)).ToList();
+
+            foreach (RolePermissionEntry grant in grantList)
+            {
+                grantLookup[BuildCellKey(grant.RoleName, grant.PermissionKey)] = grant;
+            }
+
+            // <lang>
+            //   <zh-CN>角色列取自映射中实际出现的角色名并按名称排序，保证同一数据每次呈现顺序一致；无映射时只有权限键列。**已知边界**：完全没有任何映射的角色不会出现在矩阵中（它没有任何权限事实可展示）；若将来需要"把零映射角色也列为空列"，应扩展只读数据源同时返回角色表全量角色，而不是在此推测角色清单。</zh-CN>
+            //   <en>Role columns are the role names actually present in the mappings, ordered by name so identical data renders identically; with no mappings only the permission-key column is shown. **Known boundary**: a role with no mapping at all never appears, because it carries no permission fact to display. If zero-mapping roles must later appear as empty columns, extend the read-only data source to return every role from the role table instead of guessing role names here.</en>
+            // </lang>
+            List<string> roleColumns = grantList
+                .Select(grant => grant.RoleName.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            // <lang>
+            //   <zh-CN>表头先输出权限键列标题，再逐个输出角色列标题。</zh-CN>
+            //   <en>The header emits the permission-key column title first, then one title per role column.</en>
+            // </lang>
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<table class=\"portal-capability-matrix\">");
+            builder.Append("<thead><tr>");
+            builder.Append("<th scope=\"col\">").Append(HttpUtility.HtmlEncode(text("ColumnPermissionKey"))).Append("</th>");
+
+            foreach (string roleName in roleColumns)
+            {
+                builder.Append("<th scope=\"col\">").Append(HttpUtility.HtmlEncode(roleName)).Append("</th>");
+            }
+
+            builder.Append("</tr></thead><tbody>");
+
+            // <lang>
+            //   <zh-CN>按固定层顺序逐个渲染：层内按分类分组、分类内按键名排序，形成"层 → 分类 → 键"三级结构。</zh-CN>
+            //   <en>Render layer by layer in the fixed order, grouping by category inside a layer and ordering by key inside a category, which yields the layer to category to key structure.</en>
+            // </lang>
+            foreach (string layer in LayerOrder)
+            {
+                List<PortalPermissionDefinition> layerDefinitions = definitionList
+                    .Where(definition => string.Equals(ResolveCapabilityLayer(definition.Category), layer, StringComparison.Ordinal))
+                    .ToList();
+
+                if (layerDefinitions.Count == 0)
+                {
+                    continue;
+                }
+
+                builder.Append("<tr class=\"portal-capability-matrix-layer\"><th scope=\"colgroup\" colspan=\"")
+                    .Append((roleColumns.Count + 1).ToString(System.Globalization.CultureInfo.InvariantCulture))
+                    .Append("\">")
+                    .Append(HttpUtility.HtmlEncode(text("Layer" + layer)))
+                    .Append("</th></tr>");
+
+                foreach (IGrouping<string, PortalPermissionDefinition> categoryGroup in layerDefinitions
+                    .GroupBy(definition => definition.Category ?? string.Empty, StringComparer.OrdinalIgnoreCase)
+                    .OrderBy(group => group.Key, StringComparer.OrdinalIgnoreCase))
+                {
+                    builder.Append("<tr class=\"portal-capability-matrix-category\"><th scope=\"colgroup\" colspan=\"")
+                        .Append((roleColumns.Count + 1).ToString(System.Globalization.CultureInfo.InvariantCulture))
+                        .Append("\">")
+                        .Append(HttpUtility.HtmlEncode(categoryGroup.Key))
+                        .Append("</th></tr>");
+
+                    foreach (PortalPermissionDefinition definition in categoryGroup.OrderBy(item => item.Key, StringComparer.OrdinalIgnoreCase))
+                    {
+                        builder.Append("<tr class=\"portal-capability-matrix-row\"><td>")
+                            .Append(HttpUtility.HtmlEncode(definition.Key))
+                            .Append("</td>");
+
+                        foreach (string roleName in roleColumns)
+                        {
+                            builder.Append(RenderCell(grantLookup, roleName, definition.Key, text));
+                        }
+
+                        builder.Append("</tr>");
+                    }
+                }
+            }
+
+            builder.Append("</tbody></table>");
+            return builder.ToString();
+        }

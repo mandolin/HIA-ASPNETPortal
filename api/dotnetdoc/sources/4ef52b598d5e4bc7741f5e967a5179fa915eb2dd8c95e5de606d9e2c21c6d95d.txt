@@ -1,0 +1,1 @@
+        string Contact1 { get; set; }

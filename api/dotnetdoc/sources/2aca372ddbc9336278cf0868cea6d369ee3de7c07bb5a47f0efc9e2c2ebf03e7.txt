@@ -1,0 +1,9 @@
+        private bool IsCurrentTargetSelf()
+        {
+            string actor = Context.User == null || Context.User.Identity == null
+                ? string.Empty
+                : Context.User.Identity.Name;
+            return !string.IsNullOrWhiteSpace(actor) &&
+                   currentUser != null &&
+                   string.Equals(actor, currentUser.Name, StringComparison.Ordinal);
+        }

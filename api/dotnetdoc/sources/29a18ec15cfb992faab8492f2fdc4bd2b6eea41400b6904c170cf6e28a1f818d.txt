@@ -1,0 +1,5 @@
+        private static readonly string[] ReviewSources =
+        {
+            PortalBusinessApplicationStatuses.Submitted,
+            PortalBusinessApplicationStatuses.InReview
+        };

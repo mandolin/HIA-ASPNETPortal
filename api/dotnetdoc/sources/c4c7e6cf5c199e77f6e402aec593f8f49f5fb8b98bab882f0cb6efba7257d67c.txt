@@ -1,0 +1,5 @@
+        private void ShowMessage(string message, bool isError)
+        {
+            MessageLabel.CssClass = isError ? "NormalRed" : "Normal";
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

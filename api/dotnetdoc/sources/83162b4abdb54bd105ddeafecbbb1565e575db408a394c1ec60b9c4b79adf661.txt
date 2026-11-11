@@ -1,0 +1,2 @@
+        [Dependency]
+        public IAnnouncementsDb AnnouncementsDB { private get; set; }

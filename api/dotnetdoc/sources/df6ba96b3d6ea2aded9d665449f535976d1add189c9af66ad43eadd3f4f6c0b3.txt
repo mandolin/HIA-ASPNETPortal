@@ -1,0 +1,56 @@
+        private static void AddProfileAndIncludes(
+            string profileName,
+            ISet<string> allowedPackages,
+            IList<string> invalidEntries,
+            ISet<string> visitedProfiles,
+            ISet<string> expandingProfiles)
+        {
+            // <lang>
+            //   <zh-CN>空名称不能构成 Profile 或配置键，直接停止此分支，不为其添加任意默认包。</zh-CN>
+            //   <en>An empty name cannot form a Profile or configuration key, so stop this branch without adding any default packages.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(profileName))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>已完成分支再次被引用时不重复展开，保留集合去重和首次解析顺序的既有语义。</zh-CN>
+            //   <en>Do not expand an already completed branch again, retaining the established set-deduplication and first-resolution semantics.</en>
+            // </lang>
+            if (visitedProfiles.Contains(profileName))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只有当前展开栈中的重复才是 include 循环；记录受控 Profile 名称后停止该边，防止配置图无限递归。</zh-CN>
+            //   <en>Only a duplicate on the current expansion stack is an include cycle; record the controlled Profile name and stop that edge to prevent unbounded recursion in the configuration graph.</en>
+            // </lang>
+            if (!expandingProfiles.Add(profileName))
+            {
+                invalidEntries.Add("profile include cycle=" + profileName);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先合并当前 Profile 的直接包，再递归其有效 include；不因 include 失败回滚此前已通过验证的包。</zh-CN>
+            //   <en>Merge the current Profile's direct packages before recursively processing valid includes; an include failure does not roll back packages that already passed validation.</en>
+            // </lang>
+            AddProfilePackages(profileName, allowedPackages, invalidEntries);
+            foreach (string includedProfile in ReadProfileIncludes(profileName, invalidEntries))
+            {
+                // <lang>
+                //   <zh-CN>同一访问/展开集合在整个深度优先链共享，使重复引用与循环判断基于完整 Profile 图而不是单一局部列表。</zh-CN>
+                //   <en>Share the same visited and expanding sets across the depth-first chain so repeated-reference and cycle decisions apply to the complete Profile graph rather than one local list.</en>
+                // </lang>
+                AddProfileAndIncludes(includedProfile, allowedPackages, invalidEntries, visitedProfiles, expandingProfiles);
+            }
+
+            // <lang>
+            //   <zh-CN>离开当前分支时先从展开栈移除，再标记为已完成；这一顺序确保同级重复是去重而非误报循环。</zh-CN>
+            //   <en>Remove the current branch from the expansion stack before marking it complete; this order ensures a sibling repeat is deduplicated rather than falsely reported as a cycle.</en>
+            // </lang>
+            expandingProfiles.Remove(profileName);
+            visitedProfiles.Add(profileName);
+        }

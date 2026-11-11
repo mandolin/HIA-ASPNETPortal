@@ -1,0 +1,45 @@
+        private static string Write(string level, string category, string message, Exception exception, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>先构造已净化且带关联编号的独立条目；无论后续诊断接收器是否可用，调用方仅取得该编号而不暴露原始异常或上下文。</zh-CN>
+            //   <en>Build a detached sanitized entry with a correlation id first; whether later diagnostics sinks are available or not, callers receive only that id and never raw exception or context.</en>
+            // </lang>
+            PortalDiagnosticEntry entry = BuildEntry(level, category, message, exception, context);
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>Trace 与文件接收器按既有顺序独立执行；两者都只消费已受控字段。</zh-CN>
+                //   <en>Run Trace and file sinks independently in their established order; both consume only controlled fields.</en>
+                // </lang>
+                WriteTrace(entry);
+                WriteFile(entry);
+            }
+            // <lang>
+            //   <zh-CN>记录接收器异常到局部变量，后续回退只读取其净化摘要，不让异常对象逃出诊断隔离边界。</zh-CN>
+            //   <en>Keep the sink exception in a local so the fallback reads only its sanitized summary and the exception object does not cross the isolation boundary.</en>
+            // </lang>
+            catch (Exception logException)
+            {
+                // <lang>
+                //   <zh-CN>诊断接收器失败不得反过来破坏业务请求；回退 Trace 只包含事件编号和已净化、截断的异常摘要。</zh-CN>
+                //   <en>A diagnostics-sink failure must not break the business request; fallback Trace contains only the event id and a sanitized, truncated exception summary.</en>
+                // </lang>
+                try
+                {
+                    Trace.TraceError(
+                        "Portal diagnostics write failed. EventId={0}; Error={1}",
+                        entry.EventId,
+                        PortalDiagnosticSanitizer.SanitizeAndTruncate(logException.ToString(), 2000));
+                }
+                catch
+                {
+                    // <lang>
+                    //   <zh-CN>最后一层隔离故意吞并 Trace 自身故障，保持原请求的成功或失败语义不被诊断路径覆盖。</zh-CN>
+                    //   <en>The final isolation layer deliberately swallows a Trace failure so the diagnostics path cannot override the original request outcome.</en>
+                    // </lang>
+                }
+            }
+
+            return entry.EventId;
+        }

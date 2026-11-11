@@ -1,0 +1,29 @@
+        public int AddModule(int tabId, int moduleOrder, string paneName, string title, int moduleDefId, int cacheTime,
+                             string editRoles, bool showMobile)
+        {
+            // <lang>
+            //   <zh-CN>仅创建实例记录；模块定义的来源可信性应已由上层 Module Catalog 或旧后台入口保证。</zh-CN>
+            //   <en>This creates only the instance row; trust in the module definition must already be guaranteed by Module Catalog or the legacy administration entry.</en>
+            // </lang>
+            var newModule = new ModuleItem
+            {
+                ModuleDefId = moduleDefId,
+                ModuleOrder = moduleOrder,
+                ModuleTitle = title,
+                PaneName = paneName,
+                EditRoles = editRoles,
+                CacheTimeout = cacheTime,
+                ShowMobile = showMobile,
+                TabId = tabId
+            };
+
+            _context.Modules.Add(newModule);
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>保存后刷新快照，并返回数据库生成的模块标识供后台继续编辑或跳转。</zh-CN>
+            //   <en>After saving, refresh the snapshot and return the database-generated module identifier for continued administration or navigation.</en>
+            // </lang>
+            _items = _context.Modules.ToList();
+            return newModule.ModuleId;
+        }

@@ -1,0 +1,1 @@
+            public IList<GroupTabView> Tabs { get; private set; }

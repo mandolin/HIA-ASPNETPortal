@@ -1,0 +1,1 @@
+        public const string StagingVirtualDirectory = "~/App_Data/OnlinePackages/Staging";

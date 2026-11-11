@@ -1,0 +1,5 @@
+        internal static string Common_StatusInReview {
+            get {
+                return ResourceManager.GetString("Common_StatusInReview", resourceCulture);
+            }
+        }

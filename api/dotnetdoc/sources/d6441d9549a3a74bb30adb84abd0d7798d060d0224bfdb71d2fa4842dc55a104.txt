@@ -1,0 +1,16 @@
+        private static string NormalizeConfiguredExtension(string value)
+        {
+            // <lang>
+            //   <zh-CN>先去除两端空白；空 token 不被补点，避免生成虚假的扩展名。</zh-CN>
+            //   <en>Trim surrounding whitespace first; do not add a dot to an empty token or create a fictitious extension.</en>
+            // </lang>
+            string normalized = (value ?? string.Empty).Trim();
+            if (normalized.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            return normalized.StartsWith(".", StringComparison.Ordinal)
+                ? normalized.ToLowerInvariant()
+                : "." + normalized.ToLowerInvariant();
+        }

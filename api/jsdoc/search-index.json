@@ -1,0 +1,210 @@
+[
+  {
+    "id": "module-module:portal-build",
+    "kind": "module",
+    "name": "portal-build",
+    "longname": "module:portal-build",
+    "memberof": "",
+    "summary": "Portal front-end build tasks.",
+    "localizedSummaries": {
+      "zh-CN": "门户前端资源构建任务。",
+      "en": "Portal front-end build tasks."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "module-module:portal-login-password-encryption",
+    "kind": "module",
+    "name": "portal-login-password-encryption",
+    "longname": "module:portal-login-password-encryption",
+    "memberof": "",
+    "summary": "Login-password pre-submit encryption helper for the legacy Portal login flow.",
+    "localizedSummaries": {
+      "zh-CN": "登录密码提交前加密助手；保留 IE6 级语法兼容，并只向页面暴露最小的加密入口。",
+      "en": "Login-password pre-submit encryption helper; it keeps IE6-level syntax compatibility and exposes only the minimal encryption entry points to the page."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-build-closewatchers",
+    "kind": "function",
+    "name": "closeWatchers",
+    "longname": "module:portal-build~closeWatchers",
+    "memberof": "module:portal-build",
+    "summary": "Stops every active Gulp watcher and clears its in-memory handle.",
+    "localizedSummaries": {
+      "zh-CN": "停止全部活动的 Gulp watcher，并清空对应的内存句柄。",
+      "en": "Stops every active Gulp watcher and clears its in-memory handle."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-build-coffeejs",
+    "kind": "function",
+    "name": "coffeejs",
+    "longname": "module:portal-build~coffeejs",
+    "memberof": "module:portal-build",
+    "summary": "Builds CoffeeScript source files to minimized JavaScript with source maps.",
+    "localizedSummaries": {
+      "zh-CN": "构建 CoffeeScript 源文件，输出压缩后的 JavaScript 及 source map。",
+      "en": "Builds CoffeeScript source files to minimized JavaScript with source maps."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-build-esjs",
+    "kind": "function",
+    "name": "esjs",
+    "longname": "module:portal-build~esjs",
+    "memberof": "module:portal-build",
+    "summary": "Builds ES module source files from `*.src.js` to minimized JavaScript with source maps.",
+    "localizedSummaries": {
+      "zh-CN": "构建 `*.src.js` ES 模块源码，输出压缩后的 JavaScript 及 source map。",
+      "en": "Builds ES module source files from `*.src.js` to minimized JavaScript with source maps."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-build-postcssprocessors",
+    "kind": "function",
+    "name": "postcssProcessors",
+    "longname": "module:portal-build~postcssProcessors",
+    "memberof": "module:portal-build",
+    "summary": "Creates the PostCSS processor chain shared by Sass asset builds.",
+    "localizedSummaries": {
+      "zh-CN": "创建 Sass 资源构建共用的 PostCSS 处理器链，负责补全浏览器前缀并压缩 CSS。",
+      "en": "Creates the PostCSS processor chain shared by Sass asset builds."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-build-sasscss",
+    "kind": "function",
+    "name": "sasscss",
+    "longname": "module:portal-build~sasscss",
+    "memberof": "module:portal-build",
+    "summary": "Builds Sass and SCSS source files to prefixed and minimized CSS with source maps.",
+    "localizedSummaries": {
+      "zh-CN": "构建 Sass 与 SCSS 源文件，输出补全前缀、压缩后的 CSS 及 source map。",
+      "en": "Builds Sass and SCSS source files to prefixed and minimized CSS with source maps."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-build-startwatch",
+    "kind": "function",
+    "name": "startWatch",
+    "longname": "module:portal-build~startWatch",
+    "memberof": "module:portal-build",
+    "summary": "Starts the Visual Studio Task Runner watchers without performing an initial asset build.",
+    "localizedSummaries": {
+      "zh-CN": "启动 Visual Studio Task Runner 使用的 watcher，不执行首次资源构建。",
+      "en": "Starts the Visual Studio Task Runner watchers without performing an initial asset build."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-build-stopwatch",
+    "kind": "function",
+    "name": "stopWatch",
+    "longname": "module:portal-build~stopWatch",
+    "memberof": "module:portal-build",
+    "summary": "Writes the watcher signal file so the active Visual Studio watcher process exits gracefully.",
+    "localizedSummaries": {
+      "zh-CN": "写入 watcher 信号文件，使活动的 Visual Studio watcher 进程正常退出。",
+      "en": "Writes the watcher signal file so the active Visual Studio watcher process exits gracefully."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-login-password-encryption-createrequest",
+    "kind": "function",
+    "name": "createRequest",
+    "longname": "module:portal-login-password-encryption~createRequest",
+    "memberof": "module:portal-login-password-encryption",
+    "summary": "Creates an XMLHttpRequest-compatible object for the current browser.",
+    "localizedSummaries": {
+      "zh-CN": "按现代接口、Msxml2.XMLHTTP、Microsoft.XMLHTTP 顺序创建请求对象；均不可用时返回 null。",
+      "en": "Creates a request object in the order native API, Msxml2.XMLHTTP, then Microsoft.XMLHTTP; returns null when none is available."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-login-password-encryption-encryptpassword",
+    "kind": "function",
+    "name": "encryptPassword",
+    "longname": "module:portal-login-password-encryption~encryptPassword",
+    "memberof": "module:portal-login-password-encryption",
+    "summary": "Adapts one password pair to the batch encryption routine.",
+    "localizedSummaries": {
+      "zh-CN": "将单个密码控件对适配到批量流程，保持单字段入口与多字段入口使用同一失败和明文清理语义。",
+      "en": "Adapts one password-control pair to the batch flow so single-field and multi-field entry points share the same failure and plaintext-clearing semantics."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-login-password-encryption-encryptpasswordfields",
+    "kind": "function",
+    "name": "encryptPasswordFields",
+    "longname": "module:portal-login-password-encryption~encryptPasswordFields",
+    "memberof": "module:portal-login-password-encryption",
+    "summary": "Encrypts one or more page password fields and commits ciphertext only after the whole batch succeeds.",
+    "localizedSummaries": {
+      "zh-CN": "校验成对字段、按需读取公钥并先完成整批加密，再一次性写入密文并清空明文；任一准备或加密失败都保留未提交的明文值供页面重试。",
+      "en": "Validates field pairs, fetches the public key only when needed, encrypts the complete batch first, then commits ciphertext and clears plaintext; any preparation or encryption failure leaves uncommitted plaintext available for a page retry."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-login-password-encryption-getbyid",
+    "kind": "function",
+    "name": "getById",
+    "longname": "module:portal-login-password-encryption~getById",
+    "memberof": "module:portal-login-password-encryption",
+    "summary": "Resolves a page element by its DOM id.",
+    "localizedSummaries": {
+      "zh-CN": "按页面集成提供的 DOM id 查找元素；找不到时返回 null，不创建或修改元素。",
+      "en": "Resolves the element identified by the page integration's DOM id; returns null when it is absent and never creates or mutates an element."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-login-password-encryption-requestpublickey",
+    "kind": "function",
+    "name": "requestPublicKey",
+    "longname": "module:portal-login-password-encryption~requestPublicKey",
+    "memberof": "module:portal-login-password-encryption",
+    "summary": "Fetches the public key text used for one synchronous encryption pass.",
+    "localizedSummaries": {
+      "zh-CN": "以同步 GET 读取页面指定的公钥端点并加入时间戳避免缓存；本函数不验证 URL 来源，来源信任由页面集成负责。",
+      "en": "Reads the page-selected public-key endpoint with a synchronous GET and cache-busting timestamp; URL-origin validation remains the responsibility of the page integration."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "function-module:portal-login-password-encryption-setmessage",
+    "kind": "function",
+    "name": "setMessage",
+    "longname": "module:portal-login-password-encryption~setMessage",
+    "memberof": "module:portal-login-password-encryption",
+    "summary": "Writes a fixed login-preparation message into the page message element.",
+    "localizedSummaries": {
+      "zh-CN": "将本助手选择的固定提示写入页面消息元素；不承担通用 HTML 净化或错误详情展示。",
+      "en": "Writes the fixed message selected by this helper into the page message element; it is not a general HTML sanitizer or error-detail renderer."
+    },
+    "sourceReferences": 0
+  },
+  {
+    "id": "constant-module:portal-build-assetsbuild",
+    "kind": "constant",
+    "name": "assetsBuild",
+    "longname": "module:portal-build~assetsBuild",
+    "memberof": "module:portal-build",
+    "summary": "One-time asset build task for VSCode and AI automation. It processes only existing source globs, writes outputs beside them, and does not create input directories or change the Visual Studio `startWatch` binding.",
+    "localizedSummaries": {
+      "zh-CN": "供 VSCode 与 AI 自动化使用的一次性资源构建任务；仅处理已有输入并在相邻目录写入输出， 不创建输入目录，也不改变 Visual Studio 的 `startWatch` 绑定。",
+      "en": "One-time asset build task for VSCode and AI automation; it processes existing inputs and writes adjacent outputs without creating input directories or changing the Visual Studio `startWatch` binding."
+    },
+    "sourceReferences": 0
+  }
+]

@@ -1,0 +1,52 @@
+        private bool TryInitializeRequest(out ILinkItem item)
+        {
+            // <lang>
+            //   <zh-CN>输出参数先清空，保证失败路径不会把链接快照暴露给调用方。</zh-CN>
+            //   <en>The output parameter is cleared first so failure paths cannot expose a link snapshot to callers.</en>
+            // </lang>
+            item = null;
+            // <lang>
+            //   <zh-CN>模块标识同时限定链接编辑权限和新增链接归属；非法或无权限请求统一拒绝。</zh-CN>
+            //   <en>The module identifier constrains both link edit permission and new-link ownership; invalid or unauthorized requests are denied uniformly.</en>
+            // </lang>
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
+                !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>ItemId 缺失表示新增链接；非空值必须是正整数，避免跨模块枚举异常输入。</zh-CN>
+            //   <en>A missing ItemId means a new link; non-empty values must be positive integers to avoid cross-module enumeration with malformed input.</en>
+            // </lang>
+            string requestedItemId = Request.Params["ItemId"];
+            if (!string.IsNullOrWhiteSpace(requestedItemId) &&
+                !PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>新增路径没有旧链接可校验归属，模块编辑权限即完整授权条件。</zh-CN>
+                //   <en>The creation path has no legacy link for ownership validation, so module edit permission is the complete authorization condition.</en>
+                // </lang>
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>既有链接必须按 ItemId 读取并比对模块归属，避免直接对象引用。</zh-CN>
+            //   <en>Existing links must be read by ItemId and compared against module ownership, avoiding direct object references.</en>
+            // </lang>
+            item = LinkDB.GetSingleLink(itemId);
+            if (item == null || item.ModuleId != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }

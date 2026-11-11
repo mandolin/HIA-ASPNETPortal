@@ -1,0 +1,37 @@
+        public IList<PortalWorkItemEventInfo> GetWorkItemEvents(long workItemId, int take)
+        {
+            if (workItemId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<PortalWorkItemEventInfo>();
+            }
+
+            int safeTake = NormalizeTake(take, 20);
+            try
+            {
+                // <lang>
+                //   <zh-CN>事件流水按单个审批工作项标识读取，主要用于管理员追踪状态变化，不承担业务授权判断。</zh-CN>
+                //   <en>Event history is read for one work-item identifier and is mainly used by administrators to trace status changes; it does not perform business authorization decisions.</en>
+                // </lang>
+                return context.Database.SqlQuery<PortalWorkItemEventInfo>(
+                    @"
+SELECT TOP (@Take)
+    [EventId],
+    [WorkItemId],
+    [OccurredUtc],
+    [EventType],
+    [ActorUserId],
+    [ActorName],
+    [FromStatus],
+    [ToStatus],
+    [Comment]
+FROM [dbo].[PortalBiz_WorkItemEvents]
+WHERE [WorkItemId] = @WorkItemId
+ORDER BY [OccurredUtc] DESC, [EventId] DESC;",
+                    new SqlParameter("@Take", safeTake),
+                    new SqlParameter("@WorkItemId", workItemId)).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<PortalWorkItemEventInfo>();
+            }
+        }

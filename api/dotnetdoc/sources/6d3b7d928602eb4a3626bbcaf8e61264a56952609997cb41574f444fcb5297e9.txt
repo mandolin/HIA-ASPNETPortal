@@ -1,0 +1,107 @@
+        public EmployeeProfileCorrectionRequestResult SubmitRequest(EmployeeProfileCorrectionSubmitRequest request)
+        {
+            // <lang>
+            //   <zh-CN>提交入口先统一归一化，保证后面的白名单、必填和 SQL 参数都基于裁剪后的稳定值。</zh-CN>
+            //   <en>The submission entry normalizes first so allow-list checks, required checks and SQL parameters all use trimmed stable values.</en>
+            // </lang>
+            EmployeeProfileCorrectionSubmitRequest normalized = NormalizeSubmitRequest(request);
+            if (normalized.UserId <= 0 || normalized.EmployeeId <= 0 || normalized.BindingId <= 0)
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "A signed-in user with an active employee binding is required.");
+            }
+
+            if (!IsAllowedFieldName(normalized.FieldName))
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Select a supported profile field.");
+            }
+
+            if (string.IsNullOrWhiteSpace(normalized.ProposedValue))
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Proposed value is required.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee profile correction schema is unavailable.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>插入时重新联查 Active 绑定和 Active 员工，并在 SQL 中截取当前值快照，避免页面提交过期或伪造的当前值。</zh-CN>
+                //   <en>The insert re-joins the active binding and active employee, and captures the current value snapshot in SQL so stale or forged page values are not trusted.</en>
+                // </lang>
+                List<long> rows = context.Database.SqlQuery<long>(
+                    @"
+DECLARE @Inserted TABLE
+(
+    [RequestId] BIGINT NOT NULL
+);
+
+INSERT INTO [dbo].[PortalBiz_EmployeeProfileCorrectionRequests]
+    ([EmployeeId],
+     [UserId],
+     [BindingId],
+     [SubmittedUtc],
+     [SubmittedBy],
+     [FieldName],
+     [CurrentValueSnapshot],
+     [ProposedValue],
+     [RequestNote],
+     [RequestStatus])
+OUTPUT INSERTED.[RequestId] INTO @Inserted
+SELECT TOP (1)
+    [Employee].[EmployeeId],
+    [Binding].[UserId],
+    [Binding].[BindingId],
+    @SubmittedUtc,
+    @SubmittedBy,
+    @FieldName,
+    CASE @FieldName
+        WHEN N'DisplayName' THEN [Employee].[DisplayName]
+        WHEN N'PreferredName' THEN [Employee].[PreferredName]
+        WHEN N'WorkEmail' THEN [Employee].[WorkEmail]
+        WHEN N'OrganizationDisplayName' THEN [Organization].[DisplayName]
+        ELSE NULL
+    END,
+    @ProposedValue,
+    @RequestNote,
+    N'Submitted'
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
+    ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
+WHERE [Binding].[UserId] = @UserId
+  AND [Employee].[EmployeeId] = @EmployeeId
+  AND [Binding].[BindingId] = @BindingId
+  AND [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active';
+
+SELECT [RequestId] FROM @Inserted;",
+                    new SqlParameter("@UserId", normalized.UserId),
+                    new SqlParameter("@EmployeeId", normalized.EmployeeId),
+                    new SqlParameter("@BindingId", normalized.BindingId),
+                    new SqlParameter("@SubmittedUtc", normalized.SubmittedUtc.Value),
+                    new SqlParameter("@SubmittedBy", normalized.SubmittedBy),
+                    new SqlParameter("@FieldName", normalized.FieldName),
+                    new SqlParameter("@ProposedValue", normalized.ProposedValue),
+                    CreateNullableStringParameter("@RequestNote", normalized.RequestNote)).ToList();
+
+                long requestId = rows.Count == 0 ? 0 : rows[0];
+                if (requestId <= 0)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "No active employee profile is available for correction.");
+                }
+
+                return new EmployeeProfileCorrectionRequestResult(true, requestId, "Employee profile correction request submitted.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>写入异常返回统一低敏失败消息；调用页面可结合操作上下文写 `PortalDiagnostics` 事件编号。</zh-CN>
+                //   <en>Write exceptions return one low-sensitivity failure message; the calling page may log a `PortalDiagnostics` event id with operation context.</en>
+                // </lang>
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee profile correction request failed.");
+            }
+        }

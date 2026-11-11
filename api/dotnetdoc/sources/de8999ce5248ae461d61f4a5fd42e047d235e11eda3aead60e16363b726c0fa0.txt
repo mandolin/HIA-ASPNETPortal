@@ -1,0 +1,7 @@
+            public GroupSectionView(string groupKey, string displayName, string containerId, IEnumerable<GroupTabView> tabs)
+            {
+                GroupKey = groupKey;
+                DisplayName = displayName;
+                ContainerId = containerId;
+                Tabs = new ReadOnlyCollection<GroupTabView>((tabs ?? Enumerable.Empty<GroupTabView>()).ToList());
+            }

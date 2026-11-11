@@ -1,0 +1,36 @@
+        private bool TryInitializeRequest()
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView))
+            {
+                return false;
+            }
+
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["userid"], out userId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            if (!TryReadOptionalPositiveParameter("tabid", out tabId) ||
+                !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
+            {
+                return false;
+            }
+
+            currentUser = UsersDB.FindUserById(userId);
+            if (currentUser == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            string suppliedUserName = Request.Params["username"];
+            if (!string.IsNullOrWhiteSpace(suppliedUserName) &&
+                !string.Equals(suppliedUserName, currentUser.Name, StringComparison.Ordinal))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }

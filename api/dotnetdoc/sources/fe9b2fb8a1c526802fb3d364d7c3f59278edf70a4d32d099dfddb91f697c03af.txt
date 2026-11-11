@@ -1,0 +1,8 @@
+        public DocumentsDb(PortalDbContext context)
+        {
+            // <lang>
+            //   <zh-CN>保存调用方提供的 EF 上下文引用；构造器不主动访问数据库，避免 DI 创建阶段产生隐式 I/O。</zh-CN>
+            //   <en>Store the caller-provided EF context reference; the constructor does not query the database, avoiding implicit I/O during DI creation.</en>
+            // </lang>
+            _context = context;
+        }

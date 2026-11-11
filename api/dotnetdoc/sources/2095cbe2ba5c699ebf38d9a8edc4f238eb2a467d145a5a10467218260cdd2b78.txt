@@ -1,0 +1,1 @@
+        string DesktopHtml { get; set; }

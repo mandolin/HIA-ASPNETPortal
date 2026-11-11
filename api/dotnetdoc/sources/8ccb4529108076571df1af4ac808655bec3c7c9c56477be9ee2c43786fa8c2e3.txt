@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition NavigationLogHiddenTabs =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationLogHiddenTabs,
+                "记录页签隐藏原因",
+                "控制是否在诊断日志中记录每个页签被隐藏的原因；默认开启。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Navigation");

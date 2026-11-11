@@ -1,0 +1,43 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:endpoints",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints.admin",
+      "kind": "namespace",
+      "label": "Admin",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-endpoints.admin-dd79eabc.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints:type:hia-document-aspnet-aspnet-webforms-page-default.aspx",
+      "kind": "type",
+      "label": "Default",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:aspnet-aspnet-webforms-page-default.aspx",
+      "sourcePath": "src/Portal/Default.aspx",
+      "symbolId": "aspnet:aspnet-webforms-page:default.aspx",
+      "contentPath": "entries/hia-document-aspnet-aspnet-webforms-page-default.aspx-2dcf37e2.html"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints:type:hia-document-aspnet-aspnet-webforms-page-desktopdefault.aspx",
+      "kind": "type",
+      "label": "DesktopDefault",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:aspnet-aspnet-webforms-page-desktopdefault.aspx",
+      "sourcePath": "src/Portal/DesktopDefault.aspx",
+      "symbolId": "aspnet:aspnet-webforms-page:desktopdefault.aspx",
+      "contentPath": "entries/hia-document-aspnet-aspnet-webforms-page-desktopdefault.aspx-6254172c.html"
+    }
+  ]
+}

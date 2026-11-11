@@ -1,0 +1,4 @@
+        public bool IsResolved
+        {
+            get { return Tab != null; }
+        }

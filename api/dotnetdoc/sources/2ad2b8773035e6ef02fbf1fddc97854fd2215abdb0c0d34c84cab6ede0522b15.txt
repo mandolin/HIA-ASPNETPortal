@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>子级讨论列表按当前主题的 DisplayOrder 查询回复，继续由 code-behind 控制缩进、日期格式和详情页链接。</zh-CN>
+          <en>The child discussion list queries replies by the selected thread's DisplayOrder, while indentation, date formatting, and detail links remain controlled by code-behind.</en>
+        </lang>
+        --%>

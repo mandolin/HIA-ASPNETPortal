@@ -1,0 +1,17 @@
+        public static bool TryFindByKey(string groupKey, out GroupDefinition definition)
+        {
+            // <lang>
+            //   <zh-CN>空白键直接判未命中，避免把空配置误归入某个业务组。</zh-CN>
+            //   <en>A blank key is an immediate miss so empty configuration is never mis-assigned to a business group.</en>
+            // </lang>
+            definition = null;
+            if (string.IsNullOrWhiteSpace(groupKey))
+            {
+                return false;
+            }
+
+            string trimmed = groupKey.Trim();
+            definition = DefinitionArray.FirstOrDefault(candidate =>
+                string.Equals(candidate.GroupKey, trimmed, StringComparison.OrdinalIgnoreCase));
+            return definition != null;
+        }

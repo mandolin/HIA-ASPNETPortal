@@ -1,0 +1,4 @@
+        public PortalDbContext(string connectionString) :
+            base(connectionString)
+        {
+        }

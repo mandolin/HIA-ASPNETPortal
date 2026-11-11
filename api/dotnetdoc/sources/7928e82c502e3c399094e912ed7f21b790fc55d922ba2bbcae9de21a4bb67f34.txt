@@ -1,0 +1,1 @@
+        public PortalNavigationLifecycleState LifecycleState { get; private set; }

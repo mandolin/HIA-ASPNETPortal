@@ -1,0 +1,37 @@
+        private void TryCompleteWorkItem(long requestId, string requestStatus, string reviewNote)
+        {
+            // <lang>
+            //   <zh-CN>原 [已脱敏] 延期项：审核主流程不得因待办旁路失败而回滚。此处以 try/catch 隔离待办服务异常——
+            //   待办投影是补充能力，失败仅记录诊断日志，请求状态更新（主流程）照常提交。[已脱敏] `[已脱敏]` 已在本提交闭合：
+            //   补了异常路径单测（资料更正审核侧单测锁定"旁路抛错不回滚"），并据实修订本条注释。</zh-CN>
+            //   <en>Formerly deferred as [已脱敏]: the review main flow must not roll back because of a sidecar failure. This try/catch isolates the work-item service exception — the work-item projection is supplemental, so a failure only records a diagnostic log while the request-status update (main flow) commits as usual. [已脱敏] `[已脱敏]` is closed in this change: an exception-path unit test now pins "sidecar throws but does not roll back", and this comment is updated accordingly.</en>
+            // </lang>
+            if (WorkItemDb == null || requestId <= 0)
+            {
+                return;
+            }
+
+            try
+            {
+                WorkItemDb.CompleteBusinessWorkItem(
+                    new PortalWorkItemCompletionRequest
+                    {
+                        BusinessKind = PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest,
+                        BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                        EventType = MapWorkItemEventType(requestStatus),
+                        TargetStatus = MapWorkItemStatus(requestStatus),
+                        ActorName = GetCurrentUserName(),
+                        Comment = NormalizeInput(reviewNote, 1000),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+            }
+            catch (Exception ex)
+            {
+                // <lang>
+                //   <zh-CN>待办投影失败属旁路降级：不向上抛出，避免回滚已成功的审核主流程；仅记录诊断日志供运维排查。</zh-CN>
+                //   <en>A failed work-item projection is a sidecar degradation: do not rethrow (that would roll back the already-succeeded review main flow); record a diagnostic log for operations.</en>
+                // </lang>
+                System.Diagnostics.Trace.TraceError(
+                    "资料更正审核通过后待办投影失败（已降级，不影响审核结果）：" + ex);
+            }
+        }

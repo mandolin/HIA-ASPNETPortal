@@ -1,0 +1,23 @@
+        private static bool IsTableAvailable(SqlConnection connection, string tableName)
+        {
+            // <lang>
+            //   <zh-CN>命令对象只在本 helper 生命周期内使用；tableName 来自私有常量，拼入 OBJECT_ID 前不接受外部输入。</zh-CN>
+            //   <en>The command object is used only for this helper's lifetime; tableName comes from private constants and accepts no external input before being placed in OBJECT_ID.</en>
+            // </lang>
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                // <lang>
+                //   <zh-CN>固定元数据查询只返回 0/1 表存在事实，不读取设置值、审计值或连接信息。</zh-CN>
+                //   <en>The fixed metadata query returns only the 0/1 table-existence fact and reads no setting value, audit value, or connection information.</en>
+                // </lang>
+                command.CommandText =
+                    "SELECT CASE WHEN OBJECT_ID(N'[dbo].[" + tableName + "]', N'U') IS NULL THEN 0 ELSE 1 END;";
+
+                // <lang>
+                //   <zh-CN>标量结果空值或非 1 均按不可用处理，避免部分迁移状态被误判为可安全写入。</zh-CN>
+                //   <en>Treat a null scalar result or anything other than 1 as unavailable, avoiding a partial migration state being misclassified as safely writable.</en>
+                // </lang>
+                object value = command.ExecuteScalar();
+                return value != null && Convert.ToInt32(value) == 1;
+            }
+        }

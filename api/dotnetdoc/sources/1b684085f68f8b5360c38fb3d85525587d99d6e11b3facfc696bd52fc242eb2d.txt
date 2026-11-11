@@ -1,0 +1,5 @@
+        internal static string EditXml_MessageInvalidResourcePath {
+            get {
+                return ResourceManager.GetString("EditXml_MessageInvalidResourcePath", resourceCulture);
+            }
+        }

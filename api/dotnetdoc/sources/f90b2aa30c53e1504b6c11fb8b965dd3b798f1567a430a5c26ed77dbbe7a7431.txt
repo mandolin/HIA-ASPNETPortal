@@ -1,0 +1,97 @@
+        public static bool TryVerifyZeroResidue(
+            PortalOnlinePackageSnapshot expected,
+            IList<PortalOnlinePackageSnapshotEntry> actual,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态。</zh-CN>
+            //   <en>Initialise the output to a failure state.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>先校验基线快照本身，避免用无效基线得出「一致」的结论。</zh-CN>
+            //   <en>Validate the baseline snapshot first so an invalid baseline cannot yield an "identical" verdict.</en>
+            // </lang>
+            string snapshotReason;
+            if (!TryValidateSnapshot(expected, out snapshotReason))
+            {
+                reason = snapshotReason;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>实际清单缺失即拒绝，不解释为「空目录恰好零残留」。</zh-CN>
+            //   <en>A missing actual manifest rejects; it is not interpreted as "an empty directory happens to have zero residue".</en>
+            // </lang>
+            if (actual == null)
+            {
+                reason = "Post-restore manifest is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>条目数必须相等：多出的文件即为残留，少掉的即为丢失，二者都不允许。</zh-CN>
+            //   <en>Entry counts must match: an extra file is residue and a missing one is loss; neither is allowed.</en>
+            // </lang>
+            if (actual.Count != expected.Entries.Count)
+            {
+                reason = string.Format(CultureInfo.InvariantCulture,
+                    "Post-restore file count {0} does not match baseline {1}.",
+                    actual.Count, expected.Entries.Count);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>把实际清单按路径建索引；重复路径直接判为不一致，防止覆盖式比对。</zh-CN>
+            //   <en>Index the actual manifest by path; duplicate paths are a mismatch so comparison can never be overwritten.</en>
+            // </lang>
+            IDictionary<string, PortalOnlinePackageSnapshotEntry> actualByPath =
+                new Dictionary<string, PortalOnlinePackageSnapshotEntry>(StringComparer.Ordinal);
+            foreach (PortalOnlinePackageSnapshotEntry entry in actual)
+            {
+                // <lang>
+                //   <zh-CN>null 条目或空白路径按不一致处理，不抛异常到演练脚本。</zh-CN>
+                //   <en>A null entry or blank path is a mismatch rather than an exception thrown to the drill script.</en>
+                // </lang>
+                if (entry == null || string.IsNullOrWhiteSpace(entry.RelativePath) ||
+                    actualByPath.ContainsKey(entry.RelativePath))
+                {
+                    reason = "Post-restore manifest is malformed or has duplicate paths.";
+                    return false;
+                }
+                actualByPath.Add(entry.RelativePath, entry);
+            }
+
+            // <lang>
+            //   <zh-CN>逐条基线比对：路径必须存在，长度相等，摘要忽略大小写精确一致。</zh-CN>
+            //   <en>Compare each baseline entry: the path must exist, length must be equal, and digests must match exactly ignoring case.</en>
+            // </lang>
+            foreach (PortalOnlinePackageSnapshotEntry baseline in expected.Entries)
+            {
+                // <lang>
+                //   <zh-CN>承接与基线路径对应的还原后条目；缺失即代表还原丢文件。</zh-CN>
+                //   <en>Holds the restored entry matching a baseline path; absence means restore lost a file.</en>
+                // </lang>
+                PortalOnlinePackageSnapshotEntry restored;
+                if (!actualByPath.TryGetValue(baseline.RelativePath, out restored))
+                {
+                    reason = "A baseline file is missing after restore.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>长度不同或摘要不同都判定为未达到字节级一致。</zh-CN>
+                //   <en>A differing length or digest means byte-level identity was not achieved.</en>
+                // </lang>
+                if (restored.ByteLength != baseline.ByteLength ||
+                    !PortalOnlinePackageIntegrity.IsSha256Hex(restored.Sha256Hex) ||
+                    !string.Equals(restored.Sha256Hex, baseline.Sha256Hex, StringComparison.OrdinalIgnoreCase))
+                {
+                    reason = "A restored file is not byte-identical to the baseline.";
+                    return false;
+                }
+            }
+
+            return true;
+        }

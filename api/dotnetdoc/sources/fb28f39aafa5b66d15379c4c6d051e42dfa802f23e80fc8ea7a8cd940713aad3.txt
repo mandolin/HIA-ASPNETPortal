@@ -1,0 +1,55 @@
+        public static bool TryVerifyIntegrity(byte[] content, string expectedHash, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>期望摘要必须是服务端登记的合法格式；缺失即拒绝，不从内容反推期望值。</zh-CN>
+            //   <en>The expected digest must be a well-formed server-registered value; a missing one is rejected and never inferred from content.</en>
+            // </lang>
+            if (!IsSha256Hex(expectedHash))
+            {
+                reason = "Expected package hash is missing or malformed.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>内容缺失按拒绝处理，不把 null 解释为空包的合法摘要。</zh-CN>
+            //   <en>Missing content is rejected rather than treating null as the valid digest of an empty package.</en>
+            // </lang>
+            if (content == null)
+            {
+                reason = "Package content is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>计算实际摘要；大小写折叠为 OrdinalIgnoreCase 比较，使服务端记录的大小写差异不改变安全结论。</zh-CN>
+            //   <en>Compute the actual digest and compare with OrdinalIgnoreCase, so casing differences in the server record do not change the security verdict.</en>
+            // </lang>
+            string actualHash;
+            try
+            {
+                actualHash = ComputeSha256Hex(content);
+            }
+            catch (CryptographicException)
+            {
+                // <lang>
+                //   <zh-CN>哈希提供程序异常一律收敛为稳定失败短语，不回显异常细节。</zh-CN>
+                //   <en>Any hash-provider exception converges to a stable failure phrase without echoing exception details.</en>
+                // </lang>
+                reason = "Package hash could not be computed.";
+                return false;
+            }
+
+            if (!string.Equals(actualHash, expectedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                reason = "Package content no longer matches the recorded hash.";
+                return false;
+            }
+
+            return true;
+        }

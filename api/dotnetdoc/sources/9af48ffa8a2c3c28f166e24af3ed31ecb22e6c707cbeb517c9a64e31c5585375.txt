@@ -1,0 +1,160 @@
+    public partial class Document : PortalModuleControl<Document>
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按模块读取文档项目的数据访问依赖。</zh-CN>
+        ///   <en>Data-access dependency that reads document items by module.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IDocumentsDb DocumentDB { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前模块的文档记录并绑定列表。</zh-CN>
+        ///   <en>Reads document records for the current module and binds the list.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>文档列表按当前模块读取，上传文件、数据库内容和手填链接的选择逻辑留到行级 helper。</zh-CN>
+            //   <en>The document list is read by current module, while the row-level helper decides among uploaded files, database content, and manually entered links.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>绑定前先取行数：表尾空态依赖它，且必须早于 DataBind 写入。
+            //   数据源类型保持 <c>IEnumerable</c> 不变（不改成 List），以免改变既有绑定与枚举行为。</zh-CN>
+            //   <en>Take the row count before binding: the footer's empty state depends on it and it must be written before
+            //   DataBind. The data source type stays <c>IEnumerable</c> (not converted to a List) so existing binding and
+            //   enumeration behaviour is unchanged.</en>
+            // </lang>
+            System.Collections.Generic.IEnumerable<IDocumentItem> documents = DocumentDB.GetDocuments(ModuleId);
+            documentsEmptyStateRowCount = System.Linq.Enumerable.Count(documents);
+            myDataGrid.DataSource = documents;
+            // <lang>
+            //   <zh-CN>立即绑定保持旧页面编辑后刷新语义，并让标记层在本次请求中应用编码和链接可见性。</zh-CN>
+            //   <en>Immediate binding preserves the legacy refresh-after-edit behavior and lets markup apply encoding and link visibility in this request.</en>
+            // </lang>
+            myDataGrid.DataBind();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>文档列表的空态行数：有数据为正数、零条为 <c>0</c>；本页无失败路径，故不会取 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the document list: positive when rows exist and <c>0</c> when the result is empty; this module has no failure path, so it never becomes <c>null</c>.</en>
+        /// </lang>
+        /// </summary>
+        protected int? DocumentEmptyStateRowCount
+        {
+            get { return documentsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：旧内容模块无筛选条件，零条即"暂无文档"。</zh-CN>
+        ///   <en>Empty-state wording: the legacy module has no filters, so zero rows simply means "no documents".</en>
+        /// </lang>
+        /// </summary>
+        protected string DocumentEmptyStateText
+        {
+            get { return Resources.lang.Document_EmptyNoDocuments; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>文档列表的空态行数；由 <see cref="Page_Load"/> 在绑定前写入。</zh-CN>
+        ///   <en>Empty-state row count of the document list; written by <see cref="Page_Load"/> before binding.</en>
+        /// </lang>
+        /// </summary>
+        private int? documentsEmptyStateRowCount;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为文档列表生成经验证的浏览地址。</zh-CN>
+        ///   <en>Produces a validated browse URL for the document list.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="url">
+        /// <l>
+        ///   <zh-CN>旧记录中的链接地址。</zh-CN>
+        ///   <en>Link address stored by a legacy record.</en>
+        /// </l>
+        /// </param>
+        /// <param name="size">
+        /// <l>
+        ///   <zh-CN>数据库内容大小；大于零表示走历史数据库下载入口。</zh-CN>
+        ///   <en>Database-content size; a positive value selects the legacy database download endpoint.</en>
+        /// </l>
+        /// </param>
+        /// <param name="documentId">
+        /// <l>
+        ///   <zh-CN>文档项目标识。</zh-CN>
+        ///   <en>Document-item identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>允许的浏览 URL；旧链接非法时为空。</zh-CN>
+        ///   <en>Allowed browse URL, or empty when a legacy link is invalid.</en>
+        /// </l>
+        /// </returns>
+        protected string GetBrowsePath(string url, object size, int documentId)
+        {
+            // <lang>
+            //   <zh-CN>内容大小来自旧数据绑定行；正数表示二进制内容在数据库中，必须走受控下载页而非直接 URL。</zh-CN>
+            //   <en>The content size comes from a legacy bound row; a positive value means binary content is in the database and must use the controlled download page rather than a direct URL.</en>
+            // </lang>
+            if (size != DBNull.Value && Convert.ToInt32(size) > 0)
+            {
+                return "~/DesktopModules/ViewDocument.aspx?DocumentID=" + documentId;
+            }
+
+            // <lang>
+            //   <zh-CN>normalizedUrl 是旧手填链接通过当前导航策略后的输出值；失败时不会回显原始 URL。</zh-CN>
+            //   <en>normalizedUrl is the output value for a legacy manually entered link after current navigation policy validation; failures do not echo the raw URL.</en>
+            // </lang>
+            string normalizedUrl;
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(url, Context.Request, out normalizedUrl)
+                ? normalizedUrl
+                : string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将数据库记录中的显示字段编码为安全 HTML 文本。</zh-CN>
+        ///   <en>Encodes a display field from a database record as safe HTML text.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>绑定记录中的原始字段值。</zh-CN>
+        ///   <en>Raw field value from the bound record.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>已 HTML 编码的显示文本。</zh-CN>
+        ///   <en>HTML-encoded display text.</en>
+        /// </l>
+        /// </returns>
+        protected string EncodeText(object value)
+        {
+            // <lang>
+            //   <zh-CN>文档标题、类别和描述等普通字段统一作为文本节点输出，缺失值折叠为空字符串。</zh-CN>
+            //   <en>Ordinary fields such as document title, category, and description are emitted as text nodes, with missing values folded into an empty string.</en>
+            // </lang>
+            return Server.HtmlEncode(value == null ? string.Empty : Convert.ToString(value));
+        }
+    }

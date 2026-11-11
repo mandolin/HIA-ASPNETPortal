@@ -1,0 +1,1 @@
+        IEnumerable<string> GetPermissionKeysByUserName(string name);

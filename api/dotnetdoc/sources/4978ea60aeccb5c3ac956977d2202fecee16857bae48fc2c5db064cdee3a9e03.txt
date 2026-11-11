@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_ColumnStatus {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ColumnStatus", resourceCulture);
+            }
+        }

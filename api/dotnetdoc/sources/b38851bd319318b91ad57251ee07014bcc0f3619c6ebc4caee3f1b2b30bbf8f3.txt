@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel/Delete 进入既有联系人持久化流程；按钮不绕过权限、当前记录校验或删除保护。</zh-CN>
+                    <en>Update, Cancel, and Delete enter the existing contact persistence flow; the buttons do not bypass authorization, current-record checks, or deletion protection.</en>
+                </lang>
+            --%>

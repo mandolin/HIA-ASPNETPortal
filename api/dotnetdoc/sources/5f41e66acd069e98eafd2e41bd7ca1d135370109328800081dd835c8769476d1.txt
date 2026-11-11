@@ -1,0 +1,9 @@
+        public static readonly IList<PortalBusinessApplicationTransition> All =
+            new List<PortalBusinessApplicationTransition>
+            {
+                new PortalBusinessApplicationTransition(PortalWorkflowActions.Approve, PortalBusinessApplicationStatuses.Approved, ReviewSources, true),
+                new PortalBusinessApplicationTransition(PortalWorkflowActions.Return, PortalBusinessApplicationStatuses.Returned, ReviewSources, true),
+                new PortalBusinessApplicationTransition(PortalWorkflowActions.Reject, PortalBusinessApplicationStatuses.Rejected, ReviewSources, true),
+                new PortalBusinessApplicationTransition(PortalWorkflowActions.Close, PortalBusinessApplicationStatuses.Closed, ReviewSources, true),
+                new PortalBusinessApplicationTransition(PortalWorkflowActions.Resubmit, PortalBusinessApplicationStatuses.Submitted, ResubmitSources, false)
+            }.AsReadOnly();

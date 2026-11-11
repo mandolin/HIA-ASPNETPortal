@@ -1,0 +1,1 @@
+        public PortalDatabasePurpose Purpose { get; private set; }

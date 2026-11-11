@@ -1,0 +1,5 @@
+        internal static string EditDocs_HintUploadOverride {
+            get {
+                return ResourceManager.GetString("EditDocs_HintUploadOverride", resourceCulture);
+            }
+        }

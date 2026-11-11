@@ -1,0 +1,96 @@
+        public PortalWorkItemResult EnsureWorkItem(PortalWorkItemCreateRequest request)
+        {
+            PortalWorkItemCreateRequest normalized = NormalizeCreateRequest(request);
+            if (string.IsNullOrWhiteSpace(normalized.BusinessKind) ||
+                string.IsNullOrWhiteSpace(normalized.BusinessId) ||
+                string.IsNullOrWhiteSpace(normalized.Title))
+            {
+                return new PortalWorkItemResult(false, 0, "Business kind, business id, and title are required.");
+            }
+
+            if (!normalized.AssignedUserId.HasValue && string.IsNullOrWhiteSpace(normalized.AssignedRoleKey))
+            {
+                return new PortalWorkItemResult(false, 0, "A work item requires an assigned user or role key.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new PortalWorkItemResult(false, 0, "Portal work-item schema is unavailable.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>同一业务对象若已存在未完成审批工作项，则复用最新一条；否则在同一批 SQL 中创建工作项并记录 Created 事件。</zh-CN>
+                //   <en>If the same business object already has an unfinished work item, reuse the newest one; otherwise create the work item and its Created event in the same SQL batch.</en>
+                // </lang>
+                List<long> rows = context.Database.SqlQuery<long>(
+                    @"
+DECLARE @WorkItemId BIGINT;
+
+SELECT TOP (1)
+    @WorkItemId = [WorkItemId]
+FROM [dbo].[PortalBiz_WorkItems]
+WHERE [BusinessKind] = @BusinessKind
+  AND [BusinessId] = @BusinessId
+  AND [WorkItemStatus] IN (N'Open', N'InProgress')
+ORDER BY [CreatedUtc] DESC, [WorkItemId] DESC;
+
+IF @WorkItemId IS NULL
+BEGIN
+    INSERT INTO [dbo].[PortalBiz_WorkItems]
+        ([BusinessKind],
+         [BusinessId],
+         [Title],
+         [Summary],
+         [WorkItemStatus],
+         [AssignedUserId],
+         [AssignedRoleKey],
+         [CreatedUtc],
+         [CreatedBy],
+         [DueUtc])
+    VALUES
+        (@BusinessKind,
+         @BusinessId,
+         @Title,
+         @Summary,
+         N'Open',
+         @AssignedUserId,
+         @AssignedRoleKey,
+         @CreatedUtc,
+         @CreatedBy,
+         @DueUtc);
+
+    SET @WorkItemId = CONVERT(BIGINT, SCOPE_IDENTITY());
+
+    INSERT INTO [dbo].[PortalBiz_WorkItemEvents]
+        ([WorkItemId], [OccurredUtc], [EventType], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment])
+    VALUES
+        (@WorkItemId, @CreatedUtc, N'Created', NULL, @CreatedBy, NULL, N'Open', @Summary);
+END
+
+SELECT @WorkItemId;",
+                    new SqlParameter("@BusinessKind", normalized.BusinessKind),
+                    new SqlParameter("@BusinessId", normalized.BusinessId),
+                    new SqlParameter("@Title", normalized.Title),
+                    CreateNullableStringParameter("@Summary", normalized.Summary),
+                    CreateNullableIntParameter("@AssignedUserId", normalized.AssignedUserId),
+                    CreateNullableStringParameter("@AssignedRoleKey", normalized.AssignedRoleKey),
+                    new SqlParameter("@CreatedUtc", normalized.CreatedUtc.Value),
+                    new SqlParameter("@CreatedBy", normalized.CreatedBy),
+                    CreateNullableDateTimeParameter("@DueUtc", normalized.DueUtc)).ToList();
+
+                long workItemId = rows.Count == 0 ? 0 : rows[0];
+                return workItemId <= 0
+                    ? new PortalWorkItemResult(false, 0, "Work item was not created.")
+                    : new PortalWorkItemResult(true, workItemId, "Work item is available.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>审批工作项只是业务动作之后的补充记录，创建失败时返回低敏失败结果，避免把异常细节抛给页面或中断已完成业务。</zh-CN>
+                //   <en>Work items are supplemental records after the domain action, so creation failures return low-sensitivity failure results instead of exposing exception details or interrupting completed business work.</en>
+                // </lang>
+                return new PortalWorkItemResult(false, 0, "Work item creation failed.");
+            }
+        }

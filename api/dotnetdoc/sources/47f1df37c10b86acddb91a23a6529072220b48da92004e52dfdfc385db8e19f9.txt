@@ -1,0 +1,44 @@
+        public static bool TryResolveModule(
+            ModuleSettings moduleSettings,
+            HttpContext context,
+            out PortalModuleRuntimeDescriptor descriptor,
+            out string reason)
+        {
+            descriptor = null;
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>缺少实例设置时没有可验证的原始入口，立即失败而不猜测默认控件、包或缓存身份。</zh-CN>
+            //   <en>Without instance settings there is no raw entry to validate, so fail immediately rather than guessing a default control, package, or cache identity.</en>
+            // </lang>
+            if (moduleSettings == null)
+            {
+                reason = "Module settings are unavailable.";
+                return false;
+            }
+
+            string source;
+            try
+            {
+                // <lang>
+                //   <zh-CN>定义表中的原始桌面路径不是加载许可；先由共享路径校验器规范化，才能进入 Core/包/Legacy 分支。</zh-CN>
+                //   <en>The raw desktop path from the definition table is not loading permission; normalize it through the shared path validator before entering Core/package/Legacy branches.</en>
+                // </lang>
+                source = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(moduleSettings.DesktopSrc);
+            }
+            catch (InvalidOperationException exception)
+            {
+                // <lang>
+                //   <zh-CN>路径校验失败只以截断净化后的原因返回；不回显原始定义、物理路径或异常堆栈。</zh-CN>
+                //   <en>A path-validation failure returns only a truncated sanitized reason; do not echo the raw definition, physical path, or exception stack.</en>
+                // </lang>
+                reason = PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 200);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>统一委托桌面入口解析，避免模块实例入口与后台候选入口使用不同的 Profile/状态顺序。</zh-CN>
+            //   <en>Delegate uniformly to desktop-entry resolution so module-instance entries and admin candidate entries do not use different profile/state ordering.</en>
+            // </lang>
+            return TryResolveDesktopSource(source, context, out descriptor, out reason);
+        }

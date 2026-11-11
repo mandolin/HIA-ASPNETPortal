@@ -1,0 +1,71 @@
+        protected void PackagesGrid_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>预检只需要查看权限，注册/启停则要求编辑权限；命令名不能绕过这一区分。</zh-CN>
+            //   <en>Preflight needs view permission while registration and state changes need edit permission; the command name cannot bypass that distinction.</en>
+            // </lang>
+            string permissionKey = string.Equals(e.CommandName, "Preflight", StringComparison.OrdinalIgnoreCase)
+                ? PortalPermissionKeys.ModuleCatalogView
+                : PortalPermissionKeys.ModuleCatalogEdit;
+            if (!PortalAuthorization.EnsurePermission(Context, permissionKey))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>GridView 参数只作为包标识读取并按不变文化转换，后续仍由受信目录重新解析包。</zh-CN>
+            //   <en>Read the GridView argument only as a package identifier using invariant conversion; the trusted catalog resolves the package again below.</en>
+            // </lang>
+            string packageId = Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture);
+            // <lang>
+            //   <zh-CN>服务返回的包和失败原因分别承载已部署包快照与低敏回退依据。</zh-CN>
+            //   <en>The service outputs carry the deployed-package snapshot and the low-sensitivity fallback reason separately.</en>
+            // </lang>
+            PortalModulePackage package;
+            string reason;
+            if (!PortalModuleCatalog.TryGetTrustedPackage(packageId, out package, out reason))
+            {
+                ShowMessage(lang.Admin_ModuleCatalog_MessagePackageNotDeployed);
+                BindPackages();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>Profile 只约束会改变注册或启停状态的命令；预检允许查看被部署但当前 Profile 阻断的包。</zh-CN>
+            //   <en>The Profile constrains commands that change registration or enabled state; preflight may inspect a deployed package blocked by the active Profile.</en>
+            // </lang>
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(Context);
+            if (!string.Equals(e.CommandName, "Preflight", StringComparison.OrdinalIgnoreCase) &&
+                !profile.IsPackageAllowed(package.PackageId))
+            {
+                ShowMessage(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        lang.Admin_ModuleCatalog_MessagePackageNotAllowedByProfile,
+                        profile.ActiveProfile));
+                BindPackages();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>命令分派保持原有受控动作集合，未知命令不触发任何写入；统一在动作后刷新只读目录。</zh-CN>
+            //   <en>Dispatch only the existing controlled action set; unknown commands perform no write, and the read-only catalog is refreshed after the action.</en>
+            // </lang>
+            switch (e.CommandName)
+            {
+                case "Register":
+                    RegisterPackage(package);
+                    break;
+                case "Enable":
+                    SavePackageState(package, true);
+                    break;
+                case "Disable":
+                    SavePackageState(package, false);
+                    break;
+                case "Preflight":
+                    ShowPreflight(package);
+                    break;
+            }
+
+            BindPackages();
+        }

@@ -1,0 +1,5 @@
+        public PortalLoginPasswordPublicKey(string publicKeyPem, int keySizeBits)
+        {
+            PublicKeyPem = publicKeyPem ?? string.Empty;
+            KeySizeBits = keySizeBits;
+        }

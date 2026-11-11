@@ -1,0 +1,6 @@
+<%--
+   <lang>
+     <zh-CN>门户根入口通过母版页承载，但页面自身只负责浏览器类型分流；桌面/移动目标由 code-behind 决定。</zh-CN>
+     <en>The portal root endpoint is hosted by the master page, but this page only performs browser-type routing; the desktop or mobile target is chosen by the code-behind.</en>
+   </lang>
+--%>

@@ -1,0 +1,23 @@
+    public sealed class PortalOperationAuditQuery
+    {
+        /// <summary><lang><zh-CN>包含边界的 UTC 查询起点；缺省时门面选择最近的受限时间窗。</zh-CN><en>Inclusive UTC query start; when omitted, the facade selects a recent bounded window.</en></lang></summary>
+        public DateTime StartUtc { get; set; }
+
+        /// <summary><lang><zh-CN>不包含边界的 UTC 查询终点；与起点共同避免跨页或相邻日期重复。</zh-CN><en>Exclusive UTC query end; together with the start it avoids duplication across adjacent dates or pages.</en></lang></summary>
+        public DateTime EndUtcExclusive { get; set; }
+
+        /// <summary><lang><zh-CN>可选稳定分类筛选；空值表示不按分类缩小已受限的时间范围。</zh-CN><en>Optional stable-category filter; an empty value does not further narrow the already bounded time range.</en></lang></summary>
+        public string Category { get; set; }
+
+        /// <summary><lang><zh-CN>可选稳定动作筛选；输入会在执行 SQL 前去空白并截断。</zh-CN><en>Optional stable-action filter; input is trimmed and bounded before SQL execution.</en></lang></summary>
+        public string Action { get; set; }
+
+        /// <summary><lang><zh-CN>可选非敏感目标标识筛选；它不是自由文本搜索接口。</zh-CN><en>Optional non-sensitive target-identifier filter; it is not a free-text search interface.</en></lang></summary>
+        public string TargetId { get; set; }
+
+        /// <summary><lang><zh-CN>从零开始的请求页码；门面将其夹紧，避免极大 OFFSET 造成不可控数据库成本。</zh-CN><en>Zero-based requested page number; the facade clamps it to avoid unbounded database cost from a large OFFSET.</en></lang></summary>
+        public int Page { get; set; }
+
+        /// <summary><lang><zh-CN>请求页大小；门面保留一条探测记录以报告是否还有下一页。</zh-CN><en>Requested page size; the facade retains one probe row so it can report whether another page exists.</en></lang></summary>
+        public int PageSize { get; set; }
+    }

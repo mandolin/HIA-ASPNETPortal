@@ -1,0 +1,98 @@
+        public static PortalRuntimeSettingValue GetEffectiveValue(
+            PortalSettingDefinition definition,
+            HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>在访问任何来源前拒绝空定义，确保后续键、类型、默认值和权限元数据都来自已登记契约。</zh-CN>
+            //   <en>Reject a null definition before accessing any source so later key, type, default, and permission metadata all come from the registered contract.</en>
+            // </lang>
+            EnsureDefinition(definition);
+
+            // <lang>
+            //   <zh-CN>数据库读取结果只在允许在线覆盖的非敏感设置上短暂持有，生命周期限于本次解析，并可能触发受控回退。</zh-CN>
+            //   <en>Keep the database read result only for an eligible non-sensitive setting during this resolution, where it may lead to a controlled fallback.</en>
+            // </lang>
+            PortalSystemSettingReadResult databaseResult = null;
+            if (definition.CanEditOnline && !definition.IsSensitive)
+            {
+                // <lang>
+                //   <zh-CN>只有可在线编辑且非敏感的定义可尝试数据库覆盖；敏感或部署级设置直接跳过数据库，避免在线层成为秘密读取通道。</zh-CN>
+                //   <en>Only online-editable, non-sensitive definitions may attempt a database override; sensitive or deployment-level settings bypass the database to prevent the online layer from becoming a secret-read channel.</en>
+                // </lang>
+                databaseResult = PortalSystemSettingsStore.Read(definition.Key, context);
+                if (databaseResult.IsAvailable && databaseResult.IsFound)
+                {
+                    // <lang>
+                    //   <zh-CN>保存通过数据库类型匹配与规范化门禁的候选文本；该局部值不跨越当前读取调用。</zh-CN>
+                    //   <en>Hold the candidate text that passed database type matching and normalization; this local value does not outlive the current read.</en>
+                    // </lang>
+                    string databaseValue;
+                    if (string.Equals(databaseResult.ValueType, definition.ValueType.ToString(), StringComparison.Ordinal) &&
+                        TryNormalizeValue(definition, databaseResult.Value, out databaseValue))
+                    {
+                        // <lang>
+                        //   <zh-CN>数据库值必须同时匹配已登记值类型并通过同一规范化/范围门禁，才可成为有效值；不信任存储层的文本本身。</zh-CN>
+                        //   <en>A database value becomes effective only when it matches the registered value type and passes the same normalization/range gate; do not trust storage-layer text by itself.</en>
+                        // </lang>
+                        return new PortalRuntimeSettingValue(
+                            databaseValue,
+                            PortalRuntimeSettingSource.Database);
+                    }
+
+                    WarnDatabaseFallback(
+                        definition.Key,
+                        "数据库设置值的类型或内容无效。 Database setting value is invalid.",
+                        context);
+                }
+                else if (!databaseResult.IsAvailable)
+                {
+                    // <lang>
+                    //   <zh-CN>覆盖表不可用时仅记录一次受控回退事实，继续较低优先级来源而不把数据库错误详情或连接信息带入返回值。</zh-CN>
+                    //   <en>When the override table is unavailable, record only one controlled fallback fact and continue to lower-priority sources without putting database-error detail or connection information into the return value.</en>
+                    // </lang>
+                    WarnDatabaseFallback(
+                        definition.Key,
+                        "数据库设置表不可用。 Database setting table is unavailable.",
+                        context);
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>保存 appSettings 候选的规范化结果；无效或空白输入保持失败状态并继续回退。</zh-CN>
+            //   <en>Hold the normalized appSettings candidate; invalid or blank input remains a failure and continues fallback.</en>
+            // </lang>
+            string configuredValue;
+            if (TryNormalizeValue(
+                definition,
+                ConfigurationManager.AppSettings[definition.Key],
+                out configuredValue))
+            {
+                // <lang>
+                //   <zh-CN>appSettings 仅在通过已登记类型/范围规范化后生效；空白或无效文本自然继续回退。</zh-CN>
+                //   <en>AppSettings becomes effective only after registered type/range normalization; blank or invalid text naturally continues fallback.</en>
+                // </lang>
+                return new PortalRuntimeSettingValue(
+                    configuredValue,
+                    PortalRuntimeSettingSource.AppSettings);
+            }
+
+            // <lang>
+            //   <zh-CN>保存代码默认候选的规范化结果；它只在更高优先级来源不可用时使用。</zh-CN>
+            //   <en>Hold the normalized code-default candidate; use it only when higher-priority sources are unavailable.</en>
+            // </lang>
+            string defaultValue;
+            if (TryNormalizeValue(definition, definition.DefaultValue, out defaultValue))
+            {
+                // <lang>
+                //   <zh-CN>代码默认值经过同一门禁后才作为最终常规回退，保持各来源的解析规则一致。</zh-CN>
+                //   <en>The code default becomes the final normal fallback only after the same gate, keeping parsing rules consistent across sources.</en>
+                // </lang>
+                return new PortalRuntimeSettingValue(defaultValue, PortalRuntimeSettingSource.Default);
+            }
+
+            // <lang>
+            //   <zh-CN>仅当定义自身默认值也无法规范化时返回稳定空字符串和 Default 来源；不臆造来源值或抛出原始设置文本。</zh-CN>
+            //   <en>Return stable empty text with Default source only when even the definition default cannot normalize; do not invent a source value or throw raw settings text.</en>
+            // </lang>
+            return new PortalRuntimeSettingValue(string.Empty, PortalRuntimeSettingSource.Default);
+        }

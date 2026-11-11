@@ -1,0 +1,267 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.addselfregistereduser-system.string-system.string-system.string-system.string-system.string-system.boolean",
+      "kind": "entry",
+      "label": "AddSelfRegisteredUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.addselfregistereduser-system.string-system.string-system.string-system.string-system.string-system.boolean",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.addselfregistereduser-system.string-system.string-system.string-system.string-system.string-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.addselfregistere-9e6cbeda.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.adduser-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "AddUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.adduser-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.adduser-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.adduser-system.s-47b3664c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.approveuser-system.int32-system.string",
+      "kind": "entry",
+      "label": "ApproveUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.approveuser-system.int32-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.approveuser-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.approveuser-syst-9383f628.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.deleteuser-system.int32",
+      "kind": "entry",
+      "label": "DeleteUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.deleteuser-system.int32",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.deleteuser-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.deleteuser-syste-2f9ffe1d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.finduserbyid-system.int32",
+      "kind": "entry",
+      "label": "FindUserById",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.finduserbyid-system.int32",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.finduserbyid-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.finduserbyid-sys-e744fa2d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getregistrationinfo-system.int32",
+      "kind": "entry",
+      "label": "GetRegistrationInfo",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getregistrationinfo-system.int32",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getregistrationinfo-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getregistrationi-0497f16c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getrolenamesbyuser-system.string",
+      "kind": "entry",
+      "label": "GetRoleNamesByUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getrolenamesbyuser-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getrolenamesbyuser-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getrolenamesbyus-f1b65508.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getrolesbyuser-system.string",
+      "kind": "entry",
+      "label": "GetRolesByUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getrolesbyuser-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getrolesbyuser-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getrolesbyuser-s-0191ea81.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversionbyuserid-system.int32",
+      "kind": "entry",
+      "label": "GetSecurityVersionByUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversionbyuserid-system.int32",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getsecurityversionbyuserid-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversi-a29a139e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversionbyusername-system.string",
+      "kind": "entry",
+      "label": "GetSecurityVersionByUserName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversionbyusername-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getsecurityversionbyusername-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversi-089e0a19.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsingleuser-system.string",
+      "kind": "entry",
+      "label": "GetSingleUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsingleuser-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getsingleuser-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getsingleuser-sy-055d2ddf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getuserprofileinfo-system.int32",
+      "kind": "entry",
+      "label": "GetUserProfileInfo",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getuserprofileinfo-system.int32",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getuserprofileinfo-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getuserprofilein-dc2fb2bd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.incrementsecurityversion-system.int32-system.string",
+      "kind": "entry",
+      "label": "IncrementSecurityVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.incrementsecurityversion-system.int32-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.incrementsecurityversion-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.incrementsecurit-c4071593.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.login-system.string-system.string",
+      "kind": "entry",
+      "label": "Login",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.login-system.string-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.login-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.login-system.str-ece878a0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.rejectuser-system.int32-system.string",
+      "kind": "entry",
+      "label": "RejectUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.rejectuser-system.int32-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.rejectuser-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.rejectuser-syste-5326c940.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.setuserprofilestatus-system.int32-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "SetUserProfileStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.setuserprofilestatus-system.int32-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.setuserprofilestatus-system.int32-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.setuserprofilest-20f7cff6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.signin-system.string-system.string",
+      "kind": "entry",
+      "label": "SignIn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.signin-system.string-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.signin-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.signin-system.st-5cb39801.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.updateuser-system.int32-system.string-system.string",
+      "kind": "entry",
+      "label": "UpdateUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.updateuser-system.int32-system.string-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.updateuser-system.int32-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.updateuser-syste-70b2259f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.updateuserprofile-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "UpdateUserProfile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.updateuserprofile-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.updateuserprofile-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.updateuserprofil-d7b4ae9e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iusersdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.validateregistrationinvite-system.string-aspnet.starterkit.portal.portalregistrationinviterejection",
+      "kind": "entry",
+      "label": "ValidateRegistrationInvite",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.validateregistrationinvite-system.string-aspnet.starterkit.portal.portalregistrationinviterejection",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.validateregistrationinvite-system.string-aspnet.starterkit.portal.portalregistrationinviterejection",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.validateregistra-ccddd996.html"
+    }
+  ]
+}

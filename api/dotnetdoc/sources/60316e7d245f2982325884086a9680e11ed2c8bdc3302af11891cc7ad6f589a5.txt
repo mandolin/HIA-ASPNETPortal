@@ -1,0 +1,10 @@
+        public static string GetAllowedExtensionsDisplayText()
+        {
+            // <lang>
+            //   <zh-CN>复制有效扩展名集合后排序，避免展示顺序受配置输入或 HashSet 枚举顺序影响。</zh-CN>
+            //   <en>Copy the effective extension set before sorting so display order is independent of configuration input or HashSet enumeration order.</en>
+            // </lang>
+            var extensions = new List<string>(GetConfiguredAllowedExtensions());
+            extensions.Sort(StringComparer.OrdinalIgnoreCase);
+            return string.Join(", ", extensions.ToArray());
+        }

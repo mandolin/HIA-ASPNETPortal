@@ -1,0 +1,23 @@
+        public IList<CollaborationItemInfo> GetAdminItems(string status, int take)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
+            string normalizedStatus = NormalizeStatusFilter(status);
+            try
+            {
+                return string.IsNullOrEmpty(normalizedStatus)
+                    ? QueryItems(string.Empty, NormalizeTake(take, 50))
+                    : QueryItems(
+                        @"
+WHERE [Item].[ItemStatus] = @ItemStatus",
+                        NormalizeTake(take, 50),
+                        new SqlParameter("@ItemStatus", normalizedStatus));
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemInfo>();
+            }
+        }

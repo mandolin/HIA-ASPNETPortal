@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>上传区域由 Upload 选项、文件输入和服务器策略提示组成；文件名、大小、类型、落盘位置和覆盖行为不能由客户端决定。</zh-CN>
+                  <en>The upload area combines the Upload option, file input, and server policy hint; filename, size, type, storage location, and overwrite behavior cannot be decided by the client.</en>
+                </lang>
+                --%>

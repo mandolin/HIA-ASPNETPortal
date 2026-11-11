@@ -1,0 +1,17 @@
+        protected string ChooseUrl(object itemId, object url)
+        {
+            // <lang>
+            //   <zh-CN>快捷链接在编辑态优先进入维护页面，让编辑者能修复当前不可浏览的旧 URL。</zh-CN>
+            //   <en>Quick Links prefer the maintenance page in edit mode so editors can repair legacy URLs that are not currently browsable.</en>
+            // </lang>
+            if (IsEditable)
+            {
+                return "~/DesktopModules/EditLinks.aspx?ItemID=" + Convert.ToString(itemId) + "&mid=" + ModuleId;
+            }
+
+            // <lang>
+            //   <zh-CN>浏览态只返回通过当前导航策略的 URL，策略失败则由空字符串抑制链接。</zh-CN>
+            //   <en>Browse mode returns only URLs accepted by current navigation policy, with an empty string suppressing links on failure.</en>
+            // </lang>
+            return GetSafeBrowseUrl(url);
+        }

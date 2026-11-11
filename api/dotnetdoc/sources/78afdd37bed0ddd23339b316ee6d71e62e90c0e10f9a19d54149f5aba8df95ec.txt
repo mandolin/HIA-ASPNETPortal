@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>DesktopPortalBanner 是每个桌面门户页面共享的页眉控件；站点名称、用户栏和 Tab 列表均来自服务器端门户配置与身份上下文，标记层只负责按旧 Web Forms 模板输出。</zh-CN>
+        <en>DesktopPortalBanner is the shared header control for desktop portal pages; the site name, user bar, and tab list all come from server-side portal configuration and identity context, while markup only renders the legacy Web Forms template.</en>
+    </lang>
+--%>

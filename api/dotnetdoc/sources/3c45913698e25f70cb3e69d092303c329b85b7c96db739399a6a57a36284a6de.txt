@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>编辑拒绝页复用资源化标题和说明，只呈现服务器确认的编辑权限结果，不泄露被保护对象的额外信息。</zh-CN>
+            <en>The edit-denied page reuses resource-based title and explanation, presenting the server-confirmed edit result without disclosing extra details about the protected object.</en>
+          </lang>
+        --%>

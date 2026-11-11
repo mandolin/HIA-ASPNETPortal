@@ -1,0 +1,42 @@
+        public bool TryDeprovision(int moduleId, string packageId)
+        {
+            // <lang>
+            //   <zh-CN>非法主键直接视为无需处理，返回 true（已清理态）。</zh-CN>
+            //   <en>An illegal primary key is treated as already cleaned; returns true.</en>
+            // </lang>
+            if (moduleId <= 0)
+            {
+                return true;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>删除模块实例；若其定义不再被任何实例引用，回收定义，避免孤儿类型定义残留。</zh-CN>
+                //   <en>Remove the module instance; when its definition is no longer referenced by any instance, reclaim the definition to avoid an orphaned type definition.</en>
+                // </lang>
+                context.Database.ExecuteSqlCommand(
+                    "DECLARE @DefId int = (SELECT [ModuleDefId] FROM [dbo].[PortalCfg_Modules] WHERE [ModuleId]=@p0); " +
+                    "DELETE FROM [dbo].[PortalCfg_Modules] WHERE [ModuleId]=@p0; " +
+                    "IF @DefId IS NOT NULL AND NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_Modules] WHERE [ModuleDefId]=@DefId) " +
+                    "DELETE FROM [dbo].[PortalCfg_ModuleDefinitions] WHERE [ModuleDefId]=@DefId;",
+                    moduleId);
+
+                // <lang>
+                //   <zh-CN>清理包状态；包标识为空时跳过（卸载物理文件与部署 Profile 允许集回滚属部署动作，不在此层）。</zh-CN>
+                //   <en>Clear the package state; skip when the package id is blank (removing physical files and reverting the deployment profile allow-list are deployment actions outside this layer).</en>
+                // </lang>
+                if (!string.IsNullOrWhiteSpace(packageId))
+                {
+                    context.Database.ExecuteSqlCommand(
+                        "DELETE FROM [dbo].[PortalCfg_ModulePackageStates] WHERE [PackageId]=@p0;",
+                        packageId);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }

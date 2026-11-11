@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition NavigationHideTabsWithoutRenderableModules =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationHideTabsWithoutRenderableModules,
+                "隐藏无内容页签",
+                "控制是否隐藏没有可渲染模块的导航页签；默认关闭，配置非法时退回全量显示。",
+                PortalSettingValueType.Boolean,
+                "false",
+                true,
+                false,
+                "Admins",
+                "Navigation");

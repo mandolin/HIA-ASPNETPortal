@@ -1,0 +1,85 @@
+        private bool TryValidateEmployeeRequest(EmployeeSaveRequest request, out string message)
+        {
+            message = string.Empty;
+            if (request == null)
+            {
+                message = "Employee data is required.";
+                return false;
+            }
+
+            if (request.EmployeeId < 0)
+            {
+                message = "Employee id is invalid.";
+                return false;
+            }
+
+            if (!EmployeeCodePattern.IsMatch(request.EmployeeCode ?? string.Empty))
+            {
+                message = "Employee code must be 2-64 characters and use only letters, digits, dot, underscore, or hyphen.";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(request.DisplayName) || request.DisplayName.Length > 150)
+            {
+                message = "Employee display name is required and must not exceed 150 characters.";
+                return false;
+            }
+
+            if (request.PreferredName.Length > 100)
+            {
+                message = "Preferred name must not exceed 100 characters.";
+                return false;
+            }
+
+            if (request.WorkEmail.Length > 256)
+            {
+                message = "Work email must not exceed 256 characters.";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(request.SourceSystem) || request.SourceSystem.Length > 80)
+            {
+                message = "Source system is required and must not exceed 80 characters.";
+                return false;
+            }
+
+            if (!PortalEmployeeStatuses.IsKnown(request.EmploymentStatus))
+            {
+                message = "Employee status is invalid.";
+                return false;
+            }
+
+            if (string.Equals(request.EmploymentStatus, PortalEmployeeStatuses.Left, StringComparison.Ordinal) &&
+                !request.LeftUtc.HasValue)
+            {
+                message = "Left UTC is required when status is Left.";
+                return false;
+            }
+
+            if (!string.Equals(request.EmploymentStatus, PortalEmployeeStatuses.Left, StringComparison.Ordinal) &&
+                request.LeftUtc.HasValue)
+            {
+                message = "Left UTC can be set only when status is Left.";
+                return false;
+            }
+
+            if (request.OrganizationUnitId.HasValue && !OrganizationExists(request.OrganizationUnitId.Value))
+            {
+                message = "Organization unit does not exist.";
+                return false;
+            }
+
+            if (request.EmployeeId > 0 && !EmployeeExists(request.EmployeeId))
+            {
+                message = "Employee does not exist.";
+                return false;
+            }
+
+            if (EmployeeCodeExists(request.EmployeeCode, request.EmployeeId))
+            {
+                message = "Employee code already exists.";
+                return false;
+            }
+
+            return true;
+        }

@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagestaging",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagestaging:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagestaging:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagestaging.manifestfilename",
+      "kind": "entry",
+      "label": "ManifestFileName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackagestaging.manifestfilename",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageStaging.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalonlinepackagestaging.manifestfilename",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackagestagin-f82474f5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagestaging:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagestaging.trystage-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryStage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagestaging.trystage-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageStaging.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackagestaging.trystage-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagestagin-30f9c5b3.html"
+    }
+  ]
+}

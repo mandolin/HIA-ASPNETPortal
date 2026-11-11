@@ -1,0 +1,51 @@
+        protected void RequestsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (!IsSupportedAction(e.CommandName))
+            {
+                MessageLabel.Text = lang.Admin_BusinessApplications_MessageUnsupportedAction;
+                return;
+            }
+
+            EnsureCanHandleLeaveRequests();
+            if (!long.TryParse(e.CommandArgument as string, NumberStyles.Integer, CultureInfo.InvariantCulture, out long requestId) || requestId <= 0)
+            {
+                MessageLabel.Text = lang.Admin_BusinessApplications_MessageInvalidId;
+                return;
+            }
+
+            var reviewCommentBox = (TextBox)e.Item.FindControl("ReviewCommentTextBox");
+            string reviewComment = reviewCommentBox != null ? NormalizeInput(reviewCommentBox.Text, 1000) : string.Empty;
+            int reviewerUserId = GetCurrentUserId();
+
+            LeaveRequestReviewResult review = LeaveRequestDb.ReviewRequest(new LeaveRequestReviewRequest
+            {
+                RequestId = requestId,
+                ActionKey = e.CommandName,
+                ReviewComment = reviewComment,
+                ReviewedByUserId = reviewerUserId,
+                ReviewedBy = GetCurrentUserName(),
+                ReviewedUtc = DateTime.UtcNow
+            });
+
+            if (!review.Succeeded)
+            {
+                MessageLabel.Text = lang.Admin_BusinessApplications_MessageServiceNotRegistered;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>审计事件暂复用业务申请审核事件类型（拆分 LeaveRequestReviewed 为后续项）。</zh-CN>
+            //   <en>The audit event temporarily reuses the business-application review event type (splitting out LeaveRequestReviewed is a follow-up).</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.BusinessApplicationReviewed,
+                PortalOperationAuditEvents.BusinessApplicationTargetType,
+                requestId.ToString(CultureInfo.InvariantCulture),
+                string.Format(CultureInfo.InvariantCulture, "Leave request reviewed. ActionKey={0}", e.CommandName),
+                Context);
+
+            TryCompleteWorkItem(requestId, e.CommandName, reviewComment);
+            MessageLabel.Text = lang.Admin_BusinessApplications_MessageStateUpdated;
+            BindRequests();
+        }

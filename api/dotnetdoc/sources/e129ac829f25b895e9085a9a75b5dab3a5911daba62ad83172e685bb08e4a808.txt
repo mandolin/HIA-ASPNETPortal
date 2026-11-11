@@ -1,0 +1,7 @@
+        public static bool AllowPendingEmployeeBinding
+        {
+            get
+            {
+                return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.AllowPendingEmployeeBinding);
+            }
+        }

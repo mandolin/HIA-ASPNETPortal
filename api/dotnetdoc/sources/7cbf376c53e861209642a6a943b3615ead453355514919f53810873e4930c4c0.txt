@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>图片地址和可选尺寸均由服务器从模块设置写入控件；标记层不处理上传、外链白名单或二进制资源。</zh-CN>
+            <en>The server writes the image URL and optional dimensions from module settings; the markup does not process uploads, external-link allow lists, or binary resources.</en>
+        </lang>
+    --%>

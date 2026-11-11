@@ -1,0 +1,6 @@
+<%--
+   <lang>
+     <zh-CN>文档查看入口禁用主题和母版包装，保留 code-behind 直接写出下载响应的旧 Web Forms 行为。</zh-CN>
+     <en>The document-view endpoint disables themes and master-page wrapping to preserve the legacy Web Forms behavior where the code-behind writes the download response directly.</en>
+   </lang>
+--%>

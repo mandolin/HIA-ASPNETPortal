@@ -1,0 +1,1 @@
+        public IList<int> VisibleOrganizationUnitIds { get; private set; }

@@ -1,0 +1,9 @@
+        public bool UsesProvider(string providerInvariantName)
+        {
+            // <lang>
+            //   <zh-CN>空白查询值短路为 false，避免把缺失 provider 误当作任何已配置 profile；非空白输入只修剪外围空白。</zh-CN>
+            //   <en>Short-circuit a blank query to false so a missing provider is not mistaken for any configured profile; non-blank input has only surrounding whitespace trimmed.</en>
+            // </lang>
+            return !string.IsNullOrWhiteSpace(providerInvariantName) &&
+                   string.Equals(ProviderInvariantName, providerInvariantName.Trim(), StringComparison.OrdinalIgnoreCase);
+        }

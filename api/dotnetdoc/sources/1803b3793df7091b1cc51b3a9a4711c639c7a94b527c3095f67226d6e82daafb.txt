@@ -1,0 +1,5 @@
+        internal static string ModuleProbe_LabelPlacement {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelPlacement", resourceCulture);
+            }
+        }

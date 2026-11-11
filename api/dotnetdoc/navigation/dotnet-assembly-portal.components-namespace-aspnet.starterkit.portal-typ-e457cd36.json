@@ -1,0 +1,81 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission:entry:hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.data",
+      "kind": "entry",
+      "label": "Data",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.data",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.formbuildersubmission.data",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.dat-6cc273c2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission:entry:hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.formid",
+      "kind": "entry",
+      "label": "FormId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.formid",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.formbuildersubmission.formid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.for-6397d229.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission:entry:hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.moduleid",
+      "kind": "entry",
+      "label": "ModuleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.moduleid",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.formbuildersubmission.moduleid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.mod-6db33793.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission:entry:hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedby",
+      "kind": "entry",
+      "label": "SubmittedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedby",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.formbuildersubmission.submittedby",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.sub-93b98846.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission:entry:hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedbyuserid",
+      "kind": "entry",
+      "label": "SubmittedByUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.formbuildersubmission.submittedbyuserid",
+      "sourcePath": "src/Portal.Components/IFormBuilderDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.formbuildersubmission.submittedbyuserid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.formbuildersubmission.sub-fe2879bc.html"
+    }
+  ]
+}

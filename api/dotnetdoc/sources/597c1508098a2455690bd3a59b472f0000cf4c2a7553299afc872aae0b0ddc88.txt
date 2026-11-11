@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel/Delete 通过既有事件处理器进入事件持久化流程；按钮本身不改变权限或绕过删除保护。</zh-CN>
+                    <en>Update, Cancel, and Delete use the existing event handlers for event persistence; the buttons do not change authorization or bypass deletion protection.</en>
+                </lang>
+            --%>

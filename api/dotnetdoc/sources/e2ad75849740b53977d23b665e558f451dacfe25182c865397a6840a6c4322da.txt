@@ -1,0 +1,6 @@
+        private static readonly Dictionary<string, string> LegacyToCanonical =
+            new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                { "Pending", PortalBusinessApplicationStatuses.Submitted },
+                { "Reviewed", PortalBusinessApplicationStatuses.InReview }
+            };

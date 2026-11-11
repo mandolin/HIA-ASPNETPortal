@@ -1,0 +1,1 @@
+        int AddModuleDefinition(string name, string desktopSrc, string mobileSrc);

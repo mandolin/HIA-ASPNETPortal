@@ -1,0 +1,4 @@
+        public static string GetGroupKey(PortalNavigationEntry entry)
+        {
+            return GetGroupKey(entry == null ? null : entry.EntryKey);
+        }

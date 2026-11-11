@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>审核页只调整展示结构，状态命令和审计记录仍由 code-behind 处理。</zh-CN>
+        <en>The review page only adjusts presentation structure; status commands and audit records remain handled by code-behind.</en>
+      </lang>
+    --%>

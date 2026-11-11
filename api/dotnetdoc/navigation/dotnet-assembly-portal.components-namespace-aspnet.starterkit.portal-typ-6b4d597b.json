@@ -1,0 +1,68 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.actoruserid",
+      "kind": "entry",
+      "label": "ActorUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.actoruserid",
+      "sourcePath": "src/Portal.Components/CollaborationItemParticipantCreateRequest.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.actoruserid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemparticip-04c29898.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.itemid",
+      "kind": "entry",
+      "label": "ItemId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.itemid",
+      "sourcePath": "src/Portal.Components/CollaborationItemParticipantCreateRequest.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.itemid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemparticip-b6c1786b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.participantrolekey",
+      "kind": "entry",
+      "label": "ParticipantRoleKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.participantrolekey",
+      "sourcePath": "src/Portal.Components/CollaborationItemParticipantCreateRequest.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.participantrolekey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemparticip-7df554fd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.userid",
+      "sourcePath": "src/Portal.Components/CollaborationItemParticipantCreateRequest.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemparticipantcreaterequest.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemparticip-85dd3eaf.html"
+    }
+  ]
+}

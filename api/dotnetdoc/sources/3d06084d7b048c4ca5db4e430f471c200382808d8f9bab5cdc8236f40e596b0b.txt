@@ -1,0 +1,72 @@
+    public sealed class PortalSystemSettingReadResult
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建数据库运行级设置读取结果。</zh-CN>
+        ///   <en>Creates a database runtime-setting read result.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="isAvailable">
+        /// <l>
+        ///   <zh-CN>设置表是否可用。</zh-CN>
+        ///   <en>Whether the settings table is available.</en>
+        /// </l>
+        /// </param>
+        /// <param name="isFound">
+        /// <l>
+        ///   <zh-CN>是否找到对应覆盖值。</zh-CN>
+        ///   <en>Whether the matching override was found.</en>
+        /// </l>
+        /// </param>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>原始覆盖值文本。</zh-CN>
+        ///   <en>Raw override value text.</en>
+        /// </l>
+        /// </param>
+        /// <param name="valueType">
+        /// <l>
+        ///   <zh-CN>数据库记录的值类型名称。</zh-CN>
+        ///   <en>Value-type name recorded by the database.</en>
+        /// </l>
+        /// </param>
+        internal PortalSystemSettingReadResult(bool isAvailable, bool isFound, string value, string valueType)
+        {
+            IsAvailable = isAvailable;
+            IsFound = isFound;
+            Value = value ?? string.Empty;
+            ValueType = valueType ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>运行级设置表是否可用。</zh-CN>
+        ///   <en>Whether the runtime-settings table is available.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsAvailable { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前键是否存在数据库覆盖值；仅当 <see cref="IsAvailable"/> 为 <c>true</c> 时有意义。</zh-CN>
+        ///   <en>Whether a database override exists for the requested key; meaningful only when <see cref="IsAvailable"/> is <c>true</c>.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsFound { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>数据库覆盖值文本；调用方应按注册定义校验后再使用。</zh-CN>
+        ///   <en>Database override value text; callers must validate it against the registered definition before use.</en>
+        /// </lang>
+        /// </summary>
+        public string Value { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>数据库中保存的值类型名称，用于防止错误类型覆盖被直接采用。</zh-CN>
+        ///   <en>Value-type name stored in the database, used to prevent direct use of an override with the wrong type.</en>
+        /// </lang>
+        /// </summary>
+        public string ValueType { get; private set; }
+    }

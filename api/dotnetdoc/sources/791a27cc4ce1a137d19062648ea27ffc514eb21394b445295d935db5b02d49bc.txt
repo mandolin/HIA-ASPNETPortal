@@ -1,0 +1,11 @@
+        protected string GetSafeBrowseUrl(object value)
+        {
+            // <lang>
+            //   <zh-CN>normalizedUrl 只在策略成功时作为 href 输出；失败时不回显历史原始地址。</zh-CN>
+            //   <en>normalizedUrl is emitted as href only when policy succeeds; failures do not echo the legacy raw address.</en>
+            // </lang>
+            string normalizedUrl;
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(Convert.ToString(value), Context.Request, out normalizedUrl)
+                ? normalizedUrl
+                : string.Empty;
+        }

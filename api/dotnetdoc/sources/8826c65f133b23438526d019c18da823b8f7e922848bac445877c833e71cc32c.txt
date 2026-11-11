@@ -1,0 +1,44 @@
+        private void UpsertCredential(
+            int userId,
+            string password,
+            DateTime? legacyUpgradedUtc,
+            DateTime? lastVerifiedUtc,
+            bool requiresReset,
+            string resetReason,
+            int? iterationCount = null)
+        {
+            if (!HasCredentialTables())
+            {
+                throw new InvalidOperationException("Credential metadata tables are not available.");
+            }
+
+            // <lang>
+            //   <zh-CN>传入目标迭代次数时按该成本重哈希；未传入则沿用组件默认成本，保持既有写入行为不变。非正成本由哈希器兜底回落到默认值。</zh-CN>
+            //   <en>When a target iteration count is supplied, rehash at that cost; otherwise the component default cost is used so existing write behavior is unchanged. The hasher clamps non-positive costs back to the default.</en>
+            // </lang>
+            PortalPasswordHash hash = iterationCount.HasValue
+                ? PortalPasswordHasher.CreateHash(password, iterationCount.Value)
+                : PortalPasswordHasher.CreateHash(password);
+            DateTime nowUtc = DateTime.UtcNow;
+            var credential = _context.UserCredentials.SingleOrDefault(i => i.UserId == userId);
+            if (credential == null)
+            {
+                credential = new UserCredentialItem
+                {
+                    UserId = userId,
+                    CreatedUtc = nowUtc
+                };
+                _context.UserCredentials.Add(credential);
+            }
+
+            credential.CredentialVersion = 1;
+            credential.PasswordFormat = hash.Format;
+            credential.PasswordHash = hash.Hash;
+            credential.PasswordSalt = hash.Salt;
+            credential.IterationCount = hash.IterationCount;
+            credential.UpdatedUtc = nowUtc;
+            credential.LastVerifiedUtc = lastVerifiedUtc;
+            credential.LegacyUpgradedUtc = legacyUpgradedUtc;
+            credential.RequiresReset = requiresReset;
+            credential.ResetReason = string.IsNullOrWhiteSpace(resetReason) ? null : NormalizeReason(resetReason);
+        }

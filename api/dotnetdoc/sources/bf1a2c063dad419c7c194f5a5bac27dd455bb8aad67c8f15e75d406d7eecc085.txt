@@ -1,0 +1,11 @@
+        protected void Application_End(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>容器可能因启动失败而保持为空；关闭路径必须允许这种半初始化状态。</zh-CN>
+            //   <en>The container may remain null after startup failure, so shutdown must tolerate this partially initialized state.</en>
+            // </lang>
+            if (Container != null)
+            {
+                Container.Dispose();
+            }
+        }

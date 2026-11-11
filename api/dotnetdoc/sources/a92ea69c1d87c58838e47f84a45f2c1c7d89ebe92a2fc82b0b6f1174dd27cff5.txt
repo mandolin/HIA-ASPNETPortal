@@ -1,0 +1,1 @@
+        long GetSecurityVersionByUserName(string userName);

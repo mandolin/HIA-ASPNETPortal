@@ -1,0 +1,4 @@
+        public static bool NeedsRehash(int storedIterationCount)
+        {
+            return NeedsRehash(storedIterationCount, ResolveTargetIterationCount());
+        }

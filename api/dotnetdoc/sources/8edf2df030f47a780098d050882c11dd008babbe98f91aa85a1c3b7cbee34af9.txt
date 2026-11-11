@@ -1,0 +1,1 @@
+        public bool HoldsOwnerRoleKey { get; private set; }

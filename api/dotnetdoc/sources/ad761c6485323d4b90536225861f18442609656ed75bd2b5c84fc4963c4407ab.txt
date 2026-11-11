@@ -1,0 +1,5 @@
+        internal static string DiscussDetails_Previous {
+            get {
+                return ResourceManager.GetString("DiscussDetails_Previous", resourceCulture);
+            }
+        }

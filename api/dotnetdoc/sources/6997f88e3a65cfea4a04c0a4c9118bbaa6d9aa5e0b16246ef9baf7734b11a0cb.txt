@@ -1,0 +1,34 @@
+    public enum PortalCookieSameSiteMode
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>不下发 SameSite 属性，保持历史兼容行为。</zh-CN>
+        ///   <en>Do not emit the SameSite attribute, preserving historical compatibility behavior.</en>
+        /// </lang>
+        /// </summary>
+        Unset,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>下发 SameSite=Lax。</zh-CN>
+        ///   <en>Emit SameSite=Lax.</en>
+        /// </lang>
+        /// </summary>
+        Lax,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>下发 SameSite=Strict。</zh-CN>
+        ///   <en>Emit SameSite=Strict.</en>
+        /// </lang>
+        /// </summary>
+        Strict,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>下发 SameSite=None；必须同时启用 Secure 才有效。</zh-CN>
+        ///   <en>Emit SameSite=None; valid only when Secure is enabled at the same time.</en>
+        /// </lang>
+        /// </summary>
+        None
+    }

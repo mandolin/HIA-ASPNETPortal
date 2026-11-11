@@ -1,0 +1,13 @@
+                <%--
+                    <lang>
+                      <zh-CN>历史 Windows 用户创建入口仍保留为不可见标记参考；当前阶段不启用该机制，避免绕过门户注册、审核和账号员工绑定流程。</zh-CN>
+                      <en>The historical Windows-user creation entry remains as invisible markup reference; this stage keeps it disabled to avoid bypassing Portal registration, approval, and user-employee binding flows.</en>
+                    </lang>
+                    <div class="portal-filter-field">
+                        <asp:TextBox ID="windowsUserName" Text="DOMAIN\username" Visible="False" runat="server" />
+                    </div>
+                    <div class="portal-filter-actions">
+                        <asp:LinkButton ID="addNew" CssClass="CommandButton" Text="Create new user and add to role"
+                            Visible="False" runat="server" OnClick="AddUser_Click" />
+                    </div>
+                --%>

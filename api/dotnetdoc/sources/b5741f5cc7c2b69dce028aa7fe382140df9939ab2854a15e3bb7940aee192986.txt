@@ -1,0 +1,5 @@
+        internal static string Admin_OperationAudits_ButtonNext {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ButtonNext", resourceCulture);
+            }
+        }

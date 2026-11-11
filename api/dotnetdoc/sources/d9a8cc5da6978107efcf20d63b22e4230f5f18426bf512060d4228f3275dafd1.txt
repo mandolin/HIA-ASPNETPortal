@@ -1,0 +1,79 @@
+        public static bool TryValidatePackageFile(string clientFileName, int compressedSize, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证所有提前返回都不留下未初始化的原因文本。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>体积必须是正数且不超过硬上限；零字节包不可能是合法 manifest 包，负值属调用方错误一律拒绝。</zh-CN>
+            //   <en>The size must be positive and within the hard cap; a zero-byte package cannot hold a valid manifest, and a negative value is a caller error.</en>
+            // </lang>
+            if (compressedSize <= 0)
+            {
+                reason = "Package is empty.";
+                return false;
+            }
+            if (compressedSize > MaximumPackageBytes)
+            {
+                reason = string.Format(CultureInfo.InvariantCulture, "Package exceeds the {0} byte compressed-size limit.", MaximumPackageBytes);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>空文件名无法取扩展名，按拒绝处理；不做 Trim 以保留原始证据但不使用其结果构造路径。</zh-CN>
+            //   <en>A blank file name has no extension and is rejected; no trimming is applied, and its text is never used to build a path.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(clientFileName))
+            {
+                reason = "Package file name is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>文件名长度上限防止超长输入进入诊断与日志路径；不含路径分隔符与冒号，避免 NTFS 备用数据流与目录穿越。</zh-CN>
+            //   <en>A length cap keeps overlong input out of diagnostics and logs; path separators and colons are rejected to prevent NTFS alternate data streams and traversal.</en>
+            // </lang>
+            if (clientFileName.Length > MaximumEntryNameLength ||
+                clientFileName.IndexOf(':') >= 0 ||
+                clientFileName.IndexOf('/') >= 0 ||
+                clientFileName.IndexOf('\\') >= 0)
+            {
+                reason = "Package file name contains unsupported characters or is too long.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符拒绝控制字符与通配符；这些在 Windows 文件名或 IIS 过滤器下可能改变实际落地形态。</zh-CN>
+            //   <en>Reject control characters and wildcards one by one; on Windows or under IIS filtering they can change the actual on-disk shape.</en>
+            // </lang>
+            foreach (char character in clientFileName)
+            {
+                // <lang>
+                //   <zh-CN>控制字符、通配符与双引号是文件名净化已知绕过点，任一命中即整包拒绝。</zh-CN>
+                //   <en>Control characters, wildcards, and quotes are known filename-sanitisation bypasses; any hit rejects the whole package.</en>
+                // </lang>
+                if (char.IsControl(character) || character == '*' || character == '?' || character == '"' ||
+                    character == '<' || character == '>' || character == '|')
+                {
+                    reason = "Package file name contains unsupported characters.";
+                    return false;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>扩展名在「原始文本」上判定（不解码、不折叠多余空白），且必须精确等于唯一允许值；
+            //   .zip.aspx、.zip.php 等双扩展名因末段扩展名不匹配而自然被拒，不做黑名单式枚举。</zh-CN>
+            //   <en>The extension is taken from the raw text (no decoding, no whitespace folding) and must equal the single allowed value exactly;
+            //   double extensions such as .zip.aspx are rejected because the final extension differs, without any block-list enumeration.</en>
+            // </lang>
+            string extension = Path.GetExtension(clientFileName);
+            if (!string.Equals(extension, PackageExtension, StringComparison.OrdinalIgnoreCase))
+            {
+                reason = "Package extension is not allowed.";
+                return false;
+            }
+
+            return true;
+        }

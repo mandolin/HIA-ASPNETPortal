@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>编辑地址只连接到既有 HTML 编辑页，标记层不把普通用户输入或外部资源接入受信任 HTML 渲染路径。</zh-CN>
+        <en>The edit address points only to the existing HTML editor; the markup does not route general-user input or external resources into the trusted-HTML rendering path.</en>
+    </lang>
+--%>

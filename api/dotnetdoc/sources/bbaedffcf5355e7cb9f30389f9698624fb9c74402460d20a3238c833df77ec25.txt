@@ -1,0 +1,4 @@
+        protected int? DocumentEmptyStateRowCount
+        {
+            get { return documentsEmptyStateRowCount; }
+        }

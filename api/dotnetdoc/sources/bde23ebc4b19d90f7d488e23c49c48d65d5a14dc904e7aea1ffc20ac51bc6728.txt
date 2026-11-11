@@ -1,0 +1,14 @@
+        public static class GroupKeys
+        {
+            /// <summary><lang><zh-CN>工作与审批：待办、请假与报销。</zh-CN><en>Work and approval: work items, leave and expense.</en></lang></summary>
+            public const string WorkAndApproval = "WorkAndApproval";
+
+            /// <summary><lang><zh-CN>业务办理：业务申请、我的信息。</zh-CN><en>Business: business requests, my profile.</en></lang></summary>
+            public const string Business = "Business";
+
+            /// <summary><lang><zh-CN>门户与帮助：首页、帮助。</zh-CN><en>Portal and help: home, help.</en></lang></summary>
+            public const string PortalAndHelp = "PortalAndHelp";
+
+            /// <summary><lang><zh-CN>系统管理：后台管理、企业能力工作台。</zh-CN><en>System administration: admin tab, enterprise capability workbench.</en></lang></summary>
+            public const string SystemAdministration = "SystemAdministration";
+        }

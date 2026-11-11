@@ -1,0 +1,16 @@
+        private static IUserEmployeeBindingInfo CreateBindingInfo(UserEmployeeBindingProjection row)
+        {
+            return new UserEmployeeBindingInfo(
+                row.BindingId,
+                row.UserId,
+                row.UserName,
+                row.EmployeeId,
+                row.EmployeeCode,
+                row.EmployeeDisplayName,
+                row.BindingStatus,
+                row.BoundUtc,
+                row.BoundBy,
+                row.EndedUtc,
+                row.EndedBy,
+                row.Reason);
+        }

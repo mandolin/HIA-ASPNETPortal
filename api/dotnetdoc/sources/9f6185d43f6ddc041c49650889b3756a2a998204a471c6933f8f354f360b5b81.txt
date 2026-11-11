@@ -1,0 +1,59 @@
+        public static PortalTabThemeOverrideReadResult Read(int tabId, HttpContext context = null)
+        {
+            if (tabId <= 0)
+            {
+                return new PortalTabThemeOverrideReadResult(true, false, string.Empty);
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>创建短生命周期 SQL 连接；连接不可用时不抛出到页面，而是返回可判定的回退状态。</zh-CN>
+                //   <en>Create a short-lived SQL connection; when unavailable, do not throw into the page and instead return a determinable fallback state.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        return new PortalTabThemeOverrideReadResult(false, false, string.Empty);
+                    }
+
+                    connection.Open();
+                    if (!IsTableAvailable(connection))
+                    {
+                        return new PortalTabThemeOverrideReadResult(false, false, string.Empty);
+                    }
+
+                    // <lang>
+                    //   <zh-CN>创建仅按 TabId 参数读取的命令，避免把主题选择扩展为动态 SQL。</zh-CN>
+                    //   <en>Create a command that reads only by the TabId parameter, preventing theme selection from becoming dynamic SQL.</en>
+                    // </lang>
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"
+SELECT [ThemeName]
+FROM [dbo].[PortalCfg_TabThemeOverrides]
+WHERE [TabId] = @TabId;";
+                        command.Parameters.Add("@TabId", SqlDbType.Int).Value = tabId;
+
+                        // <lang>
+                        //   <zh-CN>读取单值主题名；null/DBNull 表示表可用但当前 Tab 没有覆盖。</zh-CN>
+                        //   <en>Read the single theme value; null or DBNull means the table is available but the current tab has no override.</en>
+                        // </lang>
+                        object value = command.ExecuteScalar();
+                        return value == null || value == DBNull.Value
+                            ? new PortalTabThemeOverrideReadResult(true, false, string.Empty)
+                            : new PortalTabThemeOverrideReadResult(true, true, Convert.ToString(value));
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>仅把异常交给受限诊断记录，返回不可用状态以触发全局主题回退。</zh-CN>
+                //   <en>Send the exception only to restricted diagnostics and return unavailable status to trigger global-theme fallback.</en>
+                // </lang>
+                PortalDiagnostics.Error("Theme.TabOverride.Read", "Reading a tab theme override failed.", exception, context);
+                return new PortalTabThemeOverrideReadResult(false, false, string.Empty);
+            }
+        }

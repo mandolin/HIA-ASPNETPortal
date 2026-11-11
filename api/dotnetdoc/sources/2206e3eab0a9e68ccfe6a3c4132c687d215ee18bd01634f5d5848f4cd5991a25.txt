@@ -1,0 +1,13 @@
+        protected void RefreshButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>刷新回发再次复核权限，避免页面初次加载后权限变化仍触发健康检查。</zh-CN>
+            //   <en>Recheck permission on refresh postback so a permission change after initial load cannot trigger the health check.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.OpsHealthView))
+            {
+                return;
+            }
+
+            BindHealthSnapshot();
+        }

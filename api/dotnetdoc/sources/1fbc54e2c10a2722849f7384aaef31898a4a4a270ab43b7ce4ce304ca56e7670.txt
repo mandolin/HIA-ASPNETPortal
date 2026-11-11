@@ -1,0 +1,8 @@
+        public static bool LogHiddenTabs(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>诊断项以 true 为默认：排障信息属于低风险输出，宁可多记一条受控原因也不让"为何不显示"无从追查。</zh-CN>
+            //   <en>Diagnostics default to true: hide-reason output is low risk, and it is better to record one controlled reason than to leave "why is it hidden" untraceable.</en>
+            // </lang>
+            return ReadBoolean(PortalSettingsRegistry.NavigationLogHiddenTabs, true, context);
+        }

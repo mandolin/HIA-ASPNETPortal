@@ -1,0 +1,32 @@
+        private static string NormalizeStableName(
+            string candidate,
+            string fallback,
+            IList<string> invalidEntries,
+            string sourceName)
+        {
+            // <lang>
+            //   <zh-CN>空白候选不进入正则或问题集合，直接采用调用方已经确定的安全回退，避免把缺省配置误记为攻击性输入。</zh-CN>
+            //   <en>A blank candidate does not enter the regex or issue collection; use the caller's already determined safe fallback directly rather than misclassifying absent configuration as hostile input.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                return fallback;
+            }
+
+            // <lang>
+            //   <zh-CN>去除边缘空白后才按固定 ASCII 名称规则验证，使配置键拼接、字典查询和集合比较使用同一稳定表示。</zh-CN>
+            //   <en>Trim edge whitespace before validation against the fixed ASCII-name rule so configuration-key composition, dictionary lookup, and set comparison use one stable representation.</en>
+            // </lang>
+            string trimmed = candidate.Trim();
+            if (StableNamePattern.IsMatch(trimmed))
+            {
+                return trimmed;
+            }
+
+            // <lang>
+            //   <zh-CN>非法值只作为受控来源摘要记录，随后返回既定回退；不会将其用于构造配置键、路径或授权结论。</zh-CN>
+            //   <en>Record an invalid value only as a controlled source summary, then return the established fallback; it is never used to construct a configuration key, path, or authorization conclusion.</en>
+            // </lang>
+            invalidEntries.Add(sourceName + "=" + trimmed);
+            return fallback;
+        }

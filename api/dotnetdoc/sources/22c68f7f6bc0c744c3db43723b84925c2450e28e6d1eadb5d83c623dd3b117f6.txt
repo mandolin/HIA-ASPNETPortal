@@ -1,0 +1,165 @@
+    internal sealed class PortalLoginIdentifierResolution
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化不可变解析结果。</zh-CN>
+        ///   <en>Initializes an immutable resolution result.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="found">
+        /// <l>
+        ///   <zh-CN>是否唯一命中用户。</zh-CN>
+        ///   <en>Whether one user was uniquely found.</en>
+        /// </l>
+        /// </param>
+        /// <param name="ambiguous">
+        /// <l>
+        ///   <zh-CN>是否出现多个候选。</zh-CN>
+        ///   <en>Whether multiple candidates were found.</en>
+        /// </l>
+        /// </param>
+        /// <param name="hasDecision">
+        /// <l>
+        ///   <zh-CN>当前解析路径是否已经给出终止性结论。</zh-CN>
+        ///   <en>Whether the current resolution path has made a terminal decision.</en>
+        /// </l>
+        /// </param>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>唯一命中的门户用户标识。</zh-CN>
+        ///   <en>Uniquely matched Portal user id.</en>
+        /// </l>
+        /// </param>
+        private PortalLoginIdentifierResolution(bool found, bool ambiguous, bool hasDecision, int userId)
+        {
+            // <lang>
+            //   <zh-CN>保存唯一命中状态；false 不区分未命中和歧义，需结合其他标志读取。</zh-CN>
+            //   <en>Store unique-found state; false alone does not distinguish no match from ambiguity and must be read with the other flags.</en>
+            // </lang>
+            Found = found;
+
+            // <lang>
+            //   <zh-CN>保存歧义状态；歧义绝不选择任一候选账号。</zh-CN>
+            //   <en>Store ambiguity state; ambiguity never selects either candidate account.</en>
+            // </lang>
+            Ambiguous = ambiguous;
+
+            // <lang>
+            //   <zh-CN>保存当前路径是否终止，供调用方决定是否继续尝试后续身份来源。</zh-CN>
+            //   <en>Store whether the current path is terminal so callers can decide whether to try subsequent identity sources.</en>
+            // </lang>
+            HasDecision = hasDecision;
+
+            // <lang>
+            //   <zh-CN>保存唯一命中的门户用户标识；非唯一结果固定为 0，不能作为登录主体使用。</zh-CN>
+            //   <en>Store the uniquely matched portal user id; non-unique results are fixed to 0 and cannot be used as a sign-in principal.</en>
+            // </lang>
+            UserId = userId;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否唯一命中用户。</zh-CN>
+        ///   <en>Whether one user was uniquely found.</en>
+        /// </lang>
+        /// </summary>
+        internal bool Found { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否出现多个候选用户。</zh-CN>
+        ///   <en>Whether multiple candidate users were found.</en>
+        /// </lang>
+        /// </summary>
+        internal bool Ambiguous { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前路径是否已经给出终止性结论。</zh-CN>
+        ///   <en>Whether the current path has made a terminal decision.</en>
+        /// </lang>
+        /// </summary>
+        internal bool HasDecision { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>唯一命中的门户用户标识。</zh-CN>
+        ///   <en>Uniquely matched Portal user id.</en>
+        /// </lang>
+        /// </summary>
+        internal int UserId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建唯一命中结果。</zh-CN>
+        ///   <en>Creates a uniquely found result.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>唯一命中的门户用户标识。</zh-CN>
+        ///   <en>Uniquely matched Portal user id.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>终止性的成功解析结果。</zh-CN>
+        ///   <en>A terminal successful resolution result.</en>
+        /// </l>
+        /// </returns>
+        internal static PortalLoginIdentifierResolution CreateFound(int userId)
+        {
+            return new PortalLoginIdentifierResolution(true, false, true, userId);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建歧义结果。</zh-CN>
+        ///   <en>Creates an ambiguous result.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>终止性的歧义解析结果。</zh-CN>
+        ///   <en>A terminal ambiguous resolution result.</en>
+        /// </l>
+        /// </returns>
+        internal static PortalLoginIdentifierResolution CreateAmbiguous()
+        {
+            return new PortalLoginIdentifierResolution(false, true, true, 0);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建终止性未命中结果。</zh-CN>
+        ///   <en>Creates a terminal not-found result.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>没有其他路径需要继续尝试的未命中结果。</zh-CN>
+        ///   <en>A not-found result that does not need later paths to continue.</en>
+        /// </l>
+        /// </returns>
+        internal static PortalLoginIdentifierResolution CreateNotFound()
+        {
+            return new PortalLoginIdentifierResolution(false, false, true, 0);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建非终止性未命中结果。</zh-CN>
+        ///   <en>Creates a non-terminal not-found result.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>允许调用方继续尝试其他解析路径的未命中结果。</zh-CN>
+        ///   <en>A not-found result that allows callers to continue trying later resolution paths.</en>
+        /// </l>
+        /// </returns>
+        internal static PortalLoginIdentifierResolution CreateNotFoundWithoutDecision()
+        {
+            return new PortalLoginIdentifierResolution(false, false, false, 0);
+        }
+    }

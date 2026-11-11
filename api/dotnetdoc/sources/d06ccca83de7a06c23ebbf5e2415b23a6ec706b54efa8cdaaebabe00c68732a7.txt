@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>正文只解释样例链接没有提供内容，保持静态信息边界，不把样例数据当作可用业务资源。</zh-CN>
+          <en>The body only explains that sample-linked content is not provided, keeping a static-information boundary rather than treating sample data as an available business resource.</en>
+        </lang>
+        --%>

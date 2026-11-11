@@ -1,0 +1,31 @@
+        public void UpdateModule(int moduleId, int moduleOrder, string paneName, string title, int cacheTime,
+                                 string editRoles, bool showMobile, string titleEn = null, string titleLocalizedJson = null)
+        {
+            // <lang>
+            //   <zh-CN>更新路径保持严格查找；管理员页面不应悄悄忽略不存在的模块实例。</zh-CN>
+            //   <en>The update path keeps strict lookup; administration pages should not silently ignore missing module instances.</en>
+            // </lang>
+            var moduleRow = _items.Single(i => i.ModuleId == moduleId);
+
+            moduleRow.ModuleOrder = moduleOrder;
+            moduleRow.ModuleTitle = title;
+            moduleRow.PaneName = paneName;
+            moduleRow.CacheTimeout = cacheTime;
+            moduleRow.EditRoles = editRoles;
+            moduleRow.ShowMobile = showMobile;
+
+            // <lang>
+            //   <zh-CN>多语言列同样"显式提供才写入"，使不感知多语言的保存路径不会清空已配置的英文名或其它语言 JSON。</zh-CN>
+            //   <en>The multilingual columns likewise follow "write only when explicitly supplied", so save paths unaware of multilingualism cannot wipe already-configured English titles or other-languages JSON.</en>
+            // </lang>
+            if (!string.IsNullOrEmpty(titleEn)) { moduleRow.ModuleTitleEn = titleEn; }
+            if (!string.IsNullOrEmpty(titleLocalizedJson)) { moduleRow.ModuleTitleLocalizedJson = titleLocalizedJson; }
+
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>刷新快照以同步后续模块渲染和角色引用复核。</zh-CN>
+            //   <en>Refresh the snapshot to align later module rendering and role-reference checks.</en>
+            // </lang>
+            _items = _context.Modules.ToList();
+        }

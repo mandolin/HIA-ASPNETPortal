@@ -1,0 +1,8 @@
+        public IModuleDefinitionItem GetSingleModuleDefinition(int defId)
+        {
+            // <lang>
+            //   <zh-CN>模块定义参与动态加载；保持严格查询以暴露部署或配置损坏。</zh-CN>
+            //   <en>Module definitions participate in dynamic loading; keep this lookup strict to expose deployment or configuration corruption.</en>
+            // </lang>
+            return _items.Single(i => i.ModuleDefId == defId);
+        }

@@ -1,0 +1,16 @@
+        private static IEmployeeInfo CreateEmployeeInfo(EmployeeProjection row)
+        {
+            return new EmployeeInfo(
+                row.EmployeeId,
+                row.EmployeeCode,
+                row.DisplayName,
+                row.PreferredName,
+                row.WorkEmail,
+                row.OrganizationUnitId,
+                row.OrganizationDisplayName,
+                row.EmploymentStatus,
+                row.JoinedUtc,
+                row.LeftUtc,
+                row.SourceSystem,
+                row.UpdatedUtc);
+        }

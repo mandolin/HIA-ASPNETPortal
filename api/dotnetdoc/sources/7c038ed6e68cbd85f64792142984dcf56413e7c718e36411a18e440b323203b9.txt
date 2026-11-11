@@ -1,0 +1,169 @@
+    public sealed class ModuleCatalogRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从已验证包、状态读取结果和旧定义摘要创建目录展示行。</zh-CN>
+        ///   <en>Creates a catalog display row from a validated package, state-read result, and legacy definition summary.</en>
+        /// </lang>
+        /// </summary>
+        internal ModuleCatalogRow(
+            PortalModulePackage package,
+            bool isEnabled,
+            bool isProfileAllowed,
+            string activeProfile,
+            PortalModulePackageStateReadResult stateResult,
+            IModuleDefinitionItem definition,
+            int instanceCount)
+        {
+            // <lang>
+            //   <zh-CN>以下字段只复制受控包和服务投影，避免标记层持有可变数据访问对象。</zh-CN>
+            //   <en>The fields below copy only controlled package and service projections so markup never holds mutable data-access objects.</en>
+            // </lang>
+            PackageId = package.PackageId;
+            DisplayName = package.DisplayName;
+            Version = package.Version;
+            DesktopEntry = package.DesktopEntry;
+            IsEnabled = isEnabled;
+            IsProfileAllowed = isProfileAllowed;
+            IsRegistered = definition != null;
+            DefinitionText = definition == null
+                ? "Not registered"
+                : definition.ModuleDefId.ToString(CultureInfo.InvariantCulture);
+            InstanceCount = instanceCount;
+            // <lang>
+            //   <zh-CN>Profile 文本与状态文本分别说明能力集阻断和状态表默认值，避免把两种原因合并。</zh-CN>
+            //   <en>Keep Profile text and state text separate so capability blocking is not confused with a state-table default.</en>
+            // </lang>
+            ProfileText = isProfileAllowed
+                ? "Allowed by " + activeProfile
+                : "Blocked by " + activeProfile;
+            StateText = !isProfileAllowed
+                ? "Profile blocked"
+                : !stateResult.IsAvailable
+                ? "Enabled (state table unavailable)"
+                : stateResult.State == null || !stateResult.State.IsConfigured
+                    ? "Enabled (default)"
+                    : isEnabled ? "Enabled" : "Disabled";
+        }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>稳定部署包标识。</zh-CN>
+        ///   <en>Stable deployment-package identifier.</en>
+        /// </l>
+        /// </summary>
+        public string PackageId { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>管理员展示名称。</zh-CN>
+        ///   <en>Administrator display name.</en>
+        /// </l>
+        /// </summary>
+        public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>部署包版本。</zh-CN>
+        ///   <en>Deployment-package version.</en>
+        /// </l>
+        /// </summary>
+        public string Version { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>已验证桌面入口。</zh-CN>
+        ///   <en>Validated desktop entry.</en>
+        /// </l>
+        /// </summary>
+        public string DesktopEntry { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用启用状态。</zh-CN>
+        ///   <en>Display enabled state.</en>
+        /// </l>
+        /// </summary>
+        public bool IsEnabled { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否已有旧定义记录。</zh-CN>
+        ///   <en>Whether a legacy definition exists.</en>
+        /// </l>
+        /// </summary>
+        public bool IsRegistered { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>当前启动期 Profile 是否允许该包进入门户能力集。</zh-CN>
+        ///   <en>Whether the current startup Profile allows this package into the Portal capability set.</en>
+        /// </l>
+        /// </summary>
+        public bool IsProfileAllowed { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用 Profile 状态。</zh-CN>
+        ///   <en>Display Profile state.</en>
+        /// </l>
+        /// </summary>
+        public string ProfileText { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用状态文本。</zh-CN>
+        ///   <en>Display state text.</en>
+        /// </l>
+        /// </summary>
+        public string StateText { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用定义摘要。</zh-CN>
+        ///   <en>Display definition summary.</en>
+        /// </l>
+        /// </summary>
+        public string DefinitionText { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>引用该定义的模块实例数量。</zh-CN>
+        ///   <en>Module-instance count referencing the definition.</en>
+        /// </l>
+        /// </summary>
+        public int InstanceCount { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否显示注册按钮。</zh-CN>
+        ///   <en>Whether to show the register button.</en>
+        /// </l>
+        /// </summary>
+        public bool CanRegister
+        {
+            get { return IsProfileAllowed && !IsRegistered; }
+        }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否显示启用按钮。</zh-CN>
+        ///   <en>Whether to show the enable button.</en>
+        /// </l>
+        /// </summary>
+        public bool CanEnable
+        {
+            get { return IsProfileAllowed && !IsEnabled; }
+        }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否显示禁用按钮。</zh-CN>
+        ///   <en>Whether to show the disable button.</en>
+        /// </l>
+        /// </summary>
+        public bool CanDisable
+        {
+            get { return IsProfileAllowed && IsEnabled; }
+        }
+    }

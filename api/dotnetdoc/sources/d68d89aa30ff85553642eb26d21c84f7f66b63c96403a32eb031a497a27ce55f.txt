@@ -1,0 +1,24 @@
+        private static string GetParentText(IOrganizationUnitInfo organization, IDictionary<int, string> organizationNames)
+        {
+            // <lang>
+            //   <zh-CN>没有父级时使用固定根节点占位，不将 null 传播到标记层。</zh-CN>
+            //   <en>Use a fixed root placeholder when no parent exists instead of propagating null into markup.</en>
+            // </lang>
+            if (!organization.ParentOrganizationUnitId.HasValue)
+            {
+                return "(root)";
+            }
+
+            // <lang>
+            //   <zh-CN>父级名称只从本次已读取的索引中查找，避免为展示文本触发额外数据库读取。</zh-CN>
+            //   <en>Look up the parent name only in the index read during this batch, avoiding extra database reads for display text.</en>
+            // </lang>
+            string parentName;
+            if (organizationNames.TryGetValue(organization.ParentOrganizationUnitId.Value, out parentName) &&
+                !string.IsNullOrEmpty(parentName))
+            {
+                return parentName + " (#" + organization.ParentOrganizationUnitId.Value.ToString(CultureInfo.InvariantCulture) + ")";
+            }
+
+            return "#" + organization.ParentOrganizationUnitId.Value.ToString(CultureInfo.InvariantCulture);
+        }

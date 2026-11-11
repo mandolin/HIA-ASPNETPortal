@@ -1,0 +1,11 @@
+        protected string GetSafeBrowseUrl(object value)
+        {
+            // <lang>
+            //   <zh-CN>normalizedUrl 只在导航策略成功时被读取，避免把旧不合规 URL 回显给浏览者。</zh-CN>
+            //   <en>normalizedUrl is read only after navigation policy succeeds, avoiding echoing legacy non-compliant URLs to viewers.</en>
+            // </lang>
+            string normalizedUrl;
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(Convert.ToString(value), Context.Request, out normalizedUrl)
+                ? normalizedUrl
+                : string.Empty;
+        }

@@ -1,0 +1,11 @@
+        private static void AddRegistryCheck(
+            IList<PortalHealthCheckResult> checks,
+            IList<PortalSettingHealthInfo> settings)
+        {
+            checks.Add(new PortalHealthCheckResult(
+                "Settings",
+                "设置 Registry",
+                settings.Count > 0 ? PortalHealthStatus.Healthy : PortalHealthStatus.Warning,
+                settings.Count > 0 ? "设置 registry 已加载。" : "设置 registry 为空。",
+                "RegisteredSettings=" + settings.Count));
+        }

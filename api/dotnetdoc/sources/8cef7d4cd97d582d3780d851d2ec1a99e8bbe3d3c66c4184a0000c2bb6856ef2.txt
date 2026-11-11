@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>页头动作区聚合上一条、下一条和回复入口；按钮只负责触发 Web Forms 事件或站内导航，不在标记层拼接动态脚本。</zh-CN>
+          <en>The page-heading action area groups previous, next, and reply entry points. Buttons only trigger Web Forms events or site-local navigation; dynamic scripts are not concatenated in markup.</en>
+        </lang>
+        --%>

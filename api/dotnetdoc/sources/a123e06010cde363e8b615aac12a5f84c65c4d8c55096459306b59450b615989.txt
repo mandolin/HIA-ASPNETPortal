@@ -1,0 +1,11 @@
+        private static IModuleDefinitionItem FindDefinition(
+            IEnumerable<IModuleDefinitionItem> definitions,
+            string desktopEntry)
+        {
+            // <lang>
+            //   <zh-CN>使用不区分大小写的已规范化入口匹配，保持部署包 manifest 与旧定义的兼容关系。</zh-CN>
+            //   <en>Match normalized entries case-insensitively to preserve compatibility between package manifests and legacy definitions.</en>
+            // </lang>
+            return definitions.FirstOrDefault(item =>
+                string.Equals(item.DesktopSourceFile, desktopEntry, StringComparison.OrdinalIgnoreCase));
+        }

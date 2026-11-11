@@ -1,0 +1,4 @@
+        public AnnouncementsDb(PortalDbContext context)
+        {
+            _context = context;
+        }

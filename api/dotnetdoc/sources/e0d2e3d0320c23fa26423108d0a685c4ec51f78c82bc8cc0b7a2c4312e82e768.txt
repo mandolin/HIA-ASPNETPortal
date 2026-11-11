@@ -1,0 +1,23 @@
+        public static string GroupAliases(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>读取与布尔/列表方法同样包在 try 中：配置源不可用不得把异常抛到导航渲染路径。</zh-CN>
+            //   <en>Like the boolean/list readers, the read is wrapped in try: an unavailable configuration source must never throw into the navigation rendering path.</en>
+            // </lang>
+            try
+            {
+                // <lang>
+                //   <zh-CN>取有效值后不做任何预解析：严格校验与 fail-closed 回退属于 `PortalNavigationGroupAlias` 的职责，避免两处口径分叉。</zh-CN>
+                //   <en>Take the effective value without pre-parsing: strict validation and fail-closed fallback belong to `PortalNavigationGroupAlias`, preventing two divergent interpretations.</en>
+                // </lang>
+                return PortalRuntimeSettings.GetEffectiveValue(PortalSettingsRegistry.NavigationGroupAliases, context).Value ?? string.Empty;
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>异常时返回空串，等价于采用封闭词表默认分组；不隐藏任何页签。</zh-CN>
+                //   <en>On failure return an empty string, equivalent to adopting the closed vocabulary defaults; no tab is hidden.</en>
+                // </lang>
+                return string.Empty;
+            }
+        }

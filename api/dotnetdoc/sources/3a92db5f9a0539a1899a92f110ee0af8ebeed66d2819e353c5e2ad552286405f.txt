@@ -1,0 +1,5 @@
+        public Tab(int tabIndex, ITabItem tab)
+            : base(tab)
+        {
+            TabIndex = tabIndex;
+        }

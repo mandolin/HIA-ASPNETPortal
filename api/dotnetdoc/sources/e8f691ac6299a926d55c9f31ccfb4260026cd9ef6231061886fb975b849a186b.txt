@@ -1,0 +1,347 @@
+    public static class PortalOnlinePackageIntegrity
+    {
+        /// <summary><lang><zh-CN>SHA-256 十六进制摘要的固定长度（64）。</zh-CN><en>Fixed length of a SHA-256 hex digest (64).</en></lang></summary>
+        public const int Sha256HexLength = 64;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>计算字节内容的 SHA-256 小写十六进制摘要；与离线工具同一口径。</zh-CN>
+        ///   <en>Computes the lowercase SHA-256 hex digest of byte content, using the same format as the offline tool.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="content"><l zh-CN="包内容字节，不能为 null；空数组也返回空数组的合法摘要。" en="Package content bytes; cannot be null. An empty array still yields its valid digest." /></param>
+        /// <returns><l zh-CN="64 位小写十六进制摘要。" en="64-character lowercase hex digest." /></returns>
+        /// <exception cref="ArgumentNullException"><l zh-CN="content 为 null 时抛出。" en="Thrown when content is null." /></exception>
+        public static string ComputeSha256Hex(byte[] content)
+        {
+            // <lang>
+            //   <zh-CN>拒绝 null 而非静默返回空串，避免「未取到内容」被误当作合法摘要。</zh-CN>
+            //   <en>Reject null rather than silently returning an empty string, so "content not obtained" cannot be mistaken for a valid digest.</en>
+            // </lang>
+            if (content == null)
+            {
+                throw new ArgumentNullException("content");
+            }
+
+            // <lang>
+            //   <zh-CN>使用 4.8 自带的 SHA256.Create；using 确保哈希对象释放，不引入第三方依赖。</zh-CN>
+            //   <en>Use the framework's SHA256.Create; using disposes the hash object and adds no third-party dependency.</en>
+            // </lang>
+            using (SHA256 algorithm = SHA256.Create())
+            {
+                // <lang>
+                //   <zh-CN>BitConverter 输出带连字符大写，去掉连字符并转小写，与离线工具产物可逐字互印证。</zh-CN>
+                //   <en>BitConverter emits hyphenated uppercase; removing hyphens and lowercasing makes the result character-for-character comparable with the offline tool.</en>
+                // </lang>
+                byte[] digest = algorithm.ComputeHash(content);
+                return BitConverter.ToString(digest).Replace("-", string.Empty).ToLowerInvariant();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从流计算 SHA-256 小写十六进制摘要；流位置由调用方负责，本方法不复位也不关闭流。</zh-CN>
+        ///   <en>Computes the lowercase SHA-256 hex digest from a stream; the caller owns stream position and disposal.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="stream"><l zh-CN="可读流，不能为 null。" en="Readable stream; cannot be null." /></param>
+        /// <returns><l zh-CN="64 位小写十六进制摘要。" en="64-character lowercase hex digest." /></returns>
+        /// <exception cref="ArgumentNullException"><l zh-CN="stream 为 null 时抛出。" en="Thrown when stream is null." /></exception>
+        public static string ComputeSha256Hex(Stream stream)
+        {
+            // <lang>
+            //   <zh-CN>拒绝 null，避免把空流误当作有内容的包。</zh-CN>
+            //   <en>Reject null so an absent stream is not mistaken for a package with content.</en>
+            // </lang>
+            if (stream == null)
+            {
+                throw new ArgumentNullException("stream");
+            }
+
+            // <lang>
+            //   <zh-CN>流式计算避免把大包整体载入内存；仍用同一小写 hex 口径。</zh-CN>
+            //   <en>Streaming avoids loading a large package wholly into memory while keeping the same lowercase hex format.</en>
+            // </lang>
+            using (SHA256 algorithm = SHA256.Create())
+            {
+                byte[] digest = algorithm.ComputeHash(stream);
+                return BitConverter.ToString(digest).Replace("-", string.Empty).ToLowerInvariant();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断文本是否为定长 64 位十六进制摘要；不 Trim、不补位，避免把畸形输入洗成合法值。</zh-CN>
+        ///   <en>Determines whether text is a fixed-length 64-character hex digest; no trimming or padding so malformed input is not washed into a valid value.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value"><l zh-CN="待判定文本，可为 null。" en="Text to check; may be null." /></param>
+        /// <returns><l zh-CN="长度与字符集合规时为 true。" en="True when length and character set comply." /></returns>
+        public static bool IsSha256Hex(string value)
+        {
+            // <lang>
+            //   <zh-CN>长度不符直接拒绝；与票据校验的 64 位口径一致。</zh-CN>
+            //   <en>A wrong length is rejected outright, matching the ticket's 64-character contract.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(value) || value.Length != Sha256HexLength)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐字符限定在 0-9/a-f/A-F；冒号、空白与 Unicode 同形字符一律拒绝。</zh-CN>
+            //   <en>Restrict characters to 0-9/a-f/A-F; colons, whitespace, and Unicode look-alikes are rejected.</en>
+            // </lang>
+            foreach (char character in value)
+            {
+                bool isHex = (character >= '0' && character <= '9') ||
+                             (character >= 'a' && character <= 'f') ||
+                             (character >= 'A' && character <= 'F');
+                if (!isHex)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>校验包内容摘要与服务端记录的期望哈希一致（承担 4.8 无 CRC 自动校验的完整性职责）。</zh-CN>
+        ///   <en>Verifies the package content digest against the server-recorded expected hash (carrying the integrity duty absent from 4.8 CRC validation).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="content"><l zh-CN="包内容字节。" en="Package content bytes." /></param>
+        /// <param name="expectedHash"><l zh-CN="服务端隔离暂存时记录的期望摘要，不接受包内声明。" en="Server-recorded expected digest from isolated staging; package-declared values are not accepted." /></param>
+        /// <param name="reason"><l zh-CN="拒绝原因的稳定短语，不回显内容或哈希。" en="Stable rejection phrase that echoes neither content nor hash." /></param>
+        /// <returns><l zh-CN="摘要格式合规且完全一致时为 true。" en="True when the digest is well-formed and matches exactly." /></returns>
+        public static bool TryVerifyIntegrity(byte[] content, string expectedHash, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>期望摘要必须是服务端登记的合法格式；缺失即拒绝，不从内容反推期望值。</zh-CN>
+            //   <en>The expected digest must be a well-formed server-registered value; a missing one is rejected and never inferred from content.</en>
+            // </lang>
+            if (!IsSha256Hex(expectedHash))
+            {
+                reason = "Expected package hash is missing or malformed.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>内容缺失按拒绝处理，不把 null 解释为空包的合法摘要。</zh-CN>
+            //   <en>Missing content is rejected rather than treating null as the valid digest of an empty package.</en>
+            // </lang>
+            if (content == null)
+            {
+                reason = "Package content is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>计算实际摘要；大小写折叠为 OrdinalIgnoreCase 比较，使服务端记录的大小写差异不改变安全结论。</zh-CN>
+            //   <en>Compute the actual digest and compare with OrdinalIgnoreCase, so casing differences in the server record do not change the security verdict.</en>
+            // </lang>
+            string actualHash;
+            try
+            {
+                actualHash = ComputeSha256Hex(content);
+            }
+            catch (CryptographicException)
+            {
+                // <lang>
+                //   <zh-CN>哈希提供程序异常一律收敛为稳定失败短语，不回显异常细节。</zh-CN>
+                //   <en>Any hash-provider exception converges to a stable failure phrase without echoing exception details.</en>
+                // </lang>
+                reason = "Package hash could not be computed.";
+                return false;
+            }
+
+            if (!string.Equals(actualHash, expectedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                reason = "Package content no longer matches the recorded hash.";
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>以服务端受信任公钥验证包内容的 RSA-SHA256 签名；fail-closed，任何缺失/异常/验证失败都拒绝。</zh-CN>
+        ///   <en>Verifies the RSA-SHA256 signature of package content with a server-trusted public key; fail-closed on any absence, exception, or verification failure.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="content"><l zh-CN="被签名的包内容字节。" en="Signed package content bytes." /></param>
+        /// <param name="publicKeyXml"><l zh-CN="服务端部署配置中的 RSA 公钥 XML（只含公钥），不接受包内声明。" en="RSA public-key XML from server deployment configuration (public part only); package-declared values are not accepted." /></param>
+        /// <param name="signatureBase64"><l zh-CN="Base64 编码的签名值。" en="Base64-encoded signature value." /></param>
+        /// <param name="reason"><l zh-CN="拒绝原因的稳定短语，不回显公钥、签名或异常细节。" en="Stable rejection phrase that echoes no key, signature, or exception detail." /></param>
+        /// <returns><l zh-CN="签名有效时为 true。" en="True when the signature is valid." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>使用 4.8 已有的 `RSACryptoServiceProvider.FromXmlString` 与 `VerifyData(byte[], object, byte[])`，
+        ///   哈希算法对象显式用 `SHA256.Create()`；不引入 `SignedCms` / PKCS 或 `System.Security` 新引用（避免 4.8 可用面不确定）。
+        ///   签名**可选**（Q3）：是否要求签名由上层判定器决定，但一旦提供却无效，判定器也必须拒绝，避免伪造签名被忽略。</zh-CN>
+        ///   <en>It uses `RSACryptoServiceProvider.FromXmlString` and `VerifyData(byte[], object, byte[])` already present on 4.8,
+        ///   with an explicit `SHA256.Create()` hash object; no `SignedCms`/PKCS or new `System.Security` reference is introduced
+        ///   (avoiding uncertain 4.8 API availability). Signature is **optional** (Q3): the upper gate decides whether to require it,
+        ///   but a supplied-yet-invalid signature must also be rejected so a forged one is never ignored.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool TryVerifySignature(
+            byte[] content,
+            string publicKeyXml,
+            string signatureBase64,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证提前返回不留下未初始化原因。</zh-CN>
+            //   <en>Initialise the output to a failure state so no early return leaves an uninitialised reason.</en>
+            // </lang>
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>公钥、签名与内容三者缺一即拒绝；不尝试从包内解析替代公钥。</zh-CN>
+            //   <en>Reject if key, signature, or content is missing; never parse a substitute key from the package.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(publicKeyXml) ||
+                string.IsNullOrWhiteSpace(signatureBase64) ||
+                content == null)
+            {
+                reason = "Package signature material is missing.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>Base64 解析与验签异常全部收敛为稳定失败短语，避免把密钥或异常细节泄漏到诊断。</zh-CN>
+            //   <en>Base64 parsing and verification exceptions all converge to a stable failure phrase so no key or exception detail leaks into diagnostics.</en>
+            // </lang>
+            try
+            {
+                // <lang>
+                //   <zh-CN>Base64 非法、公钥 XML 非法或签名长度异常都会在此抛出，统一按失败处理。</zh-CN>
+                //   <en>Invalid Base64, malformed public-key XML, or an abnormal signature length throws here and is handled uniformly as failure.</en>
+                // </lang>
+                byte[] signature = Convert.FromBase64String(signatureBase64);
+                using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+                {
+                    // <lang>
+                    //   <zh-CN>只导入公钥；FromXmlString 在 4.8 已有编译实例（登录密码加密路径），此处复用同一 API。</zh-CN>
+                    //   <en>Import only the public key; FromXmlString already has a compiled 4.8 instance (login-password encryption path), reused here.</en>
+                    // </lang>
+                    rsa.FromXmlString(publicKeyXml);
+                    using (SHA256 algorithm = SHA256.Create())
+                    {
+                        // <lang>
+                        //   <zh-CN>VerifyData 返回 false 即签名不匹配，不抛异常；仍按拒绝处理。</zh-CN>
+                        //   <en>VerifyData returns false for a mismatched signature without throwing; it is still rejected.</en>
+                        // </lang>
+                        if (!rsa.VerifyData(content, algorithm, signature))
+                        {
+                            reason = "Package signature is invalid.";
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                reason = "Package signature material is malformed.";
+                return false;
+            }
+            catch (CryptographicException)
+            {
+                reason = "Package signature could not be verified.";
+                return false;
+            }
+            catch (ArgumentException)
+            {
+                reason = "Package signature material is malformed.";
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>生成 RSA-SHA256 签名，供服务端打包/发布侧使用（测试夹具也用它构造真实签名）。
+        ///   私钥只由调用方持有，本方法不读取配置、不持久化密钥。</zh-CN>
+        ///   <en>Produces an RSA-SHA256 signature for the server-side packaging/publishing path (test fixtures also use it to build real signatures).
+        ///   The private key is caller-held only; this method reads no config and persists no key.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="content"><l zh-CN="待签名内容字节。" en="Content bytes to sign." /></param>
+        /// <param name="privateKeyXml"><l zh-CN="调用方持有的 RSA 私钥 XML。" en="Caller-held RSA private-key XML." /></param>
+        /// <returns><l zh-CN="Base64 编码的签名值。" en="Base64-encoded signature value." /></returns>
+        /// <exception cref="ArgumentNullException"><l zh-CN="content 为 null 时抛出。" en="Thrown when content is null." /></exception>
+        public static string SignPackage(byte[] content, string privateKeyXml)
+        {
+            // <lang>
+            //   <zh-CN>拒绝 null 内容，避免对「未取到内容」生成签名。</zh-CN>
+            //   <en>Reject null content so a signature is never produced for "content not obtained".</en>
+            // </lang>
+            if (content == null)
+            {
+                throw new ArgumentNullException("content");
+            }
+
+            // <lang>
+            //   <zh-CN>私钥文本缺失交由 FromXmlString 抛 CryptographicException，由调用方处理；不在本方法内吞掉。</zh-CN>
+            //   <en>A missing key is left to FromXmlString to raise CryptographicException for the caller; it is not swallowed here.</en>
+            // </lang>
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(privateKeyXml);
+                using (SHA256 algorithm = SHA256.Create())
+                {
+                    // <lang>
+                    //   <zh-CN>与验签使用同一哈希算法对象类型，确保签名/验签口径一致。</zh-CN>
+                    //   <en>Use the same hash-algorithm object type as verification so signing and verifying share one format.</en>
+                    // </lang>
+                    return Convert.ToBase64String(rsa.SignData(content, algorithm));
+                }
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断签名材料是否齐备（仅形状判断，不验签）；供上层判定器区分「未配置」与「已提供但无效」。</zh-CN>
+        ///   <en>Determines whether signature material is present (shape only, no verification) so the upper gate can distinguish "not configured" from "supplied but invalid".</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="publicKeyXml"><l zh-CN="公钥 XML。" en="Public-key XML." /></param>
+        /// <param name="signatureBase64"><l zh-CN="Base64 签名值。" en="Base64 signature value." /></param>
+        /// <returns><l zh-CN="两者均非空白时为 true。" en="True when both are non-blank." /></returns>
+        public static bool HasSignatureMaterial(string publicKeyXml, string signatureBase64)
+        {
+            // <lang>
+            //   <zh-CN>空白即视为未提供；不做 Base64 预校验，具体有效性由 TryVerifySignature 判定。</zh-CN>
+            //   <en>Blank means absent; no Base64 pre-validation here, as TryVerifySignature owns actual validity.</en>
+            // </lang>
+            return !string.IsNullOrWhiteSpace(publicKeyXml) && !string.IsNullOrWhiteSpace(signatureBase64);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把字节长度格式化为不变区域性的稳定文本，供诊断与证据使用；不写入审计摘要。</zh-CN>
+        ///   <en>Formats a byte length as invariant-culture stable text for diagnostics and evidence; not written into audit summaries.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="length"><l zh-CN="字节长度。" en="Byte length." /></param>
+        /// <returns><l zh-CN="不变区域性十进制文本。" en="Invariant-culture decimal text." /></returns>
+        public static string FormatByteLength(long length)
+        {
+            // <lang>
+            //   <zh-CN>使用不变区域性，避免不同区域设置改变证据文本。</zh-CN>
+            //   <en>Invariant culture keeps evidence text stable across regional settings.</en>
+            // </lang>
+            return length.ToString(CultureInfo.InvariantCulture);
+        }
+    }

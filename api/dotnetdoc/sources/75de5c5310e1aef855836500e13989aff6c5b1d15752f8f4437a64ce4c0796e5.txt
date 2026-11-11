@@ -1,0 +1,37 @@
+        private string ResolveItemUrl(PortalWorkItemInfo item)
+        {
+            // <lang>
+            //   <zh-CN>解析故障不得让整块待办变成错误页：任何异常都按"读取注册事实失败"降级，行仍以纯文本加速提示呈现。</zh-CN>
+            //   <en>A resolution fault must not turn the whole to-do block into an error page: every exception degrades as "registration facts unreadable" and the row still renders as plain text plus a hint.</en>
+            // </lang>
+            try
+            {
+                PortalWorkItemTargetResolution resolution = PortalWorkItemTargetResolver.Resolve(
+                    item == null ? null : item.BusinessKind,
+                    targetSource);
+
+                if (!resolution.IsResolved)
+                {
+                    degradedTargetCount++;
+                    IncrementDegradationReason(resolution.ReasonCode);
+                    return string.Empty;
+                }
+
+                resolvedTargetCount++;
+
+                // <lang>
+                //   <zh-CN>地址形状走共享构造点；<c>tabindex</c> 只影响目标页的匿名登录注入启发式，授权由 <c>tabid</c> 决定（P77.2 裁定 D2），因此这里取门户桌面列表下标并在取不到时退化为 0，绝不生成负下标。</zh-CN>
+                //   <en>The URL shape comes from the shared construction point; <c>tabindex</c> only affects the target page's anonymous-login injection heuristic while authorization is decided by <c>tabid</c> (decision D2 from P77.2), so this reads the portal desktop-list index and degrades it to 0 when absent, never producing a negative subscript.</en>
+                // </lang>
+                return PortalDesktopTabUrl.Build(
+                    Global.GetApplicationPath(Request),
+                    ResolveTabIndex(resolution.Tab.TabId),
+                    resolution.Tab.TabId);
+            }
+            catch (Exception)
+            {
+                degradedTargetCount++;
+                IncrementDegradationReason(PortalWorkItemTargetResolver.ReasonResolutionFailed);
+                return string.Empty;
+            }
+        }

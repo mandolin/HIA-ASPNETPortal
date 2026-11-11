@@ -1,0 +1,1 @@
+        IContactItem GetSingleContact(int itemId);

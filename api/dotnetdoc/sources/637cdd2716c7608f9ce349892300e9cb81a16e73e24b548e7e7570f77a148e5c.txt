@@ -1,0 +1,1 @@
+        string LoginName { get; }

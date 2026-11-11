@@ -1,0 +1,6 @@
+        private static bool IsSupportedTargetStatus(string targetStatus)
+        {
+            return string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Reviewed, StringComparison.Ordinal) ||
+                   string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal) ||
+                   string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal);
+        }

@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>联系人仍按数据表格呈现，外层使用统一门户表格容器承载主题滚动和边框。</zh-CN>
+        <en>Contacts still render as a data table, with the shared portal table wrapper providing themed scrolling and borders.</en>
+    </lang>
+--%>

@@ -1,0 +1,1 @@
+            private IDictionary<string, string> desktopEntries;

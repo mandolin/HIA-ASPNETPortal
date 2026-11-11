@@ -1,0 +1,39 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>item 是通过模块权限和归属校验后的事件快照；新增事件路径保持为空。</zh-CN>
+            //   <en>item is the event snapshot after module permission and ownership validation; it remains null on the new-event path.</en>
+            // </lang>
+            IEventItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                if (item != null)
+                {
+                    // <lang>
+                    //   <zh-CN>首次加载只在归属校验通过后回填旧事件字段，避免通过 ItemId 读取其他模块的条目。</zh-CN>
+                    //   <en>Initial binding fills legacy event fields only after ownership validation, avoiding reads of items from another module via ItemId.</en>
+                    // </lang>
+                    TitleField.Text = item.Title;
+                    DescriptionField.Text = item.Description;
+                    // <lang>
+                    //   <zh-CN>事件过期日期继续按旧页面短日期文本回填，保持当前文化兼容。</zh-CN>
+                    //   <en>The event expiry date continues to fill with the legacy page's short-date text, preserving current-culture compatibility.</en>
+                    // </lang>
+                    ExpireField.Text = item.ExpireDate.HasValue ? item.ExpireDate.Value.ToShortDateString() : string.Empty;
+                    CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
+                    WhereWhenField.Text = item.WhereWhen;
+                    CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
+                }
+
+                // <lang>
+                //   <zh-CN>回跳地址只保存经策略清洗后的站内地址，供保存、删除和取消共用。</zh-CN>
+                //   <en>The return URL stores only a policy-cleaned in-app address shared by save, delete and cancel actions.</en>
+                // </lang>
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

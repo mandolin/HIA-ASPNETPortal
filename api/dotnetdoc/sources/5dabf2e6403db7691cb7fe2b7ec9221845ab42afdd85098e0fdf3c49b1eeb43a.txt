@@ -1,0 +1,27 @@
+        private void TryEnsureWorkItem(long applicationId, string applicationCode, string title, string summary)
+        {
+            // <lang>
+            //   <zh-CN>待办是审核入口投影，失败时不回滚已经成功提交的业务申请。</zh-CN>
+            //   <en>The work item is a review-entry projection; failure does not roll back the already submitted business application.</en>
+            // </lang>
+            if (WorkItemDb == null || applicationId <= 0)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>待办请求只使用稳定申请标识、归一化标题/摘要和审核角色，不复制完整正文。</zh-CN>
+            //   <en>The work-item request uses only the stable application id, normalized title/summary, and review role; it does not copy the full body.</en>
+            // </lang>
+            WorkItemDb.EnsureWorkItem(
+                new PortalWorkItemCreateRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.BusinessApplication,
+                    BusinessId = applicationId.ToString(CultureInfo.InvariantCulture),
+                    Title = "Business application " + applicationCode + ": " + title,
+                    Summary = NormalizeInput(summary, 500),
+                    AssignedRoleKey = PortalPermissionKeys.BusinessApplicationReview,
+                    CreatedUtc = DateTime.UtcNow,
+                    CreatedBy = GetCurrentUserName()
+                });
+        }

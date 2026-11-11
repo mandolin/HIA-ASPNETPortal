@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>管理用户页只重排展示结构，账号更新、注册审核、生命周期和角色命令仍由 code-behind 控制。</zh-CN>
+        <en>The manage-user page only rearranges presentation structure; account updates, registration review, lifecycle commands, and role commands remain controlled by code-behind.</en>
+      </lang>
+    --%>

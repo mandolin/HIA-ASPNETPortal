@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>过期日期和 Update/Cancel/Delete 命令共同进入旧公告状态流程；页面验证器不能替代服务器权限和当前记录校验。</zh-CN>
+                    <en>The expiration date and Update/Cancel/Delete commands enter the legacy announcement state flow together; page validators do not replace server authorization or current-record checks.</en>
+                </lang>
+            --%>

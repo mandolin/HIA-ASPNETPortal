@@ -1,0 +1,20 @@
+        internal PortalHiaBoundaryValidationResult(bool isValid, string code, string message)
+        {
+            // <lang>
+            //   <zh-CN>保存验证状态，供调用方只读取结构化结果而不接触原始 envelope。</zh-CN>
+            //   <en>Store validation state so callers consume a structured result without accessing the raw envelope.</en>
+            // </lang>
+            IsValid = isValid;
+
+            // <lang>
+            //   <zh-CN>将机器代码空值归一为空字符串，保证失败/成功结果都可稳定序列化。</zh-CN>
+            //   <en>Normalize a null machine code to empty so success and failure results serialize stably.</en>
+            // </lang>
+            Code = code ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>将安全消息空值归一为空字符串，不回显请求字段或 payload 原文。</zh-CN>
+            //   <en>Normalize a null safe message to empty without echoing request fields or raw payload text.</en>
+            // </lang>
+            Message = message ?? string.Empty;
+        }

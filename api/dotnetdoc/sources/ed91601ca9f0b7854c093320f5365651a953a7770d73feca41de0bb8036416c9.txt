@@ -1,0 +1,1 @@
+        public bool IsProfileAllowed { get; private set; }

@@ -1,0 +1,10 @@
+            public IEnumerable<int> GetModuleIdsByDefinitionId(int definitionId)
+            {
+                IModulesDb modules = owner.ModuleInstancesConfig;
+                if (modules == null)
+                {
+                    return Enumerable.Empty<int>();
+                }
+
+                return modules.GetModulesByModuleDefId(definitionId) ?? Enumerable.Empty<int>();
+            }

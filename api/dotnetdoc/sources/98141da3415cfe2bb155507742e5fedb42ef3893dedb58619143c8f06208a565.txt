@@ -1,0 +1,67 @@
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage("请先登录后再提交报销单。");
+                return;
+            }
+
+            if (ExpenseReimbursementDb == null || !ExpenseReimbursementDb.IsSchemaAvailable())
+            {
+                ShowMessage("报销服务暂不可用，请稍后重试。");
+                return;
+            }
+
+            var category = ddlCategory.SelectedValue;
+            if (string.IsNullOrWhiteSpace(txtAmount.Text))
+            {
+                ShowMessage("请填写报销金额。");
+                return;
+            }
+
+            decimal amount;
+            if (!decimal.TryParse(txtAmount.Text, out amount) || amount <= 0)
+            {
+                ShowMessage("报销金额必须为正数。");
+                return;
+            }
+
+            var attachmentName = fileAttach.HasFile ? fileAttach.FileName : null;
+            var result = ExpenseReimbursementDb.CreateRequest(new ExpenseReimbursementCreateRequest
+            {
+                UserId = userId,
+                Category = category,
+                Amount = amount,
+                Reason = txtReason.Text,
+                AttachmentName = attachmentName
+            });
+
+            if (!result.Ok)
+            {
+                ShowMessage("提交失败，请稍后重试。");
+                return;
+            }
+
+            WorkItemDb.EnsureWorkItem(new PortalWorkItemCreateRequest
+            {
+                BusinessKind = PortalWorkItemBusinessKinds.ExpenseReimbursement,
+                BusinessId = result.RequestId.ToString(CultureInfo.InvariantCulture),
+                Title = "费用报销 #" + result.RequestId,
+                Summary = category + " ¥" + amount.ToString("N2", CultureInfo.InvariantCulture),
+                AssignedRoleKey = "Admins"
+            });
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                "ExpenseReimbursement.Submit",
+                "Request",
+                result.RequestId.ToString(CultureInfo.InvariantCulture),
+                "Expense reimbursement submitted. UserId=" + userId,
+                Context,
+                null,
+                "Success");
+
+            ShowMessage("报销单已提交，可在「我的待办」跟踪审批进度。", false);
+            RenderRecent();
+        }

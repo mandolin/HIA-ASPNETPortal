@@ -1,0 +1,10 @@
+        protected string BuildGroupTabTooltip(object dataItem)
+        {
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(dataItem);
+            if (view == null)
+            {
+                return string.Empty;
+            }
+
+            return BuildTabDisplayName(view.Tab) + " (" + view.BlockedReason + ")";
+        }

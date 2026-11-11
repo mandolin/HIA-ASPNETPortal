@@ -1,0 +1,69 @@
+        private bool TryValidateOrganizationRequest(OrganizationUnitSaveRequest request, out string message)
+        {
+            message = string.Empty;
+            if (request == null)
+            {
+                message = "Organization unit data is required.";
+                return false;
+            }
+
+            if (request.OrganizationUnitId < 0)
+            {
+                message = "Organization unit id is invalid.";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(request.DisplayName) || request.DisplayName.Length > 150)
+            {
+                message = "Organization display name is required and must not exceed 150 characters.";
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(request.OrganizationCode) && request.OrganizationCode.Length > 100)
+            {
+                message = "Organization code must not exceed 100 characters.";
+                return false;
+            }
+
+            if (request.ParentOrganizationUnitId.HasValue)
+            {
+                if (request.ParentOrganizationUnitId.Value <= 0)
+                {
+                    message = "Parent organization id is invalid.";
+                    return false;
+                }
+
+                if (request.OrganizationUnitId > 0 && request.ParentOrganizationUnitId.Value == request.OrganizationUnitId)
+                {
+                    message = "An organization unit cannot be its own parent.";
+                    return false;
+                }
+
+                if (!OrganizationExists(request.ParentOrganizationUnitId.Value))
+                {
+                    message = "Parent organization unit does not exist.";
+                    return false;
+                }
+
+                if (WouldCreateOrganizationCycle(request.OrganizationUnitId, request.ParentOrganizationUnitId.Value))
+                {
+                    message = "The selected parent would create an organization cycle.";
+                    return false;
+                }
+            }
+
+            if (request.OrganizationUnitId > 0 && !OrganizationExists(request.OrganizationUnitId))
+            {
+                message = "Organization unit does not exist.";
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(request.OrganizationCode) &&
+                OrganizationCodeExists(request.OrganizationCode, request.OrganizationUnitId))
+            {
+                message = "Organization code already exists.";
+                return false;
+            }
+
+            return true;
+        }

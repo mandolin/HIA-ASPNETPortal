@@ -1,0 +1,19 @@
+        public PortalNavigationVisibilityContext(
+            bool isAdministrator,
+            IEnumerable<string> roleNames,
+            IEnumerable<string> permissionKeys,
+            IEnumerable<string> allowedPackageIds,
+            string activeProfile,
+            IEnumerable<string> includedProfiles)
+        {
+            // <lang>
+            //   <zh-CN>逐字段保存并规范化：集合去空白、按大小写不敏感去重、只读化，防止调用方在判定期间修改输入。</zh-CN>
+            //   <en>Store and normalize each field: trim, case-insensitively deduplicate, and make collections read-only so callers cannot mutate inputs during evaluation.</en>
+            // </lang>
+            IsAdministrator = isAdministrator;
+            RoleNames = NormalizeList(roleNames);
+            PermissionKeys = NormalizeList(permissionKeys);
+            AllowedPackageIds = NormalizeList(allowedPackageIds);
+            ActiveProfile = activeProfile ?? string.Empty;
+            IncludedProfiles = NormalizeList(includedProfiles);
+        }

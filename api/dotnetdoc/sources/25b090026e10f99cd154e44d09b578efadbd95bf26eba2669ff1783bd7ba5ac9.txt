@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_ColumnItem {
+            get {
+                return ResourceManager.GetString("MyWorkItems_ColumnItem", resourceCulture);
+            }
+        }

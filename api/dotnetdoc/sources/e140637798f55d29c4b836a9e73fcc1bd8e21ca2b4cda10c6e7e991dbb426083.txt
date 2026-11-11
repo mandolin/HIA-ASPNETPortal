@@ -1,0 +1,400 @@
+    public sealed class EmployeeProfileCorrectionRequestDb : IEmployeeProfileCorrectionRequestDb
+    {
+        // <lang>
+        //   <zh-CN>表名常量只用于当前 SQL Server 实现；多数据库方言阶段会把这些稳定名映射到 provider-specific 查询。</zh-CN>
+        //   <en>Table-name constants are used only by the current SQL Server implementation; the multi-provider phase will map these stable names to provider-specific queries.</en>
+        // </lang>
+        private const string RequestTableName = "PortalBiz_EmployeeProfileCorrectionRequests";
+        private const string EmployeeTableName = "PortalBiz_Employees";
+        private const string BindingTableName = "PortalBiz_UserEmployeeBindings";
+        private const string UserTableName = "Portal_Users";
+        private readonly PortalBizDbContext context;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工主数据管理门面，供审核通过后回写更正结果；可为 null，此时回写路径直接失败而不是回退到旧的无回写行为。</zh-CN>
+        ///   <en>Employee master-data administration facade used to write back an approved correction; it may be null, in which case the write-back path fails instead of silently reverting to the previous no-write behavior.</en>
+        /// </lang>
+        /// </summary>
+        private readonly IEmployeeDirectoryAdminDb employeeAdminDb;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化员工资料更正请求数据访问实现。</zh-CN>
+        ///   <en>Initializes the employee-profile correction-request data-access implementation.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>企业业务基础数据上下文。</zh-CN>
+        ///   <en>Enterprise business foundation data context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="employeeAdminDb">
+        /// <l>
+        ///   <zh-CN>员工主数据管理门面；容器自动装配。为空时审核通过无法回写主数据，会以明确失败返回。</zh-CN>
+        ///   <en>Employee master-data administration facade, wired automatically by the container. When it is null, an approval cannot write master data back and returns an explicit failure.</en>
+        /// </l>
+        /// </param>
+        public EmployeeProfileCorrectionRequestDb(PortalBizDbContext context, IEmployeeDirectoryAdminDb employeeAdminDb = null)
+        {
+            this.context = context;
+            this.employeeAdminDb = employeeAdminDb;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查更正请求表和依赖的员工绑定基础表是否可用。</zh-CN>
+        ///   <en>Checks whether the correction-request table and required employee-binding foundation tables are available.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>相关表可用时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the related tables are available.</en>
+        /// </l>
+        /// </returns>
+        public bool IsSchemaAvailable()
+        {
+            // <lang>
+            //   <zh-CN>资料更正模块依赖请求、员工、绑定和旧用户表；任一表缺失都返回不可用，页面据此显示低敏提示。</zh-CN>
+            //   <en>The correction module depends on request, employee, binding and legacy user tables; any missing table makes the module unavailable and lets the page show a low-sensitivity message.</en>
+            // </lang>
+            return HasTable(RequestTableName) &&
+                   HasTable(EmployeeTableName) &&
+                   HasTable(BindingTableName) &&
+                   HasTable(UserTableName);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定门户用户当前可提交更正请求的员工资料。</zh-CN>
+        ///   <en>Reads the employee profile for which the specified Portal user may submit a correction request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>门户用户标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前资料视图；缺表、未绑定或非 Active 状态时为空。</zh-CN>
+        ///   <en>Current profile view, or null when schema is missing, no active binding exists, or the employee is not active.</en>
+        /// </l>
+        /// </returns>
+        public EmployeeProfileCorrectionProfileView GetCurrentProfileForUser(int userId)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return null;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>读取当前用户最近的 Active 员工绑定，且员工自身也必须 Active；页面展示资料不信任客户端传入的员工标识。</zh-CN>
+                //   <en>Read the current user's latest active employee binding and require the employee to be active as well; profile display does not trust an employee id supplied by the client.</en>
+                // </lang>
+                ProfileProjection row = context.Database.SqlQuery<ProfileProjection>(
+                    @"
+SELECT TOP (1)
+    [Employee].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName],
+    [Employee].[PreferredName],
+    [Employee].[WorkEmail],
+    [Organization].[DisplayName] AS [OrganizationDisplayName],
+    [Employee].[EmploymentStatus],
+    [Binding].[BindingId],
+    [Binding].[BoundUtc]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
+    ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
+WHERE [Binding].[UserId] = @p0
+  AND [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active'
+ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;",
+                    userId).SingleOrDefault();
+
+                return row == null
+                    ? null
+                    : new EmployeeProfileCorrectionProfileView(
+                        row.EmployeeId,
+                        row.EmployeeCode,
+                        row.DisplayName,
+                        row.PreferredName,
+                        row.WorkEmail,
+                        row.OrganizationDisplayName,
+                        row.EmploymentStatus,
+                        row.BindingId,
+                        row.BoundUtc);
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>只读资料入口软失败，避免缺表或迁移中的数据库状态打断前台门户首页。</zh-CN>
+                //   <en>The read-only profile entry fails softly so missing tables or in-progress migrations do not break the portal home page.</en>
+                // </lang>
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定门户用户最近提交的更正请求。</zh-CN>
+        ///   <en>Reads recent correction requests submitted by the specified Portal user.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>门户用户标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="take">
+        /// <l>
+        ///   <zh-CN>最多返回条数。</zh-CN>
+        ///   <en>Maximum number of rows to return.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>请求列表。</zh-CN>
+        ///   <en>Request list.</en>
+        /// </l>
+        /// </returns>
+        public IList<EmployeeProfileCorrectionRequestInfo> GetRecentRequestsForUser(int userId, int take)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<EmployeeProfileCorrectionRequestInfo>();
+            }
+
+            int safeTake = NormalizeTake(take, 10);
+            try
+            {
+                // <lang>
+                //   <zh-CN>用户侧最近请求只按当前用户过滤，避免员工多人绑定或历史绑定时串看到其他账号的申请。</zh-CN>
+                //   <en>User-facing recent requests are filtered by current user to avoid leaking another account's requests when employees have multiple or historical bindings.</en>
+                // </lang>
+                return context.Database.SqlQuery<EmployeeProfileCorrectionRequestInfo>(
+                    @"
+SELECT TOP (@Take)
+    [Request].[RequestId],
+    [Request].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName] AS [EmployeeDisplayName],
+    [Request].[UserId],
+    [User].[Name] AS [UserName],
+    [Request].[BindingId],
+    [Request].[SubmittedUtc],
+    [Request].[SubmittedBy],
+    [Request].[FieldName],
+    [Request].[CurrentValueSnapshot],
+    [Request].[ProposedValue],
+    [Request].[RequestNote],
+    [Request].[RequestStatus],
+    [Request].[ReviewedUtc],
+    [Request].[ReviewedBy],
+    [Request].[ReviewNote]
+FROM [dbo].[PortalBiz_EmployeeProfileCorrectionRequests] AS [Request]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Request].[EmployeeId]
+INNER JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [Request].[UserId]
+WHERE [Request].[UserId] = @UserId
+ORDER BY [Request].[SubmittedUtc] DESC, [Request].[RequestId] DESC;",
+                    new SqlParameter("@Take", safeTake),
+                    new SqlParameter("@UserId", userId)).ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>历史请求列表读取失败时返回空集合，页面保持可用；提交动作仍会单独校验并返回明确失败。</zh-CN>
+                //   <en>When recent-request reading fails, return an empty list so the page remains usable; submission still validates independently and returns explicit failures.</en>
+                // </lang>
+                return new List<EmployeeProfileCorrectionRequestInfo>();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交一条员工资料更正请求。</zh-CN>
+        ///   <en>Submits one employee-profile correction request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>提交请求。</zh-CN>
+        ///   <en>Submission request.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果。</zh-CN>
+        ///   <en>Write result.</en>
+        /// </l>
+        /// </returns>
+        public EmployeeProfileCorrectionRequestResult SubmitRequest(EmployeeProfileCorrectionSubmitRequest request)
+        {
+            // <lang>
+            //   <zh-CN>提交入口先统一归一化，保证后面的白名单、必填和 SQL 参数都基于裁剪后的稳定值。</zh-CN>
+            //   <en>The submission entry normalizes first so allow-list checks, required checks and SQL parameters all use trimmed stable values.</en>
+            // </lang>
+            EmployeeProfileCorrectionSubmitRequest normalized = NormalizeSubmitRequest(request);
+            if (normalized.UserId <= 0 || normalized.EmployeeId <= 0 || normalized.BindingId <= 0)
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "A signed-in user with an active employee binding is required.");
+            }
+
+            if (!IsAllowedFieldName(normalized.FieldName))
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Select a supported profile field.");
+            }
+
+            if (string.IsNullOrWhiteSpace(normalized.ProposedValue))
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Proposed value is required.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee profile correction schema is unavailable.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>插入时重新联查 Active 绑定和 Active 员工，并在 SQL 中截取当前值快照，避免页面提交过期或伪造的当前值。</zh-CN>
+                //   <en>The insert re-joins the active binding and active employee, and captures the current value snapshot in SQL so stale or forged page values are not trusted.</en>
+                // </lang>
+                List<long> rows = context.Database.SqlQuery<long>(
+                    @"
+DECLARE @Inserted TABLE
+(
+    [RequestId] BIGINT NOT NULL
+);
+
+INSERT INTO [dbo].[PortalBiz_EmployeeProfileCorrectionRequests]
+    ([EmployeeId],
+     [UserId],
+     [BindingId],
+     [SubmittedUtc],
+     [SubmittedBy],
+     [FieldName],
+     [CurrentValueSnapshot],
+     [ProposedValue],
+     [RequestNote],
+     [RequestStatus])
+OUTPUT INSERTED.[RequestId] INTO @Inserted
+SELECT TOP (1)
+    [Employee].[EmployeeId],
+    [Binding].[UserId],
+    [Binding].[BindingId],
+    @SubmittedUtc,
+    @SubmittedBy,
+    @FieldName,
+    CASE @FieldName
+        WHEN N'DisplayName' THEN [Employee].[DisplayName]
+        WHEN N'PreferredName' THEN [Employee].[PreferredName]
+        WHEN N'WorkEmail' THEN [Employee].[WorkEmail]
+        WHEN N'OrganizationDisplayName' THEN [Organization].[DisplayName]
+        ELSE NULL
+    END,
+    @ProposedValue,
+    @RequestNote,
+    N'Submitted'
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
+    ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
+WHERE [Binding].[UserId] = @UserId
+  AND [Employee].[EmployeeId] = @EmployeeId
+  AND [Binding].[BindingId] = @BindingId
+  AND [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active';
+
+SELECT [RequestId] FROM @Inserted;",
+                    new SqlParameter("@UserId", normalized.UserId),
+                    new SqlParameter("@EmployeeId", normalized.EmployeeId),
+                    new SqlParameter("@BindingId", normalized.BindingId),
+                    new SqlParameter("@SubmittedUtc", normalized.SubmittedUtc.Value),
+                    new SqlParameter("@SubmittedBy", normalized.SubmittedBy),
+                    new SqlParameter("@FieldName", normalized.FieldName),
+                    new SqlParameter("@ProposedValue", normalized.ProposedValue),
+                    CreateNullableStringParameter("@RequestNote", normalized.RequestNote)).ToList();
+
+                long requestId = rows.Count == 0 ? 0 : rows[0];
+                if (requestId <= 0)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "No active employee profile is available for correction.");
+                }
+
+                return new EmployeeProfileCorrectionRequestResult(true, requestId, "Employee profile correction request submitted.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>写入异常返回统一低敏失败消息；调用页面可结合操作上下文写 `PortalDiagnostics` 事件编号。</zh-CN>
+                //   <en>Write exceptions return one low-sensitivity failure message; the calling page may log a `PortalDiagnostics` event id with operation context.</en>
+                // </lang>
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee profile correction request failed.");
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按状态读取后台处理列表。</zh-CN>
+        ///   <en>Reads an administrator review list by status.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="status">
+        /// <l>
+        ///   <zh-CN>状态筛选；空值表示全部。</zh-CN>
+        ///   <en>Status filter; empty means all statuses.</en>
+        /// </l>
+        /// </param>
+        /// <param name="take">
+        /// <l>
+        ///   <zh-CN>最多返回条数。</zh-CN>
+        ///   <en>Maximum number of rows to return.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>请求列表。</zh-CN>
+        ///   <en>Request list.</en>
+        /// </l>
+        /// </returns>
+        public IList<EmployeeProfileCorrectionRequestInfo> GetAdminRequests(string status, int take)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return new List<EmployeeProfileCorrectionRequestInfo>();
+            }
+
+            string normalizedStatus = NormalizeStatusFilter(status);
+            int safeTake = NormalizeTake(take, 50);
+            try
+            {
+                // <lang>
+                //   <zh-CN>后台列表按状态可选过滤，默认只取有限条数，避免旧 WebForms 页面一次绑定过多记录。</zh-CN>
+                //   <en>The admin list optionally filters by status and always limits rows so the legacy WebForms page does not bind too many records at once.</en>
+                // </lang>
+                return context.Database.SqlQuery<EmployeeProfileCorrectionRequestInfo>(
+                    @"
+SELECT TOP (@Take)
+    [Request].[RequestId],
+    [Request].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName] AS [EmployeeDisplayName],
+    [Request].[UserId],
+    [User].[Name] AS [UserName],
+    [Request].[BindingId],
+    [Request].[SubmittedUtc],
+    [Request].[SubmittedBy],

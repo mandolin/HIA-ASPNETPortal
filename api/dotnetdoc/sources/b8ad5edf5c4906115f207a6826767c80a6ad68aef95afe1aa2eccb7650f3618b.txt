@@ -1,0 +1,4 @@
+        public static bool IsProtectedAdministrationTabName(string tabName)
+        {
+            return IsProtectedAdministrationTabName(tabName, null);
+        }

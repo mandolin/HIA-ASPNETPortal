@@ -1,0 +1,13 @@
+        public void UpdateTabOrder(int tabId, int tabOrder)
+        {
+            // <lang>
+            //   <zh-CN>排序按钮通常连续触发；每次写入后刷新快照，避免下一次移动基于旧顺序计算。</zh-CN>
+            //   <en>Ordering buttons are often triggered consecutively; refreshing after each write prevents the next move from being calculated from stale ordering.</en>
+            // </lang>
+            TabItem tabRow = _tabs.Single(i => i.TabId == tabId);
+
+            tabRow.TabOrder = tabOrder;
+
+            _context.SaveChanges();
+            _tabs = _context.Tabs.ToList();
+        }

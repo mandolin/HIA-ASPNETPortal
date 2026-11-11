@@ -1,0 +1,30 @@
+        private static bool ExistsForUpdate(SqlConnection connection, SqlTransaction transaction, string packageId)
+        {
+            // <lang>
+            //   <zh-CN>存在性命令显式绑定写入事务，确保锁定读取与随后 update/insert 共享同一隔离边界。</zh-CN>
+            //   <en>Bind the existence command explicitly to the write transaction so the locked read and following update/insert share one isolation boundary.</en>
+            // </lang>
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.Transaction = transaction;
+
+                // <lang>
+                //   <zh-CN>UPDLOCK/HOLDLOCK 保护同一包标识的判断到提交；包标识仍以参数传入，不以内联文本改变锁定查询。</zh-CN>
+                //   <en>UPDLOCK/HOLDLOCK protects the decision for the same package identifier through commit; the package identifier remains a parameter and never changes the locked query through inline text.</en>
+                // </lang>
+                command.CommandText = @"
+SELECT CASE WHEN EXISTS
+(
+    SELECT 1
+    FROM [dbo].[PortalCfg_ModulePackageStates] WITH (UPDLOCK, HOLDLOCK)
+    WHERE [PackageId] = @PackageId
+) THEN 1 ELSE 0 END;";
+                AddTextParameter(command, "@PackageId", 100, packageId, string.Empty);
+
+                // <lang>
+                //   <zh-CN>只把受控 CASE 标量转换为分支事实；它不读取包 manifest、Profile 或模块文件，也不泄露数据库行内容。</zh-CN>
+                //   <en>Convert only the controlled CASE scalar to the branch fact; it reads no package manifest, profile, or module file and exposes no database row content.</en>
+                // </lang>
+                return Convert.ToInt32(command.ExecuteScalar()) == 1;
+            }
+        }

@@ -1,0 +1,43 @@
+    public sealed class PortalModuleStyleResource
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个已验证模块包 CSS 资源引用。</zh-CN>
+        ///   <en>Creates a CSS resource reference for a validated module package.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="packageId"><l zh-CN="catalog 传入的稳定包标识；为保持既有 DTO 回退，null 会保留为空字符串。" en="Stable package identifier supplied by the catalog; null is retained as an empty string to preserve the existing DTO fallback." /></param>
+        /// <param name="virtualPath"><l zh-CN="catalog 从已验证目录和已声明 CSS 资源组成的站内虚拟路径；为保持既有 DTO 回退，null 会保留为空字符串。" en="Site-local virtual path composed by the catalog from a validated directory and declared CSS resource; null is retained as an empty string to preserve the existing DTO fallback." /></param>
+        internal PortalModuleStyleResource(string packageId, string virtualPath)
+        {
+            // <lang>
+            //   <zh-CN>稳定包标识仅用于把输出样式归属到 catalog 已解析的包；空值兼容旧调用方，且不在此处推断授权或包存在性。</zh-CN>
+            //   <en>The stable package identifier only associates the output style with the package resolved by the catalog; an empty value preserves caller compatibility and does not infer authorization or package existence here.</en>
+            // </lang>
+            PackageId = packageId ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>虚拟路径是页面注入器随后解析的站内引用；其 manifest/路径信任已由上游建立，本 DTO 不进行第二次路径处理。</zh-CN>
+            //   <en>The virtual path is a site-local reference later resolved by the page injector; its manifest and path trust were established upstream, so this DTO performs no second path transformation.</en>
+            // </lang>
+            VirtualPath = virtualPath ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>产出样式所属的稳定模块包标识。</zh-CN>
+        ///   <en>Stable module-package identifier that owns the output style.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks><l zh-CN="该值用于归属和诊断关联，不是当前请求的授权断言。" en="This value supports ownership and diagnostic association; it is not an authorization assertion for the current request." /></remarks>
+        public string PackageId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可由当前应用虚拟目录解析的站内 CSS 路径。</zh-CN>
+        ///   <en>Site-local CSS path resolvable through the current application virtual directory.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks><l zh-CN="它来自 catalog 的受信任资源集合，不表示已经写入页面 Head。" en="It originates from the catalog's trusted resource set and does not mean it has already been written to the page Head." /></remarks>
+        public string VirtualPath { get; private set; }
+    }

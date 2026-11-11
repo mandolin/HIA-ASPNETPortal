@@ -1,0 +1,6 @@
+            <%--
+            <lang>
+              <zh-CN>ResultLabel 由服务器写入结果和 schema 状态提示；提示文本不构成数据存在、权限或迁移成功的客户端证明。</zh-CN>
+              <en>The server writes result and schema-status messaging to ResultLabel; the text is not client proof of data existence, authorization, or transition success.</en>
+            </lang>
+            --%>

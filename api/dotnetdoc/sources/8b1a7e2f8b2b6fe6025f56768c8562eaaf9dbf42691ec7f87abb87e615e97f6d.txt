@@ -1,0 +1,5 @@
+        internal static string Module_Name_ID_32 {
+            get {
+                return ResourceManager.GetString("Module_Name_ID_32", resourceCulture);
+            }
+        }

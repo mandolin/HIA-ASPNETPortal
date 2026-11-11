@@ -1,0 +1,6 @@
+<%@ Page
+    Language="c#"
+    CodeBehind="ThemeSettings.aspx.cs"
+    AutoEventWireup="True"
+    Inherits="ASPNET.StarterKit.Portal.ThemeSettings"
+    MasterPageFile="~/Default.master" %>

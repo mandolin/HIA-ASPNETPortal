@@ -1,0 +1,94 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrecentrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrecentrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
+      "sourcePath": "src/Portal/DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrecentrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationrecent-976a7f81.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.applicationcode",
+      "kind": "entry",
+      "label": "ApplicationCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.applicationcode",
+      "sourcePath": "src/Portal/DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrecentrow.applicationcode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationrecent-5d5ee777.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.applicationstatus",
+      "kind": "entry",
+      "label": "ApplicationStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.applicationstatus",
+      "sourcePath": "src/Portal/DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrecentrow.applicationstatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationrecent-282bc3e4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.reviewcomment",
+      "kind": "entry",
+      "label": "ReviewComment",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.reviewcomment",
+      "sourcePath": "src/Portal/DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrecentrow.reviewcomment",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationrecent-be348f5d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.submittedutctext",
+      "kind": "entry",
+      "label": "SubmittedUtcText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.submittedutctext",
+      "sourcePath": "src/Portal/DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrecentrow.submittedutctext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationrecent-21d1ad82.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrecentrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.title",
+      "kind": "entry",
+      "label": "Title",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrecentrow.title",
+      "sourcePath": "src/Portal/DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrecentrow.title",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationrecent-eead97e2.html"
+    }
+  ]
+}

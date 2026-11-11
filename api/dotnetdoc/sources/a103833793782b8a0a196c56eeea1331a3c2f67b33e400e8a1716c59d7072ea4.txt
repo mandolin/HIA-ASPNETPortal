@@ -1,0 +1,4 @@
+        private bool HasEmployeeCodeSignInTables()
+        {
+            return HasTable(EmployeeTableName) && HasTable(EmployeeBindingTableName);
+        }

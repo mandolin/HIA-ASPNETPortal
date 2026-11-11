@@ -1,0 +1,14 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeView))
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                BindThemeLists();
+                BindTabs();
+                BindStatuses();
+            }
+        }

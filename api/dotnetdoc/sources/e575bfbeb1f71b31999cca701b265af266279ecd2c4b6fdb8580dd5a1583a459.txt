@@ -1,0 +1,19 @@
+        private void DisableForm(string message)
+        {
+            // <lang>
+            //   <zh-CN>禁用所有会改变员工主数据的控件；只保留低敏提示，不清空已加载的只读上下文。</zh-CN>
+            //   <en>Disable every control that could change employee master data while retaining the loaded read-only context and a low-sensitivity message.</en>
+            // </lang>
+            TitleLabel.Text = lang.Admin_EmployeeEdit_TitlePage;
+            SaveButton.Enabled = false;
+            EmployeeCodeTextBox.Enabled = false;
+            DisplayNameTextBox.Enabled = false;
+            PreferredNameTextBox.Enabled = false;
+            WorkEmailTextBox.Enabled = false;
+            OrganizationUnitList.Enabled = false;
+            EmploymentStatusList.Enabled = false;
+            JoinedUtcTextBox.Enabled = false;
+            LeftUtcTextBox.Enabled = false;
+            SourceSystemTextBox.Enabled = false;
+            ShowMessage(message);
+        }

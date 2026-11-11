@@ -1,0 +1,8 @@
+        protected bool HasEmail(object value)
+        {
+            // <lang>
+            //   <zh-CN>是否显示邮件链接与实际 href 生成使用同一 helper，避免空白邮箱产生可见但无效的链接。</zh-CN>
+            //   <en>Mail-link visibility and href generation use the same helper, avoiding visible but invalid links for blank email values.</en>
+            // </lang>
+            return !string.IsNullOrEmpty(GetMailToUrl(value));
+        }

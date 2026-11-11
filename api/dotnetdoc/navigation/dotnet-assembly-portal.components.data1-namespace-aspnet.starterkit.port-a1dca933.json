@@ -1,0 +1,64 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilderdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilderdb:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilderdb:interface:t-aspnet.starterkit.portal.iformbuilderdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IFormBuilderDb",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilderdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
+      "sourcePath": "src/Portal.Components.Data1/FormBuilderDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.formbuilderdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.-ctor-aspne-7f0d1745.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilderdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.isschemaavailable",
+      "sourcePath": "src/Portal.Components.Data1/FormBuilderDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.formbuilderdb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.isschemaava-d234ce77.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuilderdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "kind": "entry",
+      "label": "Submit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.formbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "sourcePath": "src/Portal.Components.Data1/FormBuilderDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.formbuilderdb.submit-aspnet.starterkit.portal.formbuildersubmission",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilderdb.submit-aspn-519a7cbf.html"
+    }
+  ]
+}

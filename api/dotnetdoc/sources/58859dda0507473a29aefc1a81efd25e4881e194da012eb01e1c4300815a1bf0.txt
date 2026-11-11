@@ -1,0 +1,27 @@
+        public IUserRegistrationInfo GetRegistrationInfo(int userId)
+        {
+            if (!HasRegistrationTable())
+            {
+                return CreateLegacyRegistrationInfo(userId, "LegacyNoTable");
+            }
+
+            var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
+            if (registration == null)
+            {
+                return CreateLegacyRegistrationInfo(userId, "LegacyNoRecord");
+            }
+
+            return new UserRegistrationInfo(
+                registration.UserId,
+                registration.Status,
+                registration.RequiresApproval,
+                registration.EmployeeCode,
+                registration.InviteCode,
+                registration.RegisteredUtc,
+                registration.ApprovedUtc,
+                registration.ApprovedBy,
+                registration.RejectedUtc,
+                registration.RejectedBy,
+                registration.ReviewNote,
+                "RegistrationMetadata");
+        }

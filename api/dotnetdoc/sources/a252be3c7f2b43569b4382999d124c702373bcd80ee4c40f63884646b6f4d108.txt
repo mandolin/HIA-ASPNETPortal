@@ -1,0 +1,5 @@
+        internal static string Admin_WorkItems_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_MessageSchemaUnavailable", resourceCulture);
+            }
+        }

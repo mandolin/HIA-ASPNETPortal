@@ -1,0 +1,30 @@
+        private static bool HasTraversalSegment(string value)
+        {
+            // <lang>
+            //   <zh-CN>先去除查询串和片段标识，只对路径部分做解码与遍历检查。</zh-CN>
+            //   <en>Remove query and fragment portions first, then decode and inspect only the path.</en>
+            // </lang>
+            string path = value.Split(new[] { '?', '#' }, 2)[0];
+            try
+            {
+                path = Uri.UnescapeDataString(path);
+            }
+            catch (UriFormatException)
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>按统一斜杠切分路径段，避免反斜杠伪装成合法层级。</zh-CN>
+            //   <en>Split on normalized slashes so a backslash cannot disguise a path hierarchy.</en>
+            // </lang>
+            foreach (string segment in path.Replace('\\', '/').Split('/'))
+            {
+                if (string.Equals(segment, "..", StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }

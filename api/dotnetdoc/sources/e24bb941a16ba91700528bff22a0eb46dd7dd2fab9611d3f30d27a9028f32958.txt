@@ -1,0 +1,7 @@
+        private bool EnsureCanViewRequests()
+        {
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+        }

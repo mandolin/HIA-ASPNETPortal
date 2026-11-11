@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>模块目录页只重构展示壳，包注册、启停和预检命令保持既有安全边界。</zh-CN>
+        <en>The module catalog page only rebuilds the presentation shell; package registration, enable/disable, and preflight commands keep their existing security boundary.</en>
+      </lang>
+    --%>

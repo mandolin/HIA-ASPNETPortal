@@ -1,0 +1,9 @@
+        private void BindList()
+        {
+            // <lang>
+            //   <zh-CN>只读取当前模块的顶级讨论消息，回复列表由展开项的数据绑定阶段单独读取。</zh-CN>
+            //   <en>Reads only top-level discussion messages for the current module; replies are loaded separately while binding the expanded item.</en>
+            // </lang>
+            TopLevelList.DataSource = DiscussionDB.GetTopLevelMessages(ModuleId);
+            TopLevelList.DataBind();
+        }

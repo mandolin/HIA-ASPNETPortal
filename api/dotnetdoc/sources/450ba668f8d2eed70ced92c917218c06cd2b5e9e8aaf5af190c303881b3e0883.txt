@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>P6.2 昵称是可选展示资料，保存策略由 code-behind 统一处理。</zh-CN>
+                    <en>The P6.2 nickname is optional display profile data and its save policy is handled centrally by code-behind.</en>
+                  </lang>
+                --%>

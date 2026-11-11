@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>P7.4 使用现代分栏容器；CSS 提供现代浏览器增强与旧浏览器基本块级回退。</zh-CN>
+            <en>P7.4 uses modern pane containers; CSS provides modern enhancement and basic block fallback for old browsers.</en>
+        </lang>
+    --%>

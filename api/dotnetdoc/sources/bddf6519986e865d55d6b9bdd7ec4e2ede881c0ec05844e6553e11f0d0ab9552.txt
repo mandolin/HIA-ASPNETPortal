@@ -1,0 +1,8 @@
+        public static bool AreAdminLogDetailsEnabled()
+        {
+            // <lang>
+            //   <zh-CN>只返回详情功能开关，不验证当前用户、不会加载诊断详情，也不替代页面层的授权门禁。</zh-CN>
+            //   <en>Return only the details feature flag; do not validate the current user, load diagnostics detail, or replace page-layer authorization gates.</en>
+            // </lang>
+            return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.DiagnosticsAllowAdminDetailView);
+        }

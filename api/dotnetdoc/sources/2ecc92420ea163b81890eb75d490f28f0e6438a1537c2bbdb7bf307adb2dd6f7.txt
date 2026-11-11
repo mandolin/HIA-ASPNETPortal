@@ -1,0 +1,69 @@
+        public int AddUser(string fullName, string email, string password)
+        {
+            string normalizedPassword = password ?? string.Empty;
+            PortalPasswordRejection passwordRejection;
+            if (!string.IsNullOrEmpty(normalizedPassword) &&
+                !PortalPasswordPolicy.TryValidate(
+                    normalizedPassword,
+                    BuildPasswordPolicyContextTerms(fullName, email),
+                    out passwordRejection))
+            {
+                return -1;
+            }
+
+            if (!string.IsNullOrEmpty(normalizedPassword) && !HasCredentialTables())
+            {
+                return -1;
+            }
+
+            try
+            {
+                UserItem item;
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    item = new UserItem
+                    {
+                        Name = fullName,
+                        Email = email,
+                        // <lang>
+                        //   <zh-CN>新用户不再生成 MD5；旧字段只保留既有数据的迁移样本。</zh-CN>
+                        //   <en>New users no longer receive MD5; the legacy column remains only for existing data migration samples.</en>
+                        // </lang>
+                        Password = string.Empty
+                    };
+
+                    _context.Users.Add(item);
+                    _context.SaveChanges();
+
+                    EnsureSecurityState(item.UserId, "UserCreated");
+                    TryEnsureUserProfile(
+                        item.UserId,
+                        item.Name,
+                        item.Email,
+                        PortalUserProfileStatuses.Active,
+                        "system-admin");
+                    if (!string.IsNullOrEmpty(normalizedPassword))
+                    {
+                        UpsertCredential(item.UserId, normalizedPassword, null, null, false, null);
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+
+                // <lang>
+                //   <zh-CN>管理员或旧入口创建的用户默认已批准；缺少扩展表时保持旧行为。</zh-CN>
+                //   <en>Users created by administration or legacy entry points are approved by default; missing extension tables preserve legacy behavior.</en>
+                // </lang>
+                TryEnsureApprovedRegistration(item.UserId, "system-admin");
+                return item.UserId;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>保持旧接口约定，预期写入失败用 -1 表达，不在此记录敏感输入。</zh-CN>
+                //   <en>Preserve the legacy interface contract: expected write failures return -1 and do not log sensitive input here.</en>
+                // </lang>
+                return -1;
+            }
+        }

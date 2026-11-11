@@ -1,0 +1,19 @@
+        internal PortalModuleProfileSnapshot(
+            string activeProfile,
+            IList<string> allowedPackageIds,
+            IList<string> invalidEntries)
+        {
+            // <lang>
+            //   <zh-CN>将构造输入复制到只读集合，避免解析器完成后外部可变列表改变已发布的 Profile 结论。</zh-CN>
+            //   <en>Copy constructor inputs into read-only collections so externally mutable lists cannot alter a published Profile conclusion after resolution completes.</en>
+            // </lang>
+            ActiveProfile = activeProfile ?? string.Empty;
+            AllowedPackageIds = new List<string>(allowedPackageIds ?? new List<string>()).AsReadOnly();
+            InvalidEntries = new List<string>(invalidEntries ?? new List<string>()).AsReadOnly();
+
+            // <lang>
+            //   <zh-CN>成员集合以公开快照为唯一来源并使用大小写不敏感比较，保证列表与 IsPackageAllowed 的可见结论一致。</zh-CN>
+            //   <en>Build the membership set solely from the public snapshot with case-insensitive comparison so the list and IsPackageAllowed expose consistent conclusions.</en>
+            // </lang>
+            allowedPackageSet = new HashSet<string>(AllowedPackageIds, StringComparer.OrdinalIgnoreCase);
+        }

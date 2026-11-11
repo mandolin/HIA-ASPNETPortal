@@ -1,0 +1,56 @@
+        public static bool TryNormalizeTrustedDeploymentResourcePath(string candidate, HttpRequest request, out string normalizedPath)
+        {
+            normalizedPath = string.Empty;
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                return false;
+            }
+
+            string value = candidate.Trim();
+            if (value.Length > 2048 || ContainsControlCharacter(value) || value.IndexOf('?') >= 0 || value.IndexOf('#') >= 0 ||
+                value.StartsWith("//", StringComparison.Ordinal) || value.StartsWith("\\\\", StringComparison.Ordinal) ||
+                value.IndexOf('\\') >= 0 || HasTraversalSegment(value))
+            {
+                return false;
+            }
+
+            Uri absoluteUri;
+            if (Uri.TryCreate(value, UriKind.Absolute, out absoluteUri))
+            {
+                return false;
+            }
+
+            if (value.StartsWith("~/", StringComparison.Ordinal))
+            {
+                normalizedPath = value;
+                return true;
+            }
+
+            if (value.StartsWith("/", StringComparison.Ordinal))
+            {
+                if (!IsCurrentApplicationPath(value, request))
+                {
+                    return false;
+                }
+
+                normalizedPath = value;
+                return true;
+            }
+
+            if (value.StartsWith("~", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>兼容旧配置中的相对路径，但保存时统一为应用相对路径，避免其受当前页面目录影响。</zh-CN>
+            //   <en>Accept legacy relative paths, but normalize them to application-relative paths so they do not depend on the current page directory.</en>
+            // </lang>
+            if (value.StartsWith("./", StringComparison.Ordinal))
+            {
+                value = value.Substring(2);
+            }
+
+            normalizedPath = "~/" + value;
+            return true;
+        }

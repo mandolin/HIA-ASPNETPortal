@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>讨论列表仍使用 DataList 和原展开/折叠命令模型，只把输出改为主题化线程列表，以保留旧回发行为和现有 code-behind 事件绑定。</zh-CN>
+  <en>The discussion list keeps DataList plus the original expand/collapse command model while rendering a themed thread list, preserving legacy postback behavior and existing code-behind event bindings.</en>
+</lang>
+--%>

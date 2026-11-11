@@ -1,0 +1,8 @@
+        public static bool TryValidate(string password, out PortalPasswordRejection rejection)
+        {
+            // <lang>
+            //   <zh-CN>将无上下文场景委托给完整入口，保持所有长度、类别和字典判断使用同一实现。</zh-CN>
+            //   <en>Delegate the no-context scenario to the complete entry point so length, category, and dictionary checks use one implementation.</en>
+            // </lang>
+            return TryValidate(password, null, out rejection);
+        }

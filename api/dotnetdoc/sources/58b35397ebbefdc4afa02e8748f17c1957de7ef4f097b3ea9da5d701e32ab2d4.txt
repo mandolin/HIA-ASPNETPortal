@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>桌面门户页负责读取当前 Tab 的布局配置，动态实例化各模块用户控件，并注入到对应栏位容器中。</zh-CN>
+        <en>The desktop portal page reads the current Tab layout configuration, dynamically instantiates module user controls, and injects them into the matching pane containers.</en>
+    </lang>
+--%>

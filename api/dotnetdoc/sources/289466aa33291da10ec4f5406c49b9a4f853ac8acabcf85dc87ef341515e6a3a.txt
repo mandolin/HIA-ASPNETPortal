@@ -1,0 +1,122 @@
+        public static bool TryGetTrustedPackage(
+            string themeName,
+            out PortalThemePackage package,
+            out string reason)
+        {
+            // <lang>
+            //   <zh-CN>先清空 out 结果，确保任一失败分支不会泄露上一次调用的包或原因。</zh-CN>
+            //   <en>Clear out results first so every failure branch cannot leak a package or reason from a previous call.</en>
+            // </lang>
+            package = null;
+            reason = string.Empty;
+
+            if (!IsValidThemeName(themeName))
+            {
+                reason = "Theme name contains invalid characters.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>主题根目录是后续物理路径检查的信任边界，目录缺失时保持不可用而非回退到任意路径。</zh-CN>
+            //   <en>The theme root is the trust boundary for later physical-path checks; when unavailable, remain unavailable instead of falling back to an arbitrary path.</en>
+            // </lang>
+            string rootPath = HostingEnvironment.MapPath("~/App_Themes");
+            if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
+            {
+                reason = "Theme root is unavailable.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>通过根目录内子路径 helper 解析包目录；越界异常转换为不含路径的安全原因。</zh-CN>
+            //   <en>Resolve the package directory through the root-contained child-path helper; convert escape exceptions into a path-free safe reason.</en>
+            // </lang>
+            string packagePath;
+            try
+            {
+                packagePath = GetChildPath(rootPath, themeName);
+            }
+            catch (InvalidOperationException)
+            {
+                reason = "Theme directory is outside the allowed root.";
+                return false;
+            }
+
+            if (!Directory.Exists(packagePath))
+            {
+                reason = "Theme directory does not exist.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>固定 manifest 和 Default.css 入口，只有两者都存在才进入内容解析。</zh-CN>
+            //   <en>Use fixed manifest and Default.css entry points; parse content only when both exist.</en>
+            // </lang>
+            string manifestPath = Path.Combine(packagePath, "theme.json");
+            string defaultCssPath = Path.Combine(packagePath, "Default.css");
+            if (!File.Exists(manifestPath) || !File.Exists(defaultCssPath))
+            {
+                reason = "theme.json or Default.css is missing.";
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>以 UTF-8 读取低敏 manifest；解析和契约失败统一转换为无路径的无效包结果。</zh-CN>
+                //   <en>Read the low-sensitivity manifest as UTF-8; parsing or contract failures become a path-free invalid-package result.</en>
+                // </lang>
+                JObject manifest = JObject.Parse(File.ReadAllText(manifestPath, Encoding.UTF8));
+                if (!IsSchemaVersionSupported(manifest))
+                {
+                    reason = "Theme manifest schemaVersion is unsupported.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>manifest 名称必须与已经验证的目录名精确一致，防止包投影与物理目录错配。</zh-CN>
+                //   <en>The manifest name must exactly match the already validated directory name so the package projection cannot diverge from its physical directory.</en>
+                // </lang>
+                string manifestName = ReadRequiredString(manifest, "name", 64);
+                if (!string.Equals(themeName, manifestName, StringComparison.Ordinal))
+                {
+                    reason = "Theme manifest name does not match its directory.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>读取展示、版本、兼容性和资源投影；这些值仅用于已验证包的低敏元数据，不改变主题加载授权。</zh-CN>
+                //   <en>Read display, version, compatibility, and resource projections; these values are low-sensitivity metadata for a validated package and do not grant theme-loading authorization.</en>
+                // </lang>
+                string displayName = ReadRequiredString(manifest, "displayName", 100);
+                string version = ReadRequiredString(manifest, "version", 64);
+                string minimumPortalVersion = ReadOptionalString(manifest, "minimumPortalVersion", 64);
+                bool inheritsDefault = ReadOptionalBoolean(manifest, "inheritsDefault");
+                IList<string> resources = ReadAndValidateResources(manifest, packagePath);
+
+                if (manifest["script"] != null || manifest["scripts"] != null ||
+                    manifest["externalUrl"] != null || manifest["externalUrls"] != null)
+                {
+                    reason = "Theme manifest declares a prohibited script or external URL.";
+                    return false;
+                }
+
+                package = new PortalThemePackage(
+                    manifestName,
+                    displayName,
+                    version,
+                    minimumPortalVersion,
+                    inheritsDefault,
+                    resources);
+                return true;
+            }
+            catch (Exception exception) when (
+                exception is IOException ||
+                exception is UnauthorizedAccessException ||
+                exception is Newtonsoft.Json.JsonException ||
+                exception is InvalidOperationException)
+            {
+                reason = "Theme manifest is invalid.";
+                return false;
+            }
+        }

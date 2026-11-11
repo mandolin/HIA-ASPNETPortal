@@ -1,0 +1,11 @@
+        private static void EnsureDefinition(PortalSettingDefinition definition)
+        {
+            // <lang>
+            //   <zh-CN>用固定参数名抛出受控契约异常，避免后续空引用并且不包含候选设置值。</zh-CN>
+            //   <en>Throw a controlled contract exception with the fixed parameter name to avoid later null dereference and include no candidate setting value.</en>
+            // </lang>
+            if (definition == null)
+            {
+                throw new ArgumentNullException("definition");
+            }
+        }

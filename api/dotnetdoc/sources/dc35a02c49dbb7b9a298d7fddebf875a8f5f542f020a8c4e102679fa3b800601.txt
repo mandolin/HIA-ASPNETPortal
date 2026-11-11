@@ -1,0 +1,8 @@
+        public static bool HasSignatureMaterial(string publicKeyXml, string signatureBase64)
+        {
+            // <lang>
+            //   <zh-CN>空白即视为未提供；不做 Base64 预校验，具体有效性由 TryVerifySignature 判定。</zh-CN>
+            //   <en>Blank means absent; no Base64 pre-validation here, as TryVerifySignature owns actual validity.</en>
+            // </lang>
+            return !string.IsNullOrWhiteSpace(publicKeyXml) && !string.IsNullOrWhiteSpace(signatureBase64);
+        }

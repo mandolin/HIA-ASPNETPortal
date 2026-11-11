@@ -1,0 +1,400 @@
+    public partial class Roles : PortalModuleControl<Roles>
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的当前门户 Tab 标识，用于角色管理回跳上下文。</zh-CN>
+        ///   <en>The optional current-Portal Tab id used to preserve role-management return context.</en>
+        /// </lang>
+        /// </summary>
+        private int tabId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的当前门户 Tab 索引，用于角色成员页安全回跳。</zh-CN>
+        ///   <en>The optional current-Portal Tab index used for safe return navigation to membership management.</en>
+        /// </lang>
+        /// </summary>
+        private int tabIndex;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>角色数据访问依赖。</zh-CN>
+        ///   <en>Role data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IRolesDb RolesDB { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 数据访问依赖。</zh-CN>
+        ///   <en>Tab data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public ITabsDb TabsConfig { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块实例数据访问依赖。</zh-CN>
+        ///   <en>Module-instance data-access dependency.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public new IModulesDb ModulesConfig { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>授权、读取可选导航参数并在首次请求绑定当前门户角色。</zh-CN>
+        ///   <en>Authorizes, reads optional navigation parameters, and binds current-Portal roles on the initial request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>权限和导航参数是角色列表、创建、编辑、删除及成员入口的共同门禁。</zh-CN>
+            //   <en>Permission and navigation parameters gate role listing, creation, editing, deletion, and membership entry points.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在首次请求绑定角色列表，避免回发覆盖正在编辑的控件状态。</zh-CN>
+            //   <en>Bind the role list only on the initial request so postback editing state is not overwritten.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个当前门户内唯一的默认角色，并进入编辑状态。</zh-CN>
+        ///   <en>Creates a unique default role in the current Portal and enters edit mode.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
+        protected void AddRole_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>创建事件再次验证权限和导航上下文，防止陈旧模块状态触发新增。</zh-CN>
+            //   <en>Revalidate permission and navigation context before creation so stale module state cannot trigger an add.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>从当前门户读取角色集合，生成唯一默认名称后写入角色定义。</zh-CN>
+                //   <en>Read current-Portal roles, generate a unique default name, and persist the new role definition.</en>
+                // </lang>
+                PortalSettings portalSettings = PortalContext.GetPortalSettings();
+                // <lang>
+                //   <zh-CN>默认名称生成器只在当前门户集合内保证唯一。</zh-CN>
+                //   <en>The default-name generator guarantees uniqueness only within the current Portal collection.</en>
+                // </lang>
+                string roleName = CreateUniqueDefaultRoleName(RolesDB.GetPortalRoles(portalSettings.PortalId));
+                // <lang>
+                //   <zh-CN>保存成功后记录角色创建审计并刷新列表进入编辑状态。</zh-CN>
+                //   <en>After persistence succeeds, audit role creation and refresh the list in edit state.</en>
+                // </lang>
+                int roleId = RolesDB.AddRole(portalSettings.PortalId, roleName);
+                PortalOperationAudit.Record(
+                    "RoleAdministration",
+                    "Create",
+                    "Role",
+                    roleId.ToString(),
+                    "Created role.",
+                    Context);
+                rolesList.EditItemIndex = rolesList.Items.Count;
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>创建异常写入诊断并只显示事件编号。</zh-CN>
+                //   <en>Record creation failures through diagnostics and display only the event id.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Roles.Add",
+                    "Adding a role failed.",
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Roles_MessageCreateFailed, eventId));
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理角色编辑、改名、删除和成员管理命令。</zh-CN>
+        ///   <en>Handles role edit, rename, delete, and membership-management commands.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>包含命令和 DataList 项索引的事件数据。</zh-CN>
+        ///   <en>Event data containing the command and DataList item index.</en>
+        /// </l>
+        /// </param>
+        protected void RolesList_ItemCommand(object sender, DataListCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每个命令先验证页面权限、导航参数和 DataList 角色归属。</zh-CN>
+            //   <en>Validate page permission, navigation parameters, and DataList role ownership before every command.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>DataList 键必须解析为当前门户角色，避免篡改索引操作其他角色。</zh-CN>
+            //   <en>The DataList key must resolve to a current-Portal role so a tampered index cannot target another role.</en>
+            // </lang>
+            IRoleItem role;
+            if (!TryGetRoleFromDataList(e, out role))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>edit 命令只切换当前行编辑状态并刷新展示，不写入角色。</zh-CN>
+            //   <en>The edit command only switches the current row to edit mode and refreshes display without persisting a role.</en>
+            // </lang>
+            if (string.Equals(e.CommandName, "edit", StringComparison.OrdinalIgnoreCase))
+            {
+                rolesList.EditItemIndex = e.Item.ItemIndex;
+                BindData();
+                return;
+            }
+
+            if (string.Equals(e.CommandName, "apply", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(e.CommandName, "members", StringComparison.OrdinalIgnoreCase))
+            {
+                // <lang>
+                //   <zh-CN>apply/members 共用名称规范化和改名流程，失败时不继续导航或刷新。</zh-CN>
+                //   <en>apply and members share the rename normalization flow; failure stops navigation and refresh.</en>
+                // </lang>
+                TextBox roleNameTextBox = e.Item.FindControl("roleName") as TextBox;
+                if (roleNameTextBox == null || !TryRenameRole(role, roleNameTextBox.Text))
+                {
+                    return;
+                }
+
+                if (string.Equals(e.CommandName, "members", StringComparison.OrdinalIgnoreCase))
+                {
+                    // <lang>
+                    //   <zh-CN>成员入口只携带已验证角色和兼容导航参数，并交给安全导航策略。</zh-CN>
+                    //   <en>The membership entry carries only the verified role and compatibility navigation parameters through safe navigation.</en>
+                    // </lang>
+                    string url = ResolveUrl(
+                        "~/Admin/SecurityRoles.aspx?roleId=" + role.RoleId +
+                        "&tabindex=" + tabIndex +
+                        "&tabid=" + tabId);
+                    PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, url);
+                    return;
+                }
+
+                rolesList.EditItemIndex = -1;
+                BindData();
+                return;
+            }
+
+            if (string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                // <lang>
+                //   <zh-CN>删除命令交由 DeleteRole 统一执行管理员保护、成员和引用检查。</zh-CN>
+                //   <en>Delegate delete to DeleteRole so administrator, member, and reference guards stay centralized.</en>
+                // </lang>
+                DeleteRole(role);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取角色后台在模块编辑框架中需要保留的 Tab 导航参数。</zh-CN>
+        ///   <en>Reads Tab navigation parameters that the role administration control must preserve inside the module-editing frame.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>参数缺失或合法时返回 <c>true</c>；非法时已重定向并返回 <c>false</c>。</zh-CN>
+        ///   <en><c>true</c> when parameters are absent or valid; <c>false</c> after redirecting for invalid input.</en>
+        /// </l>
+        /// </returns>
+        private bool TryReadNavigationParameters()
+        {
+            // <lang>
+            //   <zh-CN>两个可选参数分别保留 Tab 标识和索引；任一非法值都会阻断后续命令。</zh-CN>
+            //   <en>Read the optional Tab id and index together; any invalid value blocks subsequent commands.</en>
+            // </lang>
+            return TryReadOptionalPositiveParameter("tabid", out tabId) &&
+                   TryReadOptionalPositiveParameter("tabindex", out tabIndex);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取一个可选的正整数导航参数。</zh-CN>
+        ///   <en>Reads one optional positive-integer navigation parameter.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="parameterName">
+        /// <l>
+        ///   <zh-CN>请求参数名称。</zh-CN>
+        ///   <en>Request parameter name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>解析后的数值；参数缺失时为 0。</zh-CN>
+        ///   <en>Parsed value, or 0 when the parameter is absent.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>参数缺失或合法时返回 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the parameter is absent or valid.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>非法参数不回显原始值，直接进入统一的编辑拒绝页，避免把后台导航参数变成探测入口。</zh-CN>
+        ///   <en>Invalid values are not echoed; the request moves to the shared edit-denied page so administration navigation parameters do not become a probing surface.</en>
+        /// </lang>
+        /// </remarks>
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            // <lang>
+            //   <zh-CN>缺失参数保留兼容默认值 0；存在参数必须通过正整数策略。</zh-CN>
+            //   <en>Keep the compatibility default of 0 when absent; a supplied value must pass positive-integer validation.</en>
+            // </lang>
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非法导航参数统一拒绝，不将原始值回显到后台页面。</zh-CN>
+            //   <en>Reject invalid navigation input consistently without echoing the raw value into the administration page.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从 DataList 命令上下文中解析并验证当前门户角色。</zh-CN>
+        ///   <en>Resolves and validates the current-Portal role from the DataList command context.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>包含 DataList 项和 DataKeys 的命令事件数据。</zh-CN>
+        ///   <en>Command event data containing the DataList item and DataKeys.</en>
+        /// </l>
+        /// </param>
+        /// <param name="role">
+        /// <l>
+        ///   <zh-CN>解析出的当前门户角色；失败时为 <c>null</c>。</zh-CN>
+        ///   <en>Resolved current-Portal role, or <c>null</c> on failure.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>角色存在且属于当前门户时返回 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the role exists and belongs to the current Portal.</en>
+        /// </l>
+        /// </returns>
+        private bool TryGetRoleFromDataList(DataListCommandEventArgs e, out IRoleItem role)
+        {
+            // <lang>
+            //   <zh-CN>先验证行对象和 DataKeys 索引，再解析非负角色标识。</zh-CN>
+            //   <en>Validate the row and DataKeys index before parsing the non-negative role identifier.</en>
+            // </lang>
+            role = null;
+            // <lang>
+            //   <zh-CN>角色标识来自服务器 DataKeys，不直接信任客户端行文本。</zh-CN>
+            //   <en>The role id comes from server DataKeys rather than trusting client row text.</en>
+            // </lang>
+            int roleId;
+            if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= rolesList.DataKeys.Count ||
+                !PortalNavigationPolicy.TryReadNonNegativeInt32(rolesList.DataKeys[e.Item.ItemIndex].ToString(), out roleId))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>只接受当前门户集合中的角色，阻断跨门户或陈旧角色操作。</zh-CN>
+            //   <en>Accept only a role in the current Portal collection, blocking cross-Portal or stale operations.</en>
+            // </lang>
+            role = FindCurrentPortalRole(roleId);
+            return role != null;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在当前门户角色集合中查找指定角色。</zh-CN>
+        ///   <en>Finds the specified role within the current Portal's role collection.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="roleId">
+        /// <l>
+        ///   <zh-CN>角色标识。</zh-CN>
+        ///   <en>Role identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>匹配角色；不属于当前门户或不存在时为 <c>null</c>。</zh-CN>
+        ///   <en>Matching role, or <c>null</c> when absent or outside the current Portal.</en>
+        /// </l>
+        /// </returns>
+        private IRoleItem FindCurrentPortalRole(int roleId)
+        {
+            // <lang>
+            //   <zh-CN>从当前门户设置读取角色集合，角色名称和成员范围不来自请求参数。</zh-CN>
+            //   <en>Read the role collection from current Portal settings so names and membership scope do not come from request parameters.</en>
+            // </lang>

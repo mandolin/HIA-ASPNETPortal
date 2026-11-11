@@ -1,0 +1,13 @@
+        public static readonly PortalSettingDefinition DiagnosticsRetentionDays =
+            new PortalSettingDefinition(
+                PortalSettingKeys.DiagnosticsRetentionDays,
+                "诊断日志保留天数",
+                "结构化诊断日志保留的天数；写入新事件时每天最多执行一次受限清理。",
+                PortalSettingValueType.Integer,
+                "90",
+                false,
+                true,
+                "Admins",
+                "Diagnostics",
+                minIntegerValue: 1,
+                maxIntegerValue: 3650);

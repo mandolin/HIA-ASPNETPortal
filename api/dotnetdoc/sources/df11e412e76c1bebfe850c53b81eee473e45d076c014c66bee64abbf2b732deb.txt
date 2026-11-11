@@ -1,0 +1,5 @@
+            public IModuleItem FindModuleById(int moduleId)
+            {
+                IModulesDb modules = owner.ModuleInstancesConfig;
+                return modules == null ? null : modules.FindModuleById(moduleId);
+            }

@@ -1,0 +1,1 @@
+        private const int MaximumCacheSeconds = 86400;

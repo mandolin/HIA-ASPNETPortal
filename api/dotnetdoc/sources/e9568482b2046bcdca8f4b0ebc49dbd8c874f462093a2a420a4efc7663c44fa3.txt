@@ -1,0 +1,41 @@
+    public sealed class PortalModulePackageStateWriteResult
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建模块包状态写入结果。</zh-CN>
+        ///   <en>Creates a module-package state write result.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="succeeded"><l zh-CN="状态表事务是否已成功提交；不证明模块已被当前 Profile 允许或实际加载。" en="Whether the state-table transaction committed; it does not prove the module is allowed by the current profile or actually loaded." /></param>
+        /// <param name="message"><l zh-CN="可安全展示给管理员的结果说明；空值归一为稳定空文本。" en="Result text safe to show an administrator; null is normalized to stable empty text." /></param>
+        internal PortalModulePackageStateWriteResult(bool succeeded, string message)
+        {
+            // <lang>
+            //   <zh-CN>该布尔值仅陈述本存储的持久化结果；页面授权、受信任部署校验、Profile gate 和模块加载由其他边界负责。</zh-CN>
+            //   <en>This boolean states only the persistence result of this store; page authorization, trusted-deployment validation, profile gating, and module loading belong to other boundaries.</en>
+            // </lang>
+            Succeeded = succeeded;
+
+            // <lang>
+            //   <zh-CN>消息是可展示的受控输出，空值不保留为 null，避免消费页面将其误作缺少失败处理或回显异常细节。</zh-CN>
+            //   <en>The message is controlled display-safe output; normalize null rather than leaving it as missing failure handling or an opportunity to echo exception detail in a consuming page.</en>
+            // </lang>
+            Message = message ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>状态表写入事务是否成功完成。</zh-CN>
+        ///   <en>Whether the state-table write transaction completed successfully.</en>
+        /// </lang>
+        /// </summary>
+        public bool Succeeded { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可安全展示给管理员的结果说明，不包含连接串、SQL 或诊断异常详情。</zh-CN>
+        ///   <en>Result message safe to show an administrator; it contains no connection-string, SQL, or diagnostic exception detail.</en>
+        /// </lang>
+        /// </summary>
+        public string Message { get; private set; }
+    }

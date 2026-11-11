@@ -1,0 +1,17 @@
+        private static EmployeeProfileCorrectionSubmitRequest NormalizeSubmitRequest(EmployeeProfileCorrectionSubmitRequest request)
+        {
+            request = request ?? new EmployeeProfileCorrectionSubmitRequest();
+            return new EmployeeProfileCorrectionSubmitRequest
+            {
+                UserId = request.UserId,
+                EmployeeId = request.EmployeeId,
+                BindingId = request.BindingId,
+                FieldName = NormalizeFieldName(request.FieldName),
+                ProposedValue = NormalizeText(request.ProposedValue, 512),
+                RequestNote = NormalizeOptionalText(request.RequestNote, 1000),
+                SubmittedUtc = request.SubmittedUtc ?? DateTime.UtcNow,
+                SubmittedBy = string.IsNullOrWhiteSpace(request.SubmittedBy)
+                    ? "system"
+                    : NormalizeText(request.SubmittedBy, 100)
+            };
+        }

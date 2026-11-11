@@ -1,0 +1,4 @@
+        private static string FormatUtc(DateTime value)
+        {
+            return value == DateTime.MinValue ? "(legacy)" : value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'");
+        }

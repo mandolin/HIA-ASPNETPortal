@@ -1,0 +1,32 @@
+        public sealed class NavigationView
+        {
+            /// <summary><lang><zh-CN>非空的展示分组，按词表顺序排列。</zh-CN><en>Non-empty presentation groups in vocabulary order.</en></lang></summary>
+            public IList<GroupSectionView> Sections { get; private set; }
+
+            /// <summary><lang><zh-CN>不属于任何分组的页签，按原顺序平铺展示。</zh-CN><en>Tabs belonging to no group, rendered flat in original order.</en></lang></summary>
+            public IList<GroupTabView> UngroupedTabs { get; private set; }
+
+            /// <summary><lang><zh-CN>别名配置非法、已 fail-closed 回退默认词表时为 true；调用方据此降级为一级平铺。</zh-CN><en>True when alias configuration was invalid and fail-closed fallback to defaults occurred; the caller degrades to flat navigation.</en></lang></summary>
+            public bool Degraded { get; private set; }
+
+            /// <summary><lang><zh-CN>被过滤掉的空分组数量，留作证据（不影响任何页签可见性）。</zh-CN><en>Number of filtered-out empty groups, kept as evidence; it never affects tab visibility.</en></lang></summary>
+            public int EmptySectionCount { get; private set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>构造不可变视图；分组与未分组集合均冻结。</zh-CN>
+            ///   <en>Build an immutable view; both the group and ungrouped collections are frozen.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="sections"><l zh-CN="非空分组序列。" en="Non-empty group sequence." /></param>
+            /// <param name="ungroupedTabs"><l zh-CN="未分组页签序列。" en="Ungrouped tab sequence." /></param>
+            /// <param name="degraded"><l zh-CN="是否因配置非法而降级。" en="Whether invalid configuration caused degradation." /></param>
+            /// <param name="emptySectionCount"><l zh-CN="被过滤的空分组数。" en="Count of filtered empty groups." /></param>
+            public NavigationView(IEnumerable<GroupSectionView> sections, IEnumerable<GroupTabView> ungroupedTabs, bool degraded, int emptySectionCount)
+            {
+                Sections = new ReadOnlyCollection<GroupSectionView>((sections ?? Enumerable.Empty<GroupSectionView>()).ToList());
+                UngroupedTabs = new ReadOnlyCollection<GroupTabView>((ungroupedTabs ?? Enumerable.Empty<GroupTabView>()).ToList());
+                Degraded = degraded;
+                EmptySectionCount = emptySectionCount;
+            }
+        }

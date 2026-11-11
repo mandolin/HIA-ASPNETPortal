@@ -1,0 +1,1 @@
+        public string OrganizationText { get; private set; }

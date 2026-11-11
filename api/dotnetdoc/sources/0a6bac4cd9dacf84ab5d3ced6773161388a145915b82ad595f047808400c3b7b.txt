@@ -1,0 +1,6 @@
+            <%--
+            <lang>
+              <zh-CN>表单动作保持主题按钮 class；提交和取消都回到服务器端事件处理，避免客户端直接改变权限状态。</zh-CN>
+              <en>Form actions keep themed button classes. Submit and cancel both return to server-side event handlers, avoiding client-side permission-state changes.</en>
+            </lang>
+            --%>

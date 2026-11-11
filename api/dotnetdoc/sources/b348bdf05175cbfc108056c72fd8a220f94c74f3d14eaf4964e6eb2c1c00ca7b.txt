@@ -1,0 +1,23 @@
+        public UserProfileInfo(
+            int userId,
+            string legacyName,
+            string loginName,
+            string displayName,
+            string nickname,
+            string preferredEmail,
+            string status,
+            string statusReason,
+            bool isAvailable,
+            string source)
+        {
+            UserId = userId;
+            LegacyName = legacyName ?? string.Empty;
+            LoginName = loginName ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            Nickname = nickname ?? string.Empty;
+            PreferredEmail = preferredEmail ?? string.Empty;
+            Status = status ?? string.Empty;
+            StatusReason = statusReason ?? string.Empty;
+            IsAvailable = isAvailable;
+            Source = source ?? string.Empty;
+        }

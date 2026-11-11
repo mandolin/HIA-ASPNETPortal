@@ -1,0 +1,10 @@
+        private static string NormalizeUpdatedBy(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return "system";
+            }
+
+            string normalized = value.Trim();
+            return normalized.Substring(0, Math.Min(normalized.Length, 100));
+        }

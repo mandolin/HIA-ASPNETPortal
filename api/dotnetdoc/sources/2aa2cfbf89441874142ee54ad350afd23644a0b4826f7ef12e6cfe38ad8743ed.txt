@@ -1,0 +1,21 @@
+        private void BindProfile()
+        {
+            int userId = GetCurrentUserId();
+            EmployeeProfileConfirmationView profile = GetCurrentProfile(userId);
+            if (profile == null)
+            {
+                ProfilePanel.Visible = false;
+                ShowMessage(GetUnavailableMessage(userId));
+                return;
+            }
+
+            ProfilePanel.Visible = true;
+            MessageLabel.Text = string.Empty;
+            EmployeeCodeLabel.Text = EncodeDisplay(profile.EmployeeCode);
+            DisplayNameLabel.Text = EncodeDisplay(profile.DisplayName);
+            PreferredNameLabel.Text = EncodeDisplay(EmptyToNone(profile.PreferredName));
+            WorkEmailLabel.Text = EncodeDisplay(EmptyToNone(profile.WorkEmail));
+            OrganizationLabel.Text = EncodeDisplay(EmptyToNone(profile.OrganizationDisplayName));
+            EmploymentStatusLabel.Text = EncodeDisplay(profile.EmploymentStatus);
+            LastConfirmedLabel.Text = EncodeDisplay(FormatUtc(profile.LastConfirmedUtc));
+        }

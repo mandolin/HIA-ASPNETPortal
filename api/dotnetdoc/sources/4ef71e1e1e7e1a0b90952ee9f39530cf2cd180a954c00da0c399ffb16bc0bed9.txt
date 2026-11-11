@@ -1,0 +1,1 @@
+        public const string EnvironmentVariableName = "HIA_ASPNETPORTAL_CONNSTR_PORTAL";

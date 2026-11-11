@@ -1,0 +1,20 @@
+        public IUserEmployeeBindingInfo GetActiveBindingByEmployeeCode(string employeeCode)
+        {
+            string normalizedEmployeeCode = Normalize(employeeCode);
+            if (string.IsNullOrEmpty(normalizedEmployeeCode) || !IsSchemaAvailable())
+            {
+                return null;
+            }
+
+            try
+            {
+                var row = _context.Database.SqlQuery<UserEmployeeBindingProjection>(
+                    GetActiveBindingSql("[Employee].[EmployeeCode] = @p0"),
+                    normalizedEmployeeCode).SingleOrDefault();
+                return row == null ? null : CreateBindingInfo(row);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }

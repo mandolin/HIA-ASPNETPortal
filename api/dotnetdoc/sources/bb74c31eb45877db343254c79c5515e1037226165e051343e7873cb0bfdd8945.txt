@@ -1,0 +1,1 @@
+        public const int Sha256HexLength = 64;

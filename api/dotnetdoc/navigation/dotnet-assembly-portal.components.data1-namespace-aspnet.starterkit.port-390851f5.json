@@ -1,0 +1,185 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.createdutc",
+      "kind": "entry",
+      "label": "CreatedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.createdutc",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.createdutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.create-d00826a2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.credentialversion",
+      "kind": "entry",
+      "label": "CredentialVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.credentialversion",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.credentialversion",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.creden-080e5b2f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.iterationcount",
+      "kind": "entry",
+      "label": "IterationCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.iterationcount",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.iterationcount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.iterat-32d8c11a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.lastverifiedutc",
+      "kind": "entry",
+      "label": "LastVerifiedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.lastverifiedutc",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.lastverifiedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.lastve-132bbabe.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.legacyupgradedutc",
+      "kind": "entry",
+      "label": "LegacyUpgradedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.legacyupgradedutc",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.legacyupgradedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.legacy-87ddae1f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwordformat",
+      "kind": "entry",
+      "label": "PasswordFormat",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwordformat",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.passwordformat",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwo-fcfb22ba.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwordhash",
+      "kind": "entry",
+      "label": "PasswordHash",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwordhash",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.passwordhash",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwo-15f11519.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwordsalt",
+      "kind": "entry",
+      "label": "PasswordSalt",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwordsalt",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.passwordsalt",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.passwo-62c80d99.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.requiresreset",
+      "kind": "entry",
+      "label": "RequiresReset",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.requiresreset",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.requiresreset",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.requir-11cb6bdf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.resetreason",
+      "kind": "entry",
+      "label": "ResetReason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.resetreason",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.resetreason",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.resetr-cba5ac6f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.rowversion",
+      "kind": "entry",
+      "label": "RowVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.rowversion",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.rowversion",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.rowver-f69242a4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.updatedutc",
+      "kind": "entry",
+      "label": "UpdatedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.updatedutc",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.updatedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.update-3425777b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usercredentialitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.usercredentialitem.userid",
+      "sourcePath": "src/Portal.Components.Data1/UserCredentialItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.usercredentialitem.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.usercredentialitem.userid-1d0fd1d2.html"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+        public static string NormalizeDesktopSourceOrThrow(string source)
+        {
+            // <lang>
+            //   <zh-CN>保留两个 out 结果，使成功路径返回规范化值，失败路径只使用固定低敏错误说明。</zh-CN>
+            //   <en>Keeps both out results so success returns the normalized value while failure uses only the fixed low-sensitivity explanation.</en>
+            // </lang>
+            string normalizedSource;
+            string errorMessage;
+
+            // <lang>
+            //   <zh-CN>复用同一校验入口，避免抛异常版本与布尔版本出现不同的路径安全规则。</zh-CN>
+            //   <en>Reuses the same validation entry point so the throwing and Boolean APIs cannot diverge in path-safety rules.</en>
+            // </lang>
+            if (TryNormalizeDesktopSource(source, out normalizedSource, out errorMessage))
+            {
+                return normalizedSource;
+            }
+
+            // <lang>
+            //   <zh-CN>异常保留既有诊断文本和原始值兼容行为；面向用户的调用方必须继续净化输出。</zh-CN>
+            //   <en>Preserves the existing diagnostic text and raw-value compatibility behavior; user-facing callers must continue sanitizing output.</en>
+            // </lang>
+            throw new InvalidOperationException($"{errorMessage} 当前值：{source}");
+        }

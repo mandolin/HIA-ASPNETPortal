@@ -1,0 +1,1 @@
+        public string EditUrl { get; private set; }

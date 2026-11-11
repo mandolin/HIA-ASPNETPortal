@@ -1,0 +1,52 @@
+        public PortalSettingDefinition(
+            string key,
+            string displayName,
+            string description,
+            PortalSettingValueType valueType,
+            string defaultValue,
+            bool canEditOnline,
+            bool requiresRestart,
+            string permission,
+            string auditCategory,
+            bool isSensitive = false,
+            string sourceLevel = "AppSettings",
+            int? minIntegerValue = null,
+            int? maxIntegerValue = null)
+        {
+            // <lang>
+            //   <zh-CN>构造器只拒绝空白稳定键，避免构造无法被 registry/配置源可靠关联的定义；它不检查键冲突、来源存在、默认文本、范围关系或权限有效性。</zh-CN>
+            //   <en>The constructor rejects only a blank stable key, avoiding a definition that registry/configuration sources cannot link reliably; it checks no key collision, source existence, default text, range relation, or permission validity.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentException("Setting key is required.", "key");
+            }
+
+            // <lang>
+            //   <zh-CN>稳定键按调用方给定文本保留，用于跨 registry、来源和审计关联；显示名称和说明仅归一 null，不在此编码或信任为授权信息。</zh-CN>
+            //   <en>Retain the stable key as supplied for registry/source/audit correlation; display name and description normalize null only and are neither encoded here nor trusted as authorization information.</en>
+            // </lang>
+            Key = key;
+            DisplayName = displayName ?? string.Empty;
+            Description = description ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>值类型、默认文本和数值范围共同描述后续验证契约；本构造器不把文本转换为类型，也不比较最小/最大边界或确认默认值在范围内。</zh-CN>
+            //   <en>Value type, default text, and numeric bounds together describe the later validation contract; this constructor neither converts text to type, compares minimum/maximum bounds, nor confirms the default lies within range.</en>
+            // </lang>
+            ValueType = valueType;
+            DefaultValue = defaultValue ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>这些策略标志和标签供运行时解析、后台写入与页面消费方使用；赋值不会读取配置、写数据库、重启应用、实施授权或产生审计。</zh-CN>
+            //   <en>These policy flags and labels are for runtime resolution, administration writes, and page consumers; assignment reads no configuration, writes no database, restarts no application, implements no authorization, and produces no audit.</en>
+            // </lang>
+            CanEditOnline = canEditOnline;
+            RequiresRestart = requiresRestart;
+            Permission = permission ?? string.Empty;
+            AuditCategory = auditCategory ?? string.Empty;
+            IsSensitive = isSensitive;
+            SourceLevel = sourceLevel ?? string.Empty;
+            MinIntegerValue = minIntegerValue;
+            MaxIntegerValue = maxIntegerValue;
+        }

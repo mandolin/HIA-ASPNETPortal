@@ -1,0 +1,45 @@
+        private static void WriteFile(PortalDiagnosticEntry entry)
+        {
+            // <lang>
+            //   <zh-CN>日志目录只由受控运行设置解析；序列化前的条目已净化，NDJSON 仍显式 HTML 转义以降低后续展示链路的解释风险。</zh-CN>
+            //   <en>The log directory is resolved only from controlled runtime settings; the entry is sanitized before serialization and NDJSON still escapes HTML to reduce interpretation risk in later display paths.</en>
+            // </lang>
+            string logDirectory = ResolveLogDirectory();
+
+            // <lang>
+            //   <zh-CN>序列化已净化 DTO，使用无缩进 NDJSON 并保持字段不携带原始上下文。</zh-CN>
+            //   <en>Serialize the sanitized DTO as compact NDJSON without reintroducing raw context fields.</en>
+            // </lang>
+            string serialized = JsonConvert.SerializeObject(
+                entry,
+                Formatting.None,
+                new JsonSerializerSettings { StringEscapeHandling = StringEscapeHandling.EscapeHtml });
+            // <lang>
+            //   <zh-CN>追加单条换行形成完整 NDJSON payload，生命周期仅覆盖本次文件写入。</zh-CN>
+            //   <en>Add one newline to form a complete NDJSON payload whose lifetime is limited to this file write.</en>
+            // </lang>
+            string payload = serialized + Environment.NewLine;
+
+            // <lang>
+            //   <zh-CN>按 UTF-8 无 BOM 实际编码计算字节数，供滚动文件容量门禁使用。</zh-CN>
+            //   <en>Compute bytes using the actual UTF-8-without-BOM encoding for the rolling-file capacity gate.</en>
+            // </lang>
+            int payloadByteCount = new UTF8Encoding(false).GetByteCount(payload);
+
+            // <lang>
+            //   <zh-CN>锁覆盖建目录、文件选择、追加与保留清理，使并发写入使用与实际追加相同的 UTF-8 无 BOM 字节计数和受控顺序。</zh-CN>
+            //   <en>The lock covers directory creation, file selection, append, and retention cleanup so concurrent writes use the same UTF-8-without-BOM byte count and controlled order as the actual append.</en>
+            // </lang>
+            lock (LogLock)
+            {
+                Directory.CreateDirectory(logDirectory);
+
+                // <lang>
+                //   <zh-CN>保存容量门禁选出的受控文件路径；该路径不来自请求输入。</zh-CN>
+                //   <en>Keep the controlled path selected by the capacity gate; it never comes from request input.</en>
+                // </lang>
+                string logFile = ResolveCurrentLogFile(logDirectory, entry.UtcTime, payloadByteCount);
+                File.AppendAllText(logFile, payload, new UTF8Encoding(false));
+                CleanupExpiredLogs(logDirectory, entry.UtcTime.Date);
+            }
+        }

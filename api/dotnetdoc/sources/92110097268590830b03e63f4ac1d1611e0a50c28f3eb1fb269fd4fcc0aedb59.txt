@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_ButtonResubmit {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ButtonResubmit", resourceCulture);
+            }
+        }

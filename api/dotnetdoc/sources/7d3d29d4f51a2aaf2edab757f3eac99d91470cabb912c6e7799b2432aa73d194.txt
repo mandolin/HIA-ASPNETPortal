@@ -1,0 +1,4 @@
+        protected int? SettingsEmptyStateRowCount
+        {
+            get { return settingsEmptyStateRowCount; }
+        }

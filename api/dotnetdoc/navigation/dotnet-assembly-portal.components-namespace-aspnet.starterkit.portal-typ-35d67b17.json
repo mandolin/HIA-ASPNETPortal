@@ -1,0 +1,81 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved",
+      "kind": "entry",
+      "label": "Approved",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.approved",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-ff2e1b28.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed",
+      "kind": "entry",
+      "label": "Closed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.closed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-089d858b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.pending",
+      "kind": "entry",
+      "label": "Pending",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.pending",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.pending",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-b7b4de76.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected",
+      "kind": "entry",
+      "label": "Rejected",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.rejected",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-a8b6bc95.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.returned",
+      "kind": "entry",
+      "label": "Returned",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.returned",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.returned",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-8f08a2ac.html"
+    }
+  ]
+}

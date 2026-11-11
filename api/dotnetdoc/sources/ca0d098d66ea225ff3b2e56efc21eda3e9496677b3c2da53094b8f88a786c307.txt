@@ -1,0 +1,7 @@
+    public enum PortalModuleKind
+    {
+        /// <summary>本体核心模块（默认形态，兼容既有 9 个无 moduleKind 声明的模块）。</summary>
+        Core = 0,
+        /// <summary>本体之外以独立能力模块形式提供的模块；须显式列入部署 Profile 允许集。</summary>
+        Independent = 1
+    }

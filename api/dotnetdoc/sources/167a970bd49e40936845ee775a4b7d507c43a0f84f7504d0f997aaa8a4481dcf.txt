@@ -1,0 +1,8 @@
+        public ITabItem GetSingleTab(int tabId)
+        {
+            // <lang>
+            //   <zh-CN>`Single` 会把缺失和重复都暴露出来；调用方应只在已经确认 Tab 存在的路径使用。</zh-CN>
+            //   <en>`Single` exposes both missing and duplicate records; callers should use this only after the Tab is known to exist.</en>
+            // </lang>
+            return _tabs.Single(i => i.TabId == tabId);
+        }

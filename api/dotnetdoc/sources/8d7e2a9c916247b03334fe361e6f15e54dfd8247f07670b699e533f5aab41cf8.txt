@@ -1,0 +1,17 @@
+        internal EmployeeProfileCorrectionAdminRow(EmployeeProfileCorrectionRequestInfo request)
+        {
+            RequestId = request.RequestId;
+            SubmittedUtcText = request.SubmittedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+            EmployeeText = request.EmployeeCode + " / " + request.EmployeeDisplayName;
+            UserText = request.UserId.ToString(CultureInfo.InvariantCulture) + " / " + request.UserName;
+            FieldName = request.FieldName;
+            CurrentValueSnapshot = EmptyToNone(request.CurrentValueSnapshot);
+            ProposedValue = EmptyToNone(request.ProposedValue);
+            RequestNote = EmptyToNone(request.RequestNote);
+            RequestStatus = request.RequestStatus;
+            ReviewText = request.ReviewedUtc.HasValue
+                ? request.ReviewedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture) +
+                  " / " + EmptyToNone(request.ReviewedBy) +
+                  " / " + EmptyToNone(request.ReviewNote)
+                : lang.Admin_EmployeeProfileCorrectionRequests_NotReviewed;
+        }

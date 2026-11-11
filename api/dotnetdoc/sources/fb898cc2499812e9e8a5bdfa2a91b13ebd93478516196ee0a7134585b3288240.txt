@@ -1,0 +1,10 @@
+        private void BindStatusFilter()
+        {
+            StatusFilterList.Items.Clear();
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Submitted, EmployeeProfileCorrectionRequestStatuses.Submitted));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Reviewed, EmployeeProfileCorrectionRequestStatuses.Reviewed));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Closed, EmployeeProfileCorrectionRequestStatuses.Closed));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Rejected, EmployeeProfileCorrectionRequestStatuses.Rejected));
+            StatusFilterList.SelectedValue = EmployeeProfileCorrectionRequestStatuses.Submitted;
+        }

@@ -1,0 +1,25 @@
+        public EmployeeProfileCorrectionProfileView(
+            int employeeId,
+            string employeeCode,
+            string displayName,
+            string preferredName,
+            string workEmail,
+            string organizationDisplayName,
+            string employmentStatus,
+            int bindingId,
+            DateTime boundUtc)
+        {
+            // <lang>
+            //   <zh-CN>视图对象直接供 Web Forms 绑定使用，字符串统一归一为空串，避免旧模板层对 null 做重复判断。</zh-CN>
+            //   <en>The view object is bound directly by Web Forms, so strings are normalized to empty values to avoid repeated null checks in legacy templates.</en>
+            // </lang>
+            EmployeeId = employeeId;
+            EmployeeCode = employeeCode ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            PreferredName = preferredName ?? string.Empty;
+            WorkEmail = workEmail ?? string.Empty;
+            OrganizationDisplayName = organizationDisplayName ?? string.Empty;
+            EmploymentStatus = employmentStatus ?? string.Empty;
+            BindingId = bindingId;
+            BoundUtc = boundUtc;
+        }

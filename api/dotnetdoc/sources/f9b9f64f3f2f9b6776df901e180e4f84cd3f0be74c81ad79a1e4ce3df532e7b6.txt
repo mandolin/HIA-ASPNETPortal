@@ -1,0 +1,7 @@
+        private static string BuildPasswordFieldScriptObject(string passwordElementId, string encryptedElementId)
+        {
+            return string.Format(
+                "{{passwordElementId:'{0}',encryptedElementId:'{1}'}}",
+                HttpUtility.JavaScriptStringEncode(passwordElementId),
+                HttpUtility.JavaScriptStringEncode(encryptedElementId));
+        }

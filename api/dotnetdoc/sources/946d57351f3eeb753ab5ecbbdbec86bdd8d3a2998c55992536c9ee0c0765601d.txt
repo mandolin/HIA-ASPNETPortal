@@ -1,0 +1,89 @@
+        public static PortalWorkItemTargetResolution Resolve(string businessKind, IPortalModuleTargetSource source)
+        {
+            // <lang>
+            //   <zh-CN>端口缺失属调用方错误：降级而不是抛错，避免一个装配问题把整块待办变成错误页。</zh-CN>
+            //   <en>A missing port is a caller error: degrade instead of throwing so one wiring problem does not turn the whole to-do block into an error page.</en>
+            // </lang>
+            if (source == null)
+            {
+                return new PortalWorkItemTargetResolution(null, ReasonSourceUnavailable);
+            }
+
+            string capabilityId = GetCapabilityId(businessKind);
+            if (string.IsNullOrEmpty(capabilityId))
+            {
+                return new PortalWorkItemTargetResolution(null, ReasonUnknownBusinessKind);
+            }
+
+            PortalCapabilityDefinition capability;
+            if (!PortalCapabilityRegistry.TryGet(capabilityId, out capability) || capability == null)
+            {
+                return new PortalWorkItemTargetResolution(null, ReasonUnknownCapability);
+            }
+
+            if (string.IsNullOrEmpty(capability.PrimaryModuleId))
+            {
+                return new PortalWorkItemTargetResolution(null, ReasonNoPrimaryModule);
+            }
+
+            string desktopEntry = source.GetDesktopEntry(capability.PrimaryModuleId);
+            if (string.IsNullOrEmpty(desktopEntry))
+            {
+                return new PortalWorkItemTargetResolution(null, ReasonNoDesktopEntry);
+            }
+
+            // <lang>
+            //   <zh-CN>与模块目录页同一匹配口径（不区分大小写的已验证入口精确匹配），避免两处对"是否已注册"得出不同结论。</zh-CN>
+            //   <en>Same matching rule as the module-catalog page (case-insensitive exact match on the validated entry) so the two places cannot disagree about whether the package is registered.</en>
+            // </lang>
+            IEnumerable<IModuleDefinitionItem> definitions = source.GetModuleDefinitions() ??
+                Enumerable.Empty<IModuleDefinitionItem>();
+            IModuleDefinitionItem definition = definitions.FirstOrDefault(item =>
+                item != null &&
+                string.Equals(item.DesktopSourceFile, desktopEntry, StringComparison.OrdinalIgnoreCase));
+
+            if (definition == null)
+            {
+                return new PortalWorkItemTargetResolution(null, ReasonNoModuleDefinition);
+            }
+
+            IEnumerable<int> moduleIds = source.GetModuleIdsByDefinitionId(definition.ModuleDefId) ??
+                Enumerable.Empty<int>();
+
+            ITabItem accessibleTab = null;
+            int bestTabOrder = int.MaxValue;
+            bool anyInstanceOwningTab = false;
+
+            foreach (int moduleId in moduleIds)
+            {
+                IModuleItem module = source.FindModuleById(moduleId);
+                if (module == null || !module.TabId.HasValue)
+                {
+                    continue;
+                }
+
+                anyInstanceOwningTab = true;
+
+                ITabItem tab = source.FindTabById(module.TabId.Value);
+                if (tab == null || !source.IsInRoles(tab.AccessRoles))
+                {
+                    continue;
+                }
+
+                int tabOrder = tab.TabOrder.HasValue ? tab.TabOrder.Value : int.MaxValue;
+                if (accessibleTab == null || tabOrder < bestTabOrder)
+                {
+                    accessibleTab = tab;
+                    bestTabOrder = tabOrder;
+                }
+            }
+
+            if (accessibleTab == null)
+            {
+                return new PortalWorkItemTargetResolution(
+                    null,
+                    anyInstanceOwningTab ? ReasonNoAccessibleTab : ReasonNoModuleInstance);
+            }
+
+            return new PortalWorkItemTargetResolution(accessibleTab, string.Empty);
+        }

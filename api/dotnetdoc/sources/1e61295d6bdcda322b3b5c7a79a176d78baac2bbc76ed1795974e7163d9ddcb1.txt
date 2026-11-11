@@ -1,0 +1,1 @@
+        public const long MaximumTotalDecompressedBytes = 67108864L;

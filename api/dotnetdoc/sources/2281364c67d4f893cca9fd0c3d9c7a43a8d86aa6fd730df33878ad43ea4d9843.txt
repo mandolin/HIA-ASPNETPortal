@@ -1,0 +1,8 @@
+        private string GetCurrentUserName()
+        {
+            // <lang>
+            //   <zh-CN>仅在认证链完整时读取 Name，否则返回可安全传递的空字符串。</zh-CN>
+            //   <en>Read Name only when the authentication chain is complete; otherwise return a safely passable empty string.</en>
+            // </lang>
+            return IsCurrentUserAuthenticated() ? Context.User.Identity.Name : string.Empty;
+        }

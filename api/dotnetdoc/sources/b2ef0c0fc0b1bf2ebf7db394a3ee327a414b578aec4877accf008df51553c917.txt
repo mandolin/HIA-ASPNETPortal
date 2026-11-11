@@ -1,0 +1,1 @@
+        void SaveRolePermissions(int roleId, IEnumerable<string> permissionKeys, string updatedBy);

@@ -1,0 +1,1 @@
+        public const string HiaPortalInstanceId = "Portal.Hia.InstanceId";

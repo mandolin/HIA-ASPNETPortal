@@ -1,0 +1,5 @@
+        internal static string EditEvents_MessageValidTimeLocation {
+            get {
+                return ResourceManager.GetString("EditEvents_MessageValidTimeLocation", resourceCulture);
+            }
+        }

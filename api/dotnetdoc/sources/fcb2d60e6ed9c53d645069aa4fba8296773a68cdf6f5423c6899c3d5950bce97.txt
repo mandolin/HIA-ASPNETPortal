@@ -1,0 +1,15 @@
+        private string NormalizeDesktopSrc()
+        {
+            // <lang>
+            //   <zh-CN>使用同一规范化策略处理兼容调用点，失败时转换为明确的操作异常。</zh-CN>
+            //   <en>Use the same normalization policy for compatibility call sites and convert failure into an explicit operation exception.</en>
+            // </lang>
+            string normalizedSource;
+            string errorMessage;
+            if (!PortalModulePathValidator.TryNormalizeDesktopSource(DesktopSrc.Text, out normalizedSource, out errorMessage))
+            {
+                throw new InvalidOperationException(errorMessage);
+            }
+
+            return normalizedSource;
+        }

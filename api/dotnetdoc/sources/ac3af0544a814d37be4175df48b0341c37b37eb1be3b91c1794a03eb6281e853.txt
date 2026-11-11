@@ -1,0 +1,10 @@
+        private string ReTitle(string title)
+        {
+            // <lang>
+            //   <zh-CN>该 helper 保持旧讨论体验：空标题不强补文本，已有回复前缀也不会重复叠加。</zh-CN>
+            //   <en>This helper preserves the legacy discussion experience: empty titles are not forced, and existing reply prefixes are not duplicated.</en>
+            // </lang>
+            return string.IsNullOrEmpty(title) || title.StartsWith("Re: ", StringComparison.Ordinal)
+                ? title
+                : "Re: " + title;
+        }

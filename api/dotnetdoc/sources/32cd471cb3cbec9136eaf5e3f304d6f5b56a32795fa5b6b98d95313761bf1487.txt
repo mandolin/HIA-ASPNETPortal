@@ -1,0 +1,15 @@
+        internal PortalThemePackage(
+            string name,
+            string displayName,
+            string version,
+            string minimumPortalVersion,
+            bool inheritsDefault,
+            IList<string> resources)
+        {
+            Name = name ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            Version = version ?? string.Empty;
+            MinimumPortalVersion = minimumPortalVersion ?? string.Empty;
+            InheritsDefault = inheritsDefault;
+            Resources = new List<string>(resources ?? new List<string>()).AsReadOnly();
+        }

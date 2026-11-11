@@ -1,0 +1,5 @@
+        internal static string Common_PasswordMessageContainsAccountContextTerm {
+            get {
+                return ResourceManager.GetString("Common_PasswordMessageContainsAccountContextTerm", resourceCulture);
+            }
+        }

@@ -1,0 +1,38 @@
+        private static bool ContainsContextTerm(string password, IEnumerable<string> contextTerms)
+        {
+            if (contextTerms == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>规范化密码用于 ordinal 子串比较；空令牌不可能命中上下文词。</zh-CN>
+            //   <en>Normalize the password for ordinal substring comparison; an empty token cannot match a context term.</en>
+            // </lang>
+            string normalizedPassword = NormalizeToken(password);
+            if (normalizedPassword.Length == 0)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐个读取调用方提供的上下文文本；每项仅即时拆分，绝不持久化或记录。</zh-CN>
+            //   <en>Read caller-provided context text one item at a time; each item is split only in place and never persisted or logged.</en>
+            // </lang>
+            foreach (string contextTerm in contextTerms)
+            {
+                // <lang>
+                //   <zh-CN>按字母数字边界生成可比较令牌，过滤掉短片段以减少误拒绝。</zh-CN>
+                //   <en>Generate comparable tokens by alphanumeric boundaries and filter short fragments to reduce false rejections.</en>
+                // </lang>
+                foreach (string token in SplitContextTokens(contextTerm))
+                {
+                    if (token.Length >= 4 && normalizedPassword.IndexOf(token, StringComparison.Ordinal) >= 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }

@@ -1,0 +1,7 @@
+        public static bool RequireRegistrationApproval
+        {
+            get
+            {
+                return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.RequireRegistrationApproval);
+            }
+        }

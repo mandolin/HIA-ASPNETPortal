@@ -1,0 +1,5 @@
+        internal static string EditDocs_UploadPolicyHintFormat {
+            get {
+                return ResourceManager.GetString("EditDocs_UploadPolicyHintFormat", resourceCulture);
+            }
+        }

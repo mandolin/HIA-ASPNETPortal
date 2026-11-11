@@ -1,0 +1,6 @@
+            <%--
+            <lang>
+              <zh-CN>SearchButton_Click 依据当前状态筛选刷新待办投影；按钮只触发查询，不代表客户端可以改变工作项状态。</zh-CN>
+              <en>SearchButton_Click refreshes the work-item projection for the current status filter; the button triggers a query and does not let the client change work-item state.</en>
+            </lang>
+            --%>

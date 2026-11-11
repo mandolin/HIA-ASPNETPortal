@@ -1,0 +1,1 @@
+        public string CurrentValueSnapshot { get; private set; }

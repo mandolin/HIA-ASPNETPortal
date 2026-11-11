@@ -1,0 +1,8 @@
+        public IHtmlTextItem GetHtmlText(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>HTML 模块允许首次编辑时创建记录，缺失记录属于正常状态；展示控件遇到空值时不输出内容。</zh-CN>
+            //   <en>HTML modules create their record during the first edit, so a missing record is an expected state; display controls emit no content for null.</en>
+            // </lang>
+            return _context.HtmlTexts.SingleOrDefault(i => i.ModuleId == moduleId);
+        }

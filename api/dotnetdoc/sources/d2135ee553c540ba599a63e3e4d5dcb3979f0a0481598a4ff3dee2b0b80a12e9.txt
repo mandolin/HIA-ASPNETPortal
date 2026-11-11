@@ -1,0 +1,4 @@
+        private static string NormalizeFieldName(string fieldName)
+        {
+            return string.IsNullOrWhiteSpace(fieldName) ? string.Empty : fieldName.Trim();
+        }

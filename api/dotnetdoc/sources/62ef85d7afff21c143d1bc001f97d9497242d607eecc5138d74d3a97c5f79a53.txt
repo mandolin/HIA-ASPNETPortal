@@ -1,0 +1,44 @@
+        private void BindProfile()
+        {
+            // <lang>
+            //   <zh-CN>使用与提交相同的当前用户解析路径，保证展示资料与后续写入目标一致。</zh-CN>
+            //   <en>Use the same current-user resolution path as submission so displayed data and any later write target the same identity.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+
+            // <lang>
+            //   <zh-CN>资料读取同时承担 schema/绑定门禁；返回空值时不向页面暴露底层异常或数据库细节。</zh-CN>
+            //   <en>Profile loading also enforces schema and binding gates; a null result must not expose storage errors or database details to the page.</en>
+            // </lang>
+            EmployeeProfileCorrectionProfileView profile = GetCurrentProfile(userId);
+            if (profile == null)
+            {
+                // <lang>
+                //   <zh-CN>隐藏提交面板并绑定空集合，避免旧回发数据继续显示为可提交状态。</zh-CN>
+                //   <en>Hide the submit panel and bind an empty collection so stale postback data cannot remain visibly submittable.</en>
+                // </lang>
+                RequestPanel.Visible = false;
+                // <lang>
+                //   <zh-CN>该分支不渲染列表行，故空态计数显式归零，避免沿用上一次绑定的计数而误判为空态。</zh-CN>
+                //   <en>This branch renders no rows, so the empty-state count is reset explicitly instead of reusing the previous binding's count and mis-reporting an empty state.</en>
+                // </lang>
+                recentRequestRowCount = 0;
+                RecentRequestsRepeater.DataSource = Enumerable.Empty<EmployeeProfileCorrectionRecentRequestRow>();
+                RecentRequestsRepeater.DataBind();
+                ShowMessage(GetUnavailableMessage(userId));
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>资料可用时恢复面板，并先清除旧提示，再对每个展示值进行 HTML 编码。</zh-CN>
+            //   <en>When the profile is available, restore the panel, clear the old message, and HTML-encode each display value.</en>
+            // </lang>
+            RequestPanel.Visible = true;
+            MessageLabel.Text = string.Empty;
+            EmployeeCodeLabel.Text = EncodeDisplay(profile.EmployeeCode);
+            DisplayNameLabel.Text = EncodeDisplay(profile.DisplayName);
+            PreferredNameLabel.Text = EncodeDisplay(EmptyToNone(profile.PreferredName));
+            WorkEmailLabel.Text = EncodeDisplay(EmptyToNone(profile.WorkEmail));
+            OrganizationLabel.Text = EncodeDisplay(EmptyToNone(profile.OrganizationDisplayName));
+            BindRecentRequests(userId);
+        }

@@ -1,0 +1,9 @@
+        public static string NormalizeToCanonical(string status)
+        {
+            if (status == null)
+            {
+                return null;
+            }
+
+            return LegacyToCanonical.TryGetValue(status, out string canonical) ? canonical : status;
+        }

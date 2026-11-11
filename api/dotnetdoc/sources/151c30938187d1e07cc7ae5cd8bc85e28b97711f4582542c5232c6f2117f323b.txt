@@ -1,0 +1,5 @@
+        public ModuleSettings ModuleConfiguration
+        {
+            get { return _moduleConfiguration; }
+            set { _moduleConfiguration = value; }
+        }

@@ -1,0 +1,23 @@
+        private bool TryValidateSaveRequest(UserEmployeeBindingSaveRequest request, out string message)
+        {
+            if (request.UserId <= 0)
+            {
+                message = "Portal user id is required.";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(request.EmployeeCode))
+            {
+                message = "Employee code is required.";
+                return false;
+            }
+
+            if (request.EmployeeCode.Length > 64)
+            {
+                message = "Employee code cannot exceed 64 characters.";
+                return false;
+            }
+
+            message = string.Empty;
+            return true;
+        }

@@ -1,0 +1,15 @@
+        public IReadOnlyList<LeaveRequestInfo> GetRecentByUser(int userId, int limit)
+        {
+            try
+            {
+                return context.Database.SqlQuery<LeaveRequestInfo>(
+                    "SELECT TOP (@Limit) RequestId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc " +
+                    "FROM dbo.PortalBiz_LeaveRequests WHERE UserId = @UserId ORDER BY CreatedUtc DESC;",
+                    new SqlParameter("@Limit", limit),
+                    new SqlParameter("@UserId", userId)).ToList();
+            }
+            catch
+            {
+                return new List<LeaveRequestInfo>();
+            }
+        }

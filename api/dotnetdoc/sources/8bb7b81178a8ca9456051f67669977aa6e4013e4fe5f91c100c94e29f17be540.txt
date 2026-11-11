@@ -1,0 +1,22 @@
+        protected void EditBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>编辑入口要求选中项来自已验证快照，并只通过安全导航策略进入布局页。</zh-CN>
+            //   <en>The edit entry requires a selection from the verified snapshot and enters the layout page only through the safe-navigation policy.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            TabSettings selectedTab;
+            if (!TryGetSelectedTab(out selectedTab))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                Context,
+                ResolveUrl("~/Admin/TabLayout.aspx?tabid=" + selectedTab.TabId));
+        }

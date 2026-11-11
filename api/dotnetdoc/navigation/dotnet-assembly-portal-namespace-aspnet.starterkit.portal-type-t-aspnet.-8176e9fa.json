@@ -1,0 +1,146 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingdirectoryrow.-ctor-aspnet.starterkit.portal.iuseremployeebindinginfo",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingdirectoryrow.-ctor-aspnet.starterkit.portal.iuseremployeebindinginfo",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.useremployeebindingdirectoryrow.-ctor-aspnet.starterkit.portal.iuseremployeebindinginfo",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.useremployeebindingdirect-595dab72.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.bindingid",
+      "kind": "entry",
+      "label": "BindingId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.bindingid",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.bindingid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-10430962.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.bindingstatus",
+      "kind": "entry",
+      "label": "BindingStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.bindingstatus",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.bindingstatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-0f2eb339.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.boundutctext",
+      "kind": "entry",
+      "label": "BoundUtcText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.boundutctext",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.boundutctext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-f551f5c7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.editurl",
+      "kind": "entry",
+      "label": "EditUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.editurl",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.editurl",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-68e5b3ef.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.employeecode",
+      "kind": "entry",
+      "label": "EmployeeCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.employeecode",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.employeecode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-c758c1b3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.employeedisplayname",
+      "kind": "entry",
+      "label": "EmployeeDisplayName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.employeedisplayname",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.employeedisplayname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-bd4e7397.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.reason",
+      "kind": "entry",
+      "label": "Reason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.reason",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.reason",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-ae4784a6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.userid",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-ca1c86b0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingdirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.username",
+      "kind": "entry",
+      "label": "UserName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingdirectoryrow.username",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingdirectoryrow.username",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingdirect-a1d9a6f6.html"
+    }
+  ]
+}

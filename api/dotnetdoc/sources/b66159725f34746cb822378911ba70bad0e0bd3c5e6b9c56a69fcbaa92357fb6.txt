@@ -1,0 +1,52 @@
+        private bool TryInitializeRequest(out IContactItem item)
+        {
+            // <lang>
+            //   <zh-CN>输出参数先清空，保证权限失败时不会把联系人快照交给调用方。</zh-CN>
+            //   <en>The output parameter is cleared first so authorization failures cannot pass a contact snapshot to callers.</en>
+            // </lang>
+            item = null;
+            // <lang>
+            //   <zh-CN>模块标识是权限检查和新增联系人归属的根；非法模块直接进入受控拒绝页。</zh-CN>
+            //   <en>The module identifier is the root for permission checks and new-contact ownership; invalid modules go directly to the controlled denial page.</en>
+            // </lang>
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
+                !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>ItemId 缺失表示新增联系人；非空值必须是正整数，避免 0 或负数伪装既有条目。</zh-CN>
+            //   <en>A missing ItemId means a new contact; non-empty values must be positive integers, preventing 0 or negative values from impersonating existing rows.</en>
+            // </lang>
+            string requestedItemId = Request.Params["ItemId"];
+            if (!string.IsNullOrWhiteSpace(requestedItemId) &&
+                !PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>新增路径没有既有联系人可做归属比对，模块编辑权限就是完整授权条件。</zh-CN>
+                //   <en>The creation path has no existing contact for ownership comparison, so module edit permission is the complete authorization condition.</en>
+                // </lang>
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>既有联系人重新从数据层读取并比对模块，避免通过 ItemId 直接引用其他模块记录。</zh-CN>
+            //   <en>Existing contacts are reloaded from the data layer and compared against the module to avoid direct references to another module's row via ItemId.</en>
+            // </lang>
+            item = ContactsDB.GetSingleContact(itemId);
+            if (item == null || item.ModuleId != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }

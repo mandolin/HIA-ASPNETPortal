@@ -1,0 +1,2 @@
+        [Dependency]
+        public ITabsDb TabsConfig { private get; set; }

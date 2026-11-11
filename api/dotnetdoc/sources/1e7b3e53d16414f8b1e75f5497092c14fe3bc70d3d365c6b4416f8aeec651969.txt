@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>筛选字段只构造目录查询条件；关键字、员工状态、绑定状态和停用组织选项仍由服务器规范化并决定可见结果。</zh-CN>
+                    <en>These filters only construct directory query criteria; the server still normalizes keyword, employee status, binding status, and inactive-organization choices before deciding visible results.</en>
+                </lang>
+            --%>

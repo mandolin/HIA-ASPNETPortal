@@ -1,0 +1,1 @@
+        void UpdateHtmlText(int moduleId, string desktopHtml, string mobileSummary, string mobileDetails);

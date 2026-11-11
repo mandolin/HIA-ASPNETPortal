@@ -1,0 +1,10 @@
+        private static IDictionary<long, IList<CollaborationItemEventInfo>> CreateEmptyEventMap(List<long> itemIds)
+        {
+            Dictionary<long, IList<CollaborationItemEventInfo>> map = new Dictionary<long, IList<CollaborationItemEventInfo>>();
+            foreach (long itemId in itemIds)
+            {
+                map[itemId] = new List<CollaborationItemEventInfo>();
+            }
+
+            return map;
+        }

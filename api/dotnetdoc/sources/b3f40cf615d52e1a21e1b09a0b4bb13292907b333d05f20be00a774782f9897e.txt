@@ -1,0 +1,98 @@
+        private sealed class UserEmployeeBindingProjection
+        {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定标识。</zh-CN>
+            ///   <en>Binding identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int BindingId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>门户用户标识。</zh-CN>
+            ///   <en>Portal user identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int UserId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>门户用户名。</zh-CN>
+            ///   <en>Portal user name.</en>
+            /// </lang>
+            /// </summary>
+            public string UserName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工标识。</zh-CN>
+            ///   <en>Employee identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
+            public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
+            public string EmployeeDisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定状态。</zh-CN>
+            ///   <en>Binding status.</en>
+            /// </lang>
+            /// </summary>
+            public string BindingStatus { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建 UTC 时间。</zh-CN>
+            ///   <en>Binding creation UTC time.</en>
+            /// </lang>
+            /// </summary>
+            public DateTime BoundUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建人。</zh-CN>
+            ///   <en>User who created the binding.</en>
+            /// </lang>
+            /// </summary>
+            public string BoundBy { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定结束 UTC 时间。</zh-CN>
+            ///   <en>Binding end UTC time.</en>
+            /// </lang>
+            /// </summary>
+            public DateTime? EndedUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定结束操作人。</zh-CN>
+            ///   <en>User who ended the binding.</en>
+            /// </lang>
+            /// </summary>
+            public string EndedBy { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定变更原因。</zh-CN>
+            ///   <en>Reason for the binding change.</en>
+            /// </lang>
+            /// </summary>
+            public string Reason { get; set; }
+        }

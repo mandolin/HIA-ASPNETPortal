@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>共享模块标题控件承载链接编辑入口和主题化标题；动作是否可见仍由服务器权限上下文决定。</zh-CN>
+        <en>The shared module-title control hosts the link-edit entry and themed title; action visibility remains a server-side permission decision.</en>
+    </lang>
+--%>

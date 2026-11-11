@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>全局主题下拉列表只提供已部署主题键；应用和重置命令的权限、manifest 信任与数据库写入仍由服务端处理。</zh-CN>
+                    <en>The global-theme dropdown only supplies keys for deployed themes; server code owns authorization, manifest trust, and database writes for apply/reset commands.</en>
+                  </lang>
+                --%>

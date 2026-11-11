@@ -1,0 +1,9 @@
+        protected string EmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(StatusFilterList.SelectedValue)
+                    ? lang.Admin_WorkItems_EmptyNoItems
+                    : lang.Admin_WorkItems_EmptyNoMatches;
+            }
+        }

@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:project:.net-project-structure:namespace:projects",
+  "children": [
+    {
+      "id": "dotnet:project:.net-project-structure:namespace:projects:type:hia-document-dotnet-project-src-portal-portal.csproj",
+      "kind": "type",
+      "label": "Portal",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-project-src-portal-portal.csproj",
+      "sourcePath": "src/Portal/Portal.csproj",
+      "symbolId": "dotnet-project:src-portal-portal.csproj",
+      "contentPath": "entries/hia-document-dotnet-project-src-portal-portal.csproj-4cdfe1d5.html"
+    },
+    {
+      "id": "dotnet:project:.net-project-structure:namespace:projects:type:hia-document-dotnet-project-src-portal.components-portal.components.csproj",
+      "kind": "type",
+      "label": "Portal.Components",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-project-src-portal.components-portal.components.csproj",
+      "sourcePath": "src/Portal.Components/Portal.Components.csproj",
+      "symbolId": "dotnet-project:src-portal.components-portal.components.csproj",
+      "contentPath": "entries/hia-document-dotnet-project-src-portal.components-portal.components.cspr-3b3458c7.html"
+    },
+    {
+      "id": "dotnet:project:.net-project-structure:namespace:projects:type:hia-document-dotnet-project-src-portal.components.data-portal.components.data.csproj",
+      "kind": "type",
+      "label": "Portal.Components.Data",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-project-src-portal.components.data-portal.components.data.csproj",
+      "sourcePath": "src/Portal.Components.Data/Portal.Components.Data.csproj",
+      "symbolId": "dotnet-project:src-portal.components.data-portal.components.data.csproj",
+      "contentPath": "entries/hia-document-dotnet-project-src-portal.components.data-portal.components-d7318ee1.html"
+    },
+    {
+      "id": "dotnet:project:.net-project-structure:namespace:projects:type:hia-document-dotnet-project-src-portal.components.data1-portal.components.data1.csproj",
+      "kind": "type",
+      "label": "Portal.Components.Data1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-project-src-portal.components.data1-portal.components.data1.csproj",
+      "sourcePath": "src/Portal.Components.Data1/Portal.Components.Data1.csproj",
+      "symbolId": "dotnet-project:src-portal.components.data1-portal.components.data1.csproj",
+      "contentPath": "entries/hia-document-dotnet-project-src-portal.components.data1-portal.component-5ff92ceb.html"
+    },
+    {
+      "id": "dotnet:project:.net-project-structure:namespace:projects:type:hia-document-dotnet-project-src-portal.tests-portal.tests.csproj",
+      "kind": "type",
+      "label": "Portal.Tests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-project-src-portal.tests-portal.tests.csproj",
+      "sourcePath": "src/Portal.Tests/Portal.Tests.csproj",
+      "symbolId": "dotnet-project:src-portal.tests-portal.tests.csproj",
+      "contentPath": "entries/hia-document-dotnet-project-src-portal.tests-portal.tests.csproj-f48c164f.html"
+    }
+  ]
+}

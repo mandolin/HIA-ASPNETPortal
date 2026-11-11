@@ -1,0 +1,59 @@
+        private sealed class PayloadRule
+        {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>当前 kind 的完整允许字段集合，供 required/optional 规则共享。</zh-CN>
+            ///   <en>Complete allowed-field set for the current kind, shared by required and optional rules.</en>
+            /// </lang>
+            /// </summary>
+            private readonly ISet<string> _allowedKeys;
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>用必填键和可选键创建 payload 规则。</zh-CN>
+            ///   <en>Creates a payload rule from required and optional keys.</en>
+            /// </lang>
+            /// </summary>
+            public PayloadRule(IEnumerable<string> requiredKeys, IEnumerable<string> optionalKeys)
+            {
+                // <lang>
+                //   <zh-CN>复制并冻结必填键集合，避免调用方后续修改规则输入。</zh-CN>
+                //   <en>Copy and freeze required keys so callers cannot mutate rule inputs afterward.</en>
+                // </lang>
+                RequiredKeys = new List<string>(requiredKeys).AsReadOnly();
+
+                // <lang>
+                //   <zh-CN>以必填键初始化白名单，再追加受控可选键。</zh-CN>
+                //   <en>Initialize the allowlist from required keys and then add controlled optional keys.</en>
+                // </lang>
+                _allowedKeys = new HashSet<string>(RequiredKeys, StringComparer.Ordinal);
+
+                // <lang>
+                //   <zh-CN>把每个可选键纳入同一 ordinal 白名单，保持字段匹配大小写敏感且稳定。</zh-CN>
+                //   <en>Add each optional key to the same ordinal allowlist so field matching remains case-sensitive and stable.</en>
+                // </lang>
+                foreach (string optionalKey in optionalKeys)
+                {
+                    _allowedKeys.Add(optionalKey);
+                }
+            }
+
+            /// <summary>
+            /// <l>
+            ///   <zh-CN>当前 kind 必须提供的字段名集合。</zh-CN>
+            ///   <en>Field names that the current kind must provide.</en>
+            /// </l>
+            /// </summary>
+            public IList<string> RequiredKeys { get; private set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>判断字段名是否在当前 kind 的白名单中。</zh-CN>
+            ///   <en>Determines whether a field name is allowed for the current kind.</en>
+            /// </lang>
+            /// </summary>
+            public bool Allows(string key)
+            {
+                return _allowedKeys.Contains(key ?? string.Empty);
+            }
+        }

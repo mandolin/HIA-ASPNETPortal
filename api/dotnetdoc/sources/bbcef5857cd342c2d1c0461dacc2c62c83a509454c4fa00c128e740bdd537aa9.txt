@@ -1,0 +1,11 @@
+        private static void AppendChangedField(ref string changedFields, string oldValue, string newValue, string fieldName)
+        {
+            if (string.Equals(Normalize(oldValue), Normalize(newValue), StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            changedFields = string.IsNullOrEmpty(changedFields)
+                ? fieldName
+                : changedFields + ", " + fieldName;
+        }

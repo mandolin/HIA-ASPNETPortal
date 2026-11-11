@@ -1,0 +1,12 @@
+    public sealed class PortalOnlinePackageUnavailableScanner : IPortalOnlinePackageScanner
+    {
+        /// <summary><lang><zh-CN>恒返回 Unavailable；不读取内容、不记录不可信文本。</zh-CN><en>Always returns Unavailable; reads no content and records no untrusted text.</en></lang></summary>
+        public PortalOnlinePackageScanVerdict Scan(string stagingName, byte[] content)
+        {
+            // <lang>
+            //   <zh-CN>刻意忽略入参：默认实现不承担扫描职责，只表达「不可用」这一事实。</zh-CN>
+            //   <en>Inputs are deliberately ignored: the default implementation performs no scanning and only expresses "unavailable".</en>
+            // </lang>
+            return PortalOnlinePackageScanVerdict.Unavailable;
+        }
+    }

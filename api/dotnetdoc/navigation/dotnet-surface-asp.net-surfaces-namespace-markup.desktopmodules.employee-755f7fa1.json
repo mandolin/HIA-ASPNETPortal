@@ -1,0 +1,77 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofileconfirm-employeeprofileconfirm.ascx-1",
+      "kind": "type",
+      "label": "EmployeeProfileConfirm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-a753c9ec.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofileconfirm-employeeprofileconfirm.ascx-2",
+      "kind": "type",
+      "label": "EmployeeProfileConfirm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-aa53cea5.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofileconfirm-employeeprofileconfirm.ascx-3",
+      "kind": "type",
+      "label": "EmployeeProfileConfirm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-a953cd12.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofileconfirm-employeeprofileconfirm.ascx-4",
+      "kind": "type",
+      "label": "EmployeeProfileConfirm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-a453c533.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofileconfirm-employeeprofileconfirm.ascx-5",
+      "kind": "type",
+      "label": "EmployeeProfileConfirm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-a353c3a0.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofileconfirm-employeeprofileconfirm.ascx-6",
+      "kind": "type",
+      "label": "EmployeeProfileConfirm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-a653c859.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.employeeprofileconfirm:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-employeeprofileconfirm-employeeprofileconfirm.ascx-7",
+      "kind": "type",
+      "label": "EmployeeProfileConfirm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.employee-a553c6c6.json"
+    }
+  ]
+}

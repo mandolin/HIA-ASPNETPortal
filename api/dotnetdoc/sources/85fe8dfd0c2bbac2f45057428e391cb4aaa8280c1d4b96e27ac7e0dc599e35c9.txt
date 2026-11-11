@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>员工编辑页只重构展示壳，字段验证、保存和审计仍由 code-behind 处理。</zh-CN>
+        <en>The employee edit page only rebuilds the presentation shell; field validation, saving, and audit writing remain handled by code-behind.</en>
+      </lang>
+    --%>

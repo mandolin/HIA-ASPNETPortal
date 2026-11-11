@@ -1,0 +1,37 @@
+        public sealed class GroupTabView
+        {
+            /// <summary><lang><zh-CN>原始页签；渲染层用它解析中英显示名与页签 ID。</zh-CN><en>Original tab; the renderer resolves localized names and the tab id from it.</en></lang></summary>
+            public ITabItem Tab { get; private set; }
+
+            /// <summary><lang><zh-CN>页签在最终授权集合中的显示下标，用于 `tabindex`；分组不改变它。</zh-CN><en>Display index in the final authorized collection, used for `tabindex`; grouping never changes it.</en></lang></summary>
+            public int DisplayIndex { get; private set; }
+
+            /// <summary><lang><zh-CN>是否为当前活动页签；为 true 时渲染成非链接的选中态。</zh-CN><en>Whether this is the active tab; when true it renders as a non-link selected state.</en></lang></summary>
+            public bool IsSelected { get; private set; }
+
+            /// <summary><lang><zh-CN>入口 gate 是否把该页签标为禁用（仅管理员可见禁用态）。</zh-CN><en>Whether the entry gate marked this tab disabled (the disabled state is visible to administrators only).</en></lang></summary>
+            public bool IsBlocked { get; private set; }
+
+            /// <summary><lang><zh-CN>禁用原因码；仅供 `title` 工具提示，不进入可见文本。</zh-CN><en>Disabled reason code; for the `title` tooltip only, never visible text.</en></lang></summary>
+            public string BlockedReason { get; private set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>构造不可变展示项；原因码为空时统一为空串，避免模板绑定出现 `null` 属性。</zh-CN>
+            ///   <en>Build an immutable presentation item; a blank reason is normalized to an empty string so template binding never sees a `null` attribute.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="tab"><l zh-CN="原始页签。" en="Original tab." /></param>
+            /// <param name="displayIndex"><l zh-CN="最终集合中的显示下标。" en="Display index in the final collection." /></param>
+            /// <param name="isSelected"><l zh-CN="是否活动页签。" en="Whether it is the active tab." /></param>
+            /// <param name="isBlocked"><l zh-CN="是否被 gate 标为禁用。" en="Whether the gate marked it disabled." /></param>
+            /// <param name="blockedReason"><l zh-CN="禁用原因码，可为 null。" en="Disabled reason code, may be null." /></param>
+            public GroupTabView(ITabItem tab, int displayIndex, bool isSelected, bool isBlocked, string blockedReason)
+            {
+                Tab = tab;
+                DisplayIndex = displayIndex;
+                IsSelected = isSelected;
+                IsBlocked = isBlocked;
+                BlockedReason = blockedReason ?? string.Empty;
+            }
+        }

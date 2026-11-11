@@ -1,0 +1,120 @@
+    public sealed class PortalThemePackage
+    {
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>创建一个已通过目录、manifest 和资源校验的主题包投影。</zh-CN>
+        /// <en>Creates a theme-package projection that has passed directory, manifest, and resource validation.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="name">
+        /// <l>
+        ///   <zh-CN>与物理目录一致的稳定主题名。</zh-CN>
+        ///   <en>Stable theme name matching the physical directory.</en>
+        /// </l>
+        /// </param>
+        /// <param name="displayName">
+        /// <l>
+        ///   <zh-CN>后台选择器展示名称。</zh-CN>
+        ///   <en>Display name for admin selectors.</en>
+        /// </l>
+        /// </param>
+        /// <param name="version">
+        /// <l>
+        ///   <zh-CN>主题包声明版本。</zh-CN>
+        ///   <en>Version declared by the theme package.</en>
+        /// </l>
+        /// </param>
+        /// <param name="minimumPortalVersion">
+        /// <l>
+        ///   <zh-CN>主题包声明的最低门户版本，可为空。</zh-CN>
+        ///   <en>Minimum portal version declared by the package, if any.</en>
+        /// </l>
+        /// </param>
+        /// <param name="inheritsDefault">
+        /// <l>
+        ///   <zh-CN>是否声明继承 Default 主题。</zh-CN>
+        ///   <en>Whether the package declares inheritance from the Default theme.</en>
+        /// </l>
+        /// </param>
+        /// <param name="resources">
+        /// <l>
+        ///   <zh-CN>已校验的站内本地资源路径集合。</zh-CN>
+        ///   <en>Validated site-local resource path collection.</en>
+        /// </l>
+        /// </param>
+        internal PortalThemePackage(
+            string name,
+            string displayName,
+            string version,
+            string minimumPortalVersion,
+            bool inheritsDefault,
+            IList<string> resources)
+        {
+            Name = name ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            Version = version ?? string.Empty;
+            MinimumPortalVersion = minimumPortalVersion ?? string.Empty;
+            InheritsDefault = inheritsDefault;
+            Resources = new List<string>(resources ?? new List<string>()).AsReadOnly();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>与部署目录一致的稳定主题名。</zh-CN>
+        ///   <en>Stable theme name matching the deployment directory.</en>
+        /// </lang>
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>供后台选择器展示的名称。</zh-CN>
+        ///   <en>Name displayed by the admin selector.</en>
+        /// </lang>
+        /// </summary>
+        public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>主题包版本。</zh-CN>
+        ///   <en>Theme package version.</en>
+        /// </lang>
+        /// </summary>
+        public string Version { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>主题声明的最低门户版本。</zh-CN>
+        ///   <en>Minimum portal version declared by the theme.</en>
+        /// </lang>
+        /// </summary>
+        public string MinimumPortalVersion { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否在 CSS 中继承 Default 主题。</zh-CN>
+        ///   <en>Whether the CSS inherits the Default theme.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>当前仅是部署包声明性元数据。主题 CSS 必须自行显式表达继承关系；catalog 和 Master Page 不会据此自动加载或注入 Default 主题资源。</zh-CN>
+        ///   <en>This is declarative deployment-package metadata only. Theme CSS must explicitly express inheritance itself; the catalog and Master Page do not automatically load or inject Default theme resources from this value.</en>
+        /// </lang>
+        /// </remarks>
+        public bool InheritsDefault { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已声明且位于主题目录内的本地资源。</zh-CN>
+        ///   <en>Declared local resources located inside the theme directory.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此列表用于部署包校验和工具链，不是 Master Page 的通用资源注入协议。Web Forms 原生 Theme 仍按 App_Themes 机制处理主题文件。</zh-CN>
+        ///   <en>This list is for deployment-package validation and tooling; it is not a general Master Page resource injection protocol. Native Web Forms Theme handling still processes theme files through App_Themes.</en>
+        /// </lang>
+        /// </remarks>
+        public IList<string> Resources { get; private set; }
+    }

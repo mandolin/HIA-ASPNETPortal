@@ -1,0 +1,61 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存前重新初始化请求，确保回发期间的模块权限和条目归属没有被 ViewState 替代。</zh-CN>
+            //   <en>The request is initialized again before saving so postback authorization and item ownership are not replaced by ViewState.</en>
+            // </lang>
+            IAnnouncementItem item;
+            if (!TryInitializeRequest(out item) || !Page.IsValid)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>expireDate 是当前文化解析后的公告到期时间，只在本次保存命令内使用。</zh-CN>
+            //   <en>expireDate is the announcement expiry time parsed with the current culture and is used only within this save command.</en>
+            // </lang>
+            DateTime expireDate;
+            if (!DateTime.TryParse(ExpireField.Text, out expireDate))
+            {
+                // <lang>
+                //   <zh-CN>旧页面仍用当前文化解析日期；本轮只补低敏校验提示，不改变历史输入格式。</zh-CN>
+                //   <en>The legacy page still parses dates using current culture; this pass only adds a low-sensitivity validation message and does not change historical input format.</en>
+                // </lang>
+                ShowValidationMessage(lang.EditEvents_MessageInvalidExpirationDate);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>moreLink 和 mobileMoreLink 保存已归一化的可选浏览地址；空输入会被折叠为空字符串。</zh-CN>
+            //   <en>moreLink and mobileMoreLink hold normalized optional browse URLs; blank input is folded into an empty string.</en>
+            // </lang>
+            string moreLink;
+            string mobileMoreLink;
+            if (!TryNormalizeOptionalBrowseUrl(MoreLinkField.Text, out moreLink) ||
+                !TryNormalizeOptionalBrowseUrl(MobileMoreField.Text, out mobileMoreLink))
+            {
+                ShowValidationMessage(lang.EditAnnouncements_MessageInvalidReadMoreUrl);
+                return;
+            }
+
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>新增公告使用当前模块标识，创建人来自服务器端认证身份，不接受浏览器传入。</zh-CN>
+                //   <en>New announcements use the current module id, and creator identity comes from the server-side authenticated principal rather than browser input.</en>
+                // </lang>
+                AnnouncementsDB.AddAnnouncement(moduleId, Context.User.Identity.Name, TitleField.Text, expireDate,
+                    DescriptionField.Text, moreLink, mobileMoreLink);
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>更新路径已经在 `TryInitializeRequest` 中核验条目归属，避免跨模块编辑。</zh-CN>
+                //   <en>The update path has already validated item ownership in `TryInitializeRequest`, avoiding cross-module edits.</en>
+                // </lang>
+                AnnouncementsDB.UpdateAnnouncement(itemId, Context.User.Identity.Name, TitleField.Text, expireDate,
+                    DescriptionField.Text, moreLink, mobileMoreLink);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

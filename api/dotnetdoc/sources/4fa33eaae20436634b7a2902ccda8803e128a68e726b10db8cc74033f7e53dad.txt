@@ -1,0 +1,4 @@
+        internal static PortalLoginIdentifierResolution CreateNotFoundWithoutDecision()
+        {
+            return new PortalLoginIdentifierResolution(false, false, false, 0);
+        }

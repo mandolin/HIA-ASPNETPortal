@@ -1,0 +1,2 @@
+        [Dependency]
+        public IDiscussionsDb DiscussionDB { private get; set; }

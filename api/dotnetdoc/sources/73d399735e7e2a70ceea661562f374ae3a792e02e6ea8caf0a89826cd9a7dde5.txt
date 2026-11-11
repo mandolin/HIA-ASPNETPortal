@@ -1,0 +1,1 @@
+        public string ValueType { get; private set; }

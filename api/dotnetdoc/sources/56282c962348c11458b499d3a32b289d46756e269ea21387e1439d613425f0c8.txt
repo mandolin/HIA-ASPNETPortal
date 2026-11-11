@@ -1,0 +1,96 @@
+        protected void ApplyChanges_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存事件再次解析请求和模块快照，拒绝未授权、跨 Tab 或失效对象的回发。</zh-CN>
+            //   <en>Resolve the request and module snapshot again for save, rejecting unauthorized, cross-Tab, or stale postbacks.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先在页面层做轻量输入归一化，阻断空标题、换行标题和过大的缓存秒数进入旧存储过程。</zh-CN>
+            //   <en>Performs lightweight page-level normalization first so empty titles, multiline titles, and excessive cache values never reach the legacy stored procedure.</en>
+            // </lang>
+            string title;
+            int cacheSeconds;
+            // <lang>
+            //   <zh-CN>标题与缓存秒数共用一个输入门禁；任一失败都会在持久化前终止。</zh-CN>
+            //   <en>Apply one input gate to the title and cache duration; any failure stops before persistence.</en>
+            // </lang>
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(moduleTitle.Text, 150, out title) ||
+                !int.TryParse(cacheTime.Text, out cacheSeconds) || cacheSeconds < 0 || cacheSeconds > MaximumCacheSeconds)
+            {
+                ShowMessage(lang.Admin_ModuleSettings_MessageInvalidNameOrCache);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>英文名与其它语言 JSON 按可选单行/多行契约校验；坏 JSON 在这里拦下，
+            //   不流到数据库 CHECK 约束（否则管理员看到的是 SQL 错误而不是业务提示）。</zh-CN>
+            //   <en>Validate the English name and other-languages JSON against the optional single-line/multi-line contracts; broken JSON is stopped here instead of reaching the database CHECK constraint, which would show the administrator a SQL error rather than a business message.</en>
+            // </lang>
+            string titleEn;
+            string titleLocalizedJson;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(moduleTitleEn.Text, 150, out titleEn) ||
+                !PortalAdministrationPolicy.TryNormalizeOptionalMultilineText(moduleTitleLocalizedJson.Text, 4000, out titleLocalizedJson))
+            {
+                ShowMessage(lang.Admin_ModuleSettings_MessageInvalidLocalizedName);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>编辑角色仍沿用旧的分号串存储格式，保存前统一通过角色解析器拼接，避免页面控件自行拼字符串。</zh-CN>
+                //   <en>Edit roles still use the legacy semicolon-delimited storage format, so the role parser owns joining instead of the page concatenating strings directly.</en>
+                // </lang>
+                string editRoles = PortalRoleParser.Join(
+                    authEditRoles.Items.Cast<ListItem>()
+                        .Where(item => item.Selected)
+                        .Select(item => item.Text));
+                // <lang>
+                //   <zh-CN>使用已验证模块快照中的布局字段，仅替换允许编辑的标题、缓存、角色和移动端开关；
+                //   多语言列只在管理员显式填写时写入，避免清空已配置值。</zh-CN>
+                //   <en>Use layout fields from the verified module snapshot and replace only the editable title, cache, roles, and mobile flag; the multilingual columns are written only when an administrator fills them in explicitly, so configured values are never wiped.</en>
+                // </lang>
+                ModulesDb.UpdateModule(
+                    moduleId,
+                    currentModule.ModuleOrder,
+                    currentModule.PaneName,
+                    title,
+                    cacheSeconds,
+                    editRoles,
+                    showMobile.Checked,
+                    titleEn,
+                    titleLocalizedJson);
+                // <lang>
+                //   <zh-CN>模块设置影响页面运行时行为，成功后写运营审计，再回到当前 Tab 布局页确认结果。</zh-CN>
+                //   <en>Module settings affect runtime page behavior, so successful saves write an operation audit before returning to the current Tab layout page.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Update",
+                    "Module",
+                    moduleId.ToString(),
+                    "Updated module instance settings.",
+                    Context);
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                    Context,
+                    ResolveUrl("~/Admin/TabLayout.aspx?tabid=" + tabId));
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>保存异常写入统一诊断并只向页面返回事件编号，避免泄漏存储层细节。</zh-CN>
+                //   <en>Record save failures through shared diagnostics and return only an event id to the page, avoiding storage-layer detail leakage.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ModuleSettings.Apply",
+                    "Updating module settings failed. ModuleId=" + moduleId + "; TabId=" + tabId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleSettings_MessageSaveFailed, eventId));
+            }
+        }

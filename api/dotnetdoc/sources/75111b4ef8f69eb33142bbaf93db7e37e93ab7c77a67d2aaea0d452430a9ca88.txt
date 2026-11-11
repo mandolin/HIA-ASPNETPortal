@@ -1,0 +1,1 @@
+        public string BusinessKind { get; private set; }

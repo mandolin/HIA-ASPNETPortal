@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>保留 DataList 绑定和编辑入口，只重构每条事件的主题化展示结构。</zh-CN>
+        <en>DataList binding and edit navigation are preserved while only the themed event-item markup is rebuilt.</en>
+    </lang>
+--%>

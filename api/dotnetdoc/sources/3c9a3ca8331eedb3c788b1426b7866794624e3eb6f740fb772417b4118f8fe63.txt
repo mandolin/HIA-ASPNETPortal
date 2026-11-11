@@ -1,0 +1,1 @@
+            public IList<GroupSectionView> Sections { get; private set; }

@@ -1,0 +1,5 @@
+        internal static string Admin_UserEmployeeBindingEdit_MessageBoundSaved {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageBoundSaved", resourceCulture);
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ButtonSubmit", resourceCulture);
+            }
+        }

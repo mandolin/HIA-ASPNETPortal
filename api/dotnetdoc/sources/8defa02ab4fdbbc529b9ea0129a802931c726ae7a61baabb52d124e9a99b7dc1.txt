@@ -1,0 +1,14 @@
+        private static string ReadRequiredString(JObject manifest, string propertyName, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>复用可选字段的类型、修剪和长度规则，再把空白提升为必填契约失败；不以默认值掩盖部署 manifest 缺字段。</zh-CN>
+            //   <en>Reuse optional-field type, trimming, and length rules, then elevate blank text to a required-contract failure; do not hide a missing deployment-manifest field with a default value.</en>
+            // </lang>
+            string value = ReadOptionalString(manifest, propertyName, maximumLength);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new InvalidOperationException("Required manifest value is missing.");
+            }
+
+            return value;
+        }

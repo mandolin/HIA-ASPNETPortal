@@ -1,0 +1,4 @@
+        public IUserItem FindUserById(int userId)
+        {
+            return _context.Users.SingleOrDefault(i => i.UserId == userId);
+        }

@@ -1,0 +1,10 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>自主注册默认关闭；公开注册链接仅在有效运行期设置显式开启时显示。</zh-CN>
+            //   <en>Self-registration is disabled by default; show the public link only when the effective runtime setting explicitly enables it.</en>
+            // </lang>
+            RegisterLink.Visible = PortalRegistrationOptions.AllowSelfRegistration;
+
+            RegisterLoginPasswordEncryptionScripts();
+        }

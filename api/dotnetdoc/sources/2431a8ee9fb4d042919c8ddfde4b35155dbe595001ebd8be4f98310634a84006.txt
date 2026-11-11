@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_MessageInvalidDueUtc {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageInvalidDueUtc", resourceCulture);
+            }
+        }

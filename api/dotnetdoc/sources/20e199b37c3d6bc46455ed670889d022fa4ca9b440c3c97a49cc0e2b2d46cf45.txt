@@ -1,0 +1,1 @@
+        public bool CredentialCostUpgraded { get; private set; }

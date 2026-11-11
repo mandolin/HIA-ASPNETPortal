@@ -1,0 +1,4 @@
+        private bool HasSecurityStateTable()
+        {
+            return HasTable(SecurityStateTableName);
+        }

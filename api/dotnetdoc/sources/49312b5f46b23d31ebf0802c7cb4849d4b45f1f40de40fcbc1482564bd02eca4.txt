@@ -1,0 +1,33 @@
+        public static bool TryFormatSixElementSummary(
+            string packageId,
+            string version,
+            string hashBefore,
+            string hashAfter,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            string direction,
+            out string summary)
+        {
+            summary = null;
+            string targetId = string.IsNullOrEmpty(version) ? (packageId + "@unknown") : (packageId + "@" + version);
+            string candidate = string.Format(
+                CultureInfo.InvariantCulture,
+                "pkg={0};hashBefore={1};hashAfter={2};actor={3};startUtc={4};endUtc={5};verification={6};direction={7}",
+                targetId,
+                hashBefore ?? string.Empty,
+                hashAfter ?? string.Empty,
+                actor ?? string.Empty,
+                startUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                endUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                verification ?? string.Empty,
+                direction ?? string.Empty);
+            if (candidate.Length > MaxSummaryLength)
+            {
+                return false;
+            }
+
+            summary = candidate;
+            return true;
+        }

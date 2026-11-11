@@ -1,0 +1,90 @@
+        public static PortalModulePackageStateReadResult Read(string packageId, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>格式非法的输入不进入连接或 SQL；这只保护存储输入边界，不把当前调用者或包声明为受信任/已授权。</zh-CN>
+            //   <en>Format-invalid input never reaches a connection or SQL; this protects only the store-input boundary and does not declare the current caller or package trusted or authorized.</en>
+            // </lang>
+            if (!PortalModuleCatalog.IsValidPackageId(packageId))
+            {
+                return new PortalModulePackageStateReadResult(false, null);
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>连接经受控容器路径创建并在 using 结束时释放；本存储不读取 appSettings、模块文件或 Profile，也不记录连接串。</zh-CN>
+                //   <en>Create the connection through the controlled container path and release it at the end of the using block; this store does not read appSettings, module files, or profiles, and never logs a connection string.</en>
+                // </lang>
+                using (SqlConnection connection = CreateConnection())
+                {
+                    if (connection == null)
+                    {
+                        // <lang>
+                        //   <zh-CN>没有连接来源时不伪造默认启用快照；调用方须从不可用事实走既有兼容回退。</zh-CN>
+                        //   <en>When no connection source exists, do not fabricate a default-enabled snapshot; callers must follow the existing compatibility fallback from the unavailable fact.</en>
+                        // </lang>
+                        return new PortalModulePackageStateReadResult(false, null);
+                    }
+
+                    connection.Open();
+                    if (!IsTableAvailable(connection))
+                    {
+                        // <lang>
+                        //   <zh-CN>未迁移或不可读的状态表与“可读但没有该包行”不同；这里保留空状态，使上层能够区分基础设施缺口。</zh-CN>
+                        //   <en>An unmigrated or unreadable state table differs from a readable table with no row for this package; retain a null state here so upper layers can distinguish the infrastructure gap.</en>
+                        // </lang>
+                        return new PortalModulePackageStateReadResult(false, null);
+                    }
+
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        // <lang>
+                        //   <zh-CN>表名和选择字段是固定受控 SQL；包标识仅作为参数，不得影响对象名、谓词结构或排序。</zh-CN>
+                        //   <en>The table name and selected fields are fixed controlled SQL; the package identifier is only a parameter and cannot affect object names, predicate structure, or ordering.</en>
+                        // </lang>
+                        command.CommandText = @"
+SELECT [IsEnabled], [UpdatedUtc], [UpdatedBy], [Note]
+FROM [dbo].[PortalCfg_ModulePackageStates]
+WHERE [PackageId] = @PackageId;";
+                        AddTextParameter(command, "@PackageId", 100, packageId, string.Empty);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.Read())
+                            {
+                                // <lang>
+                                //   <zh-CN>可读表中的缺行是旧库兼容默认，而不是读取失败或显式启用记录：保留 IsConfigured=false 与既有 UTC 哨兵，供上层按事实继续处理。</zh-CN>
+                                //   <en>A missing row in a readable table is a legacy-compatibility default, not a read failure or explicit enabled record: retain IsConfigured=false and the existing UTC sentinel for upper layers to handle as facts.</en>
+                                // </lang>
+                                return new PortalModulePackageStateReadResult(
+                                    true,
+                                    new PortalModulePackageState(packageId, true, false, DateTime.MinValue, string.Empty, string.Empty));
+                            }
+
+                            // <lang>
+                            //   <zh-CN>显式行只映射受控字段：启停布尔值与 UTC 时间保持数据库事实，可空操作人/备注归一为空文本；此处不净化、授权或加载模块。</zh-CN>
+                            //   <en>An explicit row maps only controlled fields: enabled Boolean and UTC time retain database facts while nullable actor/note text normalizes to empty text; this path does not sanitize, authorize, or load a module.</en>
+                            // </lang>
+                            return new PortalModulePackageStateReadResult(
+                                true,
+                                new PortalModulePackageState(
+                                    packageId,
+                                    reader.GetBoolean(0),
+                                    true,
+                                    reader.GetDateTime(1),
+                                    reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
+                                    reader.IsDBNull(3) ? string.Empty : reader.GetString(3)));
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>诊断层接收原始异常以便受控记录；返回值不回显异常、SQL 或连接详情，并保持不可用/空状态让调用方选择既有回退。</zh-CN>
+                //   <en>The diagnostics layer receives the original exception for controlled recording; the return value never echoes exception, SQL, or connection detail and retains an unavailable/null state for callers to choose the existing fallback.</en>
+                // </lang>
+                PortalDiagnostics.Error("ModulePackageState.Read", "Reading a module package state failed.", exception, context);
+                return new PortalModulePackageStateReadResult(false, null);
+            }
+        }

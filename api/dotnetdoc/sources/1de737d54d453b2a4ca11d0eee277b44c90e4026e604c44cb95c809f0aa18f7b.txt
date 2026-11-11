@@ -1,0 +1,5 @@
+        internal static string Admin_UserEmployeeBindingEdit_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_Subtitle", resourceCulture);
+            }
+        }

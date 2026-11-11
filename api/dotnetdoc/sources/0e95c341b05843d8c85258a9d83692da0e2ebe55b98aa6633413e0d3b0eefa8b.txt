@@ -1,0 +1,11 @@
+        internal PortalOnlinePackageConfirmationTicket WithConsumed(DateTime consumedUtc)
+        {
+            // <lang>
+            //   <zh-CN>复用同一构造入口复制全部字段，再单独设置消费时间，避免字段漂移或漏拷。</zh-CN>
+            //   <en>Copy every field through the same constructor, then set consumption separately, so no field can drift or be omitted.</en>
+            // </lang>
+            PortalOnlinePackageConfirmationTicket copy = new PortalOnlinePackageConfirmationTicket(
+                Nonce, AntiForgeryToken, ActorName, PackageStorageName, PackageHash, IssuedUtc, ExpiresUtc);
+            copy.ConsumedUtc = consumedUtc;
+            return copy;
+        }

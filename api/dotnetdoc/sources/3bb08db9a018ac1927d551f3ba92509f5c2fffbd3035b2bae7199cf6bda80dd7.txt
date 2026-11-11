@@ -1,0 +1,4 @@
+        private static bool IsSemanticVersion(string value)
+        {
+            return !string.IsNullOrWhiteSpace(value) && SemanticVersionPattern.IsMatch(value);
+        }

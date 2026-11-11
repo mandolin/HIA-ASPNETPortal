@@ -1,0 +1,22 @@
+    public interface IPortalModuleProvisioner
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>幂等安装：已存在的页签/定义/实例/包状态不会重复插入。成功返回 true 并通过 out 参数给出模块实例主键。</zh-CN>
+        ///   <en>Idempotent install: an existing tab/definition/instance/package-state is not inserted again. Returns true on success and yields the module-instance primary key via the out parameter.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request"><l zh-CN="安装请求参数。" en="Provisioning request parameters." /></param>
+        /// <param name="moduleId"><l zh-CN="成功时返回模块实例主键，否则为 0。" en="Module-instance primary key on success, otherwise 0." /></param>
+        bool TryProvision(ModuleProvisionRequest request, out int moduleId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>卸载：删除模块实例，并在其定义不再被任何实例引用时回收定义；同时清理包状态。返回是否已完成（实例不存在也视为已清理）。</zh-CN>
+        ///   <en>Uninstall: removes the module instance, and reclaims the definition when no instance references it; also clears the package state. Returns whether it completed (a missing instance is treated as already cleaned).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="moduleId"><l zh-CN="要卸载的模块实例主键。" en="Primary key of the module instance to uninstall." /></param>
+        /// <param name="packageId"><l zh-CN="关联的包标识，用于清理包状态；为空则跳过状态清理。" en="Associated package identifier used to clear package state; skipped when blank." /></param>
+        bool TryDeprovision(int moduleId, string packageId);
+    }

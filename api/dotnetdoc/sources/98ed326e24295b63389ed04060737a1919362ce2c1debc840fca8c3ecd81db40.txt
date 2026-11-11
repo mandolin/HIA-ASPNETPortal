@@ -1,0 +1,8 @@
+        public IEnumerable<ILinkItem> GetLinks(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>只按模块过滤，不在数据层追加排序规则；需要排序的页面按 ViewOrder 或页面规则处理。</zh-CN>
+            //   <en>Filter only by module and do not add a data-layer ordering rule; pages that need ordering should use ViewOrder or page-level rules.</en>
+            // </lang>
+            return _context.Links.Where(i => i.ModuleId == moduleId).ToList<ILinkItem>();
+        }

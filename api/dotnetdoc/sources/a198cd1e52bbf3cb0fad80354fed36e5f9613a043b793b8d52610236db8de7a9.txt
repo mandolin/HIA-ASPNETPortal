@@ -1,0 +1,1 @@
+        public const int DefaultKeySizeBits = 2048;

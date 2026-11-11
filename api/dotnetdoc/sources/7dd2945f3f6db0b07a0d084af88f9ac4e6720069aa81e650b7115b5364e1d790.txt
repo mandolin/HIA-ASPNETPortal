@@ -1,0 +1,1 @@
+        public string CategoryKey { get; set; }

@@ -1,0 +1,1 @@
+        void ApproveUser(int userId, string approvedBy);

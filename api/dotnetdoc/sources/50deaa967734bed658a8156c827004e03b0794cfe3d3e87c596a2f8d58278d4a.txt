@@ -1,0 +1,20 @@
+        public void DeleteDocument(int itemId)
+        {
+            // <lang>
+            //   <zh-CN>待删除实体必须唯一存在；调用方已经验证模块归属，因此这里不再用宽松空值分支吞掉损坏状态。</zh-CN>
+            //   <en>The entity to delete must exist uniquely; caller-side module ownership has already been validated, so this layer does not swallow damaged state with a loose null branch.</en>
+            // </lang>
+            DocumentItem item = _context.Documents.Single(record => record.ItemId == itemId);
+
+            // <lang>
+            //   <zh-CN>从 EF 跟踪集中标记删除；真实文件系统清理不在该旧表数据访问方法内完成。</zh-CN>
+            //   <en>Mark the entity for deletion in the EF tracking set; real filesystem cleanup is not performed inside this legacy-table data-access method.</en>
+            // </lang>
+            _context.Documents.Remove(item);
+
+            // <lang>
+            //   <zh-CN>提交单条文档表删除；权限审计和安全回跳由调用页在本方法外处理。</zh-CN>
+            //   <en>Commit the single document-table deletion; permission auditing and safe return navigation are handled by the caller page outside this method.</en>
+            // </lang>
+            _context.SaveChanges();
+        }

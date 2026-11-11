@@ -1,0 +1,34 @@
+        public static bool EnsurePermission(HttpContext context, string permissionKey)
+        {
+            // <lang>
+            //   <zh-CN>调用方可传入空上下文；统一回退到当前请求后，拒绝跳转和诊断使用同一个对象。</zh-CN>
+            //   <en>Callers may pass a null context; fall back to the current request once so redirect and diagnostics use the same object.</en>
+            // </lang>
+            context = context ?? HttpContext.Current;
+            // <lang>
+            //   <zh-CN>复用统一规范化结果，使拒绝路径不会以未验证原文构造权限消息或查询。</zh-CN>
+            //   <en>Reuse the unified normalized result so the denial path never builds messages or queries from unvalidated input.</en>
+            // </lang>
+            string normalizedKey;
+            if (!TryNormalizePermissionKey(permissionKey, context, out normalizedKey))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(context);
+                return false;
+            }
+
+            if (HasPermission(normalizedKey))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>权限失败先记录稳定键，再跳转既有拒绝页；调用方必须停止后续敏感操作。</zh-CN>
+            //   <en>Record the stable key before redirecting to the existing denial page; callers must stop subsequent sensitive work.</en>
+            // </lang>
+            PortalDiagnostics.Warn(
+                "Authorization.PermissionDenied",
+                "Permission denied. PermissionKey=" + normalizedKey,
+                context);
+            PortalNavigationPolicy.RedirectToEditAccessDenied(context);
+            return false;
+        }

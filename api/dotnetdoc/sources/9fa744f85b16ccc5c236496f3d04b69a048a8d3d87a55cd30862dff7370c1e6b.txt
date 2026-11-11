@@ -1,0 +1,9 @@
+        private void ShowValidationMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>提示文本来自固定服务器分支，不包含物理路径、异常堆栈或原始输入。</zh-CN>
+            //   <en>The message text comes from fixed server-side branches and contains no physical paths, exception stacks, or raw input.</en>
+            // </lang>
+            ValidationMessage.Text = message;
+            ValidationMessage.Visible = true;
+        }

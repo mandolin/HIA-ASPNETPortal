@@ -1,0 +1,46 @@
+        private void ConfigurePasswordSubmission()
+        {
+            // <lang>
+            //   <zh-CN>开关决定是否启用旧浏览器 validator 和客户端加密链；服务端回调仍以同一设置为最终事实。</zh-CN>
+            //   <en>The switch controls legacy validators and the client-encryption chain; the server callback still treats the same setting as final.</en>
+            // </lang>
+            bool encryptedSubmissionRequired = PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired();
+            RequiredFieldValidator3.Enabled = !encryptedSubmissionRequired;
+            RequiredFieldValidator4.Enabled = !encryptedSubmissionRequired;
+            CompareValidator1.Enabled = !encryptedSubmissionRequired;
+
+            if (!encryptedSubmissionRequired)
+            {
+                // <lang>
+                //   <zh-CN>未要求加密时移除客户端 onclick，让旧明文兼容路径保持原有 Web Forms 提交。</zh-CN>
+                //   <en>When encryption is not required, remove the client onclick so the legacy plain Web Forms submission path remains intact.</en>
+                // </lang>
+                RegisterBtn.OnClientClick = string.Empty;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>加密路径只注册既有脚本资源；脚本地址由站点解析，不能从请求参数拼接。</zh-CN>
+            //   <en>The encrypted path registers only existing script resources; URLs are site-resolved and never composed from request parameters.</en>
+            // </lang>
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(Register),
+                "JSEncryptIE6",
+                ResolveUrl("~/Scripts/Security/jsencrypt-ie6.min.js"));
+
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(Register),
+                "PortalLoginPasswordEncryption",
+                ResolveUrl("~/Scripts/Security/PortalLoginPasswordEncryption.js"));
+
+            // <lang>
+            //   <zh-CN>把字段描述、公钥端点和消息控件 ID 编码为 JavaScript 字符串，避免标记层注入。</zh-CN>
+            //   <en>Encode field descriptors, the public-key endpoint, and the message-control id as JavaScript strings to protect the markup boundary.</en>
+            // </lang>
+            RegisterBtn.OnClientClick = string.Format(
+                "return PortalLoginPasswordEncryption.encryptPasswordFields([{0},{1}],'{2}','{3}');",
+                BuildPasswordFieldScriptObject(Password.ClientID, EncryptedPassword.ClientID),
+                BuildPasswordFieldScriptObject(ConfirmPassword.ClientID, EncryptedConfirmPassword.ClientID),
+                HttpUtility.JavaScriptStringEncode(ResolveUrl("~/Security/LoginPasswordKey.ashx")),
+                HttpUtility.JavaScriptStringEncode(Message.ClientID));
+        }

@@ -1,0 +1,23 @@
+        private static HttpContext GetHttpContext(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>显式参数优先于线程静态上下文，便于后台/测试调用方提供受控请求容器。</zh-CN>
+            //   <en>Prefers the explicit argument over thread-static context so background or test callers can provide a controlled request container.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+
+            // <lang>
+            //   <zh-CN>没有任何上下文时立即失败，避免用伪造容器掩盖错误的调用生命周期。</zh-CN>
+            //   <en>Fails immediately when no context exists instead of masking an invalid call lifecycle with a fabricated container.</en>
+            // </lang>
+            if (current == null)
+            {
+                throw new InvalidOperationException("当前线程没有可用的 HttpContext，无法读取门户上下文。");
+            }
+
+            // <lang>
+            //   <zh-CN>返回已确认可用的上下文；调用方随后负责遵守 Items 键和对象类型契约。</zh-CN>
+            //   <en>Returns the confirmed context; callers remain responsible for the Items key and object-type contract.</en>
+            // </lang>
+            return current;
+        }

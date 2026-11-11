@@ -1,0 +1,11 @@
+        public bool IsSchemaAvailable()
+        {
+            try
+            {
+                return HasTable(TableName);
+            }
+            catch
+            {
+                return false;
+            }
+        }

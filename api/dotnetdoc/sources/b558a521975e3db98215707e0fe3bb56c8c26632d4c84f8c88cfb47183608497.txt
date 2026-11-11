@@ -1,0 +1,1 @@
+        public const string ModuleDefinitionEdit = "Module.Definition.Edit";

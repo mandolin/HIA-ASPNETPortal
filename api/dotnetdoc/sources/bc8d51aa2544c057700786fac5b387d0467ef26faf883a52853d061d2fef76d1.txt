@@ -1,0 +1,36 @@
+        public static string ResolveLogDirectory()
+        {
+            // <lang>
+            //   <zh-CN>目录仅来自受控部署期运行设置，不接收 HTTP 或业务调用方路径；先去空白并展开环境变量以保留既有配置兼容性。</zh-CN>
+            //   <en>The directory comes only from controlled deployment-time runtime settings, not HTTP or business-caller paths; trim and expand environment variables first to preserve established configuration compatibility.</en>
+            // </lang>
+            string configuredDirectory = PortalRuntimeSettings.GetString(PortalSettingsRegistry.DiagnosticsLogDirectory);
+            if (!string.IsNullOrWhiteSpace(configuredDirectory))
+            {
+                // <lang>
+                //   <zh-CN>展开受控设置中的环境变量并去除首尾空白；该文本仍不来自请求路径。</zh-CN>
+                //   <en>Expand environment variables and trim the controlled setting text; it still never comes from a request path.</en>
+                // </lang>
+                string expanded = Environment.ExpandEnvironmentVariables(configuredDirectory.Trim());
+                if (!Path.IsPathRooted(expanded))
+                {
+                    // <lang>
+                    //   <zh-CN>相对设置始终锚定门户应用基目录，避免按当前工作目录解析。</zh-CN>
+                    //   <en>Anchor a relative setting to the portal application base directory rather than resolving it from the current working directory.</en>
+                    // </lang>
+                    expanded = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, expanded);
+                }
+
+                // <lang>
+                //   <zh-CN>在返回前规范化完整路径；绝对部署设置仍按既有契约保留，不在此 helper 中重新定义部署授权。</zh-CN>
+                //   <en>Normalize the full path before returning; an absolute deployment setting remains allowed by the established contract and this helper does not redefine deployment authorization.</en>
+                // </lang>
+                return Path.GetFullPath(expanded);
+            }
+
+            // <lang>
+            //   <zh-CN>未设置时使用门户基目录内的固定默认位置，避免按环境猜测外部临时目录。</zh-CN>
+            //   <en>When unset, use the fixed location beneath the portal base directory rather than guessing an external temporary directory from the environment.</en>
+            // </lang>
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "Logs");
+        }

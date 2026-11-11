@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>目录页所有请求都先经过查看权限门禁，拒绝时不读取部署包或数据库。</zh-CN>
+            //   <en>Every catalog request passes the view-permission gate before reading packages or databases.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleCatalogView))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在首次请求读取目录，回发由命令事件负责动作并避免覆盖控件状态。</zh-CN>
+            //   <en>Read the catalog only on the initial request; postbacks let command events own actions without overwriting control state.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindPackages();
+            }
+        }

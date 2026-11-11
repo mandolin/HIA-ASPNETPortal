@@ -1,0 +1,276 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.allowedkinds",
+      "kind": "entry",
+      "label": "AllowedKinds",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.allowedkinds",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.allowedkinds",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-ef133bac.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.containsprohibitedfieldname-system.string",
+      "kind": "entry",
+      "label": "ContainsProhibitedFieldName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.containsprohibitedfieldname-system.string",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.containsprohibitedfieldname-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-36ee1d3d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.contractname",
+      "kind": "entry",
+      "label": "ContractName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.contractname",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.contractname",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-c27e81c2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.currentcontractversion",
+      "kind": "entry",
+      "label": "CurrentContractVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.currentcontractversion",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.currentcontractversion",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-798eb9de.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.failure-system.string-system.string",
+      "kind": "entry",
+      "label": "Failure",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.failure-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.failure-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-d0f605dc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.instanceidpattern",
+      "kind": "entry",
+      "label": "InstanceIdPattern",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.instanceidpattern",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.instanceidpattern",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-af12f8cd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.issafetext-system.string-system.int32",
+      "kind": "entry",
+      "label": "IsSafeText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.issafetext-system.string-system.int32",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.issafetext-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-afbe1e17.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.issemanticversion-system.string",
+      "kind": "entry",
+      "label": "IsSemanticVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.issemanticversion-system.string",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.issemanticversion-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-b14e4d8f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.isutctimestamp-system.string",
+      "kind": "entry",
+      "label": "IsUtcTimestamp",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.isutctimestamp-system.string",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.isutctimestamp-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-f0172175.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.isvalidcapabilities-system.object",
+      "kind": "entry",
+      "label": "IsValidCapabilities",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.isvalidcapabilities-system.object",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.isvalidcapabilities-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-43db4911.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.isvalidpayloadvalue-system.string-system.string-system.object",
+      "kind": "entry",
+      "label": "IsValidPayloadValue",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.isvalidpayloadvalue-system.string-system.string-system.object",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.isvalidpayloadvalue-system.string-system.string-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-1513093c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.lookslikeunsafelocation-system.string",
+      "kind": "entry",
+      "label": "LooksLikeUnsafeLocation",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.lookslikeunsafelocation-system.string",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.lookslikeunsafelocation-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-99dd4181.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrules",
+      "kind": "entry",
+      "label": "PayloadRules",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrules",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.payloadrules",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-ec7501d6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.producerid",
+      "kind": "entry",
+      "label": "ProducerId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.producerid",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.producerid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-3c2046ac.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.semanticversionpattern",
+      "kind": "entry",
+      "label": "SemanticVersionPattern",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.semanticversionpattern",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.semanticversionpattern",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-bb32c1bd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.success",
+      "kind": "entry",
+      "label": "Success",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.success",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.success",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-022e964d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.trynormalizeportalinstanceid-system.string-system.string",
+      "kind": "entry",
+      "label": "TryNormalizePortalInstanceId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.trynormalizeportalinstanceid-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.trynormalizeportalinstanceid-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-5fd14646.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.validate-aspnet.starterkit.portal.portalhiaperipheralenvelope",
+      "kind": "entry",
+      "label": "Validate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.validate-aspnet.starterkit.portal.portalhiaperipheralenvelope",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.validate-aspnet.starterkit.portal.portalhiaperipheralenvelope",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-9e1b2b63.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.validatemetadata-system.collections.generic.idictionary-system.string-system.object",
+      "kind": "entry",
+      "label": "ValidateMetadata",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.validatemetadata-system.collections.generic.idictionary-system.string-system.object",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.validatemetadata-system.collections.generic.idictionary-system.string-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-8173e746.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.validatepayload-system.string-system.collections.generic.idictionary-system.string-system.object",
+      "kind": "entry",
+      "label": "ValidatePayload",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.validatepayload-system.string-system.collections.generic.idictionary-system.string-system.object",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.validatepayload-system.string-system.collections.generic.idictionary-system.string-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-12e2d75c.html"
+    }
+  ]
+}

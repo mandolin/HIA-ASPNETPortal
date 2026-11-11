@@ -1,0 +1,4 @@
+        public LeaveRequestDb(PortalBizDbContext context)
+        {
+            this.context = context;
+        }

@@ -1,0 +1,35 @@
+        public bool HasEditPermissions(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>模块编辑不是单独授权，必须先读取模块所属 Tab 的访问规则。</zh-CN>
+            //   <en>Module editing is not standalone authorization; the parent-tab access rule is evaluated first.</en>
+            // </lang>
+            IModuleItem module = _modulesConfig.FindModuleById(moduleId);
+            if (module == null || !module.TabId.HasValue)
+            {
+                return false;
+            }
+
+            ITabItem tab = _tabsConfig.FindTabById(module.TabId.Value);
+            if (tab == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>两个角色集合都必须匹配，保持旧门户的严格组合规则。</zh-CN>
+            //   <en>Both role sets must match to preserve the legacy Portal's strict combined rule.</en>
+            // </lang>
+            string editRoles = module.EditRoles;
+            string accessRoles = tab.AccessRoles;
+
+            // <lang>
+            //   <zh-CN>任一集合不匹配即拒绝编辑。</zh-CN>
+            //   <en>Editing is denied when either role set does not match.</en>
+            // </lang>
+            if (!IsInRoles(accessRoles) || !IsInRoles(editRoles))
+            {
+                return false;
+            }
+            return true;
+        }

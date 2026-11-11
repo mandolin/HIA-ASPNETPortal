@@ -1,0 +1,55 @@
+        public static IList<KeyValuePair<GroupDefinition, IList<string>>> BuildGroupedView(
+            IEnumerable<string> navigationKeys, string configuration,
+            out IList<string> ungroupedKeys, out bool degraded)
+        {
+            // <lang>
+            //   <zh-CN>输入序列为空时仍返回完整分组骨架（成员为空），保证渲染层能画出「空态分组」而不崩溃。</zh-CN>
+            //   <en>An empty input still returns the full group skeleton with empty members so the renderer can draw empty-state groups without failing.</en>
+            // </lang>
+            IEnumerable<string> safeKeys = navigationKeys ?? Enumerable.Empty<string>();
+            List<string> flat = new List<string>();
+            List<KeyValuePair<GroupDefinition, IList<string>>> result = new List<KeyValuePair<GroupDefinition, IList<string>>>();
+
+            // <lang>
+            //   <zh-CN>每个分组独立收集成员；分组顺序来自词表，不依赖输入序列顺序，避免数据库排序变化影响导航层级。</zh-CN>
+            //   <en>Members are collected per group; group order comes from the vocabulary rather than the input sequence, so database ordering cannot change the navigation hierarchy.</en>
+            // </lang>
+            Dictionary<string, List<string>> byGroup = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+            bool anyDegraded = false;
+            foreach (string navigationKey in safeKeys)
+            {
+                GroupDefinition definition;
+                bool itemDegraded;
+                if (TryResolveGroup(navigationKey, configuration, out definition, out itemDegraded))
+                {
+                    anyDegraded = anyDegraded || itemDegraded;
+                    List<string> members;
+                    if (!byGroup.TryGetValue(definition.GroupKey, out members))
+                    {
+                        members = new List<string>();
+                        byGroup.Add(definition.GroupKey, members);
+                    }
+                    members.Add(navigationKey);
+                }
+                else
+                {
+                    anyDegraded = anyDegraded || itemDegraded;
+                    flat.Add(navigationKey);
+                }
+            }
+
+            degraded = anyDegraded;
+            foreach (GroupDefinition definition in GetGroups())
+            {
+                List<string> members;
+                if (!byGroup.TryGetValue(definition.GroupKey, out members))
+                {
+                    members = new List<string>();
+                }
+                result.Add(new KeyValuePair<GroupDefinition, IList<string>>(
+                    definition, new ReadOnlyCollection<string>(members)));
+            }
+
+            ungroupedKeys = new ReadOnlyCollection<string>(flat);
+            return new ReadOnlyCollection<KeyValuePair<GroupDefinition, IList<string>>>(result);
+        }

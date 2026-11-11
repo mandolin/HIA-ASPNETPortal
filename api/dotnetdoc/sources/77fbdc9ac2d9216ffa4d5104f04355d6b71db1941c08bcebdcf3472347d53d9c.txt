@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition NavigationExcludedNavigationKeyPrefixes =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationExcludedNavigationKeyPrefixes,
+                "按前缀隐藏页签",
+                "逗号分隔的 NavigationKey 前缀，命中的页签整类隐藏；默认 Test.,P22-Test-,P19-Test-。",
+                PortalSettingValueType.String,
+                "Test.,P22-Test-,P19-Test-",
+                true,
+                false,
+                "Admins",
+                "Navigation");

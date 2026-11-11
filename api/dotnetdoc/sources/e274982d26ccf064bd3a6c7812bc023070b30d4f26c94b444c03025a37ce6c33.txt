@@ -1,0 +1,6 @@
+                        <%--
+                          <lang>
+                            <zh-CN>CustomValidator 只是触发服务器路径规则的标记入口；它不把客户端校验视为路径信任或授权证明。</zh-CN>
+                            <en>CustomValidator only invokes the server path rule from markup; client-side validation is not treated as path trust or authorization proof.</en>
+                          </lang>
+                        --%>

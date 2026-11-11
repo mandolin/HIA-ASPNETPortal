@@ -1,0 +1,23 @@
+        protected void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除路径重新校验请求，避免仅凭 ItemId 触发跨模块删除。</zh-CN>
+            //   <en>The delete path revalidates the request, preventing cross-module deletion based only on ItemId.</en>
+            // </lang>
+            IContactItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (itemId != 0)
+            {
+                // <lang>
+                //   <zh-CN>只有既有联系人且已确认属于当前模块时才调用数据层删除。</zh-CN>
+                //   <en>The data layer is called only for an existing contact already confirmed to belong to the current module.</en>
+                // </lang>
+                ContactsDB.DeleteContact(itemId);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

@@ -1,0 +1,65 @@
+        private void BindForm()
+        {
+            if (EmployeeDirectoryAdminDb == null || EmployeeDirectoryDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
+            {
+                DisableForm("P6.3 schema is unavailable. Run the employee organization SQL scripts before editing.");
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>组织标识来自站内请求参数；helper 统一处理缺失、新增、非法值和拒绝回跳。</zh-CN>
+            //   <en>The organization identifier comes from an internal request parameter; the helper handles missing, creation, invalid values and denial redirect consistently.</en>
+            // </lang>
+            int organizationUnitId;
+            if (!TryReadOrganizationUnitId(out organizationUnitId))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>先绑定父级候选，再按新增/编辑路径设置表单值，避免选择器状态被后续绑定覆盖。</zh-CN>
+            //   <en>Bind parent candidates before setting creation/edit values so later data binding cannot overwrite the selector state.</en>
+            // </lang>
+            BindParentList(organizationUnitId);
+            if (organizationUnitId <= 0)
+            {
+                // <lang>
+                //   <zh-CN>新增组织不自动生成编码或名称，避免页面层创造业务标识；管理员必须明确录入。</zh-CN>
+                //   <en>New organizations do not receive generated codes or names at the page layer; administrators must enter business identifiers explicitly.</en>
+                // </lang>
+                TitleLabel.Text = lang.Admin_OrganizationUnitEdit_TitleNew;
+                OrganizationUnitIdField.Value = "0";
+                OriginalUpdatedUtcField.Value = string.Empty;
+                SortOrderTextBox.Text = "0";
+                IsActiveCheckBox.Checked = true;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>编辑路径把 `UpdatedUtc` 写入隐藏域，保存时用于检测其他管理员是否已修改同一组织。</zh-CN>
+            //   <en>The edit path stores `UpdatedUtc` in a hidden field so save can detect whether another administrator changed the same organization.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>读取单个组织只用于低敏表单回填；记录缺失时禁用表单，不从缺失实体推导新增。</zh-CN>
+            //   <en>Read the single organization only for low-sensitivity form hydration; when absent, disable the form instead of deriving a creation from a missing entity.</en>
+            // </lang>
+            IOrganizationUnitInfo organization = EmployeeDirectoryAdminDb.GetOrganizationUnitById(organizationUnitId);
+            if (organization == null)
+            {
+                DisableForm("Organization unit was not found.");
+                return;
+            }
+
+            TitleLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_OrganizationUnitEdit_TitleEdit, Server.HtmlEncode(organization.DisplayName));
+            OrganizationUnitIdField.Value = organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture);
+            OriginalUpdatedUtcField.Value = FormatRoundTripUtc(organization.UpdatedUtc);
+            OrganizationCodeTextBox.Text = organization.OrganizationCode;
+            DisplayNameTextBox.Text = organization.DisplayName;
+            SortOrderTextBox.Text = organization.SortOrder.ToString(CultureInfo.InvariantCulture);
+            IsActiveCheckBox.Checked = organization.IsActive;
+            SelectListValue(
+                ParentOrganizationList,
+                organization.ParentOrganizationUnitId.HasValue
+                    ? organization.ParentOrganizationUnitId.Value.ToString(CultureInfo.InvariantCulture)
+                    : string.Empty);
+        }

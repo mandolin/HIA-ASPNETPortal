@@ -1,0 +1,6 @@
+        public bool IsSchemaAvailable()
+        {
+            return HasTable(EmployeeTableName) &&
+                   HasTable(BindingTableName) &&
+                   HasTable("Portal_Users");
+        }

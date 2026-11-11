@@ -1,0 +1,2 @@
+        [Dependency]
+        public IModuleDefsDb ModuleDefConfig { private get; set; }

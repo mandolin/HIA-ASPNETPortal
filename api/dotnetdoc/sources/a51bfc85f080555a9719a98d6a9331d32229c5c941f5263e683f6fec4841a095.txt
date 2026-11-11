@@ -1,0 +1,25 @@
+        public static string ComputeSha256Hex(byte[] content)
+        {
+            // <lang>
+            //   <zh-CN>拒绝 null 而非静默返回空串，避免「未取到内容」被误当作合法摘要。</zh-CN>
+            //   <en>Reject null rather than silently returning an empty string, so "content not obtained" cannot be mistaken for a valid digest.</en>
+            // </lang>
+            if (content == null)
+            {
+                throw new ArgumentNullException("content");
+            }
+
+            // <lang>
+            //   <zh-CN>使用 4.8 自带的 SHA256.Create；using 确保哈希对象释放，不引入第三方依赖。</zh-CN>
+            //   <en>Use the framework's SHA256.Create; using disposes the hash object and adds no third-party dependency.</en>
+            // </lang>
+            using (SHA256 algorithm = SHA256.Create())
+            {
+                // <lang>
+                //   <zh-CN>BitConverter 输出带连字符大写，去掉连字符并转小写，与离线工具产物可逐字互印证。</zh-CN>
+                //   <en>BitConverter emits hyphenated uppercase; removing hyphens and lowercasing makes the result character-for-character comparable with the offline tool.</en>
+                // </lang>
+                byte[] digest = algorithm.ComputeHash(content);
+                return BitConverter.ToString(digest).Replace("-", string.Empty).ToLowerInvariant();
+            }
+        }

@@ -1,0 +1,23 @@
+        private static bool IsAuditTableAvailable(SqlConnection connection)
+        {
+            // <lang>
+            //   <zh-CN>命令使用受控常量表名进行 OBJECT_ID 检查；不接受动态 schema 或表名，避免该兼容检查变成 SQL 拼接入口。</zh-CN>
+            //   <en>The command uses a controlled constant table name for the OBJECT_ID check; it accepts no dynamic schema or table name, preventing this compatibility check from becoming a SQL-concatenation entry point.</en>
+            // </lang>
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                // <lang>
+                //   <zh-CN>只读取一个标量存在性值，不查询审计正文；表不存在是旧 schema 的预期降级分支。</zh-CN>
+                //   <en>Read one scalar existence value only and never query audit body text; a missing table is the expected legacy-schema degradation branch.</en>
+                // </lang>
+                command.CommandText =
+                    "SELECT CASE WHEN OBJECT_ID(N'[dbo].[" + AuditTableName + "]', N'U') IS NULL THEN 0 ELSE 1 END";
+
+                // <lang>
+                //   <zh-CN>标量值来自受控 CASE 表达式；转换前仍检查 null，避免 provider 在异常 schema 情况下把 null 转换为误导性 true。</zh-CN>
+                //   <en>The scalar value comes from a controlled CASE expression; still check null before conversion so an exceptional schema state cannot turn null into a misleading true.</en>
+                // </lang>
+                object value = command.ExecuteScalar();
+                return value != null && Convert.ToInt32(value) == 1;
+            }
+        }

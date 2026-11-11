@@ -1,0 +1,54 @@
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // <lang>
+            //   <zh-CN>旧用户和角色仍使用 `Portal_UserRoles` 多对多表；这里只声明现有结构，不改变表名或键名。</zh-CN>
+            //   <en>Legacy users and roles still use the `Portal_UserRoles` many-to-many table; this declares the existing structure without changing table or key names.</en>
+            // </lang>
+            modelBuilder.Entity<RoleItem>()
+                .HasMany(role => role.Users)
+                .WithMany(user => user.Roles)
+                .Map(map =>
+                {
+                    // <lang>
+                    //   <zh-CN>指定旧关联表名。</zh-CN>
+                    //   <en>Specify the legacy join-table name.</en>
+                    // </lang>
+                    map.ToTable("Portal_UserRoles");
+
+                    // <lang>
+                    //   <zh-CN>保持旧映射方向：左键为 RoleId。</zh-CN>
+                    //   <en>Keep the legacy mapping direction: the left key is RoleId.</en>
+                    // </lang>
+                    map.MapLeftKey("RoleId");
+
+                    // <lang>
+                    //   <zh-CN>保持旧映射方向：右键为 UserId。</zh-CN>
+                    //   <en>Keep the legacy mapping direction: the right key is UserId.</en>
+                    // </lang>
+                    map.MapRightKey("UserId");
+                });
+
+            // <lang>
+            //   <zh-CN>注册审核表不建立 EF 导航关系，保持对旧 `Portal_Users` 映射的低侵入扩展。</zh-CN>
+            //   <en>Registration review tables intentionally avoid EF navigation properties to keep legacy `Portal_Users` mapping stable.</en>
+            // </lang>
+            modelBuilder.Entity<RegistrationInviteItem>()
+                .HasKey(invite => invite.InviteCode);
+
+            // <lang>
+            //   <zh-CN>凭据和安全版本表以 UserId 为主键，不建立 EF 导航关系，避免旧 UserItem 跟踪状态被扩大。</zh-CN>
+            //   <en>Credential and security-version tables use UserId as their key and avoid EF navigation relationships so legacy UserItem tracking remains narrow.</en>
+            // </lang>
+            modelBuilder.Entity<UserCredentialItem>()
+                .HasKey(credential => credential.UserId);
+
+            modelBuilder.Entity<UserSecurityStateItem>()
+                .HasKey(state => state.UserId);
+
+            // <lang>
+            //   <zh-CN>用户资料扩展同样以 UserId 为主键，不建立导航关系，避免旧账号实体承担新生命周期状态。</zh-CN>
+            //   <en>User-profile extensions also use UserId as the key and avoid navigation properties so the legacy user entity does not own the new lifecycle status.</en>
+            // </lang>
+            modelBuilder.Entity<UserProfileItem>()
+                .HasKey(profile => profile.UserId);
+        }

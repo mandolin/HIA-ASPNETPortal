@@ -1,0 +1,1 @@
+        public const string PortalTabsEdit = "Portal.Tabs.Edit";

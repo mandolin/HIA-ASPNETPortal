@@ -1,0 +1,70 @@
+        public static bool HasPermission(string permissionKey)
+        {
+            // <lang>
+            //   <zh-CN>读取当前请求上下文，仅用于身份来源和低敏诊断；不把请求数据本身带入授权查询。</zh-CN>
+            //   <en>Capture the current request context only for identity sourcing and low-sensitivity diagnostics; do not carry request data into the authorization query.</en>
+            // </lang>
+            HttpContext context = HttpContext.Current;
+            // <lang>
+            //   <zh-CN>规范化后的权限键是后续管理员快速路径、角色查询和诊断消息的唯一键值。</zh-CN>
+            //   <en>The normalized permission key is the sole key used by the administrator fast path, role lookup, and diagnostic messages.</en>
+            // </lang>
+            string normalizedKey;
+            if (!TryNormalizePermissionKey(permissionKey, context, out normalizedKey))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>兼容管理员角色拥有已定义权限；在查询数据库前短路，避免无必要的角色存储依赖。</zh-CN>
+            //   <en>The compatibility administrator role owns defined permissions; short-circuit before database lookup to avoid an unnecessary role-store dependency.</en>
+            // </lang>
+            if (IsAdmin())
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>只取已认证身份名称；缺少用户主体时 fail-closed 拒绝权限。</zh-CN>
+            //   <en>Read only the authenticated identity name; fail closed when no user principal is available.</en>
+            // </lang>
+            string userName = GetCurrentUserName(context);
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>从受控 Unity 容器取得角色数据门面；容器缺失时保持拒绝而不伪造权限。</zh-CN>
+                //   <en>Resolve the role-data facade from the controlled Unity container; deny when the container is unavailable instead of fabricating permission.</en>
+                // </lang>
+                IRolesDb rolesDb = ResolveRolesDb();
+                if (rolesDb == null)
+                {
+                    PortalDiagnostics.Warn(
+                        "Authorization.PermissionLookup",
+                        "Permission lookup skipped because IRolesDb is unavailable. PermissionKey=" + normalizedKey,
+                        context);
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>只在角色数据返回的稳定权限键中做不区分大小写匹配，不把角色名或未知键直接当作权限。</zh-CN>
+                //   <en>Match case-insensitively only against stable permission keys returned by the role store; neither role names nor unknown keys become permissions directly.</en>
+                // </lang>
+                return rolesDb
+                    .GetPermissionKeysByUserName(userName)
+                    .Any(key => string.Equals(key, normalizedKey, StringComparison.OrdinalIgnoreCase));
+            }
+            catch (Exception exception)
+            {
+                PortalDiagnostics.Error(
+                    "Authorization.PermissionLookup",
+                    "Permission lookup failed. PermissionKey=" + normalizedKey,
+                    exception,
+                    context);
+                return false;
+            }
+        }

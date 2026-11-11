@@ -1,0 +1,4 @@
+        public BusinessApplicationDb(PortalBizDbContext context)
+        {
+            this.context = context;
+        }

@@ -1,0 +1,4 @@
+        public static bool IsValidPackageId(string packageId)
+        {
+            return !string.IsNullOrWhiteSpace(packageId) && PackageIdPattern.IsMatch(packageId.Trim());
+        }

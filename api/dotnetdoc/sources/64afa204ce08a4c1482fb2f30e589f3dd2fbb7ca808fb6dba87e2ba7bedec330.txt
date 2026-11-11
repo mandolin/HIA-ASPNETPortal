@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_ColumnField {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ColumnField", resourceCulture);
+            }
+        }

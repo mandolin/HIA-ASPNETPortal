@@ -1,0 +1,20 @@
+        public void UpdateModuleDefinition(int defId, string name, string desktopSrc, string mobileSrc)
+        {
+            // <lang>
+            //   <zh-CN>使用严格查询让缺失或重复的定义立即暴露，避免运行时悄悄保留错误路径。</zh-CN>
+            //   <en>Use a strict lookup so missing or duplicate definitions surface immediately instead of silently keeping incorrect paths at runtime.</en>
+            // </lang>
+            var modDefRow = _context.ModuleDefinitions.Single(i => i.ModuleDefId == defId);
+
+            modDefRow.FriendlyName = name;
+            modDefRow.DesktopSourceFile = desktopSrc;
+            modDefRow.MobileSourceFile = mobileSrc;
+
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>保存后刷新快照，使之后的模块装配立即使用更新后的定义。</zh-CN>
+            //   <en>Refresh the snapshot after saving so later module assembly uses the updated definition immediately.</en>
+            // </lang>
+            _items = _context.ModuleDefinitions.ToList();
+        }

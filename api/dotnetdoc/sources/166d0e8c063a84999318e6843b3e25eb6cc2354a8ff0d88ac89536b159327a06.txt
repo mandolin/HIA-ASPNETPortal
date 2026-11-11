@@ -1,0 +1,1 @@
+        public string Reason { get; private set; }

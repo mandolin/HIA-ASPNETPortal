@@ -1,0 +1,107 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.configuretargetprovider-system.func-system.int32",
+      "kind": "entry",
+      "label": "ConfigureTargetProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.configuretargetprovider-system.func-system.int32",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpassworditerationpolicy.configuretargetprovider-system.func-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpassworditerationpo-3375a80c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpassworditerationpolicy.minimumiterationcount",
+      "kind": "entry",
+      "label": "MinimumIterationCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpassworditerationpolicy.minimumiterationcount",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpassworditerationpolicy.minimumiterationcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpassworditerationpo-14081057.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.needsrehash-system.int32",
+      "kind": "entry",
+      "label": "NeedsRehash",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.needsrehash-system.int32",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpassworditerationpolicy.needsrehash-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpassworditerationpo-64315dae.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.needsrehash-system.int32-system.int32",
+      "kind": "entry",
+      "label": "NeedsRehash",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.needsrehash-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpassworditerationpolicy.needsrehash-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpassworditerationpo-69d4d8de.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.resolvetargetiterationcount",
+      "kind": "entry",
+      "label": "ResolveTargetIterationCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpassworditerationpolicy.resolvetargetiterationcount",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpassworditerationpolicy.resolvetargetiterationcount",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpassworditerationpo-52e38591.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpassworditerationpolicy.targetproviderlock",
+      "kind": "entry",
+      "label": "TargetProviderLock",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpassworditerationpolicy.targetproviderlock",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpassworditerationpolicy.targetproviderlock",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpassworditerationpo-d4e9d2a8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpassworditerationpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpassworditerationpolicy.targetprovider",
+      "kind": "entry",
+      "label": "targetProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpassworditerationpolicy.targetprovider",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpassworditerationpolicy.targetprovider",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpassworditerationpo-b8ae0f2f.html"
+    }
+  ]
+}

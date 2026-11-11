@@ -1,0 +1,34 @@
+        private sealed class EmployeeBindingProjection
+        {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工标识。</zh-CN>
+            ///   <en>Employee identifier.</en>
+            /// </lang>
+            /// </summary>
+            public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
+            public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
+            public string DisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工状态。</zh-CN>
+            ///   <en>Employee status.</en>
+            /// </lang>
+            /// </summary>
+            public string EmploymentStatus { get; set; }
+        }

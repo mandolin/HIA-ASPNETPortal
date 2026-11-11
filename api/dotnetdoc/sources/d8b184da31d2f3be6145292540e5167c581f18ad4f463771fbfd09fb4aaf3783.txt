@@ -1,0 +1,1 @@
+        public string Sha256Hex { get; private set; }

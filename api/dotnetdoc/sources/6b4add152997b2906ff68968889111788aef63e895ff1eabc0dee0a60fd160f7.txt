@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition DiagnosticsLogDirectory =
+            new PortalSettingDefinition(
+                PortalSettingKeys.DiagnosticsLogDirectory,
+                "诊断日志目录",
+                "诊断日志文件目录；留空或未配置时使用 App_Data/Logs。",
+                PortalSettingValueType.Path,
+                "App_Data/Logs",
+                false,
+                true,
+                "Admins",
+                "Diagnostics");

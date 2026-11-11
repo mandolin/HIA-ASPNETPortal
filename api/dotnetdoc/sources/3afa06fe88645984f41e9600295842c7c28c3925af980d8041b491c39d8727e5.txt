@@ -1,0 +1,22 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每次生命周期入口复核能力治理查看权限；拒绝时不取数、不渲染，拒绝出口沿用既有集中重定向。</zh-CN>
+            //   <en>Recheck the capability-governance view permission on every lifecycle entry; on denial, fetch nothing and render nothing, reusing the existing centralized denial exit.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EnterpriseCapabilityView))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>页面为纯只读视图、无回发动作；仅在首次请求渲染，避免无意义的重算。</zh-CN>
+            //   <en>The page is a pure read-only view with no postback action, so it renders only on the initial request to avoid pointless recomputation.</en>
+            // </lang>
+            if (IsPostBack)
+            {
+                return;
+            }
+
+            RenderMatrix();
+        }

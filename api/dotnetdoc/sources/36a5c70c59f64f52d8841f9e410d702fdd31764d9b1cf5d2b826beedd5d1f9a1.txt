@@ -1,0 +1,7 @@
+            public CollaborationItemActorAuthorization(int actorUserId, string actorName, string[] permissionKeys, bool isAdministrator)
+            {
+                ActorUserId = actorUserId;
+                ActorName = actorName;
+                PermissionKeys = permissionKeys ?? new string[0];
+                IsAdministrator = isAdministrator;
+            }

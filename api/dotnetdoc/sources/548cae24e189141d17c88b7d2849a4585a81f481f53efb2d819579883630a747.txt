@@ -1,0 +1,6 @@
+        private static bool IsReviewStatus(string status)
+        {
+            return string.Equals(status, EmployeeProfileCorrectionRequestStatuses.Reviewed, StringComparison.Ordinal) ||
+                   string.Equals(status, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal) ||
+                   string.Equals(status, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal);
+        }

@@ -1,0 +1,4 @@
+        private PortalNavigationGroupView.GroupTabView AsGroupTab(object dataItem)
+        {
+            return dataItem as PortalNavigationGroupView.GroupTabView;
+        }

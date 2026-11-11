@@ -1,0 +1,6 @@
+            <%--
+            <lang>
+              <zh-CN>桌面原始 HTML 输入是受信任管理员边界；ValidateRequest=false 只满足旧回发兼容，不能替代权限、审计和内容治理。</zh-CN>
+              <en>The desktop raw-HTML input is restricted to trusted administrators; ValidateRequest=false preserves legacy postback compatibility and does not replace permission, audit, or content governance.</en>
+            </lang>
+            --%>

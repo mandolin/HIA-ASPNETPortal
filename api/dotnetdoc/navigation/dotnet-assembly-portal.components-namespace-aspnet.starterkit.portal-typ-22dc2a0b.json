@@ -1,0 +1,81 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "kind": "entry",
+      "label": "FormatSixElementSummary",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageauditformatter.formatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditf-e34f36eb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string",
+      "kind": "entry",
+      "label": "IsRegisteredAction",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredaction-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditf-f70fe65d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string",
+      "kind": "entry",
+      "label": "IsRegisteredOutcome",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageauditformatter.isregisteredoutcome-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditf-fbdbc05f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength",
+      "kind": "entry",
+      "label": "MaxSummaryLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalonlinepackageauditformatter.maxsummarylength",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalonlinepackageauditf-f853295d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackageauditformatter:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryFormatSixElementSummary",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageAuditFormatter.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackageauditformatter.tryformatsixelementsummary-system.string-system.string-system.string-system.string-system.datetime-system.datetime-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackageauditf-4d8d6481.html"
+    }
+  ]
+}

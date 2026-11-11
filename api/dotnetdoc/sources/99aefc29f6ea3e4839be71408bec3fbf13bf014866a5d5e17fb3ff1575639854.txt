@@ -1,0 +1,400 @@
+    public partial class EmployeeProfileCorrectionRequest : PortalModuleControl<EmployeeProfileCorrectionRequest>
+    {
+        // <lang>
+        //   <zh-CN>限制前台列表只展示最近少量请求，避免模块在一次回发中加载无界历史记录。</zh-CN>
+        //   <en>Limit the front-end list to a small recent window so one postback cannot load unbounded request history.</en>
+        // </lang>
+        private const int RecentRequestLimit = 10;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户数据访问服务，用于把当前登录名解析为门户用户标识。</zh-CN>
+        ///   <en>User data service used to resolve the current sign-in name to a Portal user identifier.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IUsersDb UsersDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工资料更正请求模块数据访问服务。</zh-CN>
+        ///   <en>Employee-profile correction-request module data service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IEmployeeProfileCorrectionRequestDb CorrectionRequestDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务，用于把资料更正请求同步为后台待办。</zh-CN>
+        ///   <en>Lightweight work-item data service used to mirror correction requests into administration work items.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化员工资料更正请求模块。</zh-CN>
+        ///   <en>Initializes the employee-profile correction-request module.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载事件的 Web Forms 控件。</zh-CN>
+        ///   <en>Web Forms control that raised the load event.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；本回调不依赖其扩展字段。</zh-CN>
+        ///   <en>Page-load event arguments; this callback does not depend on extension fields.</en>
+        /// </l>
+        /// </param>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>仅在首次请求建立字段选项和资料快照；回发由控件状态保留用户输入，避免覆盖尚未提交的值。</zh-CN>
+            //   <en>Build field options and the profile snapshot only on the first request; postbacks retain control state so unsubmitted values are not overwritten.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>先固定可提交字段白名单，再绑定资料和最近请求，保证展示与提交使用同一组字段语义。</zh-CN>
+                //   <en>Establish the submit-field allowlist before binding the profile and recent requests so display and submission share one field vocabulary.</en>
+                // </lang>
+                BindFieldList();
+                BindProfile();
+            }
+
+            // <lang>
+            //   <zh-CN>W69：渲染期门禁——只有持有提交或管理权限的用户才启用提交入口；按钮状态只是界面提示，真正的授权判定在提交时由服务端再次执行。</zh-CN>
+            //   <en>W69 render-time gate: only users holding the submit or administration permission get an enabled submit entry; the button state is a UI hint only, and the real authorization decision is repeated server-side on submit.</en>
+            // </lang>
+            bool canSubmit = IsCurrentUserAuthenticated() && PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+
+            SubmitButton.Enabled = canSubmit;
+            if (!canSubmit)
+            {
+                // <lang>
+                //   <zh-CN>禁用入口并给出低敏说明：避免用户填完表单才发现无法提交，也不泄露具体角色或权限配置。</zh-CN>
+                //   <en>Disable the entry and show a low-sensitivity explanation so users do not discover the restriction only after filling the form, without leaking role or permission configuration.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoPermission);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交当前绑定员工的资料更正请求。</zh-CN>
+        ///   <en>Submits a profile correction request for the current bound employee.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发提交事件的按钮控件。</zh-CN>
+        ///   <en>Button control that raised the submit event.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>按钮点击事件参数；本回调不依赖其扩展字段。</zh-CN>
+        ///   <en>Button-click event arguments; this callback does not depend on extension fields.</en>
+        /// </l>
+        /// </param>
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>身份解析失败时使用零值继续进入资料门禁，由统一不可用提示隐藏具体数据访问原因。</zh-CN>
+            //   <en>Use zero when identity resolution fails and let the profile gate produce the shared low-detail unavailable message.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+
+            // <lang>
+            //   <zh-CN>W69：提交前再次校验权限。按钮启用状态来自上一次渲染，可被绕过，不能作为授权依据；校验失败即拒绝并写授权失败审计。</zh-CN>
+            //   <en>W69: re-check permission before submitting. The enabled button state comes from the previous render and can be bypassed, so it is not an authorization basis; a failed check is denied and recorded as an authorization-failure audit.</en>
+            // </lang>
+            if (!PortalAuthorization.HasAnyPermission(
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin))
+            {
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.BusinessModuleCategory,
+                    PortalOperationAuditEvents.AccessDenied,
+                    "Request",
+                    Context.Request.Path ?? string.Empty,
+                    "Profile correction submit denied. RequiredAny=" +
+                        PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit + "|" +
+                        PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin,
+                    Context,
+                    null,
+                    "Failure");
+
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoPermission);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>资料快照由服务按用户绑定关系返回；模块不接受客户端提交的员工标识作为信任来源。</zh-CN>
+            //   <en>The service returns the profile snapshot from the user's binding; the module never trusts a client-supplied employee identifier.</en>
+            // </lang>
+            EmployeeProfileCorrectionProfileView profile = GetCurrentProfile(userId);
+            if (profile == null)
+            {
+                // <lang>
+                //   <zh-CN>没有可用在职绑定时停止写入，避免把请求挂到未知员工或未初始化 schema。</zh-CN>
+                //   <en>Stop before writes when no active binding is available, preventing a request from attaching to an unknown employee or an uninitialized schema.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>字段名来自服务器生成的白名单控件；仍保留为独立值，供当前值比较和参数化提交共同使用。</zh-CN>
+            //   <en>The field name comes from a server-generated allowlist control and is retained as one value for both current-value comparison and parameterized submission.</en>
+            // </lang>
+            string fieldName = FieldNameList.SelectedValue;
+
+            // <lang>
+            //   <zh-CN>建议值和备注在离开控件边界时统一裁剪；长度分别匹配持久化字段限制。</zh-CN>
+            //   <en>Trim and bound the proposed value and note at the control boundary; each limit matches its persistence field.</en>
+            // </lang>
+            string proposedValue = NormalizeInput(ProposedValueTextBox.Text, 512);
+            string requestNote = NormalizeInput(RequestNoteTextBox.Text, 1000);
+            if (string.IsNullOrWhiteSpace(proposedValue))
+            {
+                // <lang>
+                //   <zh-CN>空建议没有可审核的业务事实，因此不调用数据访问层。</zh-CN>
+                //   <en>An empty proposal has no reviewable business fact, so do not call the data-access layer.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>按白名单字段读取当前值，拒绝无变化请求，减少无意义的待办和审计记录。</zh-CN>
+            //   <en>Read the current value through the allowlist and reject unchanged requests to avoid meaningless work items and audit records.</en>
+            // </lang>
+            if (string.Equals(GetCurrentValue(profile, fieldName), proposedValue, StringComparison.Ordinal))
+            {
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoChangeNeeded);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>提交对象只包含服务已确认的用户、员工和绑定事实，以及裁剪后的低敏文本。</zh-CN>
+            //   <en>The submit object contains only service-confirmed user, employee, and binding facts plus bounded low-sensitivity text.</en>
+            // </lang>
+            EmployeeProfileCorrectionRequestResult result = CorrectionRequestDb.SubmitRequest(
+                new EmployeeProfileCorrectionSubmitRequest
+                {
+                    UserId = userId,
+                    EmployeeId = profile.EmployeeId,
+                    BindingId = profile.BindingId,
+                    FieldName = fieldName,
+                    ProposedValue = proposedValue,
+                    RequestNote = requestNote,
+                    SubmittedUtc = DateTime.UtcNow,
+                    SubmittedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                // <lang>
+                //   <zh-CN>服务失败消息由数据访问契约提供；失败时不写审计、不创建待办，也不清空用户输入。</zh-CN>
+                //   <en>The data-access contract supplies the failure message; on failure do not audit, create a work item, or clear user input.</en>
+                // </lang>
+                ShowMessage(result.Message);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>审计记录只写请求编号、员工编号和白名单字段名，不把建议值或备注写入事件正文。</zh-CN>
+            //   <en>Audit only the request id, employee id, and allowlisted field name; do not put the proposed value or note in the event text.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionRequested,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionRequestTargetType,
+                result.RequestId.ToString(CultureInfo.InvariantCulture),
+                "Employee profile correction requested. EmployeeId=" + profile.EmployeeId.ToString(CultureInfo.InvariantCulture) +
+                "; FieldName=" + fieldName,
+                Context);
+
+            // <lang>
+            //   <zh-CN>待办是后台处理入口的补充投影；其失败隔离语义由 TryEnsureWorkItem 保持，不回滚已成功的请求。</zh-CN>
+            //   <en>The work item is a supplemental administration projection; TryEnsureWorkItem isolates its failure and does not roll back a successful request.</en>
+            // </lang>
+            TryEnsureWorkItem(result.RequestId, profile.EmployeeId, fieldName);
+
+            // <lang>
+            //   <zh-CN>成功后清除当前输入并重新绑定资料/历史，使页面反映刚提交的事实而不保留旧表单残留。</zh-CN>
+            //   <en>Clear the submitted inputs and rebind the profile/history after success so the page reflects the new fact without retaining stale form residue.</en>
+            // </lang>
+            ProposedValueTextBox.Text = string.Empty;
+            RequestNoteTextBox.Text = string.Empty;
+            BindProfile();
+            ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageSubmitted);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化允许用户提交更正的低敏字段列表。</zh-CN>
+        ///   <en>Initializes the low-sensitivity fields that users may submit for correction.</en>
+        /// </lang>
+        /// </summary>
+        private void BindFieldList()
+        {
+            // <lang>
+            //   <zh-CN>清空控件状态后重新写入固定选项，避免重复绑定在回发或控件重建时累加条目。</zh-CN>
+            //   <en>Clear the control state before writing the fixed options so rebinding cannot accumulate duplicate entries.</en>
+            // </lang>
+            FieldNameList.Items.Clear();
+
+            // <lang>
+            //   <zh-CN>以下四项是当前允许更正的低敏字段；新增字段必须同时审查数据访问、审计和输出边界。</zh-CN>
+            //   <en>These four entries are the currently permitted low-sensitivity fields; any new field requires a joint review of data access, audit, and output boundaries.</en>
+            // </lang>
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelName, "DisplayName"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelSalutation, "PreferredName"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelWorkEmail, "WorkEmail"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelOrganization, "OrganizationDisplayName"));
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定当前登录用户的员工资料、表单可见性和最近请求列表。</zh-CN>
+        ///   <en>Binds the current signed-in user's employee profile, form visibility, and recent-request list.</en>
+        /// </lang>
+        /// </summary>
+        private void BindProfile()
+        {
+            // <lang>
+            //   <zh-CN>使用与提交相同的当前用户解析路径，保证展示资料与后续写入目标一致。</zh-CN>
+            //   <en>Use the same current-user resolution path as submission so displayed data and any later write target the same identity.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+
+            // <lang>
+            //   <zh-CN>资料读取同时承担 schema/绑定门禁；返回空值时不向页面暴露底层异常或数据库细节。</zh-CN>
+            //   <en>Profile loading also enforces schema and binding gates; a null result must not expose storage errors or database details to the page.</en>
+            // </lang>
+            EmployeeProfileCorrectionProfileView profile = GetCurrentProfile(userId);
+            if (profile == null)
+            {
+                // <lang>
+                //   <zh-CN>隐藏提交面板并绑定空集合，避免旧回发数据继续显示为可提交状态。</zh-CN>
+                //   <en>Hide the submit panel and bind an empty collection so stale postback data cannot remain visibly submittable.</en>
+                // </lang>
+                RequestPanel.Visible = false;
+                // <lang>
+                //   <zh-CN>该分支不渲染列表行，故空态计数显式归零，避免沿用上一次绑定的计数而误判为空态。</zh-CN>
+                //   <en>This branch renders no rows, so the empty-state count is reset explicitly instead of reusing the previous binding's count and mis-reporting an empty state.</en>
+                // </lang>
+                recentRequestRowCount = 0;
+                RecentRequestsRepeater.DataSource = Enumerable.Empty<EmployeeProfileCorrectionRecentRequestRow>();
+                RecentRequestsRepeater.DataBind();
+                ShowMessage(GetUnavailableMessage(userId));
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>资料可用时恢复面板，并先清除旧提示，再对每个展示值进行 HTML 编码。</zh-CN>
+            //   <en>When the profile is available, restore the panel, clear the old message, and HTML-encode each display value.</en>
+            // </lang>
+            RequestPanel.Visible = true;
+            MessageLabel.Text = string.Empty;
+            EmployeeCodeLabel.Text = EncodeDisplay(profile.EmployeeCode);
+            DisplayNameLabel.Text = EncodeDisplay(profile.DisplayName);
+            PreferredNameLabel.Text = EncodeDisplay(EmptyToNone(profile.PreferredName));
+            WorkEmailLabel.Text = EncodeDisplay(EmptyToNone(profile.WorkEmail));
+            OrganizationLabel.Text = EncodeDisplay(EmptyToNone(profile.OrganizationDisplayName));
+            BindRecentRequests(userId);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定当前用户最近提交的资料更正请求。</zh-CN>
+        ///   <en>Binds recent profile-correction requests submitted by the current user.</en>
+        /// </lang>
+        /// </summary>
+        private void BindRecentRequests(int userId)
+        {
+            // <lang>
+            //   <zh-CN>schema 不可用时使用空列表；可用时由数据访问层按固定上限返回当前用户自己的请求。</zh-CN>
+            //   <en>Use an empty list when the schema is unavailable; otherwise let data access return only the current user's requests under the fixed limit.</en>
+            // </lang>
+            IList<EmployeeProfileCorrectionRequestInfo> requests = CorrectionRequestDb == null
+                ? new List<EmployeeProfileCorrectionRequestInfo>()
+                : CorrectionRequestDb.GetRecentRequestsForUser(userId, RecentRequestLimit);
+
+            // <lang>
+            //   <zh-CN>把数据访问投影转换为只读展示行，避免 Repeater 直接接触内部数据访问对象。</zh-CN>
+            //   <en>Convert the data-access projection into display rows so the Repeater does not bind directly to internal data-access objects.</en>
+            // </lang>
+            List<EmployeeProfileCorrectionRecentRequestRow> rows = requests
+                .Select(request => new EmployeeProfileCorrectionRecentRequestRow(request)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前先记录行数：标记层在表尾用该计数决定是否渲染空态提示行（Repeater 在零条时仍渲染表头与表尾）。</zh-CN>
+            //   <en>Record the row count before binding: the markup uses it in the footer to decide whether to render the empty-state hint (a Repeater still renders header and footer with zero rows).</en>
+            // </lang>
+            recentRequestRowCount = rows.Count;
+
+            RecentRequestsRepeater.DataSource = rows;
+
+            // <lang>
+            //   <zh-CN>提交绑定结果，让标记层显示当前用户的最近请求集合。</zh-CN>
+            //   <en>Commit the binding result so the markup renders the current user's recent-request collection.</en>
+            // </lang>
+            RecentRequestsRepeater.DataBind();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近更正请求列表当前已渲染的行数，供标记层在零条时渲染空态提示。</zh-CN>
+        ///   <en>Rows currently rendered in the recent-correction-request list; the markup uses it to render the empty-state hint when it is zero.</en>
+        /// </lang>
+        /// </summary>
+        protected int RecentRequestCount
+        {
+            get { return recentRequestRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近更正请求列表的已渲染行数；由 <c>BindRecentRequests</c> 在绑定前写入，资料不可用分支显式归零。</zh-CN>
+        ///   <en>Rendered row count of the recent-correction-request list; written by <c>BindRecentRequests</c> before binding and reset explicitly when the profile is unavailable.</en>
+        /// </lang>
+        /// </summary>
+        private int recentRequestRowCount;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前用户可提交更正请求的 Active 员工资料。</zh-CN>
+        ///   <en>Reads the active employee profile that the current user may submit correction requests for.</en>
+        /// </lang>
+        /// </summary>
+        private EmployeeProfileCorrectionProfileView GetCurrentProfile(int userId)
+        {
+            // <lang>
+            //   <zh-CN>只有数据服务存在、目标 schema 可用且用户标识为正数时才允许读取员工资料。</zh-CN>
+            //   <en>Read an employee profile only when the data service exists, the target schema is available, and the user id is positive.</en>
+            // </lang>
+            if (CorrectionRequestDb == null ||
+                !CorrectionRequestDb.IsSchemaAvailable() ||
+                userId <= 0)
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>实际员工绑定关系由数据访问层决定；模块不在内存中拼接或覆盖员工主数据。</zh-CN>
+            //   <en>The data-access layer determines the actual employee binding; the module does not assemble or overwrite employee master data in memory.</en>
+            // </lang>
+            return CorrectionRequestDb.GetCurrentProfileForUser(userId);
+        }
+
+        /// <summary>

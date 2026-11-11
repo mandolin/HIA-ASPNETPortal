@@ -1,0 +1,4 @@
+        public HtmlTextsDb(PortalDbContext context)
+        {
+            _context = context;
+        }

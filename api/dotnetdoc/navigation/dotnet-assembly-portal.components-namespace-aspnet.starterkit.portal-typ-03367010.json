@@ -1,0 +1,68 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackagesnapshotentry.-ctor-system.string-system.int64-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapsh-6682bcbf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength",
+      "kind": "entry",
+      "label": "ByteLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackagesnapshotentry.bytelength",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapsh-fc233442.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath",
+      "kind": "entry",
+      "label": "RelativePath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackagesnapshotentry.relativepath",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapsh-e4ceceab.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshotentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex",
+      "kind": "entry",
+      "label": "Sha256Hex",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackagesnapshotentry.sha256hex",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapsh-d4bc544c.html"
+    }
+  ]
+}

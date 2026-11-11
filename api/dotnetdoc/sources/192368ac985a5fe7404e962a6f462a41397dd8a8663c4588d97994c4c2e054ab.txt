@@ -1,0 +1,1 @@
+        public string StateText { get; private set; }

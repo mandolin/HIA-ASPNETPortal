@@ -1,0 +1,5 @@
+        internal static string Common_DocumentMessageExtensionNotAllowed {
+            get {
+                return ResourceManager.GetString("Common_DocumentMessageExtensionNotAllowed", resourceCulture);
+            }
+        }

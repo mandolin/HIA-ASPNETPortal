@@ -1,0 +1,5 @@
+        internal static string EditEvents_Heading {
+            get {
+                return ResourceManager.GetString("EditEvents_Heading", resourceCulture);
+            }
+        }

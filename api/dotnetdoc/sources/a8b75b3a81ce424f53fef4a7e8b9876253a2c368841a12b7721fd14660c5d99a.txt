@@ -1,0 +1,117 @@
+    public sealed class EmployeeProfileCorrectionAdminRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从资料更正请求数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from a profile-correction request data object.</en>
+        /// </lang>
+        /// </summary>
+        internal EmployeeProfileCorrectionAdminRow(EmployeeProfileCorrectionRequestInfo request)
+        {
+            RequestId = request.RequestId;
+            SubmittedUtcText = request.SubmittedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+            EmployeeText = request.EmployeeCode + " / " + request.EmployeeDisplayName;
+            UserText = request.UserId.ToString(CultureInfo.InvariantCulture) + " / " + request.UserName;
+            FieldName = request.FieldName;
+            CurrentValueSnapshot = EmptyToNone(request.CurrentValueSnapshot);
+            ProposedValue = EmptyToNone(request.ProposedValue);
+            RequestNote = EmptyToNone(request.RequestNote);
+            RequestStatus = request.RequestStatus;
+            ReviewText = request.ReviewedUtc.HasValue
+                ? request.ReviewedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture) +
+                  " / " + EmptyToNone(request.ReviewedBy) +
+                  " / " + EmptyToNone(request.ReviewNote)
+                : lang.Admin_EmployeeProfileCorrectionRequests_NotReviewed;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请求标识。</zh-CN>
+        ///   <en>Request identifier.</en>
+        /// </lang>
+        /// </summary>
+        public long RequestId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交时间文本。</zh-CN>
+        ///   <en>Submission time text.</en>
+        /// </lang>
+        /// </summary>
+        public string SubmittedUtcText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工文本。</zh-CN>
+        ///   <en>Employee text.</en>
+        /// </lang>
+        /// </summary>
+        public string EmployeeText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户文本。</zh-CN>
+        ///   <en>User text.</en>
+        /// </lang>
+        /// </summary>
+        public string UserText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>字段名。</zh-CN>
+        ///   <en>Field name.</en>
+        /// </lang>
+        /// </summary>
+        public string FieldName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前值快照。</zh-CN>
+        ///   <en>Current-value snapshot.</en>
+        /// </lang>
+        /// </summary>
+        public string CurrentValueSnapshot { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>建议值。</zh-CN>
+        ///   <en>Proposed value.</en>
+        /// </lang>
+        /// </summary>
+        public string ProposedValue { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工说明。</zh-CN>
+        ///   <en>Employee note.</en>
+        /// </lang>
+        /// </summary>
+        public string RequestNote { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请求状态。</zh-CN>
+        ///   <en>Request status.</en>
+        /// </lang>
+        /// </summary>
+        public string RequestStatus { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理信息文本。</zh-CN>
+        ///   <en>Review information text.</en>
+        /// </lang>
+        /// </summary>
+        public string ReviewText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将空展示值统一转换为页面占位文本。</zh-CN>
+        ///   <en>Converts empty display values to the shared page placeholder text.</en>
+        /// </lang>
+        /// </summary>
+        private static string EmptyToNone(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
+        }
+    }

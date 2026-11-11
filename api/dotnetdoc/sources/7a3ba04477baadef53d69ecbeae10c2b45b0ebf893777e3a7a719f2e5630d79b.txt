@@ -1,0 +1,2 @@
+        [StringLength(30)]
+        public string Status { get; set; }

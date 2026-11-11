@@ -1,0 +1,48 @@
+        public EmployeeDirectoryWriteResult EndBinding(UserEmployeeBindingEndRequest request)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return EmployeeDirectoryWriteResult.Failed("P6.3 binding schema is unavailable.");
+            }
+
+            UserEmployeeBindingEndRequest normalized = NormalizeEndRequest(request);
+            if (normalized.BindingId <= 0)
+            {
+                return EmployeeDirectoryWriteResult.Failed("Binding id is required.");
+            }
+
+            IUserEmployeeBindingInfo binding = GetBindingById(normalized.BindingId);
+            if (binding == null)
+            {
+                return EmployeeDirectoryWriteResult.Missing("The binding no longer exists.");
+            }
+
+            if (!string.Equals(binding.BindingStatus, PortalUserEmployeeBindingStatuses.Active, StringComparison.Ordinal))
+            {
+                return EmployeeDirectoryWriteResult.ConcurrencyConflict("The binding is no longer active. Reload before saving again.");
+            }
+
+            int affectedRows = _context.Database.ExecuteSqlCommand(
+                @"
+UPDATE [dbo].[PortalBiz_UserEmployeeBindings]
+SET [BindingStatus] = N'Ended',
+    [EndedUtc] = SYSUTCDATETIME(),
+    [EndedBy] = @ActorName,
+    [Reason] = @Reason,
+    [UpdatedUtc] = SYSUTCDATETIME(),
+    [UpdatedBy] = @ActorName
+WHERE [BindingId] = @BindingId
+  AND [BindingStatus] = N'Active';",
+                IntParameter("@BindingId", normalized.BindingId),
+                TextParameter("@ActorName", normalized.ActorName, 100),
+                TextParameter("@Reason", normalized.Reason, 200));
+
+            if (affectedRows == 1)
+            {
+                return EmployeeDirectoryWriteResult.Success(normalized.BindingId, "Employee binding ended.");
+            }
+
+            return BindingExists(normalized.BindingId)
+                ? EmployeeDirectoryWriteResult.ConcurrencyConflict("The binding was changed by another request. Reload before saving again.")
+                : EmployeeDirectoryWriteResult.Missing("The binding no longer exists.");
+        }

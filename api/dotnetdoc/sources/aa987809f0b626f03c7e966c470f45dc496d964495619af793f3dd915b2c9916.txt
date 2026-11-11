@@ -1,0 +1,5 @@
+        internal static string EditHtml_PlaceholderAddSummary {
+            get {
+                return ResourceManager.GetString("EditHtml_PlaceholderAddSummary", resourceCulture);
+            }
+        }

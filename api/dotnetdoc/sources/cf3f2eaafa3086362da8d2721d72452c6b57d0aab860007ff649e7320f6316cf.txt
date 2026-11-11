@@ -1,0 +1,15 @@
+    public interface IPortalDbConnectionFactory
+    {
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>创建尚未打开的数据库连接；调用方负责在使用后释放连接。</zh-CN>
+        /// <en>Creates a database connection that has not yet been opened; callers dispose the connection after use.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="profile"><lang><zh-CN>已验证的数据库 profile，提供 provider invariant 和敏感连接串。</zh-CN><en>Validated database profile supplying provider invariant and sensitive connection string.</en></lang></param>
+        /// <returns><lang><zh-CN>由指定 provider 创建、已配置连接串但仍关闭的连接。</zh-CN><en>Connection created by the selected provider, configured with its connection string, and still closed.</en></lang></returns>
+        /// <exception cref="ArgumentNullException"><lang><zh-CN>profile 为 null 时由实现抛出。</zh-CN><en>Thrown by implementations when profile is null.</en></lang></exception>
+        /// <exception cref="ArgumentException"><lang><zh-CN>provider invariant 未注册时由 provider 工厂解析抛出。</zh-CN><en>Thrown by provider-factory resolution when the provider invariant is unregistered.</en></lang></exception>
+        /// <exception cref="InvalidOperationException"><lang><zh-CN>已解析工厂或其 CreateConnection 未提供可用连接时抛出。</zh-CN><en>Thrown when a resolved factory or its CreateConnection method does not provide a usable connection.</en></lang></exception>
+        DbConnection CreateConnection(PortalDatabaseProfile profile);
+    }

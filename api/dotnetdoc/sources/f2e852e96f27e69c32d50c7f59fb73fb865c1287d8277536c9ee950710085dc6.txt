@@ -1,0 +1,39 @@
+        public void ApproveUser(int userId, string approvedBy)
+        {
+            if (!HasRegistrationTable())
+            {
+                throw new InvalidOperationException("Registration metadata table is not available.");
+            }
+
+            DateTime nowUtc = DateTime.UtcNow;
+            var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
+            if (registration == null)
+            {
+                _context.UserRegistrations.Add(new UserRegistrationItem
+                {
+                    UserId = userId,
+                    Status = PortalUserRegistrationStatuses.Approved,
+                    RequiresApproval = false,
+                    RegisteredUtc = nowUtc,
+                    ApprovedUtc = nowUtc,
+                    ApprovedBy = Normalize(approvedBy)
+                });
+            }
+            else
+            {
+                registration.Status = PortalUserRegistrationStatuses.Approved;
+                registration.ApprovedUtc = nowUtc;
+                registration.ApprovedBy = Normalize(approvedBy);
+                registration.RejectedUtc = null;
+                registration.RejectedBy = null;
+                registration.ReviewNote = null;
+            }
+
+            _context.SaveChanges();
+            TrySetUserProfileStatus(
+                userId,
+                PortalUserProfileStatuses.Active,
+                string.Empty,
+                Normalize(approvedBy));
+            IncrementSecurityVersion(userId, "RegistrationApproved");
+        }

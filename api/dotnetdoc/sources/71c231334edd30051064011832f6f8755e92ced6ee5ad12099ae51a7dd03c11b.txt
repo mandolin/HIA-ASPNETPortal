@@ -1,0 +1,1 @@
+        public const string BusinessCollaborationHandle = "Business.Collaboration.Handle";

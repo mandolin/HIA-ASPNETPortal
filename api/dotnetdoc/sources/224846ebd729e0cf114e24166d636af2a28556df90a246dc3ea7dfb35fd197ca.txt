@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>隐藏字段回传记录 ID 和原始更新时间，仅用于服务器并发/目标校验；它们不是客户端可写的授权来源。</zh-CN>
+          <en>These hidden fields round-trip the record ID and original update timestamp for server-side concurrency and target checks; they are not client-writable authorization sources.</en>
+        </lang>
+        --%>

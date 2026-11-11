@@ -1,0 +1,8 @@
+        internal static PortalPasswordHash CreateHash(string password)
+        {
+            // <lang>
+            //   <zh-CN>无参重载沿用组件默认成本，保持与既有调用点完全一致的行为。</zh-CN>
+            //   <en>The parameterless overload keeps the component default cost, preserving behavior identical to existing call sites.</en>
+            // </lang>
+            return CreateHash(password, DefaultIterationCount);
+        }

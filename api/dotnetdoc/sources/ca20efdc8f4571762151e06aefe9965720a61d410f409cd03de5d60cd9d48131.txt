@@ -1,0 +1,39 @@
+        public static string BuildParticipantsText(IList<CollaborationItemParticipantInfo> participants)
+        {
+            if (participants == null || participants.Count == 0)
+            {
+                return lang.Common_NonePlaceholder;
+            }
+
+            StringBuilder builder = new StringBuilder();
+            foreach (CollaborationItemParticipantInfo participant in participants)
+            {
+                // <lang>
+                //   <zh-CN>用户名缺失时用占位文本，保持"用户名（角色）"的形状不塌陷成孤立的括号。</zh-CN>
+                //   <en>A missing user name uses the placeholder so the "user name (role)" shape does not collapse into a bare pair of brackets.</en>
+                // </lang>
+                string userName = participant == null || string.IsNullOrWhiteSpace(participant.UserName)
+                    ? lang.Common_NonePlaceholder
+                    : participant.UserName.Trim();
+                string roleText = participant == null
+                    ? string.Empty
+                    : GetRoleDisplayText(participant.ParticipantRoleKey);
+
+                if (builder.Length > 0)
+                {
+                    builder.Append(", ");
+                }
+
+                // <lang>
+                //   <zh-CN>括号与分隔符由资源格式串提供：不同语言的全角/半角标点不同，硬编码会破坏本地化排版。</zh-CN>
+                //   <en>Brackets and spacing come from the resource format string: full-width and half-width punctuation differ per language, and hard-coding would break localized typography.</en>
+                // </lang>
+                builder.Append(string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Collaboration_ParticipantDisplayFormat,
+                    userName,
+                    roleText));
+            }
+
+            return builder.ToString();
+        }

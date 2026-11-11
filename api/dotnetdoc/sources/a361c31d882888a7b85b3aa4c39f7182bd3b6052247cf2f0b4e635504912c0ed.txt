@@ -1,0 +1,20 @@
+        private static bool TryGetManagedLogDate(string fileName, out DateTime fileDate)
+        {
+            // <lang>
+            //   <zh-CN>先写入稳定失败日期，再以文化无关的受控文件名和 yyyyMMdd UTC 解析；该 helper 不访问磁盘也不抛出格式细节。</zh-CN>
+            //   <en>Set a stable failure date first, then parse only the culture-invariant controlled filename and yyyyMMdd UTC value; this helper neither accesses disk nor throws format detail.</en>
+            // </lang>
+            fileDate = DateTime.MinValue;
+
+            // <lang>
+            //   <zh-CN>保存文件名正则匹配对象，仅用于当前文件日期解析。</zh-CN>
+            //   <en>Keep the filename regex match only for the current file-date parse.</en>
+            // </lang>
+            Match match = ManagedLogFileNamePattern.Match(fileName ?? string.Empty);
+            return match.Success && DateTime.TryParseExact(
+                match.Groups["date"].Value,
+                "yyyyMMdd",
+                System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal,
+                out fileDate);
+        }

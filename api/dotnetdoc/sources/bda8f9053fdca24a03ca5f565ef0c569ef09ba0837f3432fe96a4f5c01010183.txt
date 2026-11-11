@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>XML/XSL 输入只维护受信部署目录内的资源引用；本页不提供上传、在线编辑、外部 URL 或任意物理路径能力。</zh-CN>
+                    <en>XML/XSL inputs maintain references only to trusted deployment resources; this page provides no upload, online editing, external URL, or arbitrary physical-path capability.</en>
+                </lang>
+            --%>

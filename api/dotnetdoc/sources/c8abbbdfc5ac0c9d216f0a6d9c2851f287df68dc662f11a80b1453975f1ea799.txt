@@ -1,0 +1,17 @@
+        private static string NormalizeRequired(string value, string argumentName)
+        {
+            // <lang>
+            //   <zh-CN>空白稳定键会使按键查找和排序失去确定性，因此在对象创建时以固定消息和参数名拒绝，而不回退为显示名或目标。</zh-CN>
+            //   <en>A blank stable key would make key lookup and ordering indeterminate, so reject it at object creation with a fixed message and parameter name rather than falling back to display text or target.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Navigation entry value is required.", argumentName);
+            }
+
+            // <lang>
+            //   <zh-CN>只去除边缘空白；不改变大小写或字符内容，保持注册键与消费方使用的稳定标识一致。</zh-CN>
+            //   <en>Trim edge whitespace only; do not alter casing or character content so the registered key remains consistent with the stable identifier used by consumers.</en>
+            // </lang>
+            return value.Trim();
+        }

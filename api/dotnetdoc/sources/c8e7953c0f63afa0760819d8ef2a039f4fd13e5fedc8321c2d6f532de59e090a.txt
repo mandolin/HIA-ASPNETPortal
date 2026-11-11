@@ -1,0 +1,17 @@
+        public static bool TryNormalizeRequiredSingleLineText(
+            string candidate,
+            int maximumLength,
+            out string normalizedValue)
+        {
+            // <lang>
+            //   <zh-CN>先统一空值和两端空白，再由同一规范值承担长度与控制字符检查；失败时 out 值仍保留可诊断的规范结果。</zh-CN>
+            //   <en>Normalize null and surrounding whitespace first, then apply length and control-character checks to that same value; the out value remains the diagnostic normalized result even on failure.</en>
+            // </lang>
+            normalizedValue = Normalize(candidate);
+            // <lang>
+            //   <zh-CN>必填文本必须同时满足正长度、非空、目标字段长度和无控制字符四项约束。</zh-CN>
+            //   <en>Required text must satisfy positive length, nonempty content, the target-field limit, and no-control-character constraints together.</en>
+            // </lang>
+            return maximumLength > 0 && normalizedValue.Length > 0 && normalizedValue.Length <= maximumLength &&
+                   !ContainsControlCharacter(normalizedValue);
+        }

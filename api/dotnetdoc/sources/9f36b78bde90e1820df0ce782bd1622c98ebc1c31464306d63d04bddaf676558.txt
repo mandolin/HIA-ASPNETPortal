@@ -1,0 +1,18 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先执行查看权限门禁，再仅在首次请求绑定筛选项和列表，避免回发覆盖管理员输入。</zh-CN>
+            //   <en>Apply the view gate first, then bind filters and the list only on the first request so postbacks do not overwrite administrator input.</en>
+            // </lang>
+            if (!EnsureCanViewItems())
+            {
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                BindReferenceDataLists();
+                BindStatusFilter();
+                BindItems();
+            }
+        }

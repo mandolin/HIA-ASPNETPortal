@@ -1,0 +1,5 @@
+        internal static string EditImage_Heading {
+            get {
+                return ResourceManager.GetString("EditImage_Heading", resourceCulture);
+            }
+        }

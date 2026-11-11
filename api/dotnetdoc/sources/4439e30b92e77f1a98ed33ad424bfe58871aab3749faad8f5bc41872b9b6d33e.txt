@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>此入口只转到受信任的模块目录；不在旧控件中开放定义路径或程序集等高风险输入。</zh-CN>
+                    <en>This entry routes only to the trusted module catalog; the legacy control does not expose high-risk definition-path or assembly inputs.</en>
+                </lang>
+            --%>

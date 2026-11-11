@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>编辑链接仅在当前模块可编辑时生成编辑地址；无效或不允许的旧地址回退为编码文本，不产生外部导航副作用。</zh-CN>
+                    <en>The edit link gets an edit address only when the current module is editable; invalid or disallowed legacy addresses fall back to encoded text without external-navigation side effects.</en>
+                </lang>
+            --%>

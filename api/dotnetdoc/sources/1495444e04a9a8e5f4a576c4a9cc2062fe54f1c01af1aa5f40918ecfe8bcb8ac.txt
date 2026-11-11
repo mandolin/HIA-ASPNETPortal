@@ -1,0 +1,134 @@
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>身份解析失败时使用零值继续进入资料门禁，由统一不可用提示隐藏具体数据访问原因。</zh-CN>
+            //   <en>Use zero when identity resolution fails and let the profile gate produce the shared low-detail unavailable message.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+
+            // <lang>
+            //   <zh-CN>W69：提交前再次校验权限。按钮启用状态来自上一次渲染，可被绕过，不能作为授权依据；校验失败即拒绝并写授权失败审计。</zh-CN>
+            //   <en>W69: re-check permission before submitting. The enabled button state comes from the previous render and can be bypassed, so it is not an authorization basis; a failed check is denied and recorded as an authorization-failure audit.</en>
+            // </lang>
+            if (!PortalAuthorization.HasAnyPermission(
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin))
+            {
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.BusinessModuleCategory,
+                    PortalOperationAuditEvents.AccessDenied,
+                    "Request",
+                    Context.Request.Path ?? string.Empty,
+                    "Profile correction submit denied. RequiredAny=" +
+                        PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit + "|" +
+                        PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin,
+                    Context,
+                    null,
+                    "Failure");
+
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoPermission);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>资料快照由服务按用户绑定关系返回；模块不接受客户端提交的员工标识作为信任来源。</zh-CN>
+            //   <en>The service returns the profile snapshot from the user's binding; the module never trusts a client-supplied employee identifier.</en>
+            // </lang>
+            EmployeeProfileCorrectionProfileView profile = GetCurrentProfile(userId);
+            if (profile == null)
+            {
+                // <lang>
+                //   <zh-CN>没有可用在职绑定时停止写入，避免把请求挂到未知员工或未初始化 schema。</zh-CN>
+                //   <en>Stop before writes when no active binding is available, preventing a request from attaching to an unknown employee or an uninitialized schema.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>字段名来自服务器生成的白名单控件；仍保留为独立值，供当前值比较和参数化提交共同使用。</zh-CN>
+            //   <en>The field name comes from a server-generated allowlist control and is retained as one value for both current-value comparison and parameterized submission.</en>
+            // </lang>
+            string fieldName = FieldNameList.SelectedValue;
+
+            // <lang>
+            //   <zh-CN>建议值和备注在离开控件边界时统一裁剪；长度分别匹配持久化字段限制。</zh-CN>
+            //   <en>Trim and bound the proposed value and note at the control boundary; each limit matches its persistence field.</en>
+            // </lang>
+            string proposedValue = NormalizeInput(ProposedValueTextBox.Text, 512);
+            string requestNote = NormalizeInput(RequestNoteTextBox.Text, 1000);
+            if (string.IsNullOrWhiteSpace(proposedValue))
+            {
+                // <lang>
+                //   <zh-CN>空建议没有可审核的业务事实，因此不调用数据访问层。</zh-CN>
+                //   <en>An empty proposal has no reviewable business fact, so do not call the data-access layer.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>按白名单字段读取当前值，拒绝无变化请求，减少无意义的待办和审计记录。</zh-CN>
+            //   <en>Read the current value through the allowlist and reject unchanged requests to avoid meaningless work items and audit records.</en>
+            // </lang>
+            if (string.Equals(GetCurrentValue(profile, fieldName), proposedValue, StringComparison.Ordinal))
+            {
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoChangeNeeded);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>提交对象只包含服务已确认的用户、员工和绑定事实，以及裁剪后的低敏文本。</zh-CN>
+            //   <en>The submit object contains only service-confirmed user, employee, and binding facts plus bounded low-sensitivity text.</en>
+            // </lang>
+            EmployeeProfileCorrectionRequestResult result = CorrectionRequestDb.SubmitRequest(
+                new EmployeeProfileCorrectionSubmitRequest
+                {
+                    UserId = userId,
+                    EmployeeId = profile.EmployeeId,
+                    BindingId = profile.BindingId,
+                    FieldName = fieldName,
+                    ProposedValue = proposedValue,
+                    RequestNote = requestNote,
+                    SubmittedUtc = DateTime.UtcNow,
+                    SubmittedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                // <lang>
+                //   <zh-CN>服务失败消息由数据访问契约提供；失败时不写审计、不创建待办，也不清空用户输入。</zh-CN>
+                //   <en>The data-access contract supplies the failure message; on failure do not audit, create a work item, or clear user input.</en>
+                // </lang>
+                ShowMessage(result.Message);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>审计记录只写请求编号、员工编号和白名单字段名，不把建议值或备注写入事件正文。</zh-CN>
+            //   <en>Audit only the request id, employee id, and allowlisted field name; do not put the proposed value or note in the event text.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionRequested,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionRequestTargetType,
+                result.RequestId.ToString(CultureInfo.InvariantCulture),
+                "Employee profile correction requested. EmployeeId=" + profile.EmployeeId.ToString(CultureInfo.InvariantCulture) +
+                "; FieldName=" + fieldName,
+                Context);
+
+            // <lang>
+            //   <zh-CN>待办是后台处理入口的补充投影；其失败隔离语义由 TryEnsureWorkItem 保持，不回滚已成功的请求。</zh-CN>
+            //   <en>The work item is a supplemental administration projection; TryEnsureWorkItem isolates its failure and does not roll back a successful request.</en>
+            // </lang>
+            TryEnsureWorkItem(result.RequestId, profile.EmployeeId, fieldName);
+
+            // <lang>
+            //   <zh-CN>成功后清除当前输入并重新绑定资料/历史，使页面反映刚提交的事实而不保留旧表单残留。</zh-CN>
+            //   <en>Clear the submitted inputs and rebind the profile/history after success so the page reflects the new fact without retaining stale form residue.</en>
+            // </lang>
+            ProposedValueTextBox.Text = string.Empty;
+            RequestNoteTextBox.Text = string.Empty;
+            BindProfile();
+            ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageSubmitted);
+        }

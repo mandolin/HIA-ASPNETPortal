@@ -1,0 +1,4 @@
+        public static void RedirectToSafeReturnUrl(HttpContext context, string candidate)
+        {
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(context, candidate);
+        }

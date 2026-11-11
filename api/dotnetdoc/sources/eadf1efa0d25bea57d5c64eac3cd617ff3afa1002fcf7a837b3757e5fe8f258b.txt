@@ -1,0 +1,8 @@
+        private static string ReplaceAssignment(Match match)
+        {
+            // <lang>
+            //   <zh-CN>保留匹配键和分隔符以维持可诊断结构，但无条件替换整个观察到的值。</zh-CN>
+            //   <en>Preserve the matched key and separator for diagnostic structure while unconditionally replacing the entire observed value.</en>
+            // </lang>
+            return match.Groups["key"].Value + match.Groups["separator"].Value + "[REDACTED]";
+        }

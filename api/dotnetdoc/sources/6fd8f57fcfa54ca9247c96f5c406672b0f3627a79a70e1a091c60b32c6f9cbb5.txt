@@ -1,0 +1,9 @@
+        private static bool IsSchemaVersionSupported(JObject manifest)
+        {
+            // <lang>
+            //   <zh-CN>只读取 schemaVersion 节点并要求整数精确匹配；缺失、null 或其它类型均拒绝。</zh-CN>
+            //   <en>Read only the schemaVersion node and require an exact integer match; missing, null, or other types are rejected.</en>
+            // </lang>
+            JToken token = manifest["schemaVersion"];
+            return token != null && token.Type == JTokenType.Integer && token.Value<int>() == ManifestSchemaVersion;
+        }

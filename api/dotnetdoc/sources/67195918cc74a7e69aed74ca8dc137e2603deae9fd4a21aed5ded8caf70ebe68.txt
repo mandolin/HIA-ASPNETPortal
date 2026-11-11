@@ -1,0 +1,5 @@
+        internal static string Signin_rememberLogin {
+            get {
+                return ResourceManager.GetString("Signin_rememberLogin", resourceCulture);
+            }
+        }

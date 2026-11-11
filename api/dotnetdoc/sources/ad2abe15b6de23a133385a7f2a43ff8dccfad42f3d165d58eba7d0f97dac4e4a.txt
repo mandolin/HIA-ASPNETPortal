@@ -1,0 +1,18 @@
+        private bool TryNormalizeOptionalBrowseUrl(string value, out string normalizedUrl)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                // <lang>
+                //   <zh-CN>可选链接的空输入表示清空字段，不触发导航策略错误。</zh-CN>
+                //   <en>Blank input for an optional link means clearing the field and does not raise a navigation-policy error.</en>
+                // </lang>
+                normalizedUrl = string.Empty;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非空链接必须通过统一浏览地址策略，输出值用于后续保存而不是原始输入。</zh-CN>
+            //   <en>Non-empty links must pass the shared browse-url policy, and the output value is saved instead of the raw input.</en>
+            // </lang>
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(value, Request, out normalizedUrl);
+        }

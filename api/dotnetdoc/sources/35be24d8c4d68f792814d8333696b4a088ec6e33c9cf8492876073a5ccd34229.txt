@@ -1,0 +1,23 @@
+            public PayloadRule(IEnumerable<string> requiredKeys, IEnumerable<string> optionalKeys)
+            {
+                // <lang>
+                //   <zh-CN>复制并冻结必填键集合，避免调用方后续修改规则输入。</zh-CN>
+                //   <en>Copy and freeze required keys so callers cannot mutate rule inputs afterward.</en>
+                // </lang>
+                RequiredKeys = new List<string>(requiredKeys).AsReadOnly();
+
+                // <lang>
+                //   <zh-CN>以必填键初始化白名单，再追加受控可选键。</zh-CN>
+                //   <en>Initialize the allowlist from required keys and then add controlled optional keys.</en>
+                // </lang>
+                _allowedKeys = new HashSet<string>(RequiredKeys, StringComparer.Ordinal);
+
+                // <lang>
+                //   <zh-CN>把每个可选键纳入同一 ordinal 白名单，保持字段匹配大小写敏感且稳定。</zh-CN>
+                //   <en>Add each optional key to the same ordinal allowlist so field matching remains case-sensitive and stable.</en>
+                // </lang>
+                foreach (string optionalKey in optionalKeys)
+                {
+                    _allowedKeys.Add(optionalKey);
+                }
+            }

@@ -1,0 +1,1 @@
+        public IList<string> RequiredProfiles { get; private set; }

@@ -1,0 +1,14 @@
+        public static bool TryGetTargetStatus(string actionKey, out string toStatus)
+        {
+            toStatus = null;
+            foreach (PortalBusinessApplicationTransition transition in All)
+            {
+                if (string.Equals(transition.ActionKey, actionKey, StringComparison.Ordinal))
+                {
+                    toStatus = transition.ToStatus;
+                    return true;
+                }
+            }
+
+            return false;
+        }

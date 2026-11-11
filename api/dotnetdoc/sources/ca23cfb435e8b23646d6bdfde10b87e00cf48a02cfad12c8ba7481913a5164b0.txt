@@ -1,0 +1,10 @@
+        public static bool EnsureAdmin(HttpContext context)
+        {
+            if (IsAdmin())
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(context ?? HttpContext.Current);
+            return false;
+        }

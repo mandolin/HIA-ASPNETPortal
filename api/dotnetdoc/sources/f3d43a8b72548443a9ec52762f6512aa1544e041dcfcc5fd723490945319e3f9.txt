@@ -1,0 +1,14 @@
+        internal PortalTabThemeOverrideWriteResult(bool succeeded, string message)
+        {
+            // <lang>
+            //   <zh-CN>保存写入/删除是否完成，不代表调用方已经完成授权或运营审计。</zh-CN>
+            //   <en>Store whether the write or deletion completed; it does not mean the caller completed authorization or operations audit.</en>
+            // </lang>
+            Succeeded = succeeded;
+
+            // <lang>
+            //   <zh-CN>将安全展示消息空值归一为空字符串，不回显数据库异常或连接信息。</zh-CN>
+            //   <en>Normalize a null safe-display message to empty without echoing database exceptions or connection information.</en>
+            // </lang>
+            Message = message ?? string.Empty;
+        }

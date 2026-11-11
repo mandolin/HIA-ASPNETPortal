@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_LabelNote {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelNote", resourceCulture);
+            }
+        }

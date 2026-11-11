@@ -1,0 +1,11 @@
+        private static readonly GroupDefinition[] DefinitionArray =
+        {
+            new GroupDefinition(GroupKeys.WorkAndApproval, "工作与审批", "Work & Approvals", 10,
+                new[] { "MyWorkItems", "LeaveAndExpense" }),
+            new GroupDefinition(GroupKeys.Business, "业务办理", "Business", 20,
+                new[] { "BusinessRequests", "MyProfile" }),
+            new GroupDefinition(GroupKeys.PortalAndHelp, "门户与帮助", "Portal & Help", 30,
+                new[] { "Home", "Help" }),
+            new GroupDefinition(GroupKeys.SystemAdministration, "系统管理", "System Administration", 40,
+                new[] { "Admin", "CapabilityWorkbench" })
+        };

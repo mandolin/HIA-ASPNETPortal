@@ -1,0 +1,1 @@
+        public string LastActionUtcText { get; private set; }

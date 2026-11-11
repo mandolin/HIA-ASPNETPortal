@@ -1,0 +1,8 @@
+        private static string NormalizeSource(string source)
+        {
+            // <lang>
+            //   <zh-CN>空值先收敛为空字符串，再移除虚拟根标记和起始分隔符并统一为正斜杠；该转换仅供映射比较，不执行文件系统访问。</zh-CN>
+            //   <en>Converge null to an empty string, then remove virtual-root markers and leading separators and normalize to forward slashes; this conversion is for mapping comparison only and performs no file-system access.</en>
+            // </lang>
+            return (source ?? string.Empty).Trim().TrimStart('~', '/').Replace('\\', '/');
+        }

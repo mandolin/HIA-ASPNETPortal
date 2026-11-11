@@ -1,0 +1,46 @@
+        public void SetUserProfileStatus(int userId, string status, string reason, string actor)
+        {
+            if (!HasUserProfileTable())
+            {
+                throw new InvalidOperationException("User profile metadata table is not available.");
+            }
+
+            string normalizedStatus = NormalizeProfileStatus(status);
+            if (!IsKnownProfileStatus(normalizedStatus))
+            {
+                throw new InvalidOperationException("User profile status is invalid.");
+            }
+
+            string normalizedActor = Normalize(actor);
+            string normalizedReason = NormalizeReason(reason);
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                var item = _context.Users.Single(i => i.UserId == userId);
+                var profile = _context.UserProfiles.SingleOrDefault(i => i.UserId == userId);
+                DateTime nowUtc = DateTime.UtcNow;
+
+                if (profile == null)
+                {
+                    profile = new UserProfileItem
+                    {
+                        UserId = item.UserId,
+                        LoginName = Normalize(item.Name),
+                        DisplayName = Normalize(item.Name),
+                        PreferredEmail = NullIfEmpty(item.Email),
+                        CreatedUtc = nowUtc,
+                        CreatedBy = NullIfEmpty(normalizedActor)
+                    };
+                    _context.UserProfiles.Add(profile);
+                }
+
+                profile.Status = normalizedStatus;
+                profile.StatusReason = NullIfEmpty(normalizedReason);
+                profile.UpdatedUtc = nowUtc;
+                profile.UpdatedBy = NullIfEmpty(normalizedActor);
+                _context.SaveChanges();
+
+                IncrementSecurityVersion(userId, normalizedReason);
+                transaction.Commit();
+            }
+        }

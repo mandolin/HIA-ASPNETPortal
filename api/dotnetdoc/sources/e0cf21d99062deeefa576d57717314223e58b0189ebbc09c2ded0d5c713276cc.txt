@@ -1,0 +1,43 @@
+        public static string FormatSixElementSummary(
+            string stagingName,
+            string hashBefore,
+            string hashAfter,
+            string actor,
+            DateTime startUtc,
+            DateTime endUtc,
+            string verification,
+            string direction)
+        {
+            // <lang>
+            //   <zh-CN>空白暂存名退化为 unknown，避免六要素被静默省略；不 Trim 用户文本以免把畸形输入洗成合法值。</zh-CN>
+            //   <en>A blank staging name degrades to unknown so the element is never silently dropped; user text is not trimmed so malformed input is not washed into a valid value.</en>
+            // </lang>
+            string pkg = string.IsNullOrEmpty(stagingName) ? "unknown" : stagingName;
+
+            // <lang>
+            //   <zh-CN>按既有固定键序拼接；所有可空文本统一兜底为空串，时间统一转 UTC 以免调用方本地时区改变审计顺序。</zh-CN>
+            //   <en>Concatenate in the established fixed key order; all nullable text falls back to empty and times convert to UTC so caller-local zones cannot change audit ordering.</en>
+            // </lang>
+            string summary = string.Format(
+                CultureInfo.InvariantCulture,
+                "pkg={0};hashBefore={1};hashAfter={2};actor={3};startUtc={4};endUtc={5};verification={6};direction={7}",
+                pkg,
+                hashBefore ?? string.Empty,
+                hashAfter ?? string.Empty,
+                actor ?? string.Empty,
+                startUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                endUtc.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                verification ?? string.Empty,
+                direction ?? string.Empty);
+
+            // <lang>
+            //   <zh-CN>超长即显式抛异常，携带在线包上下文以便诊断归因；绝不截断或丢弃任何要素。</zh-CN>
+            //   <en>Overflow throws explicitly with an online-package context for diagnosability; no element is truncated or dropped.</en>
+            // </lang>
+            if (summary.Length > MaxSummaryLength)
+            {
+                throw new AuditSummaryTooLongException(summary.Length, MaxSummaryLength, "Online-package");
+            }
+
+            return summary;
+        }

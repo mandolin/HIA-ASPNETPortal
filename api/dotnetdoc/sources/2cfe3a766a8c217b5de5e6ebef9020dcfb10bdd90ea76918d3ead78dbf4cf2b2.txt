@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_MessageSignInRequiredAction {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageSignInRequiredAction", resourceCulture);
+            }
+        }

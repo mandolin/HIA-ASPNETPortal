@@ -1,0 +1,36 @@
+            private IDictionary<string, string> GetDesktopEntries()
+            {
+                if (desktopEntries != null)
+                {
+                    return desktopEntries;
+                }
+
+                desktopEntries = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                IList<PortalModulePackage> packages;
+                try
+                {
+                    packages = PortalModuleCatalog.GetTrustedPackages();
+                }
+                catch (Exception)
+                {
+                    return desktopEntries;
+                }
+
+                if (packages == null)
+                {
+                    return desktopEntries;
+                }
+
+                foreach (PortalModulePackage package in packages)
+                {
+                    if (package == null || string.IsNullOrEmpty(package.PackageId))
+                    {
+                        continue;
+                    }
+
+                    desktopEntries[package.PackageId] = package.DesktopEntry ?? string.Empty;
+                }
+
+                return desktopEntries;
+            }

@@ -1,0 +1,17 @@
+        public int AddRole(int portalId, string roleName)
+        {
+            var item = new RoleItem
+            {
+                PortalId = portalId,
+                RoleName = roleName
+            };
+
+            _context.Roles.Add(item);
+
+            // <lang>
+            //   <zh-CN>保存后使用数据库生成的 RoleId 作为后台页面继续编辑和授权映射的稳定标识。</zh-CN>
+            //   <en>After saving, the database-generated RoleId becomes the stable identifier used by administration pages for later editing and permission mapping.</en>
+            // </lang>
+            _context.SaveChanges();
+            return item.RoleId;
+        }

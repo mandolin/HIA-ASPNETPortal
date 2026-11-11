@@ -1,0 +1,18 @@
+        private sealed class BusinessApplicationReviewWriteRow
+        {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>被更新申请的主键。</zh-CN>
+            ///   <en>Primary key of the updated application.</en>
+            /// </lang>
+            /// </summary>
+            public long ApplicationId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>被更新申请的稳定编号。</zh-CN>
+            ///   <en>Stable code of the updated application.</en>
+            /// </lang>
+            /// </summary>
+            public string ApplicationCode { get; set; }
+        }

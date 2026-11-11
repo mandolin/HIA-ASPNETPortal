@@ -1,0 +1,10 @@
+        public static void RedirectToSafeReturnUrl(HttpContext context, string candidate)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            context.Response.Redirect(GetSafeReturnUrl(context.Request, candidate), false);
+            context.ApplicationInstance.CompleteRequest();
+        }

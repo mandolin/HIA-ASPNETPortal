@@ -1,0 +1,11 @@
+        private EmployeeProfileConfirmationView GetCurrentProfile(int userId)
+        {
+            if (EmployeeProfileConfirmationDb == null ||
+                !EmployeeProfileConfirmationDb.IsSchemaAvailable() ||
+                userId <= 0)
+            {
+                return null;
+            }
+
+            return EmployeeProfileConfirmationDb.GetCurrentProfileForUser(userId);
+        }

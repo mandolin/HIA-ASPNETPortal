@@ -1,0 +1,19 @@
+        private List<int> QueryIds(string sql, string normalizedInput)
+        {
+            try
+            {
+                // <lang>
+                //   <zh-CN>执行调用点提供的受控 SQL 模板，并把登录输入作为 EF 参数传入；不拼接用户输入。</zh-CN>
+                //   <en>Execute the controlled SQL template supplied by the call site and pass sign-in input as an EF parameter; user input is never concatenated.</en>
+                // </lang>
+                return context.Database.SqlQuery<int>(sql, normalizedInput).ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>解析扩展表失败时按未命中处理，调用方仍可走旧路径或通用失败。</zh-CN>
+                //   <en>Treat extension-table resolution failures as no match so callers can still use legacy paths or return a generic failure.</en>
+                // </lang>
+                return new List<int>();
+            }
+        }

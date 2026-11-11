@@ -1,0 +1,9 @@
+        private void ShowValidationMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>校验提示固定来自服务器端分支，不回显被拒绝的图片地址或尺寸文本。</zh-CN>
+            //   <en>The validation notice comes from fixed server-side branches and does not echo rejected image URLs or dimension text.</en>
+            // </lang>
+            ValidationMessage.Text = message;
+            ValidationMessage.Visible = true;
+        }

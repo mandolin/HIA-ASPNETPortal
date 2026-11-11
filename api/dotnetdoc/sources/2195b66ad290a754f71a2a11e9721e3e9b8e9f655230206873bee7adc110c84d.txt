@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>P3.1 主题选择页：管理员仅能选择已部署且通过 manifest 校验的主题，不提供包上传或在线样式编辑。</zh-CN>
+        <en>P3.1 theme selection page: administrators can only select deployed themes that pass manifest validation; package upload and online style editing are not provided.</en>
+    </lang>
+--%>

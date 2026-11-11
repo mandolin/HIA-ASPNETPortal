@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>模块标题由服务器控件提供并关闭自身 ViewState，页面只呈现当前模块上下文。</zh-CN>
+                <en>The server control supplies the module title with its own ViewState disabled; the page only presents the current module context.</en>
+            </lang>
+        --%>

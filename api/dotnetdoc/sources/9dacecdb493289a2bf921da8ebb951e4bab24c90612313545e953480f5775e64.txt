@@ -1,0 +1,19 @@
+        protected void EditUser_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>编辑入口只接受经过数据层复核的当前选中用户，并保留安全回跳参数。</zh-CN>
+            //   <en>The edit entry accepts only the selected user revalidated by the data layer and preserves safe return parameters.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            IUserItem user;
+            if (!TryGetSelectedUser(out user))
+            {
+                return;
+            }
+
+            RedirectToManageUser(user);
+        }

@@ -1,0 +1,18 @@
+    public static class PortalRoleNames
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧门户约定的管理员角色名称。</zh-CN>
+        ///   <en>Administrator role name defined by the legacy Portal.</en>
+        /// </lang>
+        /// </summary>
+        public const string Administrators = "Admins";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧门户约定的所有用户虚拟角色名称；访问判断将其视为当前请求可访问的通配项。</zh-CN>
+        ///   <en>Legacy virtual role for all users; access checks treat it as a wildcard that allows the current request.</en>
+        /// </lang>
+        /// </summary>
+        public const string AllUsers = "All Users";
+    }

@@ -1,0 +1,24 @@
+        protected void GroupTab_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>非数据行直接忽略；数据项类型不符或未被阻断时不改动任何 DOM。</zh-CN>
+            //   <en>Non-item rows are ignored; a type mismatch or a non-blocked tab changes no DOM at all.</en>
+            // </lang>
+            if (e == null || e.Item == null ||
+                (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem))
+            {
+                return;
+            }
+
+            PortalNavigationGroupView.GroupTabView view = AsGroupTab(e.Item.DataItem);
+            if (view == null || !view.IsBlocked)
+            {
+                return;
+            }
+
+            Label disabledTab = e.Item.FindControl("GroupTabDisabled") as Label;
+            if (disabledTab != null)
+            {
+                disabledTab.Attributes["aria-disabled"] = "true";
+            }
+        }

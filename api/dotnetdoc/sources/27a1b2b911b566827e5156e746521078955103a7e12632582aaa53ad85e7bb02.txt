@@ -1,0 +1,1 @@
+        public string ReasonCode { get; private set; }

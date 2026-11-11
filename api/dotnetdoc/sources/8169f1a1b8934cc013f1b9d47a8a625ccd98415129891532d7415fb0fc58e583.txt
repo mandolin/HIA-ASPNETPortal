@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>标题元素由服务器控制，文案由 code-behind 用资源格式串写入；此处不能放代码块，否则设置 InnerText 会因"内容非字面"而抛异常。</zh-CN>
+                    <en>The title element is server-controlled and its text is written by code-behind using a resource format string; a code block must not be placed here, otherwise setting InnerText throws because the contents are not literal.</en>
+                  </lang>
+                --%>

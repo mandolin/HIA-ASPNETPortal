@@ -1,0 +1,1 @@
+        public const string PasswordMinimumLength = "Portal.Security.Password.MinimumLength";

@@ -1,0 +1,5 @@
+        internal static string EditLinks_MessageInvalidUrl {
+            get {
+                return ResourceManager.GetString("EditLinks_MessageInvalidUrl", resourceCulture);
+            }
+        }

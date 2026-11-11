@@ -1,0 +1,1 @@
+        IUserEmployeeBindingInfo GetBindingById(int bindingId);

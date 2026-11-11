@@ -1,0 +1,5 @@
+        internal static string Admin_CollaborationItems_ButtonCancel {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonCancel", resourceCulture);
+            }
+        }

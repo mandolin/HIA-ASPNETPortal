@@ -1,0 +1,1 @@
+        public int? MinIntegerValue { get; private set; }

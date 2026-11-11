@@ -1,0 +1,7 @@
+        private static bool IsAllowedFieldName(string fieldName)
+        {
+            return string.Equals(fieldName, "DisplayName", StringComparison.Ordinal) ||
+                   string.Equals(fieldName, "PreferredName", StringComparison.Ordinal) ||
+                   string.Equals(fieldName, "WorkEmail", StringComparison.Ordinal) ||
+                   string.Equals(fieldName, "OrganizationDisplayName", StringComparison.Ordinal);
+        }

@@ -1,0 +1,4 @@
+        protected override bool ShouldApplyPortalTheme
+        {
+            get { return false; }
+        }

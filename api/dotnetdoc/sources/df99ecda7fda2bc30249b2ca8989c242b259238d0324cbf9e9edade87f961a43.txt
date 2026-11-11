@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_LabelContact2 {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelContact2", resourceCulture);
+            }
+        }

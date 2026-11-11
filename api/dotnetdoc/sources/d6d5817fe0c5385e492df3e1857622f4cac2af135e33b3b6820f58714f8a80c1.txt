@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>详情表只呈现 code-behind 已授权并净化后的字段；标记层不接收事件编号以外的路径或文件输入，敏感字段的裁剪仍由服务端职责负责。</zh-CN>
+                    <en>The detail table presents only fields authorized and sanitized by code-behind; the markup accepts no path or file input beyond the event-id route, and server code remains responsible for sensitive-field redaction.</en>
+                  </lang>
+                --%>

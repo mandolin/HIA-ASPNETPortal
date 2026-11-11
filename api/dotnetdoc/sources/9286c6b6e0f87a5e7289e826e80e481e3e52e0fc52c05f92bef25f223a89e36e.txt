@@ -1,0 +1,1 @@
+        bool IsInRoles(string accessRoles);

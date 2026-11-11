@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>仅在首次请求加载固定分类和模块数据，回发时保留用户当前表单状态。</zh-CN>
+            //   <en>Load fixed categories and module data only on the first request, preserving the user's form state on postback.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>分类列表不依赖数据库，先建立稳定的提交值映射。</zh-CN>
+                //   <en>The category list is not database-backed, so establish its stable submission-value mapping first.</en>
+                // </lang>
+                BindCategoryList();
+                // <lang>
+                //   <zh-CN>随后执行身份、Schema 和权限门禁，并绑定本人最近申请。</zh-CN>
+                //   <en>Then apply identity, schema, and permission gates and bind the current user's recent applications.</en>
+                // </lang>
+                BindModule();
+            }
+        }

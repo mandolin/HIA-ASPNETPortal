@@ -1,0 +1,1 @@
+        void DeleteUserRole(int roleId, int userId);

@@ -1,0 +1,1 @@
+        protected int EmptyStateRowCount { get; private set; }

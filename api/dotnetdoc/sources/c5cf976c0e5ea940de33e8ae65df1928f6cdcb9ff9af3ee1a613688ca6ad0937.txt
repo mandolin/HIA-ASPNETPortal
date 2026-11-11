@@ -1,0 +1,20 @@
+        public Hashtable GetModuleSettings(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>从模块快照导航属性读取设置，保持与其他模块读取路径一致。</zh-CN>
+            //   <en>Read settings from the module snapshot navigation property to stay consistent with other module read paths.</en>
+            // </lang>
+            var settings = _items.Single(i => i.ModuleId == moduleId).Settings.Select(i => new { i.SettingName, i.SettingText });
+
+            // <lang>
+            //   <zh-CN>返回旧 Web Forms 模块期望的 Hashtable 结构，避免破坏既有模块契约。</zh-CN>
+            //   <en>Return the Hashtable shape expected by legacy Web Forms modules to avoid breaking existing module contracts.</en>
+            // </lang>
+            var settingsHt = new Hashtable();
+            foreach (var row in settings)
+            {
+                settingsHt[row.SettingName] = row.SettingText;
+            }
+
+            return settingsHt;
+        }

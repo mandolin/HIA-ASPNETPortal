@@ -1,0 +1,46 @@
+        protected virtual void InjectDependencies()
+        {
+            /*
+             * <lang>
+             *   <zh-CN>先确认当前确实处于 Web 请求中；部分测试或设计期环境可能没有 HttpContext。</zh-CN>
+             *   <en>First confirm that this is a Web request; some test or design-time contexts may not have HttpContext.</en>
+             * </lang>
+             */
+            HttpContext context = HttpContext.Current;
+            if (context == null)
+            {
+                return;
+            }
+
+            /*
+             * <lang>
+             *   <zh-CN>容器访问器来自 Global.asax 暴露的应用实例；缺失时保持旧页面兼容，不主动失败。</zh-CN>
+             *   <en>The accessor comes from the application instance exposed by Global.asax; when missing, keep legacy page compatibility instead of failing eagerly.</en>
+             * </lang>
+             */
+            _accessor = context.ApplicationInstance as IContainerAccessor;
+            if (_accessor == null)
+            {
+                return;
+            }
+
+            /*
+             * <lang>
+             *   <zh-CN>访问器存在但容器为空说明启动配置不完整，应交给全局异常和结构化日志记录。</zh-CN>
+             *   <en>If the accessor exists but the container is null, startup configuration is incomplete and should be recorded by global error handling and structured logs.</en>
+             * </lang>
+             */
+            IUnityContainer container = _accessor.Container;
+            if (container == null)
+            {
+                throw new InvalidOperationException("找不到 Unity 容器");
+            }
+
+            /*
+             * <lang>
+             *   <zh-CN>使用当前应用容器填充页面声明的依赖；不在这里创建新的生命周期作用域。</zh-CN>
+             *   <en>Use the current application container to populate page dependencies; do not create a new lifetime scope here.</en>
+             * </lang>
+             */
+            container.BuildUp(typeof(T), this, string.Empty);
+        }

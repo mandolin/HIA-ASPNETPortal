@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.replaceassignment-system.text.regularexpressions.match",
+      "kind": "entry",
+      "label": "ReplaceAssignment",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.replaceassignment-system.text.regularexpressions.match",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticSanitizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticsanitizer.replaceassignment-system.text.regularexpressions.match",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer-591ab6ea.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitize-system.string",
+      "kind": "entry",
+      "label": "Sanitize",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitize-system.string",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticSanitizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitize-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer-48b621c0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitizeandtruncate-system.string-system.int32",
+      "kind": "entry",
+      "label": "SanitizeAndTruncate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitizeandtruncate-system.string-system.int32",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticSanitizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitizeandtruncate-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer-1e932aff.html"
+    }
+  ]
+}

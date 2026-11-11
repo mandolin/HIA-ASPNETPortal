@@ -1,0 +1,9 @@
+        internal PortalModulePackageStateReadResult(bool isAvailable, PortalModulePackageState state)
+        {
+            // <lang>
+            //   <zh-CN>本存储的构造位置以成对事实传入可用性与状态：不可用读取不伪装为“未配置且默认启用”，本类型也不自行触发模块加载。</zh-CN>
+            //   <en>This store's construction sites pass availability and state as paired facts: an unavailable read is not disguised as “unconfigured and default enabled,” and this type does not initiate module loading.</en>
+            // </lang>
+            IsAvailable = isAvailable;
+            State = state;
+        }

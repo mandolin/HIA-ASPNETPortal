@@ -1,0 +1,33 @@
+        public static string Sanitize(string value)
+        {
+            // <lang>
+            //   <zh-CN>空输入归一为空字符串，避免向调用方传播 null 或把“没有可记录内容”解释为原文回退。</zh-CN>
+            //   <en>Normalize empty input to an empty string so null does not propagate and “nothing to log” cannot be interpreted as a raw-text fallback.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>`sanitized` 是逐级遮蔽的累加器：每一步都基于上一步的结果再替换，因此顺序不可调换；
+                //   先遮蔽连接串和数据源，再覆盖可能携带多个字段的认证/Cookie 整行，最后处理紧凑赋值，该顺序保留既有净化覆盖面。</zh-CN>
+                //   <en>`sanitized` is a progressive-redaction accumulator: each step replaces into the previous step's result, so the order cannot be rearranged. Connection strings and data sources are redacted first, then full authorization/Cookie lines that may carry multiple fields, and finally compact assignments; that order preserves established sanitization coverage.</en>
+                // </lang>
+                string sanitized = ConnectionStringPattern.Replace(value, ReplaceAssignment);
+                sanitized = DataSourceConnectionPattern.Replace(sanitized, "[REDACTED_CONNECTION_STRING]");
+                sanitized = SensitiveLinePattern.Replace(sanitized, ReplaceAssignment);
+                sanitized = SensitiveAssignmentPattern.Replace(sanitized, ReplaceAssignment);
+                return sanitized;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>正则净化失败时 fail-closed 返回固定占位，绝不以异常处理为由回退记录原文。</zh-CN>
+                //   <en>If regex sanitization fails, return a fixed fail-closed placeholder and never use error handling to fall back to raw text.</en>
+                // </lang>
+                return "[SANITIZATION_FAILED]";
+            }
+        }

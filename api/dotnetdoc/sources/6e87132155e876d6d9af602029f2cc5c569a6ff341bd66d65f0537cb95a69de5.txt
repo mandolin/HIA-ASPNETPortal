@@ -1,0 +1,1 @@
+        public bool IsAdministrator { get; private set; }

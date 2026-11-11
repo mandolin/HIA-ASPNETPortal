@@ -1,0 +1,2 @@
+        void UpdateDocument(int moduleId, int itemId, string userName, string name, string url, string category,
+                            byte[] content, int size, string contentType);

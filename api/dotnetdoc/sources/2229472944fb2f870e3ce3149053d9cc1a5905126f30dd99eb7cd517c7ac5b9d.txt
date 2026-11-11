@@ -1,0 +1,4 @@
+        public static EmployeeDirectoryWriteResult Success(int entityId, string message)
+        {
+            return new EmployeeDirectoryWriteResult(true, entityId, message, false, false);
+        }

@@ -1,0 +1,1 @@
+        void UpdateModuleDefinition(int defId, string name, string desktopSrc, string mobileSrc);

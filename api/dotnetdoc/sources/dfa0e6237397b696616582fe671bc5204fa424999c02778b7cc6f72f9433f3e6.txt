@@ -1,0 +1,16 @@
+        public static bool GetBoolean(PortalSettingDefinition definition)
+        {
+            // <lang>
+            //   <zh-CN>先验证定义与布尔契约；最终文本再次以 TryParse 转换，防御性地将无法表示的结果收敛为 <c>false</c>。</zh-CN>
+            //   <en>Validate definition and Boolean contract first; parse final text again with TryParse so an unrepresentable result defensively converges to <c>false</c>.</en>
+            // </lang>
+            EnsureDefinition(definition);
+            EnsureValueType(definition, PortalSettingValueType.Boolean);
+
+            // <lang>
+            //   <zh-CN>承接最终文本的布尔解析结果；局部值仅服务于本次转换，不保留原始设置文本。</zh-CN>
+            //   <en>Receive the Boolean parse result for the final text; this local serves only the current conversion and retains no raw setting text.</en>
+            // </lang>
+            bool parsed;
+            return bool.TryParse(GetEffectiveValue(definition).Value, out parsed) && parsed;
+        }

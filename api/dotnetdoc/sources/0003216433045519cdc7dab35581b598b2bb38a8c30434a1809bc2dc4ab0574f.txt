@@ -1,0 +1,26 @@
+        private bool IsLoginAllowed(int userId)
+        {
+            try
+            {
+                if (!HasRegistrationTable())
+                {
+                    // <lang>
+                    //   <zh-CN>审核表尚未部署时保持旧系统可登录，避免迁移未完成导致全站锁定。</zh-CN>
+                    //   <en>Preserve legacy sign-in when the review table is not deployed, avoiding site-wide lockout during migration.</en>
+                    // </lang>
+                    return true;
+                }
+
+                var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
+                return registration == null ||
+                       registration.Status == PortalUserRegistrationStatuses.Approved;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>读取审核元数据失败时仍保持旧登录行为；该兼容回退须在未来安全迁移中重新评估。</zh-CN>
+                //   <en>Keep legacy sign-in when review metadata cannot be read; this compatibility fallback must be reassessed during future security migration.</en>
+                // </lang>
+                return true;
+            }
+        }

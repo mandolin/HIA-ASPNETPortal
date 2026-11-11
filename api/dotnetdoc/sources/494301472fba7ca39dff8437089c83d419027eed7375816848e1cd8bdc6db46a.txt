@@ -1,0 +1,8 @@
+        private static string FormatRoundTripUtc(DateTime value)
+        {
+            // <lang>
+            //   <zh-CN>以 round-trip 格式保留并发比较所需精度和时间种类。</zh-CN>
+            //   <en>Use round-trip formatting to preserve the precision and time kind required for concurrency comparison.</en>
+            // </lang>
+            return value.ToString("O", CultureInfo.InvariantCulture);
+        }

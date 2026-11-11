@@ -1,0 +1,50 @@
+        private void RegisterPackage(PortalModulePackage package)
+        {
+            // <lang>
+            //   <zh-CN>注册前重新读取定义快照，避免页面展示过期时重复创建入口。</zh-CN>
+            //   <en>Reload the definition snapshot before registration so a stale page cannot create a duplicate entry.</en>
+            // </lang>
+            IList<IModuleDefinitionItem> definitions = ModuleDefConfig.GetModuleDefinitions().ToList();
+            // <lang>
+            //   <zh-CN>按 manifest 桌面入口判断重复注册，名称变化不能产生第二条定义。</zh-CN>
+            //   <en>Detect duplicate registration by the manifest desktop entry; a display-name change cannot create a second definition.</en>
+            // </lang>
+            IModuleDefinitionItem existing = FindDefinition(definitions, package.DesktopEntry);
+            if (existing != null)
+            {
+                // <lang>
+                //   <zh-CN>带数值的用户可见消息：消息文本取自资源，标识符值用 InvariantCulture 预格式化，避免定义 ID 在不同区域设置下出现千分位。</zh-CN>
+                //   <en>User-visible messages with values: the message text comes from a resource, and identifier values are pre-formatted with InvariantCulture so a definition id never gains locale-specific group separators.</en>
+                // </lang>
+                ResultLabel.Text = string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Admin_ModuleCatalog_MessageAlreadyRegistered,
+                    existing.ModuleDefId.ToString(CultureInfo.InvariantCulture));
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>新增定义只使用受信包提供的展示名和入口，移动端入口保持空值兼容。</zh-CN>
+            //   <en>Create the definition only from the trusted package display name and entry, retaining the empty mobile entry for compatibility.</en>
+            // </lang>
+            int definitionId = ModuleDefConfig.AddModuleDefinition(
+                package.DisplayName,
+                package.DesktopEntry,
+                string.Empty);
+            // <lang>
+            //   <zh-CN>注册成功后记录固定类别和包标识，不把物理路径或连接细节写入审计正文。</zh-CN>
+            //   <en>Record fixed audit category and package identity after success without writing physical paths or connection details into the audit text.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                "ModulePackage",
+                "RegisterDefinition",
+                "ModulePackage",
+                package.PackageId,
+                "Registered module definition " + definitionId.ToString(CultureInfo.InvariantCulture) +
+                " from validated deployed package.",
+                Context);
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_ModuleCatalog_MessageRegistered,
+                definitionId.ToString(CultureInfo.InvariantCulture));
+        }

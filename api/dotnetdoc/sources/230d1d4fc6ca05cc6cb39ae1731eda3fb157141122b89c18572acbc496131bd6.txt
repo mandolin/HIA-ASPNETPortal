@@ -1,0 +1,16 @@
+        private void BindEmployeeSummary(string employeeCode)
+        {
+            string normalizedCode = Normalize(employeeCode);
+            if (string.IsNullOrEmpty(normalizedCode) || EmployeeAdminDb == null || !EmployeeAdminDb.IsSchemaAvailable())
+            {
+                EmployeeSummaryText.Text = string.Empty;
+                return;
+            }
+
+            IEmployeeInfo employee = EmployeeDirectoryDb
+                .GetEmployees(new EmployeeDirectoryQuery { Keyword = normalizedCode, Take = 10 })
+                .FirstOrDefault(item => string.Equals(item.EmployeeCode, normalizedCode, StringComparison.Ordinal));
+            EmployeeSummaryText.Text = employee == null
+                ? "Employee not found."
+                : Server.HtmlEncode(employee.DisplayName + " / " + employee.EmploymentStatus);
+        }

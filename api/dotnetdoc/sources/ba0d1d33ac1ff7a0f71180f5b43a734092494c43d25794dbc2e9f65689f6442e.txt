@@ -1,0 +1,5 @@
+        internal static string PortalModule_ButtonEdit {
+            get {
+                return ResourceManager.GetString("PortalModule_ButtonEdit", resourceCulture);
+            }
+        }

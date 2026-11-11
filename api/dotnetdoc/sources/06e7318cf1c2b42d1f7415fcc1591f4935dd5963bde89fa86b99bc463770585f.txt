@@ -1,0 +1,13 @@
+        public void DeleteUser(int userId)
+        {
+            // <lang>
+            //   <zh-CN>先清理扩展元数据，避免显式 FK 部署阻止既有删除流程。</zh-CN>
+            //   <en>Clean up extension metadata first so explicit FK deployments do not block the legacy delete flow.</en>
+            // </lang>
+            TryDeleteRegistration(userId);
+
+            var item = _context.Users.Single(i => i.UserId == userId);
+
+            _context.Users.Remove(item);
+            _context.SaveChanges();
+        }

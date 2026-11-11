@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>定义表单只允许友好名称编辑；桌面/移动源路径保持只读安全边界，并由服务器验证受信相对 ASCX 路径。</zh-CN>
+                <en>The definition form edits only the friendly name; desktop/mobile source paths remain read-only safety boundaries and the server validates trusted relative ASCX paths.</en>
+              </lang>
+            --%>

@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>字段值由当前用户的服务器端资料视图绑定并按展示规则编码；页面不接收客户端员工标识来决定要确认的对象。</zh-CN>
+                <en>Field values bind from the current user's server-side profile view and follow display encoding rules; the page does not accept a client employee identifier to choose the confirmation target.</en>
+            </lang>
+        --%>

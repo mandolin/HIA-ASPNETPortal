@@ -1,0 +1,4 @@
+        private bool HasRegistrationTable()
+        {
+            return HasTable("PortalCfg_UserRegistrations");
+        }

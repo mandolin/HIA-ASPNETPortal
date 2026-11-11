@@ -1,0 +1,30 @@
+        protected void ClearTabThemeButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeEdit))
+            {
+                return;
+            }
+
+            int tabId;
+            if (!TryGetSelectedTabId(out tabId))
+            {
+                ShowMessage(lang.Admin_ThemeSettings_MessageSelectTabBeforeClear);
+                return;
+            }
+
+            PortalTabThemeOverrideWriteResult result = PortalTabThemeOverrides.Delete(tabId, Context);
+            if (result.Succeeded)
+            {
+                PortalOperationAudit.Record(
+                    "Theme",
+                    "ClearTabThemeOverride",
+                    "Tab",
+                    tabId.ToString(CultureInfo.InvariantCulture),
+                    "Removed the tab theme override.",
+                    Context);
+                RedirectToSelf();
+                return;
+            }
+
+            ShowMessage(result.Message);
+        }

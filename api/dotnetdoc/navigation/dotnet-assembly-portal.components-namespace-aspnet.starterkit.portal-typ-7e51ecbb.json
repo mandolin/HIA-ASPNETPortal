@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalonlinepackagescanner",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iportalonlinepackagescanner:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iportalonlinepackagescanner.scan-system.string-system.byte",
+      "kind": "entry",
+      "label": "Scan",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalonlinepackagescanner.scan-system.string-system.byte",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageScanning.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalonlinepackagescanner.scan-system.string-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalonlinepackagescann-f903a098.html"
+    }
+  ]
+}

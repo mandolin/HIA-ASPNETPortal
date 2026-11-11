@@ -1,0 +1,19 @@
+        private static PortalThemeSource ToThemeSource(
+            PortalRuntimeSettingSource settingSource,
+            bool usedFallback)
+        {
+            if (usedFallback)
+            {
+                return PortalThemeSource.Fallback;
+            }
+
+            switch (settingSource)
+            {
+                case PortalRuntimeSettingSource.Database:
+                    return PortalThemeSource.Database;
+                case PortalRuntimeSettingSource.AppSettings:
+                    return PortalThemeSource.AppSettings;
+                default:
+                    return PortalThemeSource.Default;
+            }
+        }

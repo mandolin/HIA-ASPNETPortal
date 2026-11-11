@@ -1,0 +1,6 @@
+        private static string MapWorkItemStatus(string requestStatus)
+        {
+            return string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal)
+                ? PortalWorkItemStatuses.Cancelled
+                : PortalWorkItemStatuses.Completed;
+        }

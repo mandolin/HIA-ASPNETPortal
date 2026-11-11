@@ -1,0 +1,37 @@
+        public static string BuildSqlStatusPredicate()
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (PortalBusinessApplicationTransition transition in All)
+            {
+                if (!transition.ViaReviewPath)
+                {
+                    continue;
+                }
+
+                if (builder.Length > 0)
+                {
+                    builder.Append(" OR ");
+                }
+
+                builder.Append("(@ActionKey = N'");
+                builder.Append(transition.ActionKey.Replace("'", "''"));
+                builder.Append("' AND [ApplicationStatus] IN (");
+
+                for (int index = 0; index < transition.FromStatuses.Count; index++)
+                {
+                    if (index > 0)
+                    {
+                        builder.Append(", ");
+                    }
+
+                    builder.Append('N');
+                    builder.Append('\'');
+                    builder.Append(transition.FromStatuses[index].Replace("'", "''"));
+                    builder.Append('\'');
+                }
+
+                builder.Append("))");
+            }
+
+            return builder.ToString();
+        }

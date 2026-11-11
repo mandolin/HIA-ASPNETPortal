@@ -1,0 +1,19 @@
+        private static string NormalizePath(string configuredPath)
+        {
+            // <lang>
+            //   <zh-CN>这里只展开 Web.config 中写入的路径片段，不把环境变量作为根目录选择入口。</zh-CN>
+            //   <en>Only the path fragment written in Web.config is expanded here; environment variables are not a separate root-selection mechanism.</en>
+            // </lang>
+            string expandedPath = Environment.ExpandEnvironmentVariables(configuredPath.Trim());
+
+            if (!Path.IsPathRooted(expandedPath))
+            {
+                // <lang>
+                //   <zh-CN>相对路径按站点根目录解释，便于本地临时覆盖。</zh-CN>
+                //   <en>Relative paths are resolved beneath the site root so local temporary overrides remain easy to use.</en>
+                // </lang>
+                expandedPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, expandedPath);
+            }
+
+            return Path.GetFullPath(expandedPath);
+        }

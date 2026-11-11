@@ -1,0 +1,9 @@
+                <%--
+                    <lang>
+                        <zh-CN>品牌标识为随代码发布的静态资源（src/Portal/Images/portal-logo.png），不经数据库、不接受请求参数。
+                        替代文本给出项目标识；品牌文字紧随其后，故该图不承担额外语义。</zh-CN>
+                        <en>The brand mark is a static asset shipped with the code (src/Portal/Images/portal-logo.png); it comes from no
+                        database and accepts no request parameter. Its alternative text names the project, while the brand text follows
+                        immediately, so the image carries no additional meaning.</en>
+                    </lang>
+                --%>

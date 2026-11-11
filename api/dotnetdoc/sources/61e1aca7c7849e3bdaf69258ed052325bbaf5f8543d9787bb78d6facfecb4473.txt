@@ -1,0 +1,6 @@
+                            <%--
+                              <lang>
+                                <zh-CN>Name 字段承载注册用户名；标记层只要求非空，规范化、重复检查和持久化在服务器端完成。</zh-CN>
+                                <en>The Name field carries the requested user name; markup only requires a non-empty value, with normalization, duplicate checks, and persistence handled server-side.</en>
+                              </lang>
+                            --%>

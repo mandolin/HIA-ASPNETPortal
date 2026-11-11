@@ -1,0 +1,25 @@
+        private void ApplyImagePreview(string rawSource)
+        {
+            // <lang>
+            //   <zh-CN>预览只复用已允许的普通浏览地址规则，不为图片模块额外打开脚本、文件或任意物理路径能力。</zh-CN>
+            //   <en>The preview reuses the allowed browse-URL rule and does not open script, file, or arbitrary physical-path capabilities for image modules.</en>
+            // </lang>
+            string normalizedUrl;
+            if (TryNormalizeOptionalBrowseUrl(rawSource, out normalizedUrl) && !string.IsNullOrWhiteSpace(normalizedUrl))
+            {
+                // <lang>
+                //   <zh-CN>预览只使用已归一化地址，避免把被拒绝的原始输入写回 Image 控件。</zh-CN>
+                //   <en>The preview uses only the normalized address so rejected raw input is not written back to the Image control.</en>
+                // </lang>
+                ImagePreview.ImageUrl = normalizedUrl;
+                ImagePreviewPanel.Visible = true;
+                return;
+            }
+
+            ImagePreview.ImageUrl = string.Empty;
+            // <lang>
+            //   <zh-CN>没有可用地址时隐藏预览面板，避免界面显示破损图片或泄露输入。</zh-CN>
+            //   <en>When no usable address exists, the preview panel is hidden to avoid showing a broken image or leaking input.</en>
+            // </lang>
+            ImagePreviewPanel.Visible = false;
+        }

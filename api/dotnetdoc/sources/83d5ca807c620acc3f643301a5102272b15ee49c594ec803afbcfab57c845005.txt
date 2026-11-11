@@ -1,0 +1,24 @@
+        public IList<BusinessApplicationInfo> GetRecentApplicationsForUser(int applicantUserId, int take)
+        {
+            if (applicantUserId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<BusinessApplicationInfo>();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>用户列表路径固定按申请人标识过滤，并把条数限制交给共享 helper；它不从页面输入推导额外 where 片段。</zh-CN>
+                //   <en>The user-list path filters only by the applicant identifier and delegates the row bound to the shared helper; it does not derive extra where fragments from page input.</en>
+                // </lang>
+                return QueryApplications(
+                    @"
+WHERE [Application].[ApplicantUserId] = @ApplicantUserId",
+                    NormalizeTake(take, 10),
+                    new SqlParameter("@ApplicantUserId", applicantUserId));
+            }
+            catch (Exception)
+            {
+                return new List<BusinessApplicationInfo>();
+            }
+        }

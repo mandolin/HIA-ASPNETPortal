@@ -1,0 +1,4 @@
+        public bool CanDisable
+        {
+            get { return IsProfileAllowed && IsEnabled; }
+        }

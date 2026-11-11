@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>后台页先做统一权限门禁；权限失败时 helper 已负责跳转，剩余初始化不再继续执行。</zh-CN>
+            //   <en>The admin page starts with the shared permission gate; when authorization fails, the helper redirects and the remaining initialization is skipped.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在首次请求绑定表单，避免回发时覆盖管理员已输入但尚未保存的值。</zh-CN>
+            //   <en>Bind the form only on the initial request so postbacks do not overwrite administrator input that has not been saved.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindForm();
+            }
+        }

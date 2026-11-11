@@ -1,0 +1,5 @@
+        internal static string Signin_LoginText {
+            get {
+                return ResourceManager.GetString("Signin_LoginText", resourceCulture);
+            }
+        }

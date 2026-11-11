@@ -1,0 +1,94 @@
+        public EmployeeDirectoryWriteResult SaveEmployee(EmployeeSaveRequest request)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return EmployeeDirectoryWriteResult.Failed("P6.3 schema is unavailable.");
+            }
+
+            EmployeeSaveRequest normalized = NormalizeEmployeeRequest(request);
+            string validationMessage;
+            if (!TryValidateEmployeeRequest(normalized, out validationMessage))
+            {
+                return EmployeeDirectoryWriteResult.Failed(validationMessage);
+            }
+
+            // <lang>
+            //   <zh-CN>新增员工同样使用参数化 SQL 写入最小主数据字段；高敏个人信息不在当前表和请求对象中扩展。</zh-CN>
+            //   <en>New employees are also inserted through parameterized SQL with the minimal master-data fields; highly sensitive personal data is not expanded into the current table or request object.</en>
+            // </lang>
+            if (normalized.EmployeeId <= 0)
+            {
+                int newId = _context.Database.SqlQuery<int>(
+                    @"
+INSERT INTO [dbo].[PortalBiz_Employees]
+    ([EmployeeCode], [DisplayName], [PreferredName], [WorkEmail], [OrganizationUnitId], [EmploymentStatus],
+     [JoinedUtc], [LeftUtc], [SourceSystem], [CreatedBy], [UpdatedBy])
+VALUES
+    (@EmployeeCode, @DisplayName, @PreferredName, @WorkEmail, @OrganizationUnitId, @EmploymentStatus,
+     @JoinedUtc, @LeftUtc, @SourceSystem, @ActorName, @ActorName);
+SELECT CAST(SCOPE_IDENTITY() AS int);",
+                    TextParameter("@EmployeeCode", normalized.EmployeeCode),
+                    TextParameter("@DisplayName", normalized.DisplayName),
+                    TextParameter("@PreferredName", normalized.PreferredName),
+                    TextParameter("@WorkEmail", normalized.WorkEmail),
+                    NullableIntParameter("@OrganizationUnitId", normalized.OrganizationUnitId),
+                    TextParameter("@EmploymentStatus", normalized.EmploymentStatus),
+                    NullableDateTime2Parameter("@JoinedUtc", normalized.JoinedUtc),
+                    NullableDateTime2Parameter("@LeftUtc", normalized.LeftUtc),
+                    TextParameter("@SourceSystem", normalized.SourceSystem),
+                    TextParameter("@ActorName", normalized.ActorName)).Single();
+
+                return EmployeeDirectoryWriteResult.Success(newId, "Employee saved.");
+            }
+
+            // <lang>
+            //   <zh-CN>员工更新使用加载时的 UTC 更新时间作为并发条件；这比静默覆盖更适合后台主数据维护。</zh-CN>
+            //   <en>Employee updates use the UTC update timestamp from load time as the concurrency condition, which is safer for administration master-data maintenance than silent overwrite.</en>
+            // </lang>
+            if (!normalized.OriginalUpdatedUtc.HasValue)
+            {
+                return EmployeeDirectoryWriteResult.Failed("The employee was not loaded with an update timestamp.");
+            }
+
+            int affectedRows = _context.Database.ExecuteSqlCommand(
+                @"
+UPDATE [dbo].[PortalBiz_Employees]
+SET [EmployeeCode] = @EmployeeCode,
+    [DisplayName] = @DisplayName,
+    [PreferredName] = @PreferredName,
+    [WorkEmail] = @WorkEmail,
+    [OrganizationUnitId] = @OrganizationUnitId,
+    [EmploymentStatus] = @EmploymentStatus,
+    [JoinedUtc] = @JoinedUtc,
+    [LeftUtc] = @LeftUtc,
+    [SourceSystem] = @SourceSystem,
+    [UpdatedUtc] = SYSUTCDATETIME(),
+    [UpdatedBy] = @ActorName
+WHERE [EmployeeId] = @EmployeeId
+  AND [UpdatedUtc] = @OriginalUpdatedUtc;",
+                TextParameter("@EmployeeCode", normalized.EmployeeCode),
+                TextParameter("@DisplayName", normalized.DisplayName),
+                TextParameter("@PreferredName", normalized.PreferredName),
+                TextParameter("@WorkEmail", normalized.WorkEmail),
+                NullableIntParameter("@OrganizationUnitId", normalized.OrganizationUnitId),
+                TextParameter("@EmploymentStatus", normalized.EmploymentStatus),
+                NullableDateTime2Parameter("@JoinedUtc", normalized.JoinedUtc),
+                NullableDateTime2Parameter("@LeftUtc", normalized.LeftUtc),
+                TextParameter("@SourceSystem", normalized.SourceSystem),
+                TextParameter("@ActorName", normalized.ActorName),
+                IntParameter("@EmployeeId", normalized.EmployeeId),
+                DateTime2Parameter("@OriginalUpdatedUtc", normalized.OriginalUpdatedUtc.Value));
+
+            if (affectedRows == 1)
+            {
+                return EmployeeDirectoryWriteResult.Success(normalized.EmployeeId, "Employee saved.");
+            }
+
+            // <lang>
+            //   <zh-CN>与组织更新相同，零行受影响后再次判断记录是否仍存在，从而区分并发冲突和已删除。</zh-CN>
+            //   <en>As with organization updates, zero affected rows triggers an existence check so concurrency conflicts and deleted rows can be distinguished.</en>
+            // </lang>
+            return EmployeeExists(normalized.EmployeeId)
+                ? EmployeeDirectoryWriteResult.ConcurrencyConflict("The employee was changed by another request. Reload before saving again.")
+                : EmployeeDirectoryWriteResult.Missing("The employee no longer exists.");
+        }

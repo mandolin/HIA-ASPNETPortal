@@ -1,0 +1,4 @@
+        public static string ResolveThemeName(HttpContext context)
+        {
+            return ResolveThemeContext(context).ThemeName;
+        }

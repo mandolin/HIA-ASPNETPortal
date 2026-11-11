@@ -1,0 +1,5 @@
+        internal static string Common_StatusSubmitted {
+            get {
+                return ResourceManager.GetString("Common_StatusSubmitted", resourceCulture);
+            }
+        }

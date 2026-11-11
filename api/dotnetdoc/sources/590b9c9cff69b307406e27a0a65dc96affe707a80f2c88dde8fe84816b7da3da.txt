@@ -1,0 +1,30 @@
+        public static bool TryResolveFallbackValue(string referenceSetKey, string candidateValueKey, out string canonicalValueKey)
+        {
+            // <lang>
+            //   <zh-CN>输出键先置空，确保解析失败时不会保留调用方传入的旧值或上一轮结果。</zh-CN>
+            //   <en>The output key starts empty so a failed resolution cannot retain an old caller value or a previous result.</en>
+            // </lang>
+            canonicalValueKey = string.Empty;
+            // <lang>
+            //   <zh-CN>解析只遍历当前集合的兼容副本；目录可读时调用方不得走这条路径绕过停用值。</zh-CN>
+            //   <en>Resolution scans only the compatibility copy for the current set; callers must not use this path to bypass deactivated values when the catalog is readable.</en>
+            // </lang>
+            foreach (ReferenceDataItem item in GetFallbackItems(referenceSetKey))
+            {
+                // <lang>
+                //   <zh-CN>值键比较允许大小写差异，但返回值保持种子中的规范大小写，便于事实表持久化稳定键。</zh-CN>
+                //   <en>Value-key comparison accepts casing differences, but the returned value keeps the seed's canonical casing for stable fact-table persistence.</en>
+                // </lang>
+                if (string.Equals(item.ValueKey, candidateValueKey, StringComparison.OrdinalIgnoreCase))
+                {
+                    canonicalValueKey = item.ValueKey;
+                    return true;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>未命中表示候选值不属于受限兼容集合，调用方应按输入无效处理。</zh-CN>
+            //   <en>A miss means the candidate does not belong to the restricted compatibility set and should be treated by callers as invalid input.</en>
+            // </lang>
+            return false;
+        }

@@ -1,0 +1,400 @@
+    public static class PortalNavigationGroupAlias
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按稳定键划分的功能族分组标识；键是配置别名的唯一合法取值，不用显示名或序号做键。</zh-CN>
+        ///   <en>Stable keys for functional-family groups; a key is the only legal value of a configuration alias, never a display name or index.</en>
+        /// </lang>
+        /// </summary>
+        public static class GroupKeys
+        {
+            /// <summary><lang><zh-CN>工作与审批：待办、请假与报销。</zh-CN><en>Work and approval: work items, leave and expense.</en></lang></summary>
+            public const string WorkAndApproval = "WorkAndApproval";
+
+            /// <summary><lang><zh-CN>业务办理：业务申请、我的信息。</zh-CN><en>Business: business requests, my profile.</en></lang></summary>
+            public const string Business = "Business";
+
+            /// <summary><lang><zh-CN>门户与帮助：首页、帮助。</zh-CN><en>Portal and help: home, help.</en></lang></summary>
+            public const string PortalAndHelp = "PortalAndHelp";
+
+            /// <summary><lang><zh-CN>系统管理：后台管理、企业能力工作台。</zh-CN><en>System administration: admin tab, enterprise capability workbench.</en></lang></summary>
+            public const string SystemAdministration = "SystemAdministration";
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>覆盖个别页签分组归属的配置键；值为 `NavigationKey=GroupKey` 条目，逗号分隔；空值表示全部采用词表默认。</zh-CN>
+        ///   <en>Setting key overriding individual tab group assignments; the value holds comma-separated
+        ///   `NavigationKey=GroupKey` pairs; an empty value means all defaults from the vocabulary apply.</en>
+        /// </lang>
+        /// </summary>
+        public const string ConfigurationKey = "Portal.Navigation.GroupAliases";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>一个分组的展示契约：稳定键、中英显示名、排序与默认成员页签键集合；不含任何角色、权限或授权方法。</zh-CN>
+        ///   <en>Presentation contract of one group: stable key, Chinese/English labels, sort order, and default member tab keys;
+        ///   it carries no role, permission, or authorization method.</en>
+        /// </lang>
+        /// </summary>
+        public sealed class GroupDefinition
+        {
+            /// <summary><lang><zh-CN>分组稳定键。</zh-CN><en>Stable group key.</en></lang></summary>
+            public string GroupKey { get; private set; }
+
+            /// <summary><lang><zh-CN>中文界面显示名。</zh-CN><en>Chinese UI label.</en></lang></summary>
+            public string DisplayNameZhCn { get; private set; }
+
+            /// <summary><lang><zh-CN>英文界面显示名。</zh-CN><en>English UI label.</en></lang></summary>
+            public string DisplayNameEn { get; private set; }
+
+            /// <summary><lang><zh-CN>展示顺序，小者在前。</zh-CN><en>Presentation order, smaller first.</en></lang></summary>
+            public int SortOrder { get; private set; }
+
+            /// <summary><lang><zh-CN>默认成员页签 NavigationKey 只读集合。</zh-CN><en>Read-only default member tab NavigationKey collection.</en></lang></summary>
+            public IList<string> DefaultNavigationKeys { get; private set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>构造不可变分组定义；成员键集合去重、去空白后冻结，防止别名表被后续调用方改写。</zh-CN>
+            ///   <en>Build an immutable group definition; member keys are trimmed, de-duplicated and frozen so callers cannot mutate the alias table later.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="groupKey"><l zh-CN="分组稳定键。" en="Stable group key." /></param>
+            /// <param name="displayNameZhCn"><l zh-CN="中文显示名。" en="Chinese label." /></param>
+            /// <param name="displayNameEn"><l zh-CN="英文显示名。" en="English label." /></param>
+            /// <param name="sortOrder"><l zh-CN="展示顺序。" en="Presentation order." /></param>
+            /// <param name="defaultNavigationKeys"><l zh-CN="默认成员页签键。" en="Default member tab keys." /></param>
+            public GroupDefinition(string groupKey, string displayNameZhCn, string displayNameEn, int sortOrder, IEnumerable<string> defaultNavigationKeys)
+            {
+                // <lang>
+                //   <zh-CN>稳定键与双语显示名是展示契约的最小必需项；空白即拒绝构造，避免运行时出现无名分组。</zh-CN>
+                //   <en>The stable key and both labels are the minimal presentation contract; blank values are refused so no nameless group can appear at runtime.</en>
+                // </lang>
+                if (string.IsNullOrWhiteSpace(groupKey) || string.IsNullOrWhiteSpace(displayNameZhCn) || string.IsNullOrWhiteSpace(displayNameEn))
+                {
+                    throw new ArgumentException("A navigation group requires a stable key and both localized labels.");
+                }
+
+                GroupKey = groupKey.Trim();
+                DisplayNameZhCn = displayNameZhCn.Trim();
+                DisplayNameEn = displayNameEn.Trim();
+                SortOrder = sortOrder;
+
+                // <lang>
+                //   <zh-CN>成员键按忽略大小写去重；空集合是合法值（空态分组），但不得为 null 以免漏掉配置校验。</zh-CN>
+                //   <en>Member keys are de-duplicated case-insensitively; an empty set is legal (empty-state group) but null is not, so configuration validation is never skipped.</en>
+                // </lang>
+                if (defaultNavigationKeys == null)
+                {
+                    throw new ArgumentNullException("defaultNavigationKeys");
+                }
+
+                List<string> normalized = defaultNavigationKeys
+                    .Where(key => !string.IsNullOrWhiteSpace(key))
+                    .Select(key => key.Trim())
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList();
+                DefaultNavigationKeys = new ReadOnlyCollection<string>(normalized);
+            }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>按界面文化返回分组显示名；与 `PortalNavigationEntry.GetDisplayName` 同口径（两字母语言码判定中文），
+            ///   单侧缺失回落另一侧，两侧都缺失回落稳定键，绝不返回空标签。</zh-CN>
+            ///   <en>Return the localized group label for a UI culture, using the same convention as
+            ///   `PortalNavigationEntry.GetDisplayName` (two-letter code decides Chinese); a missing side falls back to the other,
+            ///   and both missing fall back to the stable key, so the label is never empty.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="culture"><l zh-CN="界面文化；为 null 时取当前线程界面文化。" en="UI culture; null uses the current thread UI culture." /></param>
+            /// <returns><l zh-CN="本地化后的显示名。" en="Localized label." /></returns>
+            public string GetDisplayName(CultureInfo culture)
+            {
+                // <lang>
+                //   <zh-CN>未显式传文化时取当前线程界面文化，保证调用方无需自行读取全球化配置。</zh-CN>
+                //   <en>When no culture is supplied, use the current thread UI culture so callers need not read globalization configuration.</en>
+                // </lang>
+                CultureInfo effective = culture ?? CultureInfo.CurrentUICulture;
+                bool preferChinese = effective != null &&
+                    string.Equals(effective.TwoLetterISOLanguageName, "zh", StringComparison.OrdinalIgnoreCase);
+
+                string preferred = preferChinese ? DisplayNameZhCn : DisplayNameEn;
+                string fallback = preferChinese ? DisplayNameEn : DisplayNameZhCn;
+
+                if (!string.IsNullOrWhiteSpace(preferred))
+                {
+                    return preferred;
+                }
+
+                if (!string.IsNullOrWhiteSpace(fallback))
+                {
+                    return fallback;
+                }
+
+                return GroupKey ?? string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>封闭词表：四个功能族分组，覆盖 `Portal_NavigationSeed.sql` 的八个 `NavigationKey`；声明顺序即展示顺序。</zh-CN>
+        ///   <en>Closed vocabulary: four functional-family groups covering the eight `NavigationKey` values in
+        ///   `Portal_NavigationSeed.sql`; declaration order is presentation order.</en>
+        /// </lang>
+        /// </summary>
+        private static readonly GroupDefinition[] DefinitionArray =
+        {
+            new GroupDefinition(GroupKeys.WorkAndApproval, "工作与审批", "Work & Approvals", 10,
+                new[] { "MyWorkItems", "LeaveAndExpense" }),
+            new GroupDefinition(GroupKeys.Business, "业务办理", "Business", 20,
+                new[] { "BusinessRequests", "MyProfile" }),
+            new GroupDefinition(GroupKeys.PortalAndHelp, "门户与帮助", "Portal & Help", 30,
+                new[] { "Home", "Help" }),
+            new GroupDefinition(GroupKeys.SystemAdministration, "系统管理", "System Administration", 40,
+                new[] { "Admin", "CapabilityWorkbench" })
+        };
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按展示顺序返回全部只读分组定义；每次返回新的只读副本，调用方不能改写词表。</zh-CN>
+        ///   <en>Return all group definitions in presentation order as a new read-only copy; callers cannot mutate the vocabulary.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns><l zh-CN="分组定义只读集合。" en="Read-only group definition collection." /></returns>
+        public static IList<GroupDefinition> GetGroups()
+        {
+            return new ReadOnlyCollection<GroupDefinition>(
+                DefinitionArray.OrderBy(definition => definition.SortOrder)
+                    .ThenBy(definition => definition.GroupKey, StringComparer.OrdinalIgnoreCase)
+                    .ToList());
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按稳定键精确查找分组定义；忽略大小写、去除首尾空白；未知键返回 false，绝不猜测分组。</zh-CN>
+        ///   <en>Find a group definition by stable key, ignoring case and surrounding whitespace; unknown keys return false and no group is guessed.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="groupKey"><l zh-CN="分组稳定键。" en="Stable group key." /></param>
+        /// <param name="definition"><l zh-CN="命中时返回分组定义，否则为 null。" en="Matched definition, or null." /></param>
+        /// <returns><l zh-CN="是否命中。" en="Whether a match was found." /></returns>
+        public static bool TryFindByKey(string groupKey, out GroupDefinition definition)
+        {
+            // <lang>
+            //   <zh-CN>空白键直接判未命中，避免把空配置误归入某个业务组。</zh-CN>
+            //   <en>A blank key is an immediate miss so empty configuration is never mis-assigned to a business group.</en>
+            // </lang>
+            definition = null;
+            if (string.IsNullOrWhiteSpace(groupKey))
+            {
+                return false;
+            }
+
+            string trimmed = groupKey.Trim();
+            definition = DefinitionArray.FirstOrDefault(candidate =>
+                string.Equals(candidate.GroupKey, trimmed, StringComparison.OrdinalIgnoreCase));
+            return definition != null;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析部署侧 `Portal.Navigation.GroupAliases` 覆盖文本，产出「页签键 → 分组键」的别名映射。
+        ///   仅接受词表内的分组键与 `NavigationKey=GroupKey` 形态；重复页签键或未知分组键一律判为非法，
+        ///   **整份配置 fail-closed 拒绝**（不采用部分覆盖），调用方据此回退默认词表并保持页签全部可达。</zh-CN>
+        ///   <en>Parse the deployment `Portal.Navigation.GroupAliases` override text into a tab-key to group-key alias map.
+        ///   Only vocabulary group keys and `NavigationKey=GroupKey` pairs are accepted; duplicate tab keys or unknown group keys
+        ///   make the **entire configuration fail closed** (no partial override is adopted), so the caller falls back to defaults
+        ///   and keeps every tab reachable.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="configuration"><l zh-CN="配置文本；null 或空白表示无覆盖。" en="Configuration text; null or blank means no override." /></param>
+        /// <param name="aliases"><l zh-CN="解析成功时的别名映射；失败时为 null。" en="Alias map on success; null on failure." /></param>
+        /// <param name="reason"><l zh-CN="失败原因代码，便于诊断而不回显配置内容。" en="Failure reason code for diagnostics without echoing the configuration." /></param>
+        /// <returns><l zh-CN="是否解析成功（含空配置的成功）。" en="Whether parsing succeeded, including an empty configuration." /></returns>
+        public static bool TryParseAliases(string configuration, out IDictionary<string, string> aliases, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>空配置是合法的无覆盖状态：返回空映射而非失败，保证默认部署不需要任何配置即可工作。</zh-CN>
+            //   <en>An empty configuration is a legal no-override state: return an empty map rather than failing, so a default deployment needs no configuration at all.</en>
+            // </lang>
+            aliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            reason = string.Empty;
+            if (string.IsNullOrWhiteSpace(configuration))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>按逗号切分条目；每段必须恰有一个等号，且等号两侧都非空，避免宽松解析把畸形文本当成有效别名。</zh-CN>
+            //   <en>Split entries by comma; each segment must contain exactly one '=' with both sides nonblank, so lenient parsing never treats malformed text as a valid alias.</en>
+            // </lang>
+            string[] segments = configuration.Split(',');
+            foreach (string segment in segments)
+            {
+                string pair = (segment ?? string.Empty).Trim();
+                if (pair.Length == 0)
+                {
+                    continue;
+                }
+
+                int separator = pair.IndexOf('=');
+                if (separator <= 0 || separator != pair.LastIndexOf('=') || separator == pair.Length - 1)
+                {
+                    aliases = null;
+                    reason = "MalformedPair";
+                    return false;
+                }
+
+                string navigationKey = pair.Substring(0, separator).Trim();
+                string groupKey = pair.Substring(separator + 1).Trim();
+                if (navigationKey.Length == 0 || groupKey.Length == 0)
+                {
+                    aliases = null;
+                    reason = "BlankPairPart";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>分组键必须来自封闭词表：未知键拒绝，防止配置悄悄把页签塞进未定义的组后被隐藏。</zh-CN>
+                //   <en>The group key must come from the closed vocabulary: unknown keys are refused so configuration cannot quietly place tabs into an undefined group and hide them.</en>
+                // </lang>
+                GroupDefinition definition;
+                if (!TryFindByKey(groupKey, out definition))
+                {
+                    aliases = null;
+                    reason = "UnknownGroupKey";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>同一页签出现两次覆盖时拒绝整份配置，避免顺序依赖导致部署结果不可复现。</zh-CN>
+                //   <en>A tab overridden twice fails the whole configuration, preventing order-dependent deployment results.</en>
+                // </lang>
+                if (aliases.ContainsKey(navigationKey))
+                {
+                    aliases = null;
+                    reason = "DuplicateNavigationKey";
+                    return false;
+                }
+
+                aliases.Add(navigationKey, definition.GroupKey);
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析一个页签的分组归属：先看部署别名覆盖，再看词表默认成员；未知页签返回 false（调用方按未分组平铺展示，
+        ///   绝不隐藏）。配置解析失败时同样回退默认词表，保证「别名解析失败 → 一级平铺」的降级路径永不丢页签。</zh-CN>
+        ///   <en>Resolve one tab's group: deployment alias override first, then vocabulary default membership; an unknown tab returns
+        ///   false and the caller renders it ungrouped (never hidden). A failed configuration parse also falls back to defaults, so
+        ///   the "alias parse failed → flat navigation" degradation path never loses a tab.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="navigationKey"><l zh-CN="页签 NavigationKey。" en="Tab NavigationKey." /></param>
+        /// <param name="configuration"><l zh-CN="部署别名配置文本，可为 null。" en="Deployment alias configuration text, may be null." /></param>
+        /// <param name="definition"><l zh-CN="命中时返回分组定义，否则为 null。" en="Matched definition, or null." /></param>
+        /// <param name="degraded"><l zh-CN="配置非法导致回退默认词表时为 true。" en="True when invalid configuration caused a fallback to defaults." /></param>
+        /// <returns><l zh-CN="是否找到分组归属。" en="Whether a group membership was found." /></returns>
+        public static bool TryResolveGroup(string navigationKey, string configuration, out GroupDefinition definition, out bool degraded)
+        {
+            // <lang>
+            //   <zh-CN>先解析整份配置：失败时清空覆盖、置降级标记，但仍继续走默认词表，不提前返回。</zh-CN>
+            //   <en>Parse the whole configuration first: on failure clear overrides and set the degraded flag, yet still continue with defaults instead of returning early.</en>
+            // </lang>
+            IDictionary<string, string> aliases;
+            string reason;
+            degraded = !TryParseAliases(configuration, out aliases, out reason);
+            if (aliases == null)
+            {
+                aliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            definition = null;
+            if (string.IsNullOrWhiteSpace(navigationKey))
+            {
+                return false;
+            }
+
+            string trimmedKey = navigationKey.Trim();
+
+            // <lang>
+            //   <zh-CN>覆盖优先级高于默认；命中后仍按稳定键取词表定义，避免把配置文本里的大小写差异带进显示层。</zh-CN>
+            //   <en>Overrides take precedence over defaults; a hit still resolves the vocabulary definition by stable key so casing from configuration text never leaks into the presentation layer.</en>
+            // </lang>
+            string overriddenGroupKey;
+            if (aliases.TryGetValue(trimmedKey, out overriddenGroupKey))
+            {
+                return TryFindByKey(overriddenGroupKey, out definition);
+            }
+
+            definition = DefinitionArray.FirstOrDefault(candidate =>
+                candidate.DefaultNavigationKeys.Contains(trimmedKey, StringComparer.OrdinalIgnoreCase));
+            return definition != null;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>生成按展示顺序排列的「分组 → 成员页签键」只读视图，供 `[已脱敏]` 的渲染层消费。
+        ///   未分组页签由调用方平铺展示；本方法不读数据库、不读请求上下文、不做授权判定。</zh-CN>
+        ///   <en>Produce a read-only, presentation-ordered "group → member tab key" view for the `[已脱敏]` renderer.
+        ///   Ungrouped tabs are rendered flat by the caller; this method reads no database or request context and performs no authorization.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="navigationKeys"><l zh-CN="本次要展示的页签 NavigationKey 序列。" en="Tab NavigationKey sequence to present." /></param>
+        /// <param name="configuration"><l zh-CN="部署别名配置文本，可为 null。" en="Deployment alias configuration text, may be null." /></param>
+        /// <param name="ungroupedKeys"><l zh-CN="未能归入任何分组的页签键（平铺展示）。" en="Tab keys that belong to no group (rendered flat)." /></param>
+        /// <param name="degraded"><l zh-CN="配置非法导致回退默认词表时为 true。" en="True when invalid configuration caused a fallback to defaults." /></param>
+        /// <returns><l zh-CN="分组定义及该组成员页签键的只读列表。" en="Read-only list of groups with their member tab keys." /></returns>
+        public static IList<KeyValuePair<GroupDefinition, IList<string>>> BuildGroupedView(
+            IEnumerable<string> navigationKeys, string configuration,
+            out IList<string> ungroupedKeys, out bool degraded)
+        {
+            // <lang>
+            //   <zh-CN>输入序列为空时仍返回完整分组骨架（成员为空），保证渲染层能画出「空态分组」而不崩溃。</zh-CN>
+            //   <en>An empty input still returns the full group skeleton with empty members so the renderer can draw empty-state groups without failing.</en>
+            // </lang>
+            IEnumerable<string> safeKeys = navigationKeys ?? Enumerable.Empty<string>();
+            List<string> flat = new List<string>();
+            List<KeyValuePair<GroupDefinition, IList<string>>> result = new List<KeyValuePair<GroupDefinition, IList<string>>>();
+
+            // <lang>
+            //   <zh-CN>每个分组独立收集成员；分组顺序来自词表，不依赖输入序列顺序，避免数据库排序变化影响导航层级。</zh-CN>
+            //   <en>Members are collected per group; group order comes from the vocabulary rather than the input sequence, so database ordering cannot change the navigation hierarchy.</en>
+            // </lang>
+            Dictionary<string, List<string>> byGroup = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+            bool anyDegraded = false;
+            foreach (string navigationKey in safeKeys)
+            {
+                GroupDefinition definition;
+                bool itemDegraded;
+                if (TryResolveGroup(navigationKey, configuration, out definition, out itemDegraded))
+                {
+                    anyDegraded = anyDegraded || itemDegraded;
+                    List<string> members;
+                    if (!byGroup.TryGetValue(definition.GroupKey, out members))
+                    {
+                        members = new List<string>();
+                        byGroup.Add(definition.GroupKey, members);
+                    }
+                    members.Add(navigationKey);
+                }
+                else
+                {
+                    anyDegraded = anyDegraded || itemDegraded;
+                    flat.Add(navigationKey);
+                }
+            }
+
+            degraded = anyDegraded;
+            foreach (GroupDefinition definition in GetGroups())
+            {
+                List<string> members;
+                if (!byGroup.TryGetValue(definition.GroupKey, out members))
+                {
+                    members = new List<string>();
+                }
+                result.Add(new KeyValuePair<GroupDefinition, IList<string>>(
+                    definition, new ReadOnlyCollection<string>(members)));

@@ -1,0 +1,47 @@
+        public static bool TryParseSameSite(string value, out PortalCookieSameSiteMode sameSite)
+        {
+            // <lang>
+            //   <zh-CN>空值按 Unset 处理且不视为降级，因为默认本就不下发该属性。</zh-CN>
+            //   <en>Blank is treated as Unset and is not a degradation because the default already omits the attribute.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                sameSite = PortalCookieSameSiteMode.Unset;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>按不区分大小写精确比对四个受控取值，避免宽松匹配把未知文本解释为某种模式。</zh-CN>
+            //   <en>Compare the four controlled values case-insensitively and exactly so loose matching never interprets unknown text as a mode.</en>
+            // </lang>
+            if (string.Equals(value, "Unset", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.Unset;
+                return true;
+            }
+
+            if (string.Equals(value, "Lax", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.Lax;
+                return true;
+            }
+
+            if (string.Equals(value, "Strict", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.Strict;
+                return true;
+            }
+
+            if (string.Equals(value, "None", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.None;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>未知取值不猜测兼容模式，交回 Unset 并由调用方标记降级原因。</zh-CN>
+            //   <en>Unknown values are never guessed into a compatibility mode; Unset is returned and the caller records the degradation reason.</en>
+            // </lang>
+            sameSite = PortalCookieSameSiteMode.Unset;
+            return false;
+        }

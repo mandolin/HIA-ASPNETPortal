@@ -1,0 +1,13 @@
+        private static bool IsExtensionAllowed(string extension)
+        {
+            // <lang>
+            //   <zh-CN>先拒绝空值和硬集合之外的类型，再读取可收紧的运行配置。</zh-CN>
+            //   <en>Reject empty or hard-allowlist-external types first, then apply the narrowing runtime configuration.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(extension) || !HardAllowedExtensions.Contains(extension))
+            {
+                return false;
+            }
+
+            return GetConfiguredAllowedExtensions().Contains(extension);
+        }

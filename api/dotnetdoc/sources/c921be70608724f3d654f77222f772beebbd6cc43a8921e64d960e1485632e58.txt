@@ -1,0 +1,13 @@
+        protected void TabSettings_Change(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>自动保存事件仍需完整请求门禁，保存结果由 SaveTabData 统一处理。</zh-CN>
+            //   <en>Auto-save events still require the full request gate, with SaveTabData owning the save result.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            SaveTabData();
+        }

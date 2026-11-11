@@ -1,0 +1,25 @@
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Hashtable Settings
+        {
+            get
+            {
+                // <lang>
+                //   <zh-CN>仅在尚无非 null 设置对象时访问数据服务；这是一项同步惰性读取，不提供锁或跨请求缓存。</zh-CN>
+                //   <en>Access the data service only while no non-null settings object is retained; this is a synchronous lazy read with neither locking nor cross-request caching.</en>
+                // </lang>
+                if (_settings == null) // 如果尚未加载设置
+                {
+                    // <lang>
+                    //   <zh-CN>以绑定配置中的模块实例标识读取旧式键值集合；服务返回 null 时字段仍为 null，后续访问会再次读取。</zh-CN>
+                    //   <en>Read the legacy key-value collection by the module-instance identifier from bound configuration; if the service returns null, the field remains null and a later access reads again.</en>
+                    // </lang>
+                    _settings = ModulesConfig.GetModuleSettings(ModuleId); // 从数据库获取模块设置
+                }
+
+                // <lang>
+                //   <zh-CN>原样返回保存的可变引用以维持旧模块兼容；调用方修改只影响该对象，是否持久化由独立数据写入 API 决定。</zh-CN>
+                //   <en>Return the retained mutable reference verbatim for legacy module compatibility; caller mutation affects only this object, while persistence is decided by separate data-write APIs.</en>
+                // </lang>
+                return _settings; // 返回模块设置
+            }
+        }

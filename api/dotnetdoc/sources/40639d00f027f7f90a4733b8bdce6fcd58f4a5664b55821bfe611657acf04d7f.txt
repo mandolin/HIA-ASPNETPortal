@@ -1,0 +1,88 @@
+    internal sealed class PortalPasswordHash
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化强密码哈希传输对象。</zh-CN>
+        ///   <en>Initializes a strong password-hash transfer object.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="format">
+        /// <l>
+        ///   <zh-CN>算法格式标识。</zh-CN>
+        ///   <en>The algorithm-format identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="iterationCount">
+        /// <l>
+        ///   <zh-CN>PBKDF2 迭代次数。</zh-CN>
+        ///   <en>The PBKDF2 iteration count.</en>
+        /// </l>
+        /// </param>
+        /// <param name="salt">
+        /// <l>
+        ///   <zh-CN>随机盐。</zh-CN>
+        ///   <en>The random salt.</en>
+        /// </l>
+        /// </param>
+        /// <param name="hash">
+        /// <l>
+        ///   <zh-CN>派生哈希。</zh-CN>
+        ///   <en>The derived hash.</en>
+        /// </l>
+        /// </param>
+        internal PortalPasswordHash(string format, int iterationCount, byte[] salt, byte[] hash)
+        {
+            // <lang>
+            //   <zh-CN>格式标识保持与数据库列值一致，调用方据此区分强哈希与历史凭据。</zh-CN>
+            //   <en>The format identifier stays aligned with the database column value so callers can distinguish strong hashes from legacy credentials.</en>
+            // </lang>
+            Format = format;
+            // <lang>
+            //   <zh-CN>迭代次数作为每条凭据的成本快照保存，不由全局默认值在读取时重新推断。</zh-CN>
+            //   <en>The iteration count is stored as the per-credential cost snapshot instead of being inferred again from the global default during reads.</en>
+            // </lang>
+            IterationCount = iterationCount;
+            // <lang>
+            //   <zh-CN>盐字节来自创建流程的随机缓冲区，并只在数据访问层写库前短暂传递。</zh-CN>
+            //   <en>The salt bytes come from the creation flow's random buffer and are passed briefly before database persistence in the data-access layer.</en>
+            // </lang>
+            Salt = salt;
+            // <lang>
+            //   <zh-CN>派生哈希同样只作为内部 DTO 字段传递，不能流入日志、页面或审计摘要。</zh-CN>
+            //   <en>The derived hash is likewise carried only as an internal DTO field and must not flow into logs, pages, or audit summaries.</en>
+            // </lang>
+            Hash = hash;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取算法格式标识。</zh-CN>
+        ///   <en>Gets the algorithm-format identifier.</en>
+        /// </lang>
+        /// </summary>
+        internal string Format { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取 PBKDF2 迭代次数。</zh-CN>
+        ///   <en>Gets the PBKDF2 iteration count.</en>
+        /// </lang>
+        /// </summary>
+        internal int IterationCount { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取随机盐。</zh-CN>
+        ///   <en>Gets the random salt.</en>
+        /// </lang>
+        /// </summary>
+        internal byte[] Salt { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取派生哈希。</zh-CN>
+        ///   <en>Gets the derived hash.</en>
+        /// </lang>
+        /// </summary>
+        internal byte[] Hash { get; private set; }
+    }

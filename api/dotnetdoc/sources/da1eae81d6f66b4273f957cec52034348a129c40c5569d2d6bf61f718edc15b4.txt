@@ -1,0 +1,1 @@
+        public string ParticipantsText { get; private set; }

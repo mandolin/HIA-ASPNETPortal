@@ -1,0 +1,29 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagefailureisolation",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagefailureisolation:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagefailureisolation:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean",
+      "kind": "entry",
+      "label": "TryAggregate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackagefailureisolation.tryaggregate-system.collections.generic.ilist-system.string-system.collections.generic.idictionary-system.string-system.boolean-system.collections.generic.ilist-system.string-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagefailur-7881337d.html"
+    }
+  ]
+}

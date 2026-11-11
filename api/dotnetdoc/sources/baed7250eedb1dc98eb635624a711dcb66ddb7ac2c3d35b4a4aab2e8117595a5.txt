@@ -1,0 +1,14 @@
+        private static string ReadRequiredString(JObject manifest, string propertyName, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>复用可选读取器取得已完成类型、trim 和长度校验的值，再将空值提升为必填字段错误。</zh-CN>
+            //   <en>Reuse the optional reader for type, trimming, and length validation, then promote an empty value to a required-field error.</en>
+            // </lang>
+            string value = ReadOptionalString(manifest, propertyName, maximumLength);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new InvalidOperationException("Required manifest value is missing.");
+            }
+
+            return value;
+        }

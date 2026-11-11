@@ -1,0 +1,9 @@
+        private string GetCurrentUserName()
+        {
+            return Context != null &&
+                   Context.User != null &&
+                   Context.User.Identity != null &&
+                   Context.User.Identity.IsAuthenticated
+                ? Context.User.Identity.Name
+                : "system";
+        }

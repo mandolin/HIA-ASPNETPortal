@@ -1,0 +1,5 @@
+        internal static string Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding", resourceCulture);
+            }
+        }

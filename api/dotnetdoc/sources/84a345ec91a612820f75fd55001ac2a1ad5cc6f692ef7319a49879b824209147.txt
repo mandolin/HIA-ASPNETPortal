@@ -1,0 +1,400 @@
+    public partial class EnterpriseCapabilityWorkbench : PortalModuleControl<EnterpriseCapabilityWorkbench>
+    {
+        private const int RecentItemLimit = 10;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户数据访问服务，用于把当前登录名解析为门户用户标识。</zh-CN>
+        ///   <en>User data service used to resolve the current sign-in name to a Portal user identifier.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IUsersDb UsersDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项数据服务。</zh-CN>
+        ///   <en>Enterprise collaboration-item data service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public ICollaborationItemDb CollaborationItemDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>受治理参考数据目录读取服务，用于填充类型和优先级。</zh-CN>
+        ///   <en>Governed reference-data catalog reader used to populate types and priorities.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IReferenceDataDb ReferenceDataDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务，用于把用户提交投影到后台处理入口。</zh-CN>
+        ///   <en>Lightweight work-item data service used to project user submissions into the administration handling entry.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化工作台并绑定固定选项和本人最近事项。</zh-CN>
+        ///   <en>Initializes the workbench and binds fixed options plus recent own items.</en>
+        /// </lang>
+        /// </summary>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>仅在首次请求绑定固定参考数据和本人列表，避免回发时覆盖用户输入或控件选择。</zh-CN>
+            //   <en>Bind fixed reference data and the own-item list only on the first request so postbacks do not overwrite user input or selections.</en>
+            // </lang>
+            if (!IsPostBack)
+            {
+                BindItemTypeList();
+                BindPriorityList();
+                BindModule();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交当前用户填写的企业协同事项。</zh-CN>
+        ///   <en>Submits the enterprise collaboration item entered by the current user.</en>
+        /// </lang>
+        /// </summary>
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先解析当前身份，再执行权限、期限、内容和数据服务门禁；任何门禁失败都只显示提示并保持页面闭环。</zh-CN>
+            //   <en>Resolve the current identity before permission, due-date, content, and data-service gates; every failed gate stays within the page flow and only reports a message.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit);
+                BindModule();
+                return;
+            }
+
+            if (!PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.BusinessCollaborationCreate,
+                PortalPermissionKeys.BusinessCollaborationAdmin))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>期限按 UTC 解析；空值代表未设置，格式错误不会进入持久化。</zh-CN>
+            //   <en>Parse the due date as UTC; an empty value means unset, while an invalid format never reaches persistence.</en>
+            // </lang>
+            DateTime? dueUtc;
+            if (!TryParseDueUtc(DueUtcTextBox.Text, out dueUtc))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageInvalidDueUtc);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>在服务调用前统一裁剪文本，保持 UI 输入与领域字段长度契约一致。</zh-CN>
+            //   <en>Normalize text before the service call so UI input remains within the domain field-length contract.</en>
+            // </lang>
+            string title = NormalizeInput(TitleTextBox.Text, 200);
+            string summary = NormalizeInput(SummaryTextBox.Text, 500);
+            string description = NormalizeInput(DescriptionTextBox.Text, 4000);
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageTitleRequired);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(summary) && string.IsNullOrWhiteSpace(description))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageContentRequired);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>协同事项服务写入提交事实和状态；提交人和处理角色采用当前上下文的稳定身份键。</zh-CN>
+            //   <en>The collaboration-item service writes the submission fact and state; submitter and handling role use stable identity keys from the current context.</en>
+            // </lang>
+            CollaborationItemResult result = CollaborationItemDb.CreateSubmittedItem(
+                new CollaborationItemCreateRequest
+                {
+                    ItemTypeKey = ItemTypeList.SelectedValue,
+                    Title = title,
+                    Summary = summary,
+                    Description = description,
+                    InitiatorUserId = userId,
+                    OwnerRoleKey = PortalPermissionKeys.BusinessCollaborationHandle,
+                    PriorityKey = PriorityList.SelectedValue,
+                    DueUtc = dueUtc,
+                    SubmittedUtc = DateTime.UtcNow,
+                    SubmittedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                ShowMessage(result.Message);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>领域事实成功后记录操作审计；后续待办投影失败不回滚已提交事项。</zh-CN>
+            //   <en>Record operation audit after the domain fact succeeds; a later work-item projection failure must not roll back the submitted item.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemSubmitted,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item submitted from EnterpriseCapabilityWorkbench. ItemCode=" + result.ItemCode,
+                Context);
+
+            TryEnsureWorkItem(result.ItemId, result.ItemCode, title, summary, dueUtc);
+            ClearSubmitForm();
+            ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSubmittedPrefix + result.ItemCode);
+            BindModule();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理本人事项列表中的评论和退回后重新提交请求。</zh-CN>
+        ///   <en>Handles comment and post-return resubmission requests from the own-item list.</en>
+        /// </lang>
+        /// </summary>
+        protected void RecentItemsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>列表命令重新解析当前身份并校验命令参数，防止匿名或无效事项标识进入动作服务。</zh-CN>
+            //   <en>Re-resolve identity and validate the command argument before list actions so anonymous or invalid item identifiers never reach the action service.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (userId <= 0 || !IsCurrentUserAuthenticated())
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredAction);
+                BindModule();
+                return;
+            }
+
+            long itemId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageInvalidItemId);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>仅允许显式支持的评论和重提动作；未知动作走统一提示并重新绑定列表。</zh-CN>
+            //   <en>Only explicit comment and resubmission actions are supported; unknown actions use the common message and rebind the list.</en>
+            // </lang>
+            string commandName = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            if (string.Equals(commandName, "AddParticipantComment", StringComparison.Ordinal))
+            {
+                // <lang>
+                //   <zh-CN>评论限定为事项参与者可见范围，并保留服务层返回的失败信息。</zh-CN>
+                //   <en>Comments are written to the item-participant visibility scope while preserving the service failure message.</en>
+                // </lang>
+                TextBox commentBox = e.Item.FindControl("ParticipantCommentTextBox") as TextBox;
+                string comment = commentBox == null ? string.Empty : commentBox.Text;
+                CollaborationItemCommentResult commentResult = CollaborationItemDb.AddComment(
+                    new CollaborationItemCommentCreateRequest
+                    {
+                        ItemId = itemId,
+                        Comment = comment,
+                        VisibilityScope = PortalCollaborationItemVisibilityScopes.ItemParticipants,
+                        ActorUserId = userId,
+                        ActorName = GetCurrentUserName(),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+                if (!commentResult.Succeeded)
+                {
+                    ShowMessage(commentResult.Message);
+                    BindModule();
+                    return;
+                }
+
+                RecordCommentAudit(commentResult, PortalCollaborationItemVisibilityScopes.ItemParticipants, comment);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageCommentAdded);
+                BindModule();
+                return;
+            }
+
+            if (string.Equals(commandName, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                // <lang>
+                //   <zh-CN>重提动作成功后重新读取本人事项，再补建后台待办并记录动作审计。</zh-CN>
+                //   <en>After resubmission succeeds, reload the user's item, recreate the handling work item, and record the action audit.</en>
+                // </lang>
+                CollaborationItemResult result = CollaborationItemDb.ApplyAction(
+                    new CollaborationItemActionRequest
+                    {
+                        ItemId = itemId,
+                        ActionKey = PortalCollaborationItemActions.Resubmit,
+                        ActorUserId = userId,
+                        ActorName = GetCurrentUserName(),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+                if (!result.Succeeded)
+                {
+                    ShowMessage(result.Message);
+                    BindModule();
+                    return;
+                }
+
+                CollaborationItemInfo item = CollaborationItemDb.GetRecentItemsForUser(userId, RecentItemLimit)
+                    .FirstOrDefault(candidate => candidate.ItemId == result.ItemId);
+                if (item != null)
+                {
+                    TryEnsureWorkItem(item.ItemId, item.ItemCode, item.Title, item.Summary, item.DueUtc);
+                }
+
+                RecordActionAudit(result);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageResubmitted);
+                BindModule();
+                return;
+            }
+
+            ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageUnsupportedAction);
+            BindModule();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按身份、Schema 和权限门禁控制工作台可见性，并绑定当前用户最近事项。</zh-CN>
+        ///   <en>Applies identity, schema, and permission gates to workbench visibility and binds the current user's recent items.</en>
+        /// </lang>
+        /// </summary>
+        private void BindModule()
+        {
+            // <lang>
+            //   <zh-CN>模块绑定前先做认证和数据库能力检查，失败时隐藏工作区并绑定空列表。</zh-CN>
+            //   <en>Check authentication and database capability before binding; failures hide the work area and bind an empty list.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (!IsCurrentUserAuthenticated())
+            {
+                WorkbenchPanel.Visible = false;
+                BindRecentItems(0);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench);
+                return;
+            }
+
+            if (CollaborationItemDb == null || !CollaborationItemDb.IsSchemaAvailable())
+            {
+                WorkbenchPanel.Visible = false;
+                BindRecentItems(0);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageModuleNotInitialized);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>创建、查看本人和管理员权限共同决定前台是否可用；此处不推断角色继承关系。</zh-CN>
+            //   <en>Create, own-view, and administrator permissions jointly determine front-end availability; no role inheritance is inferred here.</en>
+            // </lang>
+            bool canUseWorkbench = PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.BusinessCollaborationCreate,
+                PortalPermissionKeys.BusinessCollaborationViewOwn,
+                PortalPermissionKeys.BusinessCollaborationAdmin);
+            WorkbenchPanel.Visible = canUseWorkbench;
+            if (!canUseWorkbench)
+            {
+                BindRecentItems(0);
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench);
+                return;
+            }
+
+            BindRecentItems(userId);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定协同事项类型参考数据。</zh-CN>
+        ///   <en>Binds collaboration-item type reference data.</en>
+        /// </lang>
+        /// </summary>
+        private void BindItemTypeList()
+        {
+            BindReferenceDataList(ItemTypeList, PortalReferenceDataSets.CollaborationItemType);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定协同事项优先级参考数据。</zh-CN>
+        ///   <en>Binds collaboration-item priority reference data.</en>
+        /// </lang>
+        /// </summary>
+        private void BindPriorityList()
+        {
+            BindReferenceDataList(PriorityList, PortalReferenceDataSets.CollaborationPriority);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>优先读取活动参考数据，读取不可用时使用受治理的固定回退项。</zh-CN>
+        ///   <en>Prefers active reference data and uses governed fixed fallback items when the reader is unavailable.</en>
+        /// </lang>
+        /// </summary>
+        private void BindReferenceDataList(DropDownList list, string referenceSetKey)
+        {
+            // <lang>
+            //   <zh-CN>每次绑定先清空旧项，避免回发或服务切换造成重复选项。</zh-CN>
+            //   <en>Clear old entries before each bind so postbacks or service switches cannot create duplicate options.</en>
+            // </lang>
+            list.Items.Clear();
+            IList<ReferenceDataItem> items;
+            if (ReferenceDataDb == null || !ReferenceDataDb.TryGetActiveItems(referenceSetKey, out items))
+            {
+                items = PortalReferenceDataSets.GetFallbackItems(referenceSetKey);
+            }
+
+            // <lang>
+            //   <zh-CN>下拉框保存稳定值键，显示名称只来自参考数据目录。</zh-CN>
+            //   <en>Store stable value keys in the drop-down while taking display names only from the reference catalog.</en>
+            // </lang>
+            foreach (ReferenceDataItem item in items)
+            {
+                list.Items.Add(new ListItem(item.DisplayName, item.ValueKey));
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前用户最近事项及其可见事件并转换为展示行。</zh-CN>
+        ///   <en>Loads the current user's recent items and visible events and converts them to display rows.</en>
+        /// </lang>
+        /// </summary>
+        private void BindRecentItems(int userId)
+        {
+            // <lang>
+            //   <zh-CN>未认证或服务不可用时使用空集合，保持模板绑定安全且不暴露跨用户数据。</zh-CN>
+            //   <en>Use an empty collection when unauthenticated or unavailable so template binding stays safe and cannot expose another user's data.</en>
+            // </lang>
+            IList<CollaborationItemInfo> items = CollaborationItemDb == null || userId <= 0
+                ? new List<CollaborationItemInfo>()
+                : CollaborationItemDb.GetRecentItemsForUser(userId, RecentItemLimit);
+            // <lang>
+            //   <zh-CN>可见事件由数据服务按当前用户裁剪，展示行只做排序和低敏文本转换。</zh-CN>
+            //   <en>The data service scopes visible events to the current user; the display row only sorts and converts low-sensitivity text.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>P74.5 起改为批量读取：先一次性取回本页所有事项的可见事件与参与人集合，再在内存中按事项装配。
+            //   逐行版本对每个事项都会重算动作人授权并各发两条查询（实际约 4N 次往返）；批量版把动作人授权算一次、事项事实一次、事件与参与人各一次，即常数次往返。
+            //   可见性语义不变：服务层仍对**每个事项**执行 CanParticipate 与 CanView，未通过者不会出现在事件结果里；前台只展示，不做增删。</zh-CN>
+            //   <en>Since P74.5 this reads in batch: it fetches every visible event and participant set for the page's items once and assembles them in memory.
+            //   The per-row version recomputed actor authorization per item and issued two queries each (roughly 4N round trips); the batch version computes authorization once and runs one item-fact query, one event query, and one participant query, which is a constant number of round trips.
+            //   Visibility semantics are unchanged: the service still applies CanParticipate and CanView **per item**, and items that fail never appear in the event results; the front end only displays and never adds or removes.</en>
+            // </lang>
+            List<long> workbenchItemIds = items.Select(item => item.ItemId).ToList();
+            IDictionary<long, IList<CollaborationItemEventInfo>> visibleEventsByItem =
+                CollaborationItemDb.GetVisibleEventsForItems(workbenchItemIds, userId);
+            IDictionary<long, IList<CollaborationItemParticipantInfo>> participantsByItem =
+                CollaborationItemDb.GetParticipantsForItems(workbenchItemIds);
+
+            // <lang>
+            //   <zh-CN>仍按原顺序遍历事项并逐行装配，因此列表内容与顺序与逐行版本完全一致；字典缺键时回退为空集合，不引入新的失败模式。</zh-CN>

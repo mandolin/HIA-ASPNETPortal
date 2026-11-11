@@ -1,0 +1,5 @@
+        public PortalSecurity(ITabsDb tabsConfig, IModulesDb modulesConfig)
+        {
+            _tabsConfig = tabsConfig;
+            _modulesConfig = modulesConfig;
+        }

@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>标题和说明使用资源文本输出拒绝原因；页面只展示服务器决定的结果，不尝试解释或放宽权限。</zh-CN>
+            <en>The title and explanation render resource text for the denial; the page only presents the server decision and does not interpret or relax authorization.</en>
+          </lang>
+        --%>

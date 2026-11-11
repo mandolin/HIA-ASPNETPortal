@@ -1,0 +1,19 @@
+        private void BindProfileLifecycleActions(IUserProfileInfo profile, IUserRegistrationInfo registration)
+        {
+            DisableUserBtn.Visible = false;
+            RestoreUserBtn.Visible = false;
+            if (profile == null || !profile.IsAvailable)
+            {
+                return;
+            }
+
+            string status = profile.Status ?? string.Empty;
+            bool registrationRejected = registration != null &&
+                                        string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal);
+            DisableUserBtn.Visible =
+                !IsCurrentTargetSelf() &&
+                string.Equals(status, PortalUserProfileStatuses.Active, StringComparison.Ordinal);
+            RestoreUserBtn.Visible =
+                !registrationRejected &&
+                string.Equals(status, PortalUserProfileStatuses.Disabled, StringComparison.Ordinal);
+        }

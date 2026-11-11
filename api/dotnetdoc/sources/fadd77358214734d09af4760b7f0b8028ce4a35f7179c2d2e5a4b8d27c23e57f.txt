@@ -1,0 +1,36 @@
+    public static class PortalModuleAssemblyAudit
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>记录一次装配态离线校验（best-effort）。summary 应为 PortalModuleAssemblyAuditFormatter 的产物。</zh-CN>
+        ///   <en>Records one offline assembly-state check (best-effort). summary should be the output of PortalModuleAssemblyAuditFormatter.</en>
+        /// </lang>
+        /// </summary>
+        public static void RecordCheck(string targetId, string summary, string actor, HttpContext context = null)
+        {
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.ModuleAssemblyCategory,
+                PortalOperationAuditEvents.ModuleAssemblyStateCheck,
+                PortalOperationAuditEvents.ModuleAssemblyStateTargetType,
+                targetId,
+                summary,
+                context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>记录一次装配态回滚演练（best-effort）。summary 应为 PortalModuleAssemblyAuditFormatter 的产物；演练结论只证明快照可还原为零残留，不表示真实回滚发生。</zh-CN>
+        ///   <en>Records one assembly-state rollback drill (best-effort). summary should be the output of PortalModuleAssemblyAuditFormatter; the drill conclusion only proves the snapshot restores to zero residue, never that a real rollback occurred.</en>
+        /// </lang>
+        /// </summary>
+        public static void RecordRollbackDrill(string targetId, string summary, string actor, HttpContext context = null)
+        {
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.ModuleAssemblyCategory,
+                PortalOperationAuditEvents.ModuleAssemblyRollbackDrill,
+                PortalOperationAuditEvents.ModuleAssemblyStateTargetType,
+                targetId,
+                summary,
+                context);
+        }
+    }

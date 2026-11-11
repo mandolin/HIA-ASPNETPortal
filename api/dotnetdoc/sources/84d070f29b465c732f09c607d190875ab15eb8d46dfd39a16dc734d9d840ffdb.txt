@@ -1,0 +1,4 @@
+        public IEnumerable<IUserItem> GetUsers()
+        {
+            return _context.Users.OrderBy(i => i.Name).ToList();
+        }

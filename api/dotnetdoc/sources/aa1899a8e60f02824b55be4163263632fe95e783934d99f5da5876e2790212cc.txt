@@ -1,0 +1,14 @@
+        public void DeleteRole(int roleId)
+        {
+            var item = _context.Roles.Single(i => i.RoleId == roleId);
+            var affectedUserIds = GetRoleMemberIds(roleId);
+
+            _context.Roles.Remove(item);
+
+            // <lang>
+            //   <zh-CN>先保存角色删除，再递增原成员安全版本；这样即使旧票据仍存在，下一请求也会重新读取角色状态。</zh-CN>
+            //   <en>Persist the role deletion first, then increment former members' security versions so existing tickets re-read role state on the next request.</en>
+            // </lang>
+            _context.SaveChanges();
+            IncrementSecurityVersions(affectedUserIds, "RoleDeleted");
+        }

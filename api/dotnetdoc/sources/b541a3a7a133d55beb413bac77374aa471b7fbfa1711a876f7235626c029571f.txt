@@ -1,0 +1,5 @@
+        internal static string EditHtml_HintTrustedHtml {
+            get {
+                return ResourceManager.GetString("EditHtml_HintTrustedHtml", resourceCulture);
+            }
+        }

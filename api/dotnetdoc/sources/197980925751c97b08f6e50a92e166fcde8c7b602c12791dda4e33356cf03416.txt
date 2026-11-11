@@ -1,0 +1,6 @@
+                                        <%--
+                                          <lang>
+                                            <zh-CN>旧式水平线只承担视觉分隔作用，不表达验证、授权或流程状态。</zh-CN>
+                                            <en>The legacy horizontal rule is only a visual separator and does not express validation, authorization, or workflow state.</en>
+                                          </lang>
+                                        --%>

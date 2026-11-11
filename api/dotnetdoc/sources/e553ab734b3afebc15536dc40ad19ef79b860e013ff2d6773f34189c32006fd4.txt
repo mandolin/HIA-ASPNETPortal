@@ -1,0 +1,6 @@
+                    <%--
+                    <lang>
+                      <zh-CN>门户页、后台页和旧模块页都通过此占位符提供主体内容；主题样式应围绕该稳定入口做兼容。</zh-CN>
+                      <en>Portal pages, administration pages, and legacy module pages all provide main content through this placeholder; theme styles should treat it as a stable compatibility entry point.</en>
+                    </lang>
+                    --%>

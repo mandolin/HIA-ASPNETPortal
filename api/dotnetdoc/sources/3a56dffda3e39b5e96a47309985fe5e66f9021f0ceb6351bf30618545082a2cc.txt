@@ -1,0 +1,6 @@
+<%--
+  <lang>
+    <zh-CN>P2.4 只读诊断日志页仅查询受限 NDJSON 记录，不提供下载、删除或路径输入。</zh-CN>
+    <en>The P2.4 read-only diagnostic log page queries only constrained NDJSON entries and provides no download, delete, or path-input action.</en>
+  </lang>
+--%>

@@ -1,0 +1,8 @@
+        public IEnumerable<IModuleItem> GetModulesByTab(int tabId)
+        {
+            // <lang>
+            //   <zh-CN>排序和 Pane 分组由上层布局渲染逻辑处理，此处只按 Tab 归集。</zh-CN>
+            //   <en>Ordering and pane grouping are handled by the higher-level layout renderer; this method only groups by Tab.</en>
+            // </lang>
+            return _items.Where(i => i.TabId == tabId);
+        }

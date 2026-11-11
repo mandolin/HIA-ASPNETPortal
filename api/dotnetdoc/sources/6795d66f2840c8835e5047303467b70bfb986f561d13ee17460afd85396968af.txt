@@ -1,0 +1,25 @@
+        private static bool TryNormalizePermissionKeys(
+            string[] permissionKeys,
+            HttpContext context,
+            out string[] normalizedKeys)
+        {
+            // <lang>
+            //   <zh-CN>失败时提供空数组，避免调用方枚举到部分成功结果并意外放宽任一权限判断。</zh-CN>
+            //   <en>Use an empty array on failure so callers cannot enumerate partial success and accidentally broaden any-permission evaluation.</en>
+            // </lang>
+            normalizedKeys = new string[0];
+            try
+            {
+                normalizedKeys = PortalPermissionRegistry.NormalizeDefinedKeys(permissionKeys);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                PortalDiagnostics.Error(
+                    "Authorization.PermissionKey",
+                    "Undefined or invalid permission key requested in an any-permission check.",
+                    exception,
+                    context);
+                return false;
+            }
+        }

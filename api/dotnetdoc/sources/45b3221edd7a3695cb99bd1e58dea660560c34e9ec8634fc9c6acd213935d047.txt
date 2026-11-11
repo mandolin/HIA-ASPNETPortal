@@ -1,0 +1,217 @@
+        public static bool TryParse(string json, out PortalModuleAssemblyState state, out string reason)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态，保证所有提前返回都不留下半成功快照或未初始化原因。</zh-CN>
+            //   <en>Initialize outputs to the failure state so every early return leaves neither a half-success snapshot nor an uninitialized reason.</en>
+            // </lang>
+            state = null;
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>空白文本不是合法台账；按"缺文件即显式报缺"口径处理，不把空文件静默解释成全缺省。</zh-CN>
+            //   <en>Blank text is not a valid ledger; a missing file is reported explicitly rather than silently treating an empty file as all-default.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                reason = "Assembly state ledger text is blank.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>承接框架序列化器的结果；异常只在本次解析内捕获，不向上抛到调用页面。</zh-CN>
+            //   <en>Holds the framework serializer's result; exceptions are caught within this parse and never thrown to a calling page.</en>
+            // </lang>
+            object parsed;
+            try
+            {
+                // <lang>
+                //   <zh-CN>使用 .NET Framework 自带序列化器，不为台账引入新第三方依赖；解析为通用字典后再逐项白名单校验。</zh-CN>
+                //   <en>Use the .NET Framework serializer so the ledger adds no new third-party dependency; parse into a generic dictionary before whitelist validation.</en>
+                // </lang>
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                parsed = serializer.DeserializeObject(json);
+            }
+            catch (ArgumentException)
+            {
+                // <lang>
+                //   <zh-CN>格式错误统一收敛为稳定失败短语，不回显原文，也不降级为缺省态。</zh-CN>
+                //   <en>Format errors converge to a stable failure phrase without echoing raw text and are not downgraded to the default state.</en>
+                // </lang>
+                reason = "Assembly state ledger JSON is malformed.";
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                // <lang>
+                //   <zh-CN>不合法结构也可能抛出此异常，按同一口径失败，避免结构差异改变安全结论。</zh-CN>
+                //   <en>The serializer may throw this for invalid structures too; fail under the same convention so structural differences cannot change the safety conclusion.</en>
+                // </lang>
+                reason = "Assembly state ledger JSON is malformed.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>根节点必须是键值对象；数组、标量与 null 都不是台账。</zh-CN>
+            //   <en>The root must be a key-value object; arrays, scalars, and null are not a ledger.</en>
+            // </lang>
+            Dictionary<string, object> root = parsed as Dictionary<string, object>;
+            if (root == null)
+            {
+                reason = "Assembly state ledger root must be an object.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>承接 schemaVersion 原始值；要求存在且为整数 1，未知版本不做兼容性猜测。</zh-CN>
+            //   <en>Holds the raw schemaVersion; require it to exist and be integer 1, with no compatibility guess for unknown versions.</en>
+            // </lang>
+            object schemaToken;
+            if (!root.TryGetValue("schemaVersion", out schemaToken) ||
+                !(schemaToken is int) ||
+                (int)schemaToken != 1)
+            {
+                reason = "Assembly state ledger schemaVersion must be 1.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>根节点只允许两个键；多余键一律拒绝，避免未知策略被静默忽略形成"声明了但不生效"。</zh-CN>
+            //   <en>The root allows exactly two keys; extras are rejected so unknown policy cannot be silently ignored into a "declared but ineffective" state.</en>
+            // </lang>
+            foreach (string rootKey in root.Keys)
+            {
+                if (!string.Equals(rootKey, "schemaVersion", StringComparison.Ordinal) &&
+                    !string.Equals(rootKey, "entries", StringComparison.Ordinal))
+                {
+                    reason = "Assembly state ledger contains an unknown root field.";
+                    return false;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>entries 必须存在且为对象；缺失或形状错误都失败，不把空对象与缺失键混为一谈。</zh-CN>
+            //   <en>entries must exist and be an object; a missing or wrongly shaped field fails, keeping an empty object distinct from a missing key.</en>
+            // </lang>
+            object entriesToken;
+            if (!root.TryGetValue("entries", out entriesToken))
+            {
+                reason = "Assembly state ledger entries must be an object.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>承接条目字典；单独转型使形状判定与上面的缺失判定各自可核。</zh-CN>
+            //   <en>Holds the entries dictionary; a separate cast keeps the shape check verifiable independently from the missing-key check.</en>
+            // </lang>
+            Dictionary<string, object> entries = entriesToken as Dictionary<string, object>;
+            if (entries == null)
+            {
+                reason = "Assembly state ledger entries must be an object.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>承接逐条校验后的映射；只有全部条目合法才用于构造快照，保证无部分结果。</zh-CN>
+            //   <en>Holds the validated map; it constructs the snapshot only after every entry passed, guaranteeing no partial result.</en>
+            // </lang>
+            IDictionary<string, string> validated = new Dictionary<string, string>(StringComparer.Ordinal);
+
+            // <lang>
+            //   <zh-CN>逐条校验包标识、条目形状、字段白名单与装配态；任一失败即整体失败。</zh-CN>
+            //   <en>Validate each package identifier, entry shape, field whitelist, and mode; any single failure fails the whole parse.</en>
+            // </lang>
+            foreach (KeyValuePair<string, object> entry in entries)
+            {
+                // <lang>
+                //   <zh-CN>只接受本仓受控命名空间的稳定包标识；不推断任意第三方标识，长度上限与审计列对齐。</zh-CN>
+                //   <en>Accept only stable identifiers in this repository's controlled namespaces; no arbitrary third-party identifier is inferred, and the length cap aligns with audit columns.</en>
+                // </lang>
+                string packageId = entry.Key;
+                if (string.IsNullOrWhiteSpace(packageId) ||
+                    !(packageId.StartsWith("HIA.", StringComparison.Ordinal) ||
+                      packageId.StartsWith("Legacy.", StringComparison.Ordinal)) ||
+                    packageId.Length > 200)
+                {
+                    reason = "Assembly state ledger contains an invalid packageId.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>条目必须是键值对象；字符串或数组无法承载具名字段。</zh-CN>
+                //   <en>An entry must be a key-value object; string or array shapes cannot carry named fields.</en>
+                // </lang>
+                Dictionary<string, object> fields = entry.Value as Dictionary<string, object>;
+                if (fields == null)
+                {
+                    reason = "Assembly state ledger entry must be an object.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>条目只允许装配态与四个追溯字段；多余字段拒绝，防止台账被当作通用配置容器。</zh-CN>
+                //   <en>An entry allows only the mode and four traceability fields; extras are rejected so the ledger is not misused as a general config container.</en>
+                // </lang>
+                foreach (string fieldKey in fields.Keys)
+                {
+                    if (!IsAllowedEntryField(fieldKey))
+                    {
+                        reason = "Assembly state ledger entry contains an unknown field.";
+                        return false;
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>assemblyMode 必须存在、为字符串且属封闭两值；空值不被当作 CodeBehind 缺省。</zh-CN>
+                //   <en>assemblyMode must exist, be a string, and belong to the closed two-value set; a blank value is not treated as the CodeBehind default.</en>
+                // </lang>
+                object modeToken;
+                if (!fields.TryGetValue("assemblyMode", out modeToken))
+                {
+                    reason = "Assembly state ledger assemblyMode is invalid.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>承接装配态文本；单独转型使类型判定与缺失判定各自可核。</zh-CN>
+                //   <en>Holds the mode text; a separate cast keeps the type check verifiable independently from the missing-key check.</en>
+                // </lang>
+                string mode = modeToken as string;
+                if (mode == null || !PortalModuleAssemblyModes.IsRegistered(mode))
+                {
+                    reason = "Assembly state ledger assemblyMode is invalid.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>四个追溯字段若出现则必须是字符串，避免结构化对象混入只供审计展示的文本列。</zh-CN>
+                //   <en>The four traceability fields, when present, must be strings so structured objects cannot leak into audit-display text columns.</en>
+                // </lang>
+                foreach (string traceKey in new string[] { "recordedUtc", "recordedBy", "sourceHash", "note" })
+                {
+                    // <lang>
+                    //   <zh-CN>承接本轮追溯字段的原始值；只判形状不判内容，内容净化由写入方负责。</zh-CN>
+                    //   <en>Holds the current trace field's raw value; only its shape is checked, while content sanitization belongs to the writer.</en>
+                    // </lang>
+                    object traceToken;
+                    if (fields.TryGetValue(traceKey, out traceToken) && !(traceToken is string))
+                    {
+                        reason = "Assembly state ledger trace field must be a string.";
+                        return false;
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>全部校验通过后写入映射；键集合由反序列化器去重，此处不做静默覆盖。</zh-CN>
+                //   <en>Add to the map only after all checks pass; deserialization already de-duplicates keys, so no silent overwrite occurs here.</en>
+                // </lang>
+                validated.Add(packageId, mode);
+            }
+
+            // <lang>
+            //   <zh-CN>构造只读快照并清空失败原因，标志着本次解析完整成功而非部分成功。</zh-CN>
+            //   <en>Construct the read-only snapshot and clear the failure reason, marking a complete rather than partial success.</en>
+            // </lang>
+            state = new PortalModuleAssemblyState(validated);
+            reason = string.Empty;
+            return true;
+        }

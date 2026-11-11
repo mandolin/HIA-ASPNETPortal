@@ -1,0 +1,42 @@
+    public sealed class PortalRuntimeSettingValue
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建已解析设置值。</zh-CN>
+        ///   <en>Creates a resolved setting value.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>规范化文本值；<c>null</c> 会转换为空字符串。</zh-CN>
+        ///   <en>Normalized text value; <c>null</c> becomes an empty string.</en>
+        /// </l>
+        /// </param>
+        /// <param name="source">
+        /// <l>
+        ///   <zh-CN>值来源层级。</zh-CN>
+        ///   <en>Source layer of the value.</en>
+        /// </l>
+        /// </param>
+        public PortalRuntimeSettingValue(string value, PortalRuntimeSettingSource source)
+        {
+            Value = value ?? string.Empty;
+            Source = source;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已规范化的文本值。</zh-CN>
+        ///   <en>Normalized text value.</en>
+        /// </lang>
+        /// </summary>
+        public string Value { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>该值的来源层级。</zh-CN>
+        ///   <en>Source layer of this value.</en>
+        /// </lang>
+        /// </summary>
+        public PortalRuntimeSettingSource Source { get; private set; }
+    }

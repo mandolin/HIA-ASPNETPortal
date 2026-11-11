@@ -1,0 +1,9 @@
+        private static bool IsPackageAllowed(string packageId, PortalNavigationVisibilityContext context)
+        {
+            if (string.Equals(packageId, CorePackageId, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return context.AllowedPackageIds.Contains(packageId);
+        }

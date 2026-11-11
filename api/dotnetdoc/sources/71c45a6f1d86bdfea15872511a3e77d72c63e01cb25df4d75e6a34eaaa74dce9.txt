@@ -1,0 +1,23 @@
+        private static string NormalizeIdPart(string groupKey)
+        {
+            // <lang>
+            //   <zh-CN>逐字符过滤，避免正则回溯与本地化大小写差异；`char.ToLowerInvariant` 保证跨机器一致。</zh-CN>
+            //   <en>Filter character by character, avoiding regex backtracking and locale-dependent casing; `char.ToLowerInvariant` keeps it machine-independent.</en>
+            // </lang>
+            string source = groupKey ?? string.Empty;
+            char[] buffer = new char[source.Length];
+            for (int index = 0; index < source.Length; index++)
+            {
+                char current = char.ToLowerInvariant(source[index]);
+                bool isAsciiLetter = (current >= 'a' && current <= 'z');
+                bool isAsciiDigit = (current >= '0' && current <= '9');
+                buffer[index] = (isAsciiLetter || isAsciiDigit) ? current : '-';
+            }
+
+            // <lang>
+            //   <zh-CN>全非法字符时给稳定回退值，避免产出空 id 让 `aria-controls` 指向不存在的元素。</zh-CN>
+            //   <en>When every character is invalid, use a stable fallback so `aria-controls` never points at a missing element.</en>
+            // </lang>
+            string normalized = new string(buffer).Trim('-');
+            return normalized.Length > 0 ? normalized : "group";
+        }

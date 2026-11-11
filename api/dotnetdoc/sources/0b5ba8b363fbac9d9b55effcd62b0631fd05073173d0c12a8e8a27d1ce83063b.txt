@@ -1,0 +1,11 @@
+    public enum PortalOnlinePackageScanVerdict
+    {
+        /// <summary><lang><zh-CN>扫描器确认未命中恶意内容。</zh-CN><en>The scanner confirmed no malicious content.</en></lang></summary>
+        Clean,
+
+        /// <summary><lang><zh-CN>扫描器命中恶意内容。</zh-CN><en>The scanner detected malicious content.</en></lang></summary>
+        Infected,
+
+        /// <summary><lang><zh-CN>扫描器不可用、超时或返回未知结果；判定门按 fail-closed 拒绝。</zh-CN><en>The scanner is unavailable, timed out, or returned an unknown result; the gate rejects fail-closed.</en></lang></summary>
+        Unavailable
+    }

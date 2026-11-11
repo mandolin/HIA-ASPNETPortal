@@ -1,0 +1,8 @@
+        public static implicit operator string(EnvSection section)
+        {
+            // <lang>
+            //   <zh-CN>保留旧调用点的宽容语义：缺少 env 节时返回 null，由调用方决定默认环境。</zh-CN>
+            //   <en>Preserve the tolerant legacy call-site semantics: a missing env section returns null and lets the caller choose the default environment.</en>
+            // </lang>
+            return section?.Value;
+        }

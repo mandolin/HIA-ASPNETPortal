@@ -1,0 +1,4 @@
+        private static string EmptyToNone(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
+        }

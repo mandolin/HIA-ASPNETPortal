@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>回复或新建主题编辑面板。默认隐藏，仅在 code-behind 确认当前用户具备模块编辑权限后显示；输入值提交前仍由服务器端编码处理。</zh-CN>
+          <en>Reply or new-topic editor panel. It is hidden by default and shown only after the code-behind confirms module edit permission; submitted values are still encoded on the server.</en>
+        </lang>
+        --%>

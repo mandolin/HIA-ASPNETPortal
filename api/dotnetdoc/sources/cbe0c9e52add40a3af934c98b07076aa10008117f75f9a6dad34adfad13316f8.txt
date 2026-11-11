@@ -1,0 +1,9 @@
+        protected void DisableUser_Click(object sender, EventArgs e)
+        {
+            ChangeUserProfileStatus(
+                PortalUserProfileStatuses.Disabled,
+                PortalOperationAuditEvents.UserDisabled,
+                "User account disabled by administrator.",
+                lang.Admin_ManageUsers_MessageUserDisabled,
+                lang.Admin_ManageUsers_MessageUserDisabledFailed);
+        }

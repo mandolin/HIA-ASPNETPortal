@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>文档列表仍按数据表格呈现，外层提供主题化滚动与边框。</zh-CN>
+        <en>The document list still renders as a data table, with the wrapper providing themed scrolling and borders.</en>
+    </lang>
+--%>

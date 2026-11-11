@@ -1,0 +1,47 @@
+        private void AddModulePackageStyles()
+        {
+            // <lang>
+            //   <zh-CN>没有当前 Page 或可附加控件的 Header 时无法安全输出 link；保持空操作而不构造替代 Header 或改变页面结构。</zh-CN>
+            //   <en>Without a current Page or a Header that can receive controls, link output is not safe; keep a no-op rather than constructing a replacement Header or changing page structure.</en>
+            // </lang>
+            if (Page == null || Page.Header == null)
+            {
+                // <lang>
+                //   <zh-CN>静默结束以保留旧页面/测试宿主没有 Header 时的兼容行为，不把布局状态暴露为渲染异常。</zh-CN>
+                //   <en>End silently to preserve compatibility for legacy pages or test hosts without a Header, without exposing layout state as a rendering exception.</en>
+                // </lang>
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>这里仅消费 catalog 返回的最终资源集合；路径信任、启用过滤和去重不在 Master Page 中重复实现，也不把候选输出当作授权结论。</zh-CN>
+            //   <en>Consume only the final resource set returned by the catalog; path trust, enabled filtering, and de-duplication are not reimplemented in the Master Page, and candidate output is not treated as an authorization conclusion.</en>
+            // </lang>
+            foreach (PortalModuleStyleResource resource in PortalModuleCatalog.GetActiveStyleResources(Context))
+            {
+                // <lang>
+                //   <zh-CN>为单个已验证 CSS 候选创建短生命周期 server link 控件；控件仅在当前页面渲染时存活，不回写 catalog 或包元数据。</zh-CN>
+                //   <en>Create a short-lived server link control for one validated CSS candidate; the control lives only for the current page render and does not write back to the catalog or package metadata.</en>
+                // </lang>
+                var link = new HtmlLink();
+
+                // <lang>
+                //   <zh-CN>固定 rel/type 以表达样式表语义；属性值不来自模块、请求或页面输入，避免将此输出点扩展为通用标签注入。</zh-CN>
+                //   <en>Fix rel/type to express stylesheet semantics; attribute values do not come from module, request, or page input, preventing this output point from becoming general tag injection.</en>
+                // </lang>
+                link.Attributes["rel"] = "stylesheet";
+                link.Attributes["type"] = "text/css";
+
+                // <lang>
+                //   <zh-CN>将 catalog 给出的应用相对站内路径解析为当前虚拟目录下可用的 URL；ResolveUrl 不承担第二次资源验证或外部 URL 许可。</zh-CN>
+                //   <en>Resolve the application-relative site-local path supplied by the catalog into a URL usable below the current virtual directory; ResolveUrl does not perform a second resource validation or authorize external URLs.</en>
+                // </lang>
+                link.Href = ResolveUrl(resource.VirtualPath);
+
+                // <lang>
+                //   <zh-CN>按 catalog 已确定的稳定顺序把 link 附加到现有 Header；不在此层跨请求缓存、重排或额外去重控件。</zh-CN>
+                //   <en>Append the link to the existing Header in the stable order already determined by the catalog; do not cache across requests, reorder, or perform additional control de-duplication at this layer.</en>
+                // </lang>
+                Page.Header.Controls.Add(link);
+            }
+        }

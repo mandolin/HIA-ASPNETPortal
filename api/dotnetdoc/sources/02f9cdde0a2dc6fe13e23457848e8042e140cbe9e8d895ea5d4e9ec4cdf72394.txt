@@ -1,0 +1,8 @@
+        public IDocumentItem GetSingleDocument(int itemId)
+        {
+            // <lang>
+            //   <zh-CN>编辑页会把请求中的 ItemId 传入这里；未命中返回空值，重复记录仍作为完整性故障暴露。</zh-CN>
+            //   <en>Editor pages pass request item identifiers here; misses return null while duplicate records still surface as integrity failures.</en>
+            // </lang>
+            return _context.Documents.SingleOrDefault(item => item.ItemId == itemId);
+        }

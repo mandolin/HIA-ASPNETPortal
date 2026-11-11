@@ -1,0 +1,9 @@
+        private static void RegisterPasswordIterationPolicyProvider()
+        {
+            // <lang>
+            //   <zh-CN>只从受控设置读取目标迭代次数；提供器不接触密码、盐或哈希材料。</zh-CN>
+            //   <en>Only the controlled setting is read for the target iteration count; the provider never touches passwords, salts, or hash material.</en>
+            // </lang>
+            PortalPasswordIterationPolicy.ConfigureTargetProvider(
+                () => PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordIterationCount));
+        }

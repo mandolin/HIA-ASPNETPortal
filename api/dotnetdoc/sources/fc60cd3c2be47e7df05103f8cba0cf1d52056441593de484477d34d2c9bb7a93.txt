@@ -1,0 +1,10 @@
+        public static string ResolveCapabilityLayer(string category)
+        {
+            string mapped;
+            if (!string.IsNullOrWhiteSpace(category) && CategoryLayerMap.TryGetValue(category.Trim(), out mapped))
+            {
+                return mapped;
+            }
+
+            return DefaultLayer;
+        }

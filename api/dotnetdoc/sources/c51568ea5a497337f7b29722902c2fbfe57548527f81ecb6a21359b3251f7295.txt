@@ -1,0 +1,400 @@
+    public sealed class CollaborationItemDb : ICollaborationItemDb
+    {
+        private const string ItemTableName = "PortalBiz_CollaborationItems";
+        private const string EventTableName = "PortalBiz_CollaborationItemEvents";
+
+        // <lang>
+        //   <zh-CN>父子层级最大深度（顶层为 1）。超出该深度的新子项会被拒绝。</zh-CN>
+        //   <en>Maximum parent-child hierarchy depth (top level is 1). A new child beyond this depth is rejected.</en>
+        // </lang>
+        private const int MaxHierarchyDepth = 5;
+
+        // <lang>
+        //   <zh-CN>批量读取允许的最大事项数：为 IN 列表与参数个数设上限，避免调用方传入的超长集合把语句撑大。</zh-CN>
+        //   <en>Maximum item count allowed in a batch read: bounds the IN list and parameter count so an oversized caller-supplied collection cannot inflate the statement.</en>
+        // </lang>
+        private const int MaxBatchItemIds = 200;
+        private readonly PortalBizDbContext context;
+        private readonly IReferenceDataDb referenceDataDb;
+        private readonly IUsersDb usersDb;
+        private readonly IRolesDb rolesDb;
+
+        // <lang>
+        //   <zh-CN>可选员工组织目录读取服务，用于解析当前动作人的组织范围；为空时组织维度不授予可见性（fail-closed）。</zh-CN>
+        //   <en>Optional employee-directory reader used to resolve the current actor's organization scope; when null the organization dimension grants no visibility (fail-closed).</en>
+        // </lang>
+        private readonly IEmployeeDirectoryDb employeeDirectoryDb;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化企业协同事项数据访问实现。</zh-CN>
+        ///   <en>Initializes the enterprise collaboration-item data-access implementation.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>企业业务基础数据上下文。</zh-CN>
+        ///   <en>Enterprise business foundation data context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="referenceDataDb">
+        /// <l>
+        ///   <zh-CN>受治理参考数据目录读取服务，用于在写入前复核类型和优先级稳定键。</zh-CN>
+        ///   <en>Governed reference-data catalog reader used to revalidate type and priority stable keys before writing.</en>
+        /// </l>
+        /// </param>
+        /// <param name="usersDb">
+        /// <l>
+        ///   <zh-CN>门户用户服务，用于在状态和评论写入时重新确认动作人。</zh-CN>
+        ///   <en>Portal-user service used to re-confirm the actor during workflow and comment writes.</en>
+        /// </l>
+        /// </param>
+        /// <param name="rolesDb">
+        /// <l>
+        ///   <zh-CN>角色权限服务，用于按当前映射检查负责人和管理员权限。</zh-CN>
+        ///   <en>Role-permission service used to check current handler and administrator permissions.</en>
+        /// </l>
+        /// </param>
+        /// <param name="employeeDirectoryDb">
+        /// <l>
+        ///   <zh-CN>可选员工组织目录读取服务，用于解析当前动作人所属组织单元；为空引用或读取失败时组织维度不授予可见性。</zh-CN>
+        ///   <en>Optional employee-directory reader used to resolve the current actor's organization unit; a null reference or a read failure leaves the organization dimension granting no visibility.</en>
+        /// </l>
+        /// </param>
+        public CollaborationItemDb(PortalBizDbContext context, IReferenceDataDb referenceDataDb, IUsersDb usersDb, IRolesDb rolesDb, IEmployeeDirectoryDb employeeDirectoryDb)
+        {
+            this.context = context;
+            this.referenceDataDb = referenceDataDb;
+            this.usersDb = usersDb;
+            this.rolesDb = rolesDb;
+            this.employeeDirectoryDb = employeeDirectoryDb;
+        }
+
+        /// <inheritdoc />
+        public bool IsSchemaAvailable()
+        {
+            return HasTable(ItemTableName) &&
+                   HasTable(EventTableName) &&
+                   HasColumn(EventTableName, "EventType") &&
+                   HasColumn(EventTableName, "VisibilityScope");
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>规范化并校验创建请求后，创建一条处于 <c>Submitted</c> 状态的协同事项及其 Submit 事件。</zh-CN>
+        ///   <en>Normalizes and validates a create request, then creates a collaboration item in <c>Submitted</c> status with its Submit event.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>由已认证页面层提供的事项输入；发起人、标题和至少一个负责人目标为必填项。</zh-CN>
+        ///   <en>Item input supplied by an authenticated page layer; initiator, title, and at least one owner target are required.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时包含新事项标识和事项编码；校验、参考数据或数据库失败时返回不含内部异常详情的失败结果。</zh-CN>
+        ///   <en>On success, contains the new item identifier and item code; validation, reference-data, or database failures return a result without internal exception detail.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法仅写入事项事实和 Submit 事件，两者通过同一参数化数据库命令批次提交；待办投影和运营审计由调用页面在业务事实成功后作为旁路处理。</zh-CN>
+        ///   <en>This method writes only the item fact and Submit event through one parameterized database-command batch; the calling page handles work-item projection and operational audit as sidecars after the business fact succeeds.</en>
+        /// </lang>
+        /// </remarks>
+        public CollaborationItemResult CreateSubmittedItem(CollaborationItemCreateRequest request)
+        {
+            // <lang>
+            //   <zh-CN>先复制并规范化不受信任的页面输入，固定默认值、长度和可空值语义，避免后续校验与写入使用不同表示。</zh-CN>
+            //   <en>First copy and normalize untrusted page input so defaults, length limits, and nullable semantics remain consistent for validation and persistence.</en>
+            // </lang>
+            CollaborationItemCreateRequest normalized = NormalizeCreateRequest(request);
+
+            // <lang>
+            //   <zh-CN>事项提交必须可追溯到已登录的发起人；缺失身份时在触及数据库前失败。</zh-CN>
+            //   <en>Submission must be attributable to a signed-in initiator; fail before database access when the identity is missing.</en>
+            // </lang>
+            if (normalized.InitiatorUserId <= 0)
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "A signed-in portal user is required.");
+            }
+
+            // <lang>
+            //   <zh-CN>标题是事项的最小可识别业务内容，空白标题不能进入事件时间线。</zh-CN>
+            //   <en>The title is the minimum identifiable business content of an item; a blank title cannot enter the event timeline.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(normalized.Title))
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item title is required.");
+            }
+
+            // <lang>
+            //   <zh-CN>提交状态必须有可解析的个人或角色负责人，避免产生没有处理目标的事项。</zh-CN>
+            //   <en>A submitted item needs a resolvable individual or role owner so no item is created without a handling target.</en>
+            // </lang>
+            if (!normalized.OwnerUserId.HasValue && string.IsNullOrWhiteSpace(normalized.OwnerRoleKey))
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "An owner user or owner role is required.");
+            }
+
+            // <lang>
+            //   <zh-CN>先确认事项和事件表的最小结构可用，防止部分部署环境写入不完整业务事实。</zh-CN>
+            //   <en>Confirm that the minimum item and event schema is available before writing, preventing incomplete business facts in partially deployed environments.</en>
+            // </lang>
+            if (!IsSchemaAvailable())
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item schema is unavailable.");
+            }
+
+            // <lang>
+            //   <zh-CN>父项校验：父项列必须已迁移，父项必须存在且非终态，且新子项深度不得超出层级上限。新建事项不可能成为既有事项的祖先，因此创建路径无需成环检查。</zh-CN>
+            //   <en>Parent validation: the parent column must be migrated, the parent must exist and be non-terminal, and the new child must not exceed the depth limit. A new item cannot become an ancestor of any existing item, so the create path needs no cycle check.</en>
+            // </lang>
+            if (normalized.ParentItemId.HasValue)
+            {
+                if (!HasColumn(ItemTableName, "ParentItemId"))
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration hierarchy is not available in this deployment.");
+                }
+
+                CollaborationItemInfo parent = FindItem(normalized.ParentItemId.Value);
+                if (parent == null)
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Parent item was not found.");
+                }
+
+                if (IsTerminalStatus(parent.ItemStatus))
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Parent item is closed and cannot accept child items.");
+                }
+
+                if (GetItemDepth(parent.ItemId) >= MaxHierarchyDepth)
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration hierarchy depth limit reached.");
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>将请求类型复核为当前启用的参考数据稳定键；调用方不能借由自由文本绕过目录治理。</zh-CN>
+            //   <en>Revalidate the requested type as an active reference-data stable key so callers cannot bypass catalog governance with free text.</en>
+            // </lang>
+            string itemTypeKey;
+            if (!TryResolveActiveReferenceValue(PortalReferenceDataSets.CollaborationItemType, normalized.ItemTypeKey, out itemTypeKey))
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "The collaboration item type is not allowed.");
+            }
+
+            // <lang>
+            //   <zh-CN>同样复核优先级稳定键，确保写入值仍属于当前启用的优先级目录。</zh-CN>
+            //   <en>Likewise revalidate the priority stable key, ensuring the persisted value remains in the currently active priority catalog.</en>
+            // </lang>
+            string priorityKey;
+            if (!TryResolveActiveReferenceValue(PortalReferenceDataSets.CollaborationPriority, normalized.PriorityKey, out priorityKey))
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "The collaboration item priority is not allowed.");
+            }
+
+            // <lang>
+            //   <zh-CN>用目录返回的规范稳定键替换输入值，使主记录和后续筛选均使用同一受治理标识。</zh-CN>
+            //   <en>Replace input values with catalog-returned canonical stable keys so the record and later filtering use the same governed identifiers.</en>
+            // </lang>
+            normalized.ItemTypeKey = itemTypeKey;
+            normalized.PriorityKey = priorityKey;
+
+            // <lang>
+            //   <zh-CN>事项编码以已规范化的提交时间生成，供页面、待办投影和运营追踪使用，而非暴露数据库主键。</zh-CN>
+            //   <en>Generate the item code from the normalized submission time for pages, work-item projection, and operations tracing without exposing the database key.</en>
+            // </lang>
+            string itemCode = CreateItemCode(normalized.SubmittedUtc.Value);
+            try
+            {
+                // <lang>
+                //   <zh-CN>以下参数化命令批次依次写入事项事实和 Submit 事件并返回新标识；待办投影由页面层在成功后旁路创建。</zh-CN>
+                //   <en>The parameterized command batch below writes the item fact and Submit event in order and returns the new identifier; the page layer creates the work-item projection as a sidecar after success.</en>
+                // </lang>
+                List<long> rows = context.Database.SqlQuery<long>(
+                    @"
+DECLARE @ItemId BIGINT;
+
+INSERT INTO [dbo].[PortalBiz_CollaborationItems]
+    ([ItemCode],
+     [ItemTypeKey],
+     [Title],
+     [Summary],
+     [Description],
+     [ItemStatus],
+     [InitiatorUserId],
+     [InitiatorEmployeeId],
+     [OwnerUserId],
+     [OwnerRoleKey],
+     [OrganizationUnitId],
+     [PriorityKey],
+     [DueUtc],
+     [SubmittedUtc],
+     [LastActionUtc],
+     [LastActionByUserId],
+     [LastActionComment],
+     [CreatedUtc],
+     [CreatedBy],
+     [UpdatedUtc],
+     [UpdatedBy],
+     [ParentItemId])
+VALUES
+    (@ItemCode,
+     @ItemTypeKey,
+     @Title,
+     @Summary,
+     @Description,
+     N'Submitted',
+     @InitiatorUserId,
+     @InitiatorEmployeeId,
+     @OwnerUserId,
+     @OwnerRoleKey,
+     @OrganizationUnitId,
+     @PriorityKey,
+     @DueUtc,
+     @SubmittedUtc,
+     @SubmittedUtc,
+     @InitiatorUserId,
+     @Summary,
+     @SubmittedUtc,
+     @SubmittedBy,
+     @SubmittedUtc,
+     @SubmittedBy,
+     @ParentItemId);
+
+SET @ItemId = CONVERT(BIGINT, SCOPE_IDENTITY());
+
+INSERT INTO [dbo].[PortalBiz_CollaborationItemEvents]
+    ([ItemId], [OccurredUtc], [EventType], [ActionKey], [VisibilityScope], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
+VALUES
+    (@ItemId, @SubmittedUtc, N'WorkflowAction', N'Submit', N'ItemParticipants', @InitiatorUserId, @SubmittedBy, NULL, N'Submitted', @Summary, NULL);
+
+SELECT @ItemId;",
+                    new SqlParameter("@ItemCode", itemCode),
+                    new SqlParameter("@ItemTypeKey", normalized.ItemTypeKey),
+                    new SqlParameter("@Title", normalized.Title),
+                    CreateNullableStringParameter("@Summary", normalized.Summary),
+                    CreateNullableStringParameter("@Description", normalized.Description),
+                    new SqlParameter("@InitiatorUserId", normalized.InitiatorUserId),
+                    CreateNullableIntParameter("@InitiatorEmployeeId", normalized.InitiatorEmployeeId),
+                    CreateNullableIntParameter("@OwnerUserId", normalized.OwnerUserId),
+                    CreateNullableStringParameter("@OwnerRoleKey", normalized.OwnerRoleKey),
+                    CreateNullableIntParameter("@OrganizationUnitId", normalized.OrganizationUnitId),
+                    CreateNullableStringParameter("@PriorityKey", normalized.PriorityKey),
+                    CreateNullableDateTimeParameter("@DueUtc", normalized.DueUtc),
+                    new SqlParameter("@SubmittedUtc", normalized.SubmittedUtc.Value),
+                    new SqlParameter("@SubmittedBy", normalized.SubmittedBy),
+                    CreateNullableLongParameter("@ParentItemId", normalized.ParentItemId)).ToList();
+
+                // <lang>
+                //   <zh-CN>仅接受数据库批次明确返回的首个标识；空结果按创建失败处理，避免将未知写入状态报告为成功。</zh-CN>
+                //   <en>Accept only the first identifier explicitly returned by the database batch; treat an empty result as creation failure rather than reporting an unknown write state as success.</en>
+                // </lang>
+                long itemId = rows.Count == 0 ? 0 : rows[0];
+                return itemId <= 0
+                    ? new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item was not created.")
+                    : new CollaborationItemResult(true, itemId, itemCode, PortalCollaborationItemActions.Submit, "Collaboration item submitted.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>不向页面返回数据库异常细节；上层可按既有日志和运营审计策略记录上下文。</zh-CN>
+                //   <en>Do not return database exception detail to the page; upper layers may record context through their established logging and operational-audit policy.</en>
+                // </lang>
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item submission failed.");
+            }
+        }
+
+        /// <inheritdoc />
+        public IList<CollaborationItemInfo> GetRecentItemsForUser(int userId, int take)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
+            // <lang>
+            //   <zh-CN>列表读取前先在服务端重新解析动作人授权；身份无法确认时不返回任何事项，避免用客户端传入的用户标识直接换取数据。</zh-CN>
+            //   <en>Re-resolve actor authorization on the server before the list read; when the identity cannot be confirmed, return no items so a client-supplied user identifier cannot by itself fetch data.</en>
+            // </lang>
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(userId, out actor))
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>SQL 只做粗筛，返回前统一用数据范围判定裁剪；列表与详情共用同一判定，避免两条路径出现不同的可见性口径。</zh-CN>
+                //   <en>The SQL only pre-filters; every row is trimmed by the data-scope decision before returning, so list and detail share one decision instead of two visibility rules.</en>
+                // </lang>
+                return QueryItems(
+                    @"
+WHERE [Item].[InitiatorUserId] = @UserId
+   OR [Item].[OwnerUserId] = @UserId",
+                    NormalizeTake(take, 20),
+                    new SqlParameter("@UserId", userId))
+                    .Where(item => CanView(item, actor))
+                    .ToList();
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemInfo>();
+            }
+        }
+
+        /// <inheritdoc />
+        public IList<CollaborationItemInfo> GetAdminItems(string status, int take)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
+            string normalizedStatus = NormalizeStatusFilter(status);
+            try
+            {
+                return string.IsNullOrEmpty(normalizedStatus)
+                    ? QueryItems(string.Empty, NormalizeTake(take, 50))
+                    : QueryItems(
+                        @"
+WHERE [Item].[ItemStatus] = @ItemStatus",
+                        NormalizeTake(take, 50),
+                        new SqlParameter("@ItemStatus", normalizedStatus));
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemInfo>();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>返回当前动作人可见的协同事项事件时间线。</zh-CN>
+        ///   <en>Returns the collaboration-item event timeline visible to the current actor.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemId">
+        /// <l>
+        ///   <zh-CN>待读取的协同事项数据库标识；必须为正值。</zh-CN>
+        ///   <en>Database identifier of the collaboration item to read; must be positive.</en>
+        /// </l>
+        /// </param>
+        /// <param name="actorUserId">
+        /// <l>
+        ///   <zh-CN>由已认证调用方传入并在服务端重新解析授权的门户用户标识。</zh-CN>
+        ///   <en>Portal-user identifier supplied by the authenticated caller and re-resolved for authorization on the server.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按发生时间和事件标识升序排列的可见事件；无效输入、无参与权、不在数据范围内、schema 不可用或读取异常时返回空集合且不泄露内部原因。</zh-CN>
+        ///   <en>Visible events ordered by occurrence time and event identifier; invalid input, missing participation, out-of-scope data, unavailable schema, or read failure returns an empty collection without exposing the internal reason.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>管理员读取所有事件；普通参与者只能读取工作流动作和参与者可见事件。查询只拼接固定受控 SQL 片段，事项标识始终作为参数传入。</zh-CN>

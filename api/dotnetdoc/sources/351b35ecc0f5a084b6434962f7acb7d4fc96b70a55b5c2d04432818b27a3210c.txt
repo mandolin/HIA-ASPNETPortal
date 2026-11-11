@@ -1,0 +1,61 @@
+        public static bool TryAggregate(
+            IList<string> itemIds,
+            IDictionary<string, bool> succeededById,
+            out IList<string> failedIds,
+            out bool pageSurvived)
+        {
+            // <lang>
+            //   <zh-CN>输出先置失败态与空失败清单，保证提前返回不留下未初始化值。</zh-CN>
+            //   <en>Initialise outputs to a failure state and an empty failure list so no early return leaves them uninitialised.</en>
+            // </lang>
+            failedIds = new List<string>();
+            pageSurvived = false;
+
+            // <lang>
+            //   <zh-CN>空批次或缺失成功映射属于调用方错误，按拒绝处理，不解释为「全部成功」。</zh-CN>
+            //   <en>An empty batch or a missing success map is a caller error and rejects; neither is interpreted as "all succeeded".</en>
+            // </lang>
+            if (itemIds == null || itemIds.Count == 0 || succeededById == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐项判定：映射缺失、标识空白或标志为 false 都计入失败，但不中断循环。</zh-CN>
+            //   <en>Judge each item: a missing key, blank id, or false flag counts as a failure, but the loop is never interrupted.</en>
+            // </lang>
+            int validItemCount = 0;
+            foreach (string itemId in itemIds)
+            {
+                // <lang>
+                //   <zh-CN>空白标识无法归属，计入失败清单但不抛出，避免一项脏数据终止整批。</zh-CN>
+                //   <en>A blank id cannot be attributed; record it as a failure without throwing so one dirty row cannot terminate the batch.</en>
+                // </lang>
+                if (string.IsNullOrWhiteSpace(itemId))
+                {
+                    failedIds.Add(string.Empty);
+                    continue;
+                }
+
+                validItemCount++;
+
+                // <lang>
+                //   <zh-CN>缺失键按失败（fail-closed）；显式 false 同样计入失败。</zh-CN>
+                //   <en>A missing key is a failure (fail-closed); an explicit false also counts as a failure.</en>
+                // </lang>
+                bool succeeded;
+                if (!succeededById.TryGetValue(itemId, out succeeded) || !succeeded)
+                {
+                    failedIds.Add(itemId);
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>页面存活：存在至少一个可归属项，且失败项数小于总数（即至少还有其它模块继续处理）。
+            //   全部失败仍判定页面存活——因为失败被逐项隔离，没有升级为整页异常；调用方据失败清单决定是否降级呈现。</zh-CN>
+            //   <en>Page survival: at least one attributable item exists. Even when all items failed the page survives,
+            //   because failures were isolated per item and never escalated into a page-level exception; callers use the failure list to decide degraded rendering.</en>
+            // </lang>
+            pageSurvived = validItemCount > 0;
+            return true;
+        }

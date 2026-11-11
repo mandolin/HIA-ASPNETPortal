@@ -1,0 +1,153 @@
+    public static class PortalAuthenticationCookiePolicy
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>SameSite 取值无法解析时的降级原因代码。</zh-CN>
+        ///   <en>Degradation reason code used when the SameSite value cannot be parsed.</en>
+        /// </lang>
+        /// </summary>
+        public const string ReasonUnparsableSameSite = "UnparsableSameSite";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>SameSite 取 None 但未启用 Secure 时的降级原因代码。</zh-CN>
+        ///   <en>Degradation reason code used when SameSite is None but Secure is disabled.</en>
+        /// </lang>
+        /// </summary>
+        public const string ReasonNoneRequiresSecure = "SameSiteNoneRequiresSecure";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取设置失败并回落默认时的降级原因代码。</zh-CN>
+        ///   <en>Degradation reason code used when reading settings fails and defaults are applied.</en>
+        /// </lang>
+        /// </summary>
+        public const string ReasonSettingsReadFailed = "SettingsReadFailed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按安全约束归一化 Cookie 传输安全属性；SameSite 取 None 而未启用 Secure 时降级为 Unset。</zh-CN>
+        ///   <en>Normalizes cookie transport-security attributes against security constraints; SameSite=None without Secure degrades to Unset.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="secure">
+        /// <l>
+        ///   <zh-CN>配置解析出的 Secure 取值。</zh-CN>
+        ///   <en>Secure value resolved from configuration.</en>
+        /// </l>
+        /// </param>
+        /// <param name="sameSite">
+        /// <l>
+        ///   <zh-CN>配置解析出的 SameSite 模式。</zh-CN>
+        ///   <en>SameSite mode resolved from configuration.</en>
+        /// </l>
+        /// </param>
+        /// <param name="reason">
+        /// <l>
+        ///   <zh-CN>已发生的降级原因代码；无降级时传空字符串。</zh-CN>
+        ///   <en>Degradation reason code already encountered; pass an empty string when none occurred.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>满足安全约束的最终属性决策结果。</zh-CN>
+        ///   <en>Final attribute decision result that satisfies the security constraints.</en>
+        /// </l>
+        /// </returns>
+        public static PortalCookieSecurityOptions Normalize(
+            bool secure,
+            PortalCookieSameSiteMode sameSite,
+            string reason)
+        {
+            // <lang>
+            //   <zh-CN>已有原因代码即代表发生过降级；空原因表示配置尚未触发任何降级。</zh-CN>
+            //   <en>A non-empty reason code means degradation already occurred; an empty reason means configuration triggered no degradation yet.</en>
+            // </lang>
+            bool degraded = !string.IsNullOrEmpty(reason);
+
+            // <lang>
+            //   <zh-CN>None 必须配合 Secure，否则现代浏览器会直接拒绝该 Cookie；此处降级为 Unset 以保持可用性，而不是放任无效组合生效。</zh-CN>
+            //   <en>None requires Secure, otherwise modern browsers reject the cookie outright; degrade to Unset to keep the cookie usable instead of allowing an invalid combination to take effect.</en>
+            // </lang>
+            if (sameSite == PortalCookieSameSiteMode.None && !secure)
+            {
+                sameSite = PortalCookieSameSiteMode.Unset;
+                degraded = true;
+                reason = ReasonNoneRequiresSecure;
+            }
+
+            return new PortalCookieSecurityOptions(secure, sameSite, degraded, reason);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试把配置文本解析为 SameSite 模式；无法识别时返回 false 并给出 Unset。</zh-CN>
+        ///   <en>Attempts to parse configuration text into a SameSite mode; returns false with Unset when unrecognized.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>配置文本；为空时视为 Unset。</zh-CN>
+        ///   <en>Configuration text; blank is treated as Unset.</en>
+        /// </l>
+        /// </param>
+        /// <param name="sameSite">
+        /// <l>
+        ///   <zh-CN>成功时返回对应模式；失败时为 Unset。</zh-CN>
+        ///   <en>Corresponding mode on success; Unset on failure.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>取值为空或已识别的模式时返回 true；未知取值时返回 false。</zh-CN>
+        ///   <en>Returns true for blank or a recognized mode; false for an unknown value.</en>
+        /// </l>
+        /// </returns>
+        public static bool TryParseSameSite(string value, out PortalCookieSameSiteMode sameSite)
+        {
+            // <lang>
+            //   <zh-CN>空值按 Unset 处理且不视为降级，因为默认本就不下发该属性。</zh-CN>
+            //   <en>Blank is treated as Unset and is not a degradation because the default already omits the attribute.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                sameSite = PortalCookieSameSiteMode.Unset;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>按不区分大小写精确比对四个受控取值，避免宽松匹配把未知文本解释为某种模式。</zh-CN>
+            //   <en>Compare the four controlled values case-insensitively and exactly so loose matching never interprets unknown text as a mode.</en>
+            // </lang>
+            if (string.Equals(value, "Unset", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.Unset;
+                return true;
+            }
+
+            if (string.Equals(value, "Lax", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.Lax;
+                return true;
+            }
+
+            if (string.Equals(value, "Strict", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.Strict;
+                return true;
+            }
+
+            if (string.Equals(value, "None", StringComparison.OrdinalIgnoreCase))
+            {
+                sameSite = PortalCookieSameSiteMode.None;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>未知取值不猜测兼容模式，交回 Unset 并由调用方标记降级原因。</zh-CN>
+            //   <en>Unknown values are never guessed into a compatibility mode; Unset is returned and the caller records the degradation reason.</en>
+            // </lang>
+            sameSite = PortalCookieSameSiteMode.Unset;
+            return false;
+        }
+    }

@@ -1,0 +1,4 @@
+        public bool CanRegister
+        {
+            get { return IsProfileAllowed && !IsRegistered; }
+        }

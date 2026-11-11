@@ -1,0 +1,77 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemtransition",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemtransition:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemtransition:base:t-system.valuetype",
+      "kind": "relation",
+      "label": "Base: System.ValueType",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemtransition:entry:hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemtransition.-ctor-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemtransition.-ctor-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemTransitions.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.collaborationitemtransition.-ctor-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.collaborationitemtransiti-89126d87.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemtransition:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemtransition.actionkey",
+      "kind": "entry",
+      "label": "ActionKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemtransition.actionkey",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemTransitions.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemtransition.actionkey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemtransiti-74268793.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemtransition:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemtransition.fromstatus",
+      "kind": "entry",
+      "label": "FromStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemtransition.fromstatus",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemTransitions.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemtransition.fromstatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemtransiti-0d471c84.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemtransition:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemtransition.tostatus",
+      "kind": "entry",
+      "label": "ToStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemtransition.tostatus",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemTransitions.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemtransition.tostatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemtransiti-8ff59dd5.html"
+    }
+  ]
+}

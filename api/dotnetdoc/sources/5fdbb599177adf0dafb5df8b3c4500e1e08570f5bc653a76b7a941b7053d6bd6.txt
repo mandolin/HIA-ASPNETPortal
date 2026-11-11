@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>Src 只接受当前兼容策略允许的站内或 HTTP(S) 图片地址；预览面板是展示反馈，不替代服务器来源校验。</zh-CN>
+                    <en>Src accepts only application-local or HTTP(S) image locations allowed by the compatibility policy; the preview is display feedback and does not replace server-side source validation.</en>
+                </lang>
+            --%>

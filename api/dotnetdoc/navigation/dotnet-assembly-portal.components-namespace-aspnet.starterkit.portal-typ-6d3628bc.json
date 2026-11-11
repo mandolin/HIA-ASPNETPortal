@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshot",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshot:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshot:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalonlinepackagesnapshot.-ctor-system.collections.generic.ilist-aspnet.starterkit.portal.portalonlinepackagesnapshotentry-system.datetime",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalonlinepackagesnapsh-1bd231f6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc",
+      "kind": "entry",
+      "label": "CreatedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackagesnapshot.createdutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapsh-d72a471a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalonlinepackagesnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.entries",
+      "kind": "entry",
+      "label": "Entries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapshot.entries",
+      "sourcePath": "src/Portal.Components/PortalOnlinePackageRollback.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalonlinepackagesnapshot.entries",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalonlinepackagesnapsh-635a07cc.html"
+    }
+  ]
+}

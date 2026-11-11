@@ -1,0 +1,11 @@
+        private bool IsCurrentUserAuthenticated()
+        {
+            // <lang>
+            //   <zh-CN>逐级检查 Context、User、Identity 和认证状态，避免空对象访问和匿名误判。</zh-CN>
+            //   <en>Check Context, User, Identity, and authentication state step by step to avoid null access and anonymous misclassification.</en>
+            // </lang>
+            return Context != null &&
+                   Context.User != null &&
+                   Context.User.Identity != null &&
+                   Context.User.Identity.IsAuthenticated;
+        }

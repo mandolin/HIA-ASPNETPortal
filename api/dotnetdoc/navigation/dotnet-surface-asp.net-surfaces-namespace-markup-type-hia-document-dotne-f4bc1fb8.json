@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-4",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-4:entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-4",
+      "kind": "entry",
+      "label": "DesktopDefault.aspx webforms-server-comment 4",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-4",
+      "sourcePath": "src/Portal/DesktopDefault.aspx",
+      "symbolId": "dotnetdoc:markup-comment:src-portal-desktopdefault.aspx:4",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-4-cc6d9b0f.html"
+    }
+  ]
+}

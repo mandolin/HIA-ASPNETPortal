@@ -1,0 +1,9 @@
+        private static IRolesDb ResolveRolesDb()
+        {
+            if (Global.Container == null)
+            {
+                return null;
+            }
+
+            return Global.Container.Resolve<IRolesDb>();
+        }

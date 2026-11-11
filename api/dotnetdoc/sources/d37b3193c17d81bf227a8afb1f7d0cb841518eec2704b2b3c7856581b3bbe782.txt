@@ -1,0 +1,14 @@
+        internal PortalModulePackageStateWriteResult(bool succeeded, string message)
+        {
+            // <lang>
+            //   <zh-CN>该布尔值仅陈述本存储的持久化结果；页面授权、受信任部署校验、Profile gate 和模块加载由其他边界负责。</zh-CN>
+            //   <en>This boolean states only the persistence result of this store; page authorization, trusted-deployment validation, profile gating, and module loading belong to other boundaries.</en>
+            // </lang>
+            Succeeded = succeeded;
+
+            // <lang>
+            //   <zh-CN>消息是可展示的受控输出，空值不保留为 null，避免消费页面将其误作缺少失败处理或回显异常细节。</zh-CN>
+            //   <en>The message is controlled display-safe output; normalize null rather than leaving it as missing failure handling or an opportunity to echo exception detail in a consuming page.</en>
+            // </lang>
+            Message = message ?? string.Empty;
+        }

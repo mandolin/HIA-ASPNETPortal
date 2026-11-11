@@ -1,0 +1,8 @@
+        public IGlobalItem GetSinglePortal(int portalId)
+        {
+            // <lang>
+            //   <zh-CN>这里保持旧实现的严格查找语义：缺少或重复配置会抛出异常，便于暴露基础配置损坏。</zh-CN>
+            //   <en>Keep the legacy strict lookup semantics here: missing or duplicated configuration throws, making damaged base configuration visible.</en>
+            // </lang>
+            return _items.Single(i => i.PortalId == portalId);
+        }
