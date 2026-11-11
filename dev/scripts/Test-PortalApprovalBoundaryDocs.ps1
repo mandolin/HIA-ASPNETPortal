@@ -128,6 +128,51 @@ if (Test-Path -LiteralPath $myWorkItemsAscx) {
     }
 }
 
+# <lang><zh-CN>A4（Q6 / W-anp-P295）：把 W-anp-P153 的豁免清单固化为**白名单**，扫描【其余所有】用户模块文件不得含 Approve / Reject 动作标识。
+# 与 A2 只盯两个提交模块不同，A4 扫描整个 DesktopModules，仅豁免「本就承载审批语义」的模块（后台审核页与修正审核）及待办只读投影里的注释字样。
+# 凡白名单之外出现 Approve / Reject（子串、大小写不敏感）即失败——将来有人在**提交类**模块（LeaveRequest / ExpenseReimbursement 等）引入审批，门禁强制先把公开文档边界声明改对。
+# 为何按「文件/目录」级豁免而非逐行：子串匹配会把注释里的 "reject submission" 也命中，若逐行豁免则易把真审批动作一并放掉，故以白名单文件/目录为粒度放行。</zh-CN>
+# <en>A4 (Q6 / W-anp-P295): formalize the W-anp-P153 exemption list as a **whitelist**; scan ALL other user-module files for Approve / Reject action markers.
+# Unlike A2 which only watches the two submission modules, A4 scans the entire DesktopModules and only exempts modules that legitimately carry approval semantics (the back-office review page, the correction review) and the read-only work-item projection's comment wording.
+# Any non-whitelisted file containing Approve / Reject (substring, case-insensitive) fails — when approval is introduced into a *submission* module (LeaveRequest / ExpenseReimbursement etc.), the gate forces the public doc boundary declaration to be corrected first.
+# Why file/directory-level exemption instead of per-line: substring matching also catches comment text like "reject submission"; per-line exemptions would easily let a real approval action slip through, so the whitelist is at file/directory granularity.</en></lang>
+# <lang><zh-CN>豁免白名单 = 本就合法含 Approve/Reject 字样之处（来自 W-anp-P153 边界声明 + 全量扫描实测）：
+# 两个「审核/审批」模块按目录级豁免（它们本就承载审批语义）；其余为散落于注释/JS/MIME 的无关字样，按文件级豁免。
+# 白名单之外的任何用户模块文件不得含 Approve/Reject（子串、大小写不敏感）。</zh-CN>
+# <en>Exemption whitelist = places where Approve/Reject is legitimately present (from the W-anp-P153 boundary declaration + a full-scan measurement):
+# the two "review/approval" modules are exempt at directory level (they carry approval semantics by design); the rest are incidental occurrences in comments/JS/MIME, exempt at file level.
+# No user-module file outside this whitelist may contain Approve/Reject (substring, case-insensitive).</en></lang>
+$approvalBoundaryWhitelist = @(
+    'BusinessApplicationRequest',               # <zh-CN>后台审核页：本就承载审批语义（整目录豁免）</zh-CN><en>back-office review page: carries approval semantics (whole dir exempt)</en>
+    'EmployeeProfileCorrectionRequest',         # <zh-CN>修正审核：承载审核语义（整目录豁免）</zh-CN><en>correction review: carries review semantics (whole dir exempt)</en>
+    'Contacts.ascx',                            # <zh-CN>联系人模块注释含该词</zh-CN><en>contacts module comment wording</en>
+    'DiscussDetails.aspx.cs',                   # <zh-CN>讨论详情注释含该词</zh-CN><en>discussion detail comment wording</en>
+    'Discussion.ascx.cs',                       # <zh-CN>讨论模块注释含该词</zh-CN><en>discussion module comment wording</en>
+    'EditDocs.aspx.cs',                         # <zh-CN>富文本编辑器内嵌 JS/MIME 含 Reject 字样</zh-CN><en>rich-text editor embedded JS/MIME mentions Reject</en>
+    'EditImage.aspx.cs',                         # <zh-CN>图片编辑器同</zh-CN><en>image editor, same</en>
+    'EditLinks.aspx.cs',                         # <zh-CN>链接编辑器同</zh-CN><en>links editor, same</en>
+    'EditXml.aspx.cs',                          # <zh-CN>XML 编辑器同</zh-CN><en>xml editor, same</en>
+    'Links.ascx.cs',                            # <zh-CN>链接模块注释含该词</zh-CN><en>links module comment wording</en>
+    'PortalStatusLocalizer.cs',                 # <zh-CN>状态本地化器为 W-anp-P153 豁免文件（注释含审批边界说明）</zh-CN><en>status localizer is a W-anp-P153 exempt file (comment mentions approval boundary)</en>
+    'QuickLinks.ascx.cs',                       # <zh-CN>快捷链接模块注释含该词</zh-CN><en>quick links module comment wording</en>
+    'MyWorkItems\MyWorkItems.ascx.cs'           # <zh-CN>只读投影，仅注释含 reject 字样</zh-CN><en>read-only projection, only a comment mentions reject</en>
+)
+$allModuleFiles = Get-ChildItem -Path $modulesDir -Recurse -Include '*.cs', '*.ascx' -ErrorAction SilentlyContinue
+foreach ($file in $allModuleFiles) {
+    $rel = $file.FullName.Substring($modulesDir.Length + 1).Replace('/', '\')
+    $exempt = $false
+    foreach ($w in $approvalBoundaryWhitelist) {
+        if ($rel -eq $w -or $rel.StartsWith($w + '\')) { $exempt = $true; break }
+    }
+    if ($exempt) { continue }
+    $text = [System.IO.File]::ReadAllText($file.FullName)
+    foreach ($pattern in @('Approve', 'Reject')) {
+        if ($text -match $pattern) {
+            $failures += "A4 用户模块 $rel 出现审批动作标识（$pattern）——不在豁免白名单中。若确为合法审批，请把该模块加入白名单并同步更新 docs/user-guide.md 的审批边界声明；否则移除审批动作。"
+        }
+    }
+}
+
 # <lang><zh-CN>A3：文档点名的门禁必须真实存在。</zh-CN><en>A3: the gate named by the doc must exist.</en></lang>
 if ($docText -match 'Test-PortalApprovalBoundaryDocs\.ps1') {
     if (-not (Test-Path -LiteralPath $gatePath)) {
