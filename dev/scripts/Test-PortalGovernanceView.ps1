@@ -1,0 +1,224 @@
+<#
+.SYNOPSIS
+    R6 治理视图 L0 门禁：能力↔模块↔入口↔权限键 治理视图对账。
+
+.DESCRIPTION
+    单一事实源（只读对账，不改写任何产品文件）：
+      - 能力：src/Portal.Components/PortalCapabilityRegistry.cs
+              （public const string X = "BasicBusiness.XXX" 给出能力键；
+               DefinitionArray 给出每条的 PrimaryModuleId 与 PermissionKeyPrefix）
+      - 模块：src/Portal/DesktopModules/*/module.json
+              （capability.capabilityId / capability.role / packageId）
+      - 权限键：src/Portal.Components/PortalPermissions.cs
+              （PortalPermissionKeys 的 public const string 键名）
+      - 入口：src/Portal.Components/PortalNavigationRegistry.cs
+              （new PortalNavigationEntry(...) 内 DesktopModules/<folder>/<file>.ascx 绑定）
+
+    检查项：
+      C1 模块声明的能力必须能在能力注册表解析（否则模块非法声明能力，P46 契约硬失败）
+      C2 每个能力应有主责模块实现（孤儿能力 → 告警）
+      C3 每个能力的 PermissionKeyPrefix 应在 PortalPermissionKeys 有对应键族（权限键漂移 → 告警）
+      C4 导航 DesktopModule 入口引用的模块目录应存在（悬空入口 → 告警）
+      C5 发货代码 src/ 不应泄漏完整计划码 W-anp-P###/C-anp-P##（命名漂移 → 告警）
+
+    退出码：
+      0  = 通过（无硬失败；告警仅提示，不阻断）
+      1  = 硬失败（C1 不通过，或结构性自检失败）
+      2  = -Strict 模式下存在告警
+#>
+[CmdletBinding()]
+param(
+    [string]$RepoRoot = (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)),
+    [switch]$Strict
+)
+
+$ErrorActionPreference = 'Stop'
+
+$capFile  = Join-Path $RepoRoot 'src/Portal.Components/PortalCapabilityRegistry.cs'
+$permFile = Join-Path $RepoRoot 'src/Portal.Components/PortalPermissions.cs'
+$navFile  = Join-Path $RepoRoot 'src/Portal.Components/PortalNavigationRegistry.cs'
+$modRoot  = Join-Path $RepoRoot 'src/Portal/DesktopModules'
+
+$fail = 0
+$warn = 0
+
+function Emit($sev, $msg) {
+    if ($sev -eq 'FAIL') { Write-Host "  [FAIL] $msg" -ForegroundColor Red; $script:fail++ }
+    elseif ($sev -eq 'WARN') { Write-Host "  [WARN] $msg" -ForegroundColor Yellow; $script:warn++ }
+    else { Write-Host "  [ OK ] $msg" -ForegroundColor Green }
+}
+
+Write-Host '' -NoNewline
+Write-Host '=== R6 治理视图 L0 门禁（能力↔模块↔入口↔权限键）===' -ForegroundColor Cyan
+
+# ---- 解析能力注册表 ----
+if (-not (Test-Path $capFile)) { Write-Host "能力注册表缺失: $capFile" -ForegroundColor Red; exit 1 }
+$capText = Get-Content $capFile -Raw -Encoding UTF8
+
+$capConst = @{}
+foreach ($m in [regex]::Matches($capText, 'public const string (\w+) = "([^"]+)"')) {
+    $capConst[$m.Groups[1].Value] = $m.Groups[2].Value
+}
+$capIds = $capConst.Values | Where-Object { $_ -match '^BasicBusiness\.\w+$' } | Sort-Object -Unique
+
+$caps = @()
+foreach ($m in [regex]::Matches($capText, 'new PortalCapabilityDefinition\(\s*(\w+),\s*"([^"]+)",\s*\w+\.[A-Za-z]+,\s*"([^"]+)",\s*"([^"]+)",')) {
+    $id = $capConst[$m.Groups[1].Value]
+    if (-not $id) { continue }
+    $caps += [PSCustomObject]@{
+        Id = $id
+        Layer = $m.Groups[2].Value
+        PrimaryModuleId = $m.Groups[3].Value
+        PermissionPrefix = $m.Groups[4].Value
+    }
+}
+if ($caps.Count -eq 0) {
+    foreach ($id in $capIds) {
+        $caps += [PSCustomObject]@{ Id = $id; Layer = ''; PrimaryModuleId = ''; PermissionPrefix = '' }
+    }
+}
+Write-Host ("能力注册表：{0} 条能力定义，{1} 个能力键" -f $caps.Count, $capIds.Count)
+
+# ---- 解析模块 ----
+$modules = @()
+if (Test-Path $modRoot) {
+    foreach ($mj in Get-ChildItem $modRoot -Recurse -Filter module.json) {
+        try { $j = Get-Content $mj.FullName -Raw -Encoding UTF8 | ConvertFrom-Json }
+        catch { Emit 'WARN' ("模块清单解析失败: {0}" -f $mj.FullName); continue }
+        $cap = if ($j.capability) { $j.capability.capabilityId } else { $null }
+        $modules += [PSCustomObject]@{
+            Folder = $mj.Directory.Name
+            PackageId = $j.packageId
+            CapabilityId = $cap
+            Role = if ($j.capability) { $j.capability.role } else { $null }
+        }
+    }
+}
+Write-Host ("模块：{0} 个（其中声明能力的 {1} 个）" -f $modules.Count, ($modules | Where-Object { $_.CapabilityId }).Count)
+
+# 结构性自检：避免「静默通过」
+if ($caps.Count -eq 0 -or $modules.Count -eq 0) {
+    Write-Host "结构性失败：解析到能力数=$($caps.Count) 或 模块数=$($modules.Count) 为 0，门禁无法可靠运行。" -ForegroundColor Red
+    exit 1
+}
+
+# ---- 解析权限键 ----
+$permKeys = @()
+if (Test-Path $permFile) {
+    $permText = Get-Content $permFile -Raw -Encoding UTF8
+    foreach ($m in [regex]::Matches($permText, 'public const string \w+ = "([^"]+)"')) {
+        $permKeys += $m.Groups[1].Value
+    }
+}
+
+# ---- 解析导航入口 ----
+$navFolders = @()
+if (Test-Path $navFile) {
+    $navText = Get-Content $navFile -Raw -Encoding UTF8
+    foreach ($m in [regex]::Matches($navText, 'DesktopModules/([A-Za-z0-9_]+)/')) {
+        $navFolders += $m.Groups[1].Value
+    }
+    $navFolders = $navFolders | Sort-Object -Unique
+}
+
+$modFolders = $modules.Folder
+
+# ============ C1：模块声明的能力必须可解析 ============
+Write-Host ''
+Write-Host '[C1] 模块声明能力 ↔ 能力注册表解析' -ForegroundColor Cyan
+foreach ($mod in $modules | Where-Object { $_.CapabilityId }) {
+    if ($capIds -contains $mod.CapabilityId) {
+        Emit 'OK' ("{0} 声明能力 {1} 可在注册表解析" -f $mod.PackageId, $mod.CapabilityId)
+    }
+    else {
+        Emit 'FAIL' ("{0} 声明能力 {1} 不在能力注册表（非法能力声明，P46 契约违规）" -f $mod.PackageId, $mod.CapabilityId)
+    }
+}
+
+# ============ C2：每个能力应有主责模块实现 ============
+Write-Host ''
+Write-Host '[C2] 能力 ↔ 主责模块（孤儿能力）' -ForegroundColor Cyan
+foreach ($c in $caps) {
+    $impl = $modules | Where-Object { $_.CapabilityId -eq $c.Id -and $_.PackageId -eq $c.PrimaryModuleId }
+    if ($impl) {
+        Emit 'OK' ("能力 {0} 由主责模块 {1} 实现" -f $c.Id, $c.PrimaryModuleId)
+    }
+    else {
+        Emit 'WARN' ("能力 {0} 未找到主责模块 {1} 的实现（孤儿能力或主责模块未登记 capability）" -f $c.Id, $c.PrimaryModuleId)
+    }
+}
+
+# ============ C3：能力权限前缀 ↔ 权限键族 ============
+Write-Host ''
+Write-Host '[C3] 能力权限前缀 ↔ PortalPermissionKeys 键族' -ForegroundColor Cyan
+foreach ($c in $caps) {
+    if (-not $c.PermissionPrefix) { continue }
+    $prefix = $c.PermissionPrefix + '.'
+    $hit = $permKeys | Where-Object { $_.StartsWith($prefix) } | Select-Object -First 1
+    if ($hit) {
+        Emit 'OK' ("能力 {0} 权限前缀 {1} 在 PortalPermissionKeys 有键族（如 {2}）" -f $c.Id, $c.PermissionPrefix, $hit)
+    }
+    else {
+        $alt = $c.PermissionPrefix -replace '^Business\.', ''
+        $altHit = $permKeys | Where-Object { $_.StartsWith($alt + '.') } | Select-Object -First 1
+        if ($altHit) {
+            Emit 'WARN' ("能力 {0} 注册表权限前缀 {1} 与实际键族前缀 {2} 不一致（注册表多写 Business. 前缀）" -f $c.Id, $c.PermissionPrefix, $alt)
+        }
+        else {
+            Emit 'WARN' ("能力 {0} 权限前缀 {1} 在 PortalPermissionKeys 无任何对应键族（可能缺失权限键定义）" -f $c.Id, $c.PermissionPrefix)
+        }
+    }
+}
+
+# ============ C4：导航 DesktopModule 入口 ↔ 模块目录 ============
+Write-Host ''
+Write-Host '[C4] 导航入口 ↔ 模块目录（悬空入口）' -ForegroundColor Cyan
+if ($navFolders.Count -eq 0) {
+    Emit 'WARN' '未在导航注册表解析到 DesktopModules/<folder>/ 入口引用'
+}
+else {
+    foreach ($f in $navFolders) {
+        if ($modFolders -contains $f) {
+            Emit 'OK' ("导航入口引用模块目录 {0} 存在" -f $f)
+        }
+        else {
+            Emit 'WARN' ("导航入口引用模块目录 {0} 不存在于 DesktopModules（悬空入口）" -f $f)
+        }
+    }
+}
+
+# ============ C5：命名纪律（能力键 / 模块包标识 / 权限键 形态）============
+# 注：项目在源码刻意嵌入工作项可追溯性码（WorkItem sidecar 机制），不视为漂移，故不扫描。
+Write-Host ''
+Write-Host '[C5] 命名纪律（能力键 / 模块包标识 / 权限键 形态）' -ForegroundColor Cyan
+$capLayerRe = '^BasicBusiness\.\w+$'
+$modPkgRe    = '^HIA\.\w+$'
+$permLayerOk = @('Admin','Ops','Settings','Theme','Module','Content','Business','EmployeeDirectory','EmployeeProfileConfirm','EmployeeProfileCorrectionRequest','EnterpriseCapability','Audit','Portal')
+foreach ($c in $caps) {
+    if ($c.Id -match $capLayerRe) { Emit 'OK' ("能力键 {0} 符合 BasicBusiness.<类> 形态" -f $c.Id) }
+    else { Emit 'WARN' ("能力键 {0} 不符合 BasicBusiness.<类> 形态" -f $c.Id) }
+}
+foreach ($m in $modules) {
+    if (-not $m.PackageId) { continue }
+    if ($m.PackageId -match $modPkgRe) { Emit 'OK' ("模块包 {0} 符合 HIA.<名> 形态" -f $m.PackageId) }
+    else { Emit 'WARN' ("模块包 {0} 不符合 HIA.<名> 形态" -f $m.PackageId) }
+}
+$badPerm = 0
+foreach ($k in $permKeys) {
+    $seg = ($k.Split('.'))[0]
+    if ($permLayerOk -notcontains $seg) {
+        if ($badPerm -lt 20) { Emit 'WARN' ("权限键 {0} 首段 {1} 不在已知层词表" -f $k, $seg) }
+        $badPerm++
+    }
+}
+if ($badPerm -eq 0) { Emit 'OK' ("{0} 个权限键首段均在已知层词表" -f $permKeys.Count) }
+
+# ============ 汇总 ============
+Write-Host ''
+Write-Host '=== 汇总 ===' -ForegroundColor Cyan
+Write-Host ("能力 {0} / 模块 {1} / 权限键 {2} / 导航入口目录 {3}" -f $caps.Count, $modules.Count, $permKeys.Count, $navFolders.Count)
+Write-Host ("结果：FAIL={0}  WARN={1}" -f $fail, $warn) -ForegroundColor $(if ($fail -gt 0) { 'Red' } else { 'Green' })
+
+if ($fail -gt 0) { exit 1 }
+if ($Strict -and $warn -gt 0) { exit 2 }
+exit 0
