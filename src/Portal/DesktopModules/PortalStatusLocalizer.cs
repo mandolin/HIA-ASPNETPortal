@@ -13,18 +13,16 @@ namespace ASPNET.StarterKit.Portal
     /// </lang></summary>
     public static class PortalStatusLocalizer
     {
-        /// <summary><lang><zh-CN>请假行：仅「已退回」或「已拒绝」状态可重新提交。</zh-CN><en>Leave row: resubmittable only when Returned or Rejected.</en></lang></summary>
+        /// <summary><lang><zh-CN>请假行：仅「已退回」状态可重新提交；「已拒绝」为终态不可重提（Q2 裁定，委托 BusinessApplicationLifecycle 单一事实源）。</zh-CN><en>Leave row: only Returned is resubmittable; Rejected is terminal (Q2 ruling, delegated to the BusinessApplicationLifecycle single source of truth).</en></lang></summary>
         public static bool IsLeaveResubmittable(string status)
         {
-            return string.Equals(status, LeaveRequestStatuses.Returned, StringComparison.Ordinal)
-                || string.Equals(status, LeaveRequestStatuses.Rejected, StringComparison.Ordinal);
+            return BusinessApplicationLifecycle.IsResubmittable(status);
         }
 
-        /// <summary><lang><zh-CN>报销行：仅「已退回」或「已拒绝」状态可重新提交。</zh-CN><en>Expense row: resubmittable only when Returned or Rejected.</en></lang></summary>
+        /// <summary><lang><zh-CN>报销行：仅「已退回」状态可重新提交；「已拒绝」为终态不可重提（Q2 裁定，委托 BusinessApplicationLifecycle 单一事实源）。</zh-CN><en>Expense row: only Returned is resubmittable; Rejected is terminal (Q2 ruling, delegated to the BusinessApplicationLifecycle single source of truth).</en></lang></summary>
         public static bool IsExpenseResubmittable(string status)
         {
-            return string.Equals(status, ExpenseReimbursementStatuses.Returned, StringComparison.Ordinal)
-                || string.Equals(status, ExpenseReimbursementStatuses.Rejected, StringComparison.Ordinal);
+            return BusinessApplicationLifecycle.IsResubmittable(status);
         }
 
         /// <summary><lang><zh-CN>把存储态请假状态常量映射为本地化展示文案。</zh-CN><en>Maps the stored leave status constant to a localized display label.</en></lang></summary>

@@ -54,6 +54,23 @@ namespace ASPNET.StarterKit.Portal.Tests
             Assert.IsFalse(
                 BusinessApplicationLifecycle.IsResubmittable("Pending"),
                 "历史 Pending 归一化为 Submitted，不可重提。");
+            // 模块状态常量同样遵循 Q2：Leave/Expense 的 Returned 可重提、Rejected 终态、Pending 不可
+            // （PortalStatusLocalizer.IsLeave/ExpenseResubmittable 已委托本门面，须保证跨模块一致）
+            Assert.IsTrue(
+                BusinessApplicationLifecycle.IsResubmittable(LeaveRequestStatuses.Returned),
+                "LeaveRequestStatuses.Returned 可重提。");
+            Assert.IsFalse(
+                BusinessApplicationLifecycle.IsResubmittable(LeaveRequestStatuses.Rejected),
+                "LeaveRequestStatuses.Rejected 终态不可重提。");
+            Assert.IsFalse(
+                BusinessApplicationLifecycle.IsResubmittable(LeaveRequestStatuses.Pending),
+                "LeaveRequestStatuses.Pending(→Submitted) 不可重提。");
+            Assert.IsTrue(
+                BusinessApplicationLifecycle.IsResubmittable(ExpenseReimbursementStatuses.Returned),
+                "ExpenseReimbursementStatuses.Returned 可重提。");
+            Assert.IsFalse(
+                BusinessApplicationLifecycle.IsResubmittable(ExpenseReimbursementStatuses.Rejected),
+                "ExpenseReimbursementStatuses.Rejected 终态不可重提。");
         }
 
         /// <summary><lang><zh-CN>state→state 迁移判定复用既有单一事实源：Resubmit 仅 Returned→Submitted 合法，Rejected→Submitted 非法，同态非法，审核动作合法。</zh-CN><en>State→state transition judgement delegates to the existing single source of truth: Resubmit only Returned→Submitted is legal, Rejected→Submitted is illegal, same-state is illegal, review actions are legal.</en></lang></summary>

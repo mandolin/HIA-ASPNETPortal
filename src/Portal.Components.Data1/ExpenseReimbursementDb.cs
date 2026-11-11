@@ -184,12 +184,12 @@ namespace ASPNET.StarterKit.Portal
                 int rows = context.Database.ExecuteSqlCommand(
                     "UPDATE dbo.PortalBiz_ExpenseReimbursements " +
                     "SET Status = @Status, ReviewedUtc = NULL, ReviewedByUserId = NULL, ReviewedBy = NULL " +
-                    "WHERE RequestId = @RequestId AND UserId = @ApplicantUserId AND Status IN (@FromReturned, @FromRejected);",
+                    // <lang><zh-CN>Q2 裁定：仅「已退回(Returned)」可重提；「已拒绝(Rejected)」为终态不可重提，故来源集合只剩 Returned（与 BusinessApplicationLifecycle 单一事实源一致）。目标仍写本模块词汇 Pending，由 NormalizeToCanonical 在展示层映射为 Submitted，避免改写存储值。</zh-CN><en>Q2 ruling: only Returned is resubmittable; Rejected is terminal, so the source set is Returned only (consistent with the BusinessApplicationLifecycle single source of truth). Target stays the module's Pending; the display layer maps it to Submitted via NormalizeToCanonical without rewriting stored values.</en></lang>
+                    "WHERE RequestId = @RequestId AND UserId = @ApplicantUserId AND Status = @FromReturned;",
                     new SqlParameter("@Status", ExpenseReimbursementStatuses.Pending),
                     new SqlParameter("@RequestId", request.RequestId),
                     new SqlParameter("@ApplicantUserId", request.ApplicantUserId),
-                    new SqlParameter("@FromReturned", ExpenseReimbursementStatuses.Returned),
-                    new SqlParameter("@FromRejected", ExpenseReimbursementStatuses.Rejected));
+                    new SqlParameter("@FromReturned", ExpenseReimbursementStatuses.Returned));
 
                 if (rows <= 0)
                 {
