@@ -200,6 +200,7 @@
     <Compile Include="PortalCollaborationItemStatuses.cs" />
     <Compile Include="PortalBusinessApplicationTransitions.cs" />
     <Compile Include="BusinessApplicationLifecycle.cs" />
+    <Compile Include="BasicBusinessApplicationStatuses.cs" />
     <Compile Include="PortalCollaborationItemTransitions.cs" />
     <Compile Include="PortalCollaborationItemVisibilityScopes.cs" />
     <Compile Include="PortalCollaborationItemParticipantRoles.cs" />

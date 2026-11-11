@@ -91,16 +91,16 @@ namespace ASPNET.StarterKit.Portal
     /// </lang></summary>
     public static class ExpenseReimbursementStatuses
     {
-        /// <summary><lang><zh-CN>待审批。</zh-CN><en>Pending review.</en></lang></summary>
-        public const string Pending = "Pending";
-        /// <summary><lang><zh-CN>已批准。</zh-CN><en>Approved.</en></lang></summary>
-        public const string Approved = "Approved";
-        /// <summary><lang><zh-CN>已拒绝。</zh-CN><en>Rejected.</en></lang></summary>
-        public const string Rejected = "Rejected";
-        /// <summary><lang><zh-CN>已退回（等待申请人修订后重新提交）。</zh-CN><en>Returned (awaiting applicant revision and resubmission).</en></lang></summary>
-        public const string Returned = "Returned";
-        /// <summary><lang><zh-CN>已关闭。</zh-CN><en>Closed.</en></lang></summary>
-        public const string Closed = "Closed";
+        /// <summary><lang><zh-CN>待审批（存库值，单一字面源见 BasicBusinessApplicationStatuses）。</zh-CN><en>Pending review (stored value; shared literal source see BasicBusinessApplicationStatuses).</en></lang></summary>
+        public const string Pending = BasicBusinessApplicationStatuses.Pending;
+        /// <summary><lang><zh-CN>已批准（存库值，单一字面源见 BasicBusinessApplicationStatuses）。</zh-CN><en>Approved (stored value; shared literal source see BasicBusinessApplicationStatuses).</en></lang></summary>
+        public const string Approved = BasicBusinessApplicationStatuses.Approved;
+        /// <summary><lang><zh-CN>已拒绝（存库值，单一字面源见 BasicBusinessApplicationStatuses）。</zh-CN><en>Rejected (stored value; shared literal source see BasicBusinessApplicationStatuses).</en></lang></summary>
+        public const string Rejected = BasicBusinessApplicationStatuses.Rejected;
+        /// <summary><lang><zh-CN>已退回（等待申请人修订后重新提交；存库值，单一字面源见 BasicBusinessApplicationStatuses）。</zh-CN><en>Returned (awaiting applicant revision and resubmission; stored value; shared literal source see BasicBusinessApplicationStatuses).</en></lang></summary>
+        public const string Returned = BasicBusinessApplicationStatuses.Returned;
+        /// <summary><lang><zh-CN>已关闭（存库值，单一字面源见 BasicBusinessApplicationStatuses）。</zh-CN><en>Closed (stored value; shared literal source see BasicBusinessApplicationStatuses).</en></lang></summary>
+        public const string Closed = BasicBusinessApplicationStatuses.Closed;
     }
 
     /// <summary><lang>

@@ -100,5 +100,33 @@ namespace ASPNET.StarterKit.Portal.Tests
                 BusinessApplicationLifecycle.CanTransition(PortalBusinessApplicationStatuses.Closed, PortalBusinessApplicationStatuses.Submitted),
                 "终态 Closed 不可重提。");
         }
+
+        /// <summary><lang><zh-CN>BasicBusinessApplicationStatuses 是 Leave/Expense 存库词汇的单一字面源；两状态类别名引用它，值与存储兼容（Pending 等不变），且归一化层仍把 Pending 映射为 Submitted（W-anp-P296 行为保持，消除重复）。</zh-CN><en>BasicBusinessApplicationStatuses is the single literal source for the Leave/Expense stored vocabulary; both status classes alias it, values stay storage-compatible (Pending unchanged), and the normalization layer still maps Pending to Submitted (W-anp-P296 behavior-preserving, removes duplication).</en></lang></summary>
+        [TestMethod]
+        public void BasicBusinessStatusAliases_PreserveStoredValuesAndDelegateToSharedSource()
+        {
+            // 单一字面源
+            Assert.AreEqual("Pending", BasicBusinessApplicationStatuses.Pending);
+            Assert.AreEqual("Approved", BasicBusinessApplicationStatuses.Approved);
+            Assert.AreEqual("Rejected", BasicBusinessApplicationStatuses.Rejected);
+            Assert.AreEqual("Returned", BasicBusinessApplicationStatuses.Returned);
+            Assert.AreEqual("Closed", BasicBusinessApplicationStatuses.Closed);
+            // Leave/Expense 别名 == 共享源（消除重复、值不变）
+            Assert.AreEqual(LeaveRequestStatuses.Pending, BasicBusinessApplicationStatuses.Pending);
+            Assert.AreEqual(ExpenseReimbursementStatuses.Pending, BasicBusinessApplicationStatuses.Pending);
+            Assert.AreEqual(LeaveRequestStatuses.Approved, ExpenseReimbursementStatuses.Approved);
+            Assert.AreEqual(LeaveRequestStatuses.Rejected, ExpenseReimbursementStatuses.Rejected);
+            Assert.AreEqual(LeaveRequestStatuses.Returned, ExpenseReimbursementStatuses.Returned);
+            Assert.AreEqual(LeaveRequestStatuses.Closed, ExpenseReimbursementStatuses.Closed);
+            // 行为保持：存库 Pending 仍经归一化映射为规范 Submitted（展示层而非存储层改写）
+            Assert.AreEqual(
+                PortalBusinessApplicationStatuses.Submitted,
+                BusinessApplicationLifecycle.NormalizeToCanonical(LeaveRequestStatuses.Pending),
+                "Leave Pending 归一化为 Submitted（Q1，存储值不变）。");
+            Assert.AreEqual(
+                PortalBusinessApplicationStatuses.Submitted,
+                BusinessApplicationLifecycle.NormalizeToCanonical(ExpenseReimbursementStatuses.Pending),
+                "Expense Pending 归一化为 Submitted（Q1，存储值不变）。");
+        }
     }
 }
