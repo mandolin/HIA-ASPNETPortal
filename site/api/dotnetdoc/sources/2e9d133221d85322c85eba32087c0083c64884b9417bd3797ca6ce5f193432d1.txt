@@ -1,0 +1,17 @@
+    public static class BasicBusinessApplicationStatuses
+    {
+        /// <summary><lang><zh-CN>待审批（存库值）。</zh-CN><en>Pending review (stored value).</en></lang></summary>
+        public const string Pending = "Pending";
+
+        /// <summary><lang><zh-CN>已批准（存库值）。</zh-CN><en>Approved (stored value).</en></lang></summary>
+        public const string Approved = "Approved";
+
+        /// <summary><lang><zh-CN>已拒绝（存库值）。</zh-CN><en>Rejected (stored value).</en></lang></summary>
+        public const string Rejected = "Rejected";
+
+        /// <summary><lang><zh-CN>已退回（存库值，等待申请人修订后重新提交）。</zh-CN><en>Returned (stored value, awaiting applicant revision and resubmission).</en></lang></summary>
+        public const string Returned = "Returned";
+
+        /// <summary><lang><zh-CN>已关闭（存库值）。</zh-CN><en>Closed (stored value).</en></lang></summary>
+        public const string Closed = "Closed";
+    }

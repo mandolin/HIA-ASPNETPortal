@@ -1,0 +1,27 @@
+        public static bool CanTransition(string fromStatus, string toStatus)
+        {
+            string from = NormalizeToCanonical(fromStatus);
+            string to = NormalizeToCanonical(toStatus);
+            if (string.Equals(from, to, StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            foreach (PortalBusinessApplicationTransition transition in PortalBusinessApplicationTransitions.All)
+            {
+                if (!string.Equals(transition.ToStatus, to, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                foreach (string allowed in transition.FromStatuses)
+                {
+                    if (string.Equals(allowed, from, StringComparison.Ordinal))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }

@@ -39,6 +39,19 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isl-cf3e4de4.html"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
+      "kind": "entry",
+      "label": "LocalizeCanonical",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
+      "sourcePath": "src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-00da61db.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string",
       "kind": "entry",
       "label": "LocalizeExpenseStatus",

@@ -7,7 +7,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet",
       "kind": "namespace",
       "label": "ASPNET",
-      "entryCount": 2181,
+      "entryCount": 2182,
       "views": [
         "dotnet"
       ],
@@ -17,7 +17,7 @@
       "id": "dotnet:assembly:portal:namespace:resources",
       "kind": "namespace",
       "label": "Resources",
-      "entryCount": 972,
+      "entryCount": 976,
       "views": [
         "dotnet"
       ],

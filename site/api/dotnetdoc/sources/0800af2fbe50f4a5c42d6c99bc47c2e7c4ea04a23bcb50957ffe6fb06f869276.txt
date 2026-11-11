@@ -1,0 +1,17 @@
+        private static string LocalizeCanonical(string canonical)
+        {
+            if (string.IsNullOrEmpty(canonical))
+            {
+                return string.Empty;
+            }
+
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Draft, StringComparison.Ordinal)) return Resources.lang.Common_StatusDraft;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Submitted, StringComparison.Ordinal)) return Resources.lang.Common_StatusSubmitted;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.InReview, StringComparison.Ordinal)) return Resources.lang.Common_StatusInReview;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Returned, StringComparison.Ordinal)) return Resources.lang.Common_StatusReturned;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Approved, StringComparison.Ordinal)) return Resources.lang.Common_StatusApproved;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Rejected, StringComparison.Ordinal)) return Resources.lang.Common_StatusRejected;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Withdrawn, StringComparison.Ordinal)) return Resources.lang.Common_StatusWithdrawn;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Closed, StringComparison.Ordinal)) return Resources.lang.Common_StatusClosed;
+            return canonical;
+        }

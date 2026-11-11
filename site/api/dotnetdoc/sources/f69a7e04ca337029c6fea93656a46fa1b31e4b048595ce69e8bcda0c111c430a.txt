@@ -1,0 +1,5 @@
+        public static bool IsResubmittable(string status)
+        {
+            return PortalBusinessApplicationTransitions.IsLegalTransition(
+                NormalizeToCanonical(status), PortalWorkflowActions.Resubmit);
+        }

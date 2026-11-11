@@ -1827,7 +1827,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer",
       "kind": "type",
       "label": "PortalStatusLocalizer",
-      "entryCount": 5,
+      "entryCount": 6,
       "views": [
         "dotnet"
       ],

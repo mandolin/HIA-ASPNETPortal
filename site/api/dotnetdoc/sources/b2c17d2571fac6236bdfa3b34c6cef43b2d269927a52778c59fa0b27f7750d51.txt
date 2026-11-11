@@ -1,0 +1,5 @@
+        internal static string Common_StatusWithdrawn {
+            get {
+                return ResourceManager.GetString("Common_StatusWithdrawn", resourceCulture);
+            }
+        }

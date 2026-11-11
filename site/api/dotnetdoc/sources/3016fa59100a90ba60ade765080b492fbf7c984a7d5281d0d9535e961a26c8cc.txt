@@ -1,0 +1,4 @@
+        public static bool IsExpenseResubmittable(string status)
+        {
+            return BusinessApplicationLifecycle.IsResubmittable(status);
+        }

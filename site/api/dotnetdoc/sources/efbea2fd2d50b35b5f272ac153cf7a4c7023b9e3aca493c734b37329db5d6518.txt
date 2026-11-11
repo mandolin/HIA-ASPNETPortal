@@ -1,0 +1,64 @@
+    public static class BusinessApplicationLifecycle
+    {
+        /// <summary><lang><zh-CN>历史模块状态值到规范词的归一化映射。仅登记与规范词字符串不同的历史值，其余原样透传（保留既有数据存储兼容性，不做破坏性改写）。</zh-CN><en>Legacy module status values mapped to the canonical vocabulary. Only legacy values whose string differs from the canonical is registered; the rest pass through (preserves existing data-store compatibility without destructive rewrite).</en></lang></summary>
+        private static readonly Dictionary<string, string> LegacyToCanonical =
+            new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                { "Pending", PortalBusinessApplicationStatuses.Submitted },
+                { "Reviewed", PortalBusinessApplicationStatuses.InReview }
+            };
+
+        /// <summary><lang><zh-CN>把任意模块存储态归一化为规范词（Pending→Submitted、Reviewed→InReview；其余原样）。</zh-CN><en>Normalizes any module's stored status to the canonical vocabulary (Pending→Submitted, Reviewed→InReview; others unchanged).</en></lang></summary>
+        /// <param name="status"><l><zh-CN>原始状态值（可能为历史模块词汇）。</zh-CN><en>Raw status value (may be a legacy module vocabulary).</en></l></param>
+        /// <returns><l><zh-CN>规范词；入参为空返回 <c>null</c>。</zh-CN><en>The canonical status; <c>null</c> when input is null.</en></l></returns>
+        public static string NormalizeToCanonical(string status)
+        {
+            if (status == null)
+            {
+                return null;
+            }
+
+            return LegacyToCanonical.TryGetValue(status, out string canonical) ? canonical : status;
+        }
+
+        /// <summary><lang><zh-CN>判定给定状态是否可重新提交。仅 Returned（退回）可重提；Rejected 为终态不可重提（Q2 裁定，与 PortalBusinessApplicationTransitions.Resubmit 来源集合一致）。</zh-CN><en>Whether the given status is resubmittable. Only Returned is resubmittable; Rejected is terminal (Q2 ruling, matching the PortalBusinessApplicationTransitions.Resubmit source set).</en></lang></summary>
+        /// <param name="status"><l><zh-CN>原始状态值（会先归一化）。</zh-CN><en>Raw status value (normalized first).</en></l></param>
+        /// <returns><l><zh-CN>可重提为 <c>true</c>。</zh-CN><en><c>true</c> when resubmittable.</en></l></returns>
+        public static bool IsResubmittable(string status)
+        {
+            return PortalBusinessApplicationTransitions.IsLegalTransition(
+                NormalizeToCanonical(status), PortalWorkflowActions.Resubmit);
+        }
+
+        /// <summary><lang><zh-CN>判定从 from 到 to 是否为合法迁移（fail-closed）。使用单一事实源 PortalBusinessApplicationTransitions；同态视为非法迁移。</zh-CN><en>Whether from→to is a legal transition (fail-closed). Delegates to the single source of truth PortalBusinessApplicationTransitions; same-state is not a transition.</en></lang></summary>
+        /// <param name="fromStatus"><l><zh-CN>当前状态（会先归一化）。</zh-CN><en>Current status (normalized first).</en></l></param>
+        /// <param name="toStatus"><l><zh-CN>目标状态（会先归一化）。</zh-CN><en>Target status (normalized first).</en></l></param>
+        /// <returns><l><zh-CN>合法为 <c>true</c>。</zh-CN><en><c>true</c> when legal.</en></l></returns>
+        public static bool CanTransition(string fromStatus, string toStatus)
+        {
+            string from = NormalizeToCanonical(fromStatus);
+            string to = NormalizeToCanonical(toStatus);
+            if (string.Equals(from, to, StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            foreach (PortalBusinessApplicationTransition transition in PortalBusinessApplicationTransitions.All)
+            {
+                if (!string.Equals(transition.ToStatus, to, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                foreach (string allowed in transition.FromStatuses)
+                {
+                    if (string.Equals(allowed, from, StringComparison.Ordinal))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }

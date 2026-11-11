@@ -9152,6 +9152,32 @@
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusclosed-11bff616.html"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statusdraft",
+      "kind": "entry",
+      "label": "Common_StatusDraft",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusdraft",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statusdraft",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusdraft-9cb8d0b9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statusinreview",
+      "kind": "entry",
+      "label": "Common_StatusInReview",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusinreview",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statusinreview",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusinreview-48d0b1f1.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statuspending",
       "kind": "entry",
       "label": "Common_StatusPending",
@@ -9189,6 +9215,32 @@
       "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
       "symbolId": "dotnet:p:resources.lang.common_statusreturned",
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusreturned-4a4be2f5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statussubmitted",
+      "kind": "entry",
+      "label": "Common_StatusSubmitted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statussubmitted",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statussubmitted",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statussubmitted-aa1ac483.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statuswithdrawn",
+      "kind": "entry",
+      "label": "Common_StatusWithdrawn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statuswithdrawn",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statuswithdrawn",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statuswithdrawn-695195aa.html"
     },
     {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.contacts_emptynocontacts",

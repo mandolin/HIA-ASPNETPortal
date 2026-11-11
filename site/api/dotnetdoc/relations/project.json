@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6219,
-  "relationCount": 5771,
+  "nodeCount": 6237,
+  "relationCount": 5787,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -121,6 +121,48 @@
       "kind": "entry",
       "label": "_context",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.announcementsdb._context",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved",
+      "kind": "entry",
+      "label": "Approved",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed",
+      "kind": "entry",
+      "label": "Closed",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending",
+      "kind": "entry",
+      "label": "Pending",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected",
+      "kind": "entry",
+      "label": "Rejected",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned",
+      "kind": "entry",
+      "label": "Returned",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical",
+      "kind": "entry",
+      "label": "LegacyToCanonical",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical",
       "view": "dotnet"
     },
     {
@@ -7744,6 +7786,27 @@
       "kind": "entry",
       "label": "SubmitApplication",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string",
+      "kind": "entry",
+      "label": "CanTransition",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string",
+      "kind": "entry",
+      "label": "IsResubmittable",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string",
+      "kind": "entry",
+      "label": "NormalizeToCanonical",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string",
       "view": "dotnet"
     },
     {
@@ -16249,6 +16312,13 @@
       "kind": "entry",
       "label": "IsLeaveResubmittable",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
+      "kind": "entry",
+      "label": "LocalizeCanonical",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
       "view": "dotnet"
     },
     {
@@ -33248,6 +33318,20 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-p-resources.lang.common_statusdraft",
+      "kind": "entry",
+      "label": "Common_StatusDraft",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusdraft",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.common_statusinreview",
+      "kind": "entry",
+      "label": "Common_StatusInReview",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusinreview",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-p-resources.lang.common_statuspending",
       "kind": "entry",
       "label": "Common_StatusPending",
@@ -33266,6 +33350,20 @@
       "kind": "entry",
       "label": "Common_StatusReturned",
       "entryId": "hia-document:dotnet-p-resources.lang.common_statusreturned",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.common_statussubmitted",
+      "kind": "entry",
+      "label": "Common_StatusSubmitted",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statussubmitted",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.common_statuswithdrawn",
+      "kind": "entry",
+      "label": "Common_StatusWithdrawn",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statuswithdrawn",
       "view": "dotnet"
     },
     {
@@ -35201,6 +35299,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "kind": "entry",
+      "label": "BasicBusinessApplicationStatuses",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationadminrow",
       "kind": "entry",
       "label": "BusinessApplicationAdminRow",
@@ -35226,6 +35331,13 @@
       "kind": "entry",
       "label": "BusinessApplicationInfo",
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationinfo",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle",
+      "kind": "entry",
+      "label": "BusinessApplicationLifecycle",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle",
       "view": "dotnet"
     },
     {
@@ -40780,10 +40892,22 @@
       "path": "src/Portal.Components/AuditSummaryTooLongException.cs"
     },
     {
+      "id": "source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "path": "src/Portal.Components/BasicBusinessApplicationStatuses.cs"
+    },
+    {
       "id": "source:src/Portal.Components/BusinessApplicationInfo.cs",
       "kind": "source",
       "label": "src/Portal.Components/BusinessApplicationInfo.cs",
       "path": "src/Portal.Components/BusinessApplicationInfo.cs"
+    },
+    {
+      "id": "source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "path": "src/Portal.Components/BusinessApplicationLifecycle.cs"
     },
     {
       "id": "source:src/Portal.Components/BusinessApplicationResult.cs",
@@ -43275,6 +43399,84 @@
         "language": "csharp",
         "rangeStartLine": 28,
         "rangeEndLine": 28
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved->source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved",
+      "to": "source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "label": "Source: src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 10,
+        "rangeEndLine": 10
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed->source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed",
+      "to": "source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "label": "Source: src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 19,
+        "rangeEndLine": 19
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending->source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending",
+      "to": "source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "label": "Source: src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 7,
+        "rangeEndLine": 7
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected->source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected",
+      "to": "source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "label": "Source: src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 13,
+        "rangeEndLine": 13
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned->source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned",
+      "to": "source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "label": "Source: src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 16,
+        "rangeEndLine": 16
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical->source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical",
+      "to": "source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "label": "Source: src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 19,
+        "rangeEndLine": 24
       }
     },
     {
@@ -57432,6 +57634,45 @@
         "language": "csharp",
         "rangeStartLine": 91,
         "rangeEndLine": 204
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string->source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string",
+      "to": "source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "label": "Source: src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 52,
+        "rangeEndLine": 78
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string->source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string",
+      "to": "source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "label": "Source: src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 42,
+        "rangeEndLine": 46
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string->source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string",
+      "to": "source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "label": "Source: src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 29,
+        "rangeEndLine": 37
       }
     },
     {
@@ -73212,8 +73453,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 24,
-        "rangeEndLine": 28
+        "rangeStartLine": 23,
+        "rangeEndLine": 26
       }
     },
     {
@@ -73226,7 +73467,20 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 17,
-        "rangeEndLine": 21
+        "rangeEndLine": 20
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string->source:src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
+      "to": "source:src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "label": "Source: src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 41,
+        "rangeEndLine": 57
       }
     },
     {
@@ -73238,8 +73492,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 42,
-        "rangeEndLine": 50
+        "rangeStartLine": 35,
+        "rangeEndLine": 38
       }
     },
     {
@@ -73251,8 +73505,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 31,
-        "rangeEndLine": 39
+        "rangeStartLine": 29,
+        "rangeEndLine": 32
       }
     },
     {
@@ -104776,8 +105030,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.common_statusapproved",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11555,
-        "rangeEndLine": 11559
+        "rangeStartLine": 11599,
+        "rangeEndLine": 11603
       }
     },
     {
@@ -104789,8 +105043,34 @@
       "entryId": "hia-document:dotnet-p-resources.lang.common_statusclosed",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11577,
-        "rangeEndLine": 11581
+        "rangeStartLine": 11621,
+        "rangeEndLine": 11625
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.common_statusdraft->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.common_statusdraft",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusdraft",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11588,
+        "rangeEndLine": 11592
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.common_statusinreview->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.common_statusinreview",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusinreview",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11566,
+        "rangeEndLine": 11570
       }
     },
     {
@@ -104815,8 +105095,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.common_statusrejected",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11566,
-        "rangeEndLine": 11570
+        "rangeStartLine": 11610,
+        "rangeEndLine": 11614
       }
     },
     {
@@ -104828,8 +105108,34 @@
       "entryId": "hia-document:dotnet-p-resources.lang.common_statusreturned",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11588,
-        "rangeEndLine": 11592
+        "rangeStartLine": 11632,
+        "rangeEndLine": 11636
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.common_statussubmitted->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.common_statussubmitted",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statussubmitted",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11555,
+        "rangeEndLine": 11559
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.common_statuswithdrawn->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.common_statuswithdrawn",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statuswithdrawn",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11577,
+        "rangeEndLine": 11581
       }
     },
     {
@@ -106830,8 +107136,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.expensereimbursement_buttonresubmit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11632,
-        "rangeEndLine": 11636
+        "rangeStartLine": 11676,
+        "rangeEndLine": 11680
       }
     },
     {
@@ -106908,8 +107214,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.expensereimbursement_columnactions",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11621,
-        "rangeEndLine": 11625
+        "rangeStartLine": 11665,
+        "rangeEndLine": 11669
       }
     },
     {
@@ -107142,8 +107448,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.leaverequest_buttonresubmit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11610,
-        "rangeEndLine": 11614
+        "rangeStartLine": 11654,
+        "rangeEndLine": 11658
       }
     },
     {
@@ -107168,8 +107474,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.leaverequest_columnactions",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11599,
-        "rangeEndLine": 11603
+        "rangeStartLine": 11643,
+        "rangeEndLine": 11647
       }
     },
     {
@@ -108300,7 +108606,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 274
+        "rangeEndLine": 276
       }
     },
     {
@@ -108339,7 +108645,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 112
+        "rangeEndLine": 113
       }
     },
     {
@@ -108421,6 +108727,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses->source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "to": "source:src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "label": "Source: src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 4,
+        "rangeEndLine": 20
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationadminrow->source:src/Portal/Admin/BusinessApplications.aspx.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationadminrow",
@@ -108470,6 +108789,19 @@
         "language": "csharp",
         "rangeStartLine": 11,
         "rangeEndLine": 140
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle->source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle",
+      "to": "source:src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "label": "Source: src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 16,
+        "rangeEndLine": 79
       }
     },
     {
@@ -113006,7 +113338,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 14,
-        "rangeEndLine": 51
+        "rangeEndLine": 58
       }
     },
     {

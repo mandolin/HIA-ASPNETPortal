@@ -1,0 +1,4 @@
+        public static string LocalizeExpenseStatus(string status)
+        {
+            return LocalizeCanonical(BusinessApplicationLifecycle.NormalizeToCanonical(status));
+        }

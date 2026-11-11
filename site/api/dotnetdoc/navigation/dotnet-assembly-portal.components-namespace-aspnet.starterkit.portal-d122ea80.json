@@ -18,6 +18,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5a5a5ca9.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "kind": "type",
+      "label": "BasicBusinessApplicationStatuses",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "sourcePath": "src/Portal.Components/BasicBusinessApplicationStatuses.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.basicbusinessapplications-0310a06b.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c425085d.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationinfo",
       "kind": "type",
       "label": "BusinessApplicationInfo",
@@ -30,6 +44,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.businessapplicationinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationinfo-780101f9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d0260423.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationlifecycle",
+      "kind": "type",
+      "label": "BusinessApplicationLifecycle",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle",
+      "sourcePath": "src/Portal.Components/BusinessApplicationLifecycle.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.businessapplicationlifecycle",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationlifecy-15307d2b.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-ddfc3f99.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationresult",

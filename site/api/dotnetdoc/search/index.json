@@ -18189,7 +18189,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isl-cf3e4de4.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isl-cf3e4de4.html",
-      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string isleaveresubmittable dotnet-method leave row: resubmittable only when returned or rejected. public static bool aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 请假行：仅「已退回」或「已拒绝」状态可重新提交。 leave row: resubmittable only when returned or rejected."
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string isleaveresubmittable dotnet-method leave row: only returned is resubmittable; rejected is terminal (q2 ruling, delegated to the businessapplicationlifecycle single source of truth). public static bool aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 请假行：仅「已退回」状态可重新提交；「已拒绝」为终态不可重提（q2 裁定，委托 businessapplicationlifecycle 单一事实源）。 leave row: only returned is resubmittable; rejected is terminal (q2 ruling, delegated to the businessapplicationlifecycle single source of truth)."
     },
     {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string",
@@ -18198,7 +18198,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.ise-50e47d4d.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.ise-50e47d4d.html",
-      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string isexpenseresubmittable dotnet-method expense row: resubmittable only when returned or rejected. public static bool aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 报销行：仅「已退回」或「已拒绝」状态可重新提交。 expense row: resubmittable only when returned or rejected."
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string isexpenseresubmittable dotnet-method expense row: only returned is resubmittable; rejected is terminal (q2 ruling, delegated to the businessapplicationlifecycle single source of truth). public static bool aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 报销行：仅「已退回」状态可重新提交；「已拒绝」为终态不可重提（q2 裁定，委托 businessapplicationlifecycle 单一事实源）。 expense row: only returned is resubmittable; rejected is terminal (q2 ruling, delegated to the businessapplicationlifecycle single source of truth)."
     },
     {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string",
@@ -18207,7 +18207,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-aeb8b120.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-aeb8b120.html",
-      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string localizeleavestatus dotnet-method maps the stored leave status constant to a localized display label. public static string aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 把存储态请假状态常量映射为本地化展示文案。 maps the stored leave status constant to a localized display label."
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string localizeleavestatus dotnet-method maps the stored leave status to a localized display label via businessapplicationlifecycle normalization to the canonical vocabulary (single source of truth). public static string aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 把存储态请假状态映射为本地化展示文案（经 businessapplicationlifecycle 归一化到规范词，单一事实源）。 maps the stored leave status to a localized display label via businessapplicationlifecycle normalization to the canonical vocabulary (single source of truth)."
     },
     {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string",
@@ -18216,7 +18216,16 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-f13c4e6f.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-f13c4e6f.html",
-      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string localizeexpensestatus dotnet-method maps the stored expense status constant to a localized display label. public static string aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 把存储态报销状态常量映射为本地化展示文案。 maps the stored expense status constant to a localized display label."
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string localizeexpensestatus dotnet-method maps the stored expense status to a localized display label via businessapplicationlifecycle normalization to the canonical vocabulary (single source of truth). public static string aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 把存储态报销状态映射为本地化展示文案（经 businessapplicationlifecycle 归一化到规范词，单一事实源）。 maps the stored expense status to a localized display label via businessapplicationlifecycle normalization to the canonical vocabulary (single source of truth)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string",
+      "name": "LocalizeCanonical",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-00da61db.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-00da61db.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string localizecanonical dotnet-method maps a canonical status to its localized label; an unlisted canonical value falls back to the raw word (should not happen since the full canonical set is covered here). private static string aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical(string canonical) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizecanonical-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 把规范状态词映射为本地化展示文案；未列举的规范词回退为原词（不应发生，因规范词全集已在此覆盖）。 maps a canonical status to its localized label; an unlisted canonical value falls back to the raw word (should not happen since the full canonical set is covered here)."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursement",
@@ -28308,6 +28317,42 @@
       "searchText": "hia-document:dotnet-p-resources.lang.common_statuspending common_statuspending dotnet-property looks up a localized string similar to: pending internal static string resources.lang.common_statuspending { get; } dotnet:p:resources.lang.common_statuspending portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：待审批 looks up a localized string similar to: pending"
     },
     {
+      "id": "hia-document:dotnet-p-resources.lang.common_statussubmitted",
+      "name": "Common_StatusSubmitted",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statussubmitted-aa1ac483.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statussubmitted-aa1ac483.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statussubmitted common_statussubmitted dotnet-property looks up a localized string similar to: submitted internal static string resources.lang.common_statussubmitted { get; } dotnet:p:resources.lang.common_statussubmitted portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：已提交 looks up a localized string similar to: submitted"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.common_statusinreview",
+      "name": "Common_StatusInReview",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusinreview-48d0b1f1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statusinreview-48d0b1f1.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statusinreview common_statusinreview dotnet-property looks up a localized string similar to: in review internal static string resources.lang.common_statusinreview { get; } dotnet:p:resources.lang.common_statusinreview portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：审核中 looks up a localized string similar to: in review"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.common_statuswithdrawn",
+      "name": "Common_StatusWithdrawn",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statuswithdrawn-695195aa.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statuswithdrawn-695195aa.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statuswithdrawn common_statuswithdrawn dotnet-property looks up a localized string similar to: withdrawn internal static string resources.lang.common_statuswithdrawn { get; } dotnet:p:resources.lang.common_statuswithdrawn portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：已撤回 looks up a localized string similar to: withdrawn"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.common_statusdraft",
+      "name": "Common_StatusDraft",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusdraft-9cb8d0b9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statusdraft-9cb8d0b9.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statusdraft common_statusdraft dotnet-property looks up a localized string similar to: draft internal static string resources.lang.common_statusdraft { get; } dotnet:p:resources.lang.common_statusdraft portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：草稿 looks up a localized string similar to: draft"
+    },
+    {
       "id": "hia-document:dotnet-p-resources.lang.common_statusapproved",
       "name": "Common_StatusApproved",
       "kind": "dotnet-property",
@@ -33462,7 +33507,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pend-d19cba3e.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pend-d19cba3e.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pending pending dotnet-field pending review. public const string aspnet.starterkit.portal.leaverequeststatuses.pending dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.pending portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 待审批。 pending review."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pending pending dotnet-field pending review (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.leaverequeststatuses.pending dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.pending portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 待审批（存库值，单一字面源见 basicbusinessapplicationstatuses）。 pending review (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.approved",
@@ -33471,7 +33516,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.appr-d8c7d420.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.appr-d8c7d420.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.approved approved dotnet-field approved. public const string aspnet.starterkit.portal.leaverequeststatuses.approved dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.approved portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已批准。 approved."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.approved approved dotnet-field approved (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.leaverequeststatuses.approved dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.approved portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已批准（存库值，单一字面源见 basicbusinessapplicationstatuses）。 approved (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.rejected",
@@ -33480,7 +33525,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.reje-a9ca532d.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.reje-a9ca532d.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.rejected rejected dotnet-field rejected. public const string aspnet.starterkit.portal.leaverequeststatuses.rejected dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已拒绝。 rejected."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.rejected rejected dotnet-field rejected (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.leaverequeststatuses.rejected dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已拒绝（存库值，单一字面源见 basicbusinessapplicationstatuses）。 rejected (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.returned",
@@ -33489,7 +33534,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.retu-8945a324.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.retu-8945a324.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.returned returned dotnet-field returned (awaiting applicant revision and resubmission). public const string aspnet.starterkit.portal.leaverequeststatuses.returned dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.returned portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已退回（等待申请人修订后重新提交）。 returned (awaiting applicant revision and resubmission)."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.returned returned dotnet-field returned (awaiting applicant revision and resubmission; stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.leaverequeststatuses.returned dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.returned portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已退回（等待申请人修订后重新提交；存库值，单一字面源见 basicbusinessapplicationstatuses）。 returned (awaiting applicant revision and resubmission; stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.closed",
@@ -33498,7 +33543,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.clos-efa45d13.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.clos-efa45d13.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.closed closed dotnet-field closed. public const string aspnet.starterkit.portal.leaverequeststatuses.closed dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.closed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已关闭。 closed."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.closed closed dotnet-field closed (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.leaverequeststatuses.closed dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.closed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已关闭（存库值，单一字面源见 basicbusinessapplicationstatuses）。 closed (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewrequest",
@@ -33948,7 +33993,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-b7b4de76.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-b7b4de76.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.pending pending dotnet-field pending review. public const string aspnet.starterkit.portal.expensereimbursementstatuses.pending dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.pending portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 待审批。 pending review."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.pending pending dotnet-field pending review (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.expensereimbursementstatuses.pending dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.pending portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 待审批（存库值，单一字面源见 basicbusinessapplicationstatuses）。 pending review (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved",
@@ -33957,7 +34002,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-ff2e1b28.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-ff2e1b28.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved approved dotnet-field approved. public const string aspnet.starterkit.portal.expensereimbursementstatuses.approved dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.approved portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已批准。 approved."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved approved dotnet-field approved (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.expensereimbursementstatuses.approved dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.approved portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已批准（存库值，单一字面源见 basicbusinessapplicationstatuses）。 approved (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected",
@@ -33966,7 +34011,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-a8b6bc95.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-a8b6bc95.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected rejected dotnet-field rejected. public const string aspnet.starterkit.portal.expensereimbursementstatuses.rejected dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已拒绝。 rejected."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected rejected dotnet-field rejected (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.expensereimbursementstatuses.rejected dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已拒绝（存库值，单一字面源见 basicbusinessapplicationstatuses）。 rejected (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.returned",
@@ -33975,7 +34020,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-8f08a2ac.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-8f08a2ac.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.returned returned dotnet-field returned (awaiting applicant revision and resubmission). public const string aspnet.starterkit.portal.expensereimbursementstatuses.returned dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.returned portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已退回（等待申请人修订后重新提交）。 returned (awaiting applicant revision and resubmission)."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.returned returned dotnet-field returned (awaiting applicant revision and resubmission; stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.expensereimbursementstatuses.returned dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.returned portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已退回（等待申请人修订后重新提交；存库值，单一字面源见 basicbusinessapplicationstatuses）。 returned (awaiting applicant revision and resubmission; stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed",
@@ -33984,7 +34029,7 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-089d858b.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-089d858b.html",
-      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed closed dotnet-field closed. public const string aspnet.starterkit.portal.expensereimbursementstatuses.closed dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.closed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已关闭。 closed."
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed closed dotnet-field closed (stored value; shared literal source see basicbusinessapplicationstatuses). public const string aspnet.starterkit.portal.expensereimbursementstatuses.closed dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.closed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已关闭（存库值，单一字面源见 basicbusinessapplicationstatuses）。 closed (stored value; shared literal source see basicbusinessapplicationstatuses)."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementreviewrequest",
@@ -37819,6 +37864,105 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbusinessapplication-2ffd7ca7.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalbusinessapplication-2ffd7ca7.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbusinessapplicationtransitions.buildsqlstatuspredicate buildsqlstatuspredicate dotnet-method generates the administration review sql status predicate from the transition table (review-path actions only), keeping the write guard and the table from one source and eliminating drift. public static string aspnet.starterkit.portal.portalbusinessapplicationtransitions.buildsqlstatuspredicate() dotnet:m:aspnet.starterkit.portal.portalbusinessapplicationtransitions.buildsqlstatuspredicate portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalbusinessapplicationtransitions t:aspnet.starterkit.portal.portalbusinessapplicationtransitions dotnet hia-document api/portal.components.hia.json src/portal.components/portalbusinessapplicationtransitions.cs csharp 由迁移表生成后台审核 sql 的状态谓词（仅含走审核路径的动作），使写入守卫与迁移表同源、消除漂移。 generates the administration review sql status predicate from the transition table (review-path actions only), keeping the write guard and the table from one source and eliminating drift. 谓词逐条比较并要求当前状态落在该动作的合法来源集合内；因为四个审核动作的来源集合相同，生成结果与显式化之前的手写窗口**语义等价**（有单测守护）。返回文本只由受控常量拼成，不接受调用方输入。 @actionkey each clause comparesand requires the current status to fall inside the action's legal source set. because the four review actions share the same source set, the generated text is semantically equivalent to the hand-written window it replaces (guarded by a unit test). the returned text is composed only from controlled constants and never from caller input. @actionkey 可拼入 where 子句的谓词文本。 predicate text ready to be embedded in a where clause."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle",
+      "name": "BusinessApplicationLifecycle",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationlifecy-15307d2b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationlifecy-15307d2b.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationlifecycle businessapplicationlifecycle dotnet-type unified business-application approval-lifecycle facade. on top of the existing single source of truth (portalbusinessapplicationstatuses / portalworkflowactions / portalbusinessapplicationtransitions), it absorbs each basicbusiness module's legacy status vocabulary and exposes one \"normalize → validate → decide\" entry point, removing the duplicated status constants, resubmit methods and localized twin methods that expense/leave etc. reimplemented (w-anp-p294 q1–q6 ruling). class aspnet.starterkit.portal.businessapplicationlifecycle dotnet:t:aspnet.starterkit.portal.businessapplicationlifecycle portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/businessapplicationlifecycle.cs csharp 通用业务申请审批生命周期门面：在已有的单一事实源（portalbusinessapplicationstatuses / portalworkflowactions / portalbusinessapplicationtransitions）之上，吸收各 basicbusiness 模块的历史状态词汇，提供「归一化 → 校验 → 判定」的统一入口，消除 expense/leave 等模块重复实现的状态常量、resubmit 方法与本地化孪生方法（w-anp-p294 q1–q6 裁定）。 unified business-application approval-lifecycle facade. on top of the existing single source of truth (portalbusinessapplicationstatuses / portalworkflowactions / portalbusinessapplicationtransitions), it absorbs each basicbusiness module's legacy status vocabulary and exposes one \"normalize → validate → decide\" entry point, removing the duplicated status constants, resubmit methods and localized twin methods that expense/leave etc. reimplemented (w-anp-p294 q1–q6 ruling). 本类不重造状态机：迁移判定全部委托 portalbusinessapplicationtransitions（其 resubmit 已是 returned→submitted 且不在后台审核谓词内，与 q2「returned 可重提、rejected 终态」一致）。本类只补齐「历史模块词汇 → 规范词」的归一化与便捷判定；localizestatus 因依赖 app_globalresources 留在 web 层（portalstatuslocalizer）调用本类。归一化层实现 q1「统一词汇」而不改写存储字符串，保留既有数据兼容性。 this class does not reinvent the state machine: all transition checks delegate to portalbusinessapplicationtransitions (whose resubmit is already returned→submitted and excluded from the review predicate, matching q2 \"returned resubmittable, rejected terminal\"). this class only adds legacy-vocabulary normalization and convenience decisions; localizestatus stays in the web layer (portalstatuslocalizer) because it depends on app_globalresources. the normalization layer realizes q1 \"unified vocabulary\" without rewriting stored strings, preserving existing data-store compatibility."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical",
+      "name": "LegacyToCanonical",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationlifecy-c94df327.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationlifecy-c94df327.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical legacytocanonical dotnet-field legacy module status values mapped to the canonical vocabulary. only legacy values whose string differs from the canonical is registered; the rest pass through (preserves existing data-store compatibility without destructive rewrite). private static readonly system.collections.generic.dictionary<string, string> aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical dotnet:f:aspnet.starterkit.portal.businessapplicationlifecycle.legacytocanonical portal.components aspnet.starterkit.portal aspnet.starterkit.portal.businessapplicationlifecycle t:aspnet.starterkit.portal.businessapplicationlifecycle dotnet hia-document api/portal.components.hia.json src/portal.components/businessapplicationlifecycle.cs csharp 历史模块状态值到规范词的归一化映射。仅登记与规范词字符串不同的历史值，其余原样透传（保留既有数据存储兼容性，不做破坏性改写）。 legacy module status values mapped to the canonical vocabulary. only legacy values whose string differs from the canonical is registered; the rest pass through (preserves existing data-store compatibility without destructive rewrite)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string",
+      "name": "NormalizeToCanonical",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationlifecy-1381baa7.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationlifecy-1381baa7.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string normalizetocanonical dotnet-method normalizes any module's stored status to the canonical vocabulary (pending→submitted, reviewed→inreview; others unchanged). public static string aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical(string status) dotnet:m:aspnet.starterkit.portal.businessapplicationlifecycle.normalizetocanonical-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.businessapplicationlifecycle t:aspnet.starterkit.portal.businessapplicationlifecycle dotnet hia-document api/portal.components.hia.json src/portal.components/businessapplicationlifecycle.cs csharp 把任意模块存储态归一化为规范词（pending→submitted、reviewed→inreview；其余原样）。 normalizes any module's stored status to the canonical vocabulary (pending→submitted, reviewed→inreview; others unchanged). 原始状态值（可能为历史模块词汇）。 raw status value (may be a legacy module vocabulary). 规范词；入参为空返回。 null the canonical status;when input is null. null"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string",
+      "name": "IsResubmittable",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationlifecy-6e61ea80.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationlifecy-6e61ea80.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string isresubmittable dotnet-method whether the given status is resubmittable. only returned is resubmittable; rejected is terminal (q2 ruling, matching the portalbusinessapplicationtransitions.resubmit source set). public static bool aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable(string status) dotnet:m:aspnet.starterkit.portal.businessapplicationlifecycle.isresubmittable-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.businessapplicationlifecycle t:aspnet.starterkit.portal.businessapplicationlifecycle dotnet hia-document api/portal.components.hia.json src/portal.components/businessapplicationlifecycle.cs csharp 判定给定状态是否可重新提交。仅 returned（退回）可重提；rejected 为终态不可重提（q2 裁定，与 portalbusinessapplicationtransitions.resubmit 来源集合一致）。 whether the given status is resubmittable. only returned is resubmittable; rejected is terminal (q2 ruling, matching the portalbusinessapplicationtransitions.resubmit source set). 原始状态值（会先归一化）。 raw status value (normalized first). 可重提为。 true when resubmittable. true"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string",
+      "name": "CanTransition",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationlifecy-2b169257.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationlifecy-2b169257.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string cantransition dotnet-method whether from→to is a legal transition (fail-closed). delegates to the single source of truth portalbusinessapplicationtransitions; same-state is not a transition. public static bool aspnet.starterkit.portal.businessapplicationlifecycle.cantransition(string fromstatus, string tostatus) dotnet:m:aspnet.starterkit.portal.businessapplicationlifecycle.cantransition-system.string-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.businessapplicationlifecycle t:aspnet.starterkit.portal.businessapplicationlifecycle dotnet hia-document api/portal.components.hia.json src/portal.components/businessapplicationlifecycle.cs csharp 判定从 from 到 to 是否为合法迁移（fail-closed）。使用单一事实源 portalbusinessapplicationtransitions；同态视为非法迁移。 whether from→to is a legal transition (fail-closed). delegates to the single source of truth portalbusinessapplicationtransitions; same-state is not a transition. 当前状态（会先归一化）。 current status (normalized first). 目标状态（会先归一化）。 target status (normalized first). 合法为。 true when legal. true"
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses",
+      "name": "BasicBusinessApplicationStatuses",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.basicbusinessapplications-0310a06b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.basicbusinessapplications-0310a06b.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.basicbusinessapplicationstatuses basicbusinessapplicationstatuses dotnet-type single source of the stored vocabulary for basic-business modules: leave/expense persist these values (pending/approved/rejected/returned/closed) in the database; canonical display words are mapped via businessapplicationlifecycle.normalizetocanonical (pending→submitted etc.). this class carries only the stored constants to remove per-module duplicated literals; display semantics live in portalbusinessapplicationstatuses. class aspnet.starterkit.portal.basicbusinessapplicationstatuses dotnet:t:aspnet.starterkit.portal.basicbusinessapplicationstatuses portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/basicbusinessapplicationstatuses.cs csharp 基础业务模块的\"存库词汇\"单一字面源：leave/expense 在库中持久化为这些值（pending/approved/rejected/returned/closed）。规范展示词经 businessapplicationlifecycle.normalizetocanonical 映射（pending→submitted 等）。本类只承载存库常量、消除按模块重复的字面量；展示语义见 portalbusinessapplicationstatuses。 single source of the stored vocabulary for basic-business modules: leave/expense persist these values (pending/approved/rejected/returned/closed) in the database; canonical display words are mapped via businessapplicationlifecycle.normalizetocanonical (pending→submitted etc.). this class carries only the stored constants to remove per-module duplicated literals; display semantics live in portalbusinessapplicationstatuses."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending",
+      "name": "Pending",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-14b8c914.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-14b8c914.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending pending dotnet-field pending review (stored value). public const string aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending dotnet:f:aspnet.starterkit.portal.basicbusinessapplicationstatuses.pending portal.components aspnet.starterkit.portal aspnet.starterkit.portal.basicbusinessapplicationstatuses t:aspnet.starterkit.portal.basicbusinessapplicationstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/basicbusinessapplicationstatuses.cs csharp 待审批（存库值）。 pending review (stored value)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved",
+      "name": "Approved",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-8726ed42.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-8726ed42.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved approved dotnet-field approved (stored value). public const string aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved dotnet:f:aspnet.starterkit.portal.basicbusinessapplicationstatuses.approved portal.components aspnet.starterkit.portal aspnet.starterkit.portal.basicbusinessapplicationstatuses t:aspnet.starterkit.portal.basicbusinessapplicationstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/basicbusinessapplicationstatuses.cs csharp 已批准（存库值）。 approved (stored value)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected",
+      "name": "Rejected",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-e84c194f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-e84c194f.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected rejected dotnet-field rejected (stored value). public const string aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected dotnet:f:aspnet.starterkit.portal.basicbusinessapplicationstatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.basicbusinessapplicationstatuses t:aspnet.starterkit.portal.basicbusinessapplicationstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/basicbusinessapplicationstatuses.cs csharp 已拒绝（存库值）。 rejected (stored value)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned",
+      "name": "Returned",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-ab2fa4e6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-ab2fa4e6.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned returned dotnet-field returned (stored value, awaiting applicant revision and resubmission). public const string aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned dotnet:f:aspnet.starterkit.portal.basicbusinessapplicationstatuses.returned portal.components aspnet.starterkit.portal aspnet.starterkit.portal.basicbusinessapplicationstatuses t:aspnet.starterkit.portal.basicbusinessapplicationstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/basicbusinessapplicationstatuses.cs csharp 已退回（存库值，等待申请人修订后重新提交）。 returned (stored value, awaiting applicant revision and resubmission)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed",
+      "name": "Closed",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-4f28e01d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.basicbusinessapplications-4f28e01d.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed closed dotnet-field closed (stored value). public const string aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed dotnet:f:aspnet.starterkit.portal.basicbusinessapplicationstatuses.closed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.basicbusinessapplicationstatuses t:aspnet.starterkit.portal.basicbusinessapplicationstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/basicbusinessapplicationstatuses.cs csharp 已关闭（存库值）。 closed (stored value)."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemtransition",
