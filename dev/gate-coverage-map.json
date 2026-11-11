@@ -58,10 +58,10 @@
     },
     {
       "id": "accessibility",
-      "name": "无障碍静态基线（对比度/:focus/语义标记属性）",
+      "name": "无障碍静态基线（对比度/:focus/语义标记属性，含分组导航 7 套主题）",
       "layer": "L0",
       "coverage": "partial",
-      "boundary": "只证明 CSS 声明值与标记属性；不证明运行期真实渲染对比度（计算样式/渐变叠加）与真实键盘焦点顺序（见 uncovered 面 a11y-runtime）。",
+      "boundary": "只证明 CSS 声明值与标记属性：A1–A6 六套正式主题正文/语义变量对比度 ≥4.5、:focus、img alt、禁内联 onclick、<a> 命名锚；W-anp-P292 增补 A7–A10，把分组导航提升为专属硬断言（6 套正式主题分组按钮对比度实测 7.91–15.26、7 套含 Default 回退的 :focus 可见轮廓与 display:none 折叠、banner disclosure 标记语义、Q3 台账锁），10 例四步注入证明全部 proved。**不证明**运行期真实渲染对比度（计算样式/渐变叠加）、真实键盘焦点顺序与可达路径、读屏器语义（见 uncovered 面 a11y-runtime，A10 机器化锁住其未覆盖状态）；Default 回退主题分组按钮用 inherit/transparent，静态不可判定，按 A1 既有口径列软指标观察而非硬断言。",
       "gate": "Test-PortalAccessibilityBaseline.ps1"
     },
     {
@@ -360,8 +360,8 @@
       "name": "运行期键盘焦点顺序/可达路径与渲染级对比度（计算样式、渐变叠加）",
       "coverage": "uncovered",
       "owner": "项目维护者",
-      "reEntry": "需运行期遍历与像素取样（playwright 已具备）；先定判定口径（焦点顺序基线、取样点集合）再落成门禁。",
-      "basis": "W-anp-P143 交付时显式声明的证明边界：静态门禁只证明 CSS 声明值与标记属性，未覆盖运行期键盘与渲染级对比度。"
+      "reEntry": "需运行期遍历与像素取样（playwright 已具备）；先定判定口径（焦点顺序基线、取样点集合）再落成门禁。W-anp-P292 已补分组导航静态断言 A7–A10 与协作工作台浏览器级截图证据，但二者都不构成读屏器/焦点顺序/渲染级对比度的运行期判定，re-entry 条件不变。",
+      "basis": "W-anp-P143 交付时显式声明的证明边界：静态门禁只证明 CSS 声明值与标记属性，未覆盖运行期键盘与渲染级对比度。W-anp-P292 复核后仍如实保持 uncovered：新增的 A7–A10 是静态断言（10 例注入证明 proved），协作工作台四象限 L2 只证明页面渲染与截图，不证明读屏器语义、真实键盘焦点顺序或计算样式级对比度；按 Q3 裁定「不做假绿门禁」，Test-PortalAccessibilityBaseline.ps1 的 A10 机器化锁住本面必须保持 uncovered 且带 owner/reEntry/basis。"
     },
     {
       "id": "sql-query-timing",
@@ -529,6 +529,7 @@
     "Test-PortalIndependentModuleGate.ps1"
   ],
   "tooling": [
+    { "id": "Test-PortalCollaborationRuntimeEvidence.mjs", "basis": "协作工作台浏览器级 L2 运行期证据采集器（W-anp-P292，非门禁、按需手工执行、不进日常编排）：对运行中的站点以管理员登录，按「浅/深主题 × 中/英语言」四象限各自渲染、每个象限的前台工作台（tabid=1010）与后台协作事项页各出一张独立截图（共 8 张，文件名含页面+主题+语言，禁止共用）；深色主题经既有 New-PortalDefaultThemeFixture.ps1 真实切换数据库设置（非注入 CSS），采集顺序为浅色两语言→Apply 一次→深色两语言，finally Remove 一次恢复；断言状态机 9 个动作按钮齐备、状态列取值属于从 Portal.Components 与 SQL CHECK 双源核对的 8 态词表、两级分组导航未回归、主题 class 与样式表链接确实不同。参数经环境变量注入，凭据取不入库的 dev 上下文 JSON。**证明边界**：只证明采集时刻当前数据集与部署配置下四象限各自真实渲染且截图独立、控件存在；不证明状态机迁移落库与审计链（静态 smoke/单测承载）、不证明读屏器语义与真实键盘焦点顺序（a11y-runtime 仍如实未覆盖）、不证明点击状态动作后的数据变更、不证明跨机器像素一致、不证明其它 5 套皮肤在真实部署下由解析器选中。依赖运行中的站点 + 数据库 fixture + 凭据上下文 + mise node，故不进日常编排。Collaboration-workbench browser L2 evidence collector (W-anp-P292, not a gate, manual on demand): four theme/locale quadrants with eight independent screenshots, a real theme database switch, state-machine button/status assertions and grouped-navigation regression. Proof boundary: rendering and control presence at collection time only, not state persistence, screen-reader semantics, pixel equality, or resolver selection of other skins." },
     { "id": "Test-PortalNavigationGroupRenderEvidence.mjs", "basis": "主导航两级分组浏览器级 L2 运行期证据采集器（W-anp-P291，非门禁、按需手工执行、不进日常编排）：对运行中的站点以管理员登录，断言 disclosure 结构（原生 button / aria-expanded / aria-controls / 无 menu role / 无内联 onclick）、实际点击折叠与展开、Escape 关闭并回焦、中英分组名各自渲染、7 套皮肤切换 body class 后的计算样式与焦点轮廓、另起禁用 JavaScript 的上下文验证页签仍可达；中英各自出图、文件名带语言、不共用同一张。参数经环境变量注入，凭据取不入库的 dev 上下文 JSON。**证明边界**：只证明采集时刻当前数据集与部署配置下分组导航按契约渲染与交互；不证明读屏器实测（a11y-runtime 仍未覆盖）、不证明真实部署下每套皮肤都由主题解析器选中（本证据以切换 body class 验证 CSS 作用域规则）、不证明跨机器像素一致、不证明写入/审计链路。依赖运行中的站点 + 凭据上下文 + mise node，故不进日常编排。Grouped-navigation browser L2 evidence collector (W-anp-P291, not a gate, run manually on demand): signs in, asserts disclosure structure, real collapse/expand clicks, Escape focus return, per-locale group labels, computed styles across seven skins, and a JavaScript-disabled context for reachability; separate screenshots per locale. Proof boundary: rendering and interaction at collection time only, not screen-reader testing, resolver-driven skin selection, pixel equality, or write/audit flows." },
     { "id": "Test-PortalThemeSettingsEntryEvidence.mjs", "basis": "主题设置入链浏览器级 L2 运行期证据采集器（W-anp-P290，非门禁、按需手工执行、不进日常 L0/L1/L2 编排）：对运行中的站点以管理员登录，访问既有可达页 Admin/SystemHealth.aspx，断言动作区渲染出指向 Admin/ThemeSettings.aspx 的真实链接（不伪造 URL），实际点击进入并断言主题设置页标题与权限门控通过（A1–A6），留档整页截图与 JSON 摘要；参数经环境变量注入，凭据取不入库的 dev 上下文 JSON，playwright 为开发期依赖。**证明边界**：只证明采集时刻当前数据集与部署配置下管理员能经动作区点击可达；不证明匿名/普通用户可达（AdminOnly 本就不应可达）、不证明两级分组导航渲染（归 W-anp-P291）、不证明主题写入/审计链路、不证明跨机器像素一致或可访问性运行期实测。依赖运行中的站点 + 凭据上下文 + mise node，故不进日常编排。Theme-settings inbound-link browser L2 evidence collector (W-anp-P290, not a gate, run manually on demand, not wired into daily orchestration): signs in against the running site, asserts a genuine ThemeSettings.aspx link in the SystemHealth action area, clicks through and checks the title/permission gate (A1–A6), keeping a screenshot and JSON summary; all parameters via environment variables, credentials from an uncommitted dev context. Proof boundary: administrator click-through at collection time only, not anonymous reachability, two-level rendering, theme write/audit, cross-machine pixel equality, or runtime accessibility." },
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },

@@ -19,13 +19,22 @@
   A3 六套正式主题 Default.css 必须定义 :focus 可见样式（≥1 处）；
   A4 src/Portal 标记层（aspx/ascx/master，排除 obj/bin）img 必须有 alt；
   A5 非可聚焦元素（div/span/td/tr/li/img）不得内联 onclick（键盘不可达的操作）；
-  A6 `<a>` 无 href 必须是命名锚（有 name/id）。
+  A6 `<a>` 无 href 必须是命名锚（有 name/id）；
+  A7 六套正式主题分组按钮（`.portal-nav-group-toggle`）文字对背景对比度 ≥ 4.5（W-anp-P292 扩到分组导航）；
+  A8 七套主题（6 正式 + `Default` 回退，Q4 裁定）分组按钮 `:focus` 必须是可见 outline（非 none、宽度 ≥2px）；
+  A9 分组导航标记层：banner 必须被 A4–A6 扫描集合覆盖（default-deny），分组标题是原生
+     `<button type="button">` 且带 `aria-expanded` / `aria-controls`，不得用 menu/menubar role 或内联 onclick，
+     组内链接必须是带 NavigateUrl 的 HyperLink（渲染后有 href，不是无 href 空锚）；
+  A10 Q3 台账锁：`dev/gate-coverage-map.json` 的 `a11y-runtime` 必须保持 `coverage=uncovered`
+     且带 owner/reEntry/basis；在没有真实运行期焦点顺序/读屏器门禁之前，把它改成 full 属假绿，判失败。
 
-  软指标（上报不阻断）：各主题对比度明细、:focus 规则计数（Default/ThemeProbe 为 0 的观察如实列出）。
+  软指标（上报不阻断）：各主题对比度明细、:focus 规则计数（Default/ThemeProbe 为 0 的观察如实列出）、
+  Default 回退主题分组按钮用 `color: inherit` + `background-color: transparent`，静态无法判定对比度，
+  与 A1 排除 Default 的既有口径一致，故列入观察而不硬断言（在门禁里显式记录原因，不静默跳过）。
 
   证明边界：本门禁只证明 **CSS 声明值与标记属性** 的静态基线——不证明运行期真实渲染对比度
   （计算样式、渐变/叠加层）、真实键盘焦点顺序与可达路径、读屏器语义；这些需运行期（L2）检查，
-  属后续工作，不做却宣称已验证视为未完成。命名锚（name/id 无 href）是跳转目标不是交互元素，豁免；
+  属 `a11y-runtime` 未覆盖面，A10 机器化锁住该结论。命名锚（name/id 无 href）是跳转目标不是交互元素，豁免；
   服务端隐藏的控件（如 DiscussDetails 的 prevItem/nextItem，绑定阶段 Visible=false）不渲染，不在静态面内。
 
   用法（仓库根目录）：& 'dev\scripts\Test-PortalAccessibilityBaseline.ps1'
@@ -45,15 +54,27 @@
   A3 each official theme's Default.css must define visible :focus styling (>= 1 rule);
   A4 every img in src/Portal markup (aspx/ascx/master, obj/bin excluded) must carry alt;
   A5 non-focusable elements (div/span/td/tr/li/img) must not carry inline onclick (keyboard-unreachable actions);
-  A6 an `<a>` without href must be a named anchor (name/id present).
+  A6 an `<a>` without href must be a named anchor (name/id present);
+  A7 each of the six official themes' group toggle (`.portal-nav-group-toggle`) text vs background contrast >= 4.5
+     (W-anp-P292 extends the baseline to grouped navigation);
+  A8 all seven themes (six official plus the `Default` fallback, Q4 ruling) must give the group toggle a visible
+     `:focus` outline (not none, width >= 2px);
+  A9 grouped-navigation markup: the banner must be inside the A4-A6 scan set (default-deny), group headers must be
+     native `<button type="button">` with `aria-expanded` / `aria-controls`, with no menu/menubar role or inline onclick,
+     and in-group links must be HyperLinks carrying NavigateUrl (an href after rendering, not empty anchors);
+  A10 Q3 ledger lock: `a11y-runtime` in `dev/gate-coverage-map.json` must stay `coverage=uncovered` with owner / reEntry /
+     basis; marking it full without a real runtime focus-order / screen-reader gate is a false green and fails.
 
   Soft metrics (report only): per-theme contrast details and :focus rule counts (the 0-count observations of
-  Default/ThemeProbe are listed truthfully).
+  Default/ThemeProbe are listed truthfully). The `Default` fallback toggle uses `color: inherit` with
+  `background-color: transparent`, so its contrast is statically undecidable; consistent with A1's existing exclusion of
+  Default, it is observed rather than asserted, and the reason is recorded explicitly rather than silently skipped.
 
   Proof boundary: this gate proves only the **static baseline of declared CSS values and markup attributes** — not rendered
   contrast (computed styles, gradients/overlays), real focus order or keyboard traversal, or screen-reader semantics; those
-  need runtime (L2) checks and are future work. Named anchors (name/id, no href) are jump targets, exempt; server-hidden
-  controls (DiscussDetails prevItem/nextItem, Visible=false at bind time) never render and are outside the static surface.
+  need runtime (L2) checks and belong to the uncovered `a11y-runtime` surface, which A10 locks mechanically. Named anchors
+  (name/id, no href) are jump targets, exempt; server-hidden controls (DiscussDetails prevItem/nextItem, Visible=false at
+  bind time) never render and are outside the static surface.
 
   Usage (repository root): & 'dev\scripts\Test-PortalAccessibilityBaseline.ps1'
   Output: temp\a11y-baseline\a11y-baseline-stats.json (refreshed per run).
@@ -242,6 +263,188 @@ foreach ($v in $onclickNonFocusable) { $hardFailures += ("A5 非可聚焦元素�
 foreach ($v in $anchorNoHref) { $hardFailures += ("A6 a 无 href 且非命名锚：{0}" -f $v) }
 
 # ---------------------------------------------------------------------------
+# A7–A10：分组导航无障碍基线（`W-anp-P292`）
+# <lang>
+#   <zh-CN>把分组导航从「A4–A6 顺带扫到」提升为**有专属硬断言**的覆盖面：分组按钮对比度、
+#   7 套焦点轮廓、disclosure 标记语义与 Q3 未覆盖台账锁。判定全部从权威源（7 套 CSS / banner 标记 /
+#   覆盖地图）推导，不硬编码色值或按钮数量。</zh-CN>
+#   <en>Promote grouped navigation from "incidentally scanned by A4-A6" to a surface with **dedicated hard
+#   assertions**: toggle contrast, focus outlines across seven skins, disclosure markup semantics, and the Q3
+#   uncovered-ledger lock. All decisions derive from authoritative sources (seven CSS files / banner markup /
+#   coverage map) rather than hard-coded colours or button counts.</en>
+# </lang>
+# ---------------------------------------------------------------------------
+$navThemes = @($officialThemes) + @('Default')
+$navGroupStats = @()
+
+foreach ($themeName in $navThemes) {
+    $navCssPath = Join-Path (Join-Path $repoRoot 'src\Portal\App_Themes') (Join-Path $themeName 'Default.css')
+    if (-not (Test-Path -LiteralPath $navCssPath)) {
+        $hardFailures += ("A7/A8 [{0}] 主题文件缺失（漂移：被删或改名）" -f $themeName)
+        continue
+    }
+    $navCss = [System.IO.File]::ReadAllText($navCssPath)
+    $navVars = @{}
+    foreach ($m in [regex]::Matches($navCss, '(--[a-z0-9-]+)\s*:\s*([^;}]+)')) { $navVars[$m.Groups[1].Value] = $m.Groups[2].Value.Trim() }
+
+    $scope = 'body.portal-theme-' + $themeName.ToLowerInvariant() + ' '
+    $toggleBlock = [regex]::Match($navCss, '(?s)' + [regex]::Escape($scope + '.portal-nav-group-toggle') + '\s*\{([^}]*)\}')
+    $focusBlock = [regex]::Match($navCss, '(?s)' + [regex]::Escape($scope + '.portal-nav-group-toggle:focus') + '\s*\{([^}]*)\}')
+    $hiddenBlock = [regex]::Match($navCss, '(?s)' + [regex]::Escape($scope + '.portal-nav-group-hidden') + '\s*\{([^}]*)\}')
+
+    # <lang>
+    #   <zh-CN>A8：7 套（含 Default 回退）焦点轮廓必须可见：outline 非 none 且宽度 ≥2px。
+    #   用 `solid 2px` 的既有写法推导宽度，不硬编码颜色（各皮肤调色板不同）。</zh-CN>
+    #   <en>A8: all seven skins (including the Default fallback) need a visible focus outline: not none and
+    #   width >= 2px. Width is derived from the existing `solid 2px` form; no colour is hard-coded because each
+    #   skin uses its own palette.</en>
+    # </lang>
+    if (-not $focusBlock.Success) {
+        $hardFailures += ("A8 [{0}] 分组按钮缺 `:focus` 规则（键盘焦点不可见）" -f $themeName)
+    }
+    else {
+        $focusBody = $focusBlock.Groups[1].Value
+        $outline = [regex]::Match($focusBody, '(?i)\boutline\s*:\s*([^;}]+)')
+        $widthMatch = [regex]::Match($outline.Groups[1].Value, '(?i)(\d+(?:\.\d+)?)\s*px')
+        if (-not $outline.Success -or $outline.Groups[1].Value -match '(?i)\bnone\b' -or -not $widthMatch.Success -or [double]$widthMatch.Groups[1].Value -lt 2) {
+            $hardFailures += ("A8 [{0}] 分组按钮 `:focus` 轮廓不可见或宽度 <2px（{1}）" -f $themeName, ($outline.Groups[1].Value.Trim()))
+        }
+    }
+
+    # <lang>
+    #   <zh-CN>折叠后组内链接必须移出 Tab 序列；`display:none` 是键盘可达性的静态前提。</zh-CN>
+    #   <en>Collapsed in-group links must leave the Tab sequence; `display:none` is the static prerequisite for keyboard reachability.</en>
+    # </lang>
+    if (-not $hiddenBlock.Success -or $hiddenBlock.Groups[1].Value -notmatch '(?is)\bdisplay\s*:\s*none') {
+        $hardFailures += ("A8 [{0}] `.portal-nav-group-hidden` 缺 display:none（折叠后链接仍在键盘 Tab 序列）" -f $themeName)
+    }
+
+    # <lang>
+    #   <zh-CN>A7：6 套正式主题分组按钮文字/背景对比度 ≥4.5（WCAG AA 正文）。
+    #   `Default` 用 inherit/transparent，静态不可判定，按 A1 既有口径列软指标观察而非硬断言，
+    #   并在统计里显式记录原因；「无法判定即失败」只针对有完整色值的正式主题。</zh-CN>
+    #   <en>A7: the six official themes' toggle text/background contrast must be >= 4.5 (WCAG AA body text).
+    #   `Default` uses inherit/transparent, so it is statically undecidable; consistent with A1's existing
+    #   convention it is a soft observation rather than a hard assertion, with the reason recorded in the stats.
+    #   "Undecidable fails" applies only to official themes that declare a complete colour pair.</en>
+    # </lang>
+    if (-not $toggleBlock.Success) {
+        if ($themeName -ne 'Default') { $hardFailures += ("A7 [{0}] 缺分组按钮规则块（无法证明对比度）" -f $themeName) }
+        continue
+    }
+    $toggleBody = $toggleBlock.Groups[1].Value
+    $toggleColor = [regex]::Match($toggleBody, '(?i)(?<![a-z-])color\s*:\s*([^;}]+)')
+    $toggleBg = [regex]::Match($toggleBody, '(?i)background(?:-color)?\s*:\s*([^;}]+)')
+    $navRatio = $null
+    $observation = ''
+    if ($themeName -eq 'Default') {
+        # <lang>
+        #   <zh-CN>回退主题继承 body 色，无法从本规则块静态判定；只记录事实，不做假绿硬断言。</zh-CN>
+        #   <en>The fallback inherits the body colour, which cannot be decided statically from this block; record the fact only, never a false-green hard assertion.</en>
+        # </lang>
+        $observation = 'color: inherit + background-color: transparent → 静态不可判定，按 A1 口径观察'
+    }
+    elseif (-not $toggleColor.Success -or -not $toggleBg.Success) {
+        $hardFailures += ("A7 [{0}] 分组按钮缺 color 或 background-color（无法判定即失败）" -f $themeName)
+    }
+    else {
+        $fgHex = Resolve-Color $toggleColor.Groups[1].Value $navVars
+        $bgHex = Resolve-Color $toggleBg.Groups[1].Value $navVars
+        if ($null -eq $fgHex -or $null -eq $bgHex) {
+            $hardFailures += ("A7 [{0}] 分组按钮色值无法解析（fg={1} bg={2}）——无法判定即失败" -f $themeName, $toggleColor.Groups[1].Value.Trim(), $toggleBg.Groups[1].Value.Trim())
+        }
+        else {
+            $navRatio = Get-Contrast $fgHex $bgHex
+            if ($null -eq $navRatio) {
+                $hardFailures += ("A7 [{0}] 分组按钮对比度无法判定（fg={1} bg={2}）" -f $themeName, $fgHex, $bgHex)
+            }
+            elseif ($navRatio -lt 4.5) {
+                $hardFailures += ("A7 [{0}] 分组按钮对比度 {1} < 4.5（fg={2} bg={3}）" -f $themeName, $navRatio, $fgHex, $bgHex)
+            }
+        }
+    }
+    $navGroupStats += [pscustomobject]@{
+        theme = $themeName; toggleContrast = $navRatio; focusOutline = if ($focusBlock.Success) { $focusBlock.Groups[1].Value.Trim() } else { $null }; observation = $observation
+    }
+}
+
+# <lang>
+#   <zh-CN>A9：banner 分组导航标记层语义。先剥离 ASPX 说明注释（按项目「注释提及不计」口径），
+#   再把 `<%...%>` 归一化为 ASPXINLINE（与 A4–A6 同法），避免绑定表达式里的 `>` 截断标签扫描。</zh-CN>
+#   <en>A9: banner grouped-navigation markup semantics. Strip ASPX explanatory comments first (per the
+#   project's "comment mentions do not count" convention), then normalize `<%...%>` to ASPXINLINE (same as
+#   A4-A6) so `>` inside binding expressions cannot truncate tag scanning.</en>
+# </lang>
+$bannerPath = Join-Path $repoRoot 'src\Portal\DesktopPortalBanner.ascx'
+if (-not (Test-Path -LiteralPath $bannerPath)) {
+    $hardFailures += 'A9 banner 标记文件缺失（分组导航无可判定来源）'
+}
+else {
+    $bannerText = [System.IO.File]::ReadAllText($bannerPath)
+    $bannerMarkup = [regex]::Replace($bannerText, '(?s)<%--.*?--%>', '')
+    $bannerScan = $bannerMarkup -replace '<%[\s\S]*?%>', 'ASPXINLINE'
+
+    # <lang>
+    #   <zh-CN>default-deny：banner 必须在 A4–A6 的扫描集合里，否则「分组导航被顺带扫到」的前提不成立。</zh-CN>
+    #   <en>Default-deny: the banner must be inside the A4-A6 scan set, otherwise the premise that grouped navigation is covered by them does not hold.</en>
+    # </lang>
+    $bannerScanned = @($markupFiles | Where-Object { $_.Name -ieq 'DesktopPortalBanner.ascx' }).Count -gt 0
+    if (-not $bannerScanned) { $hardFailures += 'A9 DesktopPortalBanner.ascx 未被 A4–A6 扫描集合覆盖' }
+
+    $toggleTags = [regex]::Matches($bannerScan, '<button\b[^>]*portal-nav-group-toggle[^>]*>')
+    if ($toggleTags.Count -eq 0) { $hardFailures += 'A9 缺原生 button 分组标题（disclosure 契约不成立）' }
+    foreach ($tag in $toggleTags) {
+        if ($tag.Value -notmatch '\btype\s*=\s*"button"') { $hardFailures += ('A9 分组标题非 type=button：' + $tag.Value) }
+        if ($tag.Value -notmatch '\baria-expanded\s*=') { $hardFailures += ('A9 分组标题缺 aria-expanded：' + $tag.Value) }
+        if ($tag.Value -notmatch '\baria-controls\s*=') { $hardFailures += ('A9 分组标题缺 aria-controls：' + $tag.Value) }
+        if ($tag.Value -match '(?i)\brole\s*=\s*"(menu|menubar)"') { $hardFailures += ('A9 分组标题误用 menu/menubar role：' + $tag.Value) }
+        if ($tag.Value -match '(?i)\bonclick\s*=') { $hardFailures += ('A9 分组标题使用内联 onclick：' + $tag.Value) }
+    }
+
+    # <lang>
+    #   <zh-CN>组内链接必须有 NavigateUrl（渲染后成为 href）；若退化成无 href 的 `<a>`，键盘与读屏器都失去目标。</zh-CN>
+    #   <en>In-group links must carry NavigateUrl (an href after rendering); if they degrade into href-less `<a>` tags, both keyboard and screen-reader targets are lost.</en>
+    # </lang>
+    $groupLinks = [regex]::Matches($bannerScan, '(?s)<asp:HyperLink\b[^>]*ID="GroupTabLink"[^>]*>')
+    if ($groupLinks.Count -eq 0) { $hardFailures += 'A9 组内缺 GroupTabLink HyperLink' }
+    foreach ($link in $groupLinks) {
+        if ($link.Value -notmatch '\bNavigateUrl\s*=') { $hardFailures += ('A9 组内链接缺 NavigateUrl（将渲染成无 href 空锚）：' + $link.Value) }
+    }
+    $navGroupStats += [pscustomobject]@{
+        theme = 'markup'; toggleTags = $toggleTags.Count; groupLinks = $groupLinks.Count; bannerInScanSet = $bannerScanned; observation = ''
+    }
+}
+
+# <lang>
+#   <zh-CN>A10：Q3 台账锁。`a11y-runtime` 在没有真实运行期焦点顺序/读屏器门禁之前必须保持 uncovered
+#   且带 owner/reEntry/basis；把它改成 full 会把「未做」伪装成「已验证」，属假绿。</zh-CN>
+#   <en>A10: Q3 ledger lock. Until a real runtime focus-order / screen-reader gate exists, `a11y-runtime` must
+#   remain uncovered with owner/reEntry/basis. Marking it full would disguise "not done" as "verified" — a false green.</en>
+# </lang>
+$coverageMapPath = Join-Path $repoRoot 'dev\gate-coverage-map.json'
+if (-not (Test-Path -LiteralPath $coverageMapPath)) {
+    $hardFailures += 'A10 覆盖地图缺失（无法核对 Q3 未覆盖台账）'
+}
+else {
+    $coverageMapRaw = [System.IO.File]::ReadAllText($coverageMapPath)
+    $a11yRuntime = [regex]::Match($coverageMapRaw, '(?s)\{\s*"id"\s*:\s*"a11y-runtime".*?\}')
+    if (-not $a11yRuntime.Success) {
+        $hardFailures += 'A10 覆盖地图缺 a11y-runtime 条目（未覆盖面失去 owner）'
+    }
+    else {
+        $row = $a11yRuntime.Value
+        if ($row -notmatch '"coverage"\s*:\s*"uncovered"') {
+            $hardFailures += 'A10 a11y-runtime 不再标记 uncovered（无运行期门禁支撑的假绿）'
+        }
+        foreach ($required in @('owner', 'reEntry', 'basis')) {
+            if ($row -notmatch ('"' + $required + '"\s*:\s*"[^"]+"')) {
+                $hardFailures += ('A10 a11y-runtime 缺必填字段 ' + $required)
+            }
+        }
+    }
+}
+
+# ---------------------------------------------------------------------------
 # 统计落盘 + 输出
 # ---------------------------------------------------------------------------
 if ([string]::IsNullOrWhiteSpace($StatsPath)) {
@@ -259,9 +462,11 @@ $report = [pscustomobject]@{
         onclickNonFocusable = $onclickNonFocusable.Count
         anchorNoHref = $anchorNoHref.Count
     }
+    groupedNavigation = $navGroupStats
     softMetrics = @(
         'Default/ThemeProbe 为回退与探针主题，无完整可判定正文/背景对，仅观察不断言',
-        '运行期键盘焦点顺序与渲染级对比度不在本门禁证明边界内（后续 L2 工作）'
+        'Default 分组按钮 color:inherit + background-color:transparent，静态不可判定，按 A1 口径观察不硬断言',
+        '运行期键盘焦点顺序与渲染级对比度不在本门禁证明边界内（a11y-runtime，A10 台账锁）'
     )
     failures = $hardFailures
 }
@@ -283,5 +488,5 @@ if ($hardFailures.Count -gt 0) {
 }
 
 Write-Host ''
-Write-Host '[PASS] 无障碍基线硬断言全过（A1–A6）。软指标见统计文件。'
+Write-Host ("[PASS] 无障碍基线硬断言全过（A1–A10，含分组导航 7 套主题与 Q3 台账锁）。软指标见统计文件。")
 exit 0

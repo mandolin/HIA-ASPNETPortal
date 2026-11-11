@@ -1,0 +1,132 @@
+[
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A7：把 EnterpriseLight 分组按钮文字色改成与背景同色（对比度 1.0，远低于 4.5），门禁应判红并点名 A7。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/EnterpriseLight/Default.css",
+        "mode": "replace",
+        "old": "body.portal-theme-enterpriselight .portal-nav-group-toggle {\n    display: block;\n    width: 100%;\n    box-sizing: border-box;\n    padding: 7px 10px;\n    border: 1px solid #d7e1ec;\n    background-color: #12385f;\n    color: #e8f1fb;",
+        "content": "body.portal-theme-enterpriselight .portal-nav-group-toggle {\n    display: block;\n    width: 100%;\n    box-sizing: border-box;\n    padding: 7px 10px;\n    border: 1px solid #d7e1ec;\n    background-color: #12385f;\n    color: #12385f;"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A7：把 OaLight 分组按钮文字色改成无法解析的写法（无法判定即失败），门禁应判红并点名 A7，不能静默变绿。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/OaLight/Default.css",
+        "mode": "replace",
+        "old": "background-color: #0f5969;\n    color: #ffffff;",
+        "content": "background-color: #0f5969;\n    color: currentColor;"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A7：删掉 EnterpriseDark 分组按钮的背景色声明（缺完整色值即失败），门禁应判红并点名 A7。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/EnterpriseDark/Default.css",
+        "mode": "replace",
+        "old": "background-color: #071722;\n    color: #dce7f3;",
+        "content": "color: #dce7f3;"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A8：把 EnterpriseLight 分组按钮焦点轮廓改成 none（键盘焦点不可见），门禁应判红并点名 A8。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/EnterpriseLight/Default.css",
+        "mode": "replace",
+        "old": "body.portal-theme-enterpriselight .portal-nav-group-toggle:focus {\n    outline: 2px solid #ffffff;\n}",
+        "content": "body.portal-theme-enterpriselight .portal-nav-group-toggle:focus {\n    outline: none;\n}"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A8：把 OaDark 焦点轮廓宽度降到 1px（不可见的弱焦点），门禁应判红并点名 A8。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/OaDark/Default.css",
+        "mode": "replace",
+        "old": "body.portal-theme-oadark .portal-nav-group-toggle:focus {\n    outline: 2px solid #a7edf6;\n}",
+        "content": "body.portal-theme-oadark .portal-nav-group-toggle:focus {\n    outline: 1px solid #a7edf6;\n}"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A8：把 Default 回退主题的折叠隐藏规则改成 visibility:hidden（折叠后链接仍在键盘 Tab 序列），门禁应判红并点名 A8。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/Default/Default.css",
+        "mode": "replace",
+        "old": "body.portal-theme-default .portal-nav-group-hidden {\n    display: none;\n}",
+        "content": "body.portal-theme-default .portal-nav-group-hidden {\n    visibility: hidden;\n}"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A9：给分组按钮加 menu role（违反 W3C APG disclosure），门禁应判红并点名 A9。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx",
+        "mode": "replace",
+        "old": "<button type=\"button\" class=\"portal-nav-group-toggle\"\n                                    aria-expanded=\"true\" aria-controls=",
+        "content": "<button type=\"button\" role=\"menu\" class=\"portal-nav-group-toggle\"\n                                    aria-expanded=\"true\" aria-controls="
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A9：删掉分组按钮的 aria-controls（disclosure 目标失联），门禁应判红并点名 A9。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx",
+        "mode": "replace",
+        "old": "aria-expanded=\"true\" aria-controls='<%# Eval(\"ContainerId\") %>'>",
+        "content": "aria-expanded=\"true\">"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A9：删掉组内链接的 NavigateUrl（渲染成无 href 空锚），门禁应判红并点名 A9。",
+    "args": [],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopPortalBanner.ascx",
+        "mode": "replace",
+        "old": "NavigateUrl='<%# BuildGroupTabUrl(Container.DataItem) %>'\n                                                Text=",
+        "content": "Text="
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAccessibilityBaseline.ps1",
+    "note": "A10：把 a11y-runtime 台账改成 coverage=full（无运行期门禁支撑的假绿），Q3 台账锁应判红并点名 A10。",
+    "args": [],
+    "patches": [
+      {
+        "file": "dev/gate-coverage-map.json",
+        "mode": "replace",
+        "old": "\"name\": \"运行期键盘焦点顺序/可达路径与渲染级对比度（计算样式、渐变叠加）\",\n      \"coverage\": \"uncovered\",",
+        "content": "\"name\": \"运行期键盘焦点顺序/可达路径与渲染级对比度（计算样式、渐变叠加）\",\n      \"coverage\": \"full\","
+      }
+    ]
+  }
+]
