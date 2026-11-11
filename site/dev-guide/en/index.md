@@ -508,6 +508,41 @@ To review the formal frontend inputs read-only without running Node/Gulp:
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalFrontendContracts.ps1
 ```
 
+## Two-level grouped main navigation
+
+The main navigation renders two levels: a group header plus the in-group tab links. It is **not** a parent/child tab tree: `PortalCfg_Tabs` gained no parent column, groups are a presentation-only functional family, they take no part in authorization, and the tab visibility chain is unchanged.
+
+The vocabulary is a closed set in `src/Portal.Components/PortalNavigationGroupAlias.cs`, fixed to four groups by `SortOrder`:
+
+| Stable key | Chinese label | English label | Default members (`NavigationKey`) |
+| --- | --- | --- | --- |
+| `WorkAndApproval` | 工作与审批 | Work & Approvals | `MyWorkItems`, `LeaveAndExpense` |
+| `Business` | 业务办理 | Business | `BusinessRequests`, `MyProfile` |
+| `PortalAndHelp` | 门户与帮助 | Portal & Help | `Home`, `Help` |
+| `SystemAdministration` | 系统管理 | System Administration | `Admin`, `CapabilityWorkbench` |
+
+The rendering chain has three layers with strictly separated responsibilities:
+
+- `PortalNavigationGroupView` is a pure-logic view model. It consumes the tab collection after role filtering and entry gating, and produces groups, flat ungrouped tabs, a degradation flag and an empty-group count. It preserves each tab's display index in the final collection, so `tabindex` semantics match the pre-change behaviour.
+- `DesktopPortalBanner.ascx` renders group headers as native `<button type="button">` elements carrying `aria-expanded` and `aria-controls`; in-group entries remain flat `.portal-tab` links, and the selected state is a non-link span. No `menu` / `menubar` role and no inline `onclick` are used. The server emits every group expanded, so tabs stay reachable without JavaScript.
+- `Scripts/Navigation/PortalNavigationGroups.js` is an ES5 progressive-enhancement script that binds collapse/expand clicks, `Escape` close-and-return-focus, and `aria-expanded` synchronisation. It changes presentation state only and never re-evaluates permissions.
+
+Alias overrides use the configuration key `Portal.Navigation.GroupAliases` (Web.config appSettings, overridable by the database runtime setting), with a comma-separated `NavigationKey=GroupKey` value. Parsing is strict: an unknown group key, a malformed entry or a duplicate key **rejects the whole configuration and falls back to the default vocabulary**; the renderer sees the degradation flag and returns to the retained flat `DataList`. Invalid configuration never hides a tab.
+
+Theme layers cover **7 skins** (six official skins plus the `Default` fallback; the `ThemeProbe` diagnostic probe is excluded), each defining `body.portal-theme-<name> .portal-nav-group*` scope rules. The class family is `portal-nav-group`, `portal-nav-group-toggle`, `portal-nav-group-tabs`, `portal-nav-group-caret`, `portal-nav-group-count` and `portal-nav-group-hidden`. `:focus` must give a visible outline, and the hidden class must use `display:none` so in-group links leave the keyboard Tab sequence. Apply the same rule when adding visible elements; do not write rules only in a module-local stylesheet.
+
+Gates and evidence:
+
+| Gate / evidence | What it proves |
+| --- | --- |
+| `dev/scripts/Test-PortalNavigationGroupContract.ps1` (L0) | Vocabulary covers the eight seeded `NavigationKey` values, configuration key registered in four places, fail-closed parsing, no authorization symbols in groups, theme-settings inbound link |
+| `dev/scripts/Test-PortalNavigationGroupRender.ps1` (L0) | Disclosure markup semantics, seven-skin scope rules, ES5 script constraints, degradation rollback wiring |
+| `dev/scripts/Test-PortalAccessibilityBaseline.ps1` (L0) | A1–A10: contrast >= 4.5, `:focus`, `img alt`, no inline `onclick`, named anchors, plus grouped-navigation assertions and the `a11y-runtime` uncovered-ledger lock |
+| `dev/scripts/Test-PortalNavigationGroupRenderEvidence.mjs` (L2) | Browser level: separate Chinese/English screenshots, collapse/expand clicks, `Escape` focus return, computed styles across seven skins, tabs reachable with JavaScript disabled |
+| `dev/scripts/Test-PortalCollaborationRuntimeEvidence.mjs` (L2) | Collaboration workbench four quadrants (light/dark theme x Chinese/English locale) each with its own screenshot, never shared |
+
+Runtime keyboard focus order and screen-reader semantics remain honestly registered as the uncovered surface `a11y-runtime`; neither the static gates nor the browser screenshots replace it.
+
 ## Configuration notes
 
 - `src/Portal/Config` contains `*.template.*` files as well as real environment files.
@@ -527,4 +562,4 @@ To review the formal frontend inputs read-only without running Node/Gulp:
 - `src/Portal/.editorconfig` contains `root = true`, so `charset = utf-8` is set there separately.
 - The VSCode workspace sets `"files.encoding": "utf8"`, i.e. UTF-8 without signature.
 
-<!-- build-stamp: 952DB721911B -->
+<!-- build-stamp: D0ACA1EE8623 -->

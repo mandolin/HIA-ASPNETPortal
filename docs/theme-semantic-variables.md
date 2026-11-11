@@ -68,6 +68,7 @@
 2. **7 套主题必须同时定义**。新增变量时 7 套 `Default.css` 一个都不能少；漏定义的主题在支持变量的浏览器中该处会退到回退值，造成「个别皮肤样式漂移」且难以察觉。
 3. **优先复用既有主题类**，不为新变量新造颜色。错误色复用 `.NormalRed`、中性色复用 `.portal-admin-subtitle` 一类的既有取值。
 4. **变量只在主题层定义**，模块层只引用。模块层再定义一层语义变量会造成两层间接、难以追溯。
+5. **主导航分组类不在本矩阵内**。`portal-nav-group*` 是主题层的可见元素，其 7 套规则直接取各主题调色板的色值（`body.portal-theme-<名> .portal-nav-group-toggle` 等），不经 `--portal-*` 变量；因此本矩阵的 14 个变量不含它们，但它们仍受「7 套同时定义」约束。分组按钮文字/背景对比度 ≥4.5 与 `:focus` 轮廓由 `dev/scripts/Test-PortalAccessibilityBaseline.ps1` 的 A7–A10 断言，作用域规则齐备由 `dev/scripts/Test-PortalNavigationGroupRender.ps1` 断言。规则 1 的「不得写死颜色」约束的是**模块层** CSS，不适用于主题层自身的调色板声明。
 
 ## 五、如何复现本矩阵
 

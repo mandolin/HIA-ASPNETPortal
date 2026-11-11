@@ -513,6 +513,41 @@ npm run assets:stop-watch
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalFrontendContracts.ps1
 ```
 
+## 主导航两级分组
+
+主导航把「分组标题 + 组内页签链接」作为两级展示结构。它**不是**父子页签：`PortalCfg_Tabs` 表结构没有新增父子列，分组只是展示层的功能族归属，不参与授权判定，也不改变页签的可见性链路。
+
+分组词表是 `src/Portal.Components/PortalNavigationGroupAlias.cs` 中的封闭集合，按 `SortOrder` 固定为四组：
+
+| 稳定键 | 中文名 | 英文名 | 默认成员（`NavigationKey`） |
+| --- | --- | --- | --- |
+| `WorkAndApproval` | 工作与审批 | Work & Approvals | `MyWorkItems`、`LeaveAndExpense` |
+| `Business` | 业务办理 | Business | `BusinessRequests`、`MyProfile` |
+| `PortalAndHelp` | 门户与帮助 | Portal & Help | `Home`、`Help` |
+| `SystemAdministration` | 系统管理 | System Administration | `Admin`、`CapabilityWorkbench` |
+
+渲染链路分为三层，各层职责不可混用：
+
+- `PortalNavigationGroupView` 是纯逻辑视图模型，消费已完成角色过滤与入口判定的页签集合，产出分组、未分组平铺页签、降级标记与空组计数；它保留每个页签在最终集合中的显示下标，因此 `tabindex` 语义与改造前一致。
+- `DesktopPortalBanner.ascx` 用原生 `<button type="button">` 渲染分组标题，带 `aria-expanded` 与 `aria-controls`；组内仍是平铺的 `.portal-tab` 链接，选中态为非链接 span。不采用 `menu` / `menubar` role，不写内联 `onclick`。服务端默认输出全部展开，无 JavaScript 时页签依然可达。
+- `Scripts/Navigation/PortalNavigationGroups.js` 是 ES5 渐进增强脚本，绑定点击折叠/展开、`Escape` 关闭并回焦、同步 `aria-expanded`；它只改变展示状态，不重新判定权限。
+
+别名覆盖用配置键 `Portal.Navigation.GroupAliases`（`Web.config` appSettings，可被数据库运行设置覆盖），值为逗号分隔的 `NavigationKey=GroupKey`。解析严格校验：未知分组键、畸形项、重复键都会**整份拒绝并回退默认词表**，渲染层读到降级标记后退回保留的平铺 `DataList`。任何非法配置都不会隐藏页签。
+
+主题层按 **7 套**（6 套正式皮肤 + `Default` 回退，`ThemeProbe` 诊断探针排除）各自定义 `body.portal-theme-<名> .portal-nav-group*` 作用域规则，类名族为 `portal-nav-group`、`portal-nav-group-toggle`、`portal-nav-group-tabs`、`portal-nav-group-caret`、`portal-nav-group-count`、`portal-nav-group-hidden`。`:focus` 必须是可见轮廓，折叠类必须是 `display:none`（保证组内链接离开键盘 Tab 序列）。新增可见元素时按同一口径补齐，不要只在模块自带样式里写规则。
+
+相关门禁与证据：
+
+| 门禁 / 证据 | 证明范围 |
+| --- | --- |
+| `dev/scripts/Test-PortalNavigationGroupContract.ps1`（L0） | 词表覆盖种子 8 个 `NavigationKey`、配置键四处登记、fail-closed 解析、分组不含授权符号、主题设置入链 |
+| `dev/scripts/Test-PortalNavigationGroupRender.ps1`（L0） | disclosure 标记语义、7 套皮肤作用域规则、ES5 脚本约束、降级回滚接线 |
+| `dev/scripts/Test-PortalAccessibilityBaseline.ps1`（L0） | A1–A10：对比度 ≥4.5、`:focus`、`img alt`、禁内联 `onclick`、命名锚，含分组导航专属断言与 `a11y-runtime` 未覆盖台账锁 |
+| `dev/scripts/Test-PortalNavigationGroupRenderEvidence.mjs`（L2） | 浏览器级：中英各自渲染截图、点击折叠/展开、`Escape` 回焦、7 套皮肤计算样式、禁用 JavaScript 时页签仍可达 |
+| `dev/scripts/Test-PortalCollaborationRuntimeEvidence.mjs`（L2） | 协作工作台四象限（浅/深主题 × 中/英语言）各自出图，禁止共用同一张 |
+
+运行期键盘焦点顺序与读屏器语义仍如实登记为未覆盖面 `a11y-runtime`，静态门禁与浏览器截图都不替代它。
+
 ## 配置注意事项
 
 - `src/Portal/Config` 下有 `*.template.*` 文件，也有实际环境文件。

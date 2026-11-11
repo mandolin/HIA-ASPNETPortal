@@ -95,6 +95,13 @@ rather than inventing a new colour.
  the error colour, and existing values such as `.portal-admin-subtitle` for neutrals.
 4. **Variables are defined only in the theme layer**; the module layer only references them. Defining another layer of
  semantic variables in the module layer creates two levels of indirection that are hard to trace.
+5. **Main-navigation group classes are outside this matrix.** `portal-nav-group*` are visible elements of the theme layer;
+ their 7 scope rules take colours directly from each skin's palette (`body.portal-theme-<name> .portal-nav-group-toggle`
+ and siblings), not through `--portal-*` variables. The 14 variables in this matrix therefore exclude them, but the
+ "all 7 themes define them" constraint still applies. Toggle text/background contrast >= 4.5 and the `:focus` outline are
+ asserted by `dev/scripts/Test-PortalAccessibilityBaseline.ps1` A7–A10, and scope-rule completeness by
+ `dev/scripts/Test-PortalNavigationGroupRender.ps1`. Rule 1 ("must not hard-code colours") constrains **module-layer**
+ CSS, not the theme layer's own palette declarations.
 
 ## 5. How to reproduce this matrix
 
@@ -122,4 +129,4 @@ theme lacks a variable, that is a missing definition and must be filled in.
 - For the module appearance contract (the class set for container / heading / partition / table / notice / muted / danger,
  plus per-skin palettes), see `theme-module-contract.md`.
 
-<!-- build-stamp: 68AD751EF6D4 -->
+<!-- build-stamp: B792AB2D79D9 -->

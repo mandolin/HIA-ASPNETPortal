@@ -92,7 +92,19 @@ The two rejected options:
  as unfinished.
 5. If the interface form changes, produce a real rendered prototype (light + dark) and get it confirmed before touching CSS.
 
-## 5. Related documents
+## 5. Theme scope rules for grouped-navigation classes
+
+Main-navigation groups are not business modules, yet the same constraint applies: **every new visible element needs theme-layer scope rules**. The class family is `portal-nav-group`, `portal-nav-group-toggle`, `portal-nav-group-tabs`, `portal-nav-group-caret`, `portal-nav-group-count` and `portal-nav-group-hidden`; **7 themes** (six official skins plus the `Default` fallback, with the `ThemeProbe` diagnostic probe excluded) each define `body.portal-theme-<name> .portal-nav-group*` rules.
+
+- The `.portal-nav-group-toggle` text/background contrast must be >= 4.5 (WCAG AA body text); measured 7.91–15.26 across the six official themes.
+- `:focus` must give a visible outline (not `none`, width >= 2px) so keyboard users can locate the collapse control.
+- `.portal-nav-group-hidden` must use `display:none`; collapsed in-group links must leave the keyboard Tab sequence, so `visibility:hidden` is not a substitute.
+- Only non-empty groups are rendered; empty groups are counted as evidence rather than emitting a disclosure button that reveals nothing.
+- Ungrouped tabs (unknown or blank `NavigationKey`) render flat; no invalid configuration may ever hide a tab.
+
+Machine checks: `dev/scripts/Test-PortalNavigationGroupRender.ps1` (scope rules and disclosure markup), `dev/scripts/Test-PortalAccessibilityBaseline.ps1` A7–A10 (contrast, focus outline, markup semantics and the uncovered-ledger lock); browser-level computed styles are in `dev/scripts/Test-PortalNavigationGroupRenderEvidence.mjs`.
+
+## 6. Related documents
 
 - [`theme-semantic-variables.md`](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/theme-semantic-variables.md): the `--portal-*` variable matrix and usage rules.
 - [`theme-package-guide.md`](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/theme-package-guide.md): directory, enablement, fallback and release boundaries for trusted theme packages.

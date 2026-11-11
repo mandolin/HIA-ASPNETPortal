@@ -55,6 +55,8 @@ title: 模块运作与二次开发：模块是怎么装上门户的
 
 门户有 **8 套主题**（Enterprise / StateClassic / Oa 的 Light + Dark，加 Default 与 ThemeProbe）。主题包用这些作用域 class 定位：
 
+> 口径区分：这里的 8 是 `App_Themes/` 下的**实际目录数**。新增可见元素需要补齐主题层作用域规则时，按 **7 套**（6 套正式皮肤 + `Default` 回退）计算——`ThemeProbe` 是诊断探针，明确排除。`dev/scripts/Test-PortalModuleSkinCoverage.ps1` 与 `Test-PortalNavigationGroupRender.ps1` 都按 7 套断言，两个数字不矛盾。
+
 | class | 含义 |
 | --- | --- |
 | `portal-theme-{名字}` | 当前主题 |
@@ -89,4 +91,4 @@ title: 模块运作与二次开发：模块是怎么装上门户的
 - 主题包的写法与外观族 → [主题包指南]({{ site.baseurl }}/theme-package-guide/) 与 [主题模块契约]({{ site.baseurl }}/theme-module-contract/)
 - 页签可见性怎么配 → [系统设置契约]({{ site.baseurl }}/contracts-app-settings/)
 
-<!-- build-stamp: F7DCD15CFBA4 -->
+<!-- build-stamp: 5F7ED059CDC2 -->

@@ -72,11 +72,23 @@ title: 模块外观契约（Theme → Module Contract）
 4. **7 套主题的 `Default.css` 都要补该类的作用域规则**（`body.portal-theme-<名> .<模块类>`），漏补会导致该模块在多数皮肤下丢失主题化样式 —— 视为未完成；
 5. 若界面形态发生变化，先出真实渲染原型（浅+深）并经确认，再动 CSS。
 
-## 五、相关文档
+## 五、两级分组导航类的主题作用域
+
+主导航分组不是业务模块，但同样适用「新增可见元素必须补齐主题层作用域规则」的约束。分组类族为 `portal-nav-group`、`portal-nav-group-toggle`、`portal-nav-group-tabs`、`portal-nav-group-caret`、`portal-nav-group-count`、`portal-nav-group-hidden`，**7 套主题**（6 套正式皮肤 + `Default` 回退，`ThemeProbe` 诊断探针排除）各自定义 `body.portal-theme-<名> .portal-nav-group*` 规则。
+
+- 分组按钮 `.portal-nav-group-toggle` 的文字/背景对比度须 ≥4.5（WCAG AA 正文）；实测 6 套正式主题为 7.91–15.26。
+- `:focus` 必须是可见轮廓（非 `none`、宽度 ≥2px），键盘用户才能定位折叠控件。
+- `.portal-nav-group-hidden` 必须是 `display:none`；折叠后组内链接必须离开键盘 Tab 序列，不能用 `visibility:hidden` 代替。
+- 只渲染非空分组；空组计数留证，不输出「点了却没有内容」的 disclosure 按钮。
+- 未分组页签（未知或空 `NavigationKey`）平铺展示，任何非法配置都不得隐藏页签。
+
+机器校验：`dev/scripts/Test-PortalNavigationGroupRender.ps1`（作用域规则与 disclosure 标记）、`dev/scripts/Test-PortalAccessibilityBaseline.ps1` 的 A7–A10（对比度、焦点轮廓、标记语义与未覆盖台账锁）；浏览器级计算样式见 `dev/scripts/Test-PortalNavigationGroupRenderEvidence.mjs`。
+
+## 六、相关文档
 
 - [`theme-semantic-variables.md`]({{ site.baseurl }}/theme-semantic-variables/)：`--portal-*` 变量矩阵与使用规则。
 - [`theme-package-guide.md`]({{ site.baseurl }}/theme-package-guide/)：受信任主题包的目录、启用、回退和发布边界。
 - [`frontend-asset-guide.md`]({{ site.baseurl }}/frontend-asset-guide/)：Web Forms 呈现、主题、模块 CSS 与前端资产边界。
 - [`module-development-guide.md`]({{ site.baseurl }}/module-development/)：受信任部署模块包的开发、注册、启停和移除边界（含新增模块的隐藏陷阱）。
 
-<!-- build-stamp: 148F695CC475 -->
+<!-- build-stamp: 1B562F61D17E -->

@@ -47,6 +47,8 @@
 
 门户有 **8 套主题**（Enterprise / StateClassic / Oa 的 Light + Dark，加 Default 与 ThemeProbe）。主题包用这些作用域 class 定位：
 
+> 口径区分：这里的 8 是 `App_Themes/` 下的**实际目录数**。新增可见元素需要补齐主题层作用域规则时，按 **7 套**（6 套正式皮肤 + `Default` 回退）计算——`ThemeProbe` 是诊断探针，明确排除。`dev/scripts/Test-PortalModuleSkinCoverage.ps1` 与 `Test-PortalNavigationGroupRender.ps1` 都按 7 套断言，两个数字不矛盾。
+
 | class | 含义 |
 | --- | --- |
 | `portal-theme-{名字}` | 当前主题 |

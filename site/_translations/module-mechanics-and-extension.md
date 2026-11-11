@@ -55,6 +55,8 @@ A package not covered by any profile in force does not render. A profile is a gr
 
 The portal ships **eight themes** (Enterprise / StateClassic / Oa in Light and Dark, plus Default and ThemeProbe). Theme packages target these scope classes:
 
+> Terminology: eight is the **number of directories** under `App_Themes/`. When adding a visible element that needs theme-layer scope rules, count **7 themes** (six official skins plus the `Default` fallback) — `ThemeProbe` is a diagnostic probe and is explicitly excluded. Both `dev/scripts/Test-PortalModuleSkinCoverage.ps1` and `Test-PortalNavigationGroupRender.ps1` assert against 7 skins, so the two numbers do not conflict.
+
 | Class | Meaning |
 | --- | --- |
 | `portal-theme-{name}` | The theme in force |
