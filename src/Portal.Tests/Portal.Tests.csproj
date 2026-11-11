@@ -78,6 +78,7 @@
     <Compile Include="PortalCollaborationItemDataScopeTests.cs" />
     <Compile Include="PortalCollaborationItemOwnerRoleScopeTests.cs" />
     <Compile Include="PortalBusinessApplicationTransitionsTests.cs" />
+    <Compile Include="BusinessApplicationLifecycleTests.cs" />
     <Compile Include="PortalCollaborationItemTransitionsTests.cs" />
     <Compile Include="EmployeeProfileCorrectionWriteBackPolicyTests.cs" />
     <Compile Include="PortalOrganizationTreeExpanderTests.cs" />
