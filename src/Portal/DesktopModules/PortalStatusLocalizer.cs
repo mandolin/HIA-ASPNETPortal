@@ -25,26 +25,35 @@ namespace ASPNET.StarterKit.Portal
             return BusinessApplicationLifecycle.IsResubmittable(status);
         }
 
-        /// <summary><lang><zh-CN>把存储态请假状态常量映射为本地化展示文案。</zh-CN><en>Maps the stored leave status constant to a localized display label.</en></lang></summary>
+        /// <summary><lang><zh-CN>把存储态请假状态映射为本地化展示文案（经 BusinessApplicationLifecycle 归一化到规范词，单一事实源）。</zh-CN><en>Maps the stored leave status to a localized display label via BusinessApplicationLifecycle normalization to the canonical vocabulary (single source of truth).</en></lang></summary>
         public static string LocalizeLeaveStatus(string status)
         {
-            if (string.Equals(status, LeaveRequestStatuses.Pending, StringComparison.Ordinal)) return Resources.lang.Common_StatusPending;
-            if (string.Equals(status, LeaveRequestStatuses.Approved, StringComparison.Ordinal)) return Resources.lang.Common_StatusApproved;
-            if (string.Equals(status, LeaveRequestStatuses.Rejected, StringComparison.Ordinal)) return Resources.lang.Common_StatusRejected;
-            if (string.Equals(status, LeaveRequestStatuses.Closed, StringComparison.Ordinal)) return Resources.lang.Common_StatusClosed;
-            if (string.Equals(status, LeaveRequestStatuses.Returned, StringComparison.Ordinal)) return Resources.lang.Common_StatusReturned;
-            return status ?? string.Empty;
+            return LocalizeCanonical(BusinessApplicationLifecycle.NormalizeToCanonical(status));
         }
 
-        /// <summary><lang><zh-CN>把存储态报销状态常量映射为本地化展示文案。</zh-CN><en>Maps the stored expense status constant to a localized display label.</en></lang></summary>
+        /// <summary><lang><zh-CN>把存储态报销状态映射为本地化展示文案（经 BusinessApplicationLifecycle 归一化到规范词，单一事实源）。</zh-CN><en>Maps the stored expense status to a localized display label via BusinessApplicationLifecycle normalization to the canonical vocabulary (single source of truth).</en></lang></summary>
         public static string LocalizeExpenseStatus(string status)
         {
-            if (string.Equals(status, ExpenseReimbursementStatuses.Pending, StringComparison.Ordinal)) return Resources.lang.Common_StatusPending;
-            if (string.Equals(status, ExpenseReimbursementStatuses.Approved, StringComparison.Ordinal)) return Resources.lang.Common_StatusApproved;
-            if (string.Equals(status, ExpenseReimbursementStatuses.Rejected, StringComparison.Ordinal)) return Resources.lang.Common_StatusRejected;
-            if (string.Equals(status, ExpenseReimbursementStatuses.Closed, StringComparison.Ordinal)) return Resources.lang.Common_StatusClosed;
-            if (string.Equals(status, ExpenseReimbursementStatuses.Returned, StringComparison.Ordinal)) return Resources.lang.Common_StatusReturned;
-            return status ?? string.Empty;
+            return LocalizeCanonical(BusinessApplicationLifecycle.NormalizeToCanonical(status));
+        }
+
+        /// <summary><lang><zh-CN>把规范状态词映射为本地化展示文案；未列举的规范词回退为原词（不应发生，因规范词全集已在此覆盖）。</zh-CN><en>Maps a canonical status to its localized label; an unlisted canonical value falls back to the raw word (should not happen since the full canonical set is covered here).</en></lang></summary>
+        private static string LocalizeCanonical(string canonical)
+        {
+            if (string.IsNullOrEmpty(canonical))
+            {
+                return string.Empty;
+            }
+
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Draft, StringComparison.Ordinal)) return Resources.lang.Common_StatusDraft;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Submitted, StringComparison.Ordinal)) return Resources.lang.Common_StatusSubmitted;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.InReview, StringComparison.Ordinal)) return Resources.lang.Common_StatusInReview;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Returned, StringComparison.Ordinal)) return Resources.lang.Common_StatusReturned;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Approved, StringComparison.Ordinal)) return Resources.lang.Common_StatusApproved;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Rejected, StringComparison.Ordinal)) return Resources.lang.Common_StatusRejected;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Withdrawn, StringComparison.Ordinal)) return Resources.lang.Common_StatusWithdrawn;
+            if (string.Equals(canonical, PortalBusinessApplicationStatuses.Closed, StringComparison.Ordinal)) return Resources.lang.Common_StatusClosed;
+            return canonical;
         }
     }
 }

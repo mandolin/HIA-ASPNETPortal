@@ -2970,4 +2970,16 @@
   <data name="ExpenseReimbursement_ButtonResubmit" xml:space="preserve">
     <value>重新提交</value>
   </data>
+  <data name="Common_StatusSubmitted" xml:space="preserve">
+    <value>已提交</value>
+  </data>
+  <data name="Common_StatusInReview" xml:space="preserve">
+    <value>审核中</value>
+  </data>
+  <data name="Common_StatusWithdrawn" xml:space="preserve">
+    <value>已撤回</value>
+  </data>
+  <data name="Common_StatusDraft" xml:space="preserve">
+    <value>草稿</value>
+  </data>
 </root>

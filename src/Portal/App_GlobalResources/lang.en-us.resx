@@ -2970,4 +2970,16 @@
   <data name="ExpenseReimbursement_ButtonResubmit" xml:space="preserve">
     <value>Resubmit</value>
   </data>
+  <data name="Common_StatusSubmitted" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+  <data name="Common_StatusInReview" xml:space="preserve">
+    <value>In Review</value>
+  </data>
+  <data name="Common_StatusWithdrawn" xml:space="preserve">
+    <value>Withdrawn</value>
+  </data>
+  <data name="Common_StatusDraft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
 </root>

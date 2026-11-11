@@ -11548,6 +11548,50 @@ namespace Resources {
         }
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：已提交</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submitted</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusSubmitted {
+            get {
+                return ResourceManager.GetString("Common_StatusSubmitted", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：审核中</zh-CN>
+        ///   <en>Looks up a localized string similar to: In Review</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusInReview {
+            get {
+                return ResourceManager.GetString("Common_StatusInReview", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：已撤回</zh-CN>
+        ///   <en>Looks up a localized string similar to: Withdrawn</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusWithdrawn {
+            get {
+                return ResourceManager.GetString("Common_StatusWithdrawn", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：草稿</zh-CN>
+        ///   <en>Looks up a localized string similar to: Draft</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusDraft {
+            get {
+                return ResourceManager.GetString("Common_StatusDraft", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：已批准</zh-CN>
         ///   <en>Looks up a localized string similar to: Approved</en>
         /// </lang>
