@@ -20,7 +20,7 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>The employee has submitted a correction request and administrators have not processed it yet; this is the starting state when the request enters the admin queue.</en>
         /// </lang>
         /// </summary>
-        public const string Submitted = "Submitted";
+        public const string Submitted = PortalBusinessApplicationStatuses.Submitted;
 
         /// <summary>
         /// <lang>
@@ -36,7 +36,7 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>The request has been completed with no further processing required; lists and audits still keep the record as historical evidence.</en>
         /// </lang>
         /// </summary>
-        public const string Closed = "Closed";
+        public const string Closed = PortalBusinessApplicationStatuses.Closed;
 
         /// <summary>
         /// <lang>
@@ -44,6 +44,6 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>The request was rejected by an administrator; callers should keep the rejection reason and original request content for employee communication and audit traceability.</en>
         /// </lang>
         /// </summary>
-        public const string Rejected = "Rejected";
+        public const string Rejected = PortalBusinessApplicationStatuses.Rejected;
     }
 }

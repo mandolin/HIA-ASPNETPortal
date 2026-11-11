@@ -128,5 +128,22 @@ namespace ASPNET.StarterKit.Portal.Tests
                 BusinessApplicationLifecycle.NormalizeToCanonical(ExpenseReimbursementStatuses.Pending),
                 "Expense Pending 归一化为 Submitted（Q1，存储值不变）。");
         }
+
+        /// <summary><lang><zh-CN>EmployeeProfileCorrectionRequestStatuses 与规范词对齐：Submitted/Closed/Rejected 字面与 PortalBusinessApplicationStatuses 一致（别名引用），Reviewed 保留本地存库值且经归一化映射为 InReview（W-anp-P297 行为保持）。</zh-CN><en>EmployeeProfileCorrectionRequestStatuses aligns with the canonical vocabulary: Submitted/Closed/Rejected share literals with PortalBusinessApplicationStatuses (aliased), while Reviewed keeps its local stored value and normalizes to InReview (W-anp-P297 behavior-preserving).</en></lang></summary>
+        [TestMethod]
+        public void CorrectionRequestStatuses_AlignWithCanonical()
+        {
+            // 与规范词字面一致者别名引用（消除重复）
+            Assert.AreEqual(PortalBusinessApplicationStatuses.Submitted, EmployeeProfileCorrectionRequestStatuses.Submitted);
+            Assert.AreEqual(PortalBusinessApplicationStatuses.Closed, EmployeeProfileCorrectionRequestStatuses.Closed);
+            Assert.AreEqual(PortalBusinessApplicationStatuses.Rejected, EmployeeProfileCorrectionRequestStatuses.Rejected);
+            // Reviewed 保留本地存库值（不可改，否则破坏存量数据）
+            Assert.AreEqual("Reviewed", EmployeeProfileCorrectionRequestStatuses.Reviewed);
+            // 展示层经归一化映射为规范 InReview（行为保持）
+            Assert.AreEqual(
+                PortalBusinessApplicationStatuses.InReview,
+                BusinessApplicationLifecycle.NormalizeToCanonical(EmployeeProfileCorrectionRequestStatuses.Reviewed),
+                "Reviewed 归一化为 InReview（CorrectionRequest 展示统一）。");
+        }
     }
 }
