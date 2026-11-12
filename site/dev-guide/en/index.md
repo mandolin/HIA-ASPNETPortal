@@ -562,4 +562,4 @@ Runtime keyboard focus order and screen-reader semantics remain honestly registe
 - `src/Portal/.editorconfig` contains `root = true`, so `charset = utf-8` is set there separately.
 - The VSCode workspace sets `"files.encoding": "utf8"`, i.e. UTF-8 without signature.
 
-<!-- build-stamp: D0ACA1EE8623 -->
+<!-- build-stamp: 8A8337726990 -->

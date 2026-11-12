@@ -92,14 +92,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 <section class="oc-section">
   <p class="oc-eyebrow">文档</p>
   <h2 class="oc-h2">按要解决的问题读文档</h2>
-  <p class="oc-lead">文档按用途分成八个分区，每个分区都有对应的中英两版页面。</p>
+  <p class="oc-lead">文档按用途分成七个分区，每个分区都有对应的中英两版页面；模块与主题开发的内容收在「参考」分区。</p>
   <div class="oc-grid">
     <a class="oc-card" href="{{ site.baseurl }}/sections/product-overview/"><h3 class="oc-card-title">产品概览</h3><p>定位、适用边界与全部文档索引。</p><span class="oc-card-more">进入分区 →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/sections/evaluate/"><h3 class="oc-card-title">评估</h3><p>系统结构、数据访问与当前架构风险。</p><span class="oc-card-more">进入分区 →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/sections/quick-start/"><h3 class="oc-card-title">快速上手</h3><p>本地运行、外置配置与常见模块。</p><span class="oc-card-more">进入分区 →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/sections/learn/"><h3 class="oc-card-title">学习</h3><p>完整业务路径，理解各能力如何协同。</p><span class="oc-card-more">进入分区 →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/sections/reference/"><h3 class="oc-card-title">参考</h3><p>测试分层、主题契约、状态机与合规策略。</p><span class="oc-card-more">进入分区 →</span></a>
-    <a class="oc-card" href="{{ site.baseurl }}/sections/develop/"><h3 class="oc-card-title">开发</h3><p>模块与主题开发、前端资产、开发环境。</p><span class="oc-card-more">进入分区 →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/sections/operate/"><h3 class="oc-card-title">运维</h3><p>部署、运维、默认凭据治理与回滚。</p><span class="oc-card-more">进入分区 →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/sections/changes/"><h3 class="oc-card-title">变更</h3><p>版本规则与发布说明模板。</p><span class="oc-card-more">进入分区 →</span></a>
   </div>

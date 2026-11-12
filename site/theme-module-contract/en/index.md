@@ -111,4 +111,4 @@ Machine checks: `dev/scripts/Test-PortalNavigationGroupRender.ps1` (scope rules 
 - [`frontend-asset-guide.md`](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/frontend-asset-guide.md): Web Forms presentation, themes, module CSS and frontend asset boundaries.
 - [`module-development-guide.md`](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-development-guide.md): development, registration, enable/disable and removal boundaries for trusted deployed module packages (including hidden traps when adding a module).
 
-<!-- build-stamp: 6F7CAFDDAAE9 -->
+<!-- build-stamp: 0FC57C336190 -->

@@ -2,7 +2,7 @@
 layout: default
 title: Theme-module appearance contract
 lang: en
-parent: 开发
+parent: 参考
 nav_order: 1
 ---
 

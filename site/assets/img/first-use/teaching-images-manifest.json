@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "artifactClass": "public-teaching-image",
+  "purpose": "Illustrations embedded in the public first-use guide. They are teaching material committed to the site and served to readers; they are not runtime screenshot evidence.",
+  "distinctFrom": {
+    "artifactClass": "runtime-screenshot-baseline",
+    "rule": "Runtime screenshots are captured on demand into the internal evidence directory, stay out of the public site, and are governed by their own committed manifest and L0 gate. The two classes must not be merged."
+  },
+  "localeRule": "Each page language uses its own image: the Chinese guide references *.zh.png and the English translation references *.en.png. Sharing one image across both languages is prohibited; the sha256 values of a pair must differ.",
+  "scope": "site/assets/img/first-use/",
+  "captureMetadata": "not-recorded",
+  "captureMetadataNote": "These images were committed as teaching illustrations before a capture manifest existed. Viewport, target URL and capture time were not recorded and are deliberately NOT invented here. This manifest records only verifiable file facts: name, locale, byte count and sha256. Re-capture should follow the guide's own documentation-artifact conventions.",
+  "pairCount": 4,
+  "pairs": [
+    {
+      "id": "home-anonymous",
+      "step": "Open the home page before signing in",
+      "referencedBy": {
+        "zh-CN": "docs/first-use-portal.md",
+        "en": "site/_translations/first-use-portal.md"
+      },
+      "zh": { "file": "home-anonymous.zh.png", "locale": "zh-CN", "bytes": 179870, "sha256": "be86638065e9b3d3e1dc87327b543c16f9ad88cceb9b36b3ee0d2f0f5eefb036" },
+      "en": { "file": "home-anonymous.en.png", "locale": "en-US", "bytes": 182780, "sha256": "57d1eb21cfd613ef5cf3ff587f2f1a7a6aa0dc4b83addc3dcdb3d093f4ccd258" }
+    },
+    {
+      "id": "signin-card",
+      "step": "The account sign-in card",
+      "referencedBy": {
+        "zh-CN": "docs/first-use-portal.md",
+        "en": "site/_translations/first-use-portal.md"
+      },
+      "zh": { "file": "signin-card.zh.png", "locale": "zh-CN", "bytes": 10512, "sha256": "79601f5cfaddf2f119a650cf2feaee48987918dcaf1bb6fa030d2d068e71a290" },
+      "en": { "file": "signin-card.en.png", "locale": "en-US", "bytes": 12595, "sha256": "07283bca9cba45c3f13887b20cd248d1f7b6a125665800c7b849b8f05ad42816" }
+    },
+    {
+      "id": "home-signed-in",
+      "step": "The home page after signing in",
+      "referencedBy": {
+        "zh-CN": "docs/first-use-portal.md",
+        "en": "site/_translations/first-use-portal.md"
+      },
+      "zh": { "file": "home-signed-in.zh.png", "locale": "zh-CN", "bytes": 176040, "sha256": "90b200e6310ec47984ad875ab273683966fb434aa5b74983f26d9403d2481b38" },
+      "en": { "file": "home-signed-in.en.png", "locale": "en-US", "bytes": 177671, "sha256": "018c7a81d85fdb3c522d0ee0b8a31f9fa22309e4f97943d647b4a3979fad6e3a" }
+    },
+    {
+      "id": "my-work-items",
+      "step": "The my-work-items page with its filters and empty state",
+      "referencedBy": {
+        "zh-CN": "docs/first-use-portal.md",
+        "en": "site/_translations/first-use-portal.md"
+      },
+      "zh": { "file": "my-work-items.zh.png", "locale": "zh-CN", "bytes": 50753, "sha256": "87974c78bd5ae206c2c0ac910e795673be31cba66857530469dc4c710533f736" },
+      "en": { "file": "my-work-items.en.png", "locale": "en-US", "bytes": 51582, "sha256": "e4b152a91e633b678ad14adb46882d0c32cf3b9855d7cae609d18c2696a49927" }
+    }
+  ],
+  "boundaries": [
+    "This manifest proves only that the committed teaching images exist, have the recorded byte counts and hashes, and are distinct per language.",
+    "It does not prove that an image's content matches the page semantics, that the on-screen language matches the image, or that the illustration is current; those remain human review items.",
+    "It does not assert any viewport, target URL, capture time or capture tool, because those facts were not recorded.",
+    "The L0 runtime screenshot baseline gate and its own manifest are unaffected by this file."
+  ]
+}

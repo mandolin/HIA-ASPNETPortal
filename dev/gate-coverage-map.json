@@ -29,7 +29,7 @@
       "name": "按文档逐步执行能走通（运行期）",
       "layer": "L2",
       "coverage": "partial",
-      "boundary": "只证明采集时刻、指定 baseUrl、中文 UI 下四段学习文档链路齐备，且 first-use-portal.md 的匿名/登录后核心页签叙述与真实浏览器渲染一致；不证明「首次部署到 IIS」与「从零加模块」两段已人工端到端执行（仅静态链路与路径存在性核对）、不证明可选模块增量页签已被文档覆盖（如实登记为欠账，如本机 40001 的 Form Builder）、不证明分组渲染顺序与文档一致、不证明跨机器像素一致、不证明读屏器语义（a11y-runtime 未覆盖面）、不证明英文页面叙述一致（由 W-anp-P320 分语言证据承载）。前置缺失显式 exit 2 由编排记为 Skip，不作通过。",
+      "boundary": "只证明采集时刻、指定 baseUrl、中文 UI 下四段学习文档链路齐备、公开教学配图清单（teaching-images-manifest.json）与磁盘文件的字节数/sha256/中英哈希不同/两侧文档引用一致、README 快速上手七步结构与仓库内路径引用可核对（D9 不执行任何命令），且 first-use-portal.md 的匿名/登录后核心页签叙述与真实浏览器渲染一致；不证明「首次部署到 IIS」与「从零加模块」两段已人工端到端执行（仅静态链路与路径存在性核对）、不证明教学配图内容与页面语义相符/图上语言与页面语言一致/配图时效性（人工复核承载，清单 captureMetadata=not-recorded）、不证明七步在干净机器上真能跑通（由一次性浅克隆留证承载）、不证明可选模块增量页签已被文档覆盖（如实登记为欠账，如本机 40001 的 Form Builder）、不证明分组渲染顺序与文档一致、不证明跨机器像素一致、不证明读屏器语义（a11y-runtime 未覆盖面）、不证明英文页面叙述一致（由 W-anp-P320 分语言证据承载）。前置缺失显式 exit 2 由编排记为 Skip，不作通过。",
       "gate": "Test-PortalDocumentationWalkthrough.mjs",
       "gates": [
         "Test-PortalDocumentationWalkthrough.mjs",
@@ -337,7 +337,7 @@
       "name": "手写页面（首页/营销三页/分区页）与导航数据一致、中英成对、分区页 H1 正确",
       "layer": "L0",
       "coverage": "partial",
-      "boundary": "只证明手写页（site/ 下不由构建生成的 index.md：首页、营销三页、八个分区页）与 _data/navigation.yml 一致（分区页 title 等于导航分区名、nav_order 等于其序号）、中英成对、分区页 H1 唯一且等于 title、permalink 命名空间正确（中文不以 /en/ 开头、英文以 /en/ 开头）。不重复既有门禁的职责：首页统计数字归 landing 门禁（A1/A2/A4/M0）；站内链接与 parent 有效性归构建 N1/N2；镜像是否等于构建产物归镜像新鲜度门禁。不证明营销三页文案是否准确或过时（人工复核，属公开面复核）；不做语义判断；不检查未上架的手写文件（README.md 之类）。手写页集合动态界定（site/ 下的 index.md 减去 published.yml 生成的那些），不硬编码清单。Not duplicating: landing stats (landing gate), in-site links and parent validity (build N1/N2), mirror equals build output (mirror-freshness gate). Does not judge marketing copy (human review).",
+      "boundary": "只证明手写页（site/ 下不由构建生成的 index.md：首页、营销三页、七个分区页）与 _data/navigation.yml 一致（分区页 title 等于导航分区名、nav_order 等于其序号）、中英成对、分区页 H1 唯一且等于 title、permalink 命名空间正确（中文不以 /en/ 开头、英文以 /en/ 开头）。不重复既有门禁的职责：首页统计数字归 landing 门禁（A1/A2/A4/M0）；站内链接与 parent 有效性归构建 N1/N2；镜像是否等于构建产物归镜像新鲜度门禁。不证明营销三页文案是否准确或过时（人工复核，属公开面复核）；不做语义判断；不检查未上架的手写文件（README.md 之类）。手写页集合动态界定（site/ 下的 index.md 减去 published.yml 生成的那些），不硬编码清单。Not duplicating: landing stats (landing gate), in-site links and parent validity (build N1/N2), mirror equals build output (mirror-freshness gate). Does not judge marketing copy (human review).",
       "gate": "Test-PortalHandwrittenPageFreshness.ps1"
     },
     {

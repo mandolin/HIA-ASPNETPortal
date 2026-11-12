@@ -439,4 +439,4 @@ through them before adding any module:
  `dev/scripts/Invoke-PortalGateSuite.ps1` (L1 smoke / L0 readiness)
 - [ ] The whole gate suite is green: `Invoke-PortalGateSuite.ps1`
 
-<!-- build-stamp: 851AE3613B7A -->
+<!-- build-stamp: 2FD84B4C8617 -->

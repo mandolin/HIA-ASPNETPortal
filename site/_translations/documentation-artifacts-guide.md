@@ -114,12 +114,34 @@ $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Pa
 & 'dev\scripts\Test-PortalRuntimeScreenshotBaseline.ps1' # L0 gate: checks the spec against the manifest
 ```
 
-Boundaries: screenshots **do not enter the public documentation or the root repository** (`operations-runbook.md`:
-public delivery cites redacted summaries only and never puts internal evidence or production screenshots into the root
-repository); the gate proves only that "the spec is fixed, targets and manifest agree, and the images are non-empty" —
-it does **not** prove that the screenshot content matches the page semantics (that is human review), and it does
-**not** require pixel equality across machines (font / rendering / data-state differences are inherent; hash
-differences are recorded as a soft metric only).
+Boundaries (**applying only to the runtime screenshot baseline in this section**): these screenshots **do not enter
+the public documentation or the root repository** (`operations-runbook.md`: public delivery cites redacted summaries
+only and never puts internal evidence or production screenshots into the root repository); the gate proves only that
+"the spec is fixed, targets and manifest agree, and the images are non-empty" — it does **not** prove that the
+screenshot content matches the page semantics (that is human review), and it does **not** require pixel equality
+across machines (font / rendering / data-state differences are inherent; hash differences are recorded as a soft
+metric only).
+
+## Public teaching images
+
+The site carries a second class of image with a **completely different purpose**: teaching illustrations embedded
+directly in public documentation, such as the four home / sign-in / to-do illustration pairs in the first-use guide.
+They are **instructional material written for readers**, committed and published with the site. They are not the
+runtime screenshot baseline above; the two classes must not be conflated, and neither class's rules apply to the other.
+
+| Item | Rule |
+| --- | --- |
+| Purpose | Help readers understand an operation; whether an image matches the real page is a **human review** item |
+| Per language | **Each language has its own image; sharing one image is prohibited**: Chinese prose references `*.zh.png`, the English translation references `*.en.png`, and the hashes of a pair must differ |
+| Location | Committed under `site/assets/img/first-use/`, referenced from documents as `{{ site.baseurl }}/assets/img/first-use/...` |
+| Manifest | `teaching-images-manifest.json` in the same directory (**committed**), recording file name / locale / byte count / sha256 and the referencing documents |
+| Capture metadata | **Only verifiable file facts are recorded.** These images were committed before a manifest existed; viewport, target URL and capture time were not recorded, so the manifest states `captureMetadata: not-recorded` and does **not** invent capture parameters. Re-capture should register the actual values at that time |
+| Validation | The documentation chain walkthrough gate checks that manifest files exist, byte counts and sha256 values agree, and that each zh/en pair is distinct; the site build's N2 check verifies the image links resolve |
+
+In one sentence: **runtime screenshots are gate evidence (private, captured on demand, governed by a fixed capture
+spec); teaching images are public documentation content (committed with the site, per-language, recording only file
+facts).** The "screenshots do not enter public documentation" rule above therefore does not apply to teaching images;
+conversely, runtime screenshots do not gain a place in the site asset directory because this manifest exists.
 
 ## Local verification order
 

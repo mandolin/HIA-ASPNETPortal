@@ -92,14 +92,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 <section class="oc-section">
   <p class="oc-eyebrow">Documentation</p>
   <h2 class="oc-h2">Read what solves your problem</h2>
-  <p class="oc-lead">Documentation is grouped into eight sections, each available in Chinese and English.</p>
+  <p class="oc-lead">Documentation is grouped into seven sections, each available in Chinese and English; module and theme development content lives in the Reference section.</p>
   <div class="oc-grid">
     <a class="oc-card" href="{{ site.baseurl }}/en/sections/product-overview/"><h3 class="oc-card-title">Product overview</h3><p>Positioning, boundaries and the full document index.</p><span class="oc-card-more">Open section →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/en/sections/evaluate/"><h3 class="oc-card-title">Evaluate</h3><p>System structure, data access and current architecture risks.</p><span class="oc-card-more">Open section →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/en/sections/quick-start/"><h3 class="oc-card-title">Quick start</h3><p>Run locally, external configuration and common modules.</p><span class="oc-card-more">Open section →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/en/sections/learn/"><h3 class="oc-card-title">Learn</h3><p>A complete business path showing how the capabilities work together.</p><span class="oc-card-more">Open section →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/en/sections/reference/"><h3 class="oc-card-title">Reference</h3><p>Test tiers, theme contracts, state machines and compliance policy.</p><span class="oc-card-more">Open section →</span></a>
-    <a class="oc-card" href="{{ site.baseurl }}/en/sections/develop/"><h3 class="oc-card-title">Develop</h3><p>Module and theme development, frontend assets, development environment.</p><span class="oc-card-more">Open section →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/en/sections/operate/"><h3 class="oc-card-title">Operate</h3><p>Deployment, operations, default credential governance and rollback.</p><span class="oc-card-more">Open section →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/en/sections/changes/"><h3 class="oc-card-title">Changes</h3><p>Version rules and the release notes template.</p><span class="oc-card-more">Open section →</span></a>
   </div>

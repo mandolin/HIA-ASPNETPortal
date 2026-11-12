@@ -2,7 +2,7 @@
 layout: default
 title: Theme package deployment guide
 lang: en
-parent: 开发
+parent: 参考
 nav_order: 1
 ---
 

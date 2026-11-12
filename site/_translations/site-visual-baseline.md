@@ -101,7 +101,7 @@ Body line height **1.6** (readability baseline for long-form reading); heading l
 
 Two one-to-one trees; top-level entries follow the reader path in `docs/documentation-map.md`:
 
-product entry → evaluate → quick start → learn → reference → develop → operate → changes
+product entry → evaluate → quick start → learn → reference → operate → changes
 
 | Convention | Detail |
 | --- | --- |

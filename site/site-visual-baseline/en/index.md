@@ -101,7 +101,7 @@ Body line height **1.6** (readability baseline for long-form reading); heading l
 
 Two one-to-one trees; top-level entries follow the reader path in `docs/documentation-map.md`:
 
-product entry → evaluate → quick start → learn → reference → develop → operate → changes
+product entry → evaluate → quick start → learn → reference → operate → changes
 
 | Convention | Detail |
 | --- | --- |
@@ -178,4 +178,4 @@ the expression above and copy the rest verbatim; if upstream also changed the la
  palette variables, update the scheme file and custom.scss. The mechanism uses the theme-supported `color_scheme`
  and custom hooks, touching no theme-internal files.
 
-<!-- build-stamp: 10A3AC12E81A -->
+<!-- build-stamp: 7DD51913D602 -->

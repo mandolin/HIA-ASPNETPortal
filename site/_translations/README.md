@@ -121,5 +121,6 @@ entry.
 ## How to use this documentation
 
 - This documentation is available in both Chinese and English, switchable at any time.
-- Documents are organised into eight sections — product overview / evaluate / quick start / learn / reference / develop /
- operate / changes; see the [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).
+- Documents are organised into seven sections — product overview / evaluate / quick start / learn / reference / operate /
+ changes. The former Develop section has been merged into Reference; see the
+ [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).

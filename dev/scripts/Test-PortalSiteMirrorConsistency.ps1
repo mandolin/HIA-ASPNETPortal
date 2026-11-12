@@ -3,9 +3,10 @@
 <#
 .SYNOPSIS
 <lang>
-  <zh-CN>看守 `docs/` 与 `site/` 镜像一致性（L0）：上架文档必须有镜像页，且镜像正文必须等于 `docs/` 原文。</zh-CN>
-  <en>Guards `docs/` ↔ `site/` mirror consistency (L0): every published doc must have a mirror page whose body equals the
-  `docs/` source.</en>
+  <zh-CN>看守 `docs/` 与 `site/` 镜像一致性（L0）：上架文档必须有镜像页，且镜像必须是**构建产物形状**（无裸相对 `.md` 链接、无内部编号外泄、首个 H1 与源一致），不要求与 `docs/` 原文逐字节相等。</zh-CN>
+  <en>Guards `docs/` ↔ `site/` mirror consistency (L0): every published doc must have a mirror page that is
+  **build-output shaped** (no raw relative `.md` links, no leaked internal IDs, matching first H1). Byte equality with the
+  `docs/` source is deliberately not required.</en>
 </lang>
 .DESCRIPTION
 <lang>
@@ -15,13 +16,17 @@
 
   门诊（以 `site/_data/published.yml` 上架清单为准，它是"哪些文档已上架、站点路径是什么"的事实源）：
     A1 清单中每个条目：`docs/<doc>` 必须存在，`site/<path>/index.md` 必须存在。
-    A2 **镜像正文必须等于 `docs/` 原文**（跳过 front matter，按 CRLF 归一后逐字节比对）——
-       这是"改了 docs 没同步"的直接抓手。
+    A2 镜像必须是**构建产物形状**，不是 `docs/` 原文直抄：
+       A2a 无裸相对 `.md` 链接（构建会重写，站点上会 404）、
+       A2b 无 `W-anp-P*` / `C-anp-P*` 内部编号外泄、
+       A2c 首个 H1 与 `docs/` 原文一致（防止"页面从未重新生成"）。
+       **刻意不要求逐字节相等**：已上架页面中 16/29 因链接重写与公开面文本过滤本就与源不同，
+       要求相等会制造 16 个假失败（首跑实测教训，见英文 DESCRIPTION A2 与实现 L121-148）。
     A3 镜像 front matter 必须含 `lang: zh-CN` 与 `permalink: /<path>/`，且 `parent` 与清单一致
        （上架契约：站点路径与导航分区由清单唯一决定）。
     A4（软指标）`docs/` 中未出现在上架清单的文件逐条列出——即"未上架文档"清单，供人工判断是否应上架。
 
-  证明边界：只证明"已上架文档的镜像与原文一致、front matter 契约成立"；
+  证明边界：只证明"已上架文档的镜像为构建产物形状、front matter 契约成立"；
   **不证明**镜像内容与 `Build-PortalSite.ps1` 的生成输出一致（构建侧还会做链接重写与公开面文本过滤，
   其输出与已签入镜像本就不同——该分歧已登记在 `deferred-verification-memo.md`，本门禁不裁决）；
   不检查英文译本（`site/_translations/`）与站内链接可达性（分别由其它门禁/人工走查承载）。
@@ -47,7 +52,7 @@
     A4 (soft) `docs/` files absent from the manifest are listed — the "unpublished docs" list, for a human to judge whether they
        should be published.
 
-  Proof boundary: proves only that "published docs' mirrors equal the source and the front-matter contract holds"; does **not**
+  Proof boundary: proves only that "published docs' mirrors are build-output shaped and the front-matter contract holds"; does **not**
   prove that the mirror equals what `Build-PortalSite.ps1` would generate (the build also rewrites links and filters public-facing
   text, so its output differs from the committed mirror by design — that divergence is registered in
   `deferred-verification-memo.md` and is not adjudicated here); it does not check English translations (`site/_translations/`) or
