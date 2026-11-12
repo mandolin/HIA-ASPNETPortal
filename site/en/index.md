@@ -114,6 +114,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 <section class="oc-section">
   <p class="oc-eyebrow">Getting started</p>
   <h2 class="oc-h2">Three common first steps</h2>
+  <p class="oc-lead">This project ships as source only — there is no prebuilt installer or binary release. Clone the GitHub repository (or download a source archive) first, then pick one of the paths below.</p>
   <div class="oc-grid">
     <a class="oc-card" href="{{ site.baseurl }}/en/user-guide/"><h3 class="oc-card-title">Run it in Visual Studio</h3><p>Open <code>src/master.sln</code>, restore NuGet packages, pick Debug | Any CPU, then build and run.</p><span class="oc-card-more">User guide →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/en/dev-guide/"><h3 class="oc-card-title">Build from the command line</h3><p>In-repo scripts locate MSBuild and the NuGet CLI without depending on an IDE.</p><span class="oc-card-more">Developer guide →</span></a>
@@ -135,7 +136,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
     </details>
     <details>
       <summary>Can I put it straight into production?</summary>
-      <p>The current version suits development, testing, demonstration and reference use. No production-environment validation evidence exists yet (real IIS, TLS, application pool ACLs, target SQL Server, enterprise scanning). Complete your own security assessment, backups and an operations rehearsal first — see the <a href="{{ site.baseurl }}/en/versioning/">versioning policy</a>.</p>
+      <p>Production-grade reliability is claimed: real IIS / HTTPS / TLS 1.3, application pool ACLs, machineKey, a target SQL Server version matrix, an offline read-only enterprise scanning baseline and real IE9 retesting have all been evidenced, with L7 production readiness achieved and L8 business sign-off issued. Before deploying, still recheck the target environment against the <a href="{{ site.baseurl }}/en/deployment-checklist/">release and compatibility checklist</a> and the <a href="{{ site.baseurl }}/en/operations-runbook/">operations runbook</a>. A vendor commercial security-scan report (NSFOCUS / classified protection / live DAST) has not yet been obtained; an authorised offline read-only baseline is provided instead — see the <a href="{{ site.baseurl }}/en/versioning/">versioning policy</a>.</p>
     </details>
     <details>
       <summary>Is there an external API?</summary>

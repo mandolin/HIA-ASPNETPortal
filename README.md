@@ -10,6 +10,8 @@ Enterprise intranet portal platform on ASP.NET Web Forms, forked from the origin
 
 Current version: **v3.0.0** (2026-11-11, production readiness: L7 `M-ANP-TRUSTED-PORTAL` achieved under real target-environment evidence; the previous version v1.4.0 completed the documentation system). Maturity is stated as **usable / reference / research baseline**: the first-release criteria are all met, and production readiness under real target-environment evidence (`M-ANP-TRUSTED-PORTAL` / L7) is now achieved, so production-grade reliability **is** claimed. See [versioning.md](docs/versioning.md) for the wording rules.
 
+This project ships as **source only** — there is no prebuilt installer, container image or binary release. Clone the repository (or download a source archive) and follow the seven steps in the Chinese "快速上手（本地开发）" section below.
+
 ## 功能特性
 
 | 能力 | 说明 |
@@ -24,6 +26,8 @@ Current version: **v3.0.0** (2026-11-11, production readiness: L7 `M-ANP-TRUSTED
 | 自动化门禁 | **门禁统一编排**，按 L0/L1/L2 分层，退出码与输出双判定（数量随治理推进而增长，以实跑汇总为准） |
 
 ## 快速上手（本地开发）
+
+> **先取得源码**：本项目**仅以源码形式交付**（GitHub 仓库），不提供预编译安装包、容器镜像或二进制发行物。请先克隆仓库（或在仓库页面下载源码归档）到本地，再按下面七步操作。版本与发布规则见 [docs/versioning.md](docs/versioning.md)。
 
 ### 1. 前置环境
 

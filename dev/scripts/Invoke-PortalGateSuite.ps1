@@ -959,6 +959,16 @@ $gateLayers = [ordered]@{
            Fixture = @{ Script = 'New-PortalDefaultThemeFixture.ps1'
                         Apply  = @(, @('-Action', 'Apply'))
                         Remove = @(, @('-Action', 'Remove')) } }
+        # <lang>
+        #   <zh-CN>文档全链路走查（`W-anp-P319` / `C-anp-P56`）：既有 L2 门禁断言"设计意图"，
+        #   本门禁断言"文档描述是否与真实页面一致"，期望值从 `docs/first-use-portal.md` 解析而非硬编码。
+        #   前置（运行站点 / 验收上下文 / playwright）缺失时自报 exit 2 → 编排识别为 Skip，不作通过也不判代码缺陷。</zh-CN>
+        #   <en>Documentation chain walkthrough (`W-anp-P319` / `C-anp-P56`): existing L2 gates assert design intent,
+        #   this one asserts that the document matches the real page, with expectations parsed from
+        #   `docs/first-use-portal.md` rather than hard-coded. Missing prerequisites report exit 2, which the suite
+        #   records as Skip — never a pass and never a code defect.</en>
+        # </lang>
+        @{ File = 'Test-PortalDocumentationWalkthrough.mjs'; Runner = 'mjs'; Kind = '文档全链路走查'; Args = @() }
     )
 }
 

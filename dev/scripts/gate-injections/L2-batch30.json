@@ -1,0 +1,15 @@
+{
+  "gate": "Test-PortalDocumentationWalkthrough.mjs",
+  "note": "文档全链路走查门禁（W-anp-P319 / C-anp-P56）的注入法双向证明。用 PORTAL_WALKTHROUGH_STATIC=1 只跑静态断言 D1-D3，使夹具无需运行站点或凭据即可稳定复现；注入把 README.md 的「先取得源码」声明改掉，D1 的四段双语链路断言必须判红（exit 1），还原后 D1-D3 全绿（exit 0）。这证明该门禁真的会读取并校验文档链路，而不是无条件通过；运行期断言 D4-D8 的证明由真实门户实跑证据与覆盖地图边界声明承载，不靠本夹具伪造。",
+  "env": {
+    "PORTAL_WALKTHROUGH_STATIC": "1"
+  },
+  "patches": [
+    {
+      "file": "README.md",
+      "mode": "replace",
+      "old": "**先取得源码**",
+      "content": "**先取得构建产物**"
+    }
+  ]
+}

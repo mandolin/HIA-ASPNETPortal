@@ -25,6 +25,18 @@
       ]
     },
     {
+      "id": "documentation-walkthrough-runtime",
+      "name": "按文档逐步执行能走通（运行期）",
+      "layer": "L2",
+      "coverage": "partial",
+      "boundary": "只证明采集时刻、指定 baseUrl、中文 UI 下四段学习文档链路齐备，且 first-use-portal.md 的匿名/登录后核心页签叙述与真实浏览器渲染一致；不证明「首次部署到 IIS」与「从零加模块」两段已人工端到端执行（仅静态链路与路径存在性核对）、不证明可选模块增量页签已被文档覆盖（如实登记为欠账，如本机 40001 的 Form Builder）、不证明分组渲染顺序与文档一致、不证明跨机器像素一致、不证明读屏器语义（a11y-runtime 未覆盖面）、不证明英文页面叙述一致（由 W-anp-P320 分语言证据承载）。前置缺失显式 exit 2 由编排记为 Skip，不作通过。",
+      "gate": "Test-PortalDocumentationWalkthrough.mjs",
+      "gates": [
+        "Test-PortalDocumentationWalkthrough.mjs",
+        "Test-PortalNavigationShape.ps1"
+      ]
+    },
+    {
       "id": "comments-and-rop",
       "name": "注释与 ROP 基线（双语注释/契约文件齐备）",
       "layer": "L0",
@@ -487,6 +499,7 @@
     "Test-PortalThemeResolution.ps1",
     "Test-PortalDefaultCredentialRisk.ps1",
     "Test-PortalDocumentationExamples.ps1",
+    "Test-PortalDocumentationWalkthrough.mjs",
     "Test-PortalDocumentationReadiness.ps1",
     "Test-PortalEvidenceCoverage.ps1",
     "Test-PortalExtensionSmoke.ps1",

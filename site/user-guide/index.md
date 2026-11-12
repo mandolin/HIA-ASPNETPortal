@@ -16,6 +16,8 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 ## 本地运行概览
 
+> **取得源码**：本项目仅以源码形式交付，不提供预编译安装包或二进制发行物。第一次接触项目时，先从 GitHub 仓库克隆或下载源码归档；首次部署到 IIS 的完整步骤见 [operations-runbook.md]({{ site.baseurl }}/operations-runbook/)。
+
 本地运行通常需要：
 
 1. 准备 SQL Server 或 LocalDB。
@@ -273,4 +275,4 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - ~~各既有内容模块（公告、联系人、讨论、文档、事件、图片、链接等）的逐项操作说明~~ —— **已交付**：见上文「常见模块」各子节。
 - ~~`HTML`、`快速链接（QuickLinks）`、`XML`、`登录（Signin）` 四个模块的逐项操作说明~~ —— **已交付**：见上文「常见模块」各子节（其中 `Signin` 在开发库中 **0 个实例**，仅有源码级说明、**无运行期证据**，再入条件见该节末）。
 
-<!-- build-stamp: DF63E1FACA10 -->
+<!-- build-stamp: 4087F52D9BD0 -->

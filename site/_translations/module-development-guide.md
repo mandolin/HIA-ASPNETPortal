@@ -179,6 +179,66 @@ When the package state table has no record for a package, a verified package is 
 deployments that have not configured state rows. When the state table is missing or unreadable, the front end likewise keeps
 the default enabled state, but back-office state writes will prompt for the migration to be run first.
 
+## End-to-end example: adding a module from scratch
+
+The sections above cover the manifest, the code skeleton, enabling and the gates separately, but never chain them into one
+walkthrough you can follow to completion. This section takes a read-only notice module, `HIA.SampleNotice`, through the
+four-step outline in
+[module-mechanics-and-extension.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-mechanics-and-extension.md).
+Each step has a checkable result and every command points at a script that actually exists in the repository. This example
+is **display-only**: no permission changes, DLLs, scripts or external resources.
+
+**Step 1 — write the module**: under `src/Portal/DesktopModules/SampleNotice/` create four files:
+`SampleNotice.ascx`, `SampleNotice.ascx.cs`, `SampleNotice.ascx.designer.cs` and `module.json`. Use the fully qualified
+class name in the markup `Inherits` attribute (see "Code skeleton"), and use `<lang>` bilingual blocks in markup and
+code-behind comments. Use the read-only reference-package shape for `module.json`:
+
+```json
+{
+ "schemaVersion": 1,
+ "packageId": "HIA.SampleNotice",
+ "displayName": "示例公告 / Sample Notice",
+ "version": "1.0.0",
+ "minimumPortalVersion": "1.0",
+ "desktopEntry": "DesktopModules/SampleNotice/SampleNotice.ascx",
+ "resources": []
+}
+```
+
+Do not put `.dll`, `.zip`, `.js` or inline `<script>` blocks in the package (these are Fail-level smoke-gate
+constraints). If the module reads data, name the business migration script after the entity, keep it under `src/Setup/` as
+`PortalBiz_*.sql`, and never include `USE [database]`. A pure display module needs no migration script: use
+`-SkipSqlMigrationCheck` as an **honest exemption** and state the reason in the commit message.
+
+**Step 2 — register it with the build and the profile**: add the three new files to the `<Compile>` / `<Content>` items in
+`src/Portal/Portal.csproj`, otherwise the class never reaches `bin/Portal.dll`. Use the portal's stable CSS scopes
+(`portal-module`, `portal-package-{packageId}`) and confirm the theme rules in all seven skins' `Default.css` files do not
+leak into other modules. Confirm the `packageId` is in the active profile's `Packages`; packages not intended for
+mounting must be listed in `notMounted`, or the package contract gate reports "no profile coverage".
+
+**Step 3 — build, smoke-test, mount an instance**: run in order:
+
+```powershell
+pwsh -NoProfile -File dev/scripts/Restore-NuGetPackages.ps1
+pwsh -NoProfile -File dev/scripts/Build-Solution.ps1
+pwsh -NoProfile -File dev/scripts/Test-PortalNewModuleReadiness.ps1
+pwsh -NoProfile -File dev/scripts/Test-PortalBusinessModuleSmoke.ps1 -ModuleName HIA.SampleNotice -SkipSqlMigrationCheck
+```
+
+Once the build has zero errors and both gates are green, open `Admin/ModuleCatalog.aspx` as `Admins` and click
+**Register** to create the module definition, then add an instance on the target tab's layout management page (title,
+order, edit role). If the package does not appear in the catalogue, check the `desktopEntry` path and manifest parsing
+first — do not bypass the gate by writing to the database by hand.
+
+**Step 4 — runtime confirmation and pre-commit self-check**: start the site (locally, `dev/scripts/Start-IISExpress.ps1`
+with default port `40001` works), open the tab carrying the instance, and confirm the module really renders, the welcome
+text and tab navigation behave normally, and styles do not bleed across the seven skins. Then work through the twelve
+items in "Pre-commit checklist" and finally run `dev/scripts/Invoke-PortalGateSuite.ps1` to confirm all gates are green.
+
+> **This step cannot be skipped**: an `Inherits` attribute with only the class name compiles without error under msbuild
+> and throws `CS0103` only at runtime; likewise a package not allowed by the active profile silently renders nothing.
+> Build and unit tests alone can still deliver a module that "compiles but shows a blank page".
+
 ## Assembly state, environment switch and offline verification (controlled debug state)
 
 The module's **assembly mode** describes how source is hosted and compiled in the site. The platform follows the Web Application Project (WAP) route: production defaults to `CodeBehind` (source compiled into `bin/` by the build), with a controlled `CodeFile` debug state (source placed under the site directory for ASP.NET just-in-time compilation) reserved for trusted local debugging. Assembly state is **not written into** `module.json` (the manifest only describes package shape); it is recorded in a separate **deployment-side ledger** `src/Portal/Config/module-assembly-state.json`. An empty ledger (no entries) means every module defaults to `CodeBehind`.

@@ -43,6 +43,8 @@
 3. **挂实例**：在目标页签上挂一个实例，并给标题、顺序、编辑角色（后台「模块设置」）。
 4. **确认档位放行**：把 `packageId` 加进生效档位的 `Packages`；**不打算挂载**的包，要登记进 `notMounted`，否则包契约门禁会判它"无档位覆盖"。
 
+从零按这四步做一次的完整可复现走查（含 `module.json` 实例、构建项登记、Register/挂实例、门禁命令与运行期确认）见 [module-development-guide.md](module-development-guide.md) 的「端到端示例」。
+
 ## 改外观
 
 门户有 **8 套主题**（Enterprise / StateClassic / Oa 的 Light + Dark，加 Default 与 ThemeProbe）。主题包用这些作用域 class 定位：

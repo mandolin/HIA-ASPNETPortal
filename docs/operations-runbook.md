@@ -14,6 +14,25 @@
 
 管理员页面只作为运行期查看和有限维护入口，不替代目标 IIS、SQL Server、备份系统和企业监控平台的正式运维控制台。
 
+## 首次部署到 IIS
+
+本节把「拿到源码 → 站点可访问」串成一条可照做的链路，面向目标 Windows + IIS + SQL Server 环境。每一步都给出可核对的结果；[发布与兼容检查清单](deployment-checklist.md)是发布前的勾选项，与本节互补（那里是「确认什么」，这里是「怎么做」）。本节**不自动修改** IIS、应用池、数据库或外置配置，所有变更由部署方在自己的环境执行。
+
+1. **取得源码**：本项目仅以源码形式交付，从 GitHub 仓库克隆或下载源码归档到本地目录。
+2. **还原依赖并构建**：在仓库根目录执行 `dev/scripts/Restore-NuGetPackages.ps1`，再用 `dev/scripts/Build-Solution.ps1` 构建 `src/master.sln`（或在 Visual Studio 中选 `Release | Any CPU` 构建）。确认构建 0 错误后再继续。
+3. **初始化数据库**：在目标 SQL Server 上按顺序执行 `src/Setup/` 下的基础脚本、增量脚本与 `Portal_UserCredentials.sql`。注意 `src/Setup/` 的初始化脚本默认带**防误删护栏**，只对隔离测试库自动执行；对已有库请先备份并人工确认，详见 [deployment-checklist.md](deployment-checklist.md) 的「数据库与配置」。
+4. **放置外置连接串**：把 `src/Portal/Config/Templates/connectionStrings.config` 复制到目标机器进程用户目录下的 `Web\HIA-ASPNETPortal\{env}\connectionStrings.config`（`{env}` 通常为 `prod`，须与 `web.config` 的 `<env value="..." />` 一致），填入指向第 3 步所建库的 `Portal` 连接串。**真实连接串绝不进仓库**。
+5. **生成发布目录**：用 `dev/scripts/Publish-PortalFileSystem.ps1` 把 `src/Portal` 导出到目标发布目录，确认 `bin/`、`DesktopModules/`、`Admin/`、`Default.aspx` 与 `web.config` 齐备，且发布目录**不含** `Config/Templates/connectionStrings.config` 的真实值。
+6. **建应用池与站点**：在 IIS 管理器新建应用程序池（.NET CLR 版本 `v4.0`、托管管道模式 `Integrated`），新建站点并把物理路径指向第 5 步的发布目录，设置绑定（内网建议 HTTPS + 有效证书）。给 `App_Data/Logs` 与上传目录授予应用池标识的最小写权限，其他目录只读。
+7. **确认外置配置可达**：确认应用池标识对第 4 步的外置配置目录有读取权限；若使用自定义路径，在 `web.config` 的 `ExternalCfgPath` 显式指定，且 `<env>` 与外置目录一致。
+8. **首次访问与登录**：浏览器打开站点根地址，确认首页返回 200、主题样式加载、登录卡片可见；用部署时创建的账号登录，确认顶部欢迎语、左侧页签与 `Admin/SystemHealth.aspx` 的数据库轻量连接状态正常。
+9. **发布后回归**：逐项执行 [deployment-checklist.md](deployment-checklist.md) 的「发布后回归」9 项（首页、登录、权限、错误页、虚拟目录等），并保留证据。
+10. **记录与回退**：记录版本号、发布目录、配置位置与 SQL 脚本批次；按该清单的「回滚与记录」准备回退包。首次部署不建议开启任何调试态开关。
+
+> **常见阻断与定位**：登录后报「服务未注册」或列表为空，多为数据库脚本批次未执行完；页面报配置错误，多为 `ExternalCfgPath` / `<env>` 与外置目录不一致或应用池标识无读取权限；样式丢失，多为静态资产未随发布目录复制。排查入口是 `Dev/Logs/` 结构化诊断日志与 `Admin/DiagnosticsLogs.aspx`。
+
+> **边界**：本地开发用 IIS Express 时可改用 `dev/scripts/Start-IISExpress.ps1`（默认端口 `40001`），流程更短；本节面向正式 IIS 站点，**不覆盖**负载均衡、Web Farm 的 `machineKey` 统一分发、SQL Server Always On 等拓扑，这些须由目标环境运维方案承接。
+
 ## 每日检查
 
 1. 打开 `Admin/SystemHealth.aspx`，确认整体状态不是 `Error`，并记录需要目标环境补证的 `Pending` 项。

@@ -132,6 +132,43 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 
 包状态表中不存在记录时，已验证包按启用处理，兼容尚未配置状态行的部署。状态表缺失或不可读时，前台同样保持默认启用，但后台状态写入会提示先执行迁移。
 
+## 端到端示例：从零加一个模块
+
+上面各节分别讲了清单、骨架、启用与门禁，但没有把它们串成一次可以照着做完的走查。本节以只读公告模块 `HIA.SampleNotice` 为例，按 [module-mechanics-and-extension.md]({{ site.baseurl }}/module-mechanics-and-extension/) 的四步纲要走一遍；每步给出可核对的结果，命令都指向仓库中真实存在的脚本。这里**只做只读展示**，不引入权限变更、DLL、脚本或外部资源。
+
+**第 1 步 · 写模块**：在 `src/Portal/DesktopModules/SampleNotice/` 下建四个文件 —— `SampleNotice.ascx`、`SampleNotice.ascx.cs`、`SampleNotice.ascx.designer.cs`、`module.json`。标记层 `Inherits` 写全限定类名（见「代码骨架」），标记与代码后置的注释用 `<lang>` 双语块。`module.json` 用只读参考包形态：
+
+```json
+{
+ "schemaVersion": 1,
+ "packageId": "HIA.SampleNotice",
+ "displayName": "示例公告 / Sample Notice",
+ "version": "1.0.0",
+ "minimumPortalVersion": "1.0",
+ "desktopEntry": "DesktopModules/SampleNotice/SampleNotice.ascx",
+ "resources": []
+}
+```
+
+包内不放 `.dll`、`.zip`、`.js` 与内联 `<script>`（冒烟门禁的 Fail 级约束）。若模块读数据，把业务迁移脚本按实体命名放在 `src/Setup/`，命名 `PortalBiz_*.sql` 且不得含 `USE [database]`；纯展示模块不需要迁移脚本，此时冒烟检查用 `-SkipSqlMigrationCheck` **如实豁免**并在提交信息写明理由。
+
+**第 2 步 · 登记到构建与档位**：把三个新文件加入 `src/Portal/Portal.csproj` 的 `<Compile>` / `<Content>` 项，否则类不会进 `bin/Portal.dll`。CSS 使用门户稳定 scope（`portal-module`、`portal-package-{packageId}`），并在 7 套皮肤的 `Default.css` 主题规则中确认作用域不会污染别的模块。确认 `packageId` 已进入生效档位的 `Packages`；不打算挂载的包要登记进 `notMounted`，否则包契约门禁会判它「无档位覆盖」。
+
+**第 3 步 · 构建、冒烟、挂实例**：依次执行：
+
+```powershell
+pwsh -NoProfile -File dev/scripts/Restore-NuGetPackages.ps1
+pwsh -NoProfile -File dev/scripts/Build-Solution.ps1
+pwsh -NoProfile -File dev/scripts/Test-PortalNewModuleReadiness.ps1
+pwsh -NoProfile -File dev/scripts/Test-PortalBusinessModuleSmoke.ps1 -ModuleName HIA.SampleNotice -SkipSqlMigrationCheck
+```
+
+构建 0 错误、两条门禁全绿之后，以 `Admins` 打开 `Admin/ModuleCatalog.aspx` 点 **Register** 创建模块定义，再到目标页签的布局管理页面挂实例（给标题、顺序、编辑角色）。包未出现在目录页时，先查 `desktopEntry` 路径与 manifest 解析结果，不要绕过门禁手工写库。
+
+**第 4 步 · 运行期确认与提交前自查**：启动站点（本地可用 `dev/scripts/Start-IISExpress.ps1`，默认端口 `40001`），打开挂了实例的页签，确认模块真实渲染、欢迎与页签导航正常、7 套皮肤下样式不串；再按「提交前检查清单」12 项逐条核对，最后跑一次 `dev/scripts/Invoke-PortalGateSuite.ps1` 确认门禁全绿。
+
+> **这一步不能省**：`Inherits` 只写类名时 msbuild 编译不报错，只有运行期才会抛 `CS0103`；同理，档位未放行时模块静默不渲染。只跑构建与单测、不看运行页面，仍可能交付一个「编译通过但页面空白」的模块。
+
 ## 装配态、环境开关与离线校验（受控调试态）
 
 模块的**装配态（assembly mode）** 描述源码在站点中的编译承载方式。平台面向 Web Application Project（WAP）路线：生产默认恒为 `CodeBehind`（源码随构建进入 `bin/`），另有受控的 `CodeFile` 调试态（源码置于站点目录由 ASP.NET 即时编译）仅用于本地受信任调试。装配态**不写入** `module.json`（manifest 只描述包形态），而是记录在独立的**部署侧台账** `src/Portal/Config/module-assembly-state.json`。台账无条目即表示全部模块缺省 `CodeBehind`。
@@ -284,4 +321,4 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 - [ ] 新增接入编排：把该模块的冒烟检查与就绪检查加入 `dev/scripts/Invoke-PortalGateSuite.ps1`（L1 冒烟 / L0 就绪）
 - [ ] 门禁套件全绿：`Invoke-PortalGateSuite.ps1`
 
-<!-- build-stamp: 5CA664543000 -->
+<!-- build-stamp: 87183AC3D15F -->

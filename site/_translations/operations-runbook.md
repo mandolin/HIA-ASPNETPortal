@@ -25,6 +25,57 @@ certificate private keys or production configuration.
 Admin pages are only runtime viewing and limited maintenance entry points; they do not replace the formal operations consoles
 of the target IIS, SQL Server, backup systems or enterprise monitoring platforms.
 
+## First-time deployment to IIS
+
+This section chains "getting the source" through to "the site responds" for a target Windows + IIS + SQL Server
+environment. Every step has a checkable result. The
+[release and compatibility checklist](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-checklist.md)
+complements it: that page lists *what to confirm*, this one lists *how to do it*. Nothing here automatically changes IIS,
+application pools, databases or external configuration — the deployment owner performs every change in their own
+environment.
+
+1. **Get the source**: the project ships as source only, so clone the GitHub repository or download a source archive.
+2. **Restore and build**: from the repository root run `dev/scripts/Restore-NuGetPackages.ps1`, then build `src/master.sln`
+   with `dev/scripts/Build-Solution.ps1` (or select `Release | Any CPU` in Visual Studio). Continue only after a
+   zero-error build.
+3. **Initialise the database**: run the base and incremental scripts plus `src/Setup/Portal_UserCredentials.sql` in order
+   against the target SQL Server. Initialisation scripts carry a **guard against accidental deletion** and run
+   automatically only against isolated test databases; back up any existing database and confirm manually first — see the
+   "Database and configuration" section of
+   [deployment-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-checklist.md).
+4. **Place the external connection strings**: copy `src/Portal/Config/Templates/connectionStrings.config` to
+   `Web\HIA-ASPNETPortal\{env}\connectionStrings.config` under the profile directory of the process account on the target
+   machine (`{env}` is usually `prod` and must match `<env value="..." />` in `web.config`), then fill in the `Portal`
+   connection string for the database created in step 3. **Real connection strings never enter the repository.**
+5. **Produce the publish directory**: use `dev/scripts/Publish-PortalFileSystem.ps1` to export `src/Portal` to the target
+   publish directory. Confirm `bin/`, `DesktopModules/`, `Admin/`, `Default.aspx` and `web.config` are present, and that
+   the publish directory contains **no real value** for `Config/Templates/connectionStrings.config`.
+6. **Create the application pool and site**: in IIS Manager create an application pool (.NET CLR version `v4.0`, managed
+   pipeline mode `Integrated`), create a site whose physical path is the publish directory from step 5, and configure
+   bindings (HTTPS with a valid certificate is recommended on an intranet). Grant the application pool identity minimal
+   write access to `App_Data/Logs` and the upload directory; keep everything else read-only.
+7. **Confirm the external configuration is reachable**: verify the application pool identity can read the directory from
+   step 4. For a custom location, set `ExternalCfgPath` in `web.config` explicitly and keep `<env>` consistent with the
+   external directory.
+8. **First visit and sign-in**: open the site root in a browser and confirm a 200 response, loaded theme styles and a
+   visible sign-in card. Sign in with the deployment account and confirm the welcome text, the left-hand tabs and the
+   lightweight database connection status on `Admin/SystemHealth.aspx`.
+9. **Post-release regression**: work through the nine "Post-release regression" items in
+   [deployment-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-checklist.md)
+   (home, sign-in, permissions, error page, virtual directory, and so on) and retain the evidence.
+10. **Record and roll back**: record the version, publish directory, configuration location and SQL batch; prepare a
+    rollback package per "Rollback and records" in that checklist. Do not enable any debug-state switch on first deploy.
+
+> **Common blockers**: "service not registered" or empty lists after sign-in usually mean the SQL batch was not fully
+> applied; configuration errors usually mean `ExternalCfgPath` / `<env>` disagree with the external directory, or the
+> application pool identity lacks read access; missing styles usually mean static assets were not copied into the publish
+> directory. Start from the structured diagnostics logs and `Admin/DiagnosticsLogs.aspx`.
+
+> **Boundary**: for local development with IIS Express you can use `dev/scripts/Start-IISExpress.ps1` (default port
+> `40001`), which is a much shorter path. This section targets a formal IIS site and **does not cover** load balancing,
+> distributing a shared `machineKey` across a web farm, SQL Server Always On, or similar topologies — those belong to the
+> target environment's operations plan.
+
 ## Daily checks
 
 1. Open `Admin/SystemHealth.aspx`, confirm the overall status is not `Error`, and record `Pending` items that need

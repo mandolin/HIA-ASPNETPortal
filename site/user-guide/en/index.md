@@ -19,6 +19,10 @@ content, role permissions and back-office administration.
 
 ## Running it locally — overview
 
+> **Getting the source**: this project is delivered **as source only**; there is no prebuilt installer, container image
+> or binary release. Start by cloning the GitHub repository (or downloading a source archive). For a full first-time
+> deployment to IIS, see [operations-runbook.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/operations-runbook.md).
+
 Running locally usually requires:
 
 1. Preparing SQL Server or LocalDB.
@@ -388,4 +392,4 @@ documentation exists:
  development database, so it is documented at source level only and **has no runtime evidence** — see that section for
  the re-entry condition).
 
-<!-- build-stamp: 42095A0A9D6F -->
+<!-- build-stamp: 917A769FF0E9 -->

@@ -1,76 +1,80 @@
 {
-  "generatedUtc": "2026-11-06T04:46:23.9873929Z",
+  "generatedUtc": "2026-11-12T16:12:45.4718228Z",
   "entries": {
-    "Test-PortalModuleCache.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
-      "durationMs": 23192,
-      "status": "Pass"
-    },
-    "Test-PortalDefaultThemeVisualBaseline.mjs|L2|": {
-      "durationMs": 11841,
-      "status": "Pass"
-    },
-    "Test-PortalSqlCompatibility.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
-      "durationMs": 670,
-      "status": "Pass"
-    },
-    "Test-PortalSmoke.ps1|L2|": {
-      "durationMs": 2372,
-      "status": "Pass"
-    },
-    "Test-PortalSemanticMarkupEvidence.mjs|L2|": {
-      "durationMs": 12998,
-      "status": "Pass"
-    },
     "Test-PortalCollaborationLayoutEvidence.mjs|L2|": {
-      "durationMs": 16030,
-      "status": "Pass"
-    },
-    "Test-PortalPerformanceBaseline.mjs|L2|": {
-      "durationMs": 11269,
-      "status": "Pass"
-    },
-    "Test-PortalLocalizedNameRuntimeEvidence.ps1|L2|": {
-      "durationMs": 58826,
-      "status": "Pass"
-    },
-    "Invoke-PortalModuleRuntimeGate.ps1|L2|": {
-      "durationMs": 252279,
-      "status": "Pass"
-    },
-    "Test-PortalPlatformEmptyStateEvidence.mjs|L2|": {
-      "durationMs": 22434,
-      "status": "Pass"
-    },
-    "Test-PortalModuleRuntimeEvidence.mjs|L2|": {
-      "durationMs": 130416,
-      "status": "Pass"
-    },
-    "Test-PortalLocalizationLeakEvidence.mjs|L2|": {
-      "durationMs": 14257,
-      "status": "Pass"
-    },
-    "Test-PortalWorkItemReachabilityEvidence.mjs|L2|": {
-      "durationMs": 15344,
+      "durationMs": 19001,
       "status": "Pass"
     },
     "Test-PortalPlaceholderEvidence.mjs|L2|": {
-      "durationMs": 26363,
+      "durationMs": 31193,
       "status": "Pass"
     },
-    "Test-PortalResourceContractEvidence.mjs|L2|": {
-      "durationMs": 3371,
+    "Test-PortalDefaultThemeVisualBaseline.mjs|L2|": {
+      "durationMs": 13070,
       "status": "Pass"
     },
-    "Test-PortalAdminListUiEvidence.mjs|L2|": {
-      "durationMs": 11061,
+    "Test-PortalModuleRuntimeEvidence.mjs|L2|": {
+      "durationMs": 132574,
       "status": "Pass"
     },
-    "Test-PortalExtensionSmoke.ps1|L2|": {
-      "durationMs": 40581,
+    "Test-PortalDocumentationWalkthrough.mjs|L2|": {
+      "durationMs": 24642,
+      "status": "Pass"
+    },
+    "Test-PortalPerformanceBaseline.mjs|L2|": {
+      "durationMs": 15042,
+      "status": "Pass"
+    },
+    "Test-PortalLocalizedNameRuntimeEvidence.ps1|L2|": {
+      "durationMs": 65344,
       "status": "Pass"
     },
     "Test-PortalP77SupplementEvidence.mjs|L2|": {
-      "durationMs": 10180,
+      "durationMs": 14078,
+      "status": "Pass"
+    },
+    "Test-PortalAdminListUiEvidence.mjs|L2|": {
+      "durationMs": 13066,
+      "status": "Pass"
+    },
+    "Test-PortalLocalizationLeakEvidence.mjs|L2|": {
+      "durationMs": 16516,
+      "status": "Pass"
+    },
+    "Invoke-PortalModuleRuntimeGate.ps1|L2|": {
+      "durationMs": 311769,
+      "status": "Pass"
+    },
+    "Test-PortalModuleCache.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
+      "durationMs": 23832,
+      "status": "Pass"
+    },
+    "Test-PortalWorkItemReachabilityEvidence.mjs|L2|": {
+      "durationMs": 21947,
+      "status": "Pass"
+    },
+    "Test-PortalSemanticMarkupEvidence.mjs|L2|": {
+      "durationMs": 15144,
+      "status": "Pass"
+    },
+    "Test-PortalExtensionSmoke.ps1|L2|": {
+      "durationMs": 62911,
+      "status": "Pass"
+    },
+    "Test-PortalResourceContractEvidence.mjs|L2|": {
+      "durationMs": 5888,
+      "status": "Pass"
+    },
+    "Test-PortalPlatformEmptyStateEvidence.mjs|L2|": {
+      "durationMs": 24986,
+      "status": "Pass"
+    },
+    "Test-PortalSmoke.ps1|L2|": {
+      "durationMs": 3892,
+      "status": "Pass"
+    },
+    "Test-PortalSqlCompatibility.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
+      "durationMs": 1118,
       "status": "Pass"
     }
   }

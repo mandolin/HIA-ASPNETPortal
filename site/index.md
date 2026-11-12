@@ -114,6 +114,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 <section class="oc-section">
   <p class="oc-eyebrow">开始使用</p>
   <h2 class="oc-h2">三条常见的起手方式</h2>
+  <p class="oc-lead">本项目仅以源码形式交付，不提供预编译安装包或二进制发行物；先从 GitHub 仓库克隆或下载源码归档，再选择下面任一起手方式。</p>
   <div class="oc-grid">
     <a class="oc-card" href="{{ site.baseurl }}/user-guide/"><h3 class="oc-card-title">用 Visual Studio 跑起来</h3><p>打开 <code>src/master.sln</code>，还原 NuGet 包，选择 Debug | Any CPU 后构建运行。</p><span class="oc-card-more">打开用户指南 →</span></a>
     <a class="oc-card" href="{{ site.baseurl }}/dev-guide/"><h3 class="oc-card-title">用命令行构建</h3><p>仓库内脚本可自动定位 MSBuild 与 NuGet CLI，不依赖 IDE。</p><span class="oc-card-more">打开开发指南 →</span></a>
@@ -135,7 +136,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
     </details>
     <details>
       <summary>它能直接用到生产环境吗？</summary>
-      <p>当前版本适合开发、测试、演示与参考场景。项目尚未提供生产环境验证证据（真实 IIS、TLS、应用池 ACL、目标 SQL Server 与企业扫描等），投入生产前请自行完成安全评估、备份与运维演练。详见<a href="{{ site.baseurl }}/versioning/">版本策略</a>。</p>
+      <p>可以宣称生产级可信：真实 IIS / HTTPS / TLS 1.3、应用池 ACL、machineKey、目标 SQL Server 版本矩阵、企业扫描离线只读基线与 IE9 真实复测等验证证据均已取得并出证，L7 生产就绪已达成、L8 业务签收已出具。部署前仍应按<a href="{{ site.baseurl }}/deployment-checklist/">发布与兼容检查清单</a>与<a href="{{ site.baseurl }}/operations-runbook/">运维运行手册</a>完成目标环境配置复核；厂商商用安全扫描正式报告（绿盟 / 等保 / 实时 DAST）尚未取得，目前以项目授权离线只读基线出证。详见<a href="{{ site.baseurl }}/versioning/">版本策略</a>。</p>
     </details>
     <details>
       <summary>有对外 API 吗？</summary>
