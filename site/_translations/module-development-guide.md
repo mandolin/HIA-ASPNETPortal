@@ -14,9 +14,16 @@ New business modules use the **trusted deployed module package** mechanism. It k
 user-control route: module source files are written into the site by a trusted development, build and deployment pipeline,
 and administrators only register and enable modules from verified packages.
 
-The current version does **not** support background ZIP/DLL upload, online compilation, online editing of module files,
-external URLs, remote downloads, automatic JavaScript loading, or database migrations shipped with a package. Existing
-flat `DesktopModules/*.ascx` and `Admin/*.ascx` files continue to run as Legacy modules; bulk migration is not required.
+**The online-capability safety foundation is in place, but the administrator-side online installation entry point is not
+yet open**: isolated staging, a stateless two-step confirmation gate, SHA-256 integrity and RSA-SHA256 signature
+verification, a degradable fail-closed scanner adapter, rollback and single-module failure isolation all exist with gate
+evidence. However, distribution of the signing public key and the "require signature" deployment switch, plus the online
+installation page entry point, are not wired up; the scanner is not connected to a production engine either. Therefore
+**administrators still cannot upload ZIP/DLL packages from the back office in the current version**. Online compilation,
+online editing of module files, external URL loading, remote downloads, automatic JavaScript loading, and package-shipped
+database migrations are all unsupported. These are capabilities deferred behind explicit safety prerequisites: each must
+be reassessed once permission control, auditing, rollback, and isolation are complete; delivery is not promised.
+Existing flat `DesktopModules/*.ascx` and `Admin/*.ascx` files continue to run as Legacy modules; bulk migration is not required.
 
 ## Layout and manifest
 

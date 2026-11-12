@@ -13,7 +13,8 @@
 - 治理视图机器门禁 `Test-PortalGovernanceView` 落地（只读对账能力/模块/权限键/入口四源，FAIL=0/WARN=5；C3 暴露 5 条权限键漂移——EmployeeProfileConfirm/EmployeeProfileCorrectionRequest 注册表多写 `Business.` 前缀、LeaveRequest/ExpenseReimbursement/FormBuilder 无对应键族，属安全契约变更信号、待独立裁决）。
 - 代码文档快照刷新（`site/api/dotnetdoc/`），修复 `Test-PortalCodeDocs` B2 源指纹漂移；文档就绪度套件（DocumentationReadiness/PublicDocumentation/SiteMirrorConsistency/I18nContentParity/CodeDocs）全 PASS。
 - 开源就绪度套件（`Test-PortalSecretLeakage` 6630 文件无非高置信度密钥、`Test-PortalComplianceBaseline` 安全头/密码策略 PBKDF2 基线全过）全 PASS；根目录 LICENSE(MIT)/README/`.gitignore`/CONTRIBUTING 齐备。
-- 诚实边界（据实登记）：R5 的 L2 运行期证据因环境阻断（门户未连库、无种子数据/凭据）未产出、未编造；5 条权限键漂移待安全契约复核；上述均不阻断封版触发条件。
+- 诚实边界（据实登记，2026-11-11 封版时点）：R5 的 L2 运行期证据因环境阻断（门户未连库、无种子数据/凭据）未产出、未编造；5 条权限键漂移待安全契约复核；上述均不阻断封版触发条件。
+- **2026-11-12 补注（上述两项已闭环，原文为封版当日史实、保留不改）**：①「未连库/无凭据」判定经实测推翻——外置连接串存在且用集成认证，门户在线返回 200，HTTP 级 L2 合格；浏览器级 L2 已在隔离测试库以认证方式补齐，6 套正式主题下各状态列表渲染均有截图与机器校验记录（证据存于内部阶段证据目录，不进公开仓）。② 5 条权限键漂移按低风险安全契约裁定消解：注册表前缀对齐实际键、补登模块已在用键族、宿主型能力声明 keyless 且门禁跳过；治理视图 FAIL=0 / WARN=0、单测与构建门禁全绿。两项均不改变 `v3.0.0` 的 R1–R6 达成结论。
 
 ## [v2.2.0] - 2026-11-06
 **请假与报销「重新提交」与首页布局改为「上二下一」**：被退回 / 已拒绝的申请可在原记录上修改后再次提交；首页内容区按产品草图从"三栏并排"改为"第一行账户登录 + 门户公告、第二行帮助与说明通栏"，并同步重拍文档站首页截图。

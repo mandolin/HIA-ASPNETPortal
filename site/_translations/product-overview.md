@@ -23,16 +23,22 @@ SPA and has no client-side routing; pages and modules render through the Web For
 > Provenance: this project derives from the ASP.NET Portal Starter Kit published on CodePlex, and has since been
 > reworked and extended extensively.
 
-Current version: **v1.0.0** (first release, 2026-10-09).
+Current version: **v3.0.0** (2026-11-11, platform-ready / L11 achieved). Maturity is stated as **usable / reference /
+research baseline**.
 
 ### Where it fits
 
-This is the **first formal release**, with complete capability coverage, quality gates, documentation and open-source
-readiness, version anchoring, and consistent wording.
+Building on the first-release criteria (capability coverage, item-by-item benchmarking, quality gates, documentation
+readiness, open-source readiness, version anchoring, and wording constraints), this version additionally achieves
+**platform readiness**: the portal can safely host independently deployable capability modules and provide controlled
+online capability injection. A governance view, version anchors, documentation readiness and open-source readiness are
+all guarded by machine gates.
 
-However, **no production-environment validation evidence is provided yet** (real IIS, TLS, application pool ACLs, target
-SQL Server, enterprise scanning, and so on), so **direct production use is not recommended**. Full version rules are in
-`docs/versioning.md`.
+**Production-environment validation evidence has been obtained and documented**: real IIS / HTTPS / TLS 1.3 / application
+pool ACLs, machineKey, a target SQL Server version matrix, an offline read-only enterprise scanning baseline, and real
+IE9 retesting are all closed out. `M-ANP-TRUSTED-PORTAL` / L7 is achieved and L8 business sign-off has been issued, so
+**production-grade reliability is claimed**. Full version rules are in `docs/versioning.md`; before deployment, still
+recheck the target-environment configuration with `deployment-checklist.md` and `operations-runbook.md`.
 
 ## 2. Who it is for
 
@@ -48,7 +54,9 @@ SQL Server, enterprise scanning, and so on), so **direct production use is not r
 - Integration scenarios that need an **external REST / GraphQL API** — this project is a Web Forms portal with **no such
  external surface**;
 - Scenarios requiring modern frontend frameworks (React / Vue) or a separated frontend/backend architecture;
-- Deployments that demand "production-grade trust evidence" — that evidence is not yet achieved.
+- Deployments that fall outside the shape covered by the existing production-environment evidence and require a vendor
+ commercial security-scan report (NSFOCUS / classified protection / live DAST) — such an external report has not yet
+ been obtained; an authorized offline read-only baseline is provided instead (see `docs/operations-runbook.md`).
 
 ## 3. Capability map
 
@@ -69,7 +77,8 @@ SQL Server, enterprise scanning, and so on), so **direct production use is not r
 ## 4. Boundaries (explicitly out of scope)
 
 - **No external REST / GraphQL API**, and no machine-readable interface contract such as OpenAPI;
-- **No claim of production-grade trust** (L7 evidence not achieved);
+- **No vendor commercial security-scan report** (an offline read-only baseline is provided; the external report is
+ pending from the target environment);
 - No support for modern frontend frameworks or a separated frontend/backend architecture;
 - Generated documentation directories (`src/Documentation/`, `src/Portal.Components.Data/Documentation/`, `src/DoxyGen/`)
  are **generated output**, not maintained documentation entry points;

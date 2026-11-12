@@ -292,10 +292,12 @@ gate fails.
 - **What they do not do**: approve / reject, status transitions (nothing changes after `Pending`), approval comments, or
   withdrawing or editing a submitted record. No approval action method or button exists anywhere in the source.
 - **"My Work Items" contains no approval either**: it is a **read-only projection** of work items (filterable by
-  "all / overdue only"); it neither handles business nor owns process semantics. By design, handling should jump to the
-  associated business object — and the current version provides no such handling screen.
-- **Therefore**: approval is not part of these modules and must be carried by an external process or a later version.
-  Not finding an approval screen on the tab is **expected behaviour**, not a defect — please do not file an issue for it.
+  "all / overdue only"); it neither handles business nor owns process semantics. By design, handling jumps to the
+  associated business object — **the approval screens are provided by back-office review pages** (leave requests and
+  expense reimbursements each have their own page, with lists, status filters, approve / return / reject actions, and
+  persisted review comments).
+- **Therefore**: approval actions are not part of these modules. Not finding an approval button on the **user-side tab**
+  is **expected behaviour**, not a defect; use the back-office entry to open the corresponding review page.
 - The message shown after a successful submission ("you can track approval progress in 'My Work Items'") refers to
   **tracking the work item itself**; it does not mean this portal provides approval handling.
 
@@ -386,4 +388,4 @@ documentation exists:
  development database, so it is documented at source level only and **has no runtime evidence** — see that section for
  the re-entry condition).
 
-<!-- build-stamp: AA9676EA3A93 -->
+<!-- build-stamp: 42095A0A9D6F -->
