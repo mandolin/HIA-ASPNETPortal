@@ -20,6 +20,7 @@
       C3 每个能力的 PermissionKeyPrefix 应在 PortalPermissionKeys 有对应键族（权限键漂移 → L0 硬失败）
       C4 导航 DesktopModule 入口引用的模块目录应存在（悬空入口 → L0 硬失败）
       C5 能力键 / 模块包标识 / 权限键 命名形态与层词表（命名漂移 → L0 硬失败）
+      C6 入口双源交叉对账：SQL 导航种子（完整用户级页签/模块挂载源）与代码导航注册表（需运行期元数据的精选入口源）显式承认双源；代码声明的 DesktopModule 入口必须在数据库（种子 ∪ 部署增量）有对应挂载（含部署态增量白名单，FormBuilder 等由 PortalCfg_FormBuilder_Provision.sql 注入）→ L0 硬失败
 
     退出码：
       0  = 通过（无硬失败）
@@ -236,6 +237,66 @@ foreach ($k in $permKeys) {
     }
 }
 if ($badPerm -eq 0) { Emit 'OK' ("{0} 个权限键首段均在已知层词表" -f $permKeys.Count) }
+
+# ============ C6：入口双源交叉对账（SQL 种子 ↔ 代码注册表，含部署态增量白名单）============
+# Q3-C（W-anp-P326）：显式承认入口存在两套并行源、交集须有人看守——
+#   ① SQL 导航种子（src/Setup/Portal_NavigationSeed.sql）：用户级页签与模块挂载的【完整】事实源；
+#   ② 代码导航注册表（PortalNavigationRegistry.cs）：需运行期权限/可见性元数据的【精选】入口集合
+#      （含 AdminPage 与少数 DesktopModule），并非种子的完整镜像。
+# 作用域不同，故只校收敛方向：代码声明了一个 DesktopModule 入口 ⇒ 数据库（种子 ∪ 部署增量）必须挂载它，
+# 否则运行时该入口点进去无模块（P319-① 类事故）。反向（种子⊆代码）不成立——注册表是精选集、不枚举全部基础模块，属诚实边界。
+# AdminPage 类入口为平台/后台页，本就不进用户级导航种子，显式免校；FormBuilder 等由部署增量脚本
+# （PortalCfg_FormBuilder_Provision.sql）注入，纳入「部署态增量白名单」，与种子合并为有效数据库挂载集 D。
+Write-Host ''
+Write-Host '[C6] 入口双源交叉对账（SQL 种子 ↔ 代码注册表）' -ForegroundColor Cyan
+
+$seedSqlPath      = Join-Path $RepoRoot 'src/Setup/Portal_NavigationSeed.sql'
+$provisionSqlPath = Join-Path $RepoRoot 'src/Setup/PortalCfg_FormBuilder_Provision.sql'
+
+# 数据库侧挂载集合 D = 种子模块挂载 ∪ 部署态增量挂载
+$dbMounts = @{}
+if (Test-Path $seedSqlPath) {
+    $seedText = Get-Content $seedSqlPath -Raw -Encoding UTF8
+    foreach ($m in [regex]::Matches($seedText, "\(N'[^']*',\s*N'[^']*',\s*N'[^']*',\s*N'[^']*',\s*\d+,\s*N'[^']*',\s*\d+,\s*N'[^']*',\s*N'(?<src>[^']*)',\s*N'[^']*',\s*N'[^']*'\)")) {
+        $s = $m.Groups['src'].Value
+        if ($s -ne '' -and -not $dbMounts.ContainsKey($s)) { $dbMounts[$s] = 'seed' }
+    }
+}
+# 部署态增量白名单：部署期注入、不在基础种子内的模块挂载
+$deployIncrements = @()
+if (Test-Path $provisionSqlPath) {
+    $provText = Get-Content $provisionSqlPath -Raw -Encoding UTF8
+    foreach ($m in [regex]::Matches($provText, "\[?DesktopSourceFile\]?\s*=\s*N'(?<src>[^']+)'")) {
+        $s = $m.Groups['src'].Value
+        if ($s -ne '' -and -not $dbMounts.ContainsKey($s)) { $dbMounts[$s] = 'provision'; $deployIncrements += $s }
+    }
+}
+
+# 代码侧 DesktopModule 入口集合 R（注册表非完整镜像，仅含精选桌面模块）
+$regDmRe = '(?s)new PortalNavigationEntry\(\s*"(?<id>[^"]+)",\s*PortalNavigationEntryKind\.DesktopModule.*?(?<src>"(?:DesktopModules|Admin)/[^"]+\.ascx")'
+$regDesktop = @()
+if (Test-Path $navFile) {
+    foreach ($m in [regex]::Matches($navText, $regDmRe)) {
+        $regDesktop += [PSCustomObject]@{ Id = $m.Groups['id'].Value; Src = $m.Groups['src'].Value.Trim('"') }
+    }
+}
+
+if ($regDesktop.Count -eq 0) {
+    Emit 'FAIL' '未在代码导航注册表解析到任何 DesktopModule 入口（入口源缺失）'
+}
+else {
+    foreach ($e in $regDesktop) {
+        if ($dbMounts.ContainsKey($e.Src)) {
+            Emit 'OK' ("代码入口 {0} 的模块挂载 {1} 在数据库（{2}）中存在" -f $e.Id, $e.Src, $dbMounts[$e.Src])
+        }
+        else {
+            Emit 'FAIL' ("代码入口 {0} 声明的模块挂载 {1} 在数据库种子与部署态增量中均未找到（入口点进去无模块；若属合法部署增量，请加入白名单）" -f $e.Id, $e.Src)
+        }
+    }
+}
+if ($deployIncrements.Count -gt 0) {
+    Emit 'OK' ("部署态增量白名单已纳入 {0} 项（由 PortalCfg_FormBuilder_Provision.sql 注入）：{1}" -f $deployIncrements.Count, ($deployIncrements -join ', '))
+}
 
 # ============ 汇总 ============
 Write-Host ''
