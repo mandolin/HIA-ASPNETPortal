@@ -35310,6 +35310,42 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestadmin employeeprofilecorrectionrequestadmin dotnet-field legacy aggregate permission for employee-profile correction administration. public const string aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestadmin dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestadmin portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 管理员工资料更正请求的旧聚合权限。 legacy aggregate permission for employee-profile correction administration."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+      "name": "LeaveRequestSubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-58cb2aa6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-58cb2aa6.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit leaverequestsubmit dotnet-field submit a leave request. public const string aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 提交请假申请。 submit a leave request."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+      "name": "LeaveRequestResubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-7410823b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-7410823b.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit leaverequestresubmit dotnet-field resubmit a leave request. public const string aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 重新提交请假申请。 resubmit a leave request."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+      "name": "ExpenseReimbursementSubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-447eb286.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-447eb286.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit expensereimbursementsubmit dotnet-field submit an expense reimbursement. public const string aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 提交费用报销。 submit an expense reimbursement."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+      "name": "ExpenseReimbursementResubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-055ec21b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-055ec21b.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit expensereimbursementresubmit dotnet-field resubmit an expense reimbursement. public const string aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 重新提交费用报销。 resubmit an expense reimbursement."
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkitemsview",
       "name": "BusinessWorkItemsView",
       "kind": "dotnet-field",

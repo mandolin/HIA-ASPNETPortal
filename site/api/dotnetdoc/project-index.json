@@ -4,8 +4,8 @@
   "project": {
     "defaultLocale": "zh-CN",
     "entryCounts": {
-      "all": 5780,
-      "dotnet": 5780
+      "all": 5784,
+      "dotnet": 5784
     },
     "id": "hia-aspnetportal",
     "locales": [
@@ -87794,19 +87794,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 251
+            "line": 283
           },
           "end": {
-            "line": 251
+            "line": 283
           }
         },
         "fetchUrl": "sources/88053e43e72f91edc5907086ddb4d3bd18b6c3bd6a9ae42ac1995058c17fc7a0.txt",
-        "linkUrl": "sources/a27cd0144b2832023374d7970aab41435c415fdc8ce2db4fb75687049592e3f9.L251.html#L251",
+        "linkUrl": "sources/15316ae147228c9d29205f578821ae1b2cae735f5935e55f8504b9e742aac087.L283.html#L283",
         "publicAsset": {
-          "assetId": "portal.asset:a27cd0144b2832023374d7970aab4143",
-          "sourceId": "portal.source:667168f8396549d3575539faa7a7c521",
+          "assetId": "portal.asset:15316ae147228c9d29205f578821ae1b",
+          "sourceId": "portal.source:5f322e1443869c150a3965b43765ce23",
           "relativeUrl": "sources/88053e43e72f91edc5907086ddb4d3bd18b6c3bd6a9ae42ac1995058c17fc7a0.txt",
-          "linkUrl": "sources/a27cd0144b2832023374d7970aab41435c415fdc8ce2db4fb75687049592e3f9.L251.html#L251",
+          "linkUrl": "sources/15316ae147228c9d29205f578821ae1b2cae735f5935e55f8504b9e742aac087.L283.html#L283",
           "revision": "content:88053e43e72f91edc5907086ddb4d3bd18b6c3bd6a9ae42ac1995058c17fc7a0",
           "digest": "sha384-uVmTnVlIR+/LIknyb4Kbyq1rHfFeD1AeqVEdqw+OtgENQbr2BLhy+gEySvKRwN9Z",
           "byteLength": 84,
@@ -87917,19 +87917,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 243
+            "line": 275
           },
           "end": {
-            "line": 243
+            "line": 275
           }
         },
         "fetchUrl": "sources/056faab1c3fa4d73d1a732179873c017bb0fbd867fce272ff15ff5a87d1af1b7.txt",
-        "linkUrl": "sources/7d2c2bf91d899227d97268b7a7f9101b82f7bcbfceb1202489009a17fe7a7f98.L243.html#L243",
+        "linkUrl": "sources/0398d86768b926c8eaaf670eac291b88bd341fab645c464fe8fb137b4a5e994e.L275.html#L275",
         "publicAsset": {
-          "assetId": "portal.asset:7d2c2bf91d899227d97268b7a7f9101b",
-          "sourceId": "portal.source:80d78a5c22d78ac2b9d4099bc7e85378",
+          "assetId": "portal.asset:0398d86768b926c8eaaf670eac291b88",
+          "sourceId": "portal.source:3d2a875e4a9a56fa1bb133c55c24a99d",
           "relativeUrl": "sources/056faab1c3fa4d73d1a732179873c017bb0fbd867fce272ff15ff5a87d1af1b7.txt",
-          "linkUrl": "sources/7d2c2bf91d899227d97268b7a7f9101b82f7bcbfceb1202489009a17fe7a7f98.L243.html#L243",
+          "linkUrl": "sources/0398d86768b926c8eaaf670eac291b88bd341fab645c464fe8fb137b4a5e994e.L275.html#L275",
           "revision": "content:056faab1c3fa4d73d1a732179873c017bb0fbd867fce272ff15ff5a87d1af1b7",
           "digest": "sha384-pihO8fsQfw4Fd/dActGW5BWMAA/so73SWoeyIrY0Q/QWMOZ3F5RLnDy2HFaKhfGn",
           "byteLength": 86,
@@ -88040,19 +88040,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 227
+            "line": 259
           },
           "end": {
-            "line": 227
+            "line": 259
           }
         },
         "fetchUrl": "sources/0b98867e052966948c07fc33a067869deb504824b9b35535c1b0c7bac1b7c0fc.txt",
-        "linkUrl": "sources/1296c9b9e0b2e4c6d06bd55595cf39f16e8bfbbd5baa7aca07ef88ff5615ef9e.L227.html#L227",
+        "linkUrl": "sources/90b67bf056097c08bd6dae7555002cd2f41a3acdfcefb66acf184b43a85a3f49.L259.html#L259",
         "publicAsset": {
-          "assetId": "portal.asset:1296c9b9e0b2e4c6d06bd55595cf39f1",
-          "sourceId": "portal.source:f3fdedb7156f6d6dfc803bfdd57a1496",
+          "assetId": "portal.asset:90b67bf056097c08bd6dae7555002cd2",
+          "sourceId": "portal.source:e1a8fa32b468760820597b933715989d",
           "relativeUrl": "sources/0b98867e052966948c07fc33a067869deb504824b9b35535c1b0c7bac1b7c0fc.txt",
-          "linkUrl": "sources/1296c9b9e0b2e4c6d06bd55595cf39f16e8bfbbd5baa7aca07ef88ff5615ef9e.L227.html#L227",
+          "linkUrl": "sources/90b67bf056097c08bd6dae7555002cd2f41a3acdfcefb66acf184b43a85a3f49.L259.html#L259",
           "revision": "content:0b98867e052966948c07fc33a067869deb504824b9b35535c1b0c7bac1b7c0fc",
           "digest": "sha384-XoRY5ToRE+p6sdPwCseVNHiltXc+N5jVUuYLPdG51sVaXYI/T2j+9AwU8qJ9lmsN",
           "byteLength": 86,
@@ -88163,19 +88163,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 235
+            "line": 267
           },
           "end": {
-            "line": 235
+            "line": 267
           }
         },
         "fetchUrl": "sources/bdda0b96d1f0e1c859a649c393631e52583b35348775f5193939b38014fa40ef.txt",
-        "linkUrl": "sources/b89a8692ed5152fbedf395ccf96a7c41eeaa38f28cc3a39942dc283bc151a8c2.L235.html#L235",
+        "linkUrl": "sources/a88c2fad5121a29cc0ea4e295dd8444b8569a1ec1b3eb7d4293da31b2f9ffc09.L267.html#L267",
         "publicAsset": {
-          "assetId": "portal.asset:b89a8692ed5152fbedf395ccf96a7c41",
-          "sourceId": "portal.source:8db97c5e95e51d25aae9784f38a4b9b3",
+          "assetId": "portal.asset:a88c2fad5121a29cc0ea4e295dd8444b",
+          "sourceId": "portal.source:d1b887e11c3bd72a4ebc9faf685d5d2e",
           "relativeUrl": "sources/bdda0b96d1f0e1c859a649c393631e52583b35348775f5193939b38014fa40ef.txt",
-          "linkUrl": "sources/b89a8692ed5152fbedf395ccf96a7c41eeaa38f28cc3a39942dc283bc151a8c2.L235.html#L235",
+          "linkUrl": "sources/a88c2fad5121a29cc0ea4e295dd8444b8569a1ec1b3eb7d4293da31b2f9ffc09.L267.html#L267",
           "revision": "content:bdda0b96d1f0e1c859a649c393631e52583b35348775f5193939b38014fa40ef",
           "digest": "sha384-jlNrkfUAW0u3hwSn5LYaon5ZNPlO4z3UtvnZxvyFAKzzty7in0zRKNcLCRco3zoD",
           "byteLength": 88,
@@ -88286,19 +88286,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 319
+            "line": 351
           },
           "end": {
-            "line": 319
+            "line": 351
           }
         },
         "fetchUrl": "sources/189a6e83db2c5be2778a26018541ab4f89bfa7904f2e2c5c30fbc00d665a522d.txt",
-        "linkUrl": "sources/1ebaca3687b11f86f861f022e7837ef2f2c3638a29c8b082bfd372ab1d556a6a.L319.html#L319",
+        "linkUrl": "sources/ff59269e488a544b1b92d53f13c0c9d3f826057e12d4222445a30932c15131fc.L351.html#L351",
         "publicAsset": {
-          "assetId": "portal.asset:1ebaca3687b11f86f861f022e7837ef2",
-          "sourceId": "portal.source:c12c0ef3dccec6b1c930ab9c4849a466",
+          "assetId": "portal.asset:ff59269e488a544b1b92d53f13c0c9d3",
+          "sourceId": "portal.source:98c5ee6763bdbaa05f176456a85b78a8",
           "relativeUrl": "sources/189a6e83db2c5be2778a26018541ab4f89bfa7904f2e2c5c30fbc00d665a522d.txt",
-          "linkUrl": "sources/1ebaca3687b11f86f861f022e7837ef2f2c3638a29c8b082bfd372ab1d556a6a.L319.html#L319",
+          "linkUrl": "sources/ff59269e488a544b1b92d53f13c0c9d3f826057e12d4222445a30932c15131fc.L351.html#L351",
           "revision": "content:189a6e83db2c5be2778a26018541ab4f89bfa7904f2e2c5c30fbc00d665a522d",
           "digest": "sha384-DR4BWZmH4EYbA9cvZD95bFZ9WrABFnUsIiAcdT7j8nekeJPIrJDBOzXE7AB+qIaD",
           "byteLength": 88,
@@ -88409,19 +88409,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 287
+            "line": 319
           },
           "end": {
-            "line": 287
+            "line": 319
           }
         },
         "fetchUrl": "sources/8474deaf974af3b36009b29cb5cda017e2165dfba61e02e5644a737846447052.txt",
-        "linkUrl": "sources/9af617a622e8e5d76a9ece6eb40721862675a44a26d0ac17f2d80b776d5dd729.L287.html#L287",
+        "linkUrl": "sources/40d4d83c9def85f1c05828305c2a7804c7d4f95bb1570c2c2d0b3d5ed01c9619.L319.html#L319",
         "publicAsset": {
-          "assetId": "portal.asset:9af617a622e8e5d76a9ece6eb4072186",
-          "sourceId": "portal.source:a2f2dc42acbe377b339ac00befe1579e",
+          "assetId": "portal.asset:40d4d83c9def85f1c05828305c2a7804",
+          "sourceId": "portal.source:c12c0ef3dccec6b1c930ab9c4849a466",
           "relativeUrl": "sources/8474deaf974af3b36009b29cb5cda017e2165dfba61e02e5644a737846447052.txt",
-          "linkUrl": "sources/9af617a622e8e5d76a9ece6eb40721862675a44a26d0ac17f2d80b776d5dd729.L287.html#L287",
+          "linkUrl": "sources/40d4d83c9def85f1c05828305c2a7804c7d4f95bb1570c2c2d0b3d5ed01c9619.L319.html#L319",
           "revision": "content:8474deaf974af3b36009b29cb5cda017e2165dfba61e02e5644a737846447052",
           "digest": "sha384-VoWVKNB85nbF+1+GPaIiZQ+CaCsJT6km/Yx5ZWTc2Hp8UzSa/dSW+zm9omSES3xD",
           "byteLength": 90,
@@ -88532,19 +88532,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 327
+            "line": 359
           },
           "end": {
-            "line": 327
+            "line": 359
           }
         },
         "fetchUrl": "sources/e79599ab487a0f547459273740c4cd35de63db4d38256ceb420d8fcd5feb48b5.txt",
-        "linkUrl": "sources/b0e7a56b45061a993d0e3b0a5eb6df472be18d9adc6dbfe875908f196762e46e.L327.html#L327",
+        "linkUrl": "sources/69aee272033a4eef5288dd3496eff42b3e168be6312e498eb61227760f6b4eab.L359.html#L359",
         "publicAsset": {
-          "assetId": "portal.asset:b0e7a56b45061a993d0e3b0a5eb6df47",
-          "sourceId": "portal.source:202cfb9cee5d7dda1fae074a9ff883f9",
+          "assetId": "portal.asset:69aee272033a4eef5288dd3496eff42b",
+          "sourceId": "portal.source:0dcfe8db3094d0d1fcd9d9ca2ceffb4d",
           "relativeUrl": "sources/e79599ab487a0f547459273740c4cd35de63db4d38256ceb420d8fcd5feb48b5.txt",
-          "linkUrl": "sources/b0e7a56b45061a993d0e3b0a5eb6df472be18d9adc6dbfe875908f196762e46e.L327.html#L327",
+          "linkUrl": "sources/69aee272033a4eef5288dd3496eff42b3e168be6312e498eb61227760f6b4eab.L359.html#L359",
           "revision": "content:e79599ab487a0f547459273740c4cd35de63db4d38256ceb420d8fcd5feb48b5",
           "digest": "sha384-ij5B/PcCf4jSzpAxNJ+pg2qipReCr5myD+Z91QbwwnQMInl8EwvYe/Un06Js4Ops",
           "byteLength": 99,
@@ -88655,19 +88655,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 303
+            "line": 335
           },
           "end": {
-            "line": 303
+            "line": 335
           }
         },
         "fetchUrl": "sources/71c231334edd30051064011832f6f8755e92ced6ee5ad12099ae51a7dd03c11b.txt",
-        "linkUrl": "sources/70e44d50cf6fa51593f64aa80a1bba713b1a51433317059ff5b41443c17052f0.L303.html#L303",
+        "linkUrl": "sources/7387df09ad0a15cd7af888280746a62c9235e50117d59ae605d00e5301658b72.L335.html#L335",
         "publicAsset": {
-          "assetId": "portal.asset:70e44d50cf6fa51593f64aa80a1bba71",
-          "sourceId": "portal.source:fa5f5a6bd7d9b5324eac7b2a0d400f4d",
+          "assetId": "portal.asset:7387df09ad0a15cd7af888280746a62c",
+          "sourceId": "portal.source:418b088119f8bbd28ea29d697b95909d",
           "relativeUrl": "sources/71c231334edd30051064011832f6f8755e92ced6ee5ad12099ae51a7dd03c11b.txt",
-          "linkUrl": "sources/70e44d50cf6fa51593f64aa80a1bba713b1a51433317059ff5b41443c17052f0.L303.html#L303",
+          "linkUrl": "sources/7387df09ad0a15cd7af888280746a62c9235e50117d59ae605d00e5301658b72.L335.html#L335",
           "revision": "content:71c231334edd30051064011832f6f8755e92ced6ee5ad12099ae51a7dd03c11b",
           "digest": "sha384-P5JYmvTZUAd4GILa3SAK84e+EOvGwlSOS0Ftp0XZ5D2fKXqsP/Tgke+y7995DEDj",
           "byteLength": 90,
@@ -88778,19 +88778,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 311
+            "line": 343
           },
           "end": {
-            "line": 311
+            "line": 343
           }
         },
         "fetchUrl": "sources/8c7b398e6a1c47152bd4b4f34352e841c1bf095f0382cb87f205f708ca31e80c.txt",
-        "linkUrl": "sources/c4fad867fd54b284a1573194b4d3b110df02706a8e4a55cb956d3adc068fab5b.L311.html#L311",
+        "linkUrl": "sources/4785c224330a51337536aa77465020085744e4ef110b65a2e097f71ee30290d4.L343.html#L343",
         "publicAsset": {
-          "assetId": "portal.asset:c4fad867fd54b284a1573194b4d3b110",
-          "sourceId": "portal.source:85a077c13a88be429e97c8d5c8ce9118",
+          "assetId": "portal.asset:4785c224330a51337536aa7746502008",
+          "sourceId": "portal.source:d37c5e826d50293e626ad5db8e632923",
           "relativeUrl": "sources/8c7b398e6a1c47152bd4b4f34352e841c1bf095f0382cb87f205f708ca31e80c.txt",
-          "linkUrl": "sources/c4fad867fd54b284a1573194b4d3b110df02706a8e4a55cb956d3adc068fab5b.L311.html#L311",
+          "linkUrl": "sources/4785c224330a51337536aa77465020085744e4ef110b65a2e097f71ee30290d4.L343.html#L343",
           "revision": "content:8c7b398e6a1c47152bd4b4f34352e841c1bf095f0382cb87f205f708ca31e80c",
           "digest": "sha384-LKwc3hC+Eioujj27nlvm/kWH5wvqKVlc3RQ5YSXlf3RLvQVyNS5u00pLo7VpQPt0",
           "byteLength": 92,
@@ -88901,19 +88901,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 295
+            "line": 327
           },
           "end": {
-            "line": 295
+            "line": 327
           }
         },
         "fetchUrl": "sources/a31b73f76dd34c72be88b174feb0becb4418bbbfa16b0001c9dc0f7dc05a78fd.txt",
-        "linkUrl": "sources/b63133483a7998170ca4c393cf4d7dcea1e70fdccbc8b832220a6d4493f5f230.L295.html#L295",
+        "linkUrl": "sources/523aee7aeb96c7bfb682dcbcb00fdb21cd1fd200751404ef2405119ad998e75f.L327.html#L327",
         "publicAsset": {
-          "assetId": "portal.asset:b63133483a7998170ca4c393cf4d7dce",
-          "sourceId": "portal.source:c5caf872ebc68786f989d17e4103664a",
+          "assetId": "portal.asset:523aee7aeb96c7bfb682dcbcb00fdb21",
+          "sourceId": "portal.source:202cfb9cee5d7dda1fae074a9ff883f9",
           "relativeUrl": "sources/a31b73f76dd34c72be88b174feb0becb4418bbbfa16b0001c9dc0f7dc05a78fd.txt",
-          "linkUrl": "sources/b63133483a7998170ca4c393cf4d7dcea1e70fdccbc8b832220a6d4493f5f230.L295.html#L295",
+          "linkUrl": "sources/523aee7aeb96c7bfb682dcbcb00fdb21cd1fd200751404ef2405119ad998e75f.L327.html#L327",
           "revision": "content:a31b73f76dd34c72be88b174feb0becb4418bbbfa16b0001c9dc0f7dc05a78fd",
           "digest": "sha384-ia/KnwnR479AhOJA2l5ikzf0ckYInrvJm22QVlPLYc+g6X8qFlZSsqgKUsbP9KKR",
           "byteLength": 92,
@@ -89081,19 +89081,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 279
+            "line": 311
           },
           "end": {
-            "line": 279
+            "line": 311
           }
         },
         "fetchUrl": "sources/4c7e8f27a102bb7fff79720cb572b890da57a53dbe52a2e44c80bcbdb6613551.txt",
-        "linkUrl": "sources/cd4f7014c02b03a6ed1a9392c7b710fb8df4e924896bade3276fb8ef18b2d1f8.L279.html#L279",
+        "linkUrl": "sources/1513591dfad192ccd2c8d8e090a18e6856cf3c3a294f140034b1e38df45b2a7b.L311.html#L311",
         "publicAsset": {
-          "assetId": "portal.asset:cd4f7014c02b03a6ed1a9392c7b710fb",
-          "sourceId": "portal.source:26b515ab08a16b0f3ae65c67fb774e5f",
+          "assetId": "portal.asset:1513591dfad192ccd2c8d8e090a18e68",
+          "sourceId": "portal.source:85a077c13a88be429e97c8d5c8ce9118",
           "relativeUrl": "sources/4c7e8f27a102bb7fff79720cb572b890da57a53dbe52a2e44c80bcbdb6613551.txt",
-          "linkUrl": "sources/cd4f7014c02b03a6ed1a9392c7b710fb8df4e924896bade3276fb8ef18b2d1f8.L279.html#L279",
+          "linkUrl": "sources/1513591dfad192ccd2c8d8e090a18e6856cf3c3a294f140034b1e38df45b2a7b.L311.html#L311",
           "revision": "content:4c7e8f27a102bb7fff79720cb572b890da57a53dbe52a2e44c80bcbdb6613551",
           "digest": "sha384-LZdrgSKKx/r5aOBLirMdMPaUrFSy5zicunL6lqTLnS1YfjlKyt8r542GtaI0TiKJ",
           "byteLength": 78,
@@ -89261,19 +89261,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 265
+            "line": 297
           },
           "end": {
-            "line": 265
+            "line": 297
           }
         },
         "fetchUrl": "sources/7d35a948e9fec99f1b43022392ed2126751bc05d479e59798b99dd116998403b.txt",
-        "linkUrl": "sources/d5bed85b5065c0c3d29b0c6edc3cdd79eff6b9ab02f80d3c9bed640e49233437.L265.html#L265",
+        "linkUrl": "sources/9df25521ec2b07eed2458272c030959104deb7e9f85cfad08c853e4cd091e070.L297.html#L297",
         "publicAsset": {
-          "assetId": "portal.asset:d5bed85b5065c0c3d29b0c6edc3cdd79",
-          "sourceId": "portal.source:a376ba5a48c3b651f2ece6289e439cc7",
+          "assetId": "portal.asset:9df25521ec2b07eed2458272c0309591",
+          "sourceId": "portal.source:cc0e2c1e21b8529aede436d4f3c9789e",
           "relativeUrl": "sources/7d35a948e9fec99f1b43022392ed2126751bc05d479e59798b99dd116998403b.txt",
-          "linkUrl": "sources/d5bed85b5065c0c3d29b0c6edc3cdd79eff6b9ab02f80d3c9bed640e49233437.L265.html#L265",
+          "linkUrl": "sources/9df25521ec2b07eed2458272c030959104deb7e9f85cfad08c853e4cd091e070.L297.html#L297",
           "revision": "content:7d35a948e9fec99f1b43022392ed2126751bc05d479e59798b99dd116998403b",
           "digest": "sha384-/5BZx2b8bnvM9RPCj4MaLqdtCKRN0Wyg9B2uVAEj57d2zfdTxh1cD18GHLpOF3i0",
           "byteLength": 76,
@@ -89384,19 +89384,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 219
+            "line": 251
           },
           "end": {
-            "line": 219
+            "line": 251
           }
         },
         "fetchUrl": "sources/77c61beb8e66f39f1991a57f0c649570429412ea95b487b7589ae58ae0c728aa.txt",
-        "linkUrl": "sources/c9ff49a3c0bd946157db64d0adf0fdb2fd8f44a126fea35d26d37a8da3939abc.L219.html#L219",
+        "linkUrl": "sources/d65ddd3c6c8b3242fb7b65c4f288b5fade35d097e62104cd4a809f96e325f1b9.L251.html#L251",
         "publicAsset": {
-          "assetId": "portal.asset:c9ff49a3c0bd946157db64d0adf0fdb2",
-          "sourceId": "portal.source:defe06735e3aabe724a1d2113fff35a7",
+          "assetId": "portal.asset:d65ddd3c6c8b3242fb7b65c4f288b5fa",
+          "sourceId": "portal.source:667168f8396549d3575539faa7a7c521",
           "relativeUrl": "sources/77c61beb8e66f39f1991a57f0c649570429412ea95b487b7589ae58ae0c728aa.txt",
-          "linkUrl": "sources/c9ff49a3c0bd946157db64d0adf0fdb2fd8f44a126fea35d26d37a8da3939abc.L219.html#L219",
+          "linkUrl": "sources/d65ddd3c6c8b3242fb7b65c4f288b5fade35d097e62104cd4a809f96e325f1b9.L251.html#L251",
           "revision": "content:77c61beb8e66f39f1991a57f0c649570429412ea95b487b7589ae58ae0c728aa",
           "digest": "sha384-QIoAr6GVLWnuM2fygkgZO1Ixt8yg1RwMxrTEbho+Wc3NfNuBnqmlX+/uCPP8rlLI",
           "byteLength": 80,
@@ -89507,19 +89507,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 211
+            "line": 243
           },
           "end": {
-            "line": 211
+            "line": 243
           }
         },
         "fetchUrl": "sources/e70bbb2167bffdadfafd94034f0b0c65f152d43e15b420b1d2e4d4159430838e.txt",
-        "linkUrl": "sources/4e9f8fc75397f1b014c9305999debc00f1ff2db47db01eef1f1536fc1efcbcd7.L211.html#L211",
+        "linkUrl": "sources/aa2d1d4d1f00b1c88713e60bb605d7ae05ff7a1c26e73f19a6ab5e5edf4df564.L243.html#L243",
         "publicAsset": {
-          "assetId": "portal.asset:4e9f8fc75397f1b014c9305999debc00",
-          "sourceId": "portal.source:d39d4d0d15fe1663fa0856270d0d33cf",
+          "assetId": "portal.asset:aa2d1d4d1f00b1c88713e60bb605d7ae",
+          "sourceId": "portal.source:80d78a5c22d78ac2b9d4099bc7e85378",
           "relativeUrl": "sources/e70bbb2167bffdadfafd94034f0b0c65f152d43e15b420b1d2e4d4159430838e.txt",
-          "linkUrl": "sources/4e9f8fc75397f1b014c9305999debc00f1ff2db47db01eef1f1536fc1efcbcd7.L211.html#L211",
+          "linkUrl": "sources/aa2d1d4d1f00b1c88713e60bb605d7ae05ff7a1c26e73f19a6ab5e5edf4df564.L243.html#L243",
           "revision": "content:e70bbb2167bffdadfafd94034f0b0c65f152d43e15b420b1d2e4d4159430838e",
           "digest": "sha384-xqQIf69boxtJKS1bzgFg/wQPb7XNPk1UDTqmPTwh9is3JspLbm2U21TM3y0nGF/M",
           "byteLength": 82,
@@ -89630,19 +89630,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 203
+            "line": 235
           },
           "end": {
-            "line": 203
+            "line": 235
           }
         },
         "fetchUrl": "sources/ccb4f6c2f6bb2b6506eaf15a8c281717ff98bd431241fd6530a399b524cfdfc7.txt",
-        "linkUrl": "sources/5e586e95eab2324cb19cc4adecbf3ee3f5d985197d1c72ef3f44cf1177d9d457.L203.html#L203",
+        "linkUrl": "sources/f51fcde03bd8bbc984abe0b8fd7398455cc14a4b9ffc05e3a89ffc4374b3ddd7.L235.html#L235",
         "publicAsset": {
-          "assetId": "portal.asset:5e586e95eab2324cb19cc4adecbf3ee3",
-          "sourceId": "portal.source:e1adaf736b1f0d183a5777c7755afd0e",
+          "assetId": "portal.asset:f51fcde03bd8bbc984abe0b8fd739845",
+          "sourceId": "portal.source:8db97c5e95e51d25aae9784f38a4b9b3",
           "relativeUrl": "sources/ccb4f6c2f6bb2b6506eaf15a8c281717ff98bd431241fd6530a399b524cfdfc7.txt",
-          "linkUrl": "sources/5e586e95eab2324cb19cc4adecbf3ee3f5d985197d1c72ef3f44cf1177d9d457.L203.html#L203",
+          "linkUrl": "sources/f51fcde03bd8bbc984abe0b8fd7398455cc14a4b9ffc05e3a89ffc4374b3ddd7.L235.html#L235",
           "revision": "content:ccb4f6c2f6bb2b6506eaf15a8c281717ff98bd431241fd6530a399b524cfdfc7",
           "digest": "sha384-Z4G3pTjUpnxrAeVYkisHaKdzK6wI11JdqEHsdWVZ6NkfVl/BF11Jj8z2aUb5uIHJ",
           "byteLength": 78,
@@ -89753,19 +89753,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 437
+            "line": 469
           },
           "end": {
-            "line": 437
+            "line": 469
           }
         },
         "fetchUrl": "sources/a0649e73a76990c38d4bdf9d7aa5e3a4e264462bac957614f6f839a66c928256.txt",
-        "linkUrl": "sources/1a00a4028ef68603742881c0ddb1918c3e032d898debc2b108129ec32ad4e4e7.L437.html#L437",
+        "linkUrl": "sources/c0cd3e9134fae19b6a0f39dfcf8dc8d39790ac278d4db9f7128203ea7a08e03e.L469.html#L469",
         "publicAsset": {
-          "assetId": "portal.asset:1a00a4028ef68603742881c0ddb1918c",
-          "sourceId": "portal.source:a3c727f728acac50f181670ee1b3b52c",
+          "assetId": "portal.asset:c0cd3e9134fae19b6a0f39dfcf8dc8d3",
+          "sourceId": "portal.source:0f8c6ca11a8c4c923015c133c35e83b8",
           "relativeUrl": "sources/a0649e73a76990c38d4bdf9d7aa5e3a4e264462bac957614f6f839a66c928256.txt",
-          "linkUrl": "sources/1a00a4028ef68603742881c0ddb1918c3e032d898debc2b108129ec32ad4e4e7.L437.html#L437",
+          "linkUrl": "sources/c0cd3e9134fae19b6a0f39dfcf8dc8d39790ac278d4db9f7128203ea7a08e03e.L469.html#L469",
           "revision": "content:a0649e73a76990c38d4bdf9d7aa5e3a4e264462bac957614f6f839a66c928256",
           "digest": "sha384-tJqLLv7dgBxRNzjp27301MAHNfVoS5LKOrG823TTlpYwU1ZhO7tBD4WaHu890mNz",
           "byteLength": 72,
@@ -89876,19 +89876,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 445
+            "line": 477
           },
           "end": {
-            "line": 445
+            "line": 477
           }
         },
         "fetchUrl": "sources/517c4e13e91a3d7172219a145ecca197bd7d7b8ff9ad2bbe996a6b55084f40b2.txt",
-        "linkUrl": "sources/4b9c7c79508157bd724e074a0702830a1073fb8760e6f8f9ab76fedafcfacbb0.L445.html#L445",
+        "linkUrl": "sources/0d10a6a31710b36f850cbfdc7237caab4acefa324a7bec60354a5e01e94015cb.L477.html#L477",
         "publicAsset": {
-          "assetId": "portal.asset:4b9c7c79508157bd724e074a0702830a",
-          "sourceId": "portal.source:108bac3f9b02b55638eaa82507adf2f7",
+          "assetId": "portal.asset:0d10a6a31710b36f850cbfdc7237caab",
+          "sourceId": "portal.source:b8d59314d9a8619ca605cbbc7fc576c0",
           "relativeUrl": "sources/517c4e13e91a3d7172219a145ecca197bd7d7b8ff9ad2bbe996a6b55084f40b2.txt",
-          "linkUrl": "sources/4b9c7c79508157bd724e074a0702830a1073fb8760e6f8f9ab76fedafcfacbb0.L445.html#L445",
+          "linkUrl": "sources/0d10a6a31710b36f850cbfdc7237caab4acefa324a7bec60354a5e01e94015cb.L477.html#L477",
           "revision": "content:517c4e13e91a3d7172219a145ecca197bd7d7b8ff9ad2bbe996a6b55084f40b2",
           "digest": "sha384-pogXqtWbB87hSkmo8BHmplCo0bkhBl8twg0Zr9T0O4XEZjp6290y3wXZ/0gQ0Yzm",
           "byteLength": 74,
@@ -91352,19 +91352,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 482
+            "line": 514
           },
           "end": {
-            "line": 482
+            "line": 514
           }
         },
         "fetchUrl": "sources/b63d59419d9f64d3571f0a02d4fa4f46df40dadfd181fadfc8446afa29f4ff01.txt",
-        "linkUrl": "sources/6b33133999d01c1bf0212214c239cd1f035722b13cfafe4e24c42e7d14062901.L482.html#L482",
+        "linkUrl": "sources/afdcb1f7e9e030a7f3f026bf8801b26766f27b9d8873cb213bfd61cae35590fc.L514.html#L514",
         "publicAsset": {
-          "assetId": "portal.asset:6b33133999d01c1bf0212214c239cd1f",
-          "sourceId": "portal.source:d0203172814c37e68d9761e6969e1b3a",
+          "assetId": "portal.asset:afdcb1f7e9e030a7f3f026bf8801b267",
+          "sourceId": "portal.source:d0c756303edb99ce8b8343068bc3bc6c",
           "relativeUrl": "sources/b63d59419d9f64d3571f0a02d4fa4f46df40dadfd181fadfc8446afa29f4ff01.txt",
-          "linkUrl": "sources/6b33133999d01c1bf0212214c239cd1f035722b13cfafe4e24c42e7d14062901.L482.html#L482",
+          "linkUrl": "sources/afdcb1f7e9e030a7f3f026bf8801b26766f27b9d8873cb213bfd61cae35590fc.L514.html#L514",
           "revision": "content:b63d59419d9f64d3571f0a02d4fa4f46df40dadfd181fadfc8446afa29f4ff01",
           "digest": "sha384-6o1LU2fmBtN98sxF2RcA9pz9gx3nDex8bTUg/yKEQIu7j3QFanfpngvpNQ4Fa962",
           "byteLength": 114,
@@ -91475,19 +91475,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 490
+            "line": 522
           },
           "end": {
-            "line": 490
+            "line": 522
           }
         },
         "fetchUrl": "sources/cadf211caa62a34b0540fe48055ed1183bdff1e6d70fe7c4d9382959754a7e9d.txt",
-        "linkUrl": "sources/6599310e95619bf0341f4d4170099894c6a6dc4aa2a3f3276d353b20a2cda3bc.L490.html#L490",
+        "linkUrl": "sources/1c088a6309a5ea575d4723c2d3f429f21bbff187a8773cd20acf10231da7072e.L522.html#L522",
         "publicAsset": {
-          "assetId": "portal.asset:6599310e95619bf0341f4d4170099894",
-          "sourceId": "portal.source:f1c1bc3ad0b8e37d7738115d0d7f351a",
+          "assetId": "portal.asset:1c088a6309a5ea575d4723c2d3f429f2",
+          "sourceId": "portal.source:44b9ffcdf7160bf58a3e9376dbfa65df",
           "relativeUrl": "sources/cadf211caa62a34b0540fe48055ed1183bdff1e6d70fe7c4d9382959754a7e9d.txt",
-          "linkUrl": "sources/6599310e95619bf0341f4d4170099894c6a6dc4aa2a3f3276d353b20a2cda3bc.L490.html#L490",
+          "linkUrl": "sources/1c088a6309a5ea575d4723c2d3f429f21bbff187a8773cd20acf10231da7072e.L522.html#L522",
           "revision": "content:cadf211caa62a34b0540fe48055ed1183bdff1e6d70fe7c4d9382959754a7e9d",
           "digest": "sha384-0eiiWErc9yhO+2N7hS1Xk0IHOUWaYOE9ZvO5ixTVY9iXYIRH18Fq7OUETa4dXdxy",
           "byteLength": 114,
@@ -91598,19 +91598,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 466
+            "line": 498
           },
           "end": {
-            "line": 466
+            "line": 498
           }
         },
         "fetchUrl": "sources/afb95ef4e9c09034a644fcb098ccd4cc725c9ed9636257c206405154696a027c.txt",
-        "linkUrl": "sources/e3dfb7ae21ffb53e01d41770e63ff4d8de1ca03e9a879428f35e3b49278314d4.L466.html#L466",
+        "linkUrl": "sources/351d5a39664fdafd49efa84c9ab0dfbcf65ad5b176fd1683565f67dc3adce7ee.L498.html#L498",
         "publicAsset": {
-          "assetId": "portal.asset:e3dfb7ae21ffb53e01d41770e63ff4d8",
-          "sourceId": "portal.source:a7dcce03e4351df26ce44bd59a09eeb5",
+          "assetId": "portal.asset:351d5a39664fdafd49efa84c9ab0dfbc",
+          "sourceId": "portal.source:bc1a8e2781a4bf81d702358462988b7c",
           "relativeUrl": "sources/afb95ef4e9c09034a644fcb098ccd4cc725c9ed9636257c206405154696a027c.txt",
-          "linkUrl": "sources/e3dfb7ae21ffb53e01d41770e63ff4d8de1ca03e9a879428f35e3b49278314d4.L466.html#L466",
+          "linkUrl": "sources/351d5a39664fdafd49efa84c9ab0dfbcf65ad5b176fd1683565f67dc3adce7ee.L498.html#L498",
           "revision": "content:afb95ef4e9c09034a644fcb098ccd4cc725c9ed9636257c206405154696a027c",
           "digest": "sha384-kNPg6O1VwRuI10JpJBi3SphcV1fXrBhCnPy7LUakPdunILzoSlxkn2xCM3WyeDRp",
           "byteLength": 108,
@@ -91721,19 +91721,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 474
+            "line": 506
           },
           "end": {
-            "line": 474
+            "line": 506
           }
         },
         "fetchUrl": "sources/a7950ff188d3c5c4607b792f8ee15630f2a3c0c21f0d50b819b853cf3ec7f70c.txt",
-        "linkUrl": "sources/2b355a3b13b4d1fae3b128b8ff9d1af25f21f53bb34512086ab56f1e4ecdbddb.L474.html#L474",
+        "linkUrl": "sources/ecaba5129d8f9029aec4b1f7f13c63fab7cce962cfdbb5ad9e9c05ca571a6eb4.L506.html#L506",
         "publicAsset": {
-          "assetId": "portal.asset:2b355a3b13b4d1fae3b128b8ff9d1af2",
-          "sourceId": "portal.source:b20cd2aea4dcfcec38392e3a2f9f6202",
+          "assetId": "portal.asset:ecaba5129d8f9029aec4b1f7f13c63fa",
+          "sourceId": "portal.source:708be965f87102f5f59ce33aeb5a0007",
           "relativeUrl": "sources/a7950ff188d3c5c4607b792f8ee15630f2a3c0c21f0d50b819b853cf3ec7f70c.txt",
-          "linkUrl": "sources/2b355a3b13b4d1fae3b128b8ff9d1af25f21f53bb34512086ab56f1e4ecdbddb.L474.html#L474",
+          "linkUrl": "sources/ecaba5129d8f9029aec4b1f7f13c63fab7cce962cfdbb5ad9e9c05ca571a6eb4.L506.html#L506",
           "revision": "content:a7950ff188d3c5c4607b792f8ee15630f2a3c0c21f0d50b819b853cf3ec7f70c",
           "digest": "sha384-StU5sAa9iYkrPNidkJ+PbmiLBopc0HHwpdannXIcS7+pMJ99QA+maIQBMe/wGuM3",
           "byteLength": 108,
@@ -91844,19 +91844,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 498
+            "line": 530
           },
           "end": {
-            "line": 498
+            "line": 530
           }
         },
         "fetchUrl": "sources/61832faa951ade396c5cb4fff1d6051fc68052eba24adf25fa0745b124df4c08.txt",
-        "linkUrl": "sources/760ba99ebd8decb6305db4438bf1ab41866f426ab840f5b39c61b07abc6924dd.L498.html#L498",
+        "linkUrl": "sources/89f63bad4483352c844491a216c73d5c681d22f3da465cf9dee21d376cab1b0c.L530.html#L530",
         "publicAsset": {
-          "assetId": "portal.asset:760ba99ebd8decb6305db4438bf1ab41",
-          "sourceId": "portal.source:bc1a8e2781a4bf81d702358462988b7c",
+          "assetId": "portal.asset:89f63bad4483352c844491a216c73d5c",
+          "sourceId": "portal.source:a0f04795d326f04be752080ffebd95e3",
           "relativeUrl": "sources/61832faa951ade396c5cb4fff1d6051fc68052eba24adf25fa0745b124df4c08.txt",
-          "linkUrl": "sources/760ba99ebd8decb6305db4438bf1ab41866f426ab840f5b39c61b07abc6924dd.L498.html#L498",
+          "linkUrl": "sources/89f63bad4483352c844491a216c73d5c681d22f3da465cf9dee21d376cab1b0c.L530.html#L530",
           "revision": "content:61832faa951ade396c5cb4fff1d6051fc68052eba24adf25fa0745b124df4c08",
           "digest": "sha384-yFysc9brWisPAJE7pXqn2foXV3TIbjZFPdNEh+02Rne1iK6QoSqDG3yT0vyHotu7",
           "byteLength": 104,
@@ -91967,19 +91967,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 506
+            "line": 538
           },
           "end": {
-            "line": 506
+            "line": 538
           }
         },
         "fetchUrl": "sources/71a9d239362626c8928c30f7255ad4760120495d4ad5f860f758b265ee7e90fa.txt",
-        "linkUrl": "sources/54cfe0ac3145cae650abfd0bbdc8478eedf6099856fd881173e0f6f48288bd5a.L506.html#L506",
+        "linkUrl": "sources/ce04502979bc2937fef7af3e139a9f3bfdd7c6de617421f5968e00e3dd2eb65b.L538.html#L538",
         "publicAsset": {
-          "assetId": "portal.asset:54cfe0ac3145cae650abfd0bbdc8478e",
-          "sourceId": "portal.source:708be965f87102f5f59ce33aeb5a0007",
+          "assetId": "portal.asset:ce04502979bc2937fef7af3e139a9f3b",
+          "sourceId": "portal.source:1b16aed59c4b45ba44535ef17fc0df2a",
           "relativeUrl": "sources/71a9d239362626c8928c30f7255ad4760120495d4ad5f860f758b265ee7e90fa.txt",
-          "linkUrl": "sources/54cfe0ac3145cae650abfd0bbdc8478eedf6099856fd881173e0f6f48288bd5a.L506.html#L506",
+          "linkUrl": "sources/ce04502979bc2937fef7af3e139a9f3bfdd7c6de617421f5968e00e3dd2eb65b.L538.html#L538",
           "revision": "content:71a9d239362626c8928c30f7255ad4760120495d4ad5f860f758b265ee7e90fa",
           "digest": "sha384-7l2YCbPbdSxJGfZ2AcQEfkbVswt31HpNjFMcd6jwl3/uIYl+9GgsONcQW+hw65BZ",
           "byteLength": 104,
@@ -92090,19 +92090,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 458
+            "line": 490
           },
           "end": {
-            "line": 458
+            "line": 490
           }
         },
         "fetchUrl": "sources/2f9f251e7cffb7915c27acee296174b2f07ef9ef72861cfedafe49be9f0d3af9.txt",
-        "linkUrl": "sources/7db31b96727b3ed56ded88da771da732b76330ccfedd97e2faa2aeb0932ecf8a.L458.html#L458",
+        "linkUrl": "sources/d5b4fde6be0468fadca7c23c75240b3460b3c03a186615f4a866fe510ec213f6.L490.html#L490",
         "publicAsset": {
-          "assetId": "portal.asset:7db31b96727b3ed56ded88da771da732",
-          "sourceId": "portal.source:bbcab7fb04c836fd90305c9c0bf8d60d",
+          "assetId": "portal.asset:d5b4fde6be0468fadca7c23c75240b34",
+          "sourceId": "portal.source:f1c1bc3ad0b8e37d7738115d0d7f351a",
           "relativeUrl": "sources/2f9f251e7cffb7915c27acee296174b2f07ef9ef72861cfedafe49be9f0d3af9.txt",
-          "linkUrl": "sources/7db31b96727b3ed56ded88da771da732b76330ccfedd97e2faa2aeb0932ecf8a.L458.html#L458",
+          "linkUrl": "sources/d5b4fde6be0468fadca7c23c75240b3460b3c03a186615f4a866fe510ec213f6.L490.html#L490",
           "revision": "content:2f9f251e7cffb7915c27acee296174b2f07ef9ef72861cfedafe49be9f0d3af9",
           "digest": "sha384-3ZxCyIoI9MiMIXrZyK4TLMrZ38JC8FuTtQ4wWpeHc4euorEVbgQV71RhQBgSfFza",
           "byteLength": 83,
@@ -92125,6 +92125,498 @@
       "presentationTopicId": "portal.topic:712aa82548244fd53cc7ebadf66bbab1",
       "presentationPageId": "portal.page:712aa82548244fd53cc7ebadf66bbab1",
       "presentationFragmentId": "portal.fragment:712aa82548244fd53cc7ebadf66bbab1"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+      "name": "ExpenseReimbursementResubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Resubmit an expense reimbursement.",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementResubmit",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Resubmit an expense reimbursement.",
+            "localizedText": {
+              "zh-CN": "重新提交费用报销。",
+              "en": "Resubmit an expense reimbursement."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "重新提交费用报销。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Resubmit an expense reimbursement.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 227
+          },
+          "end": {
+            "line": 227
+          }
+        },
+        "fetchUrl": "sources/80d09dad8dd234232e2f70962d07e1a0767b1326fbf2211458d7322fe0a42b7d.txt",
+        "linkUrl": "sources/a09927cd6a817b36293111eab18e12ac5f4cde4625211a96b3db3237b7625a3b.L227.html#L227",
+        "publicAsset": {
+          "assetId": "portal.asset:a09927cd6a817b36293111eab18e12ac",
+          "sourceId": "portal.source:f3fdedb7156f6d6dfc803bfdd57a1496",
+          "relativeUrl": "sources/80d09dad8dd234232e2f70962d07e1a0767b1326fbf2211458d7322fe0a42b7d.txt",
+          "linkUrl": "sources/a09927cd6a817b36293111eab18e12ac5f4cde4625211a96b3db3237b7625a3b.L227.html#L227",
+          "revision": "content:80d09dad8dd234232e2f70962d07e1a0767b1326fbf2211458d7322fe0a42b7d",
+          "digest": "sha384-SjDlcX0RfloRQlI99OTRJ/ifo/XaDhyElA56kk8DaSsD28yYlkjMs9woeCA340xM",
+          "byteLength": 91,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementResubmit",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementResubmit",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-055ec21b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-055ec21b.html",
+      "presentationTopicId": "portal.topic:fb47e06a673c75c603287f48aae33183",
+      "presentationPageId": "portal.page:fb47e06a673c75c603287f48aae33183",
+      "presentationFragmentId": "portal.fragment:fb47e06a673c75c603287f48aae33183"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+      "name": "ExpenseReimbursementSubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Submit an expense reimbursement.",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementSubmit",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Submit an expense reimbursement.",
+            "localizedText": {
+              "zh-CN": "提交费用报销。",
+              "en": "Submit an expense reimbursement."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "提交费用报销。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Submit an expense reimbursement.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 219
+          },
+          "end": {
+            "line": 219
+          }
+        },
+        "fetchUrl": "sources/e5add14de606760edffc8d2dae23f4410dca2c67fb3ce463904df9f092b3b999.txt",
+        "linkUrl": "sources/5e68304c1fa6b67b58ab6cf1d35c889fae4f379ffdd3fc57e7a0f2300d1a50bb.L219.html#L219",
+        "publicAsset": {
+          "assetId": "portal.asset:5e68304c1fa6b67b58ab6cf1d35c889f",
+          "sourceId": "portal.source:defe06735e3aabe724a1d2113fff35a7",
+          "relativeUrl": "sources/e5add14de606760edffc8d2dae23f4410dca2c67fb3ce463904df9f092b3b999.txt",
+          "linkUrl": "sources/5e68304c1fa6b67b58ab6cf1d35c889fae4f379ffdd3fc57e7a0f2300d1a50bb.L219.html#L219",
+          "revision": "content:e5add14de606760edffc8d2dae23f4410dca2c67fb3ce463904df9f092b3b999",
+          "digest": "sha384-k8RJqX+EUKYaUpmiSgek4H9P5U0bXPicqxtEDak7BaOPL4/c/BS0DlsQVYAvm51t",
+          "byteLength": 87,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementSubmit",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementSubmit",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-447eb286.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-447eb286.html",
+      "presentationTopicId": "portal.topic:a3350f3d828e53df6bcb250b053a3f88",
+      "presentationPageId": "portal.page:a3350f3d828e53df6bcb250b053a3f88",
+      "presentationFragmentId": "portal.fragment:a3350f3d828e53df6bcb250b053a3f88"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+      "name": "LeaveRequestResubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Resubmit a leave request.",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestResubmit",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Resubmit a leave request.",
+            "localizedText": {
+              "zh-CN": "重新提交请假申请。",
+              "en": "Resubmit a leave request."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "重新提交请假申请。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Resubmit a leave request.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 211
+          },
+          "end": {
+            "line": 211
+          }
+        },
+        "fetchUrl": "sources/c83fc242cfd73e49e3b50a1a2dc954e8e54aecdbbf1624621998143165998e47.txt",
+        "linkUrl": "sources/ee9a993e4cf2ed113951ad72120531435080a513eca696adce2878272f3f3cfb.L211.html#L211",
+        "publicAsset": {
+          "assetId": "portal.asset:ee9a993e4cf2ed113951ad7212053143",
+          "sourceId": "portal.source:d39d4d0d15fe1663fa0856270d0d33cf",
+          "relativeUrl": "sources/c83fc242cfd73e49e3b50a1a2dc954e8e54aecdbbf1624621998143165998e47.txt",
+          "linkUrl": "sources/ee9a993e4cf2ed113951ad72120531435080a513eca696adce2878272f3f3cfb.L211.html#L211",
+          "revision": "content:c83fc242cfd73e49e3b50a1a2dc954e8e54aecdbbf1624621998143165998e47",
+          "digest": "sha384-4a1Xx5lVVwXCC9uciuRbvz5B0+GlVX108/bMUPFOi/felE0LnRO+G7soXsRHD11t",
+          "byteLength": 75,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestResubmit",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestResubmit",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-7410823b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-7410823b.html",
+      "presentationTopicId": "portal.topic:b7b922911e97f757478546e67fd7e090",
+      "presentationPageId": "portal.page:b7b922911e97f757478546e67fd7e090",
+      "presentationFragmentId": "portal.fragment:b7b922911e97f757478546e67fd7e090"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+      "name": "LeaveRequestSubmit",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Submit a leave request.",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestSubmit",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Submit a leave request.",
+            "localizedText": {
+              "zh-CN": "提交请假申请。",
+              "en": "Submit a leave request."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "提交请假申请。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Submit a leave request.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 203
+          },
+          "end": {
+            "line": 203
+          }
+        },
+        "fetchUrl": "sources/6bb33d24611767ecb9bb6be6c5f7a63c7d6f20acd9a368697b1e303a85f9018d.txt",
+        "linkUrl": "sources/9e008574394300062ea77a892aecd6c8f4065dbbb1708733d8e2d6204dd29287.L203.html#L203",
+        "publicAsset": {
+          "assetId": "portal.asset:9e008574394300062ea77a892aecd6c8",
+          "sourceId": "portal.source:e1adaf736b1f0d183a5777c7755afd0e",
+          "relativeUrl": "sources/6bb33d24611767ecb9bb6be6c5f7a63c7d6f20acd9a368697b1e303a85f9018d.txt",
+          "linkUrl": "sources/9e008574394300062ea77a892aecd6c8f4065dbbb1708733d8e2d6204dd29287.L203.html#L203",
+          "revision": "content:6bb33d24611767ecb9bb6be6c5f7a63c7d6f20acd9a368697b1e303a85f9018d",
+          "digest": "sha384-I/6tQlAwcO0LxN6H0QLAQ1goN2u2ylKsZMuCxHVcmHd48FNEzY30z4HZ+Tw1chvp",
+          "byteLength": 71,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestSubmit",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestSubmit",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-58cb2aa6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-58cb2aa6.html",
+      "presentationTopicId": "portal.topic:aaabe266adb37ff03775ce36dc485e90",
+      "presentationPageId": "portal.page:aaabe266adb37ff03775ce36dc485e90",
+      "presentationFragmentId": "portal.fragment:aaabe266adb37ff03775ce36dc485e90"
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
@@ -92213,19 +92705,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 383
+            "line": 415
           },
           "end": {
-            "line": 383
+            "line": 415
           }
         },
         "fetchUrl": "sources/bfe614d01fb3ffee2dd9a05d523077eeb2cc914d90bf1c55aa8f3dd1feb338ee.txt",
-        "linkUrl": "sources/2ef17a75e58bc24c0409967826e76291d707ff03e1436940f9a8897d43bb59ff.L383.html#L383",
+        "linkUrl": "sources/fc005aa6745f44957b3562311e6f1e5b02de253aa7426b318593320b83d9786a.L415.html#L415",
         "publicAsset": {
-          "assetId": "portal.asset:2ef17a75e58bc24c0409967826e76291",
-          "sourceId": "portal.source:a614f13e192051482fd23a8ff68c88f1",
+          "assetId": "portal.asset:fc005aa6745f44957b3562311e6f1e5b",
+          "sourceId": "portal.source:e120c661fb562fa534cd7d41b309f694",
           "relativeUrl": "sources/bfe614d01fb3ffee2dd9a05d523077eeb2cc914d90bf1c55aa8f3dd1feb338ee.txt",
-          "linkUrl": "sources/2ef17a75e58bc24c0409967826e76291d707ff03e1436940f9a8897d43bb59ff.L383.html#L383",
+          "linkUrl": "sources/fc005aa6745f44957b3562311e6f1e5b02de253aa7426b318593320b83d9786a.L415.html#L415",
           "revision": "content:bfe614d01fb3ffee2dd9a05d523077eeb2cc914d90bf1c55aa8f3dd1feb338ee",
           "digest": "sha384-zkFTH17WVkq4CUy1+6YoF5aTC2BljGGNdL/d68G62t4dSGVHkplLGN9MUbB14MdQ",
           "byteLength": 82,
@@ -92336,19 +92828,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 375
+            "line": 407
           },
           "end": {
-            "line": 375
+            "line": 407
           }
         },
         "fetchUrl": "sources/97ae64b43a78d10c3130591b57dea42eb2b50d83f0cd793b33f439e1b204774e.txt",
-        "linkUrl": "sources/bfae43d63be93996e578ea8353a48716990d15ae83f479d5c998bae6077245b4.L375.html#L375",
+        "linkUrl": "sources/8fb53156943d3eee09d603143d336a94262d20114a616c9bba7a58845ccfab84.L407.html#L407",
         "publicAsset": {
-          "assetId": "portal.asset:bfae43d63be93996e578ea8353a48716",
-          "sourceId": "portal.source:ec9be50878e8a8dff80dfdd16b729d42",
+          "assetId": "portal.asset:8fb53156943d3eee09d603143d336a94",
+          "sourceId": "portal.source:437fd1ac0037679d7b1db3484a39c56b",
           "relativeUrl": "sources/97ae64b43a78d10c3130591b57dea42eb2b50d83f0cd793b33f439e1b204774e.txt",
-          "linkUrl": "sources/bfae43d63be93996e578ea8353a48716990d15ae83f479d5c998bae6077245b4.L375.html#L375",
+          "linkUrl": "sources/8fb53156943d3eee09d603143d336a94262d20114a616c9bba7a58845ccfab84.L407.html#L407",
           "revision": "content:97ae64b43a78d10c3130591b57dea42eb2b50d83f0cd793b33f439e1b204774e",
           "digest": "sha384-5Z/f2A4qDsOpCxfy3ovctHiNbhkfy+B1SaXK78ZWtLCupLAncBv/lz1dQtIumqS0",
           "byteLength": 82,
@@ -92459,19 +92951,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 359
+            "line": 391
           },
           "end": {
-            "line": 359
+            "line": 391
           }
         },
         "fetchUrl": "sources/7afc15109e1afde36f096ad1556c94808e92739ad16365a80acd6ecc79ae1f34.txt",
-        "linkUrl": "sources/4880d70f950a0d484a25b89b0f4a0c315b81eca8b4b5ab89b10bd406dc3b4a31.L359.html#L359",
+        "linkUrl": "sources/0ba71aecbad4e415d2aa407a7a6ade2c8c81547f20785d34e345363dbd27bfc2.L391.html#L391",
         "publicAsset": {
-          "assetId": "portal.asset:4880d70f950a0d484a25b89b0f4a0c31",
-          "sourceId": "portal.source:0dcfe8db3094d0d1fcd9d9ca2ceffb4d",
+          "assetId": "portal.asset:0ba71aecbad4e415d2aa407a7a6ade2c",
+          "sourceId": "portal.source:bf2871f8263c849012be9069f6326ecf",
           "relativeUrl": "sources/7afc15109e1afde36f096ad1556c94808e92739ad16365a80acd6ecc79ae1f34.txt",
-          "linkUrl": "sources/4880d70f950a0d484a25b89b0f4a0c315b81eca8b4b5ab89b10bd406dc3b4a31.L359.html#L359",
+          "linkUrl": "sources/0ba71aecbad4e415d2aa407a7a6ade2c8c81547f20785d34e345363dbd27bfc2.L391.html#L391",
           "revision": "content:7afc15109e1afde36f096ad1556c94808e92739ad16365a80acd6ecc79ae1f34",
           "digest": "sha384-NXJa4RWit1vFJxq4YQsMaQfKC/pUJj3fCL19XFhPzjjk6E2EVTMxRTIFKvxMN/cp",
           "byteLength": 70,
@@ -92582,19 +93074,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 351
+            "line": 383
           },
           "end": {
-            "line": 351
+            "line": 383
           }
         },
         "fetchUrl": "sources/576f5ba32ab6976db50bd42d04e8989ac600457542b70ec37b8ac2440e5d3f51.txt",
-        "linkUrl": "sources/512ac589df0e18d5513651facb57ac2efd19dec96eeef7df0924b6b25bc3dbde.L351.html#L351",
+        "linkUrl": "sources/752430ea6ec5488bf06c5e62bbb1b6cfd247a1e80812e7f751f16a0d94758347.L383.html#L383",
         "publicAsset": {
-          "assetId": "portal.asset:512ac589df0e18d5513651facb57ac2e",
-          "sourceId": "portal.source:98c5ee6763bdbaa05f176456a85b78a8",
+          "assetId": "portal.asset:752430ea6ec5488bf06c5e62bbb1b6cf",
+          "sourceId": "portal.source:a614f13e192051482fd23a8ff68c88f1",
           "relativeUrl": "sources/576f5ba32ab6976db50bd42d04e8989ac600457542b70ec37b8ac2440e5d3f51.txt",
-          "linkUrl": "sources/512ac589df0e18d5513651facb57ac2efd19dec96eeef7df0924b6b25bc3dbde.L351.html#L351",
+          "linkUrl": "sources/752430ea6ec5488bf06c5e62bbb1b6cfd247a1e80812e7f751f16a0d94758347.L383.html#L383",
           "revision": "content:576f5ba32ab6976db50bd42d04e8989ac600457542b70ec37b8ac2440e5d3f51",
           "digest": "sha384-nt+z8uUIJ3BqRzCqkeZnsQ2xrRiNFbgqQc7PDehv/nntqYi2rDjw46BbO6hTctU7",
           "byteLength": 70,
@@ -92705,19 +93197,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 367
+            "line": 399
           },
           "end": {
-            "line": 367
+            "line": 399
           }
         },
         "fetchUrl": "sources/b558a521975e3db98215707e0fe3bb56c8c26632d4c84f8c88cfb47183608497.txt",
-        "linkUrl": "sources/e56b06942503dd9d0fa67f5eec29fa8d192c94dd9126040081d6a66f0e265bc4.L367.html#L367",
+        "linkUrl": "sources/cb9b3ea703debb119e217106e662ca0e19ef2759defd6508055951e52ef383d4.L399.html#L399",
         "publicAsset": {
-          "assetId": "portal.asset:e56b06942503dd9d0fa67f5eec29fa8d",
-          "sourceId": "portal.source:19fc26a74a70940532b991fb26661834",
+          "assetId": "portal.asset:cb9b3ea703debb119e217106e662ca0e",
+          "sourceId": "portal.source:e3b0ab3a0f42c1484a43e564b980154f",
           "relativeUrl": "sources/b558a521975e3db98215707e0fe3bb56c8c26632d4c84f8c88cfb47183608497.txt",
-          "linkUrl": "sources/e56b06942503dd9d0fa67f5eec29fa8d192c94dd9126040081d6a66f0e265bc4.L367.html#L367",
+          "linkUrl": "sources/cb9b3ea703debb119e217106e662ca0e19ef2759defd6508055951e52ef383d4.L399.html#L399",
           "revision": "content:b558a521975e3db98215707e0fe3bb56c8c26632d4c84f8c88cfb47183608497",
           "digest": "sha384-H3AggB/hPa8n/exQdeYzxQqTzwx/tOFuRBub94m11yr5vEd0AxypHoTSC/h1H+Md",
           "byteLength": 76,
@@ -92828,19 +93320,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 413
+            "line": 445
           },
           "end": {
-            "line": 413
+            "line": 445
           }
         },
         "fetchUrl": "sources/8e48dc5da06b2a295b629b778cd9d04c7ecb4569dc6cc2726e8aea6d9ce8db5a.txt",
-        "linkUrl": "sources/070ac66db133b695b841805cfbd4ed42b21c9bb9b41da225e9e2f8f84d518490.L413.html#L413",
+        "linkUrl": "sources/f08d51543eae85c128d5209e95ef953b6e67cfcf18d3ac9bb04678ea253bfa7f.L445.html#L445",
         "publicAsset": {
-          "assetId": "portal.asset:070ac66db133b695b841805cfbd4ed42",
-          "sourceId": "portal.source:1f49f527b1bef0d6dcdf7c0157e6c422",
+          "assetId": "portal.asset:f08d51543eae85c128d5209e95ef953b",
+          "sourceId": "portal.source:108bac3f9b02b55638eaa82507adf2f7",
           "relativeUrl": "sources/8e48dc5da06b2a295b629b778cd9d04c7ecb4569dc6cc2726e8aea6d9ce8db5a.txt",
-          "linkUrl": "sources/070ac66db133b695b841805cfbd4ed42b21c9bb9b41da225e9e2f8f84d518490.L413.html#L413",
+          "linkUrl": "sources/f08d51543eae85c128d5209e95ef953b6e67cfcf18d3ac9bb04678ea253bfa7f.L445.html#L445",
           "revision": "content:8e48dc5da06b2a295b629b778cd9d04c7ecb4569dc6cc2726e8aea6d9ce8db5a",
           "digest": "sha384-kWOfu5MGd5NpiqWAxyWC/MqnpnsZGD2yFjpdaOuWfa2hR36FzC5KRp8/mFVhJPJi",
           "byteLength": 88,
@@ -92951,19 +93443,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 399
+            "line": 431
           },
           "end": {
-            "line": 399
+            "line": 431
           }
         },
         "fetchUrl": "sources/60afd98a94f772421ac12d679f168a7b9abce91760c14ee6ef8246e7b210b621.txt",
-        "linkUrl": "sources/cf01886701a22eee4b3181819fb47aba992025ca9df3a5e7e4fc2669b714012d.L399.html#L399",
+        "linkUrl": "sources/53de82eeb3dab10b2a18622f4d06f9b3c104f5d4e107353e4f4cda26e32bb770.L431.html#L431",
         "publicAsset": {
-          "assetId": "portal.asset:cf01886701a22eee4b3181819fb47aba",
-          "sourceId": "portal.source:e3b0ab3a0f42c1484a43e564b980154f",
+          "assetId": "portal.asset:53de82eeb3dab10b2a18622f4d06f9b3",
+          "sourceId": "portal.source:9c2ecaa82582d1da122b47288a70f332",
           "relativeUrl": "sources/60afd98a94f772421ac12d679f168a7b9abce91760c14ee6ef8246e7b210b621.txt",
-          "linkUrl": "sources/cf01886701a22eee4b3181819fb47aba992025ca9df3a5e7e4fc2669b714012d.L399.html#L399",
+          "linkUrl": "sources/53de82eeb3dab10b2a18622f4d06f9b3c104f5d4e107353e4f4cda26e32bb770.L431.html#L431",
           "revision": "content:60afd98a94f772421ac12d679f168a7b9abce91760c14ee6ef8246e7b210b621",
           "digest": "sha384-Om9VJonqhSDCMqfT/31Y/SkOWTy9J5oFvyYd3Tzj4VnoS3HoF4xXUh8A9vhfrlGZ",
           "byteLength": 86,
@@ -93443,19 +93935,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 429
+            "line": 461
           },
           "end": {
-            "line": 429
+            "line": 461
           }
         },
         "fetchUrl": "sources/b5468851d29ce185cf1e802ebd0e39aea1e3782be3bbdf733d3e86f4d3c08806.txt",
-        "linkUrl": "sources/98d7fcdac5577f9902dc9b88cb59cd29b43b09767af0a18aba7ec7f67d3eeb40.L429.html#L429",
+        "linkUrl": "sources/f49e0c827217eee184bfaed6ab85accc39282be683676e43cdf267f58a2ee332.L461.html#L461",
         "publicAsset": {
-          "assetId": "portal.asset:98d7fcdac5577f9902dc9b88cb59cd29",
-          "sourceId": "portal.source:44e42a981d8a8e4789ea78eb52fd0084",
+          "assetId": "portal.asset:f49e0c827217eee184bfaed6ab85accc",
+          "sourceId": "portal.source:373c1600b0007c768f4175a4f87afef4",
           "relativeUrl": "sources/b5468851d29ce185cf1e802ebd0e39aea1e3782be3bbdf733d3e86f4d3c08806.txt",
-          "linkUrl": "sources/98d7fcdac5577f9902dc9b88cb59cd29b43b09767af0a18aba7ec7f67d3eeb40.L429.html#L429",
+          "linkUrl": "sources/f49e0c827217eee184bfaed6ab85accc39282be683676e43cdf267f58a2ee332.L461.html#L461",
           "revision": "content:b5468851d29ce185cf1e802ebd0e39aea1e3782be3bbdf733d3e86f4d3c08806",
           "digest": "sha384-Az6JlmWCIHQaoasQg9wz0AeCNQwFGvOcXYVYLDieu1CjLE9TeTTvehKI+VttHire",
           "byteLength": 70,
@@ -93566,19 +94058,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 421
+            "line": 453
           },
           "end": {
-            "line": 421
+            "line": 453
           }
         },
         "fetchUrl": "sources/e52dc36273bd9e75bdc5dd3853f24ee6f3748af68d9f4019741ad9ba83e559d2.txt",
-        "linkUrl": "sources/00c6aa7cf2cbece9258027dbcc9cf2b12700a5132680fa33962925e8fe720022.L421.html#L421",
+        "linkUrl": "sources/21503ff73f640e7f6ddf1c5f6a41c2ba845f70f131d5e083e56fb8ca377749fd.L453.html#L453",
         "publicAsset": {
-          "assetId": "portal.asset:00c6aa7cf2cbece9258027dbcc9cf2b1",
-          "sourceId": "portal.source:00982b98d5c24e12a39c468eab5baafc",
+          "assetId": "portal.asset:21503ff73f640e7f6ddf1c5f6a41c2ba",
+          "sourceId": "portal.source:92e2a7bca49f7560d84c3d6d88c41ea6",
           "relativeUrl": "sources/e52dc36273bd9e75bdc5dd3853f24ee6f3748af68d9f4019741ad9ba83e559d2.txt",
-          "linkUrl": "sources/00c6aa7cf2cbece9258027dbcc9cf2b12700a5132680fa33962925e8fe720022.L421.html#L421",
+          "linkUrl": "sources/21503ff73f640e7f6ddf1c5f6a41c2ba845f70f131d5e083e56fb8ca377749fd.L453.html#L453",
           "revision": "content:e52dc36273bd9e75bdc5dd3853f24ee6f3748af68d9f4019741ad9ba83e559d2",
           "digest": "sha384-tSydbCHLFQ+Jjy9vsCnQ56ufn7/+hamn0E8eaVGlcq2kkOXk6KujCuUtfM+bb6t9",
           "byteLength": 64,
@@ -94058,19 +94550,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 343
+            "line": 375
           },
           "end": {
-            "line": 343
+            "line": 375
           }
         },
         "fetchUrl": "sources/5c0fe283f2aeff879c30915c3a31da8c967893b1be961cf382325248c7d456c4.txt",
-        "linkUrl": "sources/3f695029a14e25789a76ce2f68af92086e2cd2149e44dbc4db64ea2d85886c89.L343.html#L343",
+        "linkUrl": "sources/3fe1cd49b8905d5e97cb317eae96ac04b59e89bbda0e6b162232efb5c038407b.L375.html#L375",
         "publicAsset": {
-          "assetId": "portal.asset:3f695029a14e25789a76ce2f68af9208",
-          "sourceId": "portal.source:d37c5e826d50293e626ad5db8e632923",
+          "assetId": "portal.asset:3fe1cd49b8905d5e97cb317eae96ac04",
+          "sourceId": "portal.source:ec9be50878e8a8dff80dfdd16b729d42",
           "relativeUrl": "sources/5c0fe283f2aeff879c30915c3a31da8c967893b1be961cf382325248c7d456c4.txt",
-          "linkUrl": "sources/3f695029a14e25789a76ce2f68af92086e2cd2149e44dbc4db64ea2d85886c89.L343.html#L343",
+          "linkUrl": "sources/3fe1cd49b8905d5e97cb317eae96ac04b59e89bbda0e6b162232efb5c038407b.L375.html#L375",
           "revision": "content:5c0fe283f2aeff879c30915c3a31da8c967893b1be961cf382325248c7d456c4",
           "digest": "sha384-pWm40K2SGZm15pQpfrqqV+qkaJLuvlhWfHYdWnWKJ1wXM2L+IujPi7YTczHcZerB",
           "byteLength": 53,
@@ -94181,19 +94673,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 335
+            "line": 367
           },
           "end": {
-            "line": 335
+            "line": 367
           }
         },
         "fetchUrl": "sources/5d50381c37fdf2cc0cf49d9e4c572949ef4faa0fcce1e6ac72375466707fc8b2.txt",
-        "linkUrl": "sources/e231d477b46faf9872dbf05f284a241281b1d6bba9537b68b0e3f546f9816a0f.L335.html#L335",
+        "linkUrl": "sources/63ed28118cb7f0a8093f6915002944f7b85a4a8d2b49f0ec197fb6e949c9254d.L367.html#L367",
         "publicAsset": {
-          "assetId": "portal.asset:e231d477b46faf9872dbf05f284a2412",
-          "sourceId": "portal.source:418b088119f8bbd28ea29d697b95909d",
+          "assetId": "portal.asset:63ed28118cb7f0a8093f6915002944f7",
+          "sourceId": "portal.source:19fc26a74a70940532b991fb26661834",
           "relativeUrl": "sources/5d50381c37fdf2cc0cf49d9e4c572949ef4faa0fcce1e6ac72375466707fc8b2.txt",
-          "linkUrl": "sources/e231d477b46faf9872dbf05f284a241281b1d6bba9537b68b0e3f546f9816a0f.L335.html#L335",
+          "linkUrl": "sources/63ed28118cb7f0a8093f6915002944f7b85a4a8d2b49f0ec197fb6e949c9254d.L367.html#L367",
           "revision": "content:5d50381c37fdf2cc0cf49d9e4c572949ef4faa0fcce1e6ac72375466707fc8b2",
           "digest": "sha384-YjCJpxzDOmEoMsAUAwz6Djz4FWZjMa4b37fThICXUdRHtXvNp6uPjPwrGCZLeAdD",
           "byteLength": 53,
@@ -413797,19 +414289,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 547
+            "line": 579
           },
           "end": {
-            "line": 552
+            "line": 584
           }
         },
         "fetchUrl": "sources/5fa2e5ba24495087a55c231b3f43f5a4e138623ae83c60f3fbf5b6ce15306815.txt",
-        "linkUrl": "sources/f0f65ad85adbef18d7ba280f6c31655489cd680dc0e22b2dfdc62acb049ddbf4.L547.html#L547",
+        "linkUrl": "sources/db3fc16540fcd7b5c280a6a5e06e639ba285d3fa354f76d50c537a09cadfb7d6.L579.html#L579",
         "publicAsset": {
-          "assetId": "portal.asset:f0f65ad85adbef18d7ba280f6c316554",
-          "sourceId": "portal.source:6200d073df42f250e698959f992c27d5",
+          "assetId": "portal.asset:db3fc16540fcd7b5c280a6a5e06e639b",
+          "sourceId": "portal.source:735691f5ddc2a9b2799b761245d9196c",
           "relativeUrl": "sources/5fa2e5ba24495087a55c231b3f43f5a4e138623ae83c60f3fbf5b6ce15306815.txt",
-          "linkUrl": "sources/f0f65ad85adbef18d7ba280f6c31655489cd680dc0e22b2dfdc62acb049ddbf4.L547.html#L547",
+          "linkUrl": "sources/db3fc16540fcd7b5c280a6a5e06e639ba285d3fa354f76d50c537a09cadfb7d6.L579.html#L579",
           "revision": "content:5fa2e5ba24495087a55c231b3f43f5a4e138623ae83c60f3fbf5b6ce15306815",
           "digest": "sha384-3HhJ3pxi1zCXMgf3wdArMwrWh/BJvHDxrPMdl3M6k5/GV7M7q2uuGBy8fx6OIBhz",
           "byteLength": 205,
@@ -414079,19 +414571,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 720
+            "line": 756
           },
           "end": {
-            "line": 723
+            "line": 759
           }
         },
         "fetchUrl": "sources/0b64c5b760b3ce98485966296368b99535df55038e8eebbbedecf165df6d7b59.txt",
-        "linkUrl": "sources/8c7b3a41905a0277a1a026d1c518ec4e2547df19d19501674a22494c699e788e.L720.html#L720",
+        "linkUrl": "sources/18621b5a22bdee1ff10f70f52c36ce781f5e42f11a806f228f2c50ec2938aae1.L756.html#L756",
         "publicAsset": {
-          "assetId": "portal.asset:8c7b3a41905a0277a1a026d1c518ec4e",
-          "sourceId": "portal.source:bd6354a764ee0251e1402df70526eb46",
+          "assetId": "portal.asset:18621b5a22bdee1ff10f70f52c36ce78",
+          "sourceId": "portal.source:f7c7a9c983c651cfd9fbd8330cb3fb30",
           "relativeUrl": "sources/0b64c5b760b3ce98485966296368b99535df55038e8eebbbedecf165df6d7b59.txt",
-          "linkUrl": "sources/8c7b3a41905a0277a1a026d1c518ec4e2547df19d19501674a22494c699e788e.L720.html#L720",
+          "linkUrl": "sources/18621b5a22bdee1ff10f70f52c36ce781f5e42f11a806f228f2c50ec2938aae1.L756.html#L756",
           "revision": "content:0b64c5b760b3ce98485966296368b99535df55038e8eebbbedecf165df6d7b59",
           "digest": "sha384-dG6q3CAaGdPEoS8mLTPDEvMBVMbrPWt/OC/6/np1gz2G6r28venrMR3SBm3ZLPkz",
           "byteLength": 154,
@@ -414412,19 +414904,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 755
+            "line": 791
           },
           "end": {
-            "line": 771
+            "line": 807
           }
         },
         "fetchUrl": "sources/21d99b8bf110833d59c99139e563f7809f7c75e8bc2f24fea327da5b08d6159a.txt",
-        "linkUrl": "sources/0998f5b6c3ef5bf2d2cc1fe8ca2ed3bb7657295ce3d4a997f7c50c347da68a4a.L755.html#L755",
+        "linkUrl": "sources/b07f87f76d699882bc2a8c97bf19de8c735afe3bbd2768813780d183b2bb37d7.L791.html#L791",
         "publicAsset": {
-          "assetId": "portal.asset:0998f5b6c3ef5bf2d2cc1fe8ca2ed3bb",
-          "sourceId": "portal.source:5c9e3282788c85e58043a161065d50fc",
+          "assetId": "portal.asset:b07f87f76d699882bc2a8c97bf19de8c",
+          "sourceId": "portal.source:ac06852c43f5c8e2320310f4cf57bac5",
           "relativeUrl": "sources/21d99b8bf110833d59c99139e563f7809f7c75e8bc2f24fea327da5b08d6159a.txt",
-          "linkUrl": "sources/0998f5b6c3ef5bf2d2cc1fe8ca2ed3bb7657295ce3d4a997f7c50c347da68a4a.L755.html#L755",
+          "linkUrl": "sources/b07f87f76d699882bc2a8c97bf19de8c735afe3bbd2768813780d183b2bb37d7.L791.html#L791",
           "revision": "content:21d99b8bf110833d59c99139e563f7809f7c75e8bc2f24fea327da5b08d6159a",
           "digest": "sha384-nuWYU77s4sMKrnuee9NL+5PFTDrm+U6nisFS0lSRhOyDfUb41fKhgJbpN61HTovo",
           "byteLength": 635,
@@ -414694,19 +415186,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 797
+            "line": 833
           },
           "end": {
-            "line": 810
+            "line": 846
           }
         },
         "fetchUrl": "sources/cef3c44e0fd0c01e32c0259a955fc97547e08a37182252a45e25170c2013cc24.txt",
-        "linkUrl": "sources/53db210bd5f5137061059d718ce38200758fbf0011940751aaeed912ac80ff2b.L797.html#L797",
+        "linkUrl": "sources/27d44b597512677592800ef89611138bc5e8fde2688986a14d3d13c793090e80.L833.html#L833",
         "publicAsset": {
-          "assetId": "portal.asset:53db210bd5f5137061059d718ce38200",
-          "sourceId": "portal.source:f3d59e6ba524fb43815ddaaf4393e3f6",
+          "assetId": "portal.asset:27d44b597512677592800ef89611138b",
+          "sourceId": "portal.source:accc0da89173fc54204e72bc6c0f319d",
           "relativeUrl": "sources/cef3c44e0fd0c01e32c0259a955fc97547e08a37182252a45e25170c2013cc24.txt",
-          "linkUrl": "sources/53db210bd5f5137061059d718ce38200758fbf0011940751aaeed912ac80ff2b.L797.html#L797",
+          "linkUrl": "sources/27d44b597512677592800ef89611138bc5e8fde2688986a14d3d13c793090e80.L833.html#L833",
           "revision": "content:cef3c44e0fd0c01e32c0259a955fc97547e08a37182252a45e25170c2013cc24",
           "digest": "sha384-2dI8FjV/lni+ZU62P0L/wttEV3k44QSpS4zK4u7HiyCoSk/42M3Dv5zlTrtLWfWe",
           "byteLength": 485,
@@ -626680,19 +627172,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 568
+            "line": 600
           },
           "end": {
-            "line": 568
+            "line": 600
           }
         },
         "fetchUrl": "sources/2c7ebdae40e5cd351b7d6a8e2e518f0f99d6308de81db06f62cc30f5e5cc5428.txt",
-        "linkUrl": "sources/2ade378dd5013d5e76b644dff5d2c7f76bf52fb415f296546d1e439dd368ea65.L568.html#L568",
+        "linkUrl": "sources/2244e86556261a0c63772e5c30bbc8a9d9b97dc13db3466c3fd4ba471e79dbec.L600.html#L600",
         "publicAsset": {
-          "assetId": "portal.asset:2ade378dd5013d5e76b644dff5d2c7f7",
-          "sourceId": "portal.source:937b22e756cba30602f96611b3dd9377",
+          "assetId": "portal.asset:2244e86556261a0c63772e5c30bbc8a9",
+          "sourceId": "portal.source:31847f7ac0ff7858b20f52d1a0568ed7",
           "relativeUrl": "sources/2c7ebdae40e5cd351b7d6a8e2e518f0f99d6308de81db06f62cc30f5e5cc5428.txt",
-          "linkUrl": "sources/2ade378dd5013d5e76b644dff5d2c7f76bf52fb415f296546d1e439dd368ea65.L568.html#L568",
+          "linkUrl": "sources/2244e86556261a0c63772e5c30bbc8a9d9b97dc13db3466c3fd4ba471e79dbec.L600.html#L600",
           "revision": "content:2c7ebdae40e5cd351b7d6a8e2e518f0f99d6308de81db06f62cc30f5e5cc5428",
           "digest": "sha384-Jdov7Cwd19eGKUFQgszc24KFCgZvGVmBQ3CC2oxLvAHY6lJ7RQ6xfX8WK7RPtrKC",
           "byteLength": 52,
@@ -626803,19 +627295,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 576
+            "line": 608
           },
           "end": {
-            "line": 576
+            "line": 608
           }
         },
         "fetchUrl": "sources/beee87279912ef731c79d066045d7bd53d698ea21538303ea2466fd04964b2a1.txt",
-        "linkUrl": "sources/65c7625aa1917775f491fc00938cac97a0a3115aac434c632e1b80e7e6e83971.L576.html#L576",
+        "linkUrl": "sources/76f3c8e0dd1949146eb5a956b80fc67e8ed29ecb95c7b04b298c5bb4f911e835.L608.html#L608",
         "publicAsset": {
-          "assetId": "portal.asset:65c7625aa1917775f491fc00938cac97",
-          "sourceId": "portal.source:46aac7f725ffcb937925dff57685b22f",
+          "assetId": "portal.asset:76f3c8e0dd1949146eb5a956b80fc67e",
+          "sourceId": "portal.source:f5bc4517691a604e32eb6092f22d0c69",
           "relativeUrl": "sources/beee87279912ef731c79d066045d7bd53d698ea21538303ea2466fd04964b2a1.txt",
-          "linkUrl": "sources/65c7625aa1917775f491fc00938cac97a0a3115aac434c632e1b80e7e6e83971.L576.html#L576",
+          "linkUrl": "sources/76f3c8e0dd1949146eb5a956b80fc67e8ed29ecb95c7b04b298c5bb4f911e835.L608.html#L608",
           "revision": "content:beee87279912ef731c79d066045d7bd53d698ea21538303ea2466fd04964b2a1",
           "digest": "sha384-mtJz8H9wZwUtpGQ1aBaVY4bcl+ibcUqzXdS5R/akrIBHsCS4G9M7B5hU7cu+MjR4",
           "byteLength": 55,
@@ -626926,19 +627418,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 560
+            "line": 592
           },
           "end": {
-            "line": 560
+            "line": 592
           }
         },
         "fetchUrl": "sources/5e203df10c8377a01f0438e31af98f108b7720a3413954ad1ce629c4493f608d.txt",
-        "linkUrl": "sources/8856f42ddbd150d8e966715c238930fd0c4ef4e095bcfd964910a08a7c678c8b.L560.html#L560",
+        "linkUrl": "sources/1757bdc2a2e342f944711087647de303bde019f6c99a193c9fca2043fc5dda80.L592.html#L592",
         "publicAsset": {
-          "assetId": "portal.asset:8856f42ddbd150d8e966715c238930fd",
-          "sourceId": "portal.source:c98854f7b5e366c2e4f1ee620817d2a3",
+          "assetId": "portal.asset:1757bdc2a2e342f944711087647de303",
+          "sourceId": "portal.source:f8023b346622934f3ecba1d71feae9e4",
           "relativeUrl": "sources/5e203df10c8377a01f0438e31af98f108b7720a3413954ad1ce629c4493f608d.txt",
-          "linkUrl": "sources/8856f42ddbd150d8e966715c238930fd0c4ef4e095bcfd964910a08a7c678c8b.L560.html#L560",
+          "linkUrl": "sources/1757bdc2a2e342f944711087647de303bde019f6c99a193c9fca2043fc5dda80.L592.html#L592",
           "revision": "content:5e203df10c8377a01f0438e31af98f108b7720a3413954ad1ce629c4493f608d",
           "digest": "sha384-OXnKDpnFmLPc4pg7/ReorRvxwP6CxYdOm78YkmuX7Os5PEFPrMI/mfz9rX7UvNuK",
           "byteLength": 47,
@@ -627106,19 +627598,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 691
+            "line": 727
           },
           "end": {
-            "line": 694
+            "line": 730
           }
         },
         "fetchUrl": "sources/35003b29685934934ff91e81d69b5fe8a09482845f7c20acfd0627b975bf756e.txt",
-        "linkUrl": "sources/026815bbaa2236763d47f0f49bcfc7136fcfc3f602edd6615a23008619e984b6.L691.html#L691",
+        "linkUrl": "sources/de736cdd2d873809138b980a763f8bf64acf6b03e514081d28729e4896f69cfd.L727.html#L727",
         "publicAsset": {
-          "assetId": "portal.asset:026815bbaa2236763d47f0f49bcfc713",
-          "sourceId": "portal.source:fa190103b283f9bf1a6ae3ea20eb7303",
+          "assetId": "portal.asset:de736cdd2d873809138b980a763f8bf6",
+          "sourceId": "portal.source:19d753dd5c6bdb0e2747d233c4450247",
           "relativeUrl": "sources/35003b29685934934ff91e81d69b5fe8a09482845f7c20acfd0627b975bf756e.txt",
-          "linkUrl": "sources/026815bbaa2236763d47f0f49bcfc7136fcfc3f602edd6615a23008619e984b6.L691.html#L691",
+          "linkUrl": "sources/de736cdd2d873809138b980a763f8bf64acf6b03e514081d28729e4896f69cfd.L727.html#L727",
           "revision": "content:35003b29685934934ff91e81d69b5fe8a09482845f7c20acfd0627b975bf756e",
           "digest": "sha384-3GK26OR/7zuG0QNqhaWzhje4IELpNXP5vsj/TR8pce7jUmHnhNPTQlShBilkTNRt",
           "byteLength": 137,
@@ -826989,16 +827481,16 @@
             "line": 202
           }
         },
-        "fetchUrl": "sources/863b26c14471d7078c4a9322d7fa3f80cf12cbc18daea2a0e02e902ccbd976cf.txt",
-        "linkUrl": "sources/91ee7f8b57d05134d4f1386a63d70a460c9d5de3566c61f9eb50c93635564510.L98.html#L98",
+        "fetchUrl": "sources/80fd4ac6ecb61a3b0534f67b2384fd24d1777e20f9a8edfc04f67b777d350d42.txt",
+        "linkUrl": "sources/20b23929bdb1f75b878c128c90ea5da5de08ea829b07867120eebd4f6dbb371f.L98.html#L98",
         "publicAsset": {
-          "assetId": "portal.asset:91ee7f8b57d05134d4f1386a63d70a46",
+          "assetId": "portal.asset:20b23929bdb1f75b878c128c90ea5da5",
           "sourceId": "portal.source:1d14d8382ef7c3d8709bed9ce35464f1",
-          "relativeUrl": "sources/863b26c14471d7078c4a9322d7fa3f80cf12cbc18daea2a0e02e902ccbd976cf.txt",
-          "linkUrl": "sources/91ee7f8b57d05134d4f1386a63d70a460c9d5de3566c61f9eb50c93635564510.L98.html#L98",
-          "revision": "content:863b26c14471d7078c4a9322d7fa3f80cf12cbc18daea2a0e02e902ccbd976cf",
-          "digest": "sha384-OdZEYVl56mCUJFhpaa+MwdE0vjZCJPf7yBejLHIpiyAr7MHsv1q57Ex5cZJXbrvo",
-          "byteLength": 6720,
+          "relativeUrl": "sources/80fd4ac6ecb61a3b0534f67b2384fd24d1777e20f9a8edfc04f67b777d350d42.txt",
+          "linkUrl": "sources/20b23929bdb1f75b878c128c90ea5da5de08ea829b07867120eebd4f6dbb371f.L98.html#L98",
+          "revision": "content:80fd4ac6ecb61a3b0534f67b2384fd24d1777e20f9a8edfc04f67b777d350d42",
+          "digest": "sha384-irDIepAT2ERn1d5WP7+dcVtXvYMl/HTaW8UKc5LarHgL/vJqC3BQJJHcHqjeEz/g",
+          "byteLength": 6664,
           "lineCount": 105
         },
         "fetchTrigger": "on-expand",
@@ -845282,19 +845774,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 515
+            "line": 547
           },
           "end": {
-            "line": 577
+            "line": 609
           }
         },
         "fetchUrl": "sources/9959394d1326c6b1a28a378d3f2d564fa40b9d14a5ca34b8bc4eaeb5f9388c7b.txt",
-        "linkUrl": "sources/942c411946a74d9643d666c4956c8bda79b3ed55b2c2b27c1aa9d881f9474a4b.L515.html#L515",
+        "linkUrl": "sources/cfac8c976ad05124b290fd4fe4734bf85ca2c8b666b4ce714731ab8c128ee0ff.L547.html#L547",
         "publicAsset": {
-          "assetId": "portal.asset:942c411946a74d9643d666c4956c8bda",
-          "sourceId": "portal.source:6b9b3991ca218b1be1cba65a93dbf105",
+          "assetId": "portal.asset:cfac8c976ad05124b290fd4fe4734bf8",
+          "sourceId": "portal.source:d89cecaa7b6d7a1e86a7303167b583de",
           "relativeUrl": "sources/9959394d1326c6b1a28a378d3f2d564fa40b9d14a5ca34b8bc4eaeb5f9388c7b.txt",
-          "linkUrl": "sources/942c411946a74d9643d666c4956c8bda79b3ed55b2c2b27c1aa9d881f9474a4b.L515.html#L515",
+          "linkUrl": "sources/cfac8c976ad05124b290fd4fe4734bf85ca2c8b666b4ce714731ab8c128ee0ff.L547.html#L547",
           "revision": "content:9959394d1326c6b1a28a378d3f2d564fa40b9d14a5ca34b8bc4eaeb5f9388c7b",
           "digest": "sha384-RstUgurgPuTskKT1kFklILPKXfMhwVst8VmvfzmJiswtsXmp+89xNp12UQyRNXBZ",
           "byteLength": 2217,
@@ -845469,16 +845961,16 @@
             "line": 418
           }
         },
-        "fetchUrl": "sources/bcb8886e2f52190e0003cda36ed309064be95b0134c2ee2cf8e3b55bcae4d65d.txt",
-        "linkUrl": "sources/5dce54116ed39604a10806ca4b5c046093fd10b943ec15d9610d0e64f269bb0b.L19.html#L19",
+        "fetchUrl": "sources/5035a712158eb5d88a94160bd215d979a19dc5a92e10a3f120e09b6943492d09.txt",
+        "linkUrl": "sources/36d8363ef3c7ca032ea860628b73259ac0284e4b87b9d46869c8469a5cbcb0c7.L19.html#L19",
         "publicAsset": {
-          "assetId": "portal.asset:5dce54116ed39604a10806ca4b5c0460",
+          "assetId": "portal.asset:36d8363ef3c7ca032ea860628b73259a",
           "sourceId": "portal.source:a6c2caeb1db11d2cc873ca650dbfffba",
-          "relativeUrl": "sources/bcb8886e2f52190e0003cda36ed309064be95b0134c2ee2cf8e3b55bcae4d65d.txt",
-          "linkUrl": "sources/5dce54116ed39604a10806ca4b5c046093fd10b943ec15d9610d0e64f269bb0b.L19.html#L19",
-          "revision": "content:bcb8886e2f52190e0003cda36ed309064be95b0134c2ee2cf8e3b55bcae4d65d",
-          "digest": "sha384-ZY4jMYC9dyS8J70LEf/c5dTiaxB0+Ozlm1gS2XdAC1frsZ+vDlNefAInzpkpTdxI",
-          "byteLength": 18479,
+          "relativeUrl": "sources/5035a712158eb5d88a94160bd215d979a19dc5a92e10a3f120e09b6943492d09.txt",
+          "linkUrl": "sources/36d8363ef3c7ca032ea860628b73259ac0284e4b87b9d46869c8469a5cbcb0c7.L19.html#L19",
+          "revision": "content:5035a712158eb5d88a94160bd215d979a19dc5a92e10a3f120e09b6943492d09",
+          "digest": "sha384-lk5TL5MIksp4rnIs50/b6qlH720b2793M2J9oaG+H1Quowbqu8w951TTvh+oaBcz",
+          "byteLength": 16657,
           "lineCount": 400
         },
         "fetchTrigger": "on-expand",
@@ -845644,23 +846136,23 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 591
+            "line": 623
           },
           "end": {
-            "line": 811
+            "line": 847
           }
         },
-        "fetchUrl": "sources/6ec6f2741bb98c134cfa58452c167ed8ded5c13da97a1cc4f43a487b31bb0535.txt",
-        "linkUrl": "sources/06f0cd25e87ab3c12c32192a39d7e29386042f7d61409ca4463827c0b219bd7d.L591.html#L591",
+        "fetchUrl": "sources/81e2fa0f7ecb2bd839d61754a6fa0b5205ba48c67d3e82fe37acb5621a22a979.txt",
+        "linkUrl": "sources/1735cda0bc2c6c47c9ab0984b6a2dd492c65f469cde32aab070ad5e34440e6b2.L623.html#L623",
         "publicAsset": {
-          "assetId": "portal.asset:06f0cd25e87ab3c12c32192a39d7e293",
-          "sourceId": "portal.source:9de338a67a27afbfcd45587586b8f767",
-          "relativeUrl": "sources/6ec6f2741bb98c134cfa58452c167ed8ded5c13da97a1cc4f43a487b31bb0535.txt",
-          "linkUrl": "sources/06f0cd25e87ab3c12c32192a39d7e29386042f7d61409ca4463827c0b219bd7d.L591.html#L591",
-          "revision": "content:6ec6f2741bb98c134cfa58452c167ed8ded5c13da97a1cc4f43a487b31bb0535",
-          "digest": "sha384-dbBr/Ud4UsjMVDOuOs9e33AsEGYb84FPhY+7FgN/s9cvJZ6AqlGloEDsMbmyDb5k",
-          "byteLength": 17085,
-          "lineCount": 221
+          "assetId": "portal.asset:1735cda0bc2c6c47c9ab0984b6a2dd49",
+          "sourceId": "portal.source:d306db200b67d635399dacf182a86d1b",
+          "relativeUrl": "sources/81e2fa0f7ecb2bd839d61754a6fa0b5205ba48c67d3e82fe37acb5621a22a979.txt",
+          "linkUrl": "sources/1735cda0bc2c6c47c9ab0984b6a2dd492c65f469cde32aab070ad5e34440e6b2.L623.html#L623",
+          "revision": "content:81e2fa0f7ecb2bd839d61754a6fa0b5205ba48c67d3e82fe37acb5621a22a979",
+          "digest": "sha384-OI0jdNFKRxq8Uy7LLgEqb2wEDi07wltFqQmUUr7bsTeDqxwQU5jEMWVrcTXDE24J",
+          "byteLength": 17565,
+          "lineCount": 225
         },
         "fetchTrigger": "on-expand",
         "fetchMaxLines": 400
@@ -882400,7 +882892,7 @@
       "id": "kind:dotnet-field",
       "kind": "kind",
       "label": "dotnet-field",
-      "entryCount": 1064,
+      "entryCount": 1068,
       "views": [
         "dotnet"
       ]
@@ -882454,7 +882946,7 @@
       "id": "profile-layer:unknown-profile",
       "kind": "profile-layer",
       "label": "unknown-profile",
-      "entryCount": 5780,
+      "entryCount": 5784,
       "views": [
         "dotnet"
       ]
@@ -882463,7 +882955,7 @@
       "id": "source-root:src",
       "kind": "source-root",
       "label": "src",
-      "entryCount": 5780,
+      "entryCount": 5784,
       "views": [
         "dotnet"
       ]
@@ -882474,7 +882966,7 @@
       "id": "view:dotnet",
       "kind": "view",
       "label": ".NET",
-      "entryCount": 5780,
+      "entryCount": 5784,
       "views": [
         "dotnet"
       ],
@@ -944037,7 +944529,7 @@
           "id": "dotnet:assembly:portal.components",
           "kind": "assembly",
           "label": "Portal.Components",
-          "entryCount": 1500,
+          "entryCount": 1504,
           "views": [
             "dotnet"
           ],
@@ -944046,7 +944538,7 @@
               "id": "dotnet:assembly:portal.components:namespace:aspnet",
               "kind": "namespace",
               "label": "ASPNET",
-              "entryCount": 1500,
+              "entryCount": 1504,
               "views": [
                 "dotnet"
               ],
@@ -944055,7 +944547,7 @@
                   "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit",
                   "kind": "namespace",
                   "label": "StarterKit",
-                  "entryCount": 1500,
+                  "entryCount": 1504,
                   "views": [
                     "dotnet"
                   ],
@@ -944064,7 +944556,7 @@
                       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal",
                       "kind": "namespace",
                       "label": "Portal",
-                      "entryCount": 1500,
+                      "entryCount": 1504,
                       "views": [
                         "dotnet"
                       ],
@@ -962203,7 +962695,7 @@
                           "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys",
                           "kind": "type",
                           "label": "PortalPermissionKeys",
-                          "entryCount": 58,
+                          "entryCount": 62,
                           "views": [
                             "dotnet"
                           ],
@@ -962736,6 +963228,58 @@
                               "sourcePath": "src/Portal.Components/PortalPermissions.cs",
                               "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
                               "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-11724c9e.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+                              "kind": "entry",
+                              "label": "ExpenseReimbursementResubmit",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-055ec21b.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+                              "kind": "entry",
+                              "label": "ExpenseReimbursementSubmit",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-447eb286.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+                              "kind": "entry",
+                              "label": "LeaveRequestResubmit",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-7410823b.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+                              "kind": "entry",
+                              "label": "LeaveRequestSubmit",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-58cb2aa6.html"
                             },
                             {
                               "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
@@ -977349,8 +977893,8 @@
   "relationGraph": {
     "contract": "hia-project-relation-graph",
     "contractVersion": "0.1.0-draft",
-    "nodeCount": 6237,
-    "relationCount": 5787,
+    "nodeCount": 6241,
+    "relationCount": 5791,
     "nodes": [
       {
         "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -982670,6 +983214,34 @@
         "kind": "entry",
         "label": "EnterpriseCapabilityView",
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+        "kind": "entry",
+        "label": "ExpenseReimbursementResubmit",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+        "kind": "entry",
+        "label": "ExpenseReimbursementSubmit",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+        "kind": "entry",
+        "label": "LeaveRequestResubmit",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+        "kind": "entry",
+        "label": "LeaveRequestSubmit",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
         "view": "dotnet"
       },
       {
@@ -1029962,8 +1030534,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationadmin",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 251,
-          "rangeEndLine": 251
+          "rangeStartLine": 283,
+          "rangeEndLine": 283
         }
       },
       {
@@ -1029975,8 +1030547,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 243,
-          "rangeEndLine": 243
+          "rangeStartLine": 275,
+          "rangeEndLine": 275
         }
       },
       {
@@ -1029988,8 +1030560,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationsubmit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 227,
-          "rangeEndLine": 227
+          "rangeStartLine": 259,
+          "rangeEndLine": 259
         }
       },
       {
@@ -1030001,8 +1030573,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationviewown",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 235,
-          "rangeEndLine": 235
+          "rangeStartLine": 267,
+          "rangeEndLine": 267
         }
       },
       {
@@ -1030014,8 +1030586,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationadmin",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 319,
-          "rangeEndLine": 319
+          "rangeStartLine": 351,
+          "rangeEndLine": 351
         }
       },
       {
@@ -1030027,8 +1030599,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationcreate",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 287,
-          "rangeEndLine": 287
+          "rangeStartLine": 319,
+          "rangeEndLine": 319
         }
       },
       {
@@ -1030040,8 +1030612,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationeventsview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 327,
-          "rangeEndLine": 327
+          "rangeStartLine": 359,
+          "rangeEndLine": 359
         }
       },
       {
@@ -1030053,8 +1030625,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationhandle",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 303,
-          "rangeEndLine": 303
+          "rangeStartLine": 335,
+          "rangeEndLine": 335
         }
       },
       {
@@ -1030066,8 +1030638,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewall",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 311,
-          "rangeEndLine": 311
+          "rangeStartLine": 343,
+          "rangeEndLine": 343
         }
       },
       {
@@ -1030079,8 +1030651,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewown",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 295,
-          "rangeEndLine": 295
+          "rangeStartLine": 327,
+          "rangeEndLine": 327
         }
       },
       {
@@ -1030092,8 +1030664,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkflowadmin",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 279,
-          "rangeEndLine": 279
+          "rangeStartLine": 311,
+          "rangeEndLine": 311
         }
       },
       {
@@ -1030105,8 +1030677,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkflowview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 265,
-          "rangeEndLine": 265
+          "rangeStartLine": 297,
+          "rangeEndLine": 297
         }
       },
       {
@@ -1030118,8 +1030690,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkitemsadmin",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 219,
-          "rangeEndLine": 219
+          "rangeStartLine": 251,
+          "rangeEndLine": 251
         }
       },
       {
@@ -1030131,8 +1030703,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkitemshandle",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 211,
-          "rangeEndLine": 211
+          "rangeStartLine": 243,
+          "rangeEndLine": 243
         }
       },
       {
@@ -1030144,8 +1030716,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkitemsview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 203,
-          "rangeEndLine": 203
+          "rangeStartLine": 235,
+          "rangeEndLine": 235
         }
       },
       {
@@ -1030157,8 +1030729,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentrawhtmledit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 437,
-          "rangeEndLine": 437
+          "rangeStartLine": 469,
+          "rangeEndLine": 469
         }
       },
       {
@@ -1030170,8 +1030742,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentuploadmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 445,
-          "rangeEndLine": 445
+          "rangeStartLine": 477,
+          "rangeEndLine": 477
         }
       },
       {
@@ -1030326,8 +1030898,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 482,
-          "rangeEndLine": 482
+          "rangeStartLine": 514,
+          "rangeEndLine": 514
         }
       },
       {
@@ -1030339,8 +1030911,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessreview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 490,
-          "rangeEndLine": 490
+          "rangeStartLine": 522,
+          "rangeEndLine": 522
         }
       },
       {
@@ -1030352,8 +1030924,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 466,
-          "rangeEndLine": 466
+          "rangeStartLine": 498,
+          "rangeEndLine": 498
         }
       },
       {
@@ -1030365,8 +1030937,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationreview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 474,
-          "rangeEndLine": 474
+          "rangeStartLine": 506,
+          "rangeEndLine": 506
         }
       },
       {
@@ -1030378,8 +1030950,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 498,
-          "rangeEndLine": 498
+          "rangeStartLine": 530,
+          "rangeEndLine": 530
         }
       },
       {
@@ -1030391,8 +1030963,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformreview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 506,
-          "rangeEndLine": 506
+          "rangeStartLine": 538,
+          "rangeEndLine": 538
         }
       },
       {
@@ -1030404,8 +1030976,60 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 458,
-          "rangeEndLine": 458
+          "rangeStartLine": 490,
+          "rangeEndLine": 490
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 227,
+          "rangeEndLine": 227
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 219,
+          "rangeEndLine": 219
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 211,
+          "rangeEndLine": 211
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestsubmit",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 203,
+          "rangeEndLine": 203
         }
       },
       {
@@ -1030417,8 +1031041,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 383,
-          "rangeEndLine": 383
+          "rangeStartLine": 415,
+          "rangeEndLine": 415
         }
       },
       {
@@ -1030430,8 +1031054,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 375,
-          "rangeEndLine": 375
+          "rangeStartLine": 407,
+          "rangeEndLine": 407
         }
       },
       {
@@ -1030443,8 +1031067,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 359,
-          "rangeEndLine": 359
+          "rangeStartLine": 391,
+          "rangeEndLine": 391
         }
       },
       {
@@ -1030456,8 +1031080,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 351,
-          "rangeEndLine": 351
+          "rangeStartLine": 383,
+          "rangeEndLine": 383
         }
       },
       {
@@ -1030469,8 +1031093,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 367,
-          "rangeEndLine": 367
+          "rangeStartLine": 399,
+          "rangeEndLine": 399
         }
       },
       {
@@ -1030482,8 +1031106,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 413,
-          "rangeEndLine": 413
+          "rangeStartLine": 445,
+          "rangeEndLine": 445
         }
       },
       {
@@ -1030495,8 +1031119,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 399,
-          "rangeEndLine": 399
+          "rangeStartLine": 431,
+          "rangeEndLine": 431
         }
       },
       {
@@ -1030547,8 +1031171,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portalmodulesedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 429,
-          "rangeEndLine": 429
+          "rangeStartLine": 461,
+          "rangeEndLine": 461
         }
       },
       {
@@ -1030560,8 +1031184,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 421,
-          "rangeEndLine": 421
+          "rangeStartLine": 453,
+          "rangeEndLine": 453
         }
       },
       {
@@ -1030612,8 +1031236,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 343,
-          "rangeEndLine": 343
+          "rangeStartLine": 375,
+          "rangeEndLine": 375
         }
       },
       {
@@ -1030625,8 +1031249,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 335,
-          "rangeEndLine": 335
+          "rangeStartLine": 367,
+          "rangeEndLine": 367
         }
       },
       {
@@ -1050346,8 +1050970,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 547,
-          "rangeEndLine": 552
+          "rangeStartLine": 579,
+          "rangeEndLine": 584
         }
       },
       {
@@ -1050359,8 +1050983,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 720,
-          "rangeEndLine": 723
+          "rangeStartLine": 756,
+          "rangeEndLine": 759
         }
       },
       {
@@ -1050372,8 +1050996,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 755,
-          "rangeEndLine": 771
+          "rangeStartLine": 791,
+          "rangeEndLine": 807
         }
       },
       {
@@ -1050385,8 +1051009,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 797,
-          "rangeEndLine": 810
+          "rangeStartLine": 833,
+          "rangeEndLine": 846
         }
       },
       {
@@ -1068819,8 +1069443,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.category",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 568,
-          "rangeEndLine": 568
+          "rangeStartLine": 600,
+          "rangeEndLine": 600
         }
       },
       {
@@ -1068832,8 +1069456,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.description",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 576,
-          "rangeEndLine": 576
+          "rangeStartLine": 608,
+          "rangeEndLine": 608
         }
       },
       {
@@ -1068845,8 +1069469,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.key",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 560,
-          "rangeEndLine": 560
+          "rangeStartLine": 592,
+          "rangeEndLine": 592
         }
       },
       {
@@ -1068858,8 +1069482,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 691,
-          "rangeEndLine": 694
+          "rangeStartLine": 727,
+          "rangeEndLine": 730
         }
       },
       {
@@ -1090425,8 +1091049,8 @@
         "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissiondefinition",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 515,
-          "rangeEndLine": 577
+          "rangeStartLine": 547,
+          "rangeEndLine": 609
         }
       },
       {
@@ -1090451,8 +1091075,8 @@
         "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissionregistry",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 591,
-          "rangeEndLine": 811
+          "rangeStartLine": 623,
+          "rangeEndLine": 847
         }
       },
       {

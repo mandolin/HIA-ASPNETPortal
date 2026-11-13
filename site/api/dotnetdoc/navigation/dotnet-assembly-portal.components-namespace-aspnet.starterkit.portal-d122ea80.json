@@ -2377,7 +2377,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys",
       "kind": "type",
       "label": "PortalPermissionKeys",
-      "entryCount": 58,
+      "entryCount": 62,
       "views": [
         "dotnet"
       ],
