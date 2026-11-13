@@ -23,8 +23,8 @@ SPA and has no client-side routing; pages and modules render through the Web For
 > Provenance: this project derives from the ASP.NET Portal Starter Kit published on CodePlex, and has since been
 > reworked and extended extensively.
 
-Current version: **v3.0.0** (2026-11-11, platform-ready / L11 achieved). Maturity is stated as **usable / reference /
-research baseline**.
+Current version: **v3.1.0** (2026-11-13, documentation-system cycle closed out; platform readiness / L11 already
+achieved). Maturity is stated as **usable / reference / research baseline**.
 
 ### Where it fits
 

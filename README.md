@@ -2,13 +2,13 @@
 
 企业内网 Web Forms 门户平台。fork 自 Codeplex 上的 ASP.NET Portal Starter Kit，在其基础上补齐了**权限与数据范围、流程状态机、审计、模块包治理、主题治理与自动化门禁**。
 
-当前版本：**v3.0.0**（`2026-11-11，生产就绪收口；上一版 v1.4.0 为文档体系完整化）。成熟度定位为 **可用 / 参考 / 研究基线**：首发判据（能力覆盖、逐条目对标、质量门禁、文档就绪、开源就绪、版本锚点、口径约束）均已达成，且**真实生产环境证据下的生产就绪（`M-ANP-TRUSTED-PORTAL` / L7）已达成**，故**可宣称生产级可信**（口径约束见 [版本策略](docs/versioning.md)）。
+当前版本：**v3.1.0**（`2026-11-13，生产就绪收口；上一版 v1.4.0 为文档体系完整化）。成熟度定位为 **可用 / 参考 / 研究基线**：首发判据（能力覆盖、逐条目对标、质量门禁、文档就绪、开源就绪、版本锚点、口径约束）均已达成，且**真实生产环境证据下的生产就绪（`M-ANP-TRUSTED-PORTAL` / L7）已达成**，故**可宣称生产级可信**（口径约束见 [版本策略](docs/versioning.md)）。
 
 ## English
 
 Enterprise intranet portal platform on ASP.NET Web Forms, forked from the original ASP.NET Portal Starter Kit on Codeplex and extended with permission and data-scope enforcement, workflow state machines, auditing, module package governance, theme governance, and an automated gate suite.
 
-Current version: **v3.0.0** (2026-11-11, production readiness: L7 `M-ANP-TRUSTED-PORTAL` achieved under real target-environment evidence; the previous version v1.4.0 completed the documentation system). Maturity is stated as **usable / reference / research baseline**: the first-release criteria are all met, and production readiness under real target-environment evidence (`M-ANP-TRUSTED-PORTAL` / L7) is now achieved, so production-grade reliability **is** claimed. See [versioning.md](docs/versioning.md) for the wording rules.
+Current version: **v3.1.0** (2026-11-13, production readiness: L7 `M-ANP-TRUSTED-PORTAL` achieved under real target-environment evidence; the previous version v1.4.0 completed the documentation system). Maturity is stated as **usable / reference / research baseline**: the first-release criteria are all met, and production readiness under real target-environment evidence (`M-ANP-TRUSTED-PORTAL` / L7) is now achieved, so production-grade reliability **is** claimed. See [versioning.md](docs/versioning.md) for the wording rules.
 
 This project ships as **source only** — there is no prebuilt installer, container image or binary release. Clone the repository (or download a source archive) and follow the seven steps in the Chinese "快速上手（本地开发）" section below.
 

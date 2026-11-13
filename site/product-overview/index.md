@@ -18,7 +18,7 @@ title: 产品概览与定位（HIA-ASPNETPortal）
 
 > 溯源：本项目源自 CodePlex 上的 ASP.NET Portal Starter Kit，已在其基础上大量重构与扩展。
 
-当前版本 **v3.0.0**（2026-11-11，能力平台就绪 / L11 达成）。成熟度口径为**可用 / 参考 / 研究基线**。
+当前版本 **v3.1.0**（2026-11-13，文档体系主线收口；能力平台就绪 / L11 已达成）。成熟度口径为**可用 / 参考 / 研究基线**。
 
 ### 适用场景
 
@@ -92,4 +92,4 @@ title: 产品概览与定位（HIA-ASPNETPortal）
 - 想**部署**：`deployment-checklist.md` → `operations-runbook.md`
 - 想**查全部文档**：[documentation-map.md]({{ site.baseurl }}/documentation-map/)
 
-<!-- build-stamp: 16C65B2F31DF -->
+<!-- build-stamp: ABD581EF76A0 -->

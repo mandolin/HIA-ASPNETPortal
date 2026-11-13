@@ -60,9 +60,8 @@ allowed.
 
 ## 6. Current version
 
-**`v1.2.0`** (2026-10-22, current) — verification and release mechanics were closed out: post-publish live re-check, build stamps with a precise propagation criterion, handwritten page freshness, build rehearsal and output redirection switches, a local injection-track tool, and the release-readiness gate. The previous version `v1.1.0` (2026-10-17) — the product website and documentation subsite were overhauled. The first formal
-release `v1.0.0` (2026-10-09) completed capability coverage, quality gates, documentation and open-source readiness;
-the external wording remains limited to "development, testing, demonstration and reference" (see section 6).
+**`v3.1.0`** (2026-11-13, current) — production ready: the real target-environment evidence loop is closed (real IIS / TLS / ACL, cookies and machineKey, a SQL Server version matrix, an offline enterprise-scanning baseline and real IE9 retesting); `M-ANP-TRUSTED-PORTAL` / L7 achieved and L8 business sign-off issued, so the public wording can claim production-grade reliability. The previous version `v3.0.0` (2026-11-11) — platform readiness / L11 achieved. The first formal
+release `v1.0.0` (2026-10-09) completed capability coverage, quality gates, documentation and open-source readiness.
 See `CHANGELOG.md` for details.
 
 ## 7. `minimumPortalVersion` semantics in module manifests
