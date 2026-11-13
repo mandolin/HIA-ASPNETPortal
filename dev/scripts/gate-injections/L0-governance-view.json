@@ -1,0 +1,14 @@
+[
+  {
+    "gate": "Test-PortalGovernanceView.ps1",
+    "note": "W-anp-P327：漂移能力权限前缀族常量 BusinessCollaborationKeyPrefix 的取值，使其不再匹配任何 PortalPermissionKeys 键族，触发 C3（权限键前缀漂移）L0 硬失败；还原后应回到 PASS。验证治理视图门禁（L0 常驻硬断言 + 入口双源对账 C6）可被真实漂移捕获且可恢复。",
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalPermissions.cs",
+        "mode": "replace",
+        "old": "public const string BusinessCollaborationKeyPrefix = \"Business.Collaboration\";",
+        "content": "public const string BusinessCollaborationKeyPrefix = \"Z-Drift-NotAKeyFamily\";"
+      }
+    ]
+  }
+]

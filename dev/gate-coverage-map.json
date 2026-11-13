@@ -453,6 +453,13 @@
       "coverage": "full",
       "gate": "Test-PortalNavigationGroupRender.ps1",
       "boundary": "只证明静态契约自洽：分组视图不含授权符号且保留未分组平铺/显示下标/降级标记、banner 为原生 button disclosure 且不用 menu role 或内联 onclick、7 套皮肤各有 ≥8 条分组作用域规则与 :focus/隐藏类、渐进增强脚本为 ES5 且含 Escape 回焦与幂等绑定、csproj/配置/降级分支接线齐备。**不证明**运行期真的渲染出分组 HTML、键盘交互与 Escape 回焦生效、浅/深主题视觉正确或中英各自截图（由 L2 运行期证据 Test-PortalNavigationGroupRenderEvidence.mjs 承载），也不证明任何授权判定正确（由 PortalNavigationGroupViewTests 单测承载）。"
+    },
+    {
+      "id": "governance-view",
+      "name": "治理视图（能力/模块/入口/权限键契约 L0 硬断言 + 入口双源交叉对账；W-anp-P325 升 L0 常驻硬断言、W-anp-P326 加 C6 双源对账、W-anp-P327 接入日常 L0 编排）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalGovernanceView.ps1"
     }
   ],
   "boundaryRequiredGates": [

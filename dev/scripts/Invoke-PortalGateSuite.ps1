@@ -762,6 +762,18 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalIndependentModuleGate.ps1'; Runner = 'ps1'; Kind = '独立模块契约一致性'; Args = @() }
         @{ File = 'Test-PortalNavigationGroupContract.ps1'; Runner = 'ps1'; Kind = '主导航分组配置别名契约'; Args = @() }
         @{ File = 'Test-PortalNavigationGroupRender.ps1'; Runner = 'ps1'; Kind = '主导航两级分组渲染契约'; Args = @() }
+        # <lang>
+        #   <zh-CN>W-anp-P327 接入：治理视图（能力/模块/入口/权限键契约 L0 硬断言，含 Q3-C 入口双源交叉对账 C6）。
+        #     此前它写好了却未进任何编排层（“写好了但等于没写”的实例），故漂移无人看守。现接入日常 L0 每日报告——
+        #     任何能力前缀漂移、孤儿能力、悬空入口、命名漂移或入口双源不一致都会让每日报告标红，在一天内被发现
+        #     （不阻断发布，符合 L0 职责）。属静态门禁、无需编译，归入 L0 而非 L1（L1 为构建/单测/冒烟）。</zh-CN>
+        #   <en>W-anp-P327 wiring: the governance view (capability/module/entry/permission-key contract as L0 hard assertions,
+        #     including Q3-C dual-source entry reconciliation C6). It existed but was in no orchestration layer (the "exists but
+        #     effectively absent" instance), so drift went unwatched. Now wired into the daily L0 report — any capability-prefix
+        #     drift, orphan capability, dangling entry, naming drift or dual-source mismatch turns the daily report red within a day
+        #     (non-blocking, matching L0's role). A static gate needing no compile, so it belongs in L0, not L1 (build/test/smoke).</en>
+        # </lang>
+        @{ File = 'Test-PortalGovernanceView.ps1';       Runner = 'ps1'; Kind = '治理视图（能力/模块/入口/权限键契约 + 入口双源对账）'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
