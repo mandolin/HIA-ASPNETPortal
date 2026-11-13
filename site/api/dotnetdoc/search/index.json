@@ -35481,6 +35481,69 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationeventsview businesscollaborationeventsview dotnet-field view enterprise collaboration-item workflow events. public const string aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationeventsview dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationeventsview portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 查看企业协同事项流程事件。 view enterprise collaboration-item workflow events."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+      "name": "BusinessCollaborationKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-caa30ca8.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-caa30ca8.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix businesscollaborationkeyprefix dotnet-field permission-key prefix family for thecapability in the capability registry. the registry references this instead of a hard-coded literal. collaboration public const string aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 能力注册表中能力的权限键前缀族。注册表不再硬编码字面量，统一引用此处。 collaboration permission-key prefix family for thecapability in the capability registry. the registry references this instead of a hard-coded literal. collaboration"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+      "name": "BusinessApplicationKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-b39c2ad9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-b39c2ad9.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix businessapplicationkeyprefix dotnet-field permission-key prefix family for thecapability. applicationrequest public const string aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 能力注册表中能力的权限键前缀族。 applicationrequest permission-key prefix family for thecapability. applicationrequest"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+      "name": "EmployeeProfileConfirmKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-1ea56c70.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-1ea56c70.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix employeeprofileconfirmkeyprefix dotnet-field permission-key prefix family for thecapability (keyless; prefix equals the capability name). employeeprofileconfirm public const string aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 能力注册表中能力的权限键前缀族（keyless 能力，前缀即自身名）。 employeeprofileconfirm permission-key prefix family for thecapability (keyless; prefix equals the capability name). employeeprofileconfirm"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+      "name": "EmployeeProfileCorrectionRequestKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-e1fdc11f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-e1fdc11f.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix employeeprofilecorrectionrequestkeyprefix dotnet-field permission-key prefix family for thecapability (keyless). employeeprofilecorrectionrequest public const string aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 能力注册表中能力的权限键前缀族（keyless 能力）。 employeeprofilecorrectionrequest permission-key prefix family for thecapability (keyless). employeeprofilecorrectionrequest"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+      "name": "LeaveRequestKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-cb5c10d1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-cb5c10d1.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix leaverequestkeyprefix dotnet-field permission-key prefix family for thecapability (keyless). leaverequest public const string aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 能力注册表中能力的权限键前缀族（keyless 能力）。 leaverequest permission-key prefix family for thecapability (keyless). leaverequest"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+      "name": "ExpenseReimbursementKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-83df4c31.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-83df4c31.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix expensereimbursementkeyprefix dotnet-field permission-key prefix family for thecapability (keyless). expensereimbursement public const string aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 能力注册表中能力的权限键前缀族（keyless 能力）。 expensereimbursement permission-key prefix family for thecapability (keyless). expensereimbursement"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+      "name": "FormBuilderKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.form-7f12e7f6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.form-7f12e7f6.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix formbuilderkeyprefix dotnet-field thecapability is keyless (no permission-key family); its prefix is the empty string and must be declared explicitly rather than left ambiguous. formbuilder public const string aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpermissionkeys t:aspnet.starterkit.portal.portalpermissionkeys dotnet hia-document api/portal.components.hia.json src/portal.components/portalpermissions.cs csharp 能力注册表中能力为 keyless（无权限键族），前缀为空串，必须显式声明而非留空引发歧义。 formbuilder thecapability is keyless (no permission-key family); its prefix is the empty string and must be declared explicitly rather than left ambiguous. formbuilder"
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeview",
       "name": "ThemeView",
       "kind": "dotnet-field",

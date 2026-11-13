@@ -16,15 +16,15 @@
 
     检查项：
       C1 模块声明的能力必须能在能力注册表解析（否则模块非法声明能力，P46 契约硬失败）
-      C2 每个能力应有主责模块实现（孤儿能力 → 告警）
-      C3 每个能力的 PermissionKeyPrefix 应在 PortalPermissionKeys 有对应键族（权限键漂移 → 告警）
-      C4 导航 DesktopModule 入口引用的模块目录应存在（悬空入口 → 告警）
-      C5 发货代码 src/ 不应泄漏完整计划码 W-anp-P###/C-anp-P##（命名漂移 → 告警）
+      C2 每个能力应有主责模块实现（孤儿能力 → L0 硬失败）
+      C3 每个能力的 PermissionKeyPrefix 应在 PortalPermissionKeys 有对应键族（权限键漂移 → L0 硬失败）
+      C4 导航 DesktopModule 入口引用的模块目录应存在（悬空入口 → L0 硬失败）
+      C5 能力键 / 模块包标识 / 权限键 命名形态与层词表（命名漂移 → L0 硬失败）
 
     退出码：
-      0  = 通过（无硬失败；告警仅提示，不阻断）
-      1  = 硬失败（C1 不通过，或结构性自检失败）
-      2  = -Strict 模式下存在告警
+      0  = 通过（无硬失败）
+      1  = 硬失败（C1/C2/C3/C4/C5 任一不通过，或结构性自检失败）—— 自 W-anp-P325 起治理视图整体升 L0 常驻硬断言
+      2  = -Strict 模式下存在告警（自 W-anp-P325 起 C2–C5 已升 FAIL，此分支通常不再触发，保留以兼容历史调用）
 #>
 [CmdletBinding()]
 param(
@@ -42,6 +42,8 @@ $modRoot  = Join-Path $RepoRoot 'src/Portal/DesktopModules'
 $fail = 0
 $warn = 0
 
+# 注：自 W-anp-P325 起，治理视图整体升为 L0 常驻硬断言——C2–C5 的告警（WARN）全部升级为硬失败（FAIL），
+# 任何能力/模块/入口/权限键契约漂移都会让脚本以 exit 1 阻断；-Strict 的告警分支因此不再触发（保留以兼容历史调用）。
 function Emit($sev, $msg) {
     if ($sev -eq 'FAIL') { Write-Host "  [FAIL] $msg" -ForegroundColor Red; $script:fail++ }
     elseif ($sev -eq 'WARN') { Write-Host "  [WARN] $msg" -ForegroundColor Yellow; $script:warn++ }
@@ -56,20 +58,42 @@ if (-not (Test-Path $capFile)) { Write-Host "能力注册表缺失: $capFile" -F
 $capText = Get-Content $capFile -Raw -Encoding UTF8
 
 $capConst = @{}
-foreach ($m in [regex]::Matches($capText, 'public const string (\w+) = "([^"]+)"')) {
+foreach ($m in [regex]::Matches($capText, 'public const string (\w+) = "([^"]*)"')) {
     $capConst[$m.Groups[1].Value] = $m.Groups[2].Value
+}
+# 权限键常量表：能力前缀可引用其中的常量（如 PortalPermissions.BusinessCollaborationKeyPrefix），门禁须能解析其取值。
+# 允许空串（keyless 能力 FormBuilderKeyPrefix = "" 是合法定义）。
+$permConst = @{}
+if (Test-Path $permFile) {
+    $permText = Get-Content $permFile -Raw -Encoding UTF8
+    foreach ($m in [regex]::Matches($permText, 'public const string (\w+) = "([^"]*)"')) {
+        $permConst[$m.Groups[1].Value] = $m.Groups[2].Value
+    }
 }
 $capIds = $capConst.Values | Where-Object { $_ -match '^BasicBusiness\.\w+$' } | Sort-Object -Unique
 
 $caps = @()
-foreach ($m in [regex]::Matches($capText, 'new PortalCapabilityDefinition\(\s*(\w+),\s*"([^"]*)",\s*\w+\.[A-Za-z]+,\s*"([^"]*)",\s*"([^"]*)",')) {
+# 能力权限前缀可写为带引号字面量，或引用 PortalPermissions 常量（如 PortalPermissions.BusinessCollaborationKeyPrefix）。
+# 后者是 W-anp-P325 Q2-A 的「单一事实源」形态；门禁须解析常量引用，而非只认字面量，否则会误判为孤儿能力。
+foreach ($m in [regex]::Matches($capText, 'new PortalCapabilityDefinition\(\s*(\w+),\s*"([^"]*)",\s*\w+\.[A-Za-z]+,\s*"([^"]*)",\s*("([^"]*)"|((?:[\w]+\.)?[\w]+)),')) {
     $id = $capConst[$m.Groups[1].Value]
     if (-not $id) { continue }
+    $prefixRaw = if ($m.Groups[4].Success) { $m.Groups[4].Value } else { $m.Groups[5].Value }
+    if ($prefixRaw -match '^".*"$') {
+        $prefixVal = $prefixRaw.Trim('"')
+    }
+    else {
+        # 常量引用：去掉 PortalPermissions. 前缀后在常量表中查值；查不到则保留原标识符（C3 会据此报漂移）
+        $name = $prefixRaw -replace '^.*\.', ''
+        if ($permConst.ContainsKey($name)) { $prefixVal = $permConst[$name] }
+        elseif ($capConst.ContainsKey($name)) { $prefixVal = $capConst[$name] }
+        else { $prefixVal = $prefixRaw }
+    }
     $caps += [PSCustomObject]@{
         Id = $id
         Layer = $m.Groups[2].Value
         PrimaryModuleId = $m.Groups[3].Value
-        PermissionPrefix = $m.Groups[4].Value
+        PermissionPrefix = $prefixVal
     }
 }
 if ($caps.Count -eq 0) {
@@ -84,7 +108,7 @@ $modules = @()
 if (Test-Path $modRoot) {
     foreach ($mj in Get-ChildItem $modRoot -Recurse -Filter module.json) {
         try { $j = Get-Content $mj.FullName -Raw -Encoding UTF8 | ConvertFrom-Json }
-        catch { Emit 'WARN' ("模块清单解析失败: {0}" -f $mj.FullName); continue }
+        catch { Emit 'FAIL' ("模块清单解析失败: {0}" -f $mj.FullName); continue }
         $cap = if ($j.capability) { $j.capability.capabilityId } else { $null }
         $modules += [PSCustomObject]@{
             Folder = $mj.Directory.Name
@@ -144,7 +168,7 @@ foreach ($c in $caps) {
         Emit 'OK' ("能力 {0} 由主责模块 {1} 实现" -f $c.Id, $c.PrimaryModuleId)
     }
     else {
-        Emit 'WARN' ("能力 {0} 未找到主责模块 {1} 的实现（孤儿能力或主责模块未登记 capability）" -f $c.Id, $c.PrimaryModuleId)
+        Emit 'FAIL' ("能力 {0} 未找到主责模块 {1} 的实现（孤儿能力或主责模块未登记 capability）" -f $c.Id, $c.PrimaryModuleId)
     }
 }
 
@@ -162,10 +186,10 @@ foreach ($c in $caps) {
         $alt = $c.PermissionPrefix -replace '^Business\.', ''
         $altHit = $permKeys | Where-Object { $_.StartsWith($alt + '.') } | Select-Object -First 1
         if ($altHit) {
-            Emit 'WARN' ("能力 {0} 注册表权限前缀 {1} 与实际键族前缀 {2} 不一致（注册表多写 Business. 前缀）" -f $c.Id, $c.PermissionPrefix, $alt)
+            Emit 'FAIL' ("能力 {0} 注册表权限前缀 {1} 与实际键族前缀 {2} 不一致（注册表多写 Business. 前缀）" -f $c.Id, $c.PermissionPrefix, $alt)
         }
         else {
-            Emit 'WARN' ("能力 {0} 权限前缀 {1} 在 PortalPermissionKeys 无任何对应键族（可能缺失权限键定义）" -f $c.Id, $c.PermissionPrefix)
+            Emit 'FAIL' ("能力 {0} 权限前缀 {1} 在 PortalPermissionKeys 无任何对应键族（可能缺失权限键定义）" -f $c.Id, $c.PermissionPrefix)
         }
     }
 }
@@ -174,7 +198,7 @@ foreach ($c in $caps) {
 Write-Host ''
 Write-Host '[C4] 导航入口 ↔ 模块目录（悬空入口）' -ForegroundColor Cyan
 if ($navFolders.Count -eq 0) {
-    Emit 'WARN' '未在导航注册表解析到 DesktopModules/<folder>/ 入口引用'
+    Emit 'FAIL' '未在导航注册表解析到 DesktopModules/<folder>/ 入口引用'
 }
 else {
     foreach ($f in $navFolders) {
@@ -182,7 +206,7 @@ else {
             Emit 'OK' ("导航入口引用模块目录 {0} 存在" -f $f)
         }
         else {
-            Emit 'WARN' ("导航入口引用模块目录 {0} 不存在于 DesktopModules（悬空入口）" -f $f)
+            Emit 'FAIL' ("导航入口引用模块目录 {0} 不存在于 DesktopModules（悬空入口）" -f $f)
         }
     }
 }
@@ -196,18 +220,18 @@ $modPkgRe    = '^HIA\.\w+$'
 $permLayerOk = @('Admin','Ops','Settings','Theme','Module','Content','Business','EmployeeDirectory','EmployeeProfileConfirm','EmployeeProfileCorrectionRequest','LeaveRequest','ExpenseReimbursement','EnterpriseCapability','Audit','Portal')
 foreach ($c in $caps) {
     if ($c.Id -match $capLayerRe) { Emit 'OK' ("能力键 {0} 符合 BasicBusiness.<类> 形态" -f $c.Id) }
-    else { Emit 'WARN' ("能力键 {0} 不符合 BasicBusiness.<类> 形态" -f $c.Id) }
+    else { Emit 'FAIL' ("能力键 {0} 不符合 BasicBusiness.<类> 形态" -f $c.Id) }
 }
 foreach ($m in $modules) {
     if (-not $m.PackageId) { continue }
     if ($m.PackageId -match $modPkgRe) { Emit 'OK' ("模块包 {0} 符合 HIA.<名> 形态" -f $m.PackageId) }
-    else { Emit 'WARN' ("模块包 {0} 不符合 HIA.<名> 形态" -f $m.PackageId) }
+    else { Emit 'FAIL' ("模块包 {0} 不符合 HIA.<名> 形态" -f $m.PackageId) }
 }
 $badPerm = 0
 foreach ($k in $permKeys) {
     $seg = ($k.Split('.'))[0]
     if ($permLayerOk -notcontains $seg) {
-        if ($badPerm -lt 20) { Emit 'WARN' ("权限键 {0} 首段 {1} 不在已知层词表" -f $k, $seg) }
+        if ($badPerm -lt 20) { Emit 'FAIL' ("权限键 {0} 首段 {1} 不在已知层词表" -f $k, $seg) }
         $badPerm++
     }
 }

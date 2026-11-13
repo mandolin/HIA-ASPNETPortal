@@ -4,8 +4,8 @@
   "project": {
     "defaultLocale": "zh-CN",
     "entryCounts": {
-      "all": 5784,
-      "dotnet": 5784
+      "all": 5791,
+      "dotnet": 5791
     },
     "id": "hia-aspnetportal",
     "locales": [
@@ -87831,6 +87831,129 @@
       "presentationFragmentId": "portal.fragment:4ce444bee8c6aac950c83369340dadf6"
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+      "name": "BusinessApplicationKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Permission-key prefix family for thecapability. ApplicationRequest",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.BusinessApplicationKeyPrefix",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Permission-key prefix family for thecapability. ApplicationRequest",
+            "localizedText": {
+              "zh-CN": "能力注册表中能力的权限键前缀族。 ApplicationRequest",
+              "en": "Permission-key prefix family for thecapability. ApplicationRequest"
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "能力注册表中能力的权限键前缀族。 ApplicationRequest",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Permission-key prefix family for thecapability. ApplicationRequest",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 376
+          },
+          "end": {
+            "line": 376
+          }
+        },
+        "fetchUrl": "sources/fa4569526fd0e7d89a5bb39ba613cdb55ab2207f652aaace7fcc82847b4864ab.txt",
+        "linkUrl": "sources/dbf592b5180e9e4169e9ee852e10926971774a0afb7c4b9dfb27f31539f66950.L376.html#L376",
+        "publicAsset": {
+          "assetId": "portal.asset:dbf592b5180e9e4169e9ee852e109269",
+          "sourceId": "portal.source:3e1eb917ad8f91e218ff9d4406302258",
+          "relativeUrl": "sources/fa4569526fd0e7d89a5bb39ba613cdb55ab2207f652aaace7fcc82847b4864ab.txt",
+          "linkUrl": "sources/dbf592b5180e9e4169e9ee852e10926971774a0afb7c4b9dfb27f31539f66950.L376.html#L376",
+          "revision": "content:fa4569526fd0e7d89a5bb39ba613cdb55ab2207f652aaace7fcc82847b4864ab",
+          "digest": "sha384-+vnVJkhz2VmlnRUEyhaluo/raYS9AXInI+IKUyaPR2ye8sxDcoaQt1SRiFE5t7Pf",
+          "byteLength": 82,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.BusinessApplicationKeyPrefix",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.BusinessApplicationKeyPrefix",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-b39c2ad9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-b39c2ad9.html",
+      "presentationTopicId": "portal.topic:5a0091b9c2a2cb5a525c5bbdf5693a2b",
+      "presentationPageId": "portal.page:5a0091b9c2a2cb5a525c5bbdf5693a2b",
+      "presentationFragmentId": "portal.fragment:5a0091b9c2a2cb5a525c5bbdf5693a2b"
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
       "name": "BusinessApplicationReview",
       "kind": "dotnet-field",
@@ -88690,6 +88813,129 @@
       "presentationTopicId": "portal.topic:aa0aadd356e673edda983776db3e90be",
       "presentationPageId": "portal.page:aa0aadd356e673edda983776db3e90be",
       "presentationFragmentId": "portal.fragment:aa0aadd356e673edda983776db3e90be"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+      "name": "BusinessCollaborationKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Permission-key prefix family for thecapability in the capability registry. The registry references this instead of a hard-coded literal. Collaboration",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.BusinessCollaborationKeyPrefix",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Permission-key prefix family for thecapability in the capability registry. The registry references this instead of a hard-coded literal. Collaboration",
+            "localizedText": {
+              "zh-CN": "能力注册表中能力的权限键前缀族。注册表不再硬编码字面量，统一引用此处。 Collaboration",
+              "en": "Permission-key prefix family for thecapability in the capability registry. The registry references this instead of a hard-coded literal. Collaboration"
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "能力注册表中能力的权限键前缀族。注册表不再硬编码字面量，统一引用此处。 Collaboration",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Permission-key prefix family for thecapability in the capability registry. The registry references this instead of a hard-coded literal. Collaboration",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 368
+          },
+          "end": {
+            "line": 368
+          }
+        },
+        "fetchUrl": "sources/b12f906cdc53222f9cc6639a33addb876219509861dee0041f026c3146489cbb.txt",
+        "linkUrl": "sources/bdee3390c4867f7fe53f934a34dd97a6dc3932a1e5f3d4aa18781472a14ba57c.L368.html#L368",
+        "publicAsset": {
+          "assetId": "portal.asset:bdee3390c4867f7fe53f934a34dd97a6",
+          "sourceId": "portal.source:a3ca30293bb30f3c7afb332dfc97d5a2",
+          "relativeUrl": "sources/b12f906cdc53222f9cc6639a33addb876219509861dee0041f026c3146489cbb.txt",
+          "linkUrl": "sources/bdee3390c4867f7fe53f934a34dd97a6dc3932a1e5f3d4aa18781472a14ba57c.L368.html#L368",
+          "revision": "content:b12f906cdc53222f9cc6639a33addb876219509861dee0041f026c3146489cbb",
+          "digest": "sha384-UUDX9Z9bh6uJ2HkhuTCdw0G+pvYacx0FnP9/m0pE0lB2Nz00rM/1HtSu8o1Xqimy",
+          "byteLength": 86,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.BusinessCollaborationKeyPrefix",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.BusinessCollaborationKeyPrefix",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-caa30ca8.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-caa30ca8.html",
+      "presentationTopicId": "portal.topic:d5e2dc478a48780c313cf24d2e519ff7",
+      "presentationPageId": "portal.page:d5e2dc478a48780c313cf24d2e519ff7",
+      "presentationFragmentId": "portal.fragment:d5e2dc478a48780c313cf24d2e519ff7"
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewall",
@@ -89753,19 +89999,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 469
+            "line": 527
           },
           "end": {
-            "line": 469
+            "line": 527
           }
         },
         "fetchUrl": "sources/a0649e73a76990c38d4bdf9d7aa5e3a4e264462bac957614f6f839a66c928256.txt",
-        "linkUrl": "sources/c0cd3e9134fae19b6a0f39dfcf8dc8d39790ac278d4db9f7128203ea7a08e03e.L469.html#L469",
+        "linkUrl": "sources/6aef733006c8498bbe236b495b50898c11ad0723c34a04e18c38a4d6a0a82cf8.L527.html#L527",
         "publicAsset": {
-          "assetId": "portal.asset:c0cd3e9134fae19b6a0f39dfcf8dc8d3",
-          "sourceId": "portal.source:0f8c6ca11a8c4c923015c133c35e83b8",
+          "assetId": "portal.asset:6aef733006c8498bbe236b495b50898c",
+          "sourceId": "portal.source:e026e030322973b318d85942d87e0994",
           "relativeUrl": "sources/a0649e73a76990c38d4bdf9d7aa5e3a4e264462bac957614f6f839a66c928256.txt",
-          "linkUrl": "sources/c0cd3e9134fae19b6a0f39dfcf8dc8d39790ac278d4db9f7128203ea7a08e03e.L469.html#L469",
+          "linkUrl": "sources/6aef733006c8498bbe236b495b50898c11ad0723c34a04e18c38a4d6a0a82cf8.L527.html#L527",
           "revision": "content:a0649e73a76990c38d4bdf9d7aa5e3a4e264462bac957614f6f839a66c928256",
           "digest": "sha384-tJqLLv7dgBxRNzjp27301MAHNfVoS5LKOrG823TTlpYwU1ZhO7tBD4WaHu890mNz",
           "byteLength": 72,
@@ -89876,19 +90122,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 477
+            "line": 535
           },
           "end": {
-            "line": 477
+            "line": 535
           }
         },
         "fetchUrl": "sources/517c4e13e91a3d7172219a145ecca197bd7d7b8ff9ad2bbe996a6b55084f40b2.txt",
-        "linkUrl": "sources/0d10a6a31710b36f850cbfdc7237caab4acefa324a7bec60354a5e01e94015cb.L477.html#L477",
+        "linkUrl": "sources/9033b0843f3fb8d95c534fbfba75a8e5ab4531aedbaa02d4bd228bb18f24abe4.L535.html#L535",
         "publicAsset": {
-          "assetId": "portal.asset:0d10a6a31710b36f850cbfdc7237caab",
-          "sourceId": "portal.source:b8d59314d9a8619ca605cbbc7fc576c0",
+          "assetId": "portal.asset:9033b0843f3fb8d95c534fbfba75a8e5",
+          "sourceId": "portal.source:5c2e261db54f83a4e67c9d7403671201",
           "relativeUrl": "sources/517c4e13e91a3d7172219a145ecca197bd7d7b8ff9ad2bbe996a6b55084f40b2.txt",
-          "linkUrl": "sources/0d10a6a31710b36f850cbfdc7237caab4acefa324a7bec60354a5e01e94015cb.L477.html#L477",
+          "linkUrl": "sources/9033b0843f3fb8d95c534fbfba75a8e5ab4531aedbaa02d4bd228bb18f24abe4.L535.html#L535",
           "revision": "content:517c4e13e91a3d7172219a145ecca197bd7d7b8ff9ad2bbe996a6b55084f40b2",
           "digest": "sha384-pogXqtWbB87hSkmo8BHmplCo0bkhBl8twg0Zr9T0O4XEZjp6290y3wXZ/0gQ0Yzm",
           "byteLength": 74,
@@ -90528,6 +90774,129 @@
       "presentationFragmentId": "portal.fragment:8ea9262ee96a25bf3ad1982b6bb36e75"
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+      "name": "EmployeeProfileConfirmKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Permission-key prefix family for thecapability (keyless; prefix equals the capability name). EmployeeProfileConfirm",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.EmployeeProfileConfirmKeyPrefix",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Permission-key prefix family for thecapability (keyless; prefix equals the capability name). EmployeeProfileConfirm",
+            "localizedText": {
+              "zh-CN": "能力注册表中能力的权限键前缀族（keyless 能力，前缀即自身名）。 EmployeeProfileConfirm",
+              "en": "Permission-key prefix family for thecapability (keyless; prefix equals the capability name). EmployeeProfileConfirm"
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "能力注册表中能力的权限键前缀族（keyless 能力，前缀即自身名）。 EmployeeProfileConfirm",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Permission-key prefix family for thecapability (keyless; prefix equals the capability name). EmployeeProfileConfirm",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 384
+          },
+          "end": {
+            "line": 384
+          }
+        },
+        "fetchUrl": "sources/9ca215dd7f1eb73997d94588a6edf3cf8d1982f6eb8b2e2befb7a3796c18492f.txt",
+        "linkUrl": "sources/c301208233225cef665b040e4b6a241f17354742125dd9ccc8ec7d9990aad209.L384.html#L384",
+        "publicAsset": {
+          "assetId": "portal.asset:c301208233225cef665b040e4b6a241f",
+          "sourceId": "portal.source:88367839b51a083a99261885a7dba896",
+          "relativeUrl": "sources/9ca215dd7f1eb73997d94588a6edf3cf8d1982f6eb8b2e2befb7a3796c18492f.txt",
+          "linkUrl": "sources/c301208233225cef665b040e4b6a241f17354742125dd9ccc8ec7d9990aad209.L384.html#L384",
+          "revision": "content:9ca215dd7f1eb73997d94588a6edf3cf8d1982f6eb8b2e2befb7a3796c18492f",
+          "digest": "sha384-x/bHSlNvG8uqTT/olyqHdyZkyAPS+boEv6LPkME3N9vKk3tgG8O9zYZaXoYWJPvg",
+          "byteLength": 87,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.EmployeeProfileConfirmKeyPrefix",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.EmployeeProfileConfirmKeyPrefix",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-1ea56c70.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-1ea56c70.html",
+      "presentationTopicId": "portal.topic:0d075e2d6995cf199b2e8a4dc565be4e",
+      "presentationPageId": "portal.page:0d075e2d6995cf199b2e8a4dc565be4e",
+      "presentationFragmentId": "portal.fragment:0d075e2d6995cf199b2e8a4dc565be4e"
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
       "name": "EmployeeProfileConfirmView",
       "kind": "dotnet-field",
@@ -90895,6 +91264,129 @@
       "presentationTopicId": "portal.topic:277aa37c928537efaf30b17b010639d3",
       "presentationPageId": "portal.page:277aa37c928537efaf30b17b010639d3",
       "presentationFragmentId": "portal.fragment:277aa37c928537efaf30b17b010639d3"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+      "name": "EmployeeProfileCorrectionRequestKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Permission-key prefix family for thecapability (keyless). EmployeeProfileCorrectionRequest",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.EmployeeProfileCorrectionRequestKeyPrefix",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Permission-key prefix family for thecapability (keyless). EmployeeProfileCorrectionRequest",
+            "localizedText": {
+              "zh-CN": "能力注册表中能力的权限键前缀族（keyless 能力）。 EmployeeProfileCorrectionRequest",
+              "en": "Permission-key prefix family for thecapability (keyless). EmployeeProfileCorrectionRequest"
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "能力注册表中能力的权限键前缀族（keyless 能力）。 EmployeeProfileCorrectionRequest",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Permission-key prefix family for thecapability (keyless). EmployeeProfileCorrectionRequest",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 392
+          },
+          "end": {
+            "line": 392
+          }
+        },
+        "fetchUrl": "sources/a050e11e34188a5b49a43b5806033b43a62009979a21cc4f6a7c9bde9468d3ad.txt",
+        "linkUrl": "sources/2a280a2661e464856601f004122a4e3829d8bfb512419c2af4a380f81755d0a1.L392.html#L392",
+        "publicAsset": {
+          "assetId": "portal.asset:2a280a2661e464856601f004122a4e38",
+          "sourceId": "portal.source:d0c38045ba0e48e44072ebd0c2e52a7a",
+          "relativeUrl": "sources/a050e11e34188a5b49a43b5806033b43a62009979a21cc4f6a7c9bde9468d3ad.txt",
+          "linkUrl": "sources/2a280a2661e464856601f004122a4e3829d8bfb512419c2af4a380f81755d0a1.L392.html#L392",
+          "revision": "content:a050e11e34188a5b49a43b5806033b43a62009979a21cc4f6a7c9bde9468d3ad",
+          "digest": "sha384-vlQHLHRPlpF6pq5690FspPETCz4FaFNXGZphMs2rfR/D2c0MkHD9rgpMjQF/9pQL",
+          "byteLength": 107,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.EmployeeProfileCorrectionRequestKeyPrefix",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.EmployeeProfileCorrectionRequestKeyPrefix",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-e1fdc11f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-e1fdc11f.html",
+      "presentationTopicId": "portal.topic:2d563b4f93d8f9c09a0d3dc4129fd322",
+      "presentationPageId": "portal.page:2d563b4f93d8f9c09a0d3dc4129fd322",
+      "presentationFragmentId": "portal.fragment:2d563b4f93d8f9c09a0d3dc4129fd322"
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestreview",
@@ -91352,19 +91844,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 514
+            "line": 572
           },
           "end": {
-            "line": 514
+            "line": 572
           }
         },
         "fetchUrl": "sources/b63d59419d9f64d3571f0a02d4fa4f46df40dadfd181fadfc8446afa29f4ff01.txt",
-        "linkUrl": "sources/afdcb1f7e9e030a7f3f026bf8801b26766f27b9d8873cb213bfd61cae35590fc.L514.html#L514",
+        "linkUrl": "sources/c021f616d615edd2403f0dd5060a7f9f22f0b0e50e602dc35838c69ee7d7493a.L572.html#L572",
         "publicAsset": {
-          "assetId": "portal.asset:afdcb1f7e9e030a7f3f026bf8801b267",
-          "sourceId": "portal.source:d0c756303edb99ce8b8343068bc3bc6c",
+          "assetId": "portal.asset:c021f616d615edd2403f0dd5060a7f9f",
+          "sourceId": "portal.source:895d33c43a0103f330de72ef3eed59fa",
           "relativeUrl": "sources/b63d59419d9f64d3571f0a02d4fa4f46df40dadfd181fadfc8446afa29f4ff01.txt",
-          "linkUrl": "sources/afdcb1f7e9e030a7f3f026bf8801b26766f27b9d8873cb213bfd61cae35590fc.L514.html#L514",
+          "linkUrl": "sources/c021f616d615edd2403f0dd5060a7f9f22f0b0e50e602dc35838c69ee7d7493a.L572.html#L572",
           "revision": "content:b63d59419d9f64d3571f0a02d4fa4f46df40dadfd181fadfc8446afa29f4ff01",
           "digest": "sha384-6o1LU2fmBtN98sxF2RcA9pz9gx3nDex8bTUg/yKEQIu7j3QFanfpngvpNQ4Fa962",
           "byteLength": 114,
@@ -91475,19 +91967,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 522
+            "line": 580
           },
           "end": {
-            "line": 522
+            "line": 580
           }
         },
         "fetchUrl": "sources/cadf211caa62a34b0540fe48055ed1183bdff1e6d70fe7c4d9382959754a7e9d.txt",
-        "linkUrl": "sources/1c088a6309a5ea575d4723c2d3f429f21bbff187a8773cd20acf10231da7072e.L522.html#L522",
+        "linkUrl": "sources/e0d8ee641c7e6631f0b34f2ceae1f9f2bde0f29f63ce905efeffe75b39a9eedc.L580.html#L580",
         "publicAsset": {
-          "assetId": "portal.asset:1c088a6309a5ea575d4723c2d3f429f2",
-          "sourceId": "portal.source:44b9ffcdf7160bf58a3e9376dbfa65df",
+          "assetId": "portal.asset:e0d8ee641c7e6631f0b34f2ceae1f9f2",
+          "sourceId": "portal.source:035a2ff730b41628f4253e4ad5789560",
           "relativeUrl": "sources/cadf211caa62a34b0540fe48055ed1183bdff1e6d70fe7c4d9382959754a7e9d.txt",
-          "linkUrl": "sources/1c088a6309a5ea575d4723c2d3f429f21bbff187a8773cd20acf10231da7072e.L522.html#L522",
+          "linkUrl": "sources/e0d8ee641c7e6631f0b34f2ceae1f9f2bde0f29f63ce905efeffe75b39a9eedc.L580.html#L580",
           "revision": "content:cadf211caa62a34b0540fe48055ed1183bdff1e6d70fe7c4d9382959754a7e9d",
           "digest": "sha384-0eiiWErc9yhO+2N7hS1Xk0IHOUWaYOE9ZvO5ixTVY9iXYIRH18Fq7OUETa4dXdxy",
           "byteLength": 114,
@@ -91598,19 +92090,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 498
+            "line": 556
           },
           "end": {
-            "line": 498
+            "line": 556
           }
         },
         "fetchUrl": "sources/afb95ef4e9c09034a644fcb098ccd4cc725c9ed9636257c206405154696a027c.txt",
-        "linkUrl": "sources/351d5a39664fdafd49efa84c9ab0dfbcf65ad5b176fd1683565f67dc3adce7ee.L498.html#L498",
+        "linkUrl": "sources/eeb87ab5cd87dcd43757c36a90bf78006c61a65d3534a662482d134f09c43ff9.L556.html#L556",
         "publicAsset": {
-          "assetId": "portal.asset:351d5a39664fdafd49efa84c9ab0dfbc",
-          "sourceId": "portal.source:bc1a8e2781a4bf81d702358462988b7c",
+          "assetId": "portal.asset:eeb87ab5cd87dcd43757c36a90bf7800",
+          "sourceId": "portal.source:8bd0b8dbf173a66372d6637b8ac5db00",
           "relativeUrl": "sources/afb95ef4e9c09034a644fcb098ccd4cc725c9ed9636257c206405154696a027c.txt",
-          "linkUrl": "sources/351d5a39664fdafd49efa84c9ab0dfbcf65ad5b176fd1683565f67dc3adce7ee.L498.html#L498",
+          "linkUrl": "sources/eeb87ab5cd87dcd43757c36a90bf78006c61a65d3534a662482d134f09c43ff9.L556.html#L556",
           "revision": "content:afb95ef4e9c09034a644fcb098ccd4cc725c9ed9636257c206405154696a027c",
           "digest": "sha384-kNPg6O1VwRuI10JpJBi3SphcV1fXrBhCnPy7LUakPdunILzoSlxkn2xCM3WyeDRp",
           "byteLength": 108,
@@ -91721,19 +92213,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 506
+            "line": 564
           },
           "end": {
-            "line": 506
+            "line": 564
           }
         },
         "fetchUrl": "sources/a7950ff188d3c5c4607b792f8ee15630f2a3c0c21f0d50b819b853cf3ec7f70c.txt",
-        "linkUrl": "sources/ecaba5129d8f9029aec4b1f7f13c63fab7cce962cfdbb5ad9e9c05ca571a6eb4.L506.html#L506",
+        "linkUrl": "sources/d0f2b902625b1675996e0deb82bee770de434bd3cff6929c3fecb70f5febb44c.L564.html#L564",
         "publicAsset": {
-          "assetId": "portal.asset:ecaba5129d8f9029aec4b1f7f13c63fa",
-          "sourceId": "portal.source:708be965f87102f5f59ce33aeb5a0007",
+          "assetId": "portal.asset:d0f2b902625b1675996e0deb82bee770",
+          "sourceId": "portal.source:0017a8aa36d7035deeac5b52e180f9bf",
           "relativeUrl": "sources/a7950ff188d3c5c4607b792f8ee15630f2a3c0c21f0d50b819b853cf3ec7f70c.txt",
-          "linkUrl": "sources/ecaba5129d8f9029aec4b1f7f13c63fab7cce962cfdbb5ad9e9c05ca571a6eb4.L506.html#L506",
+          "linkUrl": "sources/d0f2b902625b1675996e0deb82bee770de434bd3cff6929c3fecb70f5febb44c.L564.html#L564",
           "revision": "content:a7950ff188d3c5c4607b792f8ee15630f2a3c0c21f0d50b819b853cf3ec7f70c",
           "digest": "sha384-StU5sAa9iYkrPNidkJ+PbmiLBopc0HHwpdannXIcS7+pMJ99QA+maIQBMe/wGuM3",
           "byteLength": 108,
@@ -91844,19 +92336,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 530
+            "line": 588
           },
           "end": {
-            "line": 530
+            "line": 588
           }
         },
         "fetchUrl": "sources/61832faa951ade396c5cb4fff1d6051fc68052eba24adf25fa0745b124df4c08.txt",
-        "linkUrl": "sources/89f63bad4483352c844491a216c73d5c681d22f3da465cf9dee21d376cab1b0c.L530.html#L530",
+        "linkUrl": "sources/732655501a78cbef32ec7f99c9259c731fcad7923e6526535e91edc30d6d05e3.L588.html#L588",
         "publicAsset": {
-          "assetId": "portal.asset:89f63bad4483352c844491a216c73d5c",
-          "sourceId": "portal.source:a0f04795d326f04be752080ffebd95e3",
+          "assetId": "portal.asset:732655501a78cbef32ec7f99c9259c73",
+          "sourceId": "portal.source:c342af910f0ac328b68b9ada8f16cfcc",
           "relativeUrl": "sources/61832faa951ade396c5cb4fff1d6051fc68052eba24adf25fa0745b124df4c08.txt",
-          "linkUrl": "sources/89f63bad4483352c844491a216c73d5c681d22f3da465cf9dee21d376cab1b0c.L530.html#L530",
+          "linkUrl": "sources/732655501a78cbef32ec7f99c9259c731fcad7923e6526535e91edc30d6d05e3.L588.html#L588",
           "revision": "content:61832faa951ade396c5cb4fff1d6051fc68052eba24adf25fa0745b124df4c08",
           "digest": "sha384-yFysc9brWisPAJE7pXqn2foXV3TIbjZFPdNEh+02Rne1iK6QoSqDG3yT0vyHotu7",
           "byteLength": 104,
@@ -91967,19 +92459,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 538
+            "line": 596
           },
           "end": {
-            "line": 538
+            "line": 596
           }
         },
         "fetchUrl": "sources/71a9d239362626c8928c30f7255ad4760120495d4ad5f860f758b265ee7e90fa.txt",
-        "linkUrl": "sources/ce04502979bc2937fef7af3e139a9f3bfdd7c6de617421f5968e00e3dd2eb65b.L538.html#L538",
+        "linkUrl": "sources/1f0acab84eab53f05a75d16c246504ad1a31eddebe9b71a5ee5d4b610031e25c.L596.html#L596",
         "publicAsset": {
-          "assetId": "portal.asset:ce04502979bc2937fef7af3e139a9f3b",
-          "sourceId": "portal.source:1b16aed59c4b45ba44535ef17fc0df2a",
+          "assetId": "portal.asset:1f0acab84eab53f05a75d16c246504ad",
+          "sourceId": "portal.source:83e1509a585fb229c3b03f31763f7060",
           "relativeUrl": "sources/71a9d239362626c8928c30f7255ad4760120495d4ad5f860f758b265ee7e90fa.txt",
-          "linkUrl": "sources/ce04502979bc2937fef7af3e139a9f3bfdd7c6de617421f5968e00e3dd2eb65b.L538.html#L538",
+          "linkUrl": "sources/1f0acab84eab53f05a75d16c246504ad1a31eddebe9b71a5ee5d4b610031e25c.L596.html#L596",
           "revision": "content:71a9d239362626c8928c30f7255ad4760120495d4ad5f860f758b265ee7e90fa",
           "digest": "sha384-7l2YCbPbdSxJGfZ2AcQEfkbVswt31HpNjFMcd6jwl3/uIYl+9GgsONcQW+hw65BZ",
           "byteLength": 104,
@@ -92090,19 +92582,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 490
+            "line": 548
           },
           "end": {
-            "line": 490
+            "line": 548
           }
         },
         "fetchUrl": "sources/2f9f251e7cffb7915c27acee296174b2f07ef9ef72861cfedafe49be9f0d3af9.txt",
-        "linkUrl": "sources/d5b4fde6be0468fadca7c23c75240b3460b3c03a186615f4a866fe510ec213f6.L490.html#L490",
+        "linkUrl": "sources/2ccc977253f61094d0d19369a2bd03992237de8d1556611e907c12e62b0b036f.L548.html#L548",
         "publicAsset": {
-          "assetId": "portal.asset:d5b4fde6be0468fadca7c23c75240b34",
-          "sourceId": "portal.source:f1c1bc3ad0b8e37d7738115d0d7f351a",
+          "assetId": "portal.asset:2ccc977253f61094d0d19369a2bd0399",
+          "sourceId": "portal.source:20eb720d0452794eda4472db0f1a4c22",
           "relativeUrl": "sources/2f9f251e7cffb7915c27acee296174b2f07ef9ef72861cfedafe49be9f0d3af9.txt",
-          "linkUrl": "sources/d5b4fde6be0468fadca7c23c75240b3460b3c03a186615f4a866fe510ec213f6.L490.html#L490",
+          "linkUrl": "sources/2ccc977253f61094d0d19369a2bd03992237de8d1556611e907c12e62b0b036f.L548.html#L548",
           "revision": "content:2f9f251e7cffb7915c27acee296174b2f07ef9ef72861cfedafe49be9f0d3af9",
           "digest": "sha384-3ZxCyIoI9MiMIXrZyK4TLMrZ38JC8FuTtQ4wWpeHc4euorEVbgQV71RhQBgSfFza",
           "byteLength": 83,
@@ -92125,6 +92617,129 @@
       "presentationTopicId": "portal.topic:712aa82548244fd53cc7ebadf66bbab1",
       "presentationPageId": "portal.page:712aa82548244fd53cc7ebadf66bbab1",
       "presentationFragmentId": "portal.fragment:712aa82548244fd53cc7ebadf66bbab1"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+      "name": "ExpenseReimbursementKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Permission-key prefix family for thecapability (keyless). ExpenseReimbursement",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementKeyPrefix",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Permission-key prefix family for thecapability (keyless). ExpenseReimbursement",
+            "localizedText": {
+              "zh-CN": "能力注册表中能力的权限键前缀族（keyless 能力）。 ExpenseReimbursement",
+              "en": "Permission-key prefix family for thecapability (keyless). ExpenseReimbursement"
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "能力注册表中能力的权限键前缀族（keyless 能力）。 ExpenseReimbursement",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Permission-key prefix family for thecapability (keyless). ExpenseReimbursement",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 408
+          },
+          "end": {
+            "line": 408
+          }
+        },
+        "fetchUrl": "sources/dfcceee8e4b5bacdc03528f5b66e17e7704b748f61d5ef727dad5010154dcbe4.txt",
+        "linkUrl": "sources/fc727f68f71dbed5bec86df71fa8840b0c9e69f1a2eca455001f8c9bbe9dc8c0.L408.html#L408",
+        "publicAsset": {
+          "assetId": "portal.asset:fc727f68f71dbed5bec86df71fa8840b",
+          "sourceId": "portal.source:5e8238baa6a1e8b5fd61ad9b9eeb110f",
+          "relativeUrl": "sources/dfcceee8e4b5bacdc03528f5b66e17e7704b748f61d5ef727dad5010154dcbe4.txt",
+          "linkUrl": "sources/fc727f68f71dbed5bec86df71fa8840b0c9e69f1a2eca455001f8c9bbe9dc8c0.L408.html#L408",
+          "revision": "content:dfcceee8e4b5bacdc03528f5b66e17e7704b748f61d5ef727dad5010154dcbe4",
+          "digest": "sha384-MFolMycTSXvqYpCDhLKQ6F1yUxCo7FuPfjomMVxttSu4kBU9UnvP6HVFsn7Cwx+K",
+          "byteLength": 83,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementKeyPrefix",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.ExpenseReimbursementKeyPrefix",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-83df4c31.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-83df4c31.html",
+      "presentationTopicId": "portal.topic:667f3807b71d737b61ca319c12e516c8",
+      "presentationPageId": "portal.page:667f3807b71d737b61ca319c12e516c8",
+      "presentationFragmentId": "portal.fragment:667f3807b71d737b61ca319c12e516c8"
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
@@ -92371,6 +92986,252 @@
       "presentationTopicId": "portal.topic:a3350f3d828e53df6bcb250b053a3f88",
       "presentationPageId": "portal.page:a3350f3d828e53df6bcb250b053a3f88",
       "presentationFragmentId": "portal.fragment:a3350f3d828e53df6bcb250b053a3f88"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+      "name": "FormBuilderKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Thecapability is keyless (no permission-key family); its prefix is the empty string and must be declared explicitly rather than left ambiguous. FormBuilder",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.FormBuilderKeyPrefix",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Thecapability is keyless (no permission-key family); its prefix is the empty string and must be declared explicitly rather than left ambiguous. FormBuilder",
+            "localizedText": {
+              "zh-CN": "能力注册表中能力为 keyless（无权限键族），前缀为空串，必须显式声明而非留空引发歧义。 FormBuilder",
+              "en": "Thecapability is keyless (no permission-key family); its prefix is the empty string and must be declared explicitly rather than left ambiguous. FormBuilder"
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "能力注册表中能力为 keyless（无权限键族），前缀为空串，必须显式声明而非留空引发歧义。 FormBuilder",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Thecapability is keyless (no permission-key family); its prefix is the empty string and must be declared explicitly rather than left ambiguous. FormBuilder",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 416
+          },
+          "end": {
+            "line": 416
+          }
+        },
+        "fetchUrl": "sources/65d753cfe491736cea3a5b3604660f49b8f394887d2f3debb45625f000650cb7.txt",
+        "linkUrl": "sources/9670c86c14b25976dca5b7c11bb827ac493a5948bfa4889a9303afdb66ecf702.L416.html#L416",
+        "publicAsset": {
+          "assetId": "portal.asset:9670c86c14b25976dca5b7c11bb827ac",
+          "sourceId": "portal.source:1a8beb2f664a940c80e77909147cf05c",
+          "relativeUrl": "sources/65d753cfe491736cea3a5b3604660f49b8f394887d2f3debb45625f000650cb7.txt",
+          "linkUrl": "sources/9670c86c14b25976dca5b7c11bb827ac493a5948bfa4889a9303afdb66ecf702.L416.html#L416",
+          "revision": "content:65d753cfe491736cea3a5b3604660f49b8f394887d2f3debb45625f000650cb7",
+          "digest": "sha384-gUphoyVEplw72BMetRifwK0lRZd2Mm4b0B5IVYmsnviBQDOl4b9IP+MTotte8Hk2",
+          "byteLength": 54,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.FormBuilderKeyPrefix",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.FormBuilderKeyPrefix",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.form-7f12e7f6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.form-7f12e7f6.html",
+      "presentationTopicId": "portal.topic:b052f14ef612565e10077f47bb590de5",
+      "presentationPageId": "portal.page:b052f14ef612565e10077f47bb590de5",
+      "presentationFragmentId": "portal.fragment:b052f14ef612565e10077f47bb590de5"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+      "name": "LeaveRequestKeyPrefix",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Permission-key prefix family for thecapability (keyless). LeaveRequest",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestKeyPrefix",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Permission-key prefix family for thecapability (keyless). LeaveRequest",
+            "localizedText": {
+              "zh-CN": "能力注册表中能力的权限键前缀族（keyless 能力）。 LeaveRequest",
+              "en": "Permission-key prefix family for thecapability (keyless). LeaveRequest"
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "能力注册表中能力的权限键前缀族（keyless 能力）。 LeaveRequest",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Permission-key prefix family for thecapability (keyless). LeaveRequest",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalPermissions.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 400
+          },
+          "end": {
+            "line": 400
+          }
+        },
+        "fetchUrl": "sources/6feed516ab5c1428d163ed2bd17a81abae317fa396335d393dabd8371592c0c9.txt",
+        "linkUrl": "sources/4383a84b4994dd227ee47218456b8f3b74fcaa9a40cc690a63bdf0c00cd5db44.L400.html#L400",
+        "publicAsset": {
+          "assetId": "portal.asset:4383a84b4994dd227ee47218456b8f3b",
+          "sourceId": "portal.source:8782a54b0181ea13b4e27e03f7f365e0",
+          "relativeUrl": "sources/6feed516ab5c1428d163ed2bd17a81abae317fa396335d393dabd8371592c0c9.txt",
+          "linkUrl": "sources/4383a84b4994dd227ee47218456b8f3b74fcaa9a40cc690a63bdf0c00cd5db44.L400.html#L400",
+          "revision": "content:6feed516ab5c1428d163ed2bd17a81abae317fa396335d393dabd8371592c0c9",
+          "digest": "sha384-6P6OcGgZFZaDQ5u/9WfOT6tmtNbVE7uYGGefJyeyHjqy2Vr9ndinjXm4XPa6plPA",
+          "byteLength": 67,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalPermissionKeys",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestKeyPrefix",
+        "displayName": "ASPNET.StarterKit.Portal.PortalPermissionKeys.LeaveRequestKeyPrefix",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalPermissionKeys"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-cb5c10d1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-cb5c10d1.html",
+      "presentationTopicId": "portal.topic:32498f262934851e340e78fc21a7e9ea",
+      "presentationPageId": "portal.page:32498f262934851e340e78fc21a7e9ea",
+      "presentationFragmentId": "portal.fragment:32498f262934851e340e78fc21a7e9ea"
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
@@ -92705,19 +93566,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 415
+            "line": 473
           },
           "end": {
-            "line": 415
+            "line": 473
           }
         },
         "fetchUrl": "sources/bfe614d01fb3ffee2dd9a05d523077eeb2cc914d90bf1c55aa8f3dd1feb338ee.txt",
-        "linkUrl": "sources/fc005aa6745f44957b3562311e6f1e5b02de253aa7426b318593320b83d9786a.L415.html#L415",
+        "linkUrl": "sources/82edefd6c5b26289045e0facd5478e0424bcdda5ea839abcde2449a533441065.L473.html#L473",
         "publicAsset": {
-          "assetId": "portal.asset:fc005aa6745f44957b3562311e6f1e5b",
-          "sourceId": "portal.source:e120c661fb562fa534cd7d41b309f694",
+          "assetId": "portal.asset:82edefd6c5b26289045e0facd5478e04",
+          "sourceId": "portal.source:09c68df9192260525b026e7056ac387f",
           "relativeUrl": "sources/bfe614d01fb3ffee2dd9a05d523077eeb2cc914d90bf1c55aa8f3dd1feb338ee.txt",
-          "linkUrl": "sources/fc005aa6745f44957b3562311e6f1e5b02de253aa7426b318593320b83d9786a.L415.html#L415",
+          "linkUrl": "sources/82edefd6c5b26289045e0facd5478e0424bcdda5ea839abcde2449a533441065.L473.html#L473",
           "revision": "content:bfe614d01fb3ffee2dd9a05d523077eeb2cc914d90bf1c55aa8f3dd1feb338ee",
           "digest": "sha384-zkFTH17WVkq4CUy1+6YoF5aTC2BljGGNdL/d68G62t4dSGVHkplLGN9MUbB14MdQ",
           "byteLength": 82,
@@ -92828,19 +93689,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 407
+            "line": 465
           },
           "end": {
-            "line": 407
+            "line": 465
           }
         },
         "fetchUrl": "sources/97ae64b43a78d10c3130591b57dea42eb2b50d83f0cd793b33f439e1b204774e.txt",
-        "linkUrl": "sources/8fb53156943d3eee09d603143d336a94262d20114a616c9bba7a58845ccfab84.L407.html#L407",
+        "linkUrl": "sources/c6a5c0bb5263e79d466034c61c5f0094fe4b5aa00a644b5397849fb00db7dcf8.L465.html#L465",
         "publicAsset": {
-          "assetId": "portal.asset:8fb53156943d3eee09d603143d336a94",
-          "sourceId": "portal.source:437fd1ac0037679d7b1db3484a39c56b",
+          "assetId": "portal.asset:c6a5c0bb5263e79d466034c61c5f0094",
+          "sourceId": "portal.source:2f3315bd53ecb7117db495638a5350fb",
           "relativeUrl": "sources/97ae64b43a78d10c3130591b57dea42eb2b50d83f0cd793b33f439e1b204774e.txt",
-          "linkUrl": "sources/8fb53156943d3eee09d603143d336a94262d20114a616c9bba7a58845ccfab84.L407.html#L407",
+          "linkUrl": "sources/c6a5c0bb5263e79d466034c61c5f0094fe4b5aa00a644b5397849fb00db7dcf8.L465.html#L465",
           "revision": "content:97ae64b43a78d10c3130591b57dea42eb2b50d83f0cd793b33f439e1b204774e",
           "digest": "sha384-5Z/f2A4qDsOpCxfy3ovctHiNbhkfy+B1SaXK78ZWtLCupLAncBv/lz1dQtIumqS0",
           "byteLength": 82,
@@ -92951,19 +93812,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 391
+            "line": 449
           },
           "end": {
-            "line": 391
+            "line": 449
           }
         },
         "fetchUrl": "sources/7afc15109e1afde36f096ad1556c94808e92739ad16365a80acd6ecc79ae1f34.txt",
-        "linkUrl": "sources/0ba71aecbad4e415d2aa407a7a6ade2c8c81547f20785d34e345363dbd27bfc2.L391.html#L391",
+        "linkUrl": "sources/e4d4692327e7b2f336d3f28c5a588a3f3057a89fdd8e691d5cef6e7bbc5066d7.L449.html#L449",
         "publicAsset": {
-          "assetId": "portal.asset:0ba71aecbad4e415d2aa407a7a6ade2c",
-          "sourceId": "portal.source:bf2871f8263c849012be9069f6326ecf",
+          "assetId": "portal.asset:e4d4692327e7b2f336d3f28c5a588a3f",
+          "sourceId": "portal.source:1d3cba37f41831d571113289f954c305",
           "relativeUrl": "sources/7afc15109e1afde36f096ad1556c94808e92739ad16365a80acd6ecc79ae1f34.txt",
-          "linkUrl": "sources/0ba71aecbad4e415d2aa407a7a6ade2c8c81547f20785d34e345363dbd27bfc2.L391.html#L391",
+          "linkUrl": "sources/e4d4692327e7b2f336d3f28c5a588a3f3057a89fdd8e691d5cef6e7bbc5066d7.L449.html#L449",
           "revision": "content:7afc15109e1afde36f096ad1556c94808e92739ad16365a80acd6ecc79ae1f34",
           "digest": "sha384-NXJa4RWit1vFJxq4YQsMaQfKC/pUJj3fCL19XFhPzjjk6E2EVTMxRTIFKvxMN/cp",
           "byteLength": 70,
@@ -93074,19 +93935,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 383
+            "line": 441
           },
           "end": {
-            "line": 383
+            "line": 441
           }
         },
         "fetchUrl": "sources/576f5ba32ab6976db50bd42d04e8989ac600457542b70ec37b8ac2440e5d3f51.txt",
-        "linkUrl": "sources/752430ea6ec5488bf06c5e62bbb1b6cfd247a1e80812e7f751f16a0d94758347.L383.html#L383",
+        "linkUrl": "sources/801e1ac6c22ece73383df020d92f588deb8dd08a488075a8c7a0173ffc7bd698.L441.html#L441",
         "publicAsset": {
-          "assetId": "portal.asset:752430ea6ec5488bf06c5e62bbb1b6cf",
-          "sourceId": "portal.source:a614f13e192051482fd23a8ff68c88f1",
+          "assetId": "portal.asset:801e1ac6c22ece73383df020d92f588d",
+          "sourceId": "portal.source:6649355a3004cbc1d8ee6cff25f29552",
           "relativeUrl": "sources/576f5ba32ab6976db50bd42d04e8989ac600457542b70ec37b8ac2440e5d3f51.txt",
-          "linkUrl": "sources/752430ea6ec5488bf06c5e62bbb1b6cfd247a1e80812e7f751f16a0d94758347.L383.html#L383",
+          "linkUrl": "sources/801e1ac6c22ece73383df020d92f588deb8dd08a488075a8c7a0173ffc7bd698.L441.html#L441",
           "revision": "content:576f5ba32ab6976db50bd42d04e8989ac600457542b70ec37b8ac2440e5d3f51",
           "digest": "sha384-nt+z8uUIJ3BqRzCqkeZnsQ2xrRiNFbgqQc7PDehv/nntqYi2rDjw46BbO6hTctU7",
           "byteLength": 70,
@@ -93197,19 +94058,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 399
+            "line": 457
           },
           "end": {
-            "line": 399
+            "line": 457
           }
         },
         "fetchUrl": "sources/b558a521975e3db98215707e0fe3bb56c8c26632d4c84f8c88cfb47183608497.txt",
-        "linkUrl": "sources/cb9b3ea703debb119e217106e662ca0e19ef2759defd6508055951e52ef383d4.L399.html#L399",
+        "linkUrl": "sources/2472684107fa8fea376c642a79ee8378c34d753c49245a73bb38404bca0cca96.L457.html#L457",
         "publicAsset": {
-          "assetId": "portal.asset:cb9b3ea703debb119e217106e662ca0e",
-          "sourceId": "portal.source:e3b0ab3a0f42c1484a43e564b980154f",
+          "assetId": "portal.asset:2472684107fa8fea376c642a79ee8378",
+          "sourceId": "portal.source:e696b774b5200f8ae9519d8f11521d00",
           "relativeUrl": "sources/b558a521975e3db98215707e0fe3bb56c8c26632d4c84f8c88cfb47183608497.txt",
-          "linkUrl": "sources/cb9b3ea703debb119e217106e662ca0e19ef2759defd6508055951e52ef383d4.L399.html#L399",
+          "linkUrl": "sources/2472684107fa8fea376c642a79ee8378c34d753c49245a73bb38404bca0cca96.L457.html#L457",
           "revision": "content:b558a521975e3db98215707e0fe3bb56c8c26632d4c84f8c88cfb47183608497",
           "digest": "sha384-H3AggB/hPa8n/exQdeYzxQqTzwx/tOFuRBub94m11yr5vEd0AxypHoTSC/h1H+Md",
           "byteLength": 76,
@@ -93320,19 +94181,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 445
+            "line": 503
           },
           "end": {
-            "line": 445
+            "line": 503
           }
         },
         "fetchUrl": "sources/8e48dc5da06b2a295b629b778cd9d04c7ecb4569dc6cc2726e8aea6d9ce8db5a.txt",
-        "linkUrl": "sources/f08d51543eae85c128d5209e95ef953b6e67cfcf18d3ac9bb04678ea253bfa7f.L445.html#L445",
+        "linkUrl": "sources/6783fe46def00c3870c1bb161c7c1cee8b3a71549e2a03674a6e75c0872f5134.L503.html#L503",
         "publicAsset": {
-          "assetId": "portal.asset:f08d51543eae85c128d5209e95ef953b",
-          "sourceId": "portal.source:108bac3f9b02b55638eaa82507adf2f7",
+          "assetId": "portal.asset:6783fe46def00c3870c1bb161c7c1cee",
+          "sourceId": "portal.source:88ccf0f616aa72b7c171bb4502eb5e79",
           "relativeUrl": "sources/8e48dc5da06b2a295b629b778cd9d04c7ecb4569dc6cc2726e8aea6d9ce8db5a.txt",
-          "linkUrl": "sources/f08d51543eae85c128d5209e95ef953b6e67cfcf18d3ac9bb04678ea253bfa7f.L445.html#L445",
+          "linkUrl": "sources/6783fe46def00c3870c1bb161c7c1cee8b3a71549e2a03674a6e75c0872f5134.L503.html#L503",
           "revision": "content:8e48dc5da06b2a295b629b778cd9d04c7ecb4569dc6cc2726e8aea6d9ce8db5a",
           "digest": "sha384-kWOfu5MGd5NpiqWAxyWC/MqnpnsZGD2yFjpdaOuWfa2hR36FzC5KRp8/mFVhJPJi",
           "byteLength": 88,
@@ -93443,19 +94304,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 431
+            "line": 489
           },
           "end": {
-            "line": 431
+            "line": 489
           }
         },
         "fetchUrl": "sources/60afd98a94f772421ac12d679f168a7b9abce91760c14ee6ef8246e7b210b621.txt",
-        "linkUrl": "sources/53de82eeb3dab10b2a18622f4d06f9b3c104f5d4e107353e4f4cda26e32bb770.L431.html#L431",
+        "linkUrl": "sources/0c21b784f9d21b178ac768f54e99977ab70da3eb230519f92cd445f3c7916045.L489.html#L489",
         "publicAsset": {
-          "assetId": "portal.asset:53de82eeb3dab10b2a18622f4d06f9b3",
-          "sourceId": "portal.source:9c2ecaa82582d1da122b47288a70f332",
+          "assetId": "portal.asset:0c21b784f9d21b178ac768f54e99977a",
+          "sourceId": "portal.source:b4d95e7145d7d2d458b0d297c39bee66",
           "relativeUrl": "sources/60afd98a94f772421ac12d679f168a7b9abce91760c14ee6ef8246e7b210b621.txt",
-          "linkUrl": "sources/53de82eeb3dab10b2a18622f4d06f9b3c104f5d4e107353e4f4cda26e32bb770.L431.html#L431",
+          "linkUrl": "sources/0c21b784f9d21b178ac768f54e99977ab70da3eb230519f92cd445f3c7916045.L489.html#L489",
           "revision": "content:60afd98a94f772421ac12d679f168a7b9abce91760c14ee6ef8246e7b210b621",
           "digest": "sha384-Om9VJonqhSDCMqfT/31Y/SkOWTy9J5oFvyYd3Tzj4VnoS3HoF4xXUh8A9vhfrlGZ",
           "byteLength": 86,
@@ -93935,19 +94796,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 461
+            "line": 519
           },
           "end": {
-            "line": 461
+            "line": 519
           }
         },
         "fetchUrl": "sources/b5468851d29ce185cf1e802ebd0e39aea1e3782be3bbdf733d3e86f4d3c08806.txt",
-        "linkUrl": "sources/f49e0c827217eee184bfaed6ab85accc39282be683676e43cdf267f58a2ee332.L461.html#L461",
+        "linkUrl": "sources/6300ec3d1191bd98db37f71a31f42b44ab12fdf0354a64974e6209dd085fcf41.L519.html#L519",
         "publicAsset": {
-          "assetId": "portal.asset:f49e0c827217eee184bfaed6ab85accc",
-          "sourceId": "portal.source:373c1600b0007c768f4175a4f87afef4",
+          "assetId": "portal.asset:6300ec3d1191bd98db37f71a31f42b44",
+          "sourceId": "portal.source:8d27b7fce7f7cb90d47992f84ced6904",
           "relativeUrl": "sources/b5468851d29ce185cf1e802ebd0e39aea1e3782be3bbdf733d3e86f4d3c08806.txt",
-          "linkUrl": "sources/f49e0c827217eee184bfaed6ab85accc39282be683676e43cdf267f58a2ee332.L461.html#L461",
+          "linkUrl": "sources/6300ec3d1191bd98db37f71a31f42b44ab12fdf0354a64974e6209dd085fcf41.L519.html#L519",
           "revision": "content:b5468851d29ce185cf1e802ebd0e39aea1e3782be3bbdf733d3e86f4d3c08806",
           "digest": "sha384-Az6JlmWCIHQaoasQg9wz0AeCNQwFGvOcXYVYLDieu1CjLE9TeTTvehKI+VttHire",
           "byteLength": 70,
@@ -94058,19 +94919,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 453
+            "line": 511
           },
           "end": {
-            "line": 453
+            "line": 511
           }
         },
         "fetchUrl": "sources/e52dc36273bd9e75bdc5dd3853f24ee6f3748af68d9f4019741ad9ba83e559d2.txt",
-        "linkUrl": "sources/21503ff73f640e7f6ddf1c5f6a41c2ba845f70f131d5e083e56fb8ca377749fd.L453.html#L453",
+        "linkUrl": "sources/747e7214ea9c1f3f77ca21385da7b04806fe03736157e158e79e5017a63ccb0c.L511.html#L511",
         "publicAsset": {
-          "assetId": "portal.asset:21503ff73f640e7f6ddf1c5f6a41c2ba",
-          "sourceId": "portal.source:92e2a7bca49f7560d84c3d6d88c41ea6",
+          "assetId": "portal.asset:747e7214ea9c1f3f77ca21385da7b048",
+          "sourceId": "portal.source:32a947e6c2270c205e4ab523ee8d2e39",
           "relativeUrl": "sources/e52dc36273bd9e75bdc5dd3853f24ee6f3748af68d9f4019741ad9ba83e559d2.txt",
-          "linkUrl": "sources/21503ff73f640e7f6ddf1c5f6a41c2ba845f70f131d5e083e56fb8ca377749fd.L453.html#L453",
+          "linkUrl": "sources/747e7214ea9c1f3f77ca21385da7b04806fe03736157e158e79e5017a63ccb0c.L511.html#L511",
           "revision": "content:e52dc36273bd9e75bdc5dd3853f24ee6f3748af68d9f4019741ad9ba83e559d2",
           "digest": "sha384-tSydbCHLFQ+Jjy9vsCnQ56ufn7/+hamn0E8eaVGlcq2kkOXk6KujCuUtfM+bb6t9",
           "byteLength": 64,
@@ -94550,19 +95411,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 375
+            "line": 433
           },
           "end": {
-            "line": 375
+            "line": 433
           }
         },
         "fetchUrl": "sources/5c0fe283f2aeff879c30915c3a31da8c967893b1be961cf382325248c7d456c4.txt",
-        "linkUrl": "sources/3fe1cd49b8905d5e97cb317eae96ac04b59e89bbda0e6b162232efb5c038407b.L375.html#L375",
+        "linkUrl": "sources/d94499e77da052d0c38e39a4bcacb4945e9c174046201cf79b08e09146f6b360.L433.html#L433",
         "publicAsset": {
-          "assetId": "portal.asset:3fe1cd49b8905d5e97cb317eae96ac04",
-          "sourceId": "portal.source:ec9be50878e8a8dff80dfdd16b729d42",
+          "assetId": "portal.asset:d94499e77da052d0c38e39a4bcacb494",
+          "sourceId": "portal.source:e8a7152c08e76cfc64dd30e5d4f958ba",
           "relativeUrl": "sources/5c0fe283f2aeff879c30915c3a31da8c967893b1be961cf382325248c7d456c4.txt",
-          "linkUrl": "sources/3fe1cd49b8905d5e97cb317eae96ac04b59e89bbda0e6b162232efb5c038407b.L375.html#L375",
+          "linkUrl": "sources/d94499e77da052d0c38e39a4bcacb4945e9c174046201cf79b08e09146f6b360.L433.html#L433",
           "revision": "content:5c0fe283f2aeff879c30915c3a31da8c967893b1be961cf382325248c7d456c4",
           "digest": "sha384-pWm40K2SGZm15pQpfrqqV+qkaJLuvlhWfHYdWnWKJ1wXM2L+IujPi7YTczHcZerB",
           "byteLength": 53,
@@ -94673,19 +95534,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 367
+            "line": 425
           },
           "end": {
-            "line": 367
+            "line": 425
           }
         },
         "fetchUrl": "sources/5d50381c37fdf2cc0cf49d9e4c572949ef4faa0fcce1e6ac72375466707fc8b2.txt",
-        "linkUrl": "sources/63ed28118cb7f0a8093f6915002944f7b85a4a8d2b49f0ec197fb6e949c9254d.L367.html#L367",
+        "linkUrl": "sources/14932701e9a480134bf4b974e94b5d37af0723cbf5cb8503f76beafcdc891241.L425.html#L425",
         "publicAsset": {
-          "assetId": "portal.asset:63ed28118cb7f0a8093f6915002944f7",
-          "sourceId": "portal.source:19fc26a74a70940532b991fb26661834",
+          "assetId": "portal.asset:14932701e9a480134bf4b974e94b5d37",
+          "sourceId": "portal.source:0594ef13f8b695c11e6f1dfc53cf4382",
           "relativeUrl": "sources/5d50381c37fdf2cc0cf49d9e4c572949ef4faa0fcce1e6ac72375466707fc8b2.txt",
-          "linkUrl": "sources/63ed28118cb7f0a8093f6915002944f7b85a4a8d2b49f0ec197fb6e949c9254d.L367.html#L367",
+          "linkUrl": "sources/14932701e9a480134bf4b974e94b5d37af0723cbf5cb8503f76beafcdc891241.L425.html#L425",
           "revision": "content:5d50381c37fdf2cc0cf49d9e4c572949ef4faa0fcce1e6ac72375466707fc8b2",
           "digest": "sha384-YjCJpxzDOmEoMsAUAwz6Djz4FWZjMa4b37fThICXUdRHtXvNp6uPjPwrGCZLeAdD",
           "byteLength": 53,
@@ -414289,19 +415150,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 579
+            "line": 637
           },
           "end": {
-            "line": 584
+            "line": 642
           }
         },
         "fetchUrl": "sources/5fa2e5ba24495087a55c231b3f43f5a4e138623ae83c60f3fbf5b6ce15306815.txt",
-        "linkUrl": "sources/db3fc16540fcd7b5c280a6a5e06e639ba285d3fa354f76d50c537a09cadfb7d6.L579.html#L579",
+        "linkUrl": "sources/0f20c21fd3bce1cb6e114e1756598dda6cab37de0fea6e7e64c8816c557d98b0.L637.html#L637",
         "publicAsset": {
-          "assetId": "portal.asset:db3fc16540fcd7b5c280a6a5e06e639b",
-          "sourceId": "portal.source:735691f5ddc2a9b2799b761245d9196c",
+          "assetId": "portal.asset:0f20c21fd3bce1cb6e114e1756598dda",
+          "sourceId": "portal.source:13fde0bb7be5bd3be2734794cf077125",
           "relativeUrl": "sources/5fa2e5ba24495087a55c231b3f43f5a4e138623ae83c60f3fbf5b6ce15306815.txt",
-          "linkUrl": "sources/db3fc16540fcd7b5c280a6a5e06e639ba285d3fa354f76d50c537a09cadfb7d6.L579.html#L579",
+          "linkUrl": "sources/0f20c21fd3bce1cb6e114e1756598dda6cab37de0fea6e7e64c8816c557d98b0.L637.html#L637",
           "revision": "content:5fa2e5ba24495087a55c231b3f43f5a4e138623ae83c60f3fbf5b6ce15306815",
           "digest": "sha384-3HhJ3pxi1zCXMgf3wdArMwrWh/BJvHDxrPMdl3M6k5/GV7M7q2uuGBy8fx6OIBhz",
           "byteLength": 205,
@@ -414571,19 +415432,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 756
+            "line": 814
           },
           "end": {
-            "line": 759
+            "line": 817
           }
         },
         "fetchUrl": "sources/0b64c5b760b3ce98485966296368b99535df55038e8eebbbedecf165df6d7b59.txt",
-        "linkUrl": "sources/18621b5a22bdee1ff10f70f52c36ce781f5e42f11a806f228f2c50ec2938aae1.L756.html#L756",
+        "linkUrl": "sources/4abd00b67ed0dace4e36e508642187aa51825b7cfcce264bfc99fed81536a341.L814.html#L814",
         "publicAsset": {
-          "assetId": "portal.asset:18621b5a22bdee1ff10f70f52c36ce78",
-          "sourceId": "portal.source:f7c7a9c983c651cfd9fbd8330cb3fb30",
+          "assetId": "portal.asset:4abd00b67ed0dace4e36e508642187aa",
+          "sourceId": "portal.source:209ca7937c14412cc54f6d8d61e8a70f",
           "relativeUrl": "sources/0b64c5b760b3ce98485966296368b99535df55038e8eebbbedecf165df6d7b59.txt",
-          "linkUrl": "sources/18621b5a22bdee1ff10f70f52c36ce781f5e42f11a806f228f2c50ec2938aae1.L756.html#L756",
+          "linkUrl": "sources/4abd00b67ed0dace4e36e508642187aa51825b7cfcce264bfc99fed81536a341.L814.html#L814",
           "revision": "content:0b64c5b760b3ce98485966296368b99535df55038e8eebbbedecf165df6d7b59",
           "digest": "sha384-dG6q3CAaGdPEoS8mLTPDEvMBVMbrPWt/OC/6/np1gz2G6r28venrMR3SBm3ZLPkz",
           "byteLength": 154,
@@ -414904,19 +415765,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 791
+            "line": 849
           },
           "end": {
-            "line": 807
+            "line": 865
           }
         },
         "fetchUrl": "sources/21d99b8bf110833d59c99139e563f7809f7c75e8bc2f24fea327da5b08d6159a.txt",
-        "linkUrl": "sources/b07f87f76d699882bc2a8c97bf19de8c735afe3bbd2768813780d183b2bb37d7.L791.html#L791",
+        "linkUrl": "sources/404146204503e7dc3b3c6e671978f1a0ef8812034562dbd32cf710bf08f6f98b.L849.html#L849",
         "publicAsset": {
-          "assetId": "portal.asset:b07f87f76d699882bc2a8c97bf19de8c",
-          "sourceId": "portal.source:ac06852c43f5c8e2320310f4cf57bac5",
+          "assetId": "portal.asset:404146204503e7dc3b3c6e671978f1a0",
+          "sourceId": "portal.source:cf6e089b2811dd81300d4dd0785a696f",
           "relativeUrl": "sources/21d99b8bf110833d59c99139e563f7809f7c75e8bc2f24fea327da5b08d6159a.txt",
-          "linkUrl": "sources/b07f87f76d699882bc2a8c97bf19de8c735afe3bbd2768813780d183b2bb37d7.L791.html#L791",
+          "linkUrl": "sources/404146204503e7dc3b3c6e671978f1a0ef8812034562dbd32cf710bf08f6f98b.L849.html#L849",
           "revision": "content:21d99b8bf110833d59c99139e563f7809f7c75e8bc2f24fea327da5b08d6159a",
           "digest": "sha384-nuWYU77s4sMKrnuee9NL+5PFTDrm+U6nisFS0lSRhOyDfUb41fKhgJbpN61HTovo",
           "byteLength": 635,
@@ -415186,19 +416047,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 833
+            "line": 891
           },
           "end": {
-            "line": 846
+            "line": 904
           }
         },
         "fetchUrl": "sources/cef3c44e0fd0c01e32c0259a955fc97547e08a37182252a45e25170c2013cc24.txt",
-        "linkUrl": "sources/27d44b597512677592800ef89611138bc5e8fde2688986a14d3d13c793090e80.L833.html#L833",
+        "linkUrl": "sources/840ffeb8fa6dc558416135bc2bf779c07a6b29c5bff7c1c5e0496f0556179bbf.L891.html#L891",
         "publicAsset": {
-          "assetId": "portal.asset:27d44b597512677592800ef89611138b",
-          "sourceId": "portal.source:accc0da89173fc54204e72bc6c0f319d",
+          "assetId": "portal.asset:840ffeb8fa6dc558416135bc2bf779c0",
+          "sourceId": "portal.source:12af2e8de8712b3d72109ba69a447d0f",
           "relativeUrl": "sources/cef3c44e0fd0c01e32c0259a955fc97547e08a37182252a45e25170c2013cc24.txt",
-          "linkUrl": "sources/27d44b597512677592800ef89611138bc5e8fde2688986a14d3d13c793090e80.L833.html#L833",
+          "linkUrl": "sources/840ffeb8fa6dc558416135bc2bf779c07a6b29c5bff7c1c5e0496f0556179bbf.L891.html#L891",
           "revision": "content:cef3c44e0fd0c01e32c0259a955fc97547e08a37182252a45e25170c2013cc24",
           "digest": "sha384-2dI8FjV/lni+ZU62P0L/wttEV3k44QSpS4zK4u7HiyCoSk/42M3Dv5zlTrtLWfWe",
           "byteLength": 485,
@@ -627172,19 +628033,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 600
+            "line": 658
           },
           "end": {
-            "line": 600
+            "line": 658
           }
         },
         "fetchUrl": "sources/2c7ebdae40e5cd351b7d6a8e2e518f0f99d6308de81db06f62cc30f5e5cc5428.txt",
-        "linkUrl": "sources/2244e86556261a0c63772e5c30bbc8a9d9b97dc13db3466c3fd4ba471e79dbec.L600.html#L600",
+        "linkUrl": "sources/f6a24978707331dab9b82c9bccff55653f99b3e6df198b70f5b37794f8065991.L658.html#L658",
         "publicAsset": {
-          "assetId": "portal.asset:2244e86556261a0c63772e5c30bbc8a9",
-          "sourceId": "portal.source:31847f7ac0ff7858b20f52d1a0568ed7",
+          "assetId": "portal.asset:f6a24978707331dab9b82c9bccff5565",
+          "sourceId": "portal.source:a5cae6b452727cf02666de02e101d674",
           "relativeUrl": "sources/2c7ebdae40e5cd351b7d6a8e2e518f0f99d6308de81db06f62cc30f5e5cc5428.txt",
-          "linkUrl": "sources/2244e86556261a0c63772e5c30bbc8a9d9b97dc13db3466c3fd4ba471e79dbec.L600.html#L600",
+          "linkUrl": "sources/f6a24978707331dab9b82c9bccff55653f99b3e6df198b70f5b37794f8065991.L658.html#L658",
           "revision": "content:2c7ebdae40e5cd351b7d6a8e2e518f0f99d6308de81db06f62cc30f5e5cc5428",
           "digest": "sha384-Jdov7Cwd19eGKUFQgszc24KFCgZvGVmBQ3CC2oxLvAHY6lJ7RQ6xfX8WK7RPtrKC",
           "byteLength": 52,
@@ -627295,19 +628156,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 608
+            "line": 666
           },
           "end": {
-            "line": 608
+            "line": 666
           }
         },
         "fetchUrl": "sources/beee87279912ef731c79d066045d7bd53d698ea21538303ea2466fd04964b2a1.txt",
-        "linkUrl": "sources/76f3c8e0dd1949146eb5a956b80fc67e8ed29ecb95c7b04b298c5bb4f911e835.L608.html#L608",
+        "linkUrl": "sources/df48844d4845c886d33a7192ea65aff3aeac3c3dcff68b3f1ca8d82a740d84cb.L666.html#L666",
         "publicAsset": {
-          "assetId": "portal.asset:76f3c8e0dd1949146eb5a956b80fc67e",
-          "sourceId": "portal.source:f5bc4517691a604e32eb6092f22d0c69",
+          "assetId": "portal.asset:df48844d4845c886d33a7192ea65aff3",
+          "sourceId": "portal.source:7fb1063695c85a13bb1fd1ffe4e0e1d3",
           "relativeUrl": "sources/beee87279912ef731c79d066045d7bd53d698ea21538303ea2466fd04964b2a1.txt",
-          "linkUrl": "sources/76f3c8e0dd1949146eb5a956b80fc67e8ed29ecb95c7b04b298c5bb4f911e835.L608.html#L608",
+          "linkUrl": "sources/df48844d4845c886d33a7192ea65aff3aeac3c3dcff68b3f1ca8d82a740d84cb.L666.html#L666",
           "revision": "content:beee87279912ef731c79d066045d7bd53d698ea21538303ea2466fd04964b2a1",
           "digest": "sha384-mtJz8H9wZwUtpGQ1aBaVY4bcl+ibcUqzXdS5R/akrIBHsCS4G9M7B5hU7cu+MjR4",
           "byteLength": 55,
@@ -627418,19 +628279,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 592
+            "line": 650
           },
           "end": {
-            "line": 592
+            "line": 650
           }
         },
         "fetchUrl": "sources/5e203df10c8377a01f0438e31af98f108b7720a3413954ad1ce629c4493f608d.txt",
-        "linkUrl": "sources/1757bdc2a2e342f944711087647de303bde019f6c99a193c9fca2043fc5dda80.L592.html#L592",
+        "linkUrl": "sources/9ee18c08409ff2f4e53a6414c9ad9f820f92c7ff6c48e37ca9783746a781f00d.L650.html#L650",
         "publicAsset": {
-          "assetId": "portal.asset:1757bdc2a2e342f944711087647de303",
-          "sourceId": "portal.source:f8023b346622934f3ecba1d71feae9e4",
+          "assetId": "portal.asset:9ee18c08409ff2f4e53a6414c9ad9f82",
+          "sourceId": "portal.source:f3cea851f2682d16987b764842214459",
           "relativeUrl": "sources/5e203df10c8377a01f0438e31af98f108b7720a3413954ad1ce629c4493f608d.txt",
-          "linkUrl": "sources/1757bdc2a2e342f944711087647de303bde019f6c99a193c9fca2043fc5dda80.L592.html#L592",
+          "linkUrl": "sources/9ee18c08409ff2f4e53a6414c9ad9f820f92c7ff6c48e37ca9783746a781f00d.L650.html#L650",
           "revision": "content:5e203df10c8377a01f0438e31af98f108b7720a3413954ad1ce629c4493f608d",
           "digest": "sha384-OXnKDpnFmLPc4pg7/ReorRvxwP6CxYdOm78YkmuX7Os5PEFPrMI/mfz9rX7UvNuK",
           "byteLength": 47,
@@ -627598,19 +628459,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 727
+            "line": 785
           },
           "end": {
-            "line": 730
+            "line": 788
           }
         },
         "fetchUrl": "sources/35003b29685934934ff91e81d69b5fe8a09482845f7c20acfd0627b975bf756e.txt",
-        "linkUrl": "sources/de736cdd2d873809138b980a763f8bf64acf6b03e514081d28729e4896f69cfd.L727.html#L727",
+        "linkUrl": "sources/e87d77c998cda0df0b9f116b8985c1ce0611b2a1d84008a93ec6cd74f4a42720.L785.html#L785",
         "publicAsset": {
-          "assetId": "portal.asset:de736cdd2d873809138b980a763f8bf6",
-          "sourceId": "portal.source:19d753dd5c6bdb0e2747d233c4450247",
+          "assetId": "portal.asset:e87d77c998cda0df0b9f116b8985c1ce",
+          "sourceId": "portal.source:ef7153bf53e4fd245d4cef113121ce84",
           "relativeUrl": "sources/35003b29685934934ff91e81d69b5fe8a09482845f7c20acfd0627b975bf756e.txt",
-          "linkUrl": "sources/de736cdd2d873809138b980a763f8bf64acf6b03e514081d28729e4896f69cfd.L727.html#L727",
+          "linkUrl": "sources/e87d77c998cda0df0b9f116b8985c1ce0611b2a1d84008a93ec6cd74f4a42720.L785.html#L785",
           "revision": "content:35003b29685934934ff91e81d69b5fe8a09482845f7c20acfd0627b975bf756e",
           "digest": "sha384-3GK26OR/7zuG0QNqhaWzhje4IELpNXP5vsj/TR8pce7jUmHnhNPTQlShBilkTNRt",
           "byteLength": 137,
@@ -827481,16 +828342,16 @@
             "line": 202
           }
         },
-        "fetchUrl": "sources/80fd4ac6ecb61a3b0534f67b2384fd24d1777e20f9a8edfc04f67b777d350d42.txt",
-        "linkUrl": "sources/20b23929bdb1f75b878c128c90ea5da5de08ea829b07867120eebd4f6dbb371f.L98.html#L98",
+        "fetchUrl": "sources/09e2e277c003b4dec649ff9c0c4c0ae145f72848d8cd6e626d6454eb28c9745d.txt",
+        "linkUrl": "sources/04e4c80209d4da1becb9f889fa6d1d58d1bc89ac1e414d30631b63d9fd7e5f29.L98.html#L98",
         "publicAsset": {
-          "assetId": "portal.asset:20b23929bdb1f75b878c128c90ea5da5",
+          "assetId": "portal.asset:04e4c80209d4da1becb9f889fa6d1d58",
           "sourceId": "portal.source:1d14d8382ef7c3d8709bed9ce35464f1",
-          "relativeUrl": "sources/80fd4ac6ecb61a3b0534f67b2384fd24d1777e20f9a8edfc04f67b777d350d42.txt",
-          "linkUrl": "sources/20b23929bdb1f75b878c128c90ea5da5de08ea829b07867120eebd4f6dbb371f.L98.html#L98",
-          "revision": "content:80fd4ac6ecb61a3b0534f67b2384fd24d1777e20f9a8edfc04f67b777d350d42",
-          "digest": "sha384-irDIepAT2ERn1d5WP7+dcVtXvYMl/HTaW8UKc5LarHgL/vJqC3BQJJHcHqjeEz/g",
-          "byteLength": 6664,
+          "relativeUrl": "sources/09e2e277c003b4dec649ff9c0c4c0ae145f72848d8cd6e626d6454eb28c9745d.txt",
+          "linkUrl": "sources/04e4c80209d4da1becb9f889fa6d1d58d1bc89ac1e414d30631b63d9fd7e5f29.L98.html#L98",
+          "revision": "content:09e2e277c003b4dec649ff9c0c4c0ae145f72848d8cd6e626d6454eb28c9745d",
+          "digest": "sha384-KOoPoGhXq1x+yjVqK5JAqXLvW/11vVlcWdTBLGFxz6M0F7bG7U4pjj9U73eY9u7H",
+          "byteLength": 6869,
           "lineCount": 105
         },
         "fetchTrigger": "on-expand",
@@ -845774,19 +846635,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 547
+            "line": 605
           },
           "end": {
-            "line": 609
+            "line": 667
           }
         },
         "fetchUrl": "sources/9959394d1326c6b1a28a378d3f2d564fa40b9d14a5ca34b8bc4eaeb5f9388c7b.txt",
-        "linkUrl": "sources/cfac8c976ad05124b290fd4fe4734bf85ca2c8b666b4ce714731ab8c128ee0ff.L547.html#L547",
+        "linkUrl": "sources/a8b9c15a4be609ff0a8aa620a9b119d460e2c0505eca4f76e7c08ba0b65448f1.L605.html#L605",
         "publicAsset": {
-          "assetId": "portal.asset:cfac8c976ad05124b290fd4fe4734bf8",
-          "sourceId": "portal.source:d89cecaa7b6d7a1e86a7303167b583de",
+          "assetId": "portal.asset:a8b9c15a4be609ff0a8aa620a9b119d4",
+          "sourceId": "portal.source:9fba1ba9337e1b8d5cd939ce9d159232",
           "relativeUrl": "sources/9959394d1326c6b1a28a378d3f2d564fa40b9d14a5ca34b8bc4eaeb5f9388c7b.txt",
-          "linkUrl": "sources/cfac8c976ad05124b290fd4fe4734bf85ca2c8b666b4ce714731ab8c128ee0ff.L547.html#L547",
+          "linkUrl": "sources/a8b9c15a4be609ff0a8aa620a9b119d460e2c0505eca4f76e7c08ba0b65448f1.L605.html#L605",
           "revision": "content:9959394d1326c6b1a28a378d3f2d564fa40b9d14a5ca34b8bc4eaeb5f9388c7b",
           "digest": "sha384-RstUgurgPuTskKT1kFklILPKXfMhwVst8VmvfzmJiswtsXmp+89xNp12UQyRNXBZ",
           "byteLength": 2217,
@@ -845961,16 +846822,16 @@
             "line": 418
           }
         },
-        "fetchUrl": "sources/5035a712158eb5d88a94160bd215d979a19dc5a92e10a3f120e09b6943492d09.txt",
-        "linkUrl": "sources/36d8363ef3c7ca032ea860628b73259ac0284e4b87b9d46869c8469a5cbcb0c7.L19.html#L19",
+        "fetchUrl": "sources/ab70ce7932d150c01987923ebe57a0ab8ddb1f1cce2f5d19184236e6477b105e.txt",
+        "linkUrl": "sources/fd74862a814008f8344c2162ea3f5ab07f0796f659f49d64997d222ef48f4609.L19.html#L19",
         "publicAsset": {
-          "assetId": "portal.asset:36d8363ef3c7ca032ea860628b73259a",
+          "assetId": "portal.asset:fd74862a814008f8344c2162ea3f5ab0",
           "sourceId": "portal.source:a6c2caeb1db11d2cc873ca650dbfffba",
-          "relativeUrl": "sources/5035a712158eb5d88a94160bd215d979a19dc5a92e10a3f120e09b6943492d09.txt",
-          "linkUrl": "sources/36d8363ef3c7ca032ea860628b73259ac0284e4b87b9d46869c8469a5cbcb0c7.L19.html#L19",
-          "revision": "content:5035a712158eb5d88a94160bd215d979a19dc5a92e10a3f120e09b6943492d09",
-          "digest": "sha384-lk5TL5MIksp4rnIs50/b6qlH720b2793M2J9oaG+H1Quowbqu8w951TTvh+oaBcz",
-          "byteLength": 16657,
+          "relativeUrl": "sources/ab70ce7932d150c01987923ebe57a0ab8ddb1f1cce2f5d19184236e6477b105e.txt",
+          "linkUrl": "sources/fd74862a814008f8344c2162ea3f5ab07f0796f659f49d64997d222ef48f4609.L19.html#L19",
+          "revision": "content:ab70ce7932d150c01987923ebe57a0ab8ddb1f1cce2f5d19184236e6477b105e",
+          "digest": "sha384-i5TnU4COwuu7HWbVkoe2NwORulsjUz4PAcJDbX416ZDhP9HsoTH9MAOywYHeSlHH",
+          "byteLength": 17120,
           "lineCount": 400
         },
         "fetchTrigger": "on-expand",
@@ -846136,19 +846997,19 @@
         "language": "csharp",
         "range": {
           "start": {
-            "line": 623
+            "line": 681
           },
           "end": {
-            "line": 847
+            "line": 905
           }
         },
         "fetchUrl": "sources/81e2fa0f7ecb2bd839d61754a6fa0b5205ba48c67d3e82fe37acb5621a22a979.txt",
-        "linkUrl": "sources/1735cda0bc2c6c47c9ab0984b6a2dd492c65f469cde32aab070ad5e34440e6b2.L623.html#L623",
+        "linkUrl": "sources/b42f405b4ad6ded02174537aada3483b27a0dfcb71fbe0c4cb6670441da33f7b.L681.html#L681",
         "publicAsset": {
-          "assetId": "portal.asset:1735cda0bc2c6c47c9ab0984b6a2dd49",
-          "sourceId": "portal.source:d306db200b67d635399dacf182a86d1b",
+          "assetId": "portal.asset:b42f405b4ad6ded02174537aada3483b",
+          "sourceId": "portal.source:f350f3827d6f857276ba7bafcdd4e958",
           "relativeUrl": "sources/81e2fa0f7ecb2bd839d61754a6fa0b5205ba48c67d3e82fe37acb5621a22a979.txt",
-          "linkUrl": "sources/1735cda0bc2c6c47c9ab0984b6a2dd492c65f469cde32aab070ad5e34440e6b2.L623.html#L623",
+          "linkUrl": "sources/b42f405b4ad6ded02174537aada3483b27a0dfcb71fbe0c4cb6670441da33f7b.L681.html#L681",
           "revision": "content:81e2fa0f7ecb2bd839d61754a6fa0b5205ba48c67d3e82fe37acb5621a22a979",
           "digest": "sha384-OI0jdNFKRxq8Uy7LLgEqb2wEDi07wltFqQmUUr7bsTeDqxwQU5jEMWVrcTXDE24J",
           "byteLength": 17565,
@@ -882892,7 +883753,7 @@
       "id": "kind:dotnet-field",
       "kind": "kind",
       "label": "dotnet-field",
-      "entryCount": 1068,
+      "entryCount": 1075,
       "views": [
         "dotnet"
       ]
@@ -882946,7 +883807,7 @@
       "id": "profile-layer:unknown-profile",
       "kind": "profile-layer",
       "label": "unknown-profile",
-      "entryCount": 5784,
+      "entryCount": 5791,
       "views": [
         "dotnet"
       ]
@@ -882955,7 +883816,7 @@
       "id": "source-root:src",
       "kind": "source-root",
       "label": "src",
-      "entryCount": 5784,
+      "entryCount": 5791,
       "views": [
         "dotnet"
       ]
@@ -882966,7 +883827,7 @@
       "id": "view:dotnet",
       "kind": "view",
       "label": ".NET",
-      "entryCount": 5784,
+      "entryCount": 5791,
       "views": [
         "dotnet"
       ],
@@ -944529,7 +945390,7 @@
           "id": "dotnet:assembly:portal.components",
           "kind": "assembly",
           "label": "Portal.Components",
-          "entryCount": 1504,
+          "entryCount": 1511,
           "views": [
             "dotnet"
           ],
@@ -944538,7 +945399,7 @@
               "id": "dotnet:assembly:portal.components:namespace:aspnet",
               "kind": "namespace",
               "label": "ASPNET",
-              "entryCount": 1504,
+              "entryCount": 1511,
               "views": [
                 "dotnet"
               ],
@@ -944547,7 +945408,7 @@
                   "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit",
                   "kind": "namespace",
                   "label": "StarterKit",
-                  "entryCount": 1504,
+                  "entryCount": 1511,
                   "views": [
                     "dotnet"
                   ],
@@ -944556,7 +945417,7 @@
                       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal",
                       "kind": "namespace",
                       "label": "Portal",
-                      "entryCount": 1504,
+                      "entryCount": 1511,
                       "views": [
                         "dotnet"
                       ],
@@ -962695,7 +963556,7 @@
                           "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys",
                           "kind": "type",
                           "label": "PortalPermissionKeys",
-                          "entryCount": 62,
+                          "entryCount": 69,
                           "views": [
                             "dotnet"
                           ],
@@ -962788,6 +963649,19 @@
                               "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-a474500d.html"
                             },
                             {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+                              "kind": "entry",
+                              "label": "BusinessApplicationKeyPrefix",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-b39c2ad9.html"
+                            },
+                            {
                               "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
                               "kind": "entry",
                               "label": "BusinessApplicationReview",
@@ -962877,6 +963751,19 @@
                               "sourcePath": "src/Portal.Components/PortalPermissions.cs",
                               "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationhandle",
                               "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-cd0d8db3.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+                              "kind": "entry",
+                              "label": "BusinessCollaborationKeyPrefix",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-caa30ca8.html"
                             },
                             {
                               "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewall",
@@ -963061,6 +963948,19 @@
                               "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-c1e44937.html"
                             },
                             {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+                              "kind": "entry",
+                              "label": "EmployeeProfileConfirmKeyPrefix",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-1ea56c70.html"
+                            },
+                            {
                               "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
                               "kind": "entry",
                               "label": "EmployeeProfileConfirmView",
@@ -963098,6 +963998,19 @@
                               "sourcePath": "src/Portal.Components/PortalPermissions.cs",
                               "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestcancel",
                               "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-12d07b5e.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+                              "kind": "entry",
+                              "label": "EmployeeProfileCorrectionRequestKeyPrefix",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-e1fdc11f.html"
                             },
                             {
                               "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestreview",
@@ -963230,6 +964143,19 @@
                               "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-11724c9e.html"
                             },
                             {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+                              "kind": "entry",
+                              "label": "ExpenseReimbursementKeyPrefix",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-83df4c31.html"
+                            },
+                            {
                               "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
                               "kind": "entry",
                               "label": "ExpenseReimbursementResubmit",
@@ -963254,6 +964180,32 @@
                               "sourcePath": "src/Portal.Components/PortalPermissions.cs",
                               "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
                               "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expe-447eb286.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+                              "kind": "entry",
+                              "label": "FormBuilderKeyPrefix",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.form-7f12e7f6.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+                              "kind": "entry",
+                              "label": "LeaveRequestKeyPrefix",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+                              "sourcePath": "src/Portal.Components/PortalPermissions.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leav-cb5c10d1.html"
                             },
                             {
                               "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestresubmit",
@@ -977893,8 +978845,8 @@
   "relationGraph": {
     "contract": "hia-project-relation-graph",
     "contractVersion": "0.1.0-draft",
-    "nodeCount": 6241,
-    "relationCount": 5791,
+    "nodeCount": 6248,
+    "relationCount": 5798,
     "nodes": [
       {
         "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -982979,6 +983931,13 @@
         "view": "dotnet"
       },
       {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+        "kind": "entry",
+        "label": "BusinessApplicationKeyPrefix",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+        "view": "dotnet"
+      },
+      {
         "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
         "kind": "entry",
         "label": "BusinessApplicationReview",
@@ -983025,6 +983984,13 @@
         "kind": "entry",
         "label": "BusinessCollaborationHandle",
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationhandle",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+        "kind": "entry",
+        "label": "BusinessCollaborationKeyPrefix",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
         "view": "dotnet"
       },
       {
@@ -983126,6 +984092,13 @@
         "view": "dotnet"
       },
       {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+        "kind": "entry",
+        "label": "EmployeeProfileConfirmKeyPrefix",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+        "view": "dotnet"
+      },
+      {
         "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
         "kind": "entry",
         "label": "EmployeeProfileConfirmView",
@@ -983144,6 +984117,13 @@
         "kind": "entry",
         "label": "EmployeeProfileCorrectionRequestCancel",
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestcancel",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+        "kind": "entry",
+        "label": "EmployeeProfileCorrectionRequestKeyPrefix",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
         "view": "dotnet"
       },
       {
@@ -983217,6 +984197,13 @@
         "view": "dotnet"
       },
       {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+        "kind": "entry",
+        "label": "ExpenseReimbursementKeyPrefix",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+        "view": "dotnet"
+      },
+      {
         "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
         "kind": "entry",
         "label": "ExpenseReimbursementResubmit",
@@ -983228,6 +984215,20 @@
         "kind": "entry",
         "label": "ExpenseReimbursementSubmit",
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+        "kind": "entry",
+        "label": "FormBuilderKeyPrefix",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+        "kind": "entry",
+        "label": "LeaveRequestKeyPrefix",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
         "view": "dotnet"
       },
       {
@@ -1030539,6 +1031540,19 @@
         }
       },
       {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 376,
+          "rangeEndLine": 376
+        }
+      },
+      {
         "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview->source:src/Portal.Components/PortalPermissions.cs",
         "kind": "semantic-member",
         "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
@@ -1030627,6 +1031641,19 @@
           "language": "csharp",
           "rangeStartLine": 335,
           "rangeEndLine": 335
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 368,
+          "rangeEndLine": 368
         }
       },
       {
@@ -1030729,8 +1031756,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentrawhtmledit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 469,
-          "rangeEndLine": 469
+          "rangeStartLine": 527,
+          "rangeEndLine": 527
         }
       },
       {
@@ -1030742,8 +1031769,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentuploadmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 477,
-          "rangeEndLine": 477
+          "rangeStartLine": 535,
+          "rangeEndLine": 535
         }
       },
       {
@@ -1030812,6 +1031839,19 @@
         }
       },
       {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 384,
+          "rangeEndLine": 384
+        }
+      },
+      {
         "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview->source:src/Portal.Components/PortalPermissions.cs",
         "kind": "semantic-member",
         "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
@@ -1030848,6 +1031888,19 @@
           "language": "csharp",
           "rangeStartLine": 187,
           "rangeEndLine": 187
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 392,
+          "rangeEndLine": 392
         }
       },
       {
@@ -1030898,8 +1031951,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 514,
-          "rangeEndLine": 514
+          "rangeStartLine": 572,
+          "rangeEndLine": 572
         }
       },
       {
@@ -1030911,8 +1031964,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessreview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 522,
-          "rangeEndLine": 522
+          "rangeStartLine": 580,
+          "rangeEndLine": 580
         }
       },
       {
@@ -1030924,8 +1031977,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 498,
-          "rangeEndLine": 498
+          "rangeStartLine": 556,
+          "rangeEndLine": 556
         }
       },
       {
@@ -1030937,8 +1031990,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationreview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 506,
-          "rangeEndLine": 506
+          "rangeStartLine": 564,
+          "rangeEndLine": 564
         }
       },
       {
@@ -1030950,8 +1032003,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformmanage",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 530,
-          "rangeEndLine": 530
+          "rangeStartLine": 588,
+          "rangeEndLine": 588
         }
       },
       {
@@ -1030963,8 +1032016,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformreview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 538,
-          "rangeEndLine": 538
+          "rangeStartLine": 596,
+          "rangeEndLine": 596
         }
       },
       {
@@ -1030976,8 +1032029,21 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 490,
-          "rangeEndLine": 490
+          "rangeStartLine": 548,
+          "rangeEndLine": 548
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 408,
+          "rangeEndLine": 408
         }
       },
       {
@@ -1031004,6 +1032070,32 @@
           "language": "csharp",
           "rangeStartLine": 219,
           "rangeEndLine": 219
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 416,
+          "rangeEndLine": 416
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+        "to": "source:src/Portal.Components/PortalPermissions.cs",
+        "label": "Source: src/Portal.Components/PortalPermissions.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 400,
+          "rangeEndLine": 400
         }
       },
       {
@@ -1031041,8 +1032133,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 415,
-          "rangeEndLine": 415
+          "rangeStartLine": 473,
+          "rangeEndLine": 473
         }
       },
       {
@@ -1031054,8 +1032146,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 407,
-          "rangeEndLine": 407
+          "rangeStartLine": 465,
+          "rangeEndLine": 465
         }
       },
       {
@@ -1031067,8 +1032159,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 391,
-          "rangeEndLine": 391
+          "rangeStartLine": 449,
+          "rangeEndLine": 449
         }
       },
       {
@@ -1031080,8 +1032172,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 383,
-          "rangeEndLine": 383
+          "rangeStartLine": 441,
+          "rangeEndLine": 441
         }
       },
       {
@@ -1031093,8 +1032185,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 399,
-          "rangeEndLine": 399
+          "rangeStartLine": 457,
+          "rangeEndLine": 457
         }
       },
       {
@@ -1031106,8 +1032198,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 445,
-          "rangeEndLine": 445
+          "rangeStartLine": 503,
+          "rangeEndLine": 503
         }
       },
       {
@@ -1031119,8 +1032211,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 431,
-          "rangeEndLine": 431
+          "rangeStartLine": 489,
+          "rangeEndLine": 489
         }
       },
       {
@@ -1031171,8 +1032263,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portalmodulesedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 461,
-          "rangeEndLine": 461
+          "rangeStartLine": 519,
+          "rangeEndLine": 519
         }
       },
       {
@@ -1031184,8 +1032276,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 453,
-          "rangeEndLine": 453
+          "rangeStartLine": 511,
+          "rangeEndLine": 511
         }
       },
       {
@@ -1031236,8 +1032328,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeedit",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 375,
-          "rangeEndLine": 375
+          "rangeStartLine": 433,
+          "rangeEndLine": 433
         }
       },
       {
@@ -1031249,8 +1032341,8 @@
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeview",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 367,
-          "rangeEndLine": 367
+          "rangeStartLine": 425,
+          "rangeEndLine": 425
         }
       },
       {
@@ -1050970,8 +1052062,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 579,
-          "rangeEndLine": 584
+          "rangeStartLine": 637,
+          "rangeEndLine": 642
         }
       },
       {
@@ -1050983,8 +1052075,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 756,
-          "rangeEndLine": 759
+          "rangeStartLine": 814,
+          "rangeEndLine": 817
         }
       },
       {
@@ -1050996,8 +1052088,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 791,
-          "rangeEndLine": 807
+          "rangeStartLine": 849,
+          "rangeEndLine": 865
         }
       },
       {
@@ -1051009,8 +1052101,8 @@
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 833,
-          "rangeEndLine": 846
+          "rangeStartLine": 891,
+          "rangeEndLine": 904
         }
       },
       {
@@ -1069443,8 +1070535,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.category",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 600,
-          "rangeEndLine": 600
+          "rangeStartLine": 658,
+          "rangeEndLine": 658
         }
       },
       {
@@ -1069456,8 +1070548,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.description",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 608,
-          "rangeEndLine": 608
+          "rangeStartLine": 666,
+          "rangeEndLine": 666
         }
       },
       {
@@ -1069469,8 +1070561,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.key",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 592,
-          "rangeEndLine": 592
+          "rangeStartLine": 650,
+          "rangeEndLine": 650
         }
       },
       {
@@ -1069482,8 +1070574,8 @@
         "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 727,
-          "rangeEndLine": 730
+          "rangeStartLine": 785,
+          "rangeEndLine": 788
         }
       },
       {
@@ -1091049,8 +1092141,8 @@
         "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissiondefinition",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 547,
-          "rangeEndLine": 609
+          "rangeStartLine": 605,
+          "rangeEndLine": 667
         }
       },
       {
@@ -1091075,8 +1092167,8 @@
         "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissionregistry",
         "metadata": {
           "language": "csharp",
-          "rangeStartLine": 623,
-          "rangeEndLine": 847
+          "rangeStartLine": 681,
+          "rangeEndLine": 905
         }
       },
       {

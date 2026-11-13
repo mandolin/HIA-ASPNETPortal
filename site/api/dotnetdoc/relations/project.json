@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6241,
-  "relationCount": 5791,
+  "nodeCount": 6248,
+  "relationCount": 5798,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -5087,6 +5087,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+      "kind": "entry",
+      "label": "BusinessApplicationKeyPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
       "kind": "entry",
       "label": "BusinessApplicationReview",
@@ -5133,6 +5140,13 @@
       "kind": "entry",
       "label": "BusinessCollaborationHandle",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationhandle",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+      "kind": "entry",
+      "label": "BusinessCollaborationKeyPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
       "view": "dotnet"
     },
     {
@@ -5234,6 +5248,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+      "kind": "entry",
+      "label": "EmployeeProfileConfirmKeyPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
       "kind": "entry",
       "label": "EmployeeProfileConfirmView",
@@ -5252,6 +5273,13 @@
       "kind": "entry",
       "label": "EmployeeProfileCorrectionRequestCancel",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestcancel",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+      "kind": "entry",
+      "label": "EmployeeProfileCorrectionRequestKeyPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
       "view": "dotnet"
     },
     {
@@ -5325,6 +5353,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+      "kind": "entry",
+      "label": "ExpenseReimbursementKeyPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementresubmit",
       "kind": "entry",
       "label": "ExpenseReimbursementResubmit",
@@ -5336,6 +5371,20 @@
       "kind": "entry",
       "label": "ExpenseReimbursementSubmit",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementsubmit",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+      "kind": "entry",
+      "label": "FormBuilderKeyPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+      "kind": "entry",
+      "label": "LeaveRequestKeyPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
       "view": "dotnet"
     },
     {
@@ -52647,6 +52696,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationkeyprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 376,
+        "rangeEndLine": 376
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview->source:src/Portal.Components/PortalPermissions.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
@@ -52735,6 +52797,19 @@
         "language": "csharp",
         "rangeStartLine": 335,
         "rangeEndLine": 335
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationkeyprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 368,
+        "rangeEndLine": 368
       }
     },
     {
@@ -52837,8 +52912,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentrawhtmledit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 469,
-        "rangeEndLine": 469
+        "rangeStartLine": 527,
+        "rangeEndLine": 527
       }
     },
     {
@@ -52850,8 +52925,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentuploadmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 477,
-        "rangeEndLine": 477
+        "rangeStartLine": 535,
+        "rangeEndLine": 535
       }
     },
     {
@@ -52920,6 +52995,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmkeyprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 384,
+        "rangeEndLine": 384
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview->source:src/Portal.Components/PortalPermissions.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
@@ -52956,6 +53044,19 @@
         "language": "csharp",
         "rangeStartLine": 187,
         "rangeEndLine": 187
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestkeyprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 392,
+        "rangeEndLine": 392
       }
     },
     {
@@ -53006,8 +53107,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 514,
-        "rangeEndLine": 514
+        "rangeStartLine": 572,
+        "rangeEndLine": 572
       }
     },
     {
@@ -53019,8 +53120,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 522,
-        "rangeEndLine": 522
+        "rangeStartLine": 580,
+        "rangeEndLine": 580
       }
     },
     {
@@ -53032,8 +53133,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 498,
-        "rangeEndLine": 498
+        "rangeStartLine": 556,
+        "rangeEndLine": 556
       }
     },
     {
@@ -53045,8 +53146,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 506,
-        "rangeEndLine": 506
+        "rangeStartLine": 564,
+        "rangeEndLine": 564
       }
     },
     {
@@ -53058,8 +53159,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformmanage",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 530,
-        "rangeEndLine": 530
+        "rangeStartLine": 588,
+        "rangeEndLine": 588
       }
     },
     {
@@ -53071,8 +53172,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformreview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 538,
-        "rangeEndLine": 538
+        "rangeStartLine": 596,
+        "rangeEndLine": 596
       }
     },
     {
@@ -53084,8 +53185,21 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 490,
-        "rangeEndLine": 490
+        "rangeStartLine": 548,
+        "rangeEndLine": 548
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.expensereimbursementkeyprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 408,
+        "rangeEndLine": 408
       }
     },
     {
@@ -53112,6 +53226,32 @@
         "language": "csharp",
         "rangeStartLine": 219,
         "rangeEndLine": 219
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.formbuilderkeyprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 416,
+        "rangeEndLine": 416
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix->source:src/Portal.Components/PortalPermissions.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+      "to": "source:src/Portal.Components/PortalPermissions.cs",
+      "label": "Source: src/Portal.Components/PortalPermissions.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.leaverequestkeyprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 400,
+        "rangeEndLine": 400
       }
     },
     {
@@ -53149,8 +53289,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 415,
-        "rangeEndLine": 415
+        "rangeStartLine": 473,
+        "rangeEndLine": 473
       }
     },
     {
@@ -53162,8 +53302,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleassemblystateview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 407,
-        "rangeEndLine": 407
+        "rangeStartLine": 465,
+        "rangeEndLine": 465
       }
     },
     {
@@ -53175,8 +53315,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 391,
-        "rangeEndLine": 391
+        "rangeStartLine": 449,
+        "rangeEndLine": 449
       }
     },
     {
@@ -53188,8 +53328,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 383,
-        "rangeEndLine": 383
+        "rangeStartLine": 441,
+        "rangeEndLine": 441
       }
     },
     {
@@ -53201,8 +53341,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 399,
-        "rangeEndLine": 399
+        "rangeStartLine": 457,
+        "rangeEndLine": 457
       }
     },
     {
@@ -53214,8 +53354,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageconfirm",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 445,
-        "rangeEndLine": 445
+        "rangeStartLine": 503,
+        "rangeEndLine": 503
       }
     },
     {
@@ -53227,8 +53367,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduleonlinepackageupload",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 431,
-        "rangeEndLine": 431
+        "rangeStartLine": 489,
+        "rangeEndLine": 489
       }
     },
     {
@@ -53279,8 +53419,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portalmodulesedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 461,
-        "rangeEndLine": 461
+        "rangeStartLine": 519,
+        "rangeEndLine": 519
       }
     },
     {
@@ -53292,8 +53432,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 453,
-        "rangeEndLine": 453
+        "rangeStartLine": 511,
+        "rangeEndLine": 511
       }
     },
     {
@@ -53344,8 +53484,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeedit",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 375,
-        "rangeEndLine": 375
+        "rangeStartLine": 433,
+        "rangeEndLine": 433
       }
     },
     {
@@ -53357,8 +53497,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeview",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 367,
-        "rangeEndLine": 367
+        "rangeStartLine": 425,
+        "rangeEndLine": 425
       }
     },
     {
@@ -73078,8 +73218,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 579,
-        "rangeEndLine": 584
+        "rangeStartLine": 637,
+        "rangeEndLine": 642
       }
     },
     {
@@ -73091,8 +73231,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 756,
-        "rangeEndLine": 759
+        "rangeStartLine": 814,
+        "rangeEndLine": 817
       }
     },
     {
@@ -73104,8 +73244,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 791,
-        "rangeEndLine": 807
+        "rangeStartLine": 849,
+        "rangeEndLine": 865
       }
     },
     {
@@ -73117,8 +73257,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 833,
-        "rangeEndLine": 846
+        "rangeStartLine": 891,
+        "rangeEndLine": 904
       }
     },
     {
@@ -91551,8 +91691,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.category",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 600,
-        "rangeEndLine": 600
+        "rangeStartLine": 658,
+        "rangeEndLine": 658
       }
     },
     {
@@ -91564,8 +91704,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.description",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 608,
-        "rangeEndLine": 608
+        "rangeStartLine": 666,
+        "rangeEndLine": 666
       }
     },
     {
@@ -91577,8 +91717,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.key",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 592,
-        "rangeEndLine": 592
+        "rangeStartLine": 650,
+        "rangeEndLine": 650
       }
     },
     {
@@ -91590,8 +91730,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 727,
-        "rangeEndLine": 730
+        "rangeStartLine": 785,
+        "rangeEndLine": 788
       }
     },
     {
@@ -113157,8 +113297,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissiondefinition",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 547,
-        "rangeEndLine": 609
+        "rangeStartLine": 605,
+        "rangeEndLine": 667
       }
     },
     {
@@ -113183,8 +113323,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissionregistry",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 623,
-        "rangeEndLine": 847
+        "rangeStartLine": 681,
+        "rangeEndLine": 905
       }
     },
     {

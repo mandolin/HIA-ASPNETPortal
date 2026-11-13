@@ -358,6 +358,64 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public const string BusinessCollaborationEventsView = "Business.Collaboration.Events.View";
 
+        #region 能力权限前缀族（单一事实源，供 PortalCapabilityRegistry 引用）
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>能力注册表中 <c>Collaboration</c> 能力的权限键前缀族。注册表不再硬编码字面量，统一引用此处。</zh-CN>
+        ///   <en>Permission-key prefix family for the <c>Collaboration</c> capability in the capability registry. The registry references this instead of a hard-coded literal.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationKeyPrefix = "Business.Collaboration";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>能力注册表中 <c>ApplicationRequest</c> 能力的权限键前缀族。</zh-CN>
+        ///   <en>Permission-key prefix family for the <c>ApplicationRequest</c> capability.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationKeyPrefix = "Business.Application";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>能力注册表中 <c>EmployeeProfileConfirm</c> 能力的权限键前缀族（keyless 能力，前缀即自身名）。</zh-CN>
+        ///   <en>Permission-key prefix family for the <c>EmployeeProfileConfirm</c> capability (keyless; prefix equals the capability name).</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileConfirmKeyPrefix = "EmployeeProfileConfirm";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>能力注册表中 <c>EmployeeProfileCorrectionRequest</c> 能力的权限键前缀族（keyless 能力）。</zh-CN>
+        ///   <en>Permission-key prefix family for the <c>EmployeeProfileCorrectionRequest</c> capability (keyless).</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestKeyPrefix = "EmployeeProfileCorrectionRequest";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>能力注册表中 <c>LeaveRequest</c> 能力的权限键前缀族（keyless 能力）。</zh-CN>
+        ///   <en>Permission-key prefix family for the <c>LeaveRequest</c> capability (keyless).</en>
+        /// </lang>
+        /// </summary>
+        public const string LeaveRequestKeyPrefix = "LeaveRequest";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>能力注册表中 <c>ExpenseReimbursement</c> 能力的权限键前缀族（keyless 能力）。</zh-CN>
+        ///   <en>Permission-key prefix family for the <c>ExpenseReimbursement</c> capability (keyless).</en>
+        /// </lang>
+        /// </summary>
+        public const string ExpenseReimbursementKeyPrefix = "ExpenseReimbursement";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>能力注册表中 <c>FormBuilder</c> 能力为 keyless（无权限键族），前缀为空串，必须显式声明而非留空引发歧义。</zh-CN>
+        ///   <en>The <c>FormBuilder</c> capability is keyless (no permission-key family); its prefix is the empty string and must be declared explicitly rather than left ambiguous.</en>
+        /// </lang>
+        /// </summary>
+        public const string FormBuilderKeyPrefix = "";
+        #endregion
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查看主题设置。</zh-CN>
