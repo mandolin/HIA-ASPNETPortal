@@ -115,8 +115,9 @@ entry.
  operational audit**, the permission model beyond `ContentRawHtmlEdit`, and the evidence boundary of **no edit page /
  0 instances / source-level description only**.
 - `code-documentation.md`: the **code documentation system** — API-level documentation generated from source comments by
- HIA-Documentation-Sys (the JSDoc half is published as bilingual pages; the DotNetDoc half is intermediate output), plus
- refresh procedure and dependency-installation notes. dependencies.
+ HIA-Documentation-Sys; **both halves are published** (`/api/jsdoc/` bilingual pages and `/api/dotnetdoc/` bilingual
+ multi-page HTML site), plus the snapshot refresh procedure and dependency-installation notes. Source fingerprints and
+ public-surface shape are guarded by an L0 gate.
 
 ## How to use this documentation
 
@@ -125,4 +126,4 @@ entry.
  changes. The former Develop section has been merged into Reference; see the
  [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).
 
-<!-- build-stamp: BA94E6296B6D -->
+<!-- build-stamp: C712A3586C08 -->

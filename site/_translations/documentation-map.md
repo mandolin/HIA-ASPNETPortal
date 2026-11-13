@@ -90,10 +90,10 @@ Not in `docs/`; lives in source node/flow comments.
  - **Evidence boundary (registered honestly)**: the `Signin` module has **0 instances** in the development database, so
  it is documented at source level only and **has no runtime evidence**; re-entry condition: mount the module instance
  in the target environment and collect runtime evidence.
- - **Code documentation **: the JSDoc half is published (`/api/jsdoc/`, bilingual, explainer
- page `code-documentation.md`, source fingerprint guarded by an L0 gate); the DotNetDoc half is still **intermediate
- JSON and not published** — re-entry condition: add it through the same snapshot-manifest mechanism once a
- rendering/publishing component exists.
+ - **Code documentation**: **both halves are published** — JSDoc (`/api/jsdoc/`, bilingual pages) and DotNetDoc
+ (`/api/dotnetdoc/`, bilingual multi-page HTML site). The explainer page is `code-documentation.md`; source fingerprints
+ and public-surface shape are guarded by an L0 gate, and page figures follow the snapshot manifest's `counts` after each
+ refresh.
 
 - `theme-module-contract.md` — module appearance contract (layer division of labour, appearance class families, fallback
  meaning and differences)

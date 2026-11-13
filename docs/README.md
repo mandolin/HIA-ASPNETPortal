@@ -61,7 +61,7 @@
 - `modules/leave-request.md`：**请假申请模块**详细使用说明——假别 / 起止日期 / 天数 / 事由与可选证明、落表 `PortalBiz_LeaveRequests` 并写入「我的待办」、日期区间与天数在标记层无校验器（提交后才拒）。
 - `modules/module-probe.md`：**模块探针模块**详细使用说明——**只读验证样例、不是业务办理入口**：呈现模块 / 包 / 位置 / 渲染时刻 / 主题作用域五项只读事实，**不写入任何数据、不写审计、无输入控件与提交动作**。
 - `modules/my-work-items.md`：**我的待办模块**详细使用说明——待办聚合入口（本人或本人持有角色键所指派的未完成项）、**不提供就地办理**属既定设计、查看动作写 `WorkItemsViewed` 审计、无输入控件。
-- `code-documentation.md`：**代码文档体系**——由 HIA-Documentation-Sys 从源码注释生成的 API 级文档（JSDoc 半边已发布中英双语页面，DotNetDoc 半边为中间产物）、刷新方式与依赖安装注意事项。
+- `code-documentation.md`：**代码文档体系**——由 HIA-Documentation-Sys 从源码注释生成的 API 级文档；JSDoc 与 DotNetDoc 两个半边**均已发布**（`/api/jsdoc/` 中英双语页面、`/api/dotnetdoc/` 中英多页 HTML 站点），另含快照刷新方式与依赖安装注意事项；源指纹与公开面形状由 L0 门禁看守。
 
 ## 使用说明
 
