@@ -185,8 +185,11 @@ The sections above cover the manifest, the code skeleton, enabling and the gates
 walkthrough you can follow to completion. This section takes a read-only notice module, `HIA.SampleNotice`, through the
 four-step outline in
 [module-mechanics-and-extension.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-mechanics-and-extension.md).
-Each step has a checkable result and every command points at a script that actually exists in the repository. This example
-is **display-only**: no permission changes, DLLs, scripts or external resources.
+Each step has a checkable result and every command points at a script that actually exists in the repository. The **module
+itself** is display-only (no permission changes, DLLs, scripts or external resources), but the **walkthrough is not a
+read-only operation**: it creates files, edits `Portal.csproj`, runs builds and gates, and registers a module definition
+in the back office, writing to `PortalCfg_*` tables. Run it in a throwaway clone or an isolated branch and database, never
+against a production database.
 
 **Step 1 — write the module**: under `src/Portal/DesktopModules/SampleNotice/` create four files:
 `SampleNotice.ascx`, `SampleNotice.ascx.cs`, `SampleNotice.ascx.designer.cs` and `module.json`. Use the fully qualified

@@ -3,9 +3,10 @@
 //   参数化、可复跑的机器证据。由 `work-zone/dev/evidence/p265/first-use-walkthrough.mjs` 的独立视角原型正式化而来。
 //
 //   断言分两组：
-//     D1–D3、D9（静态，无需站点）四段学习文档链路齐备且中英同构、公开教学配图清单（Q5）逐条核对
+//     D1–D3、D9、D10（静态，无需站点）四段学习文档链路齐备且中英同构、公开教学配图清单（Q5）逐条核对
 //        文件存在 / 字节数 / sha256 / 中英成对且哈希不同 / 两侧文档引用、脚本与 SQL 示例路径真实存在、
-//        README 快速上手七步结构与仓库内路径引用可核对（不执行任何命令）；
+//        README 快速上手七步结构与仓库内路径引用可核对、首次部署到 IIS 十步与从零加模块四步的
+//        结构与引用路径可核对（D9/D10 不执行任何命令）；
 //     D4–D8（运行期）匿名首页页签与文档一致、无注册链接、错误口令不区分账号/口令、
 //        正确登录后欢迎语与页签集合与文档一致、我的待办可达。
 //   期望值**从文档正文解析**（匿名两个页签、登录后六项列表），不在脚本里硬编码数据行；
@@ -30,8 +31,10 @@
 //   （它们只做静态链路与路径存在性核对，实际执行须按各自文档的走查清单另行留证）、
 //   **不证明教学配图内容与页面语义相符、不证明图上语言与页面语言一致、不证明配图时效性**
 //   （这三项由人工核对承载，清单的 `captureMetadata: not-recorded` 明示采集参数未登记）、
-//   D9 只核对文档结构与被引用文件存在，**不执行任何命令**，故不证明「下载安装」七步在干净机器上真能跑通
-//   （该段实做由一次性浅克隆留证承载，见 W-anp-P320 工作包文档）；
+//   D9/D10 只核对文档结构与被引用文件存在，**不执行任何命令**，故不证明「下载安装」七步、
+//   「首次部署到 IIS」十步与「从零加模块」四步在干净机器上真能跑通
+//   （下载安装段由 W-anp-P320 一次性浅克隆留证承载；另两段受现有 Portal 库护栏、独立站点未接回、
+//   以及任何 Debug 构建都会改写 DotNetDoc 指纹输入这三重限制，见 W-anp-P321 工作包文档与证据）；
 //   不证明可选模块增量页签已被文档覆盖（如实登记为欠账）、不证明跨机器像素一致、
 //   不证明读屏器语义（a11y-runtime 未覆盖面）、不证明英文页面叙述一致
 //   （本脚本只走中文页面，英文叙述一致性属 W-anp-P320 分语言证据范围）。
@@ -63,10 +66,11 @@
 //   manual walkthrough into parameterised, repeatable machine evidence. Formalised from the independent-perspective
 //   prototype at `work-zone/dev/evidence/p265/first-use-walkthrough.mjs`.
 //
-//   Two assertion groups: D1-D3 and D9 (static, no site needed) check that the four-stage learning chain is complete
-//   and bilingual, that the public teaching image manifest (Q5) matches every file's bytes/sha256 and keeps zh/en pairs
-//   distinct with both guides referencing their own images, that script/SQL examples resolve to real paths, and that the
-//   README quick-start seven-step structure and in-repo references are checkable (no command is executed by D9);
+//   Two assertion groups: D1-D3, D9 and D10 (static, no site needed) check that the four-stage learning chain is
+//   complete and bilingual, that the public teaching image manifest (Q5) matches every file's bytes/sha256 and keeps
+//   zh/en pairs distinct with both guides referencing their own images, that script/SQL examples resolve to real paths,
+//   and that the README seven-step quick start, the ten-step first-time IIS deployment and the four-step from-scratch
+//   module example have checkable structure and in-repo references (D9/D10 execute no command);
 //   D4-D8 (runtime) check anonymous tabs against the document, absence of a registration link, a wrong-password
 //   response that does not disclose whether the account exists, a signed-in welcome message and tab set that match the
 //   document, and reachability of "My Work Items". Expectations are **parsed from the document body** rather than
@@ -92,8 +96,10 @@
 //   narrative matches a real Chinese render. It does **not** prove that a teaching image's content matches the page
 //   semantics, that the on-screen language matches the image, or that the illustration is current — those are human
 //   review items, and the manifest's `captureMetadata: not-recorded` states that capture parameters were not recorded.
-//   D9 checks document structure and referenced file existence only and **executes no command**, so it does not prove
-//   the seven quick-start steps run on a clean machine (that stage is evidenced separately by a one-off shallow clone).
+//   D9/D10 check document structure and referenced file existence only and **execute no command**, so they do not prove
+//   the quick-start, IIS-deployment or from-scratch-module stages run on a clean machine (the quick-start stage has a
+//   separate one-off shallow-clone evidence; the other two are constrained by the existing Portal database guard, the
+//   disconnected isolated site, and the fact that any Debug build rewrites the DotNetDoc fingerprint inputs).
 //   It does not prove the IIS deployment or from-scratch module walkthroughs were executed end to end, nor
 //   cross-machine pixel equality, screen-reader semantics (`a11y-runtime`), or parity of the English narrative.
 //
@@ -284,6 +290,45 @@ function checkQuickStartSteps() {
       note: 'Structure and referenced files only; no command was executed by this assertion.' });
 }
 
+// <lang><zh-CN>D10：另外两段（首次部署到 IIS / 从零加模块）的文档结构与引用路径可核对（W-anp-P321）。
+// 承接备忘 P319-③。与 D9 同口径：只断言文档小节存在与被引用的仓库内文件存在，**不执行任何命令**，
+// 不证明这两段已在干净机器上端到端跑通（本机存在现有 Portal 库护栏、独立站点未接回、且任何 Debug 构建
+// 都会改写 DotNetDoc 指纹输入这三重限制，见 W-anp-P321 工作包文档与证据）。</zh-CN>
+// <en>D10: the other two stages (first-time IIS deployment / adding a module from scratch) have checkable document
+// structure and in-repo references (W-anp-P321), taking over memo P319-3. Same rule as D9: assert section presence and
+// referenced file existence only, **execute no command**, and do not claim these stages ran end to end on a clean
+// machine (the local Portal database guard, the disconnected isolated site, and the fact that any Debug build rewrites
+// the DotNetDoc fingerprint inputs are recorded in the W-anp-P321 work item and evidence).</en></lang>
+function checkDeploymentAndModuleStages() {
+  const runbook = readText('docs/operations-runbook.md') || '';
+  const runbookEn = readText('site/_translations/operations-runbook.md') || '';
+  const moduleGuide = readText('docs/module-development-guide.md') || '';
+  const moduleGuideEn = readText('site/_translations/module-development-guide.md') || '';
+  const deploySection = runbook.split('## 首次部署到 IIS')[1];
+  const deployBody = deploySection ? deploySection.split(/\n## /)[0] : '';
+  const moduleSection = moduleGuide.split('## 端到端示例')[1];
+  const moduleBody = moduleSection ? moduleGuide.split('## 端到端示例')[1].split(/\n## /)[0] : '';
+  const deploySteps = [...deployBody.matchAll(/^\d+\.\s+\*\*/gm)].length;
+  const moduleSteps = [...moduleBody.matchAll(/^\*\*第\s*\d+\s*步/gm)].length;
+  const enDeployOk = /## First-time deployment to IIS/.test(runbookEn);
+  const enModuleOk = /## End-to-end example/.test(moduleGuideEn);
+  const refs = new Set();
+  for (const text of [deployBody, moduleBody]) {
+    for (const m of text.matchAll(/(?:dev[\\/]scripts[\\/][A-Za-z0-9._-]+\.ps1|src[\\/]Setup[\\/][A-Za-z0-9._-]+\.sql|src[\\/]Portal[\\/]Config[\\/]Templates[\\/][A-Za-z0-9._-]+\.config|src[\\/]master\.sln)/g)) {
+      refs.add(m[0].replace(/\\/g, '/'));
+    }
+  }
+  const isPlaceholder = (r) => /Your[A-Za-z]/.test(r) || /[<>{}]/.test(r);
+  const checked = [...refs].filter((r) => !isPlaceholder(r)).sort()
+    .map((r) => ({ ref: r, exists: fs.existsSync(path.join(repoRoot, r)) }));
+  const missing = checked.filter((r) => !r.exists).map((r) => r.ref);
+  record('D10', 'IIS deployment and from-scratch module stages: structure and references',
+    deploySteps >= 10 && moduleSteps >= 4 && enDeployOk && enModuleOk && missing.length === 0,
+    { deployStepCount: deploySteps, moduleStepCount: moduleSteps, enDeployOk, enModuleOk,
+      checked, missing,
+      note: 'Structure and referenced files only; no command executed. End-to-end execution remains a deferred item.' });
+}
+
 // <lang><zh-CN>从 first-use-portal.md 解析期望值，避免硬编码数据行。</zh-CN>
 // <en>Parses expectations from first-use-portal.md instead of hard-coding data rows.</en></lang>
 function parseDocumentExpectations() {
@@ -443,6 +488,7 @@ async function main() {
   checkImages();
   checkExamplePaths();
   checkQuickStartSteps();
+  checkDeploymentAndModuleStages();
 
   if (staticOnly) {
     summary.status = summary.checks.every((c) => c.status === 'Pass') ? 'Pass' : 'Fail';

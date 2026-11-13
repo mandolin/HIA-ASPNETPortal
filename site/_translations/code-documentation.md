@@ -16,7 +16,7 @@ This page explains the project's **code documentation system** — API-level doc
 | Half | Inputs | Artifact form | Current status |
 | --- | --- | --- | --- |
 | **JSDoc (JavaScript)** | `src/Portal/gulpfile.js`, `src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js` | **Bilingual HTML pages** + theme assets | ✅ **Published** — see "Published code documentation" below |
-| **DotNetDoc (C# XML documentation)** | 4 XML documentation outputs such as `src/Portal/bin/Portal.xml`, plus `src/master.sln` | **Intermediate JSON** (14 artifacts / 60.8 MB, no rendering surface yet; that figure is one measurement taken when the generation pipeline was first proven and may differ on a re-run) | ⏸ **Not published** — will be added through the same manifest mechanism once a rendering/publishing component exists |
+| **DotNetDoc (C# XML documentation)** | 4 XML documentation outputs, `src/master.sln`, plus markup / surface / project-discovery inputs declared in `dotnetdoc.config.json` | **Multi-page HTML site (split-site)**: an entry page with a type tree and search, one page per type/member; Chinese and English | ✅ **Published** — see "Published code documentation (DotNetDoc)" below |
 
 The two entry scripts (under `dev/scripts/`) stay isolated from each other and from the portal runtime, front-end
 packages and existing Task Runner bindings:
@@ -40,7 +40,7 @@ paths.
 - Coverage: **four API projects** (`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`) and the **markup comments**; the source comments follow the bilingual `<lang><zh-CN>…<en>…</lang>` convention.
 - **[Measured coverage, reviewed 2026-10-22] this is *partially* bilingual, not fully bilingual**: about **62% of the text spans on the Chinese pages actually contain Chinese**; for the remaining ~38% of members only an English comment exists, and **the Chinese page shows the English text verbatim**. Per half: `markup` 51.2%, `api/Portal` 61.0%, `api/Portal.Components` 62.7%, `api/Portal.Components.Data` 66.7%, `api/Portal.Components.Data1` 67.9%. **This is the honestly recorded state rather than a defect** — adding Chinese comments is a separate piece of work (it changes C# source comments, out of scope for this cycle).
 - **The surface and project-discovery halves are English-only**: they are structural descriptions (route inventory, solution composition), not human-written comments, so there is no Chinese content. **Published as English honestly, rather than fabricating Chinese directories to look bilingual.**
-- Size: about 91 MB of rendered artifacts (11475 files / 5366 entry pages). The single-page era was about 16.8 MB (15 huge pages, 4.58 MB for the Chinese Portal page alone): **total bytes grew 5x, but per-load cost dropped from MB to KB** — the latter is what readers actually feel.
+- Size (**from the `counts` field of `site/api/dotnetdoc/code-docs-manifest.json`, measured after the 2026-11-13 refresh**): about **182.92 MB** of rendered artifacts (**23025 files / 5784 entry pages**). The single-page era was about 16.8 MB (15 huge pages, 4.58 MB for the Chinese Portal page alone): **total bytes grew, but per-load cost dropped from MB to KB** — the latter is what readers actually feel. Size changes with source comments and toolchain versions; after a refresh, treat the manifest's new values as authoritative rather than reading this line as a fixed contract.
 - Refresh: `dev/scripts/Publish-PortalDotNetDoc.ps1` (first run `Build-PortalDotNetDocPilot.ps1` to produce the HIA artifacts; this script then renders **once via `--project-manifest` into a multi-page site** under `site/api/dotnetdoc/`).
 
 ## Refresh procedure (snapshot mechanism)
@@ -53,8 +53,17 @@ generation. To refresh:
  in the same folder;
 3. Commit and push.
 
-The L0 gate `Test-PortalCodeDocs.ps1` checks the **source fingerprint** (SHA-256 over the two JSDoc input files) and the
-artifact shape: if the sources changed but the snapshot was not refreshed, the gate fails.
+The L0 gate `Test-PortalCodeDocs.ps1` checks **source fingerprints** and artifact shape in two groups: the JSDoc half
+(A2) hashes its 2 input files; the DotNetDoc half (B2) computes a combined fingerprint with the same algorithm over
+`dotnetdoc.config.json` and all 62 inputs it declares (4 XML documents, markup files, surface files, `src/master.sln`,
+and so on). If sources changed but the snapshot was not refreshed, the gate fails; a missing input is recorded as
+`<missing>` and fails rather than being silently skipped.
+
+> **Fingerprints include build outputs**: the 4 XML documents are produced by a Debug build and are git-ignored. Any
+> Debug build can therefore change the B2 fingerprint; when that happens, re-run
+> `dev/scripts/Publish-PortalDotNetDoc.ps1`, refresh the snapshot and commit it. Do not hand-edit the fingerprint in the
+> manifest, and do not delete the XML files to get around it (missing inputs fail the gate). This is a known constraint of
+> the current mechanism, not a hidden defect.
 
 ## Dependency installation note (environment-specific)
 

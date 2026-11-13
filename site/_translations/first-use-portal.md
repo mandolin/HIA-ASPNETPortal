@@ -49,6 +49,8 @@ In order:
 
 Administrators get two more: platform administration (site settings, tabs, modules, roles, users) and the enterprise workbench (submitting, resubmitting and commenting on collaboration items).
 
+> **This list is the baseline, not the grouped order you see on screen**: the six items above follow their registration order in the navigation seed so they can be checked one by one. The actual interface groups them under "Work & Approvals / Business / Portal & Help / System Administration", so the visual sequence differs from this list by design. Installing optional modules may also add extra tabs (for example an entry brought in by an independent module); those are **deployment-time increments**, not part of this baseline, and they do not remove any of the six items above. For the developer view of grouping and increments, see the "Developer path map" in [module mechanics and secondary development]({{ site.baseurl }}/en/module-mechanics-and-extension/).
+
 ## View your to-do items
 
 Click "My to-do items" and the page lists, as it loads, the unfinished items assigned to you. You do not have to press anything.

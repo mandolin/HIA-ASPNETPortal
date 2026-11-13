@@ -52,6 +52,7 @@
 
 
 ### 4. 开发者与贡献者
+- `module-mechanics-and-extension.md` — 参考轨总纲兼**开发者路径地图**（代码结构 / 请求链路 / 流程逻辑 / 二次开发路径串成一张导航图；不重复各专页内容）
 - `dev-guide.md` — 开发总指南
 - `module-development-guide.md` — 模块开发指南
 - `frontend-asset-guide.md` — 前端资源指南

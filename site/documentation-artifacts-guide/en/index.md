@@ -143,6 +143,13 @@ spec); teaching images are public documentation content (committed with the site
 facts).** The "screenshots do not enter public documentation" rule above therefore does not apply to teaching images;
 conversely, runtime screenshots do not gain a place in the site asset directory because this manifest exists.
 
+> **Known boundary (verified by human review on 2026-11-13)**: `home-anonymous.en.png` has English form labels and
+> navigation, but the announcement and help content areas are still Chinese, because **seeded content is not switched
+> with the UI language**. This is not a shared image (the zh/en hashes do differ), nor something a manifest of file facts
+> can certify. The image is deliberately retained rather than silently replaced; re-capture requires both localised seed
+> content and a per-locale capture script, neither of which exists today, so this is recorded as a deferred item rather
+> than claimed as resolved. Human-review results are recorded in the internal memo.
+
 ## Local verification order
 
 1. Run `portal: verify public documentation` to check public entry points, relative links, privacy and generated-directory
@@ -164,4 +171,4 @@ generated output, does not read sensitive configuration, and does not connect to
 These verifications are all local / VSCode gates. CI, online link monitoring, a documentation site, search and versioned
 releases will be designed separately once requirements, secrets, caching, branching and release policy are settled.
 
-<!-- build-stamp: 688C31DC1A33 -->
+<!-- build-stamp: 3AF80BE69614 -->

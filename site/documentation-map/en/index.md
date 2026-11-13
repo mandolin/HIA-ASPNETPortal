@@ -102,6 +102,7 @@ Not in `docs/`; lives in source node/flow comments.
 
 ### 4. Developers and contributors
 
+- `module-mechanics-and-extension.md` — reference-track overview and **developer path map** (code structure / request chain / process logic / secondary-development routes in one navigation map; does not repeat the specialist pages)
 - `dev-guide.md` — general development guide
 - `module-development-guide.md` — module development guide
 - `frontend-asset-guide.md` — front-end asset guide
@@ -140,4 +141,4 @@ Not in `docs/`; lives in source node/flow comments.
  correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
 
-<!-- build-stamp: C7E76E8CFF2B -->
+<!-- build-stamp: 00FA0334DD4B -->

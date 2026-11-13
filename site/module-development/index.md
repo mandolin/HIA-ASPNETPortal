@@ -134,7 +134,7 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 
 ## 端到端示例：从零加一个模块
 
-上面各节分别讲了清单、骨架、启用与门禁，但没有把它们串成一次可以照着做完的走查。本节以只读公告模块 `HIA.SampleNotice` 为例，按 [module-mechanics-and-extension.md]({{ site.baseurl }}/module-mechanics-and-extension/) 的四步纲要走一遍；每步给出可核对的结果，命令都指向仓库中真实存在的脚本。这里**只做只读展示**，不引入权限变更、DLL、脚本或外部资源。
+上面各节分别讲了清单、骨架、启用与门禁，但没有把它们串成一次可以照着做完的走查。本节以只读公告模块 `HIA.SampleNotice` 为例，按 [module-mechanics-and-extension.md]({{ site.baseurl }}/module-mechanics-and-extension/) 的四步纲要走一遍；每步给出可核对的结果，命令都指向仓库中真实存在的脚本。**模块本身只做展示**（不引入权限变更、DLL、脚本或外部资源），但**这条走查不是只读操作**：它会新建文件、修改 `Portal.csproj`、执行构建与门禁，并在后台登记模块定义、写 `PortalCfg_*` 表。请在一次性克隆或隔离分支 + 隔离数据库中执行，不要对着生产库照做。
 
 **第 1 步 · 写模块**：在 `src/Portal/DesktopModules/SampleNotice/` 下建四个文件 —— `SampleNotice.ascx`、`SampleNotice.ascx.cs`、`SampleNotice.ascx.designer.cs`、`module.json`。标记层 `Inherits` 写全限定类名（见「代码骨架」），标记与代码后置的注释用 `<lang>` 双语块。`module.json` 用只读参考包形态：
 
@@ -321,4 +321,4 @@ pwsh -NoProfile -File dev/scripts/Test-PortalBusinessModuleSmoke.ps1 -ModuleName
 - [ ] 新增接入编排：把该模块的冒烟检查与就绪检查加入 `dev/scripts/Invoke-PortalGateSuite.ps1`（L1 冒烟 / L0 就绪）
 - [ ] 门禁套件全绿：`Invoke-PortalGateSuite.ps1`
 
-<!-- build-stamp: 87183AC3D15F -->
+<!-- build-stamp: 8EF6C6646DA4 -->

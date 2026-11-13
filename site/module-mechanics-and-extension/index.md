@@ -86,6 +86,25 @@ title: 模块运作与二次开发：模块是怎么装上门户的
 
 两者都是站点的静态产物，由发布脚本重新生成并提交快照；改了源码注释却没刷新快照，代码文档门禁会判"源指纹不一致"。
 
+## 开发者路径地图
+
+前面几节回答「模块怎么装上门户」，但参考轨还有三件事散落在别的页：代码在哪、一次请求怎么走、要改系统该按什么顺序读。这一节把它们串成一张地图，**只做导航，不复述各专页的内容**。
+
+**职责分界（两轨互不复述）**：学习轨回答「怎么用、我要办一件事该怎么走」；参考轨回答「为什么这样跑、我要改它或加它该动哪里」。本页及以下链接都属后者，不要在这里写操作步骤或界面截图说明。
+
+| 你想弄清什么 | 先读 | 再读 | 事实源 |
+| --- | --- | --- | --- |
+| 代码结构 / 解决方案怎么划分 | [架构概览]({{ site.baseurl }}/architecture/) 的「解决方案结构」「Web 项目结构」 | [开发指南]({{ site.baseurl }}/dev-guide/) 的环境、构建与调试章节 | `src/master.sln`、`src/Portal/Portal.csproj` |
+| 一次请求怎么跑到模块渲染 | 本页「五个层次」+「档位」 | [开发指南]({{ site.baseurl }}/dev-guide/) 的「主导航两级分组」与「独立模块」 | `Global.asax.cs`（每请求语言与档位判定）、`DesktopPortalBanner.ascx`（分组渲染）、`PortalCfg_*` 表 |
+| 流程逻辑 / 状态怎么流转 | [业务申请状态机]({{ site.baseurl }}/business-application-state-machine/) 与 [协同事项状态机]({{ site.baseurl }}/collaboration-item-state-machine/) | [样板业务路径]({{ site.baseurl }}/p12-sample-business-flow/) | `src/Setup/PortalBiz_*.sql` 与迁移表 |
+| 从零加一个模块 | 本页「加一个自己的模块」四步 | [模块开发指南]({{ site.baseurl }}/module-development/) 的「端到端示例」 | `module.json`、`Portal.csproj`、两条冒烟门禁 |
+| 契约与配置边界 | [契约总览]({{ site.baseurl }}/contracts-readme/)、[清单契约]({{ site.baseurl }}/contracts-module-manifest/)、[系统设置契约]({{ site.baseurl }}/contracts-app-settings/) | [主题包指南]({{ site.baseurl }}/theme-package-guide/) 与 [前端资产指南]({{ site.baseurl }}/frontend-asset-guide/) | `src/Portal/Config/appSettings*.json` |
+| 代码文档与快照 | [代码文档说明页]({{ site.baseurl }}/code-documentation/) | 本页「API 文档在哪」 | `/api/jsdoc/`、`/api/dotnetdoc/` |
+
+**改完系统后的验证顺序**（与 [测试清单]({{ site.baseurl }}/testing-checklist/) 一致，不另起一套）：先跑 L0 静态门禁（契约、资源、导航形态、代码文档源指纹），再 L1 构建与单测，最后 L2 运行期证据。**只跑构建与单测、不看运行页面，可能交付一个「编译通过但页面空白」的模块** —— 这是本项目反复出现的教训。
+
+**导航基线与可选模块增量（据实口径）**：站点文档里的页签清单描述的是 `src/Setup/Portal_NavigationSeed.sql` 的**基线形态**，由 `Test-PortalNavigationShape.ps1` 与基线文档逐项对账，**不得**把可选模块带来的增量页签写进那份基线叙述（否则门禁判红）。例如执行 `src/Setup/PortalCfg_FormBuilder_Provision.sql` 安装独立模块后，导航会多出 `Form Builder` 页签；这是**部署态增量**，不是基线定义，读者应在模块提供脚本与本页「五个层次」里理解它。同理，登录后的显示顺序按分组渲染的词表 `SortOrder`（见开发指南「主导航两级分组」）排布，与种子里的扁平 `TabOrder` 不是一回事，两处数字不要互相当作对方的定义。
+
 ## 这页没讲的事
 
 - 模块包契约的完整判据 → [模块清单契约]({{ site.baseurl }}/contracts-module-manifest/)
@@ -93,4 +112,4 @@ title: 模块运作与二次开发：模块是怎么装上门户的
 - 主题包的写法与外观族 → [主题包指南]({{ site.baseurl }}/theme-package-guide/) 与 [主题模块契约]({{ site.baseurl }}/theme-module-contract/)
 - 页签可见性怎么配 → [系统设置契约]({{ site.baseurl }}/contracts-app-settings/)
 
-<!-- build-stamp: 24C0CBEA7B81 -->
+<!-- build-stamp: B707653BB2AA -->

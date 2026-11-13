@@ -60,6 +60,7 @@ title: 文档地图 / 导航索引（HIA-ASPNETPortal）
 
 
 ### 4. 开发者与贡献者
+- `module-mechanics-and-extension.md` — 参考轨总纲兼**开发者路径地图**（代码结构 / 请求链路 / 流程逻辑 / 二次开发路径串成一张导航图；不重复各专页内容）
 - `dev-guide.md` — 开发总指南
 - `module-development-guide.md` — 模块开发指南
 - `frontend-asset-guide.md` — 前端资源指南
@@ -93,4 +94,4 @@ title: 文档地图 / 导航索引（HIA-ASPNETPortal）
 - `site-visual-baseline.md` — **官网视觉基线**（配色 / 字体 / 排版层级 / 代码块与表格取色 / 导航骨架）
 - `README.md` — 仓库入口（含文档分区导航指向本图）
 
-<!-- build-stamp: F94B248A4E19 -->
+<!-- build-stamp: 18D0C33E943A -->

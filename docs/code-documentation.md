@@ -7,7 +7,7 @@
 | 半边 | 输入 | 产物形态 | 当前状态 |
 | --- | --- | --- | --- |
 | **JSDoc（JavaScript）** | `src/Portal/gulpfile.js`、`src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js` | **双语 HTML 页面** + 主题资源 | ✅ **已发布**：见下方「已发布的代码文档」 |
-| **DotNetDoc（C# XML 文档）** | `src/Portal/bin/Portal.xml` 等 4 个 XML 文档产物 + `src/master.sln` | 生成**中间 JSON**（14 个产物 / 60.8 MB，暂无渲染面；该数字为打通生成链路时的一次实测，重跑后可能不同） | ⏸ **未上架**：待渲染/发布组件就位后按同一清单机制补入 |
+| **DotNetDoc（C# XML 文档）** | 4 个 XML 文档产物 + `src/master.sln` + 标记层 / 页面表层 / 工程发现输入（由 `dotnetdoc.config.json` 声明） | **多页 HTML 站点（split-site）**：入口页含类型树与搜索，每个类型/成员单独一页；中英两种语言 | ✅ **已发布**：见下方「已发布的代码文档（DotNetDoc）」 |
 
 两侧的入口脚本（`dev/scripts/` 下）与门禁彼此隔离，不改变门户运行时、前端包或既有 Task Runner 绑定：
 
@@ -28,7 +28,7 @@
 - 覆盖：**4 个 API 工程**（`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`）与**标记层注释**；源注释按 `<lang><zh-CN>…<en>…</lang>` 双语惯例书写。
 - **【实测覆盖率，2026-10-22 审校】是"部分双语"，不是"全双语"**：中文页里**实际含中文的文本段约占 62%**，其余约 38% 的成员只有英文注释，**中文页直接显示英文原文**。逐半边覆盖率：`markup` 51.2%、`api/Portal` 61.0%、`api/Portal.Components` 62.7%、`api/Portal.Components.Data` 66.7%、`api/Portal.Components.Data1` 67.9%。**这不是缺陷而是现状如实登记**——补中文注释属另一件事（改的是 C# 源码注释内容，不在本周期范围）。
 - **页面表层与工程发现两个半边只有英文**：它们是结构描述（路由清单、解决方案构成），不是人工撰写的注释，因此没有中文内容。**如实按英文发布，不为凑双语而伪造中文目录。**
-- 体积：约 91 MB 渲染产物（11475 文件 / 5366 条目页）。单页时代约 16.8 MB（15 个巨页，Portal 中文版单页 4.58 MB）：**总字节变大 5 倍，但单次载入从 MB 级降到 KB 级**——后者才是读者实际体验的分水岭。
+- 体积（**以 `site/api/dotnetdoc/code-docs-manifest.json` 的 `counts` 为准，2026-11-13 刷新后实测**）：约 **182.92 MB** 渲染产物（**23025 文件 / 5784 条目页**）。单页时代约 16.8 MB（15 个巨页，Portal 中文版单页 4.58 MB）：**总字节变大，但单次载入从 MB 级降到 KB 级**——后者才是读者实际体验的分水岭。体积会随源码注释与工具链变化，重跑刷新后请以清单里的新值为准，不要把本行数字当成固定契约。
 - 刷新：脚本 `dev/scripts/Publish-PortalDotNetDoc.ps1`（先跑 `Build-PortalDotNetDocPilot.ps1` 生成 HIA 工件，再由本脚本用 `--project-manifest` **一次渲染成多页站点**并落到 `site/api/dotnetdoc/`）。
 
 ## 刷新方式（快照机制）
@@ -39,7 +39,9 @@
 2. 将产物拷贝到 `site/api/jsdoc/`，并更新同目录 `code-docs-manifest.json` 的 `generatedUtc` 与 `sourceFingerprint`；
 3. 提交并推送。
 
-L0 门禁 `Test-PortalCodeDocs.ps1` 会核对**源指纹**（对 JSDoc 的 2 个输入文件计算 SHA256）与产物形状：源码已变而快照未刷新 → 门禁失败。
+L0 门禁 `Test-PortalCodeDocs.ps1` 分两组核对**源指纹**与产物形状：JSDoc 半边（A2）对 2 个输入文件计算 SHA256；DotNetDoc 半边（B2）对 `dotnetdoc.config.json` 及其声明的全部输入（4 个 XML 文档、标记层文件、页面表层文件、`src/master.sln` 等 62 项）按同样算法计算组合指纹。源码已变而快照未刷新 → 门禁失败，且输入缺失会记 `<missing>` 并判红、不静默跳过。
+
+> **指纹含构建产物的注意**：4 个 XML 文档由 Debug 构建产出且不入库（gitignored）。因此**任何一次 Debug 构建都可能改变 B2 指纹**，此时应重跑 `dev/scripts/Publish-PortalDotNetDoc.ps1` 刷新快照并提交；不要手改清单里的指纹，也不要靠删除 XML 绕过（缺输入会直接判红）。这是当前机制的已知约束，不是缺陷掩盖。
 
 ## 依赖安装注意事项（环境相关）
 

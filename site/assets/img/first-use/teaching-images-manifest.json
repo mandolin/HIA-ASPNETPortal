@@ -55,7 +55,7 @@
   ],
   "boundaries": [
     "This manifest proves only that the committed teaching images exist, have the recorded byte counts and hashes, and are distinct per language.",
-    "It does not prove that an image's content matches the page semantics, that the on-screen language matches the image, or that the illustration is current; those remain human review items.",
+    "It does not prove that an image's content matches the page semantics, that the on-screen language matches the image, or that the illustration is current; those remain human review items. Known gap recorded on 2026-11-13: home-anonymous.en.png has English form labels and navigation but Chinese announcement / help content, because seeded content is not localised with the UI language. The image is retained (not silently replaced); re-capture requires localised seed content plus a per-locale capture script and is tracked in the deferred-verification memo.",
     "It does not assert any viewport, target URL, capture time or capture tool, because those facts were not recorded.",
     "The L0 runtime screenshot baseline gate and its own manifest are unaffected by this file."
   ]

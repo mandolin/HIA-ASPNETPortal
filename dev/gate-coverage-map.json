@@ -29,7 +29,7 @@
       "name": "按文档逐步执行能走通（运行期）",
       "layer": "L2",
       "coverage": "partial",
-      "boundary": "只证明采集时刻、指定 baseUrl、中文 UI 下四段学习文档链路齐备、公开教学配图清单（teaching-images-manifest.json）与磁盘文件的字节数/sha256/中英哈希不同/两侧文档引用一致、README 快速上手七步结构与仓库内路径引用可核对（D9 不执行任何命令），且 first-use-portal.md 的匿名/登录后核心页签叙述与真实浏览器渲染一致；不证明「首次部署到 IIS」与「从零加模块」两段已人工端到端执行（仅静态链路与路径存在性核对）、不证明教学配图内容与页面语义相符/图上语言与页面语言一致/配图时效性（人工复核承载，清单 captureMetadata=not-recorded）、不证明七步在干净机器上真能跑通（由一次性浅克隆留证承载）、不证明可选模块增量页签已被文档覆盖（如实登记为欠账，如本机 40001 的 Form Builder）、不证明分组渲染顺序与文档一致、不证明跨机器像素一致、不证明读屏器语义（a11y-runtime 未覆盖面）、不证明英文页面叙述一致（由 W-anp-P320 分语言证据承载）。前置缺失显式 exit 2 由编排记为 Skip，不作通过。",
+      "boundary": "只证明采集时刻、指定 baseUrl、中文 UI 下四段学习文档链路齐备、公开教学配图清单（teaching-images-manifest.json）与磁盘文件的字节数/sha256/中英哈希不同/两侧文档引用一致、README 快速上手七步（D9）与首次部署到 IIS 十步 / 从零加模块四步（D10）的文档结构及仓库内路径引用可核对（D9/D10 不执行任何命令），且 first-use-portal.md 的匿名/登录后核心页签叙述与真实浏览器渲染一致；不证明「下载安装」「首次部署到 IIS」「从零加模块」三段已在干净机器上端到端跑通（仅静态链路与路径存在性核对；下载安装段另有一次性浅克隆留证，另两段受现有 Portal 库护栏、独立站点未接回与 Debug 构建改写指纹输入三重限制，登记备忘 P319-③）、不证明教学配图内容与页面语义相符/图上语言与页面语言一致/配图时效性（人工复核承载，清单 captureMetadata=not-recorded；home-anonymous.en.png 内容区仍中文已登记备忘 P320-①）、不证明可选模块增量页签已被文档覆盖（W-anp-P321 已在两轨据实说明基线/分组/增量口径）、不证明跨机器像素一致、不证明读屏器语义（a11y-runtime 未覆盖面）、不证明英文页面叙述一致（由 W-anp-P320 分语言证据承载）。前置缺失显式 exit 2 由编排记为 Skip，不作通过。",
       "gate": "Test-PortalDocumentationWalkthrough.mjs",
       "gates": [
         "Test-PortalDocumentationWalkthrough.mjs",
