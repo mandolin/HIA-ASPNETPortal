@@ -47,7 +47,7 @@ title: 请假申请（LeaveRequest）
 | 开始日期 | `txtStartDate` | 单行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | **日期格式由代码侧判定**，填错会在提交后被拒 |
 | 结束日期 | `txtEndDate` | 单行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | 同上；且与开始日期的先后关系由代码侧判定 |
 | 天数 | `txtDays` | 单行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | **数值格式由代码侧判定** |
-| 事由 | `txtReason` | 单行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | 由代码侧判定 |
+| 事由 | `txtReason` | 多行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | 由代码侧判定 |
 | 证明材料 | `fileAttach` | 文件上传控件 | — | 可选 | 由上传路径的白名单/校验策略决定 |
 
 字段的控件 id 与类型取自 `LeaveRequest.ascx` 的标记，**不是本文档的估计**。本模块**没有独立的 `Edit*.aspx`**。
@@ -89,4 +89,4 @@ title: 请假申请（LeaveRequest）
 - 部署页签与实例数为交付时快照；**新增或迁移页签后需重新核对**本页描述。
 - 与[费用报销]({{ site.baseurl }}/modules/expense-reimbursement/)同构（各自的业务表 + 同一个待办写入机制），只是字段不同。
 
-<!-- build-stamp: F974D48E8D85 -->
+<!-- build-stamp: 84ADCB7E4340 -->

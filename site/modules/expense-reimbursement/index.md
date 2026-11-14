@@ -44,7 +44,7 @@ title: 费用报销（ExpenseReimbursement）
 | --- | --- | --- | --- | --- | --- |
 | 类别 | `ddlCategory` | 下拉选择 | — | 否（无标记层必填校验器） | 取值来自下拉项 |
 | 金额 | `txtAmount` | 单行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | **金额格式由代码侧判定**，非数字会被拒 |
-| 事由 | `txtReason` | 单行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | 由代码侧判定 |
+| 事由 | `txtReason` | 多行文本 | 源码未设 `MaxLength` | 否（无标记层必填校验器） | 由代码侧判定 |
 | 单据附件 | `fileAttach` | 文件上传控件 | — | 可选 | 由上传路径的白名单/校验策略决定 |
 
 字段的控件 id 与类型取自 `ExpenseReimbursement.ascx` 的标记，**不是本文档的估计**。本模块**没有独立的 `Edit*.aspx`**。
@@ -86,4 +86,4 @@ title: 费用报销（ExpenseReimbursement）
 - 部署页签与实例数为交付时快照；**新增或迁移页签后需重新核对**本页描述。
 - 与[请假申请]({{ site.baseurl }}/modules/leave-request/)同构（各自的业务表 + 同一个待办写入机制），只是字段不同。
 
-<!-- build-stamp: A87DC1EA2A9C -->
+<!-- build-stamp: BB3B9278FB5E -->
