@@ -312,8 +312,28 @@ $adminChecks = [ordered]@{
     'CapabilityIdContract' = $provisionerText.Contains('request.CapabilityId')
 }
 foreach ($key in $adminChecks.Keys) { Check "A1.$key" ([bool]$adminChecks[$key]) "PortalModuleProvisioner must carry the Admins-boundary assertion: $key" }
-$formBuilderPrefixOk = $registryText -match '"HIA\.FormBuilder"\s*,\s*"Business\.FormBuilder"'
-Check 'A1.CapabilityPrefixNotAdmin' $formBuilderPrefixOk 'FormBuilder capability permission-key prefix must be Business.FormBuilder (never Admins/Admin)'
+# <lang>
+#   <zh-CN>A1（续）：FormBuilder 能力前缀的硬边界是「绝不为 Admins/Admin」，而非某个固定字面量。
+#     注册表自 W-anp-P325 起引用 PortalPermissionKeys.FormBuilderKeyPrefix（单一事实源；keyless 空串是显式合法定义，
+#     与 Test-PortalGovernanceView.ps1 的解析口径一致）。旧断言硬编码 "Business.FormBuilder" 字面量，
+#     在该改造后已滞后于产品事实而恒判失败；此处改为解析常量取值，并同时校验单一事实源引用与管理级前缀拒绝，
+#     断言名与「第三方独立模块不得获 Admins」的 A 级硬边界语义不变，且比原字面量检查更强。</zh-CN>
+#   <en>A1 (cont.): the FormBuilder capability-prefix hard boundary is "never Admins/Admin", not a fixed literal.
+#     Since W-anp-P325 the registry references PortalPermissionKeys.FormBuilderKeyPrefix (single source of truth;
+#     a keyless empty string is an explicitly valid definition, matching Test-PortalGovernanceView.ps1 parsing).
+#     The old assertion hard-coded the "Business.FormBuilder" literal and went stale after that change, failing forever.
+#     It now resolves the constant value and checks both the single-source reference and admin-prefix rejection;
+#     the assertion name and the A-level hard boundary ("independent modules never obtain Admins") are unchanged,
+#     and this is strictly stronger than the literal check.</en>
+# </lang>
+$permissionKeysText = Read-Text (Join-Path $repoRoot 'src/Portal.Components/PortalPermissions.cs')
+$formBuilderPrefixMatch = [regex]::Match($permissionKeysText, 'public\s+const\s+string\s+FormBuilderKeyPrefix\s*=\s*"([^"]*)"')
+$formBuilderPrefixValue = if ($formBuilderPrefixMatch.Success) { $formBuilderPrefixMatch.Groups[1].Value } else { $null }
+$formBuilderUsesSingleSource = $registryText -match '"HIA\.FormBuilder"\s*,\s*PortalPermissionKeys\.FormBuilderKeyPrefix'
+$adminPrefixPattern = '(?i)(^|\.)Admins?(\.|$)'
+$formBuilderPrefixOk = $formBuilderPrefixMatch.Success -and $formBuilderUsesSingleSource -and
+    ($formBuilderPrefixValue -eq '' -or $formBuilderPrefixValue -notmatch $adminPrefixPattern)
+Check 'A1.CapabilityPrefixNotAdmin' ([bool]$formBuilderPrefixOk) 'FormBuilder capability must reference PortalPermissionKeys.FormBuilderKeyPrefix (single source of truth) and its value must never be an Admins/Admin prefix; keyless empty string is valid'
 
 # <lang>
 #   <zh-CN>U1：卸载脚本必须清理安装脚本写入的每一张表；逐表对称，避免「安装留下孤儿行」。</zh-CN>

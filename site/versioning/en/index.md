@@ -60,7 +60,7 @@ allowed.
 
 ## 6. Current version
 
-**`v3.1.0`** (2026-11-13, current) — production ready: the real target-environment evidence loop is closed (real IIS / TLS / ACL, cookies and machineKey, a SQL Server version matrix, an offline enterprise-scanning baseline and real IE9 retesting); `M-ANP-TRUSTED-PORTAL` / L7 achieved and L8 business sign-off issued, so the public wording can claim production-grade reliability. The previous version `v3.0.0` (2026-11-11) — platform readiness / L11 achieved. The first formal
+**`v3.2.0`** (2026-11-14, current) — enterprise capability standardization, normalization and governance gate expansion: capability permission-key prefixes converge on a single source of truth, four governance-view conventions become L0 hard assertions, dual-source entry reconciliation, and root-cause fixes for tooling and documentation gate debt. **The previous version's criteria conclusions carry over unchanged and are not relaxed by the version bump**: the real target-environment evidence loop is closed (real IIS / TLS / ACL, cookies and machineKey, a SQL Server version matrix, an offline enterprise-scanning baseline and real IE9 retesting); `M-ANP-TRUSTED-PORTAL` / L7 achieved and L8 business sign-off issued, so the public wording can claim production-grade reliability. The previous version `v3.1.0` (2026-11-13) — documentation-system cycle closed out and production-readiness public wording. The first formal
 release `v1.0.0` (2026-10-09) completed capability coverage, quality gates, documentation and open-source readiness.
 See `CHANGELOG.md` for details.
 
@@ -84,4 +84,4 @@ the portal-kernel capability baseline is not the same dimension", the convention
 3. validation behaviour (whether loading is forcibly blocked) is defined by the module-loading logic; this document defines
  the semantics only.
 
-<!-- build-stamp: 462FDA1EF43F -->
+<!-- build-stamp: 4C5E60257996 -->

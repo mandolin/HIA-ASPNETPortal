@@ -1,80 +1,248 @@
 {
-  "generatedUtc": "2026-11-12T16:12:45.4718228Z",
+  "generatedUtc": "2026-11-14T12:43:11.4855626Z",
   "entries": {
-    "Test-PortalCollaborationLayoutEvidence.mjs|L2|": {
-      "durationMs": 19001,
+    "Test-PortalApprovalBoundaryDocs.ps1|L0|": {
+      "durationMs": 522,
       "status": "Pass"
     },
-    "Test-PortalPlaceholderEvidence.mjs|L2|": {
-      "durationMs": 31193,
+    "Test-PortalEvidenceCoverage.ps1|L0|": {
+      "durationMs": 540,
       "status": "Pass"
     },
-    "Test-PortalDefaultThemeVisualBaseline.mjs|L2|": {
-      "durationMs": 13070,
+    "Test-PortalVersionConsistency.ps1|L0|": {
+      "durationMs": 931,
       "status": "Pass"
     },
-    "Test-PortalModuleRuntimeEvidence.mjs|L2|": {
-      "durationMs": 132574,
+    "Test-PortalL7CriteriaRegistry.ps1|L0|": {
+      "durationMs": 497,
       "status": "Pass"
     },
-    "Test-PortalDocumentationWalkthrough.mjs|L2|": {
-      "durationMs": 24642,
+    "Test-PortalPublicDocumentation.ps1|L0|": {
+      "durationMs": 1596,
       "status": "Pass"
     },
-    "Test-PortalPerformanceBaseline.mjs|L2|": {
-      "durationMs": 15042,
+    "Test-PortalCodeDocs.ps1|L0|": {
+      "durationMs": 7209,
       "status": "Pass"
     },
-    "Test-PortalLocalizedNameRuntimeEvidence.ps1|L2|": {
-      "durationMs": 65344,
+    "Test-PortalOperationsReadiness.ps1|L0|": {
+      "durationMs": 516,
       "status": "Pass"
     },
-    "Test-PortalP77SupplementEvidence.mjs|L2|": {
-      "durationMs": 14078,
+    "Test-PortalResourceContract.ps1|L0|": {
+      "durationMs": 2785,
       "status": "Pass"
     },
-    "Test-PortalAdminListUiEvidence.mjs|L2|": {
-      "durationMs": 13066,
+    "Test-PortalIndependentModuleGate.ps1|L0|": {
+      "durationMs": 673,
       "status": "Pass"
     },
-    "Test-PortalLocalizationLeakEvidence.mjs|L2|": {
-      "durationMs": 16516,
+    "Test-PortalRopCommentBaseline.ps1|L0|": {
+      "durationMs": 1073,
       "status": "Pass"
     },
-    "Invoke-PortalModuleRuntimeGate.ps1|L2|": {
-      "durationMs": 311769,
+    "Test-PortalSiteMirrorConsistency.ps1|L0|": {
+      "durationMs": 559,
       "status": "Pass"
     },
-    "Test-PortalModuleCache.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
-      "durationMs": 23832,
+    "Test-PortalAscxCompilationContract.ps1|L0|": {
+      "durationMs": 3191,
       "status": "Pass"
     },
-    "Test-PortalWorkItemReachabilityEvidence.mjs|L2|": {
-      "durationMs": 21947,
+    "Test-PortalSitePublicSurface.ps1|L0|": {
+      "durationMs": 1052,
       "status": "Pass"
     },
-    "Test-PortalSemanticMarkupEvidence.mjs|L2|": {
-      "durationMs": 15144,
+    "Test-PortalNewModuleReadiness.ps1|L0|-ModuleName LeaveRequest -ModuleCssPrefix leave-request -ExpectedPackageId HIA.LeaveRequest": {
+      "durationMs": 492,
       "status": "Pass"
     },
-    "Test-PortalExtensionSmoke.ps1|L2|": {
-      "durationMs": 62911,
+    "Test-PortalProductionHardening.ps1|L0|": {
+      "durationMs": 669,
       "status": "Pass"
     },
-    "Test-PortalResourceContractEvidence.mjs|L2|": {
-      "durationMs": 5888,
+    "Test-PortalModuleDocPages.ps1|L0|": {
+      "durationMs": 566,
       "status": "Pass"
     },
-    "Test-PortalPlatformEmptyStateEvidence.mjs|L2|": {
-      "durationMs": 24986,
+    "Test-PortalReferenceDataSmoke.ps1|L0|": {
+      "durationMs": 474,
       "status": "Pass"
     },
-    "Test-PortalSmoke.ps1|L2|": {
-      "durationMs": 3892,
+    "Test-PortalNavigationShape.ps1|L0|": {
+      "durationMs": 504,
       "status": "Pass"
     },
-    "Test-PortalSqlCompatibility.ps1|L2|-ConnectionStringsConfigPath C:\\Users\\admin\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config": {
-      "durationMs": 1118,
+    "Test-PortalWorkItemNumbering.ps1|L0|": {
+      "durationMs": 1255,
+      "status": "Pass"
+    },
+    "Test-PortalSiteMirrorFreshness.ps1|L0|": {
+      "durationMs": 2243,
+      "status": "Pass"
+    },
+    "Test-PortalWorkItemSmoke.ps1|L0|": {
+      "durationMs": 484,
+      "status": "Pass"
+    },
+    "Test-PortalLandingStats.ps1|L0|": {
+      "durationMs": 708,
+      "status": "Pass"
+    },
+    "Test-PortalComplianceBaseline.ps1|L0|": {
+      "durationMs": 5359,
+      "status": "Pass"
+    },
+    "Test-PortalAuditRetentionDeclaration.ps1|L0|": {
+      "durationMs": 2871,
+      "status": "Pass"
+    },
+    "Test-PortalDocumentationReadiness.ps1|L0|": {
+      "durationMs": 2008,
+      "status": "Pass"
+    },
+    "Test-PortalIeModeReadiness.ps1|L0|": {
+      "durationMs": 631,
+      "status": "Pass"
+    },
+    "Test-PortalLocalizedNameGate.ps1|L0|": {
+      "durationMs": 475,
+      "status": "Pass"
+    },
+    "Test-PortalGateCoverageMap.ps1|L0|": {
+      "durationMs": 632,
+      "status": "Pass"
+    },
+    "Test-PortalRuntimeGatePackageSet.ps1|L0|": {
+      "durationMs": 595,
+      "status": "Pass"
+    },
+    "Test-PortalContentModuleDocs.ps1|L0|": {
+      "durationMs": 520,
+      "status": "Pass"
+    },
+    "Test-PortalSqlVersionMatrix.ps1|L0|": {
+      "durationMs": 736,
+      "status": "Pass"
+    },
+    "Test-PortalI18nContentParity.ps1|L0|": {
+      "durationMs": 733,
+      "status": "Pass"
+    },
+    "Test-PortalLogMaintenance.ps1|L0|": {
+      "durationMs": 529,
+      "status": "Pass"
+    },
+    "Test-PortalDefaultCredentialRisk.ps1|L0|": {
+      "durationMs": 3488,
+      "status": "Pass"
+    },
+    "Test-PortalAccessibilityBaseline.ps1|L0|": {
+      "durationMs": 2562,
+      "status": "Pass"
+    },
+    "Test-PortalPublicDocContentApplicability.ps1|L0|": {
+      "durationMs": 584,
+      "status": "Pass"
+    },
+    "Test-PortalSecretLeakage.ps1|L0|": {
+      "durationMs": 17509,
+      "status": "Pass"
+    },
+    "Test-PortalBusinessPermissionAudit.ps1|L0|": {
+      "durationMs": 476,
+      "status": "Pass"
+    },
+    "Test-PortalXmlDocumentation.ps1|L0|": {
+      "durationMs": 605,
+      "status": "Pass"
+    },
+    "Test-PortalPublishReadiness.ps1|L0|": {
+      "durationMs": 42567,
+      "status": "Pass"
+    },
+    "Test-PortalHandwrittenPageFreshness.ps1|L0|": {
+      "durationMs": 1004,
+      "status": "Pass"
+    },
+    "Test-PortalCollaborationWorkflowSmoke.ps1|L0|": {
+      "durationMs": 489,
+      "status": "Pass"
+    },
+    "Test-PortalLegacyCssCompatibility.ps1|L0|": {
+      "durationMs": 1049,
+      "status": "Pass"
+    },
+    "Test-PortalNavigationGroupRender.ps1|L0|": {
+      "durationMs": 511,
+      "status": "Pass"
+    },
+    "Test-PortalBenchmarkChecklist.ps1|L0|": {
+      "durationMs": 440,
+      "status": "Pass"
+    },
+    "Test-PortalDocumentationExamples.ps1|L0|": {
+      "durationMs": 541,
+      "status": "Pass"
+    },
+    "Test-PortalDependencyVulnerabilityBaseline.ps1|L0|": {
+      "durationMs": 4606,
+      "status": "Pass"
+    },
+    "Test-PortalPlanLedgerConsistency.ps1|L0|": {
+      "durationMs": 574,
+      "status": "Pass"
+    },
+    "Test-PortalOnlinePackageSecurityBoundaries.ps1|L0|": {
+      "durationMs": 496,
+      "status": "Pass"
+    },
+    "Test-PortalSiteTranslationFreshness.ps1|L0|": {
+      "durationMs": 580,
+      "status": "Pass"
+    },
+    "Test-PortalGovernanceView.ps1|L0|": {
+      "durationMs": 555,
+      "status": "Pass"
+    },
+    "Test-PortalReleaseReadiness.ps1|L0|-DailySelfCheck": {
+      "durationMs": 1642,
+      "status": "Pass"
+    },
+    "Test-PortalRuntimeScreenshotBaseline.ps1|L0|": {
+      "durationMs": 530,
+      "status": "Pass"
+    },
+    "Test-PortalFrontendContracts.ps1|L0|": {
+      "durationMs": 2924,
+      "status": "Pass"
+    },
+    "Test-PortalModuleSkinCoverage.ps1|L0|": {
+      "durationMs": 533,
+      "status": "Pass"
+    },
+    "Test-PortalModulePackageContract.ps1|L0|": {
+      "durationMs": 522,
+      "status": "Pass"
+    },
+    "Test-PortalNewModuleReadiness.ps1|L0|-ModuleName ExpenseReimbursement -ModuleCssPrefix expense-reimbursement -ExpectedPackageId HIA.ExpenseReimbursement": {
+      "durationMs": 476,
+      "status": "Pass"
+    },
+    "Test-PortalNavigationGroupContract.ps1|L0|": {
+      "durationMs": 532,
+      "status": "Pass"
+    },
+    "Test-PortalTargetEnvironmentEvidenceMap.ps1|L0|": {
+      "durationMs": 479,
+      "status": "Pass"
+    },
+    "Test-PortalBusinessIdentity.ps1|L0|": {
+      "durationMs": 599,
+      "status": "Pass"
+    },
+    "Test-PortalModuleAssemblyContract.ps1|L0|": {
+      "durationMs": 7507,
       "status": "Pass"
     }
   }

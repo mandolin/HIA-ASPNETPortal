@@ -23,8 +23,7 @@ SPA and has no client-side routing; pages and modules render through the Web For
 > Provenance: this project derives from the ASP.NET Portal Starter Kit published on CodePlex, and has since been
 > reworked and extended extensively.
 
-Current version: **v3.1.0** (2026-11-13, documentation-system cycle closed out; platform readiness / L11 already
-achieved). Maturity is stated as **usable / reference / research baseline**.
+Current version: **v3.2.0** (2026-11-14, enterprise capability standardization, normalization and governance gate expansion; platform readiness / L11 and production readiness / L7 conclusions carry over, and the criteria are not relaxed by the version bump). Maturity is stated as **usable / reference / research baseline**.
 
 ### Where it fits
 
@@ -113,4 +112,4 @@ matters in `docs/font-policy-and-audit.md`.
 - To **deploy it**: `docs/deployment-checklist.md` → `docs/operations-runbook.md`
 - To **find everything**: `docs/documentation-map.md`
 
-<!-- build-stamp: EB806DCDAE53 -->
+<!-- build-stamp: 7133A09400BD -->
