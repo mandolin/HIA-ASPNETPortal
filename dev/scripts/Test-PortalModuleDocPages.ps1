@@ -20,8 +20,9 @@
 
     六类断言：
       M1 页面存在性：登记为「已交付」的模块必须有页面文件。
-      M2 字段集 ⊇ 源码控件集：编辑页每个输入控件 id 必须在页面中出现（**词边界**匹配，与 A3 同口径——
-         `LinkTitleField` 这类"含原 id 的改名"不算命中）。
+      M2 字段集 ⊇ 源码控件集（id + 类型 + 长度上限 三元组）：编辑页每个输入控件须以完整 id 在页面出现（**词边界**匹配，
+         与 A3 同口径——`LinkTitleField` 这类"含原 id 的改名"不算命中），且其「字段表」行须记录与源码一致的类型
+         （单行/多行/密码/下拉/复选框）与长度上限（源码有 MaxLength 须数值一致；源码未设须文档表达为不限/未设）。
       M3 八节齐全（**须为 `## ` 二级标题**，只出现节名这个词不算）：用途与前置 / 操作步骤 / 字段表 /
        必填与校验 / 存储与审计 / 权限 / 常见问题 / 边界与不做
       M3a **H1 存在且指向本模块**（`W-anp-P190` 新增）：页面必须有**唯一**一级标题，且标题须含登记表的模块名——补上"页面看着正常但语义缺失"这一类（构建会拿 parent 兜底当标题）。
@@ -127,12 +128,68 @@ if ($requiredSections.Count -lt 8) {
 
 function Get-InputControls([string] $editPath) {
     $text = [System.IO.File]::ReadAllText($editPath, $utf8)
-    $ids = @()
+    $controls = @()
     foreach ($tag in [regex]::Matches($text, '<asp:(TextBox|DropDownList|CheckBox|HtmlTextArea)\b[^>]*>')) {
-        $m = [regex]::Match($tag.Value, '\bid\s*=\s*"([^"]+)"', 'IgnoreCase')
-        if ($m.Success) { $ids += $m.Groups[1].Value }
+        $tagText = $tag.Value
+        $idM = [regex]::Match($tagText, '\bid\s*=\s*"([^"]+)"', 'IgnoreCase')
+        if (-not $idM.Success) { continue }
+        $id = $idM.Groups[1].Value
+        $tagName = $tag.Groups[1].Value
+        # <lang>
+        #   <zh-CN>类型归一为文档页字段表「类型」列的同套中文词：TextBox 默认单行文本，TextMode=MultiLine→多行文本、
+        #     TextMode=Password→密码；HtmlTextArea→多行文本；DropDownList→下拉列表；CheckBox→复选框。</zh-CN>
+        #   <en>Normalize type to the same Chinese terms used in the doc field-table "类型" column: TextBox defaults to
+        #     single-line text; TextMode=MultiLine→multi-line; TextMode=Password→password; HtmlTextArea→multi-line;
+        #     DropDownList→dropdown; CheckBox→checkbox.</en>
+        # </lang>
+        $type = switch ($tagName) {
+            'TextBox' {
+                $tm = [regex]::Match($tagText, '\bTextMode\s*=\s*"([^"]+)"', 'IgnoreCase')
+                if ($tm.Success) {
+                    switch ($tm.Groups[1].Value) {
+                        'MultiLine' { '多行文本' }
+                        'Password'  { '密码' }
+                        default     { '单行文本' }
+                    }
+                } else { '单行文本' }
+            }
+            'HtmlTextArea' { '多行文本' }
+            'DropDownList' { '下拉列表' }
+            'CheckBox'     { '复选框' }
+            default        { $tagName }
+        }
+        # <lang>
+        #   <zh-CN>长度上限取自 MaxLength 属性；缺省（未设）记为 $null，由 M2 当成"不限"处理。</zh-CN>
+        #   <en>Max length comes from the MaxLength attribute; its absence is recorded as $null and treated as "unlimited" by M2.</en>
+        # </lang>
+        $mlM = [regex]::Match($tagText, '\bMaxLength\s*=\s*"(\d+)"', 'IgnoreCase')
+        $maxLength = if ($mlM.Success) { $mlM.Groups[1].Value } else { $null }
+        $controls += [PSCustomObject]@{ Id = $id; Type = $type; MaxLength = $maxLength }
     }
-    return $ids
+    return $controls
+}
+
+function Parse-FieldTable([string] $page) {
+    <#
+    .SYNOPSIS
+    解析文档页「字段表」为 控件id → { Type, MaxLength } 映射，供 M2 三元组核对。
+    #>
+    $map = @{}
+    foreach ($line in ($page -split "`n")) {
+        $t = $line.Trim()
+        if ($t -notmatch '^\|') { continue }
+        if ($t -match '^\|[\s\-:|]+\|$') { continue }  # 分隔行
+        $cells = ($t -split '\|') | ForEach-Object { $_.Trim() }
+        if ($cells.Count -lt 5) { continue }
+        # cells: [0]='' [1]=字段 [2]=控件id(含反引号) [3]=类型 [4]=长度上限 [5]=必填 [6]=校验
+        $idM = [regex]::Match($cells[2], '`([^`]+)`')
+        if (-not $idM.Success) { continue }  # 标题行等无反引号控件的行跳过
+        $cid = $idM.Groups[1].Value
+        if (-not $map.ContainsKey($cid)) {
+            $map[$cid] = [PSCustomObject]@{ Type = $cells[3]; MaxLength = $cells[4] }
+        }
+    }
+    return $map
 }
 
 function Get-RequiredCount([string] $editPath) {
@@ -232,10 +289,35 @@ foreach ($mod in $registry.modules) {
         continue
     }
 
-    # ---------- M2 字段集 ⊇ 源码控件集（词边界） ----------
+    # ---------- M2 字段集 ⊇ 源码控件集（id + 类型 + 长度上限 三元组） ----------
+    $pageFieldTable = Parse-FieldTable $page
     foreach ($control in (Get-InputControls $editPath)) {
-        if ($page -cnotmatch ('(?<![\w])' + [regex]::Escape($control) + '(?![\w])')) {
-            $failures += "M2 文档页未记录字段：$pageName 的编辑页控件 $control（源码有、文档缺；须以完整 id 出现，不能只作子串）。"
+        if ($page -cnotmatch ('(?<![\w])' + [regex]::Escape($control.Id) + '(?![\w])')) {
+            $failures += "M2 文档页未记录字段：$pageName 的编辑页控件 $($control.Id)（源码有、文档缺；须以完整 id 出现，不能只作子串）。"
+            continue
+        }
+        if (-not $pageFieldTable.ContainsKey($control.Id)) {
+            $failures += "M2 文档页字段表缺控件行：$pageName 的 $($control.Id) 未在「字段表」以控件 id 列出。"
+            continue
+        }
+        $row = $pageFieldTable[$control.Id]
+        # 类型归一：文档「下拉选择」与源码「下拉列表」在本项目同义；其余按原词比对
+        $pageTypeNorm = $row.Type.Trim()
+        if ($pageTypeNorm -eq '下拉选择') { $pageTypeNorm = '下拉列表' }
+        if ($row.Type -and $pageTypeNorm -ne $control.Type) {
+            $failures += "M2 字段类型不一致：$pageName 的 $($control.Id) 源码类型为「$($control.Type)」，文档记为「$($row.Type.Trim())」。"
+        }
+        if ($control.MaxLength -ne $null) {
+            if ($row.MaxLength -notmatch [regex]::Escape($control.MaxLength)) {
+                $failures += "M2 字段长度上限不一致：$pageName 的 $($control.Id) 源码 MaxLength=$($control.MaxLength)，文档记为「$($row.MaxLength.Trim())」。"
+            }
+        } else {
+            $noLimit = @('不限', '未设', '无', '没有', '不限制', '源码未设', '未限制', '—', '-', 'N/A', 'NA', '不适用', '无长度', '无上限', '—')
+            $hit = $false
+            foreach ($phrase in $noLimit) { if ($row.MaxLength -match $phrase) { $hit = $true; break } }
+            if (-not $hit) {
+                $failures += "M2 字段长度上限不一致：$pageName 的 $($control.Id) 源码未设 MaxLength，文档记为「$($row.MaxLength.Trim())」（应表达为不限/未设）。"
+            }
         }
     }
 
