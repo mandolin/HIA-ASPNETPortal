@@ -30288,6 +30288,114 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string tryvalidate dotnet-method read-only validation of form fields. on false, reasons contains at least one controlled reason; on true it is empty. no input is mutated and no file/config is read. callers must map json fields to fieldinput / string collections first. public static bool aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate(aspnet.starterkit.portal.portalmoduleformcontract.fieldinput hostframework, aspnet.starterkit.portal.portalmoduleformcontract.fieldinput entrykind, system.collections.generic.ilist<string> dependencies, out system.collections.generic.ilist<string> reasons) dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 只读校验形态字段。返回 false 时 reasons 至少含一条受控原因；返回 true 时 reasons 为空。 不修改任何输入、不读文件/配置。调用方须先把 json 字段映射为 fieldinput / 字符串集合。 read-only validation of form fields. on false, reasons contains at least one controlled reason; on true it is empty. no input is mutated and no file/config is read. callers must map json fields to fieldinput / string collections first. 宿主框架字段输入。 入口形态字段输入。 调用方已提取的依赖声明数组；null 表示字段未声明。 受控失败原因集合；成功时为空。 形态契约校验通过返回 true，否则 false。"
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate",
+      "name": "PortalModuleFormProfileGate",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilega-972488d7.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilega-972488d7.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate portalmoduleformprofilegate dotnet-type pure in-memory read-only gate for form-aware enablement: decides whether a form dimension (host framework / entry form) is enabled under a caller-supplied deployment-level allow-set, with an **explicit default-off** posture (an empty/undeclared allow set enables nothing) and fail-closed unknown values. it is **strictly separated from the assembly-state switch**: no config/file reads, no reference to the assembly ledger or `allowcodefile`, no wiring into `portalmoduleprofilesnapshot.ispackageallowed`, and no change to existing package parsing or profile decisions. class aspnet.starterkit.portal.portalmoduleformprofilegate dotnet:t:aspnet.starterkit.portal.portalmoduleformprofilegate portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 形态启用判定的**纯内存只读判定器**：把形态维度（宿主框架 / 入口形态）的启用判定 纳入\"部署级允许集\"这一输入，**显式缺省关闭**（允许集为空或未声明即不启用）、未知值 fail-closed。 **与装配态开关严格分离**：本类不读配置、不读文件、不引用装配态台账或 `allowcodefile`， 不接入 `portalmoduleprofilesnapshot.ispackageallowed` 装载链，不改变既有包解析 / profile 判定结果。 pure in-memory read-only gate for form-aware enablement: decides whether a form dimension (host framework / entry form) is enabled under a caller-supplied deployment-level allow-set, with an **explicit default-off** posture (an empty/undeclared allow set enables nothing) and fail-closed unknown values. it is **strictly separated from the assembly-state switch**: no config/file reads, no reference to the assembly ledger or `allowcodefile`, no wiring into `portalmoduleprofilesnapshot.ispackageallowed`, and no change to existing package parsing or profile decisions. 调用方负责从部署配置提取允许集并传入；本类只做判定，不负责配置解析。 允许集用精确比较（`stringcomparison.ordinal`），大小写与空白变体不自动放行。 callers extract allow-sets from deployment configuration and pass them in; this class only decides. allow-sets use exact (`stringcomparison.ordinal`) comparison — case and whitespace variants are not auto-allowed."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty",
+      "name": "ReasonAllowSetEmpty",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-7b5602a3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-7b5602a3.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty reasonallowsetempty dotnet-field default reason: allow-set absent or empty (explicit default-off). public const string aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty dotnet:f:aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate t:aspnet.starterkit.portal.portalmoduleformprofilegate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 缺省判定原因：允许集未提供或为空（显式缺省关闭）。 default reason: allow-set absent or empty (explicit default-off)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared",
+      "name": "ReasonFormUndeclared",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-51c61e92.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-51c61e92.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared reasonformundeclared dotnet-field default reason: form dimension undeclared (legacy compatible, no new form enabled). public const string aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared dotnet:f:aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate t:aspnet.starterkit.portal.portalmoduleformprofilegate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 缺省判定原因：形态未声明（兼容既有包，不启用新形态）。 default reason: form dimension undeclared (legacy compatible, no new form enabled)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed",
+      "name": "ReasonFormNotAllowed",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-e77ddc64.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-e77ddc64.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed reasonformnotallowed dotnet-field default reason: form value not in the allow-set (fail closed). public const string aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed dotnet:f:aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate t:aspnet.starterkit.portal.portalmoduleformprofilegate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 缺省判定原因：形态值不在允许集内（fail-closed）。 default reason: form value not in the allow-set (fail closed)."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "name": "Decision",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilega-6159fe71.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilega-6159fe71.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision decision dotnet-type decision result: enabled flag plus a controlled reason (empty string when enabled). struct aspnet.starterkit.portal.portalmoduleformprofilegate.decision dotnet:t:aspnet.starterkit.portal.portalmoduleformprofilegate.decision portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate t:aspnet.starterkit.portal.portalmoduleformprofilegate t:system.valuetype t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 判定结果：是否启用 + 受控原因（启用时为空文本）。 decision result: enabled flag plus a controlled reason (empty string when enabled)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "name": "Enabled",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-6663c1b4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-6663c1b4.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled enabled dotnet-field 是否启用该形态。 public bool aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled dotnet:f:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate.decision t:aspnet.starterkit.portal.portalmoduleformprofilegate.decision dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 是否启用该形态。"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "name": "Reason",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-7f67badb.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-7f67badb.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason reason dotnet-field 受控原因（启用时为空文本）。 public string aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason dotnet:f:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate.decision t:aspnet.starterkit.portal.portalmoduleformprofilegate.decision dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 受控原因（启用时为空文本）。"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "name": "Allow",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-091b74d5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-091b74d5.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow allow dotnet-method 构造启用结果。 builds an enabled decision. public static aspnet.starterkit.portal.portalmoduleformprofilegate.decision aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow() dotnet:m:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate.decision t:aspnet.starterkit.portal.portalmoduleformprofilegate.decision dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 构造启用结果。 builds an enabled decision."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "name": "Deny",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-e2c62ceb.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-e2c62ceb.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string deny dotnet-method 构造拒绝结果（受控原因）。 builds a denied decision with a controlled reason. public static aspnet.starterkit.portal.portalmoduleformprofilegate.decision aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny(string reason) dotnet:m:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate.decision t:aspnet.starterkit.portal.portalmoduleformprofilegate.decision dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 构造拒绝结果（受控原因）。 builds a denied decision with a controlled reason."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "name": "IsHostFrameworkEnabled",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-4fea7ad0.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-4fea7ad0.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string ishostframeworkenabled dotnet-method decides whether a host-framework form is enabled. a null/empty `allowset` means default-off; an undeclared `form` enables no new form (legacy compatible); otherwise an exact allow-set match is required and a miss fails closed. public static aspnet.starterkit.portal.portalmoduleformprofilegate.decision aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled(aspnet.starterkit.portal.portalmoduleformcontract.fieldinput form, system.collections.generic.ilist<string> allowset) dotnet:m:aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate t:aspnet.starterkit.portal.portalmoduleformprofilegate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 判定宿主框架形态是否启用。`allowset` 为 null 或空集 → 缺省关闭； `form` 未声明 → 不启用新形态（兼容既有包）；否则精确匹配允许集，未命中即 fail-closed。 decides whether a host-framework form is enabled. a null/empty `allowset` means default-off; an undeclared `form` enables no new form (legacy compatible); otherwise an exact allow-set match is required and a miss fails closed. 形态字段输入（由调用方从 manifest 提取）。 部署级允许集；null 或空表示缺省关闭。 判定结果（启用标志 + 受控原因）。"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "name": "IsEntryKindEnabled",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-862a2948.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-862a2948.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string isentrykindenabled dotnet-method decides whether an entry form is enabled. same rules as host framework (default-off, undeclared enables nothing, exact match, fail-closed). public static aspnet.starterkit.portal.portalmoduleformprofilegate.decision aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled(aspnet.starterkit.portal.portalmoduleformcontract.fieldinput form, system.collections.generic.ilist<string> allowset) dotnet:m:aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate t:aspnet.starterkit.portal.portalmoduleformprofilegate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 判定入口形态是否启用。规则与宿主框架相同（缺省关闭、未声明不启用、精确匹配、fail-closed）。 decides whether an entry form is enabled. same rules as host framework (default-off, undeclared enables nothing, exact match, fail-closed). 形态字段输入（由调用方从 manifest 提取）。 部署级允许集；null 或空表示缺省关闭。 判定结果（启用标志 + 受控原因）。"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean",
+      "name": "IsAllowSetWellFormed",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-541b8d4b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-541b8d4b.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean isallowsetwellformed dotnet-method validates a deployment allow-set itself: only closed-vocabulary values are accepted; unknown values fail closed. this ensures a misconfiguration cannot become a default-allow. public static bool aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed(system.collections.generic.ilist<string> allowset, system.func<string, bool> isregistered) dotnet:m:aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformprofilegate t:aspnet.starterkit.portal.portalmoduleformprofilegate dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformprofilegate.cs csharp 校验部署级允许集本身：只允许封闭词表中的值，未知值 fail-closed。 这确保\"配置写错\"不会变成\"默认放行\"。 validates a deployment allow-set itself: only closed-vocabulary values are accepted; unknown values fail closed. this ensures a misconfiguration cannot become a default-allow. 部署级允许集。 封闭词表判定函数。 允许集全为已登记值返回 true，否则 false。"
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationinfo",
       "name": "BusinessApplicationInfo",
       "kind": "dotnet-type",

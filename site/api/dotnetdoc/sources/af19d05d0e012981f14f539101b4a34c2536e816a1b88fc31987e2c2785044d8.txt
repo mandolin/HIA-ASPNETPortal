@@ -1,0 +1,4 @@
+            public static Decision Allow()
+            {
+                return new Decision { Enabled = true, Reason = string.Empty };
+            }

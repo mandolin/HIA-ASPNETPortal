@@ -97,6 +97,7 @@
     <Compile Include="PortalOnlinePackageSecurityTests.cs" />
     <Compile Include="PortalOnlinePackageRollbackTests.cs" />
     <Compile Include="PortalModuleFormContractTests.cs" />
+    <Compile Include="PortalModuleFormProfileGateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

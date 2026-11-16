@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6270,
-  "relationCount": 5819,
+  "nodeCount": 6283,
+  "relationCount": 5831,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -4076,6 +4076,41 @@
       "kind": "entry",
       "label": "ModuleKindField",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "kind": "entry",
+      "label": "Enabled",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "kind": "entry",
+      "label": "Reason",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty",
+      "kind": "entry",
+      "label": "ReasonAllowSetEmpty",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed",
+      "kind": "entry",
+      "label": "ReasonFormNotAllowed",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared",
+      "kind": "entry",
+      "label": "ReasonFormUndeclared",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared",
       "view": "dotnet"
     },
     {
@@ -14975,6 +15010,41 @@
       "kind": "entry",
       "label": "TryValidate",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "kind": "entry",
+      "label": "Allow",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "kind": "entry",
+      "label": "Deny",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean",
+      "kind": "entry",
+      "label": "IsAllowSetWellFormed",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "IsEntryKindEnabled",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "IsHostFrameworkEnabled",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
       "view": "dotnet"
     },
     {
@@ -37434,6 +37504,20 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate",
+      "kind": "entry",
+      "label": "PortalModuleFormProfileGate",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "kind": "entry",
+      "label": "Decision",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
       "kind": "entry",
       "label": "PortalModuleHostFrameworks",
@@ -41720,6 +41804,12 @@
       "kind": "source",
       "label": "src/Portal.Components/PortalModuleFormContract.cs",
       "path": "src/Portal.Components/PortalModuleFormContract.cs"
+    },
+    {
+      "id": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "path": "src/Portal.Components/PortalModuleFormProfileGate.cs"
     },
     {
       "id": "source:src/Portal.Components/PortalNavigationGroupAlias.cs",
@@ -50974,6 +51064,71 @@
         "language": "csharp",
         "rangeStartLine": 80,
         "rangeEndLine": 80
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 43,
+        "rangeEndLine": 43
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 46,
+        "rangeEndLine": 46
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonallowsetempty",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 31,
+        "rangeEndLine": 31
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformnotallowed",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 37,
+        "rangeEndLine": 37
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.reasonformundeclared",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 34,
+        "rangeEndLine": 34
       }
     },
     {
@@ -71215,6 +71370,71 @@
         "language": "csharp",
         "rangeStartLine": 133,
         "rangeEndLine": 147
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 49,
+        "rangeEndLine": 52
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 55,
+        "rangeEndLine": 58
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isallowsetwellformed-system.collections.generic.ilist-system.string-system.func-system.string-system.boolean",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 133,
+        "rangeEndLine": 150
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.isentrykindenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 88,
+        "rangeEndLine": 91
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.ishostframeworkenabled-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 73,
+        "rangeEndLine": 76
       }
     },
     {
@@ -109200,7 +109420,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 277
+        "rangeEndLine": 278
       }
     },
     {
@@ -109239,7 +109459,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 114
+        "rangeEndLine": 115
       }
     },
     {
@@ -112919,6 +113139,32 @@
         "language": "csharp",
         "rangeStartLine": 90,
         "rangeEndLine": 118
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 28,
+        "rangeEndLine": 151
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision->source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "to": "source:src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "label": "Source: src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 40,
+        "rangeEndLine": 59
       }
     },
     {

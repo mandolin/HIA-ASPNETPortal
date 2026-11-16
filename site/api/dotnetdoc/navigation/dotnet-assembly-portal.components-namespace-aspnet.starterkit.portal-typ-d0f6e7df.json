@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "kind": "entry",
+      "label": "Allow",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "sourcePath": "src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.allow",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-091b74d5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "kind": "entry",
+      "label": "Deny",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "sourcePath": "src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.deny-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformprofilega-e2c62ceb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "kind": "entry",
+      "label": "Enabled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "sourcePath": "src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.enabled",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-6663c1b4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "kind": "entry",
+      "label": "Reason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "sourcePath": "src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformprofilegate.decision.reason",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformprofilega-7f67badb.html"
+    }
+  ]
+}

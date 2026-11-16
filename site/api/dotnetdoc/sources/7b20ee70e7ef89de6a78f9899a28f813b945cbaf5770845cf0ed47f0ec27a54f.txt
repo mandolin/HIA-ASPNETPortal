@@ -1,0 +1,4 @@
+            public static Decision Deny(string reason)
+            {
+                return new Decision { Enabled = false, Reason = reason ?? string.Empty };
+            }

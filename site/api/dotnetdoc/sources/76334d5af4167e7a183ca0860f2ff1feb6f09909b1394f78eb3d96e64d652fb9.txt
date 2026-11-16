@@ -1,0 +1,4 @@
+        public static Decision IsEntryKindEnabled(PortalModuleFormContract.FieldInput form, IList<string> allowSet)
+        {
+            return Evaluate(form, allowSet);
+        }

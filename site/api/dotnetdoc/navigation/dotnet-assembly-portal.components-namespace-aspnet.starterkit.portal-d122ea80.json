@@ -284,6 +284,16 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-212dd4ae.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "kind": "type",
+      "label": "Decision",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d0f6e7df.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryquery",
       "kind": "type",
       "label": "EmployeeDirectoryQuery",
@@ -1976,6 +1986,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.-c7053005.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-94ab4347.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformprofilegate",
+      "kind": "type",
+      "label": "PortalModuleFormProfileGate",
+      "entryCount": 8,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "sourcePath": "src/Portal.Components/PortalModuleFormProfileGate.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleformprofilegate.decision",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformprofilega-6159fe71.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-548f85b5.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks",
