@@ -1,0 +1,4 @@
+            public static FieldInput FromString(string value)
+            {
+                return new FieldInput { Declared = true, IsString = true, Value = value };
+            }

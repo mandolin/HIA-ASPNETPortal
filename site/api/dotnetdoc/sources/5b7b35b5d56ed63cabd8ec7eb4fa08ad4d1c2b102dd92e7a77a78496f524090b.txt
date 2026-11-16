@@ -1,0 +1,15 @@
+        public static bool TryValidate(FieldInput hostFramework, FieldInput entryKind, IList<string> dependencies, out IList<string> reasons)
+        {
+            var found = new List<string>();
+
+            ValidateEnumField(HostFrameworkField, hostFramework, PortalModuleHostFrameworks.IsRegistered, found);
+            ValidateEnumField(EntryKindField, entryKind, PortalModuleEntryKinds.IsRegistered, found);
+
+            if (dependencies != null)
+            {
+                ValidateDependencies(dependencies, found);
+            }
+
+            reasons = found;
+            return found.Count == 0;
+        }

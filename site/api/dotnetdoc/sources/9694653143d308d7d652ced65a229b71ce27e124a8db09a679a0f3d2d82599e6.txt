@@ -1,0 +1,4 @@
+            public static FieldInput NonString()
+            {
+                return new FieldInput { Declared = true, IsString = false, Value = null };
+            }

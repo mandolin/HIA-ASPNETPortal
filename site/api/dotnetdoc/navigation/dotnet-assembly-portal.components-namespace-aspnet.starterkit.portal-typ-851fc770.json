@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+      "kind": "entry",
+      "label": "Ascx",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.as-7c31f431.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+      "kind": "entry",
+      "label": "IsRegistered",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.is-97c6de3c.html"
+    }
+  ]
+}

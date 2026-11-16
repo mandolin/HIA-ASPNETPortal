@@ -1,0 +1,11 @@
+    public static class PortalModuleEntryKinds
+    {
+        /// <summary>受控 ASCX 用户控件入口（当前唯一已实现形态）。</summary>
+        public const string Ascx = "Ascx";
+
+        /// <summary><lang><zh-CN>精确判定值是否在封闭词表内。</zh-CN><en>Exact membership test.</en></lang></summary>
+        public static bool IsRegistered(string value)
+        {
+            return string.Equals(value, Ascx, StringComparison.Ordinal);
+        }
+    }

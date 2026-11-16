@@ -1,0 +1,11 @@
+    public static class PortalModuleHostFrameworks
+    {
+        /// <summary>ASP.NET Web Forms 宿主（当前唯一已实现形态）。</summary>
+        public const string AspNetWebForms = "AspNetWebForms";
+
+        /// <summary><lang><zh-CN>精确判定值是否在封闭词表内；大小写与空白变体一律拒绝。</zh-CN><en>Exact membership test; case and whitespace variants are rejected.</en></lang></summary>
+        public static bool IsRegistered(string value)
+        {
+            return string.Equals(value, AspNetWebForms, StringComparison.Ordinal);
+        }
+    }

@@ -578,6 +578,16 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-35d67b17.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+      "kind": "type",
+      "label": "FieldInput",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-183c630b.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission",
       "kind": "type",
       "label": "FormBuilderSubmission",
@@ -1938,6 +1948,48 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleassemblystate",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate-2edbb57e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4b991828.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds",
+      "kind": "type",
+      "label": "PortalModuleEntryKinds",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleentrykinds",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds-a456fb56.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-851fc770.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract",
+      "kind": "type",
+      "label": "PortalModuleFormContract",
+      "entryCount": 9,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.-c7053005.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-94ab4347.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks",
+      "kind": "type",
+      "label": "PortalModuleHostFrameworks",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmodulehostframeworks",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulehostframework-06704aee.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-877e5448.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentry",

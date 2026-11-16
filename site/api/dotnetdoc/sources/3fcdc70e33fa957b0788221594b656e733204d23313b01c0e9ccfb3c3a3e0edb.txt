@@ -1,0 +1,4 @@
+        public static bool IsRegistered(string value)
+        {
+            return string.Equals(value, Ascx, StringComparison.Ordinal);
+        }

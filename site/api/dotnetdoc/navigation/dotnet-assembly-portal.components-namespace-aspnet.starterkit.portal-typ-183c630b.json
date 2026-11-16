@@ -1,0 +1,85 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+      "kind": "entry",
+      "label": "Declared",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-45f805d9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+      "kind": "entry",
+      "label": "FromString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-90871af2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+      "kind": "entry",
+      "label": "IsString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-e1cba892.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+      "kind": "entry",
+      "label": "NonString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9ea0b284.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+      "kind": "entry",
+      "label": "Undeclared",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-2292935b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+      "kind": "entry",
+      "label": "Value",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-29258e70.html"
+    }
+  ]
+}

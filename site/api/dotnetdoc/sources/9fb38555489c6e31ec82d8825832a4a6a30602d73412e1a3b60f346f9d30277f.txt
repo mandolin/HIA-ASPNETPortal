@@ -1,0 +1,4 @@
+            public static FieldInput Undeclared()
+            {
+                return new FieldInput { Declared = false, IsString = false, Value = null };
+            }

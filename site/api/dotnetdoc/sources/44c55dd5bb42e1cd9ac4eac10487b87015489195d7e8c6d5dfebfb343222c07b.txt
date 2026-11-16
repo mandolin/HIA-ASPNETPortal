@@ -1,0 +1,29 @@
+        public struct FieldInput
+        {
+            /// <summary>字段是否在 manifest 出现。</summary>
+            public bool Declared;
+
+            /// <summary>值是否为 JSON 字符串。</summary>
+            public bool IsString;
+
+            /// <summary>字段字符串值（仅 IsString=true 时有意义）。</summary>
+            public string Value;
+
+            /// <summary><zh-CN>构造已声明的字符串字段。</zh-CN><en>Builds a declared string field.</en></summary>
+            public static FieldInput FromString(string value)
+            {
+                return new FieldInput { Declared = true, IsString = true, Value = value };
+            }
+
+            /// <summary><zh-CN>构造已声明的非字符串字段（类型错误）。</zh-CN><en>Builds a declared non-string field (type error).</en></summary>
+            public static FieldInput NonString()
+            {
+                return new FieldInput { Declared = true, IsString = false, Value = null };
+            }
+
+            /// <summary><zh-CN>构造未声明字段（兼容既有包）。</zh-CN><en>Builds an undeclared field (legacy compatible).</en></summary>
+            public static FieldInput Undeclared()
+            {
+                return new FieldInput { Declared = false, IsString = false, Value = null };
+            }
+        }

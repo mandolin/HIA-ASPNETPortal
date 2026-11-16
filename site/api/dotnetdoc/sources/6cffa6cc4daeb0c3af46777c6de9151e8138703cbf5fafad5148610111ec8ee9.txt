@@ -1,0 +1,1 @@
+        public const int MaxDependencyCount = 64;

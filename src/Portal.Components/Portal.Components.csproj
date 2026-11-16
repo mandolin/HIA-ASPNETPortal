@@ -130,6 +130,7 @@
     <Compile Include="IUsersDb.cs" />
     <Compile Include="PortalRegistrationInviteRejection.cs" />
     <Compile Include="PortalPasswordRejection.cs" />
+    <Compile Include="PortalModuleFormContract.cs" />
     <Compile Include="BusinessApplicationInfo.cs" />
     <Compile Include="BusinessApplicationResult.cs" />
     <Compile Include="BusinessApplicationReviewRequest.cs" />

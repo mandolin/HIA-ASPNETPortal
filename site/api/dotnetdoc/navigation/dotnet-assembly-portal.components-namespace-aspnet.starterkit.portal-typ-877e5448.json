@@ -1,0 +1,42 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+      "kind": "entry",
+      "label": "AspNetWebForms",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulehostframework-21aa3ffc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+      "kind": "entry",
+      "label": "IsRegistered",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+      "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulehostframework-c6e1f034.html"
+    }
+  ]
+}

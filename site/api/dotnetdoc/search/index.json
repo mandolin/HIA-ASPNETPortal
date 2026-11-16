@@ -30099,6 +30099,195 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.containsaccountcontextterm containsaccountcontextterm dotnet-field the password contains account-related context such as the user name, email, employee code, or display name. aspnet.starterkit.portal.portalpasswordrejection.containsaccountcontextterm dotnet:f:aspnet.starterkit.portal.portalpasswordrejection.containsaccountcontextterm portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalpasswordrejection t:aspnet.starterkit.portal.portalpasswordrejection dotnet hia-document api/portal.components.hia.json src/portal.components/portalpasswordrejection.cs csharp 密码包含用户名、邮箱、员工号、显示名等账号相关信息。 the password contains account-related context such as the user name, email, employee code, or display name."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+      "name": "PortalModuleHostFrameworks",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulehostframework-06704aee.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulehostframework-06704aee.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks portalmodulehostframeworks dotnet-type closed vocabulary of host frameworks. only the actually implemented asp.net web forms (ascx) host is registered; mvc/cms and other forms are not yet implemented and are therefore not declarable. class aspnet.starterkit.portal.portalmodulehostframeworks dotnet:t:aspnet.starterkit.portal.portalmodulehostframeworks portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 宿主框架封闭词表。当前仅登记项目实际实现的 asp.net web forms（ascx）宿主； mvc / cms 等形态尚未落地，不作为可声明值。 closed vocabulary of host frameworks. only the actually implemented asp.net web forms (ascx) host is registered; mvc/cms and other forms are not yet implemented and are therefore not declarable."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+      "name": "AspNetWebForms",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulehostframework-21aa3ffc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulehostframework-21aa3ffc.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms aspnetwebforms dotnet-field asp.net web forms 宿主（当前唯一已实现形态）。 public const string aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms dotnet:f:aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulehostframeworks t:aspnet.starterkit.portal.portalmodulehostframeworks dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp asp.net web forms 宿主（当前唯一已实现形态）。"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+      "name": "IsRegistered",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulehostframework-c6e1f034.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulehostframework-c6e1f034.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string isregistered dotnet-method exact membership test; case and whitespace variants are rejected. public static bool aspnet.starterkit.portal.portalmodulehostframeworks.isregistered(string value) dotnet:m:aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmodulehostframeworks t:aspnet.starterkit.portal.portalmodulehostframeworks dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 精确判定值是否在封闭词表内；大小写与空白变体一律拒绝。 exact membership test; case and whitespace variants are rejected."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+      "name": "PortalModuleEntryKinds",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds-a456fb56.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds-a456fb56.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds portalmoduleentrykinds dotnet-type closed vocabulary of entry forms. only the controlled ascx user-control entry is registered; other entry forms are not implemented and are therefore not declarable. class aspnet.starterkit.portal.portalmoduleentrykinds dotnet:t:aspnet.starterkit.portal.portalmoduleentrykinds portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 入口形态封闭词表。当前仅登记受控 ascx 用户控件入口； 其它入口形态未实现，不作为可声明值。 closed vocabulary of entry forms. only the controlled ascx user-control entry is registered; other entry forms are not implemented and are therefore not declarable."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+      "name": "Ascx",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.as-7c31f431.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.as-7c31f431.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx ascx dotnet-field 受控 ascx 用户控件入口（当前唯一已实现形态）。 public const string aspnet.starterkit.portal.portalmoduleentrykinds.ascx dotnet:f:aspnet.starterkit.portal.portalmoduleentrykinds.ascx portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleentrykinds t:aspnet.starterkit.portal.portalmoduleentrykinds dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 受控 ascx 用户控件入口（当前唯一已实现形态）。"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+      "name": "IsRegistered",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.is-97c6de3c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.is-97c6de3c.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string isregistered dotnet-method exact membership test. public static bool aspnet.starterkit.portal.portalmoduleentrykinds.isregistered(string value) dotnet:m:aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleentrykinds t:aspnet.starterkit.portal.portalmoduleentrykinds dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 精确判定值是否在封闭词表内。 exact membership test."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract",
+      "name": "PortalModuleFormContract",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract-0ed29aa9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract-0ed29aa9.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract portalmoduleformcontract dotnet-type read-only contract validator for module form-description fields across the four dimensions (module kind / host framework / entry form / resources and dependency declarations). it performs closed-vocabulary validation only: it is not wired into the loading chain, does not change existing package parsing, reads no file/config, and writes nothing. a missing field means \"undeclared\" (backward compatible); a present but invalid value fails closed. this class has zero external dependencies: callers pass already-extracted strings and string collections; the caller maps json type errors to \"isstring: false\". class aspnet.starterkit.portal.portalmoduleformcontract dotnet:t:aspnet.starterkit.portal.portalmoduleformcontract portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 模块形态描述字段的**只读契约校验器**。按 `module.json` 的四类形态维度 （模块种类 / 宿主框架 / 入口形态 / 资源与依赖声明）做封闭词表校验； **不接入装载链、不改变既有包解析结果、不读文件/配置、不写任何内容**。 字段缺失＝未声明（兼容既有包）；字段出现但值非法＝fail-closed。 本类零外部依赖：只接收调用方已从 manifest 提取的字符串与字符串集合， 由调用方负责把 json 类型错误映射为 \"isstring: false\"。 read-only contract validator for module form-description fields across the four dimensions (module kind / host framework / entry form / resources and dependency declarations). it performs closed-vocabulary validation only: it is not wired into the loading chain, does not change existing package parsing, reads no file/config, and writes nothing. a missing field means \"undeclared\" (backward compatible); a present but invalid value fails closed. this class has zero external dependencies: callers pass already-extracted strings and string collections; the caller maps json type errors to \"isstring: false\"."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+      "name": "MaxDependencyCount",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-20cfce11.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-20cfce11.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount maxdependencycount dotnet-field maximum number of dependency declarations (bounds the array). public const int aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 依赖声明数组的最大项数（防止无界声明）。 maximum number of dependency declarations (bounds the array)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+      "name": "MaxDependencyLength",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-7c72a7be.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-7c72a7be.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength maxdependencylength dotnet-field maximum length of a single dependency declaration. public const int aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 单个依赖声明的最大长度。 maximum length of a single dependency declaration."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+      "name": "HostFrameworkField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-07c8ed29.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-07c8ed29.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield hostframeworkfield dotnet-field host framework field name. public const string aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 宿主框架字段名。 host framework field name."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+      "name": "EntryKindField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-1472a591.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-1472a591.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield entrykindfield dotnet-field entry form field name. public const string aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 入口形态字段名。 entry form field name."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+      "name": "DependenciesField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-5a4ef8b6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-5a4ef8b6.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield dependenciesfield dotnet-field dependency declaration field name. public const string aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 依赖声明字段名。 dependency declaration field name."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+      "name": "ModuleKindField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-f1ac2d53.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-f1ac2d53.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield modulekindfield dotnet-field module kind field name (existing field, reused). public const string aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 模块种类字段名（既有字段，复用不新增）。 module kind field name (existing field, reused)."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+      "name": "FieldInput",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.-c7053005.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.-c7053005.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput fieldinput dotnet-type input for a form-field check: `declared` says whether the field is present in the manifest, `isstring` says whether the value is a json string. undeclared fields (declared=false) skip value checks for backward compatibility. struct aspnet.starterkit.portal.portalmoduleformcontract.fieldinput dotnet:t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract t:system.valuetype t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 形态字段校验输入；`declared` 表示字段是否在 manifest 出现，`isstring` 表示值是否为 json 字符串。 不声明字段（declared=false）时不校验其值，保证既有包兼容。 input for a form-field check: `declared` says whether the field is present in the manifest, `isstring` says whether the value is a json string. undeclared fields (declared=false) skip value checks for backward compatibility."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+      "name": "Declared",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-45f805d9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-45f805d9.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared declared dotnet-field 字段是否在 manifest 出现。 public bool aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract.fieldinput t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 字段是否在 manifest 出现。"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+      "name": "IsString",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-e1cba892.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-e1cba892.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring isstring dotnet-field 值是否为 json 字符串。 public bool aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract.fieldinput t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 值是否为 json 字符串。"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+      "name": "Value",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-29258e70.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-29258e70.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value value dotnet-field 字段字符串值（仅 isstring=true 时有意义）。 public string aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract.fieldinput t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 字段字符串值（仅 isstring=true 时有意义）。"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+      "name": "FromString",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-90871af2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-90871af2.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string fromstring dotnet-method 构造已声明的字符串字段。 builds a declared string field. public static aspnet.starterkit.portal.portalmoduleformcontract.fieldinput aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring(string value) dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract.fieldinput t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 构造已声明的字符串字段。 builds a declared string field."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+      "name": "NonString",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9ea0b284.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9ea0b284.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring nonstring dotnet-method 构造已声明的非字符串字段（类型错误）。 builds a declared non-string field (type error). public static aspnet.starterkit.portal.portalmoduleformcontract.fieldinput aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring() dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract.fieldinput t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 构造已声明的非字符串字段（类型错误）。 builds a declared non-string field (type error)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+      "name": "Undeclared",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-2292935b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-2292935b.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared undeclared dotnet-method 构造未声明字段（兼容既有包）。 builds an undeclared field (legacy compatible). public static aspnet.starterkit.portal.portalmoduleformcontract.fieldinput aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared() dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract.fieldinput t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 构造未声明字段（兼容既有包）。 builds an undeclared field (legacy compatible)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "name": "TryValidate",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9cddcc7d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9cddcc7d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string tryvalidate dotnet-method read-only validation of form fields. on false, reasons contains at least one controlled reason; on true it is empty. no input is mutated and no file/config is read. callers must map json fields to fieldinput / string collections first. public static bool aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate(aspnet.starterkit.portal.portalmoduleformcontract.fieldinput hostframework, aspnet.starterkit.portal.portalmoduleformcontract.fieldinput entrykind, system.collections.generic.ilist<string> dependencies, out system.collections.generic.ilist<string> reasons) dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string portal.components aspnet.starterkit.portal aspnet.starterkit.portal.portalmoduleformcontract t:aspnet.starterkit.portal.portalmoduleformcontract dotnet hia-document api/portal.components.hia.json src/portal.components/portalmoduleformcontract.cs csharp 只读校验形态字段。返回 false 时 reasons 至少含一条受控原因；返回 true 时 reasons 为空。 不修改任何输入、不读文件/配置。调用方须先把 json 字段映射为 fieldinput / 字符串集合。 read-only validation of form fields. on false, reasons contains at least one controlled reason; on true it is empty. no input is mutated and no file/config is read. callers must map json fields to fieldinput / string collections first. 宿主框架字段输入。 入口形态字段输入。 调用方已提取的依赖声明数组；null 表示字段未声明。 受控失败原因集合；成功时为空。 形态契约校验通过返回 true，否则 false。"
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationinfo",
       "name": "BusinessApplicationInfo",
       "kind": "dotnet-type",

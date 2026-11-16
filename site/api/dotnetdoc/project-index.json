@@ -4,8 +4,8 @@
   "project": {
     "defaultLocale": "zh-CN",
     "entryCounts": {
-      "all": 5791,
-      "dotnet": 5791
+      "all": 5812,
+      "dotnet": 5812
     },
     "id": "hia-aspnetportal",
     "locales": [
@@ -68961,6 +68961,1189 @@
       "presentationTopicId": "portal.topic:bc4306ab0f197a0ad675bb230b5c0103",
       "presentationPageId": "portal.page:bc4306ab0f197a0ad675bb230b5c0103",
       "presentationFragmentId": "portal.fragment:bc4306ab0f197a0ad675bb230b5c0103"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+      "name": "Ascx",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "受控 ASCX 用户控件入口（当前唯一已实现形态）。",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalModuleEntryKinds.Ascx",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "受控 ASCX 用户控件入口（当前唯一已实现形态）。",
+            "localizedText": {
+              "en": "受控 ASCX 用户控件入口（当前唯一已实现形态）。"
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 37
+          },
+          "end": {
+            "line": 37
+          }
+        },
+        "fetchUrl": "sources/410abfc0cf55211aee4907782d4e936402ff8da204e1ce05c99a4b5ce9bee908.txt",
+        "linkUrl": "sources/15ffe1ff76a61950c6220827e41993e1eba8af28094f4625dde955ee98c4b56c.L37.html#L37",
+        "publicAsset": {
+          "assetId": "portal.asset:15ffe1ff76a61950c6220827e41993e1",
+          "sourceId": "portal.source:d5e1b3bb469a0ef251ad1c8c61370b34",
+          "relativeUrl": "sources/410abfc0cf55211aee4907782d4e936402ff8da204e1ce05c99a4b5ce9bee908.txt",
+          "linkUrl": "sources/15ffe1ff76a61950c6220827e41993e1eba8af28094f4625dde955ee98c4b56c.L37.html#L37",
+          "revision": "content:410abfc0cf55211aee4907782d4e936402ff8da204e1ce05c99a4b5ce9bee908",
+          "digest": "sha384-7A8L4ViiSklqLRMNsEkgAiRRrPNxX6kOGGw79MzQdUN8pPT/BIaa5m/EcKMQDgIw",
+          "byteLength": 42,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleEntryKinds",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleEntryKinds.Ascx",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleEntryKinds.Ascx",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleEntryKinds"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.as-7c31f431.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.as-7c31f431.html",
+      "presentationTopicId": "portal.topic:6e9e7eff26e817b819fbc4b484a541e9",
+      "presentationPageId": "portal.page:6e9e7eff26e817b819fbc4b484a541e9",
+      "presentationFragmentId": "portal.fragment:6e9e7eff26e817b819fbc4b484a541e9"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+      "name": "DependenciesField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Dependency declaration field name.",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalModuleFormContract.DependenciesField",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Dependency declaration field name.",
+            "localizedText": {
+              "zh-CN": "依赖声明字段名。",
+              "en": "Dependency declaration field name."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "依赖声明字段名。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Dependency declaration field name.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 77
+          },
+          "end": {
+            "line": 77
+          }
+        },
+        "fetchUrl": "sources/3b5ec081a4bf57aeee6532d77a617caefbc06d230f8c8dc32a593bab715e3c8b.txt",
+        "linkUrl": "sources/01dd5374f5e30bbb270c0f7ae29a570d3a13c44e938033fa9b1f7691667bbdfa.L77.html#L77",
+        "publicAsset": {
+          "assetId": "portal.asset:01dd5374f5e30bbb270c0f7ae29a570d",
+          "sourceId": "portal.source:d28e13cc3c3094ff1807c9d9a5c6baf8",
+          "relativeUrl": "sources/3b5ec081a4bf57aeee6532d77a617caefbc06d230f8c8dc32a593bab715e3c8b.txt",
+          "linkUrl": "sources/01dd5374f5e30bbb270c0f7ae29a570d3a13c44e938033fa9b1f7691667bbdfa.L77.html#L77",
+          "revision": "content:3b5ec081a4bf57aeee6532d77a617caefbc06d230f8c8dc32a593bab715e3c8b",
+          "digest": "sha384-GZPRd2T4jVfX0XO690igV9E25lBR+ZImveYs/bkGrqCYLN+1L3APsbS0hzkb563C",
+          "byteLength": 63,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.DependenciesField",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.DependenciesField",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-5a4ef8b6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-5a4ef8b6.html",
+      "presentationTopicId": "portal.topic:6ada63761fc4c4f9d89337b1e69b9dba",
+      "presentationPageId": "portal.page:6ada63761fc4c4f9d89337b1e69b9dba",
+      "presentationFragmentId": "portal.fragment:6ada63761fc4c4f9d89337b1e69b9dba"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+      "name": "EntryKindField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Entry form field name.",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalModuleFormContract.EntryKindField",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Entry form field name.",
+            "localizedText": {
+              "zh-CN": "入口形态字段名。",
+              "en": "Entry form field name."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "入口形态字段名。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Entry form field name.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 74
+          },
+          "end": {
+            "line": 74
+          }
+        },
+        "fetchUrl": "sources/e83a9b0014d637816076f1f504f7c9a47d031633e117488ab129dbcce34c6b7b.txt",
+        "linkUrl": "sources/b378d7b59e402891abcd7a44ce3a5318e0d4eed2cdc9769b12dd383c605dfc07.L74.html#L74",
+        "publicAsset": {
+          "assetId": "portal.asset:b378d7b59e402891abcd7a44ce3a5318",
+          "sourceId": "portal.source:4bf1b48b49062ef808e07d3f1f2a9923",
+          "relativeUrl": "sources/e83a9b0014d637816076f1f504f7c9a47d031633e117488ab129dbcce34c6b7b.txt",
+          "linkUrl": "sources/b378d7b59e402891abcd7a44ce3a5318e0d4eed2cdc9769b12dd383c605dfc07.L74.html#L74",
+          "revision": "content:e83a9b0014d637816076f1f504f7c9a47d031633e117488ab129dbcce34c6b7b",
+          "digest": "sha384-xBu6BQXeopj7GkEVS/cTGBkUvfsuDK7IA+WZdAu6yWelDGPc+0Ehdvx9RLdc3+O9",
+          "byteLength": 57,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.EntryKindField",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.EntryKindField",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-1472a591.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-1472a591.html",
+      "presentationTopicId": "portal.topic:601e9962ce4672bbd0f20f92083a8130",
+      "presentationPageId": "portal.page:601e9962ce4672bbd0f20f92083a8130",
+      "presentationFragmentId": "portal.fragment:601e9962ce4672bbd0f20f92083a8130"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+      "name": "Declared",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "字段是否在 manifest 出现。",
+      "signature": "public bool ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Declared",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "字段是否在 manifest 出现。",
+            "localizedText": {
+              "en": "字段是否在 manifest 出现。"
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 93
+          },
+          "end": {
+            "line": 93
+          }
+        },
+        "fetchUrl": "sources/4db7eddb5e060d8fc49213c5e435ef3cd074a506052ddad72f002549aa172c06.txt",
+        "linkUrl": "sources/f56daeec0e41cd463796fab63738518c05c3f4c3f6d75ebfc31502268d22d56c.L93.html#L93",
+        "publicAsset": {
+          "assetId": "portal.asset:f56daeec0e41cd463796fab63738518c",
+          "sourceId": "portal.source:fa54d517f80e42d9578075c7b9af0c43",
+          "relativeUrl": "sources/4db7eddb5e060d8fc49213c5e435ef3cd074a506052ddad72f002549aa172c06.txt",
+          "linkUrl": "sources/f56daeec0e41cd463796fab63738518c05c3f4c3f6d75ebfc31502268d22d56c.L93.html#L93",
+          "revision": "content:4db7eddb5e060d8fc49213c5e435ef3cd074a506052ddad72f002549aa172c06",
+          "digest": "sha384-cghYGLZqlen2Zmn94ndGiunTwzMjjXWXzK5aGXQpjZanovSUpB5tq64D5pPDHTa+",
+          "byteLength": 33,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Declared",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Declared",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-45f805d9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-45f805d9.html",
+      "presentationTopicId": "portal.topic:b3d9cc31bba31d9173c678e9f16ba503",
+      "presentationPageId": "portal.page:b3d9cc31bba31d9173c678e9f16ba503",
+      "presentationFragmentId": "portal.fragment:b3d9cc31bba31d9173c678e9f16ba503"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+      "name": "IsString",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "值是否为 JSON 字符串。",
+      "signature": "public bool ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.IsString",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "值是否为 JSON 字符串。",
+            "localizedText": {
+              "en": "值是否为 JSON 字符串。"
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 96
+          },
+          "end": {
+            "line": 96
+          }
+        },
+        "fetchUrl": "sources/8d672508ede5da44c80437f0892a79af280f7cbd8f2e85239e11f80e5d4bb950.txt",
+        "linkUrl": "sources/60c66397b3e20bd33fa58299aa2576545ccb39e12ca230f54c6c1d8bd1c7ab8c.L96.html#L96",
+        "publicAsset": {
+          "assetId": "portal.asset:60c66397b3e20bd33fa58299aa257654",
+          "sourceId": "portal.source:fc7a9b42865290f978c50b7432543ad1",
+          "relativeUrl": "sources/8d672508ede5da44c80437f0892a79af280f7cbd8f2e85239e11f80e5d4bb950.txt",
+          "linkUrl": "sources/60c66397b3e20bd33fa58299aa2576545ccb39e12ca230f54c6c1d8bd1c7ab8c.L96.html#L96",
+          "revision": "content:8d672508ede5da44c80437f0892a79af280f7cbd8f2e85239e11f80e5d4bb950",
+          "digest": "sha384-LQRtirqooqHKlE/9s7eGggD2azAF4OEkKQaRlYqFP+9RBBcr7zpSMp+kuUhZg/fC",
+          "byteLength": 33,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.IsString",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.IsString",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-e1cba892.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-e1cba892.html",
+      "presentationTopicId": "portal.topic:ead276c489b4ff2d1fa9116d94a246fa",
+      "presentationPageId": "portal.page:ead276c489b4ff2d1fa9116d94a246fa",
+      "presentationFragmentId": "portal.fragment:ead276c489b4ff2d1fa9116d94a246fa"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+      "name": "Value",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "字段字符串值（仅 IsString=true 时有意义）。",
+      "signature": "public string ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Value",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "字段字符串值（仅 IsString=true 时有意义）。",
+            "localizedText": {
+              "en": "字段字符串值（仅 IsString=true 时有意义）。"
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 99
+          },
+          "end": {
+            "line": 99
+          }
+        },
+        "fetchUrl": "sources/b83f3a3259655e6d59c7c296ffd7e4c3ab26031bb2ebbc55ffd53da6d93cac05.txt",
+        "linkUrl": "sources/6de87a0864913c7edd226f651f6072d2a53b52a5dfb66f5e6dde884f47c0a095.L99.html#L99",
+        "publicAsset": {
+          "assetId": "portal.asset:6de87a0864913c7edd226f651f6072d2",
+          "sourceId": "portal.source:d15538cef093cc8fa26b054aa99fa770",
+          "relativeUrl": "sources/b83f3a3259655e6d59c7c296ffd7e4c3ab26031bb2ebbc55ffd53da6d93cac05.txt",
+          "linkUrl": "sources/6de87a0864913c7edd226f651f6072d2a53b52a5dfb66f5e6dde884f47c0a095.L99.html#L99",
+          "revision": "content:b83f3a3259655e6d59c7c296ffd7e4c3ab26031bb2ebbc55ffd53da6d93cac05",
+          "digest": "sha384-JqLjz6+od/v4tLfPy1FOa8UXYDcNy6FZlR47oE6p2s877v2YPUxntJxxjqXi+97s",
+          "byteLength": 32,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Value",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Value",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-29258e70.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-29258e70.html",
+      "presentationTopicId": "portal.topic:47599811b3ba7ce8f00c1ea3ebe14f84",
+      "presentationPageId": "portal.page:47599811b3ba7ce8f00c1ea3ebe14f84",
+      "presentationFragmentId": "portal.fragment:47599811b3ba7ce8f00c1ea3ebe14f84"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+      "name": "HostFrameworkField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Host framework field name.",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalModuleFormContract.HostFrameworkField",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Host framework field name.",
+            "localizedText": {
+              "zh-CN": "宿主框架字段名。",
+              "en": "Host framework field name."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "宿主框架字段名。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Host framework field name.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 71
+          },
+          "end": {
+            "line": 71
+          }
+        },
+        "fetchUrl": "sources/8ab09e05f5aacd9af9a762dd9e36a314408a3b5db2849bd926efc35e14758ac7.txt",
+        "linkUrl": "sources/f2158b618b3e8ed872b288aeec9b6acea1a79eb8b86bd467eed76af6a986a926.L71.html#L71",
+        "publicAsset": {
+          "assetId": "portal.asset:f2158b618b3e8ed872b288aeec9b6ace",
+          "sourceId": "portal.source:0d99905722a15ed50caa0a275478735e",
+          "relativeUrl": "sources/8ab09e05f5aacd9af9a762dd9e36a314408a3b5db2849bd926efc35e14758ac7.txt",
+          "linkUrl": "sources/f2158b618b3e8ed872b288aeec9b6acea1a79eb8b86bd467eed76af6a986a926.L71.html#L71",
+          "revision": "content:8ab09e05f5aacd9af9a762dd9e36a314408a3b5db2849bd926efc35e14758ac7",
+          "digest": "sha384-FzDhAbF3x9Yw1Dkq6ozKkvATBtzfEzbJ9X3qwaQXl/XhvW+iUWL3NReycXfM5oy9",
+          "byteLength": 65,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.HostFrameworkField",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.HostFrameworkField",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-07c8ed29.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-07c8ed29.html",
+      "presentationTopicId": "portal.topic:ae68917098bf355e0b6c63e7efb37cba",
+      "presentationPageId": "portal.page:ae68917098bf355e0b6c63e7efb37cba",
+      "presentationFragmentId": "portal.fragment:ae68917098bf355e0b6c63e7efb37cba"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+      "name": "MaxDependencyCount",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Maximum number of dependency declarations (bounds the array).",
+      "signature": "public const int ASPNET.StarterKit.Portal.PortalModuleFormContract.MaxDependencyCount",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Maximum number of dependency declarations (bounds the array).",
+            "localizedText": {
+              "zh-CN": "依赖声明数组的最大项数（防止无界声明）。",
+              "en": "Maximum number of dependency declarations (bounds the array)."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "依赖声明数组的最大项数（防止无界声明）。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Maximum number of dependency declarations (bounds the array).",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 65
+          },
+          "end": {
+            "line": 65
+          }
+        },
+        "fetchUrl": "sources/6cffa6cc4daeb0c3af46777c6de9151e8138703cbf5fafad5148610111ec8ee9.txt",
+        "linkUrl": "sources/3951b4ed61d2c56614c0fd0d4a62652b1543ad2e172db439d60adb37c32fa71e.L65.html#L65",
+        "publicAsset": {
+          "assetId": "portal.asset:3951b4ed61d2c56614c0fd0d4a62652b",
+          "sourceId": "portal.source:81bb630d5d8d441e8cac765cc3450f7e",
+          "relativeUrl": "sources/6cffa6cc4daeb0c3af46777c6de9151e8138703cbf5fafad5148610111ec8ee9.txt",
+          "linkUrl": "sources/3951b4ed61d2c56614c0fd0d4a62652b1543ad2e172db439d60adb37c32fa71e.L65.html#L65",
+          "revision": "content:6cffa6cc4daeb0c3af46777c6de9151e8138703cbf5fafad5148610111ec8ee9",
+          "digest": "sha384-IKZRKuMy0wVOYDjVxGeCiZGuLQWKnSwdRaVh1fzWrz7mu+chpGNgdV2qzSi9NcUo",
+          "byteLength": 49,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.MaxDependencyCount",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.MaxDependencyCount",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-20cfce11.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-20cfce11.html",
+      "presentationTopicId": "portal.topic:f5c727a7a95d85505161835c2a748f38",
+      "presentationPageId": "portal.page:f5c727a7a95d85505161835c2a748f38",
+      "presentationFragmentId": "portal.fragment:f5c727a7a95d85505161835c2a748f38"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+      "name": "MaxDependencyLength",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Maximum length of a single dependency declaration.",
+      "signature": "public const int ASPNET.StarterKit.Portal.PortalModuleFormContract.MaxDependencyLength",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Maximum length of a single dependency declaration.",
+            "localizedText": {
+              "zh-CN": "单个依赖声明的最大长度。",
+              "en": "Maximum length of a single dependency declaration."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "单个依赖声明的最大长度。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Maximum length of a single dependency declaration.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 68
+          },
+          "end": {
+            "line": 68
+          }
+        },
+        "fetchUrl": "sources/06ffdf00996f2ced2dc38fd499c3350330daed11499cbb7b972785ac76f81232.txt",
+        "linkUrl": "sources/10e74bc23a794081aaf27d21cdf31f67988e7cd734bdf4d00cead486543563e7.L68.html#L68",
+        "publicAsset": {
+          "assetId": "portal.asset:10e74bc23a794081aaf27d21cdf31f67",
+          "sourceId": "portal.source:cbc571412158602bae0bc9356c2777aa",
+          "relativeUrl": "sources/06ffdf00996f2ced2dc38fd499c3350330daed11499cbb7b972785ac76f81232.txt",
+          "linkUrl": "sources/10e74bc23a794081aaf27d21cdf31f67988e7cd734bdf4d00cead486543563e7.L68.html#L68",
+          "revision": "content:06ffdf00996f2ced2dc38fd499c3350330daed11499cbb7b972785ac76f81232",
+          "digest": "sha384-AFRy2q6+fdzY24mlWWpyZTBhoohZskK7dRcfjChCcNOQ1U35Cw+bPGi7w1qHLYra",
+          "byteLength": 51,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.MaxDependencyLength",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.MaxDependencyLength",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-7c72a7be.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-7c72a7be.html",
+      "presentationTopicId": "portal.topic:88906fd1614f29a9e9cc5d53353c76e2",
+      "presentationPageId": "portal.page:88906fd1614f29a9e9cc5d53353c76e2",
+      "presentationFragmentId": "portal.fragment:88906fd1614f29a9e9cc5d53353c76e2"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+      "name": "ModuleKindField",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "Module kind field name (existing field, reused).",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalModuleFormContract.ModuleKindField",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Module kind field name (existing field, reused).",
+            "localizedText": {
+              "zh-CN": "模块种类字段名（既有字段，复用不新增）。",
+              "en": "Module kind field name (existing field, reused)."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "模块种类字段名（既有字段，复用不新增）。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Module kind field name (existing field, reused).",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 80
+          },
+          "end": {
+            "line": 80
+          }
+        },
+        "fetchUrl": "sources/8d58fffcedaf565260046296f9af245f7609d6b40d2c1417c2ac57d541c1c20e.txt",
+        "linkUrl": "sources/0073cda35b23af9da79ace03780cb1f91585c0bf8e8672404d81dc270ddf5828.L80.html#L80",
+        "publicAsset": {
+          "assetId": "portal.asset:0073cda35b23af9da79ace03780cb1f9",
+          "sourceId": "portal.source:70a4fe6bc56af84923d188e5b8bf2d2c",
+          "relativeUrl": "sources/8d58fffcedaf565260046296f9af245f7609d6b40d2c1417c2ac57d541c1c20e.txt",
+          "linkUrl": "sources/0073cda35b23af9da79ace03780cb1f91585c0bf8e8672404d81dc270ddf5828.L80.html#L80",
+          "revision": "content:8d58fffcedaf565260046296f9af245f7609d6b40d2c1417c2ac57d541c1c20e",
+          "digest": "sha384-KXRPweGbftCdGk3Dpm0S1ou07H4kthgerTeb1/urZjPoHf4KVtrV2OlYFu9Dv9SI",
+          "byteLength": 59,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleFormContract.ModuleKindField",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.ModuleKindField",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-f1ac2d53.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-f1ac2d53.html",
+      "presentationTopicId": "portal.topic:79ae62a5f8023e1b259cf2bb6a28240a",
+      "presentationPageId": "portal.page:79ae62a5f8023e1b259cf2bb6a28240a",
+      "presentationFragmentId": "portal.fragment:79ae62a5f8023e1b259cf2bb6a28240a"
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+      "name": "AspNetWebForms",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "summary": "ASP.NET Web Forms 宿主（当前唯一已实现形态）。",
+      "signature": "public const string ASPNET.StarterKit.Portal.PortalModuleHostFrameworks.AspNetWebForms",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "ASP.NET Web Forms 宿主（当前唯一已实现形态）。",
+            "localizedText": {
+              "en": "ASP.NET Web Forms 宿主（当前唯一已实现形态）。"
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 17
+          },
+          "end": {
+            "line": 17
+          }
+        },
+        "fetchUrl": "sources/5ad0dfb5b3ca3e8d2eb775fab46fb737ca78a917753c7430aabf470c503b6827.txt",
+        "linkUrl": "sources/d6fdd1bb72877d4b4ac9594690eeab5abafb075e63b5b8d5a50f704b8684b744.L17.html#L17",
+        "publicAsset": {
+          "assetId": "portal.asset:d6fdd1bb72877d4b4ac9594690eeab5a",
+          "sourceId": "portal.source:89f9a838a8af47fd2f867cca3d6b1105",
+          "relativeUrl": "sources/5ad0dfb5b3ca3e8d2eb775fab46fb737ca78a917753c7430aabf470c503b6827.txt",
+          "linkUrl": "sources/d6fdd1bb72877d4b4ac9594690eeab5abafb075e63b5b8d5a50f704b8684b744.L17.html#L17",
+          "revision": "content:5ad0dfb5b3ca3e8d2eb775fab46fb737ca78a917753c7430aabf470c503b6827",
+          "digest": "sha384-Nir7Us9QhGDxr6I0LyHaAJ0uTTa+3syyBRUl5+bszJPjj/9Hf8TlnarNiEOcju19",
+          "byteLength": 62,
+          "lineCount": 1
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleHostFrameworks",
+        "symbolDocumentationId": "F:ASPNET.StarterKit.Portal.PortalModuleHostFrameworks.AspNetWebForms",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleHostFrameworks.AspNetWebForms",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleHostFrameworks"
+      },
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulehostframework-21aa3ffc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulehostframework-21aa3ffc.html",
+      "presentationTopicId": "portal.topic:541ab312b0213501187e8e572d2f2d5c",
+      "presentationPageId": "portal.page:541ab312b0213501187e8e572d2f2d5c",
+      "presentationFragmentId": "portal.fragment:541ab312b0213501187e8e572d2f2d5c"
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulekind.core",
@@ -364641,6 +365824,762 @@
       "presentationTopicId": "portal.topic:a942d25bb4bae97182a56b16ca635d55",
       "presentationPageId": "portal.page:a942d25bb4bae97182a56b16ca635d55",
       "presentationFragmentId": "portal.fragment:a942d25bb4bae97182a56b16ca635d55"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+      "name": "IsRegistered",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "summary": "Exact membership test.",
+      "signature": "public static bool ASPNET.StarterKit.Portal.PortalModuleEntryKinds.IsRegistered(string value)",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Exact membership test.",
+            "localizedText": {
+              "zh-CN": "精确判定值是否在封闭词表内。",
+              "en": "Exact membership test."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "精确判定值是否在封闭词表内。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Exact membership test.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 40
+          },
+          "end": {
+            "line": 43
+          }
+        },
+        "fetchUrl": "sources/3fcdc70e33fa957b0788221594b656e733204d23313b01c0e9ccfb3c3a3e0edb.txt",
+        "linkUrl": "sources/12eb9bbe328daa509526bb68d2d9b4e4535cf44923bab6261b9fdeca13fc1c07.L40.html#L40",
+        "publicAsset": {
+          "assetId": "portal.asset:12eb9bbe328daa509526bb68d2d9b4e4",
+          "sourceId": "portal.source:f7d915d28b76bdb8514c247349831117",
+          "relativeUrl": "sources/3fcdc70e33fa957b0788221594b656e733204d23313b01c0e9ccfb3c3a3e0edb.txt",
+          "linkUrl": "sources/12eb9bbe328daa509526bb68d2d9b4e4535cf44923bab6261b9fdeca13fc1c07.L40.html#L40",
+          "revision": "content:3fcdc70e33fa957b0788221594b656e733204d23313b01c0e9ccfb3c3a3e0edb",
+          "digest": "sha384-QmS/774b2vg5hu96iPTtWQTcPqseft8rKxMRddsFwWdvuyzkfpYqt7hdySUZNssx",
+          "byteLength": 146,
+          "lineCount": 4
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleEntryKinds",
+        "symbolDocumentationId": "M:ASPNET.StarterKit.Portal.PortalModuleEntryKinds.IsRegistered(System.String)",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleEntryKinds.IsRegistered(string)",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleEntryKinds"
+      },
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.is-97c6de3c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.is-97c6de3c.html",
+      "presentationTopicId": "portal.topic:97c9658b1e8a30f0d16a7b043273d727",
+      "presentationPageId": "portal.page:97c9658b1e8a30f0d16a7b043273d727",
+      "presentationFragmentId": "portal.fragment:97c9658b1e8a30f0d16a7b043273d727"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+      "name": "FromString",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "summary": "构造已声明的字符串字段。 Builds a declared string field.",
+      "signature": "public static ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.FromString(string value)",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "构造已声明的字符串字段。 Builds a declared string field.",
+            "localizedText": {
+              "en": "构造已声明的字符串字段。 Builds a declared string field."
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 102
+          },
+          "end": {
+            "line": 105
+          }
+        },
+        "fetchUrl": "sources/56802fb9591d3ddf4d2594d60668b6f8faae125a968a7d8041a0b6b2c4ad603a.txt",
+        "linkUrl": "sources/fdffb4f8f1b27753e340cff7ba440b421095e9d8fd96daa7ac66d854f26a3906.L102.html#L102",
+        "publicAsset": {
+          "assetId": "portal.asset:fdffb4f8f1b27753e340cff7ba440b42",
+          "sourceId": "portal.source:ccb2e7ba3bbdc27c6f0a5e9cd5d3d1fd",
+          "relativeUrl": "sources/56802fb9591d3ddf4d2594d60668b6f8faae125a968a7d8041a0b6b2c4ad603a.txt",
+          "linkUrl": "sources/fdffb4f8f1b27753e340cff7ba440b421095e9d8fd96daa7ac66d854f26a3906.L102.html#L102",
+          "revision": "content:56802fb9591d3ddf4d2594d60668b6f8faae125a968a7d8041a0b6b2c4ad603a",
+          "digest": "sha384-vA8kObXg0lWkLvhrRT4nIh9lAXWgAuhDSmXJaJ5ITD4eUdI9pdZSPmLy+kH83ED4",
+          "byteLength": 180,
+          "lineCount": 4
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "symbolDocumentationId": "M:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.FromString(System.String)",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.FromString(string)",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput"
+      },
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-90871af2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-90871af2.html",
+      "presentationTopicId": "portal.topic:f52365f6c525404d1a24d70fd6f4085e",
+      "presentationPageId": "portal.page:f52365f6c525404d1a24d70fd6f4085e",
+      "presentationFragmentId": "portal.fragment:f52365f6c525404d1a24d70fd6f4085e"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+      "name": "NonString",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "summary": "构造已声明的非字符串字段（类型错误）。 Builds a declared non-string field (type error).",
+      "signature": "public static ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.NonString()",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "构造已声明的非字符串字段（类型错误）。 Builds a declared non-string field (type error).",
+            "localizedText": {
+              "en": "构造已声明的非字符串字段（类型错误）。 Builds a declared non-string field (type error)."
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 108
+          },
+          "end": {
+            "line": 111
+          }
+        },
+        "fetchUrl": "sources/9694653143d308d7d652ced65a229b71ce27e124a8db09a679a0f3d2d82599e6.txt",
+        "linkUrl": "sources/cb6c1548191849a0c3f37492abb9f1785fe08a5b3ded3deeaf522c55d4b3c17f.L108.html#L108",
+        "publicAsset": {
+          "assetId": "portal.asset:cb6c1548191849a0c3f37492abb9f178",
+          "sourceId": "portal.source:d5c0b05d5957e02adecbf386a3df3298",
+          "relativeUrl": "sources/9694653143d308d7d652ced65a229b71ce27e124a8db09a679a0f3d2d82599e6.txt",
+          "linkUrl": "sources/cb6c1548191849a0c3f37492abb9f1785fe08a5b3ded3deeaf522c55d4b3c17f.L108.html#L108",
+          "revision": "content:9694653143d308d7d652ced65a229b71ce27e124a8db09a679a0f3d2d82599e6",
+          "digest": "sha384-d5mOcw/+18oe63OlcgP31M3/9gklZbc5qckGM8L3d6gIrMTycY6UcsakQQh/YS0Y",
+          "byteLength": 167,
+          "lineCount": 4
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "symbolDocumentationId": "M:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.NonString",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.NonString()",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput"
+      },
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9ea0b284.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9ea0b284.html",
+      "presentationTopicId": "portal.topic:05ee93966aec16c310d6690adb83a3c3",
+      "presentationPageId": "portal.page:05ee93966aec16c310d6690adb83a3c3",
+      "presentationFragmentId": "portal.fragment:05ee93966aec16c310d6690adb83a3c3"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+      "name": "Undeclared",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "summary": "构造未声明字段（兼容既有包）。 Builds an undeclared field (legacy compatible).",
+      "signature": "public static ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Undeclared()",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "构造未声明字段（兼容既有包）。 Builds an undeclared field (legacy compatible).",
+            "localizedText": {
+              "en": "构造未声明字段（兼容既有包）。 Builds an undeclared field (legacy compatible)."
+            },
+            "source": "xml.summary",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 114
+          },
+          "end": {
+            "line": 117
+          }
+        },
+        "fetchUrl": "sources/9fb38555489c6e31ec82d8825832a4a6a30602d73412e1a3b60f346f9d30277f.txt",
+        "linkUrl": "sources/0a3e2d58b41eab56007c2d8ad58ace940fd8c9632f5fb5a896880f2ef6916719.L114.html#L114",
+        "publicAsset": {
+          "assetId": "portal.asset:0a3e2d58b41eab56007c2d8ad58ace94",
+          "sourceId": "portal.source:15a69ce36a15783861f33056c241a0a3",
+          "relativeUrl": "sources/9fb38555489c6e31ec82d8825832a4a6a30602d73412e1a3b60f346f9d30277f.txt",
+          "linkUrl": "sources/0a3e2d58b41eab56007c2d8ad58ace940fd8c9632f5fb5a896880f2ef6916719.L114.html#L114",
+          "revision": "content:9fb38555489c6e31ec82d8825832a4a6a30602d73412e1a3b60f346f9d30277f",
+          "digest": "sha384-wBW0MNqSRDGW3r8M6MJ3gegZcUOLSWLt9rlVYKrJIPrtclHalHZFaNeyx2FBT7nq",
+          "byteLength": 169,
+          "lineCount": 4
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "symbolDocumentationId": "M:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Undeclared",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput.Undeclared()",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput"
+      },
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-2292935b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-2292935b.html",
+      "presentationTopicId": "portal.topic:3b706d277d37428807c4d50141b75ac0",
+      "presentationPageId": "portal.page:3b706d277d37428807c4d50141b75ac0",
+      "presentationFragmentId": "portal.fragment:3b706d277d37428807c4d50141b75ac0"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "name": "TryValidate",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "summary": "Read-only validation of form fields. On false, reasons contains at least one controlled reason; on true it is empty. No input is mutated and no file/config is read. Callers must map JSON fields to FieldInput / string collections first.",
+      "signature": "public static bool ASPNET.StarterKit.Portal.PortalModuleFormContract.TryValidate(ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput hostFramework, ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput entryKind, System.Collections.Generic.IList<string> dependencies, out System.Collections.Generic.IList<string> reasons)",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Read-only validation of form fields. On false, reasons contains at least one controlled reason; on true it is empty. No input is mutated and no file/config is read. Callers must map JSON fields to FieldInput / string collections first.",
+            "localizedText": {
+              "zh-CN": "只读校验形态字段。返回 false 时 reasons 至少含一条受控原因；返回 true 时 reasons 为空。 不修改任何输入、不读文件/配置。调用方须先把 JSON 字段映射为 FieldInput / 字符串集合。",
+              "en": "Read-only validation of form fields. On false, reasons contains at least one controlled reason; on true it is empty. No input is mutated and no file/config is read. Callers must map JSON fields to FieldInput / string collections first."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "只读校验形态字段。返回 false 时 reasons 至少含一条受控原因；返回 true 时 reasons 为空。 不修改任何输入、不读文件/配置。调用方须先把 JSON 字段映射为 FieldInput / 字符串集合。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Read-only validation of form fields. On false, reasons contains at least one controlled reason; on true it is empty. No input is mutated and no file/config is read. Callers must map JSON fields to FieldInput / string collections first.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          },
+          "params.hostFramework.summary": {
+            "fieldPath": "params.hostFramework.summary",
+            "kind": "param",
+            "defaultLocale": "en",
+            "defaultText": "宿主框架字段输入。",
+            "localizedText": {
+              "en": "宿主框架字段输入。"
+            },
+            "source": "xml.param.hostFramework",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.param.hostFramework"
+              }
+            }
+          },
+          "params.entryKind.summary": {
+            "fieldPath": "params.entryKind.summary",
+            "kind": "param",
+            "defaultLocale": "en",
+            "defaultText": "入口形态字段输入。",
+            "localizedText": {
+              "en": "入口形态字段输入。"
+            },
+            "source": "xml.param.entryKind",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.param.entryKind"
+              }
+            }
+          },
+          "params.dependencies.summary": {
+            "fieldPath": "params.dependencies.summary",
+            "kind": "param",
+            "defaultLocale": "en",
+            "defaultText": "调用方已提取的依赖声明数组；null 表示字段未声明。",
+            "localizedText": {
+              "en": "调用方已提取的依赖声明数组；null 表示字段未声明。"
+            },
+            "source": "xml.param.dependencies",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.param.dependencies"
+              }
+            }
+          },
+          "params.reasons.summary": {
+            "fieldPath": "params.reasons.summary",
+            "kind": "param",
+            "defaultLocale": "en",
+            "defaultText": "受控失败原因集合；成功时为空。",
+            "localizedText": {
+              "en": "受控失败原因集合；成功时为空。"
+            },
+            "source": "xml.param.reasons",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.param.reasons"
+              }
+            }
+          },
+          "returns.summary": {
+            "fieldPath": "returns.summary",
+            "kind": "returns",
+            "defaultLocale": "en",
+            "defaultText": "形态契约校验通过返回 true，否则 false。",
+            "localizedText": {
+              "en": "形态契约校验通过返回 true，否则 false。"
+            },
+            "source": "xml.returns",
+            "resolutions": {
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "default-text",
+                "sourceLocale": "en",
+                "source": "xml.returns"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 133
+          },
+          "end": {
+            "line": 147
+          }
+        },
+        "fetchUrl": "sources/5b7b35b5d56ed63cabd8ec7eb4fa08ad4d1c2b102dd92e7a77a78496f524090b.txt",
+        "linkUrl": "sources/81fc3098e79d184eff47bd2ddb0ad2d73a37bb017ec3c6d638506e7a57635723.L133.html#L133",
+        "publicAsset": {
+          "assetId": "portal.asset:81fc3098e79d184eff47bd2ddb0ad2d7",
+          "sourceId": "portal.source:685b0625836a92c6c2847dc34674ea5c",
+          "relativeUrl": "sources/5b7b35b5d56ed63cabd8ec7eb4fa08ad4d1c2b102dd92e7a77a78496f524090b.txt",
+          "linkUrl": "sources/81fc3098e79d184eff47bd2ddb0ad2d73a37bb017ec3c6d638506e7a57635723.L133.html#L133",
+          "revision": "content:5b7b35b5d56ed63cabd8ec7eb4fa08ad4d1c2b102dd92e7a77a78496f524090b",
+          "digest": "sha384-vgUKA8O2CHpXUpnbJMX02N2moTW2AGx1SAD1VEHQ7R/+QH/fAGQ0wUqmgPp/L7ux",
+          "byteLength": 615,
+          "lineCount": 15
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "M:ASPNET.StarterKit.Portal.PortalModuleFormContract.TryValidate(ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput,ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput,System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.String}@)",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.TryValidate(ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput, ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput, System.Collections.Generic.IList<string>, out System.Collections.Generic.IList<string>)",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract"
+      },
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9cddcc7d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9cddcc7d.html",
+      "presentationTopicId": "portal.topic:d3ba31c264f60ddc9564bb833d4e1760",
+      "presentationPageId": "portal.page:d3ba31c264f60ddc9564bb833d4e1760",
+      "presentationFragmentId": "portal.fragment:d3ba31c264f60ddc9564bb833d4e1760"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+      "name": "IsRegistered",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "summary": "Exact membership test; case and whitespace variants are rejected.",
+      "signature": "public static bool ASPNET.StarterKit.Portal.PortalModuleHostFrameworks.IsRegistered(string value)",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Exact membership test; case and whitespace variants are rejected.",
+            "localizedText": {
+              "zh-CN": "精确判定值是否在封闭词表内；大小写与空白变体一律拒绝。",
+              "en": "Exact membership test; case and whitespace variants are rejected."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "精确判定值是否在封闭词表内；大小写与空白变体一律拒绝。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Exact membership test; case and whitespace variants are rejected.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 20
+          },
+          "end": {
+            "line": 23
+          }
+        },
+        "fetchUrl": "sources/a6a0acea19e68f11fca09885e7069d00ff082927bcc5f65887a9019f6c1ca079.txt",
+        "linkUrl": "sources/c9b256e87994ab0a65f5f55d811fa52f404a6a8fbbd3dab49f942105481fe0ac.L20.html#L20",
+        "publicAsset": {
+          "assetId": "portal.asset:c9b256e87994ab0a65f5f55d811fa52f",
+          "sourceId": "portal.source:a07b13bbfe2a0ffe0fa5966257941c5f",
+          "relativeUrl": "sources/a6a0acea19e68f11fca09885e7069d00ff082927bcc5f65887a9019f6c1ca079.txt",
+          "linkUrl": "sources/c9b256e87994ab0a65f5f55d811fa52f404a6a8fbbd3dab49f942105481fe0ac.L20.html#L20",
+          "revision": "content:a6a0acea19e68f11fca09885e7069d00ff082927bcc5f65887a9019f6c1ca079",
+          "digest": "sha384-QYT/wo64GB9XkSpPYWv53bqwhbQpxSjgCcNdEJuZ27oSteyUvzWGL99XrShe35K5",
+          "byteLength": 156,
+          "lineCount": 4
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleHostFrameworks",
+        "symbolDocumentationId": "M:ASPNET.StarterKit.Portal.PortalModuleHostFrameworks.IsRegistered(System.String)",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleHostFrameworks.IsRegistered(string)",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleHostFrameworks"
+      },
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulehostframework-c6e1f034.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulehostframework-c6e1f034.html",
+      "presentationTopicId": "portal.topic:3cbec4541813babb7460525c4b0a4c0c",
+      "presentationPageId": "portal.page:3cbec4541813babb7460525c4b0a4c0c",
+      "presentationFragmentId": "portal.fragment:3cbec4541813babb7460525c4b0a4c0c"
     },
     {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackage.-ctor-system.string-system.string-system.string-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.string-system.string-aspnet.starterkit.portal.portalmodulekind",
@@ -789982,20 +791921,20 @@
             "line": 1
           },
           "end": {
-            "line": 276
+            "line": 277
           }
         },
-        "fetchUrl": "sources/f486dae021072f0b4d0403add882e168a76354483c17bee3999a532726e77754.txt",
-        "linkUrl": "sources/e022f1b3160d3810acdb655c398ee0d8b3076b8f04a2de7125af7f4801e464f0.L1.html#L1",
+        "fetchUrl": "sources/38723a451b9902fd6e1aff699772351ffbb9657d196145951d6ee77e133f22ad.txt",
+        "linkUrl": "sources/c606c964cebc6692a7e372d32553d68648dde77089d286d05906c9f4defd9091.L1.html#L1",
         "publicAsset": {
-          "assetId": "portal.asset:e022f1b3160d3810acdb655c398ee0d8",
-          "sourceId": "portal.source:18594e3481ac69e6540e519a8040038b",
-          "relativeUrl": "sources/f486dae021072f0b4d0403add882e168a76354483c17bee3999a532726e77754.txt",
-          "linkUrl": "sources/e022f1b3160d3810acdb655c398ee0d8b3076b8f04a2de7125af7f4801e464f0.L1.html#L1",
-          "revision": "content:f486dae021072f0b4d0403add882e168a76354483c17bee3999a532726e77754",
-          "digest": "sha384-AskH4ToXFnDirLhSkBOXBIoeZzbqcEmAy7q0HO8aGKARhECsDA9uk2peHr0p22rM",
-          "byteLength": 14218,
-          "lineCount": 276
+          "assetId": "portal.asset:c606c964cebc6692a7e372d32553d686",
+          "sourceId": "portal.source:c86155be6625c0beb9d54d9b68a4678e",
+          "relativeUrl": "sources/38723a451b9902fd6e1aff699772351ffbb9657d196145951d6ee77e133f22ad.txt",
+          "linkUrl": "sources/c606c964cebc6692a7e372d32553d68648dde77089d286d05906c9f4defd9091.L1.html#L1",
+          "revision": "content:38723a451b9902fd6e1aff699772351ffbb9657d196145951d6ee77e133f22ad",
+          "digest": "sha384-IQcUHM40pHOtzwlSZ5DP/7M1GVmUbn+1QFRUudNXW6Fl26JmLn1O1rKbXNCB0FHk",
+          "byteLength": 14272,
+          "lineCount": 277
         },
         "fetchTrigger": "on-expand",
         "fetchMaxLines": 400
@@ -790117,20 +792056,20 @@
             "line": 1
           },
           "end": {
-            "line": 113
+            "line": 114
           }
         },
-        "fetchUrl": "sources/1379a2f62ffdfdfb0b19229b43f079d4327e601bd08b18dbc72efffef12ee365.txt",
-        "linkUrl": "sources/8937bb36fb9397800e211faa0cc8c6bf3f20bdf27c8a95a634a6e583f776d668.L1.html#L1",
+        "fetchUrl": "sources/fd91f7f3667972301768cbdc318150f53ed5b8eecc1341a428d9a11195228677.txt",
+        "linkUrl": "sources/633b1d5fb6d72df71d6b391f157f8fa8f36ed4b2964886955fcdb1b953298533.L1.html#L1",
         "publicAsset": {
-          "assetId": "portal.asset:8937bb36fb9397800e211faa0cc8c6bf",
-          "sourceId": "portal.source:9a5cc579f7f4068b764b967b74ec33c5",
-          "relativeUrl": "sources/1379a2f62ffdfdfb0b19229b43f079d4327e601bd08b18dbc72efffef12ee365.txt",
-          "linkUrl": "sources/8937bb36fb9397800e211faa0cc8c6bf3f20bdf27c8a95a634a6e583f776d668.L1.html#L1",
-          "revision": "content:1379a2f62ffdfdfb0b19229b43f079d4327e601bd08b18dbc72efffef12ee365",
-          "digest": "sha384-e0nbNPqaaUFmMJot5OxrNkIEdCTs4W5cJZwZKv/3sKYHfJTsgm+NwMmjiQNoCn+X",
-          "byteLength": 6075,
-          "lineCount": 113
+          "assetId": "portal.asset:633b1d5fb6d72df71d6b391f157f8fa8",
+          "sourceId": "portal.source:c0e3b2730d35b181f609dfcc30c073ec",
+          "relativeUrl": "sources/fd91f7f3667972301768cbdc318150f53ed5b8eecc1341a428d9a11195228677.txt",
+          "linkUrl": "sources/633b1d5fb6d72df71d6b391f157f8fa8f36ed4b2964886955fcdb1b953298533.L1.html#L1",
+          "revision": "content:fd91f7f3667972301768cbdc318150f53ed5b8eecc1341a428d9a11195228677",
+          "digest": "sha384-vcoX5agdNgH5ES0/dzX+HTTphAxMbxLa32Rv1N2WyRL8ZHNGHg6DDa+A4M/o+38f",
+          "byteLength": 6134,
+          "lineCount": 114
         },
         "fetchTrigger": "on-expand",
         "fetchMaxLines": 400
@@ -836809,6 +838748,505 @@
       "presentationTopicId": "portal.topic:772850b0782b0ae8ebc907ccde6f0bc9",
       "presentationPageId": "portal.page:772850b0782b0ae8ebc907ccde6f0bc9",
       "presentationFragmentId": "portal.fragment:772850b0782b0ae8ebc907ccde6f0bc9"
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+      "name": "PortalModuleEntryKinds",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "summary": "Closed vocabulary of entry forms. Only the controlled ASCX user-control entry is registered; other entry forms are not implemented and are therefore not declarable.",
+      "signature": "class ASPNET.StarterKit.Portal.PortalModuleEntryKinds",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Closed vocabulary of entry forms. Only the controlled ASCX user-control entry is registered; other entry forms are not implemented and are therefore not declarable.",
+            "localizedText": {
+              "zh-CN": "入口形态封闭词表。当前仅登记受控 ASCX 用户控件入口； 其它入口形态未实现，不作为可声明值。",
+              "en": "Closed vocabulary of entry forms. Only the controlled ASCX user-control entry is registered; other entry forms are not implemented and are therefore not declarable."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "入口形态封闭词表。当前仅登记受控 ASCX 用户控件入口； 其它入口形态未实现，不作为可声明值。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Closed vocabulary of entry forms. Only the controlled ASCX user-control entry is registered; other entry forms are not implemented and are therefore not declarable.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 34
+          },
+          "end": {
+            "line": 44
+          }
+        },
+        "fetchUrl": "sources/eb25b4dafd0f818da8119ff0311ff0250362ccafcb5613d70370f0d440d1b069.txt",
+        "linkUrl": "sources/4e8a4b13788cc6d5a9a479371f81b0cb54262f76e2b321f1fa33918dcfb098fa.L34.html#L34",
+        "publicAsset": {
+          "assetId": "portal.asset:4e8a4b13788cc6d5a9a479371f81b0cb",
+          "sourceId": "portal.source:dc7ec48d6cd11da0da2a074b6c706fa9",
+          "relativeUrl": "sources/eb25b4dafd0f818da8119ff0311ff0250362ccafcb5613d70370f0d440d1b069.txt",
+          "linkUrl": "sources/4e8a4b13788cc6d5a9a479371f81b0cb54262f76e2b321f1fa33918dcfb098fa.L34.html#L34",
+          "revision": "content:eb25b4dafd0f818da8119ff0311ff0250362ccafcb5613d70370f0d440d1b069",
+          "digest": "sha384-J+vZMZBw+1RuAwDUwGP8h4uyavVlVPc3AyKQYEIJP5sJRXC2DhoN8tQe7rcQvP8w",
+          "byteLength": 480,
+          "lineCount": 11
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleentrykinds",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "symbolDocumentationId": "T:ASPNET.StarterKit.Portal.PortalModuleEntryKinds",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleEntryKinds",
+        "baseTypeIds": [
+          "T:System.Object"
+        ]
+      },
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds-a456fb56.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds-a456fb56.html",
+      "presentationTopicId": "portal.topic:0e90f5073f9cee5ea2ded0cdbd6123ca",
+      "presentationPageId": "portal.page:0e90f5073f9cee5ea2ded0cdbd6123ca",
+      "presentationFragmentId": "portal.fragment:0e90f5073f9cee5ea2ded0cdbd6123ca"
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract",
+      "name": "PortalModuleFormContract",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "summary": "Read-only contract validator for module form-description fields across the four dimensions (module kind / host framework / entry form / resources and dependency declarations). It performs closed-vocabulary validation only: it is NOT wired into the loading chain, does NOT change existing package parsing, reads no file/config, and writes nothing. A missing field means \"undeclared\" (backward compatible); a present but invalid value fails closed. This class has zero external dependencies: callers pass already-extracted strings and string collections; the caller maps JSON type errors to \"isString: false\".",
+      "signature": "class ASPNET.StarterKit.Portal.PortalModuleFormContract",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Read-only contract validator for module form-description fields across the four dimensions (module kind / host framework / entry form / resources and dependency declarations). It performs closed-vocabulary validation only: it is NOT wired into the loading chain, does NOT change existing package parsing, reads no file/config, and writes nothing. A missing field means \"undeclared\" (backward compatible); a present but invalid value fails closed. This class has zero external dependencies: callers pass already-extracted strings and string collections; the caller maps JSON type errors to \"isString: false\".",
+            "localizedText": {
+              "zh-CN": "模块形态描述字段的**只读契约校验器**。按 `module.json` 的四类形态维度 （模块种类 / 宿主框架 / 入口形态 / 资源与依赖声明）做封闭词表校验； **不接入装载链、不改变既有包解析结果、不读文件/配置、不写任何内容**。 字段缺失＝未声明（兼容既有包）；字段出现但值非法＝fail-closed。 本类零外部依赖：只接收调用方已从 manifest 提取的字符串与字符串集合， 由调用方负责把 JSON 类型错误映射为 \"isString: false\"。",
+              "en": "Read-only contract validator for module form-description fields across the four dimensions (module kind / host framework / entry form / resources and dependency declarations). It performs closed-vocabulary validation only: it is NOT wired into the loading chain, does NOT change existing package parsing, reads no file/config, and writes nothing. A missing field means \"undeclared\" (backward compatible); a present but invalid value fails closed. This class has zero external dependencies: callers pass already-extracted strings and string collections; the caller maps JSON type errors to \"isString: false\"."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "模块形态描述字段的**只读契约校验器**。按 `module.json` 的四类形态维度 （模块种类 / 宿主框架 / 入口形态 / 资源与依赖声明）做封闭词表校验； **不接入装载链、不改变既有包解析结果、不读文件/配置、不写任何内容**。 字段缺失＝未声明（兼容既有包）；字段出现但值非法＝fail-closed。 本类零外部依赖：只接收调用方已从 manifest 提取的字符串与字符串集合， 由调用方负责把 JSON 类型错误映射为 \"isString: false\"。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Read-only contract validator for module form-description fields across the four dimensions (module kind / host framework / entry form / resources and dependency declarations). It performs closed-vocabulary validation only: it is NOT wired into the loading chain, does NOT change existing package parsing, reads no file/config, and writes nothing. A missing field means \"undeclared\" (backward compatible); a present but invalid value fails closed. This class has zero external dependencies: callers pass already-extracted strings and string collections; the caller maps JSON type errors to \"isString: false\".",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 62
+          },
+          "end": {
+            "line": 185
+          }
+        },
+        "fetchUrl": "sources/d37568292b61a68c47084e4df6dce22a67659e42e0f3e8048718282f6115b0f8.txt",
+        "linkUrl": "sources/7ec46b5a19a45e597b68e3306522a7183a66611993a89bc3b29eb736d1edd4c2.L62.html#L62",
+        "publicAsset": {
+          "assetId": "portal.asset:7ec46b5a19a45e597b68e3306522a718",
+          "sourceId": "portal.source:35e101d5d337ce05c1bf381c1454ba63",
+          "relativeUrl": "sources/d37568292b61a68c47084e4df6dce22a67659e42e0f3e8048718282f6115b0f8.txt",
+          "linkUrl": "sources/7ec46b5a19a45e597b68e3306522a7183a66611993a89bc3b29eb736d1edd4c2.L62.html#L62",
+          "revision": "content:d37568292b61a68c47084e4df6dce22a67659e42e0f3e8048718282f6115b0f8",
+          "digest": "sha384-B8swRf2BP1QVjYL/h1HyPd/ejiL6OJ9CVaH0Ts+aMX5cOQRGYHIh3c39gHp0GgVM",
+          "byteLength": 6114,
+          "lineCount": 124
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleformcontract",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "symbolDocumentationId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "baseTypeIds": [
+          "T:System.Object"
+        ]
+      },
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract-0ed29aa9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract-0ed29aa9.html",
+      "presentationTopicId": "portal.topic:c5ced4356de05e55249f476c975d6fce",
+      "presentationPageId": "portal.page:c5ced4356de05e55249f476c975d6fce",
+      "presentationFragmentId": "portal.fragment:c5ced4356de05e55249f476c975d6fce"
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+      "name": "FieldInput",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "summary": "Input for a form-field check: `declared` says whether the field is present in the manifest, `isString` says whether the value is a JSON string. Undeclared fields (declared=false) skip value checks for backward compatibility.",
+      "signature": "struct ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Input for a form-field check: `declared` says whether the field is present in the manifest, `isString` says whether the value is a JSON string. Undeclared fields (declared=false) skip value checks for backward compatibility.",
+            "localizedText": {
+              "zh-CN": "形态字段校验输入；`declared` 表示字段是否在 manifest 出现，`isString` 表示值是否为 JSON 字符串。 不声明字段（declared=false）时不校验其值，保证既有包兼容。",
+              "en": "Input for a form-field check: `declared` says whether the field is present in the manifest, `isString` says whether the value is a JSON string. Undeclared fields (declared=false) skip value checks for backward compatibility."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "形态字段校验输入；`declared` 表示字段是否在 manifest 出现，`isString` 表示值是否为 JSON 字符串。 不声明字段（declared=false）时不校验其值，保证既有包兼容。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Input for a form-field check: `declared` says whether the field is present in the manifest, `isString` says whether the value is a JSON string. Undeclared fields (declared=false) skip value checks for backward compatibility.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 90
+          },
+          "end": {
+            "line": 118
+          }
+        },
+        "fetchUrl": "sources/44c55dd5bb42e1cd9ac4eac10487b87015489195d7e8c6d5dfebfb343222c07b.txt",
+        "linkUrl": "sources/df51e968f6aba92f14bfc2d0eb251948fa4a9df4158e839049c69afe6a048b4a.L90.html#L90",
+        "publicAsset": {
+          "assetId": "portal.asset:df51e968f6aba92f14bfc2d0eb251948",
+          "sourceId": "portal.source:fe4f570c3611674be6c6d4cec9039003",
+          "relativeUrl": "sources/44c55dd5bb42e1cd9ac4eac10487b87015489195d7e8c6d5dfebfb343222c07b.txt",
+          "linkUrl": "sources/df51e968f6aba92f14bfc2d0eb251948fa4a9df4158e839049c69afe6a048b4a.L90.html#L90",
+          "revision": "content:44c55dd5bb42e1cd9ac4eac10487b87015489195d7e8c6d5dfebfb343222c07b",
+          "digest": "sha384-L/NQRHW1a4A0SsmD3RaeOgEKvpq2022Z0nLNccXIEGOrOqqkm8CKJ3e568pjnGwW",
+          "byteLength": 1350,
+          "lineCount": 29
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "symbolDocumentationId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleFormContract.FieldInput",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.PortalModuleFormContract",
+        "baseTypeIds": [
+          "T:System.ValueType",
+          "T:System.Object"
+        ]
+      },
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.-c7053005.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.-c7053005.html",
+      "presentationTopicId": "portal.topic:84ec0eb33e50d45cf7226282c1adb9f8",
+      "presentationPageId": "portal.page:84ec0eb33e50d45cf7226282c1adb9f8",
+      "presentationFragmentId": "portal.fragment:84ec0eb33e50d45cf7226282c1adb9f8"
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+      "name": "PortalModuleHostFrameworks",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "summary": "Closed vocabulary of host frameworks. Only the actually implemented ASP.NET Web Forms (ASCX) host is registered; MVC/CMS and other forms are not yet implemented and are therefore not declarable.",
+      "signature": "class ASPNET.StarterKit.Portal.PortalModuleHostFrameworks",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Closed vocabulary of host frameworks. Only the actually implemented ASP.NET Web Forms (ASCX) host is registered; MVC/CMS and other forms are not yet implemented and are therefore not declarable.",
+            "localizedText": {
+              "zh-CN": "宿主框架封闭词表。当前仅登记项目实际实现的 ASP.NET Web Forms（ASCX）宿主； MVC / CMS 等形态尚未落地，不作为可声明值。",
+              "en": "Closed vocabulary of host frameworks. Only the actually implemented ASP.NET Web Forms (ASCX) host is registered; MVC/CMS and other forms are not yet implemented and are therefore not declarable."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "宿主框架封闭词表。当前仅登记项目实际实现的 ASP.NET Web Forms（ASCX）宿主； MVC / CMS 等形态尚未落地，不作为可声明值。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Closed vocabulary of host frameworks. Only the actually implemented ASP.NET Web Forms (ASCX) host is registered; MVC/CMS and other forms are not yet implemented and are therefore not declarable.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.Components.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal.Components/PortalModuleFormContract.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 14
+          },
+          "end": {
+            "line": 24
+          }
+        },
+        "fetchUrl": "sources/631cc9f625dd6a79c947c8633e986b4474696ca0111c0a3f54c20362c9cde1ed.txt",
+        "linkUrl": "sources/6547048a935b889139fdfc172c3f203e1fe719e7f7ce880f0e0be976dc271868.L14.html#L14",
+        "publicAsset": {
+          "assetId": "portal.asset:6547048a935b889139fdfc172c3f203e",
+          "sourceId": "portal.source:c26fbd7d49f2426e6d98fc57c126baf9",
+          "relativeUrl": "sources/631cc9f625dd6a79c947c8633e986b4474696ca0111c0a3f54c20362c9cde1ed.txt",
+          "linkUrl": "sources/6547048a935b889139fdfc172c3f203e1fe719e7f7ce880f0e0be976dc271868.L14.html#L14",
+          "revision": "content:631cc9f625dd6a79c947c8633e986b4474696ca0111c0a3f54c20362c9cde1ed",
+          "digest": "sha384-MaZMJDGjKmcvOndVbyD80jmJbR61rIw48oc+KDzltRHbv20YDBozxlRlJkFBkPJO",
+          "byteLength": 590,
+          "lineCount": 11
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmodulehostframeworks",
+      "hierarchy": {
+        "assembly": "Portal.Components",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "symbolDocumentationId": "T:ASPNET.StarterKit.Portal.PortalModuleHostFrameworks",
+        "displayName": "ASPNET.StarterKit.Portal.PortalModuleHostFrameworks",
+        "baseTypeIds": [
+          "T:System.Object"
+        ]
+      },
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulehostframework-06704aee.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulehostframework-06704aee.html",
+      "presentationTopicId": "portal.topic:850f5301c2da561af134b68eede74b68",
+      "presentationPageId": "portal.page:850f5301c2da561af134b68eede74b68",
+      "presentationFragmentId": "portal.fragment:850f5301c2da561af134b68eede74b68"
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulekind",
@@ -883744,7 +886182,7 @@
       "id": "kind:dotnet-method",
       "kind": "kind",
       "label": "dotnet-method",
-      "entryCount": 1534,
+      "entryCount": 1540,
       "views": [
         "dotnet"
       ]
@@ -883753,7 +886191,7 @@
       "id": "kind:dotnet-field",
       "kind": "kind",
       "label": "dotnet-field",
-      "entryCount": 1075,
+      "entryCount": 1086,
       "views": [
         "dotnet"
       ]
@@ -883762,7 +886200,7 @@
       "id": "kind:dotnet-type",
       "kind": "kind",
       "label": "dotnet-type",
-      "entryCount": 437,
+      "entryCount": 441,
       "views": [
         "dotnet"
       ]
@@ -883807,7 +886245,7 @@
       "id": "profile-layer:unknown-profile",
       "kind": "profile-layer",
       "label": "unknown-profile",
-      "entryCount": 5791,
+      "entryCount": 5812,
       "views": [
         "dotnet"
       ]
@@ -883816,7 +886254,7 @@
       "id": "source-root:src",
       "kind": "source-root",
       "label": "src",
-      "entryCount": 5791,
+      "entryCount": 5812,
       "views": [
         "dotnet"
       ]
@@ -883827,7 +886265,7 @@
       "id": "view:dotnet",
       "kind": "view",
       "label": ".NET",
-      "entryCount": 5791,
+      "entryCount": 5812,
       "views": [
         "dotnet"
       ],
@@ -945390,7 +947828,7 @@
           "id": "dotnet:assembly:portal.components",
           "kind": "assembly",
           "label": "Portal.Components",
-          "entryCount": 1511,
+          "entryCount": 1532,
           "views": [
             "dotnet"
           ],
@@ -945399,7 +947837,7 @@
               "id": "dotnet:assembly:portal.components:namespace:aspnet",
               "kind": "namespace",
               "label": "ASPNET",
-              "entryCount": 1511,
+              "entryCount": 1532,
               "views": [
                 "dotnet"
               ],
@@ -945408,7 +947846,7 @@
                   "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit",
                   "kind": "namespace",
                   "label": "StarterKit",
-                  "entryCount": 1511,
+                  "entryCount": 1532,
                   "views": [
                     "dotnet"
                   ],
@@ -945417,7 +947855,7 @@
                       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal",
                       "kind": "namespace",
                       "label": "Portal",
-                      "entryCount": 1511,
+                      "entryCount": 1532,
                       "views": [
                         "dotnet"
                       ],
@@ -950211,6 +952649,95 @@
                           "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
                           "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementstatuses",
                           "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementstatu-5f4db405.html"
+                        },
+                        {
+                          "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+                          "kind": "type",
+                          "label": "FieldInput",
+                          "entryCount": 6,
+                          "views": [
+                            "dotnet"
+                          ],
+                          "children": [
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+                              "kind": "entry",
+                              "label": "Declared",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-45f805d9.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+                              "kind": "entry",
+                              "label": "FromString",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+                              "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-90871af2.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+                              "kind": "entry",
+                              "label": "IsString",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-e1cba892.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+                              "kind": "entry",
+                              "label": "NonString",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+                              "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9ea0b284.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+                              "kind": "entry",
+                              "label": "Undeclared",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+                              "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-2292935b.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+                              "kind": "entry",
+                              "label": "Value",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-29258e70.html"
+                            }
+                          ]
                         },
                         {
                           "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.formbuildersubmission",
@@ -959863,6 +962390,230 @@
                           "sourcePath": "src/Portal.Components/PortalModuleAssemblyState.cs",
                           "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleassemblystate",
                           "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleassemblystate-2edbb57e.html"
+                        },
+                        {
+                          "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds",
+                          "kind": "type",
+                          "label": "PortalModuleEntryKinds",
+                          "entryCount": 3,
+                          "views": [
+                            "dotnet"
+                          ],
+                          "children": [
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds:base:t-system.object",
+                              "kind": "relation",
+                              "label": "Base: System.Object",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+                              "kind": "entry",
+                              "label": "Ascx",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.as-7c31f431.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleentrykinds:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+                              "kind": "entry",
+                              "label": "IsRegistered",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+                              "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.is-97c6de3c.html"
+                            }
+                          ],
+                          "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+                          "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                          "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleentrykinds",
+                          "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds-a456fb56.html"
+                        },
+                        {
+                          "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract",
+                          "kind": "type",
+                          "label": "PortalModuleFormContract",
+                          "entryCount": 9,
+                          "views": [
+                            "dotnet"
+                          ],
+                          "children": [
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:base:t-system.object",
+                              "kind": "relation",
+                              "label": "Base: System.Object",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:base:t-system.valuetype",
+                              "kind": "relation",
+                              "label": "Base: System.ValueType",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+                              "kind": "entry",
+                              "label": "DependenciesField",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-5a4ef8b6.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+                              "kind": "entry",
+                              "label": "EntryKindField",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-1472a591.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+                              "kind": "entry",
+                              "label": "HostFrameworkField",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-07c8ed29.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+                              "kind": "entry",
+                              "label": "MaxDependencyCount",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-20cfce11.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+                              "kind": "entry",
+                              "label": "MaxDependencyLength",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-7c72a7be.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+                              "kind": "entry",
+                              "label": "ModuleKindField",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.-f1ac2d53.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleformcontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+                              "kind": "entry",
+                              "label": "TryValidate",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+                              "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.-9cddcc7d.html"
+                            }
+                          ],
+                          "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+                          "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                          "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+                          "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.-c7053005.html"
+                        },
+                        {
+                          "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks",
+                          "kind": "type",
+                          "label": "PortalModuleHostFrameworks",
+                          "entryCount": 3,
+                          "views": [
+                            "dotnet"
+                          ],
+                          "children": [
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks:base:t-system.object",
+                              "kind": "relation",
+                              "label": "Base: System.Object",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+                              "kind": "entry",
+                              "label": "AspNetWebForms",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+                              "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulehostframework-21aa3ffc.html"
+                            },
+                            {
+                              "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulehostframeworks:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+                              "kind": "entry",
+                              "label": "IsRegistered",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+                              "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                              "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+                              "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulehostframework-c6e1f034.html"
+                            }
+                          ],
+                          "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+                          "sourcePath": "src/Portal.Components/PortalModuleFormContract.cs",
+                          "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmodulehostframeworks",
+                          "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulehostframework-06704aee.html"
                         },
                         {
                           "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentry",
@@ -978845,8 +981596,8 @@
   "relationGraph": {
     "contract": "hia-project-relation-graph",
     "contractVersion": "0.1.0-draft",
-    "nodeCount": 6248,
-    "relationCount": 5798,
+    "nodeCount": 6270,
+    "relationCount": 5819,
     "nodes": [
       {
         "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -982850,6 +985601,83 @@
         "kind": "entry",
         "label": "_modesByPackageId",
         "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleassemblystate._modesbypackageid",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+        "kind": "entry",
+        "label": "Ascx",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+        "kind": "entry",
+        "label": "DependenciesField",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+        "kind": "entry",
+        "label": "EntryKindField",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+        "kind": "entry",
+        "label": "Declared",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+        "kind": "entry",
+        "label": "IsString",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+        "kind": "entry",
+        "label": "Value",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+        "kind": "entry",
+        "label": "HostFrameworkField",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+        "kind": "entry",
+        "label": "MaxDependencyCount",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+        "kind": "entry",
+        "label": "MaxDependencyLength",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+        "kind": "entry",
+        "label": "ModuleKindField",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+        "kind": "entry",
+        "label": "AspNetWebForms",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
         "view": "dotnet"
       },
       {
@@ -993707,6 +996535,48 @@
         "kind": "entry",
         "label": "OnInit",
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecontrol-1.oninit-system.eventargs",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+        "kind": "entry",
+        "label": "IsRegistered",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+        "kind": "entry",
+        "label": "FromString",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+        "kind": "entry",
+        "label": "NonString",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+        "kind": "entry",
+        "label": "Undeclared",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+        "kind": "entry",
+        "label": "TryValidate",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+        "kind": "entry",
+        "label": "IsRegistered",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
         "view": "dotnet"
       },
       {
@@ -1016138,6 +1019008,34 @@
         "view": "dotnet"
       },
       {
+        "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+        "kind": "entry",
+        "label": "PortalModuleEntryKinds",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract",
+        "kind": "entry",
+        "label": "PortalModuleFormContract",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+        "kind": "entry",
+        "label": "FieldInput",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+        "kind": "entry",
+        "label": "PortalModuleHostFrameworks",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+        "view": "dotnet"
+      },
+      {
         "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulekind",
         "kind": "entry",
         "label": "PortalModuleKind",
@@ -1020411,6 +1023309,12 @@
         "kind": "source",
         "label": "src/Portal.Components/PortalModuleAssemblyState.cs",
         "path": "src/Portal.Components/PortalModuleAssemblyState.cs"
+      },
+      {
+        "id": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "source",
+        "label": "src/Portal.Components/PortalModuleFormContract.cs",
+        "path": "src/Portal.Components/PortalModuleFormContract.cs"
       },
       {
         "id": "source:src/Portal.Components/PortalNavigationGroupAlias.cs",
@@ -1029535,6 +1032439,149 @@
           "language": "csharp",
           "rangeStartLine": 61,
           "rangeEndLine": 61
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleentrykinds.ascx",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 37,
+          "rangeEndLine": 37
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.dependenciesfield",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 77,
+          "rangeEndLine": 77
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.entrykindfield",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 74,
+          "rangeEndLine": 74
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.declared",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 93,
+          "rangeEndLine": 93
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.isstring",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 96,
+          "rangeEndLine": 96
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.value",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 99,
+          "rangeEndLine": 99
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.hostframeworkfield",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 71,
+          "rangeEndLine": 71
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencycount",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 65,
+          "rangeEndLine": 65
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.maxdependencylength",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 68,
+          "rangeEndLine": 68
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleformcontract.modulekindfield",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 80,
+          "rangeEndLine": 80
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulehostframeworks.aspnetwebforms",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 17,
+          "rangeEndLine": 17
         }
       },
       {
@@ -1049698,6 +1052745,84 @@
           "language": "csharp",
           "rangeStartLine": 246,
           "rangeEndLine": 259
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleentrykinds.isregistered-system.string",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 40,
+          "rangeEndLine": 43
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.fromstring-system.string",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 102,
+          "rangeEndLine": 105
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.nonstring",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 108,
+          "rangeEndLine": 111
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput.undeclared",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 114,
+          "rangeEndLine": 117
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleformcontract.tryvalidate-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 133,
+          "rangeEndLine": 147
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulehostframeworks.isregistered-system.string",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 20,
+          "rangeEndLine": 23
         }
       },
       {
@@ -1087670,7 +1090795,7 @@
         "metadata": {
           "language": "xml",
           "rangeStartLine": 1,
-          "rangeEndLine": 276
+          "rangeEndLine": 277
         }
       },
       {
@@ -1087709,7 +1090834,7 @@
         "metadata": {
           "language": "xml",
           "rangeStartLine": 1,
-          "rangeEndLine": 113
+          "rangeEndLine": 114
         }
       },
       {
@@ -1091350,6 +1094475,58 @@
           "language": "csharp",
           "rangeStartLine": 24,
           "rangeEndLine": 260
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleentrykinds",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 34,
+          "rangeEndLine": 44
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 62,
+          "rangeEndLine": 185
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleformcontract.fieldinput",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 90,
+          "rangeEndLine": 118
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks->source:src/Portal.Components/PortalModuleFormContract.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+        "to": "source:src/Portal.Components/PortalModuleFormContract.cs",
+        "label": "Source: src/Portal.Components/PortalModuleFormContract.cs",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulehostframeworks",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 14,
+          "rangeEndLine": 24
         }
       },
       {

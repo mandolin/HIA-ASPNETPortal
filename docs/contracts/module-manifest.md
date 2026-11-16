@@ -18,6 +18,12 @@
 | `desktopEntry` | 字符串 | 是 | 受控 ASCX 入口的相对路径，形如 `DesktopModules/<模块>/<模块>.ascx` |
 | `resources` | 字符串数组 | 是 | 站内静态资源路径；**逐项校验**，缺项、路径转义或扩展名不在允许表内会**拒绝整个包** |
 | `capability` | 对象 | **否** | 见下节「企业能力」 |
+| `moduleKind` | 字符串 | 否 | `Core`（缺省，兼容既有包）/ `Independent`（须显式列入部署 Profile 允许集）；其它值整包拒绝 |
+| `hostFramework` | 字符串 | 否 | 宿主框架；封闭词表仅 `AspNetWebForms`（当前唯一已实现宿主）；出现即校验、未知值拒绝 |
+| `entryKind` | 字符串 | 否 | 入口形态；封闭词表仅 `Ascx`（当前唯一已实现入口）；出现即校验、未知值拒绝 |
+| `dependencies` | 字符串数组 | 否 | 依赖声明；逐项非空、长度受限、数组项数受限；**只做形态契约层校验，不解析依赖语义、不验证依赖对象存在性** |
+
+> **形态字段的校验边界**：后三个字段（`hostFramework` / `entryKind` / `dependencies`）由**独立只读校验器** `PortalModuleFormContract.cs` 校验，**不接入装载链、不改变既有包解析结果**。字段缺失＝未声明（兼容既有包）；字段出现但值非法＝fail-closed。未知字段的通用拒绝**尚未实现**，作为开放点登记（见下节）。
 
 ### `schemaVersion`
 
@@ -30,7 +36,9 @@
 
 ### `resources`
 
-当前静态资源允许表为 **`.css`**（扩展名精确比较、不按 MIME 猜测、不接受无扩展名）。资源路径须位于站内；新扩展名不会因向后兼容被自动放行。
+当前静态资源允许表为 **`.css`、`.png`、`.jpg`、`.jpeg`、`.gif`、`.webp`**（扩展名精确比较、不按 MIME 猜测、不接受无扩展名）。资源路径须位于站内；新扩展名不会因向后兼容被自动放行。
+
+> 本表于 2026-11-16 与权威源码 `PortalModulePackage.cs:1238-1243` 对齐（此前本页只列 `.css`，与源码及 `docs/dev-guide.md:358` 不一致）；此次仅收敛文档事实，**未放宽任何允许表、未改校验实现**。
 
 ## 三、企业能力（capability）
 
@@ -73,7 +81,26 @@
 - 程序集相关声明
 - 包 URL 相关声明
 
-## 五、相关门禁与文档
+## 五、形态描述字段契约（2026-11-16 新增）
+
+形态描述字段按 backlog「容纳机制设计方向」四类维度收口，权威校验实现为 `src/Portal.Components/PortalModuleFormContract.cs`（**只读、独立于装载链**）：
+
+| 维度 | 字段 | 封闭词表 / 约束 | 缺失时 |
+| --- | --- | --- | --- |
+| 模块种类 | `moduleKind` | `Core`（默认）/ `Independent`，其它值拒绝（现有 `PortalModulePackage.cs:989-1004` 已校验） | 缺省 `Core` |
+| 宿主框架 | `hostFramework` | 仅 `AspNetWebForms`（当前唯一已实现宿主） | 未声明（兼容） |
+| 入口形态 | `entryKind` | 仅 `Ascx`（当前唯一已实现入口） | 未声明（兼容） |
+| 资源与依赖声明 | `resources` / `dependencies` | 资源沿用 §`resources` 允许表；依赖数组逐项非空、长度 ≤ `MaxDependencyLength`、项数 ≤ `MaxDependencyCount` | `resources` 必填；`dependencies` 未声明（兼容） |
+
+**校验纪律**：字段出现即校验、未知值 fail-closed、原因受控不回显输入；不修改 manifest、不读文件/配置、不接入 `TryReadPackage` 装载链（既有包解析结果零变化）。单测 `src/Portal.Tests/PortalModuleFormContractTests.cs` 覆盖封闭词表、缺省兼容、非法值/类型/数组 fail-closed 与重复实跑幂等。
+
+**开放点（显式登记，未擅自实现）**：
+1. **未知字段通用拒绝**：当前 `TryReadPackage` 为逐字段读取（`:911-1017`），对未列入黑名单的未知字段无通用拒绝。是否收紧为全字段白名单须用户裁定——收紧会使既有未登记字段的包失效，属兼容性决策，不在本包范围。
+2. **依赖语义**：`dependencies` 只做形态契约层校验，**不验证依赖对象是否真实存在**、不参与授权；与 `PortalNavigationRegistry`「不验证依赖存在性」口径一致。语义解析留后续周期。
+3. **宿主 / 入口扩展**：`AspNetMvc` / CMS 等形态未落地，不进入词表；未来扩展须显式修改封闭词表并经确认，不因向后兼容自动放行。
+4. **A 级硬边界**：本契约不触碰三条硬边界（第三方禁获 `Admins`、来源与能力声明不作授权依据、第三方不得自创能力条目），相关判定仍由 `PortalCapabilityRegistry` / `PortalModuleProvisioner` / 门禁承担。
+
+## 六、相关门禁与文档
 
 - 新增模块就绪检查：`dev/scripts/Test-PortalNewModuleReadiness.ps1`（R1 csproj 登记 / R2 `CodeBehind` / R3 主题作用域规则 / R4 标记与 CSS 类名一致）。
 - 业务模块冒烟：`dev/scripts/Test-PortalBusinessModuleSmoke.ps1`。
