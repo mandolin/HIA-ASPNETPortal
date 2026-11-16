@@ -1,0 +1,10 @@
+            public static ModuleFailureInput Create(string moduleId, string failureCategory, bool diagnosticRecorded, bool continueCalled)
+            {
+                return new ModuleFailureInput
+                {
+                    ModuleId = moduleId,
+                    FailureCategory = failureCategory,
+                    DiagnosticRecorded = diagnosticRecorded,
+                    ContinueCalled = continueCalled
+                };
+            }

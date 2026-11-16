@@ -1,0 +1,19 @@
+        public static Decision CanIsolateFailure(ModuleFailureInput failure, int subsequentModuleCount)
+        {
+            if (!failure.DiagnosticRecorded)
+            {
+                return Decision.Fail(ReasonDiagnosticMissing);
+            }
+
+            if (!failure.ContinueCalled)
+            {
+                return Decision.Fail(ReasonLoopStopped);
+            }
+
+            if (subsequentModuleCount <= 0)
+            {
+                return Decision.Fail(ReasonNoSubsequentModule);
+            }
+
+            return Decision.Pass();
+        }

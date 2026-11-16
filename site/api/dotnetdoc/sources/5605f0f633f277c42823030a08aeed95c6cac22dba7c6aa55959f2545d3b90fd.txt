@@ -1,0 +1,19 @@
+        public static Decision IsEntryUnique(IList<PortalNavigationEntry> entries, string entryKey)
+        {
+            if (entries == null || string.IsNullOrWhiteSpace(entryKey))
+            {
+                return Decision.Fail(ReasonEntryNotUnique);
+            }
+
+            int hits = 0;
+            for (int i = 0; i < entries.Count; i++)
+            {
+                PortalNavigationEntry entry = entries[i];
+                if (entry != null && string.Equals(entry.EntryKey, entryKey.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    hits++;
+                }
+            }
+
+            return hits == 1 ? Decision.Pass() : Decision.Fail(ReasonEntryNotUnique);
+        }

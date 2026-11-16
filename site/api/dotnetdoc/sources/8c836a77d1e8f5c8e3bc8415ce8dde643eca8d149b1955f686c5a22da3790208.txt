@@ -1,0 +1,33 @@
+        public static Decision IsDiagnosticWellFormed(DiagnosticInput diagnostic, string moduleId, IList<string> registeredCategories)
+        {
+            if (string.IsNullOrWhiteSpace(diagnostic.EventId) ||
+                diagnostic.UtcTime == default(DateTime) ||
+                string.IsNullOrWhiteSpace(diagnostic.Category) ||
+                string.IsNullOrWhiteSpace(diagnostic.Message))
+            {
+                return Decision.Fail(ReasonDiagnosticIncomplete);
+            }
+
+            if (string.IsNullOrWhiteSpace(moduleId) || diagnostic.Message.IndexOf(moduleId, StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                return Decision.Fail(ReasonDiagnosticIncomplete);
+            }
+
+            if (registeredCategories == null)
+            {
+                return Decision.Fail(ReasonDiagnosticIncomplete);
+            }
+
+            bool registered = false;
+            for (int i = 0; i < registeredCategories.Count; i++)
+            {
+                string candidate = registeredCategories[i];
+                if (!string.IsNullOrWhiteSpace(candidate) && string.Equals(candidate.Trim(), diagnostic.Category.Trim(), StringComparison.Ordinal))
+                {
+                    registered = true;
+                    break;
+                }
+            }
+
+            return registered ? Decision.Pass() : Decision.Fail(ReasonDiagnosticIncomplete);
+        }

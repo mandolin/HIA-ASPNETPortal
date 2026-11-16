@@ -1,0 +1,20 @@
+        public struct Decision
+        {
+            /// <summary>判定是否成立。</summary>
+            public bool Holds;
+
+            /// <summary>受控原因。</summary>
+            public string Reason;
+
+            /// <summary><zh-CN>构造成立结果。</zh-CN><en>Builds a holding decision.</en></summary>
+            public static Decision Pass()
+            {
+                return new Decision { Holds = true, Reason = string.Empty };
+            }
+
+            /// <summary><zh-CN>构造不成立结果。</zh-CN><en>Builds a failing decision.</en></summary>
+            public static Decision Fail(string reason)
+            {
+                return new Decision { Holds = false, Reason = reason ?? string.Empty };
+            }
+        }

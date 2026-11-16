@@ -1,0 +1,30 @@
+        public struct DiagnosticInput
+        {
+            /// <summary>事件标识。</summary>
+            public string EventId;
+
+            /// <summary>UTC 时间（非空即视为已记录）。</summary>
+            public DateTime UtcTime;
+
+            /// <summary>类别（须在已登记词表内）。</summary>
+            public string Category;
+
+            /// <summary>摘要（模块标识由调用方要求包含在其中，因为 DTO 无专用字段）。</summary>
+            public string Message;
+
+            /// <summary>异常类型（无异常时可为空）。</summary>
+            public string ExceptionType;
+
+            /// <summary><zh-CN>构造诊断输入。</zh-CN><en>Builds a diagnostic input.</en></summary>
+            public static DiagnosticInput Create(string eventId, DateTime utcTime, string category, string message, string exceptionType)
+            {
+                return new DiagnosticInput
+                {
+                    EventId = eventId,
+                    UtcTime = utcTime,
+                    Category = category,
+                    Message = message,
+                    ExceptionType = exceptionType
+                };
+            }
+        }

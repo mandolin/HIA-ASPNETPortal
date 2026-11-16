@@ -1,0 +1,26 @@
+        public struct ModuleFailureInput
+        {
+            /// <summary>失败模块标识。</summary>
+            public string ModuleId;
+
+            /// <summary>失败分类（如 ModulePackage.Load）。</summary>
+            public string FailureCategory;
+
+            /// <summary>是否已记录诊断。</summary>
+            public bool DiagnosticRecorded;
+
+            /// <summary>渲染循环是否已 continue（跳过该模块）。</summary>
+            public bool ContinueCalled;
+
+            /// <summary><zh-CN>构造失败上下文。</zh-CN><en>Builds a failure context.</en></summary>
+            public static ModuleFailureInput Create(string moduleId, string failureCategory, bool diagnosticRecorded, bool continueCalled)
+            {
+                return new ModuleFailureInput
+                {
+                    ModuleId = moduleId,
+                    FailureCategory = failureCategory,
+                    DiagnosticRecorded = diagnosticRecorded,
+                    ContinueCalled = continueCalled
+                };
+            }
+        }

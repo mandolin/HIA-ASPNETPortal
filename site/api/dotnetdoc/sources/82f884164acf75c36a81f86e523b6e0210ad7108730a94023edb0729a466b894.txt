@@ -1,0 +1,4 @@
+            public static Decision Pass()
+            {
+                return new Decision { Holds = true, Reason = string.Empty };
+            }

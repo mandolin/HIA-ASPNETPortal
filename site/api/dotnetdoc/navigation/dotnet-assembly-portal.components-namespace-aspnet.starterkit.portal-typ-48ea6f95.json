@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.continuecalled",
+      "kind": "entry",
+      "label": "ContinueCalled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.continuecalled",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.continuecalled",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcont-926062ad.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.create-system.string-system.string-system.boolean-system.boolean",
+      "kind": "entry",
+      "label": "Create",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.create-system.string-system.string-system.boolean-system.boolean",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.create-system.string-system.string-system.boolean-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcont-1f4488d2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.diagnosticrecorded",
+      "kind": "entry",
+      "label": "DiagnosticRecorded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.diagnosticrecorded",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.diagnosticrecorded",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcont-ec24c052.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.failurecategory",
+      "kind": "entry",
+      "label": "FailureCategory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.failurecategory",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.failurecategory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcont-015149b5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.moduleid",
+      "kind": "entry",
+      "label": "ModuleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.moduleid",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput.moduleid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcont-495f0dc0.html"
+    }
+  ]
+}

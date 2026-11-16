@@ -1,0 +1,4 @@
+            public static Decision Fail(string reason)
+            {
+                return new Decision { Holds = false, Reason = reason ?? string.Empty };
+            }

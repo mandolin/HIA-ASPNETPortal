@@ -294,6 +294,26 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d0f6e7df.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.decision",
+      "kind": "type",
+      "label": "Decision",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-32bab1f9.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.diagnosticinput",
+      "kind": "type",
+      "label": "DiagnosticInput",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f5377c24.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryquery",
       "kind": "type",
       "label": "EmployeeDirectoryQuery",
@@ -1464,6 +1484,16 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e0356b9f.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.modulefailureinput",
+      "kind": "type",
+      "label": "ModuleFailureInput",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-48ea6f95.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprovisionrequest",
       "kind": "type",
       "label": "ModuleProvisionRequest",
@@ -2014,6 +2044,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmodulehostframeworks",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulehostframework-06704aee.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-877e5448.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract",
+      "kind": "type",
+      "label": "PortalModuleIsolationContract",
+      "entryCount": 12,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleisolationcontract.decision",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleisolationcontract.decision",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleisolationcont-8c5372a3.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d2763aff.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentry",

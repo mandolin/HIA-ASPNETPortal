@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.decision",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.decision:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.fail-system.string",
+      "kind": "entry",
+      "label": "Fail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.fail-system.string",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleisolationcontract.decision.fail-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcont-1dd3f9ef.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.decision:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.holds",
+      "kind": "entry",
+      "label": "Holds",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.holds",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleisolationcontract.decision.holds",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcont-ab4b1a95.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.decision:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.pass",
+      "kind": "entry",
+      "label": "Pass",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.pass",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleisolationcontract.decision.pass",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleisolationcont-bafc1da3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.decision:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.reason",
+      "kind": "entry",
+      "label": "Reason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcontract.decision.reason",
+      "sourcePath": "src/Portal.Components/PortalModuleIsolationContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmoduleisolationcontract.decision.reason",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmoduleisolationcont-248f7715.html"
+    }
+  ]
+}

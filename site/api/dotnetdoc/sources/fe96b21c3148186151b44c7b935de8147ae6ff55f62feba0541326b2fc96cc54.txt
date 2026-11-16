@@ -1,0 +1,11 @@
+            public static DiagnosticInput Create(string eventId, DateTime utcTime, string category, string message, string exceptionType)
+            {
+                return new DiagnosticInput
+                {
+                    EventId = eventId,
+                    UtcTime = utcTime,
+                    Category = category,
+                    Message = message,
+                    ExceptionType = exceptionType
+                };
+            }
