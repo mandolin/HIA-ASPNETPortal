@@ -1,0 +1,9 @@
+    public partial class ModuleHostProof : PortalModuleControl<ModuleHostProof>
+    {
+        /// <summary>
+        /// <lang><zh-CN>首次加载无需初始化（静态 MVP）；保留入口以供后续包扩展，不引入任何副作用。</zh-CN><en>No initialization needed on first load (static MVP); the hook is reserved for later packages with no side effects.</en></lang>
+        /// </summary>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
+    }

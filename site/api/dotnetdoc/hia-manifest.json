@@ -2021,6 +2021,11 @@
       "contentType": "application/json; charset=utf-8"
     },
     {
+      "path": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-828da713.json",
+      "role": "index",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
       "path": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-fd04b885.json",
       "role": "index",
       "contentType": "application/json; charset=utf-8"
@@ -24572,6 +24577,26 @@
     },
     {
       "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.formbuilder.submitbutton_-179016fe.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.modulehostproof-ae96eb69.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.modulehostproof-ae96eb69.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-18c974da.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-18c974da.html",
       "role": "entry",
       "contentType": "text/html; charset=utf-8"
     },
@@ -103456,6 +103481,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/7d02e55c7bdcc3ac9617fa602ab68ac26fd2bbe2b6c011fd5337dc805fd1d749.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/c00e3a5f8022c7a5e2d5ce8fc8228752b9974d194feb51eb93289d3abf6d9d62.L22.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/fe570921a8f5eb4222a703990f4c02ba756cd23a68fbaaff3d057d887649e3e7.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -108936,6 +108971,11 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/d9b342cbce5c16b41b9381bb360b8080368cc5058cdd12e79d687c461a7a7e71.L27.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/d50baca871b6c2c54272b3baf3752c157bc3b7479970ae0dd4be15369dc8f0e6.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -109487,16 +109527,6 @@
     },
     {
       "path": "sources/dbf6cbffddf9f74d4c52d81a6950a8abd2afaf56876682a1bfc437c45ebb1259.L7006.html",
-      "role": "asset",
-      "contentType": "text/html; charset=utf-8"
-    },
-    {
-      "path": "sources/fbaa2af2a9b32037c85f604b147662711390dbc234dab75e61eb84ccb77678e6.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "sources/dbff8dd9bfa9fa68f498d1a985ee70e5a62c24b3b53d13038af59138fe03a9d7.L1.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -115916,6 +115946,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/d259f1d8868cf13073588eb2271532c34e968902465f6722e900910297628fce.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/fbfc4bc7d2a1ff9c2f1fccd8b9fd0979c5c9b71bfcd7da755e218d9ed548bb49.L1.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/9e52d997fc4d3ea8d327c89caafd5b37a91ea0c325861981bb304844e135abe2.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -116974,8 +117014,8 @@
       "dotnet"
     ],
     "entryCounts": {
-      "all": 5874,
-      "dotnet": 5874
+      "all": 5876,
+      "dotnet": 5876
     },
     "theme": {
       "contract": "documentation-portal-theme",
@@ -116994,14 +117034,14 @@
     "navigationIndex": {
       "contract": "hia-project-navigation-index",
       "contractVersion": "0.1.0-draft",
-      "entryCount": 5874,
+      "entryCount": 5876,
       "path": "project-index.json"
     },
     "relationGraph": {
       "contract": "hia-project-relation-graph",
       "contractVersion": "0.1.0-draft",
-      "nodeCount": 6335,
-      "relationCount": 5881,
+      "nodeCount": 6338,
+      "relationCount": 5883,
       "path": "project-index.json"
     }
   },

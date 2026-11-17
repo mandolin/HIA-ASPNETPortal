@@ -1,0 +1,4 @@
+/* <lang><zh-CN>首证包私有样式：只承担布局，颜色/字体一律取自主题语义变量（--portal-*），与 FormBuilder 包分层一致；7 套主题作用域规则在部署包（P344）阶段补齐，本草案不含颜色值。</zh-CN><en>First-proof package private style: layout only; colors/fonts come from theme semantic variables (--portal-*), same layering as FormBuilder. Seven-theme scope rules are added at deployment (P344); this draft contains no color values.</en></lang> */
+.module-host-proof { margin: 0; padding: 0; }
+.module-host-proof-title { display: block; }
+.module-host-proof-body { display: block; }

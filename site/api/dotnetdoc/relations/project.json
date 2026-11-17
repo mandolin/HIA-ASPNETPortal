@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6335,
-  "relationCount": 5881,
+  "nodeCount": 6338,
+  "relationCount": 5883,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -13190,6 +13190,13 @@
       "kind": "entry",
       "label": "UpdateModuleDefinition",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefsdb.updatemoduledefinition-system.int32-system.string-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
       "view": "dotnet"
     },
     {
@@ -37231,6 +37238,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+      "kind": "entry",
+      "label": "ModuleHostProof",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.moduleitem",
       "kind": "entry",
       "label": "ModuleItem",
@@ -43708,6 +43722,12 @@
       "kind": "source",
       "label": "src/Portal/DesktopModules/Links.ascx.designer.cs",
       "path": "src/Portal/DesktopModules/Links.ascx.designer.cs"
+    },
+    {
+      "id": "source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "kind": "source",
+      "label": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "path": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs"
     },
     {
       "id": "source:src/Portal/DesktopModules/ModuleProbe/ModuleProbe.ascx",
@@ -68352,6 +68372,19 @@
         "language": "csharp",
         "rangeStartLine": 194,
         "rangeEndLine": 213
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs->source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+      "to": "source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "label": "Source: src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 27,
+        "rangeEndLine": 29
       }
     },
     {
@@ -112994,6 +113027,19 @@
         "language": "csharp",
         "rangeStartLine": 20,
         "rangeEndLine": 249
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof->source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+      "to": "source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "label": "Source: src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 22,
+        "rangeEndLine": 30
       }
     },
     {

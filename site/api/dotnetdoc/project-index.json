@@ -4,8 +4,8 @@
   "project": {
     "defaultLocale": "zh-CN",
     "entryCounts": {
-      "all": 5874,
-      "dotnet": 5874
+      "all": 5876,
+      "dotnet": 5876
     },
     "id": "hia-aspnetportal",
     "locales": [
@@ -299975,6 +299975,129 @@
       "presentationTopicId": "portal.topic:83f791d073b62db314a3c9f98ae4cac3",
       "presentationPageId": "portal.page:83f791d073b62db314a3c9f98ae4cac3",
       "presentationFragmentId": "portal.fragment:83f791d073b62db314a3c9f98ae4cac3"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+      "name": "Page_Load",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "summary": "No initialization needed on first load (static MVP); the hook is reserved for later packages with no side effects.",
+      "signature": "protected void ASPNET.StarterKit.Portal.ModuleHostProof.Page_Load(object sender, System.EventArgs e)",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "No initialization needed on first load (static MVP); the hook is reserved for later packages with no side effects.",
+            "localizedText": {
+              "zh-CN": "首次加载无需初始化（静态 MVP）；保留入口以供后续包扩展，不引入任何副作用。",
+              "en": "No initialization needed on first load (static MVP); the hook is reserved for later packages with no side effects."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "首次加载无需初始化（静态 MVP）；保留入口以供后续包扩展，不引入任何副作用。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "No initialization needed on first load (static MVP); the hook is reserved for later packages with no side effects.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 27
+          },
+          "end": {
+            "line": 29
+          }
+        },
+        "fetchUrl": "sources/48fe5993eee82c59a1715aa4ba437561381ddc3695c80785de51a845baeccde6.txt",
+        "linkUrl": "sources/d9b342cbce5c16b41b9381bb360b8080368cc5058cdd12e79d687c461a7a7e71.L27.html#L27",
+        "publicAsset": {
+          "assetId": "portal.asset:d9b342cbce5c16b41b9381bb360b8080",
+          "sourceId": "portal.source:c4310d0ad479f18e7a9038a84ee4d037",
+          "relativeUrl": "sources/48fe5993eee82c59a1715aa4ba437561381ddc3695c80785de51a845baeccde6.txt",
+          "linkUrl": "sources/d9b342cbce5c16b41b9381bb360b8080368cc5058cdd12e79d687c461a7a7e71.L27.html#L27",
+          "revision": "content:48fe5993eee82c59a1715aa4ba437561381ddc3695c80785de51a845baeccde6",
+          "digest": "sha384-8Y5SkzbP2FxXS/xQncOwg1mlHxKcVafP/8MRiWXZzS+L2qJinHqYQrnH7XsiC/VJ",
+          "byteLength": 80,
+          "lineCount": 3
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+      "hierarchy": {
+        "assembly": "Portal",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "containingType": "ASPNET.StarterKit.Portal.ModuleHostProof",
+        "symbolDocumentationId": "M:ASPNET.StarterKit.Portal.ModuleHostProof.Page_Load(System.Object,System.EventArgs)",
+        "displayName": "ASPNET.StarterKit.Portal.ModuleHostProof.Page_Load(object, System.EventArgs)",
+        "parentSymbolId": "T:ASPNET.StarterKit.Portal.ModuleHostProof"
+      },
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-18c974da.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-18c974da.html",
+      "presentationTopicId": "portal.topic:163870bf22f13c4f7fb24007cb3321ae",
+      "presentationPageId": "portal.page:163870bf22f13c4f7fb24007cb3321ae",
+      "presentationFragmentId": "portal.fragment:163870bf22f13c4f7fb24007cb3321ae"
     },
     {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.moduleprobe.bindprobeinformation",
@@ -798443,16 +798566,16 @@
             "line": 400
           }
         },
-        "fetchUrl": "sources/fbaa2af2a9b32037c85f604b147662711390dbc234dab75e61eb84ccb77678e6.txt",
-        "linkUrl": "sources/dbff8dd9bfa9fa68f498d1a985ee70e5a62c24b3b53d13038af59138fe03a9d7.L1.html#L1",
+        "fetchUrl": "sources/d259f1d8868cf13073588eb2271532c34e968902465f6722e900910297628fce.txt",
+        "linkUrl": "sources/fbfc4bc7d2a1ff9c2f1fccd8b9fd0979c5c9b71bfcd7da755e218d9ed548bb49.L1.html#L1",
         "publicAsset": {
-          "assetId": "portal.asset:dbff8dd9bfa9fa68f498d1a985ee70e5",
+          "assetId": "portal.asset:fbfc4bc7d2a1ff9c2f1fccd8b9fd0979",
           "sourceId": "portal.source:ab385679a4fa97d71d6e57df80a04e6e",
-          "relativeUrl": "sources/fbaa2af2a9b32037c85f604b147662711390dbc234dab75e61eb84ccb77678e6.txt",
-          "linkUrl": "sources/dbff8dd9bfa9fa68f498d1a985ee70e5a62c24b3b53d13038af59138fe03a9d7.L1.html#L1",
-          "revision": "content:fbaa2af2a9b32037c85f604b147662711390dbc234dab75e61eb84ccb77678e6",
-          "digest": "sha384-ZYDQufHAw7phvzXEB5ux92Nw4AhfYEPUsR/LISy4ZrKKUHCVC6+5ppRQxqK2Ud3U",
-          "byteLength": 20878,
+          "relativeUrl": "sources/d259f1d8868cf13073588eb2271532c34e968902465f6722e900910297628fce.txt",
+          "linkUrl": "sources/fbfc4bc7d2a1ff9c2f1fccd8b9fd0979c5c9b71bfcd7da755e218d9ed548bb49.L1.html#L1",
+          "revision": "content:d259f1d8868cf13073588eb2271532c34e968902465f6722e900910297628fce",
+          "digest": "sha384-yh0s4CcKWWp71V8D4ebGjCpSCbwSRJCCp4OUUVcj4+DvPCQTP0EKAG10tSwUxUtl",
+          "byteLength": 20898,
           "lineCount": 400
         },
         "fetchTrigger": "on-expand",
@@ -831600,6 +831723,207 @@
       "presentationTopicId": "portal.topic:d181ced21a7f51db65912b3c3301ab66",
       "presentationPageId": "portal.page:d181ced21a7f51db65912b3c3301ab66",
       "presentationFragmentId": "portal.fragment:d181ced21a7f51db65912b3c3301ab66"
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+      "name": "ModuleHostProof",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "summary": "Same-form first-proof independent module (MVP): a minimal user control proving that a same-form package can be discovered, mounted and run. It reads/writes no business data and offers no upload/script/remote/dynamic-compile capability, nor does it declare permission keys or roles.",
+      "signature": "class ASPNET.StarterKit.Portal.ModuleHostProof",
+      "i18n": {
+        "enabled": true,
+        "model": "hia-text-i18n",
+        "modelVersion": "0.2.0",
+        "defaultLocale": "en",
+        "locales": [
+          "en",
+          "zh-CN"
+        ],
+        "fields": {
+          "summary": {
+            "fieldPath": "summary",
+            "kind": "summary",
+            "defaultLocale": "en",
+            "defaultText": "Same-form first-proof independent module (MVP): a minimal user control proving that a same-form package can be discovered, mounted and run. It reads/writes no business data and offers no upload/script/remote/dynamic-compile capability, nor does it declare permission keys or roles.",
+            "localizedText": {
+              "zh-CN": "同形模块首证（独立模块 MVP）：以最小用户控件证明「同形态模块包可发现、可挂载、可运行」， 不读写业务数据、不提供上传/脚本/远程资源/动态编译能力、不声明权限键或角色。",
+              "en": "Same-form first-proof independent module (MVP): a minimal user control proving that a same-form package can be discovered, mounted and run. It reads/writes no business data and offers no upload/script/remote/dynamic-compile capability, nor does it declare permission keys or roles."
+            },
+            "source": "xml.summary",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "summary",
+                "text": "同形模块首证（独立模块 MVP）：以最小用户控件证明「同形态模块包可发现、可挂载、可运行」， 不读写业务数据、不提供上传/脚本/远程资源/动态编译能力、不声明权限键或角色。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "summary",
+                "text": "Same-form first-proof independent module (MVP): a minimal user control proving that a same-form package can be discovered, mounted and run. It reads/writes no business data and offers no upload/script/remote/dynamic-compile capability, nor does it declare permission keys or roles.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.summary"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.summary"
+              }
+            }
+          },
+          "remarks": {
+            "fieldPath": "remarks",
+            "kind": "remarks",
+            "defaultLocale": "en",
+            "defaultText": "Kept deliberately minimal: static markup only, no form designer and no data access. Capability reuses the registered `BasicBusiness.FormBuilder` (role=Contributor in module.json); no capability is self-created.",
+            "localizedText": {
+              "zh-CN": "刻意保持 MVP：只渲染静态标记，无表单设计器、无数据访问。能力归属复用已登记词表中的 `BasicBusiness.FormBuilder`（role=Contributor，见 module.json），不新创能力条目（A 级硬边界③）。",
+              "en": "Kept deliberately minimal: static markup only, no form designer and no data access. Capability reuses the registered `BasicBusiness.FormBuilder` (role=Contributor in module.json); no capability is self-created."
+            },
+            "source": "xml.remarks",
+            "blocks": [
+              {
+                "kind": "lang-block",
+                "locale": "zh-CN",
+                "fieldPath": "remarks",
+                "text": "刻意保持 MVP：只渲染静态标记，无表单设计器、无数据访问。能力归属复用已登记词表中的 `BasicBusiness.FormBuilder`（role=Contributor，见 module.json），不新创能力条目（A 级硬边界③）。",
+                "source": "xml.lang",
+                "rangeInComment": null
+              },
+              {
+                "kind": "lang-block",
+                "locale": "en",
+                "fieldPath": "remarks",
+                "text": "Kept deliberately minimal: static markup only, no form designer and no data access. Capability reuses the registered `BasicBusiness.FormBuilder` (role=Contributor in module.json); no capability is self-created.",
+                "source": "xml.lang",
+                "rangeInComment": null
+              }
+            ],
+            "resolutions": {
+              "zh-CN": {
+                "requestedLocale": "zh-CN",
+                "resolvedLocale": "zh-CN",
+                "fallbackChain": [
+                  "zh-CN",
+                  "zh",
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "zh-CN",
+                "source": "xml.remarks"
+              },
+              "en": {
+                "requestedLocale": "en",
+                "resolvedLocale": "en",
+                "fallbackChain": [
+                  "en"
+                ],
+                "usedFallback": false,
+                "missing": false,
+                "sourceKind": "lang-block",
+                "sourceLocale": "en",
+                "source": "xml.remarks"
+              }
+            }
+          }
+        }
+      },
+      "input": {
+        "kind": "hia-document",
+        "path": "api/Portal.hia.json",
+        "contract": "hia-core-document",
+        "contractVersion": "0.2.0"
+      },
+      "source": {
+        "path": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "language": "csharp",
+        "range": {
+          "start": {
+            "line": 22
+          },
+          "end": {
+            "line": 30
+          }
+        },
+        "fetchUrl": "sources/7d02e55c7bdcc3ac9617fa602ab68ac26fd2bbe2b6c011fd5337dc805fd1d749.txt",
+        "linkUrl": "sources/c00e3a5f8022c7a5e2d5ce8fc8228752b9974d194feb51eb93289d3abf6d9d62.L22.html#L22",
+        "publicAsset": {
+          "assetId": "portal.asset:c00e3a5f8022c7a5e2d5ce8fc8228752",
+          "sourceId": "portal.source:dd6ed0d30e962a60f562b024d0374767",
+          "relativeUrl": "sources/7d02e55c7bdcc3ac9617fa602ab68ac26fd2bbe2b6c011fd5337dc805fd1d749.txt",
+          "linkUrl": "sources/c00e3a5f8022c7a5e2d5ce8fc8228752b9974d194feb51eb93289d3abf6d9d62.L22.html#L22",
+          "revision": "content:7d02e55c7bdcc3ac9617fa602ab68ac26fd2bbe2b6c011fd5337dc805fd1d749",
+          "digest": "sha384-KV2MDta/Rd2jHo4bbsdq/pVh54Qj80hpef0pjhH7a4JOo3qfNFnNHgE2KTWpwcXm",
+          "byteLength": 490,
+          "lineCount": 9
+        },
+        "fetchTrigger": "on-expand",
+        "fetchMaxLines": 400
+      },
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.modulehostproof",
+      "hierarchy": {
+        "assembly": "Portal",
+        "namespace": "ASPNET.StarterKit.Portal",
+        "symbolDocumentationId": "T:ASPNET.StarterKit.Portal.ModuleHostProof",
+        "displayName": "ASPNET.StarterKit.Portal.ModuleHostProof",
+        "baseTypeIds": [
+          "T:ASPNET.StarterKit.Portal.PortalModuleControl{ASPNET.StarterKit.Portal.ModuleHostProof}",
+          "T:System.Web.UI.UserControl",
+          "T:System.Web.UI.TemplateControl",
+          "T:System.Web.UI.Control",
+          "T:System.Object"
+        ],
+        "interfaceIds": [
+          "T:System.ComponentModel.IComponent",
+          "T:System.IDisposable",
+          "T:System.Web.UI.IParserAccessor",
+          "T:System.Web.UI.IUrlResolutionService",
+          "T:System.Web.UI.IDataBindingsAccessor",
+          "T:System.Web.UI.IControlBuilderAccessor",
+          "T:System.Web.UI.IControlDesignerAccessor",
+          "T:System.Web.UI.IExpressionsAccessor",
+          "T:System.Web.UI.IFilterResolutionService",
+          "T:System.Web.UI.IAttributeAccessor",
+          "T:System.Web.UI.INonBindingContainer",
+          "T:System.Web.UI.INamingContainer",
+          "T:System.Web.UI.IUserControlDesignerAccessor",
+          "T:ASPNET.StarterKit.Portal.IPortalModuleControl"
+        ]
+      },
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.modulehostproof-ae96eb69.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.modulehostproof-ae96eb69.html",
+      "presentationTopicId": "portal.topic:7b120fb4ba1b5c4727ed9bc26cc4ce67",
+      "presentationPageId": "portal.page:7b120fb4ba1b5c4727ed9bc26cc4ce67",
+      "presentationFragmentId": "portal.fragment:7b120fb4ba1b5c4727ed9bc26cc4ce67"
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.moduleitem",
@@ -893810,7 +894134,7 @@
       "id": "kind:dotnet-method",
       "kind": "kind",
       "label": "dotnet-method",
-      "entryCount": 1559,
+      "entryCount": 1560,
       "views": [
         "dotnet"
       ]
@@ -893828,7 +894152,7 @@
       "id": "kind:dotnet-type",
       "kind": "kind",
       "label": "dotnet-type",
-      "entryCount": 449,
+      "entryCount": 450,
       "views": [
         "dotnet"
       ]
@@ -893873,7 +894197,7 @@
       "id": "profile-layer:unknown-profile",
       "kind": "profile-layer",
       "label": "unknown-profile",
-      "entryCount": 5874,
+      "entryCount": 5876,
       "views": [
         "dotnet"
       ]
@@ -893882,7 +894206,7 @@
       "id": "source-root:src",
       "kind": "source-root",
       "label": "src",
-      "entryCount": 5874,
+      "entryCount": 5876,
       "views": [
         "dotnet"
       ]
@@ -893893,7 +894217,7 @@
       "id": "view:dotnet",
       "kind": "view",
       "label": ".NET",
-      "entryCount": 5874,
+      "entryCount": 5876,
       "views": [
         "dotnet"
       ],
@@ -901715,7 +902039,7 @@
           "id": "dotnet:assembly:portal",
           "kind": "assembly",
           "label": "Portal",
-          "entryCount": 3158,
+          "entryCount": 3160,
           "views": [
             "dotnet"
           ],
@@ -901724,7 +902048,7 @@
               "id": "dotnet:assembly:portal:namespace:aspnet",
               "kind": "namespace",
               "label": "ASPNET",
-              "entryCount": 2182,
+              "entryCount": 2184,
               "views": [
                 "dotnet"
               ],
@@ -901733,7 +902057,7 @@
                   "id": "dotnet:assembly:portal:namespace:aspnet.starterkit",
                   "kind": "namespace",
                   "label": "StarterKit",
-                  "entryCount": 2182,
+                  "entryCount": 2184,
                   "views": [
                     "dotnet"
                   ],
@@ -901742,7 +902066,7 @@
                       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal",
                       "kind": "namespace",
                       "label": "Portal",
-                      "entryCount": 2182,
+                      "entryCount": 2184,
                       "views": [
                         "dotnet"
                       ],
@@ -923046,6 +923370,205 @@
                           "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
                           "symbolId": "dotnet:t:aspnet.starterkit.portal.moduledefs",
                           "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.moduledefs-b1c828eb.html"
+                        },
+                        {
+                          "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof",
+                          "kind": "type",
+                          "label": "ModuleHostProof",
+                          "entryCount": 2,
+                          "views": [
+                            "dotnet"
+                          ],
+                          "children": [
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:base:t-aspnet.starterkit.portal.portalmodulecontrol-aspnet.starterkit.portal.modulehostproof",
+                              "kind": "relation",
+                              "label": "Base: ASPNET.StarterKit.Portal.PortalModuleControl{ASPNET.StarterKit.Portal.ModuleHostProof}",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:base:t-system.object",
+                              "kind": "relation",
+                              "label": "Base: System.Object",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:base:t-system.web.ui.control",
+                              "kind": "relation",
+                              "label": "Base: System.Web.UI.Control",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:base:t-system.web.ui.templatecontrol",
+                              "kind": "relation",
+                              "label": "Base: System.Web.UI.TemplateControl",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:base:t-system.web.ui.usercontrol",
+                              "kind": "relation",
+                              "label": "Base: System.Web.UI.UserControl",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-aspnet.starterkit.portal.iportalmodulecontrol",
+                              "kind": "relation",
+                              "label": "Interface: ASPNET.StarterKit.Portal.IPortalModuleControl",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.componentmodel.icomponent",
+                              "kind": "relation",
+                              "label": "Interface: System.ComponentModel.IComponent",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.idisposable",
+                              "kind": "relation",
+                              "label": "Interface: System.IDisposable",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.iattributeaccessor",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IAttributeAccessor",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.icontrolbuilderaccessor",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IControlBuilderAccessor",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.icontroldesigneraccessor",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IControlDesignerAccessor",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.idatabindingsaccessor",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IDataBindingsAccessor",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.iexpressionsaccessor",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IExpressionsAccessor",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.ifilterresolutionservice",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IFilterResolutionService",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.inamingcontainer",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.INamingContainer",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.inonbindingcontainer",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.INonBindingContainer",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.iparseraccessor",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IParserAccessor",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.iurlresolutionservice",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IUrlResolutionService",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:interface:t-system.web.ui.iusercontroldesigneraccessor",
+                              "kind": "relation",
+                              "label": "Interface: System.Web.UI.IUserControlDesignerAccessor",
+                              "entryCount": 0,
+                              "views": [
+                                "dotnet"
+                              ]
+                            },
+                            {
+                              "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof:entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+                              "kind": "entry",
+                              "label": "Page_Load",
+                              "entryCount": 1,
+                              "views": [
+                                "dotnet"
+                              ],
+                              "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+                              "sourcePath": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+                              "symbolId": "dotnet:m:aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+                              "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-18c974da.html"
+                            }
+                          ],
+                          "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+                          "sourcePath": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+                          "symbolId": "dotnet:t:aspnet.starterkit.portal.modulehostproof",
+                          "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.modulehostproof-ae96eb69.html"
                         },
                         {
                           "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprobe",
@@ -990080,8 +990603,8 @@
   "relationGraph": {
     "contract": "hia-project-relation-graph",
     "contractVersion": "0.1.0-draft",
-    "nodeCount": 6335,
-    "relationCount": 5881,
+    "nodeCount": 6338,
+    "relationCount": 5883,
     "nodes": [
       {
         "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -1003269,6 +1003792,13 @@
         "kind": "entry",
         "label": "UpdateModuleDefinition",
         "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefsdb.updatemoduledefinition-system.int32-system.string-system.string-system.string",
+        "view": "dotnet"
+      },
+      {
+        "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+        "kind": "entry",
+        "label": "Page_Load",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
         "view": "dotnet"
       },
       {
@@ -1027310,6 +1027840,13 @@
         "view": "dotnet"
       },
       {
+        "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+        "kind": "entry",
+        "label": "ModuleHostProof",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+        "view": "dotnet"
+      },
+      {
         "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.moduleitem",
         "kind": "entry",
         "label": "ModuleItem",
@@ -1033787,6 +1034324,12 @@
         "kind": "source",
         "label": "src/Portal/DesktopModules/Links.ascx.designer.cs",
         "path": "src/Portal/DesktopModules/Links.ascx.designer.cs"
+      },
+      {
+        "id": "source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "kind": "source",
+        "label": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "path": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs"
       },
       {
         "id": "source:src/Portal/DesktopModules/ModuleProbe/ModuleProbe.ascx",
@@ -1058431,6 +1058974,19 @@
           "language": "csharp",
           "rangeStartLine": 194,
           "rangeEndLine": 213
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs->source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+        "to": "source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "label": "Source: src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulehostproof.page_load-system.object-system.eventargs",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 27,
+          "rangeEndLine": 29
         }
       },
       {
@@ -1103073,6 +1103629,19 @@
           "language": "csharp",
           "rangeStartLine": 20,
           "rangeEndLine": 249
+        }
+      },
+      {
+        "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof->source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "kind": "semantic-member",
+        "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+        "to": "source:src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "label": "Source: src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+        "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+        "metadata": {
+          "language": "csharp",
+          "rangeStartLine": 22,
+          "rangeEndLine": 30
         }
       },
       {

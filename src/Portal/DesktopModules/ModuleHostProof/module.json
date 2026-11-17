@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 2,
+  "packageId": "HIA.ModuleHostProof",
+  "displayName": "同形模块首证（独立模块 MVP）",
+  "version": "0.1.0",
+  "minimumPortalVersion": "1.0",
+  "moduleKind": "Independent",
+  "hostFramework": "AspNetWebForms",
+  "entryKind": "Ascx",
+  "desktopEntry": "DesktopModules/ModuleHostProof/ModuleHostProof.ascx",
+  "resources": [
+    "Styles/ModuleHostProof.css"
+  ],
+  "dependencies": [],
+  "capability": {
+    "capabilityId": "BasicBusiness.FormBuilder",
+    "role": "Contributor"
+  }
+}

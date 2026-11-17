@@ -874,6 +874,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-7853ce21.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulehostproof",
+      "kind": "type",
+      "label": "ModuleHostProof",
+      "entryCount": 2,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.modulehostproof",
+      "sourcePath": "src/Portal/DesktopModules/ModuleHostProof/ModuleHostProof.ascx.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.modulehostproof",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.modulehostproof-ae96eb69.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-828da713.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduleprobe",
       "kind": "type",
       "label": "ModuleProbe",

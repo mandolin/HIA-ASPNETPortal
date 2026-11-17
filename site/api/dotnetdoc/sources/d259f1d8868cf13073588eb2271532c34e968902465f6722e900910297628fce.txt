@@ -245,6 +245,7 @@
     <Content Include="DesktopModules\FormBuilder\module.json" />
     <Content Include="DesktopModules\FormBuilder\form.json" />
     <Content Include="DesktopModules\FormBuilder\FormBuilder.ascx" />
+    <Content Include="DesktopModules\ModuleHostProof\ModuleHostProof.ascx" />
     <Content Include="DesktopModules\FormBuilder\Styles\FormBuilder.css" />
     <Content Include="DesktopModules\QuickLinks.ascx" />
     <Content Include="DesktopModules\Signin.ascx" />
@@ -397,4 +398,3 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\DiagnosticsLogs.aspx.designer.cs">
-      <DependentUpon>DiagnosticsLogs.aspx</DependentUpon>

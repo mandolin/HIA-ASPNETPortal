@@ -125,7 +125,8 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalNewModuleReadiness.ps1';    Runner = 'ps1'; Kind = '新增模块就绪';
            ArgSets = @(
                @('-ModuleName', 'LeaveRequest', '-ModuleCssPrefix', 'leave-request', '-ExpectedPackageId', 'HIA.LeaveRequest'),
-               @('-ModuleName', 'ExpenseReimbursement', '-ModuleCssPrefix', 'expense-reimbursement', '-ExpectedPackageId', 'HIA.ExpenseReimbursement')
+               @('-ModuleName', 'ExpenseReimbursement', '-ModuleCssPrefix', 'expense-reimbursement', '-ExpectedPackageId', 'HIA.ExpenseReimbursement'),
+               @('-ModuleName', 'ModuleHostProof', '-ModuleCssPrefix', 'module-host-proof', '-ExpectedPackageId', 'HIA.ModuleHostProof')
            ) }
         @{ File = 'Test-PortalBenchmarkChecklist.ps1'; Runner = 'ps1'; Kind = '对标检查表'; Args = @() }
         # <lang>
@@ -798,7 +799,8 @@ $gateLayers = [ordered]@{
                @('-ModuleName', 'HIA.EmployeeProfileConfirm', '-SqlMigrationFile', 'src\Setup\PortalBiz_EmployeeProfileConfirmations.sql'),
                @('-ModuleName', 'HIA.EmployeeProfileCorrectionRequest', '-SqlMigrationFile', 'src\Setup\PortalBiz_EmployeeProfileCorrectionRequests.sql'),
                @('-ModuleName', 'HIA.EnterpriseCapabilityWorkbench', '-SkipSqlMigrationCheck'),
-               @('-ModuleName', 'HIA.BusinessApplicationRequest', '-SqlMigrationFile', 'src\Setup\PortalBiz_BusinessApplications.sql')
+               @('-ModuleName', 'HIA.BusinessApplicationRequest', '-SqlMigrationFile', 'src\Setup\PortalBiz_BusinessApplications.sql'),
+               @('-ModuleName', 'HIA.ModuleHostProof', '-SkipSqlMigrationCheck')
            ) }
         # <lang>
         #   <zh-CN>C-anp-P16 / A3（W96，2026-10-07）：以下 2 个为"构建隔离 proof 项目"门禁，归入 L1（需先构建产物）。</zh-CN>

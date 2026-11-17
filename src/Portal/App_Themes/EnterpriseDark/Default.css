@@ -2186,3 +2186,14 @@ body.portal-theme-enterprisedark .portal-nav-group-tabs {
 body.portal-theme-enterprisedark .portal-nav-group-hidden {
     display: none;
 }
+
+/* 同形模块首证模块目录主题作用域（7 套同时定义；布局类占位，颜色/字体由主题语义变量决定） */
+body.portal-theme-enterprisedark .module-host-proof {
+    margin: 0;
+}
+body.portal-theme-enterprisedark .module-host-proof-title {
+    font-weight: 600;
+}
+body.portal-theme-enterprisedark .module-host-proof-body {
+    display: block;
+}

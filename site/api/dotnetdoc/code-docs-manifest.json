@@ -3,7 +3,7 @@
   "layout": "split-site",
   "generator": "@hia-doc/dotnetdoc-runner（hia-dotnetdoc）+ @hia-doc/renderer-html（hia docs build），由 dev/scripts/Publish-PortalDotNetDoc.ps1 编排",
   "publishedBy": "HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）",
-  "generatedUtc": "2026-11-17T02:45:58Z",
+  "generatedUtc": "2026-11-17T19:41:45Z",
   "entrypoint": "index.html",
   "defaultLocale": "zh-CN",
   "locales": [
@@ -11,7 +11,7 @@
     "en"
   ],
   "localeNote": "条目页内含中英双语内容块，站内语言切换器切换显示语言；默认显示中文。已知限制：搜索索引按默认语言（中文）建立。",
-  "sourceFingerprint": "89d6cf9952a1e9fb2dbcde429c903c0946f3f1fc95696c47854f6d6644b80a12",
+  "sourceFingerprint": "5b4c44deac2d0d3294588c2e96b04317090798e69b51a73677c1a4cd569a4ad3",
   "fingerprintAlgorithm": "SHA256 over '<relativePath>|<byteLength>|<sha256(content)>' lines, joined by LF；输入缺失记 <missing>。覆盖 dotnetdoc.config.json 及其声明的全部输入。",
   "fingerprintInputs": [
     "dotnetdoc.config.json",
@@ -79,9 +79,9 @@
     "src/Portal/GenericErrorPage.aspx"
   ],
   "counts": {
-    "entryPages": 5874,
-    "files": 23391,
-    "bytes": 185490839.0
+    "entryPages": 5876,
+    "files": 23399,
+    "bytes": 185568431.0
   },
   "declaredInputs": [
     {
