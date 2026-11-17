@@ -2661,6 +2661,11 @@
       "contentType": "application/json; charset=utf-8"
     },
     {
+      "path": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2d273c7f.json",
+      "role": "index",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
       "path": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f5377c24.json",
       "role": "index",
       "contentType": "application/json; charset=utf-8"
@@ -3297,6 +3302,11 @@
     },
     {
       "path": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d2763aff.json",
+      "role": "index",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "path": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-9dc2f355.json",
       "role": "index",
       "contentType": "application/json; charset=utf-8"
     },
@@ -38056,6 +38066,236 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepermissionaud-785d7fc3.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepermissionaud-785d7fc3.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-77448d3b.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-77448d3b.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-3ba38cba.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-3ba38cba.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-7cba3886.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-7cba3886.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-2bb484cf.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-2bb484cf.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-e4cde40c.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-e4cde40c.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-320ee2a4.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-320ee2a4.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-2a08ee2d.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-2a08ee2d.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-fbe4c31e.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-fbe4c31e.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-f001d5c5.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-f001d5c5.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-8eabc6e8.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-8eabc6e8.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-0906627f.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-0906627f.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-a73e1cbb.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-a73e1cbb.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepermissionaud-a0b1eadd.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepermissionaud-a0b1eadd.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-03fa6a57.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-03fa6a57.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-ab5ef8d3.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-ab5ef8d3.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-5b31d599.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-5b31d599.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-d3cddcb5.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-d3cddcb5.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-eb29c5d3.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-eb29c5d3.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-1f990958.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-1f990958.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-f68f3a0d.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-f68f3a0d.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-06c95ffc.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-06c95ffc.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-7cc9f44f.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-7cc9f44f.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationinfo-780101f9.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
@@ -62741,6 +62981,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/302d7ffe451005f8c72777872bbe6c7d3b3cd990e50596b60c4bafc69e5aebf3.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/00dfa40ca4166cbf79ecd73598a24e19cbca7b6b3d2f0622c9aa2f2df4947900.L179.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/534376801ab561f4fde1d223a3937fc3f94c772def2e15b1b27f86e40a58f120.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -63187,6 +63437,16 @@
     },
     {
       "path": "sources/0273f06185e376b4015b91901d096c85c9a207edd19853f50424d8c43d2678f7.L39.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/d4037468657b6869ba9ad00f2dedfc4dd737ca3010a2570e77bcf341bf2e63c6.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/027400ba65ba613564b8ca4d7b0fe6f119ef20f382e9f0ce2a1310f8d103322d.L62.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -65881,6 +66141,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/b5d68e620ba38f9804603b1eff1491973e57aa3deaac279c0eaf422457dbb9d9.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/0edc24a181d7bebcc34f588be4a9fd6565ddb13482c86571287b4abde4f6516d.L32.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/b05332a97f9f8b5b85fab0047523bfe5e7fb35a34e986a3128bd3684d0e85b11.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -66081,6 +66351,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/66171fa46f5f7d2aaf2f50bc9af7cfc84ce3e4a8ce2ccb94f0efddb3b9be4345.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/0f8e5f36ed5839ee8ce64af1453fd3fa01fc68865299e0a77de4b7b81004ed58.L38.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/1e53fbced427c1583138613384be1aeca3f8688d975a25c6d401bf07f2c5f539.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -66239,11 +66519,6 @@
       "path": "sources/1044f46bad8b949f1bddf3d06095913ed91c13221ef2fc332fcd04b1f2ad9fec.L134.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
-    },
-    {
-      "path": "sources/d4037468657b6869ba9ad00f2dedfc4dd737ca3010a2570e77bcf341bf2e63c6.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
     },
     {
       "path": "sources/10562fd328f3e65d8768879bea0e2edb6aad251d19e7b2c57bcc952e47b8aa95.L101.html",
@@ -69131,6 +69406,26 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/1fc61bc66c562c6fc3ad82d3ebaee91e2c5add70ab286b1ecefa897ab5c34c20.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/1d95e52954093486c9f6f28dfbc7fc181198ebf0a2007c9fb0ae618a3bce3511.L53.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/e75cb9780679874a1f1b1e0e486a223defd3ed24ed48e05cc66039fc7d4b2580.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/1d9ce6dafcc93fa2663bcd09bcb2027eaba6fc69c8de278e4868e511dab4d7ed.L202.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/9f36b78bde90e1820df0ce782bd1622c98ebc1c31464306d63d04bddaf676558.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -69542,16 +69837,6 @@
     },
     {
       "path": "sources/1f789b86f8c6a9a8ac9910801e1f92273a773dc824e599f2accfb1111278e96b.L58.html",
-      "role": "asset",
-      "contentType": "text/html; charset=utf-8"
-    },
-    {
-      "path": "sources/723dcf66e1a279962f9274329bcc892a36512d10f73df884a39dc5d6257bd882.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "sources/1f8df5cb6fa4c7b03164d5fe5509c0a39c70a7d578acbb2ad09bafc9a48827a0.L1.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -71382,6 +71667,16 @@
     },
     {
       "path": "sources/2774e8515fb0aaf1cea3e92c87d0f07f656bf165cb90f828813ce9b9507f9099.L358.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/e59be878ec26f842f467d3e653da7c3b2c47353523249483042fcaa33a9e16dc.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/2780e7399c9f2c4801cf08cd55cf6b7c5af6e5be4e3dbe599252cf443c462954.L74.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -74816,6 +75111,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/d560bcf3534bfee3039534bcbfaf347e6a444b612f79b7f4cd4e94afb49adb17.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/38848da08705b64fa908027593f8b96ead9fe5ccf63b6d1dfaa9d3a63f061bf5.L23.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/33b54a3a7b7c4bb0944f3a154ca035e237a496cc1e1777b447811eb185c0995c.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -77852,6 +78157,16 @@
     },
     {
       "path": "sources/473ec9386382e5309dfe30791efa71eda775661877394cbd5061e2f27111fd6f.L11366.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/82f884164acf75c36a81f86e523b6e0210ad7108730a94023edb0729a466b894.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/4757a90915b2eb02ab12ce087234edc0fd20ba78d26419352dd065aee794c174.L68.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -81756,6 +82071,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/6f4312fd8b8fd9dea5cc8baa575fa5e5d376ba7cefd55bfd7cb371baa682c627.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/58dca12045eec8190614c409a463813c8a7ca1330adb2a152e4e228eaff96e3b.L20.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/18e53223232047e2b5f09cbde0fcad7e31bad44f21d458153a9437862c9b74d7.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -82752,6 +83077,11 @@
     },
     {
       "path": "sources/5d9d69f350a1919a4b9e22c915bc758ad3b4ea7583e5301e9b4abe7a0f84366b.L333.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/5da1a40344f1cf2039bb55d56150e7cb5c847a730e1d0c1ba24e191d400a450a.L59.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -86436,6 +86766,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/0c1ce11a4388b89f3eeb0eecdd8e8e678be708b0a3bfd0c07fbc0a450c5b562f.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/6e29dc8c8899db2bec8de548cb1c4f6b00cbd89e7dadb452ef5f5fbd4e3f4878.L221.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/8ee46a5f873b652d6c1fe533a8d0bc190b9beec6c69300605cf59d539093dc7c.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -86747,6 +87087,16 @@
     },
     {
       "path": "sources/6f350c1a4994aa978e03afbe0edc522aac74345f4c49f5b7b383987fcb470770.L8530.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/5d0d4201b7a7be176ece8977a34ad80e0c98a411d31cb951005b6d73f55a2cca.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/6f3b6b017e8da313853ec59ef7c2a390b24bc5d4a6ebf17f0b4ea4a221e9fdc4.L26.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -87162,6 +87512,16 @@
     },
     {
       "path": "sources/70cfa1678560a689a8c600322262640c07992af18a14a256ba503c8da44783be.L2453.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/2e2b8731875e1d92652fb0d91e600f5015b0d514621f9de148081d906f290174.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/70d35bf4d155dd7e1979055bffd59092837260758da3d69056a5499305de370d.L47.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -87921,11 +88281,6 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
-      "path": "sources/82f884164acf75c36a81f86e523b6e0210ad7108730a94023edb0729a466b894.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
       "path": "sources/74eb9074dc3dd7a1d6c95fd3485e6fb30b6dcaff19fec9ca90a0ce0371ca95b0.L107.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
@@ -88104,11 +88459,6 @@
       "path": "sources/75ce11af7ad53705cfa1a9d1c454957fb25eca9fe805d3023225c6e50bb5d301.L374.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
-    },
-    {
-      "path": "sources/e59be878ec26f842f467d3e653da7c3b2c47353523249483042fcaa33a9e16dc.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
     },
     {
       "path": "sources/75cf50edb6c25d996ed9d9230d297a255117a273f1f78e97dc8e7943f9d288f7.L113.html",
@@ -94106,16 +94456,6 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
-      "path": "sources/b93cc3b7488e67ce08dd30d0b67a8438acb80a7c36dd7e4d80153fe2aeaad395.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "sources/946211f46df72e8d31f7e4644769781fe0805f93bac3e99a3fcc17c8c509ee50.L1.html",
-      "role": "asset",
-      "contentType": "text/html; charset=utf-8"
-    },
-    {
       "path": "sources/3e307eb4ab9adf52f7384d48a974bac909a7080a276d1fd4b7f4ef1c0bd440fc.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -94542,6 +94882,16 @@
     },
     {
       "path": "sources/96544d537e07b35da7815d31f76c5155a2e0583d506bc1ae9d6253006ca6003d.L6852.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/3cc6a1cc2611d69540e4f217c0ab50b8242eaa93297e79b2c8890439a9a20b17.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/96576dcb1ddcfa403cd66ddb3251bc12de3912e2431a1a86a88ff10ff07fc6d6.L1.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -97376,6 +97726,11 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/a496d5edd5ce921aaf7c147862dd46b6e1a0dcf1d395f2022bd296da5768de61.L65.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/b4e7002328a859c43a5f16de5af7fb314c9a71368b361733de44eabcccb35dab.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -99781,6 +100136,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/1f20d8bc52100724d45852587bd330d838e06aa88ce7768561abb7c5d4528c82.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/b020c5f5c33f3024e5d37f65a64053abe2ba49ab3c2d80f32343922e29dfb446.L35.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/b02b0fd9c631ff8cae781101ee2a8b2b0f9d0222082704d0398c2657da57adbf.L561.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
@@ -100317,6 +100682,16 @@
     },
     {
       "path": "sources/b26ac76e1cfa316b77cda123090a648bb4346bc0ff74e26aa47b1dfdf3cc8c8b.L721.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/0eb6f3397902479c4b99a421c1a5a80fd2c95d3b90e441db48e041b164b8c820.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/b26ee53b02fae04bd1c6d9e5c5180fd17b292f3a080e433aefa54e46c16a1487.L44.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -101227,6 +101602,16 @@
     },
     {
       "path": "sources/b710842b3feabbf3950b591619290ff529799b57185adc2721f93d52c02ea920.L37.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/41df0e82625e69ca8a604b0ff2525b1f92a8ff1c2245a5ecf0ca153cbbb1b978.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/b7143bbce0407d3b68340f379e674f6d29e758c161077fca3a9f191b126a588e.L148.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -102642,6 +103027,16 @@
     },
     {
       "path": "sources/bd9085593957942ff4b619af44b8d4526a37989d571f156d4310c3d364b4536c.L16.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/6543ce7eac951f8b3b43db28652be4fc1d98e3cc6744345eb126565f934fcb46.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/bd9693304c337201b0b214ff30917beb00040c978b2d0c655f7c4c0680bf5922.L96.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -104377,6 +104772,16 @@
     },
     {
       "path": "sources/c6856c77c0b79ea1bfaab2849854c2d85180ecab78236f41a02b663653841337.L119.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/ede722ed5f948cad76b71d2afb206a698bec84581298caa4c0c3af44ed159a34.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/c6884fd96a57a05c34cc9da91d55bf33002d5ee66d31514d507c272ddafb792a.L56.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -106696,6 +107101,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/6b3794889985cff55b7752e858391aeb425d6a95c771aec2fcad67aa26258aca.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/d1e740977b0cb686392e469869821b322ac67d0d3dfaa4abac70f1baf0e28568.L50.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/b54d82f76754baec912a0c85469773d6a0abfabf8181564d0c516d66c05bfe37.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -106857,6 +107272,16 @@
     },
     {
       "path": "sources/d2e0eb630f5b37100bcbc7a3ec4f36d2616ee5caa40259a46123988e4ddf0582.L106.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/80fd600ba87288d3d8274770d259fa670aefbf60b5c32c288ffdf2c109b5f4bb.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/d2f226ae00c079fa3b38a269e89a2419ae413d2477da3ce3ecab1c62c415ac51.L1.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -107382,6 +107807,16 @@
     },
     {
       "path": "sources/d513ead2927eb897d83f374f344761eedbe047cb3d654120b3b70d997c0f1003.L5705.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/fa11d6b5f0e3156cde4140f8823f8db1c85881ba13d493c5371db17c922c825c.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/d52763f1533056c82866293c1af05de763fe67f60844d4f428f2eef7727f9659.L29.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -109477,6 +109912,16 @@
     },
     {
       "path": "sources/dde0079a9efde0350155a90032799a567560a8b0ab4b07b5a0c41f87256347ab.L64.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/35c4155640a462a8604f130b23aa194ecc8e7dfc9bc0c1e34e2798770ba00777.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/dde6990c38cb1350465425c1bf6e595da2b0d201be68427e38e851032dcd35e2.L41.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -116529,8 +116974,8 @@
       "dotnet"
     ],
     "entryCounts": {
-      "all": 5851,
-      "dotnet": 5851
+      "all": 5874,
+      "dotnet": 5874
     },
     "theme": {
       "contract": "documentation-portal-theme",
@@ -116549,14 +116994,14 @@
     "navigationIndex": {
       "contract": "hia-project-navigation-index",
       "contractVersion": "0.1.0-draft",
-      "entryCount": 5851,
+      "entryCount": 5874,
       "path": "project-index.json"
     },
     "relationGraph": {
       "contract": "hia-project-relation-graph",
       "contractVersion": "0.1.0-draft",
-      "nodeCount": 6311,
-      "relationCount": 5858,
+      "nodeCount": 6335,
+      "relationCount": 5881,
       "path": "project-index.json"
     }
   },

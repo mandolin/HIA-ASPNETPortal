@@ -1,0 +1,6 @@
+        public static Decision CheckAuthorizationBasis(string authorizationBasis)
+        {
+            return string.Equals(authorizationBasis, AuthorizationBasisRegisteredKey, StringComparison.Ordinal)
+                ? Decision.Pass()
+                : Decision.Fail(ReasonBoundaryOriginClaim);
+        }

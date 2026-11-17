@@ -304,6 +304,16 @@
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-32bab1f9.json"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision",
+      "kind": "type",
+      "label": "Decision",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2d273c7f.json"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleisolationcontract.diagnosticinput",
       "kind": "type",
       "label": "DiagnosticInput",
@@ -2058,6 +2068,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmoduleisolationcontract.decision",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmoduleisolationcont-8c5372a3.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d2763aff.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract",
+      "kind": "type",
+      "label": "PortalModulePermissionAuditContract",
+      "entryCount": 19,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalmodulepermissionaud-a0b1eadd.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-9dc2f355.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentry",

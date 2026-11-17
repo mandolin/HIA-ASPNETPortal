@@ -1,0 +1,11 @@
+        public static Decision CheckCapabilityRegistered(string capabilityId, IList<string> registeredCapabilityIds)
+        {
+            if (string.IsNullOrWhiteSpace(capabilityId))
+            {
+                return Decision.Pass();
+            }
+
+            return ContainsOrdinal(registeredCapabilityIds, capabilityId)
+                ? Decision.Pass()
+                : Decision.Fail(ReasonBoundarySelfCreated);
+        }

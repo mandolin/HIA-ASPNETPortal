@@ -1,0 +1,11 @@
+        public static Decision CheckNoAdminGrant(string grantedPermissionKey)
+        {
+            if (string.IsNullOrWhiteSpace(grantedPermissionKey))
+            {
+                return Decision.Pass();
+            }
+
+            return IsAdministrativePrefix(grantedPermissionKey.Trim())
+                ? Decision.Fail(ReasonBoundaryAdminGrant)
+                : Decision.Pass();
+        }

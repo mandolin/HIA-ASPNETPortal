@@ -1,0 +1,259 @@
+using System;
+using System.Collections.Generic;
+
+namespace ASPNET.StarterKit.Portal
+{
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>权限与审计的**纯内存只读契约判定器**：把形态相关「安装 / 启用 / 停用」权限键、
+    ///   运营审计事件词表与 A 级三条硬边界收敛为可机器核对的判定。词表全部由调用方传入
+    ///   （`PortalPermissionRegistry` / `PortalCapabilityRegistry` / 审计词表在各自项目维护），
+    ///   本类不引用 Web 项目的 `PortalOperationAuditEvents`、不读配置、不写任何内容、
+    ///   **不新增权限键常量或审计事件常量**（避免与单一事实源漂移）。</zh-CN>
+    ///   <en>Pure in-memory read-only contract decisions for permission and audit: machine-checkable rules for
+    ///   form-related install/enable/disable permission keys, the operations-audit vocabulary, and the three A-level
+    ///   hard boundaries. All vocabularies are supplied by callers (registries live in their own projects); this class
+    ///   does not reference the Web project's `PortalOperationAuditEvents`, reads no config, writes nothing, and adds
+    ///   **no new permission-key or audit-event constants** (avoiding drift from the single source of truth).</en>
+    /// </lang>
+    /// </summary>
+    public static class PortalModulePermissionAuditContract
+    {
+        /// <summary>授权依据只接受已登记权限键（其它来源一律拒绝）。</summary>
+        public const string AuthorizationBasisRegisteredKey = "RegisteredPermissionKey";
+
+        /// <summary>来源声明（拒绝作为授权依据）。</summary>
+        public const string AuthorizationBasisOriginClaim = "OriginClaim";
+
+        /// <summary>能力声明（拒绝作为授权依据）。</summary>
+        public const string AuthorizationBasisCapabilityClaim = "CapabilityClaim";
+
+        /// <summary>角色名（拒绝作为授权依据）。</summary>
+        public const string AuthorizationBasisRoleName = "RoleName";
+
+        /// <summary><lang><zh-CN>权限键未在已登记词表内。</zh-CN><en>Permission key is not in the registered vocabulary.</en></lang></summary>
+        public const string ReasonPermissionUnknown = "PermissionAudit.PermissionUnknown";
+
+        /// <summary><lang><zh-CN>权限键为管理级前缀（Admins/Admin/Business.Admin）。</zh-CN><en>Permission key uses an administrative prefix.</en></lang></summary>
+        public const string ReasonAdminPrefix = "PermissionAudit.AdminPrefix";
+
+        /// <summary><lang><zh-CN>扁平单层键（如 EnterpriseCapability.Manage）被禁用。</zh-CN><en>Flat single-layer key (e.g. EnterpriseCapability.Manage) is forbidden.</en></lang></summary>
+        public const string ReasonFlatKey = "PermissionAudit.FlatKey";
+
+        /// <summary><lang><zh-CN>类别/动作未在已登记审计词表内。</zh-CN><en>Category/action is not in the registered audit vocabulary.</en></lang></summary>
+        public const string ReasonAuditUnknown = "PermissionAudit.AuditUnknown";
+
+        /// <summary><lang><zh-CN>outcome 不在 Success/Failure/Skipped 白名单内。</zh-CN><en>Outcome is not in the Success/Failure/Skipped allow-list.</en></lang></summary>
+        public const string ReasonAuditBadOutcome = "PermissionAudit.BadOutcome";
+
+        /// <summary><lang><zh-CN>边界①：第三方被授予管理级权限。</zh-CN><en>Boundary 1: a third party was granted an administrative permission.</en></lang></summary>
+        public const string ReasonBoundaryAdminGrant = "PermissionAudit.Boundary1AdminGrant";
+
+        /// <summary><lang><zh-CN>边界②：授权依据不是已登记权限键。</zh-CN><en>Boundary 2: authorization basis is not a registered permission key.</en></lang></summary>
+        public const string ReasonBoundaryOriginClaim = "PermissionAudit.Boundary2OriginClaim";
+
+        /// <summary><lang><zh-CN>边界③：能力条目未在封闭词表内（自创能力）。</zh-CN><en>Boundary 3: capability id is not in the closed registry (self-created capability).</en></lang></summary>
+        public const string ReasonBoundarySelfCreated = "PermissionAudit.Boundary3SelfCreated";
+
+        /// <summary><lang><zh-CN>判定结果：是否成立 + 受控原因（成立时为空文本）。</zh-CN><en>Decision: holds flag plus a controlled reason (empty when it holds).</en></lang></summary>
+        public struct Decision
+        {
+            /// <summary>判定是否成立。</summary>
+            public bool Holds;
+
+            /// <summary>受控原因。</summary>
+            public string Reason;
+
+            /// <summary><zh-CN>构造成立结果。</zh-CN><en>Builds a holding decision.</en></summary>
+            public static Decision Pass()
+            {
+                return new Decision { Holds = true, Reason = string.Empty };
+            }
+
+            /// <summary><zh-CN>构造不成立结果。</zh-CN><en>Builds a failing decision.</en></summary>
+            public static Decision Fail(string reason)
+            {
+                return new Decision { Holds = false, Reason = reason ?? string.Empty };
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判定形态相关动作权限键：须在调用方传入的已登记权限键集合内（fail-closed），
+        ///   不得为管理级前缀（`Admins` / `Admin` / `Business.Admin`，与 `PortalModuleProvisioner.IsAdminCapability` 同口径），
+        ///   不得为扁平单层键（`EnterpriseCapability.Manage`，与 `PortalPermissions.cs:538-539` 注释一致）。
+        ///   本判定不新增权限键常量，也不改变 `EnterpriseCapability.*` 七键的既有分层。</zh-CN>
+        ///   <en>Decides whether a form-related action permission key is well formed: it must be in the caller-supplied
+        ///   registered-key set (fail closed), must not use an administrative prefix (same rule as
+        ///   `PortalModuleProvisioner.IsAdminCapability`), and must not be a flat single-layer key (per the note at
+        ///   `PortalPermissions.cs:538-539`). No new key constant is added and the existing seven-layer
+        ///   `EnterpriseCapability.*` shape is unchanged.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="permissionKey">待判定权限键。</param>
+        /// <param name="registeredKeys">调用方从 `PortalPermissionRegistry` 取得的已登记键集合。</param>
+        /// <returns>成立或受控原因。</returns>
+        public static Decision IsModuleActionPermissionWellFormed(string permissionKey, IList<string> registeredKeys)
+        {
+            if (string.IsNullOrWhiteSpace(permissionKey))
+            {
+                return Decision.Fail(ReasonPermissionUnknown);
+            }
+
+            string key = permissionKey.Trim();
+            if (IsAdministrativePrefix(key))
+            {
+                return Decision.Fail(ReasonAdminPrefix);
+            }
+
+            if (key.StartsWith("EnterpriseCapability.", StringComparison.Ordinal) && key.Split('.').Length < 3)
+            {
+                return Decision.Fail(ReasonFlatKey);
+            }
+
+            if (registeredKeys == null)
+            {
+                return Decision.Fail(ReasonPermissionUnknown);
+            }
+
+            for (int i = 0; i < registeredKeys.Count; i++)
+            {
+                string candidate = registeredKeys[i];
+                if (!string.IsNullOrWhiteSpace(candidate) && string.Equals(candidate.Trim(), key, StringComparison.OrdinalIgnoreCase))
+                {
+                    return Decision.Pass();
+                }
+            }
+
+            return Decision.Fail(ReasonPermissionUnknown);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判定运营审计记录：类别 / 动作须在调用方传入的已登记词表内，outcome 须在
+        ///   `Success` / `Failure` / `Skipped` 白名单内（与 `PortalOnlinePackageAuditFormatter.IsRegisteredOutcome` 同口径）。
+        ///   拒绝未知 outcome 即为「不伪造成功记录」。</zh-CN>
+        ///   <en>Decides whether an operations-audit record is well formed: category and action must be in the
+        ///   caller-supplied registered vocabularies, and outcome must be in the `Success`/`Failure`/`Skipped`
+        ///   allow-list (same rule as `PortalOnlinePackageAuditFormatter.IsRegisteredOutcome`). Rejecting an unknown
+        ///   outcome enforces "no fabricated success".</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="category">审计类别。</param>
+        /// <param name="action">审计动作。</param>
+        /// <param name="outcome">审计结果。</param>
+        /// <param name="registeredCategories">已登记类别词表。</param>
+        /// <param name="registeredActions">已登记动作词表。</param>
+        /// <returns>成立或受控原因。</returns>
+        public static Decision IsAuditRecordWellFormed(
+            string category,
+            string action,
+            string outcome,
+            IList<string> registeredCategories,
+            IList<string> registeredActions)
+        {
+            if (!ContainsOrdinal(registeredCategories, category) || !ContainsOrdinal(registeredActions, action))
+            {
+                return Decision.Fail(ReasonAuditUnknown);
+            }
+
+            if (!string.Equals(outcome, "Success", StringComparison.Ordinal) &&
+                !string.Equals(outcome, "Failure", StringComparison.Ordinal) &&
+                !string.Equals(outcome, "Skipped", StringComparison.Ordinal))
+            {
+                return Decision.Fail(ReasonAuditBadOutcome);
+            }
+
+            return Decision.Pass();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>边界①机器核对：授予的权限键不得为管理级前缀（第三方禁获 `Admins`）。</zh-CN>
+        ///   <en>Machine check for boundary 1: a granted permission key must not use an administrative prefix
+        ///   (third parties must never obtain `Admins`).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="grantedPermissionKey">被授予的权限键。</param>
+        /// <returns>成立或 `PermissionAudit.Boundary1AdminGrant`。</returns>
+        public static Decision CheckNoAdminGrant(string grantedPermissionKey)
+        {
+            if (string.IsNullOrWhiteSpace(grantedPermissionKey))
+            {
+                return Decision.Pass();
+            }
+
+            return IsAdministrativePrefix(grantedPermissionKey.Trim())
+                ? Decision.Fail(ReasonBoundaryAdminGrant)
+                : Decision.Pass();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>边界②机器核对：授权依据只接受 `RegisteredPermissionKey`；
+        ///   来源声明 / 能力声明 / 角色名一律拒绝（与 `PortalOnlinePackageConfirmation.cs:110-118` 同口径）。</zh-CN>
+        ///   <en>Machine check for boundary 2: the only accepted authorization basis is `RegisteredPermissionKey`;
+        ///   origin claims, capability claims and role names are rejected (same rule as
+        ///   `PortalOnlinePackageConfirmation.cs:110-118`).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="authorizationBasis">授权依据字面值。</param>
+        /// <returns>成立或 `PermissionAudit.Boundary2OriginClaim`。</returns>
+        public static Decision CheckAuthorizationBasis(string authorizationBasis)
+        {
+            return string.Equals(authorizationBasis, AuthorizationBasisRegisteredKey, StringComparison.Ordinal)
+                ? Decision.Pass()
+                : Decision.Fail(ReasonBoundaryOriginClaim);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>边界③机器核对：能力标识须在调用方传入的封闭能力词表内（第三方不得自创能力条目）。
+        ///   未声明能力（null / 空白）按既有 Provisioner 条件口径不阻断。</zh-CN>
+        ///   <en>Machine check for boundary 3: a capability id must be in the caller-supplied closed registry
+        ///   (no self-created capability). An undeclared capability (null/blank) is not blocked, matching the existing
+        ///   conditional Provisioner rule.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="capabilityId">能力标识。</param>
+        /// <param name="registeredCapabilityIds">调用方从 `PortalCapabilityRegistry` 取得的封闭词表。</param>
+        /// <returns>成立或 `PermissionAudit.Boundary3SelfCreated`。</returns>
+        public static Decision CheckCapabilityRegistered(string capabilityId, IList<string> registeredCapabilityIds)
+        {
+            if (string.IsNullOrWhiteSpace(capabilityId))
+            {
+                return Decision.Pass();
+            }
+
+            return ContainsOrdinal(registeredCapabilityIds, capabilityId)
+                ? Decision.Pass()
+                : Decision.Fail(ReasonBoundarySelfCreated);
+        }
+
+        private static bool IsAdministrativePrefix(string key)
+        {
+            return key.StartsWith("Admins", StringComparison.OrdinalIgnoreCase) ||
+                   key.StartsWith("Admin", StringComparison.OrdinalIgnoreCase) ||
+                   key.StartsWith("Business.Admin", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static bool ContainsOrdinal(IList<string> vocabulary, string value)
+        {
+            if (vocabulary == null || string.IsNullOrWhiteSpace(value))
+            {
+                return false;
+            }
+
+            for (int i = 0; i < vocabulary.Count; i++)
+            {
+                string candidate = vocabulary[i];
+                if (!string.IsNullOrWhiteSpace(candidate) && string.Equals(candidate.Trim(), value.Trim(), StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+}

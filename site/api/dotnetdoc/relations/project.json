@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 6311,
-  "relationCount": 5858,
+  "nodeCount": 6335,
+  "relationCount": 5881,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -4244,6 +4244,104 @@
       "kind": "entry",
       "label": "Independent",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulekind.independent",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim",
+      "kind": "entry",
+      "label": "AuthorizationBasisCapabilityClaim",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim",
+      "kind": "entry",
+      "label": "AuthorizationBasisOriginClaim",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey",
+      "kind": "entry",
+      "label": "AuthorizationBasisRegisteredKey",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename",
+      "kind": "entry",
+      "label": "AuthorizationBasisRoleName",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.holds",
+      "kind": "entry",
+      "label": "Holds",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.holds",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.reason",
+      "kind": "entry",
+      "label": "Reason",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.reason",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix",
+      "kind": "entry",
+      "label": "ReasonAdminPrefix",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome",
+      "kind": "entry",
+      "label": "ReasonAuditBadOutcome",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown",
+      "kind": "entry",
+      "label": "ReasonAuditUnknown",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant",
+      "kind": "entry",
+      "label": "ReasonBoundaryAdminGrant",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim",
+      "kind": "entry",
+      "label": "ReasonBoundaryOriginClaim",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated",
+      "kind": "entry",
+      "label": "ReasonBoundarySelfCreated",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey",
+      "kind": "entry",
+      "label": "ReasonFlatKey",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown",
+      "kind": "entry",
+      "label": "ReasonPermissionUnknown",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown",
       "view": "dotnet"
     },
     {
@@ -15318,6 +15416,55 @@
       "kind": "entry",
       "label": "TryNormalizeDesktopSource",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepathvalidator.trynormalizedesktopsource-system.string-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string",
+      "kind": "entry",
+      "label": "CheckAuthorizationBasis",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "CheckCapabilityRegistered",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string",
+      "kind": "entry",
+      "label": "CheckNoAdminGrant",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.fail-system.string",
+      "kind": "entry",
+      "label": "Fail",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.fail-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.pass",
+      "kind": "entry",
+      "label": "Pass",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.pass",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "IsAuditRecordWellFormed",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "IsModuleActionPermissionWellFormed",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string",
       "view": "dotnet"
     },
     {
@@ -37756,6 +37903,20 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract",
+      "kind": "entry",
+      "label": "PortalModulePermissionAuditContract",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision",
+      "kind": "entry",
+      "label": "Decision",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmoduleprofileresolver",
       "kind": "entry",
       "label": "PortalModuleProfileResolver",
@@ -42005,6 +42166,12 @@
       "kind": "source",
       "label": "src/Portal.Components/PortalModuleIsolationContract.cs",
       "path": "src/Portal.Components/PortalModuleIsolationContract.cs"
+    },
+    {
+      "id": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "source",
+      "label": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "path": "src/Portal.Components/PortalModulePermissionAuditContract.cs"
     },
     {
       "id": "source:src/Portal.Components/PortalNavigationGroupAlias.cs",
@@ -51571,6 +51738,188 @@
         "language": "csharp",
         "rangeStartLine": 34,
         "rangeEndLine": 34
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 29,
+        "rangeEndLine": 29
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 26,
+        "rangeEndLine": 26
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 23,
+        "rangeEndLine": 23
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 32,
+        "rangeEndLine": 32
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.holds->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.holds",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.holds",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 62,
+        "rangeEndLine": 62
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.reason->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.reason",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.reason",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 65,
+        "rangeEndLine": 65
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 38,
+        "rangeEndLine": 38
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 47,
+        "rangeEndLine": 47
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 44,
+        "rangeEndLine": 44
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 50,
+        "rangeEndLine": 50
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 53,
+        "rangeEndLine": 53
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 56,
+        "rangeEndLine": 56
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 41,
+        "rangeEndLine": 41
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 35,
+        "rangeEndLine": 35
       }
     },
     {
@@ -72137,6 +72486,97 @@
         "language": "csharp",
         "rangeStartLine": 47,
         "rangeEndLine": 124
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 202,
+        "rangeEndLine": 207
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 221,
+        "rangeEndLine": 231
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 179,
+        "rangeEndLine": 189
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.fail-system.string->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.fail-system.string",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.fail-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 74,
+        "rangeEndLine": 77
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.pass->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.pass",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision.pass",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 68,
+        "rangeEndLine": 71
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 148,
+        "rangeEndLine": 168
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 96,
+        "rangeEndLine": 129
       }
     },
     {
@@ -109914,7 +110354,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 279
+        "rangeEndLine": 280
       }
     },
     {
@@ -109953,7 +110393,7 @@
       "metadata": {
         "language": "xml",
         "rangeStartLine": 1,
-        "rangeEndLine": 116
+        "rangeEndLine": 117
       }
     },
     {
@@ -113802,6 +114242,32 @@
         "language": "csharp",
         "rangeStartLine": 19,
         "rangeEndLine": 182
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 20,
+        "rangeEndLine": 258
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision->source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision",
+      "to": "source:src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "label": "Source: src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalmodulepermissionauditcontract.decision",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 59,
+        "rangeEndLine": 78
       }
     },
     {

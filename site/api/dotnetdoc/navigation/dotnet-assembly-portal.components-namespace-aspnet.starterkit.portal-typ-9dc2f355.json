@@ -1,0 +1,246 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:base:t-system.valuetype",
+      "kind": "relation",
+      "label": "Base: System.ValueType",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim",
+      "kind": "entry",
+      "label": "AuthorizationBasisCapabilityClaim",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasiscapabilityclaim",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-7cba3886.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim",
+      "kind": "entry",
+      "label": "AuthorizationBasisOriginClaim",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisoriginclaim",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-3ba38cba.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey",
+      "kind": "entry",
+      "label": "AuthorizationBasisRegisteredKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisregisteredkey",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-77448d3b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename",
+      "kind": "entry",
+      "label": "AuthorizationBasisRoleName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.authorizationbasisrolename",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-2bb484cf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string",
+      "kind": "entry",
+      "label": "CheckAuthorizationBasis",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkauthorizationbasis-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-06c95ffc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "CheckCapabilityRegistered",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepermissionauditcontract.checkcapabilityregistered-system.string-system.collections.generic.ilist-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-7cc9f44f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string",
+      "kind": "entry",
+      "label": "CheckNoAdminGrant",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepermissionauditcontract.checknoadmingrant-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-f68f3a0d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "IsAuditRecordWellFormed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepermissionauditcontract.isauditrecordwellformed-system.string-system.string-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-1f990958.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "IsModuleActionPermissionWellFormed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepermissionauditcontract.ismoduleactionpermissionwellformed-system.string-system.collections.generic.ilist-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepermissionaud-eb29c5d3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix",
+      "kind": "entry",
+      "label": "ReasonAdminPrefix",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonadminprefix",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-320ee2a4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome",
+      "kind": "entry",
+      "label": "ReasonAuditBadOutcome",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditbadoutcome",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-f001d5c5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown",
+      "kind": "entry",
+      "label": "ReasonAuditUnknown",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonauditunknown",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-fbe4c31e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant",
+      "kind": "entry",
+      "label": "ReasonBoundaryAdminGrant",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryadmingrant",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-8eabc6e8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim",
+      "kind": "entry",
+      "label": "ReasonBoundaryOriginClaim",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryoriginclaim",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-0906627f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated",
+      "kind": "entry",
+      "label": "ReasonBoundarySelfCreated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonboundaryselfcreated",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-a73e1cbb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey",
+      "kind": "entry",
+      "label": "ReasonFlatKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonflatkey",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-2a08ee2d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepermissionauditcontract:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown",
+      "kind": "entry",
+      "label": "ReasonPermissionUnknown",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown",
+      "sourcePath": "src/Portal.Components/PortalModulePermissionAuditContract.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalmodulepermissionauditcontract.reasonpermissionunknown",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalmodulepermissionaud-e4cde40c.html"
+    }
+  ]
+}

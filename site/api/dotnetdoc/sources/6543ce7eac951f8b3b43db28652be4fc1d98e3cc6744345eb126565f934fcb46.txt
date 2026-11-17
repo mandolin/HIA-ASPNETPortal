@@ -1,0 +1,34 @@
+        public static Decision IsModuleActionPermissionWellFormed(string permissionKey, IList<string> registeredKeys)
+        {
+            if (string.IsNullOrWhiteSpace(permissionKey))
+            {
+                return Decision.Fail(ReasonPermissionUnknown);
+            }
+
+            string key = permissionKey.Trim();
+            if (IsAdministrativePrefix(key))
+            {
+                return Decision.Fail(ReasonAdminPrefix);
+            }
+
+            if (key.StartsWith("EnterpriseCapability.", StringComparison.Ordinal) && key.Split('.').Length < 3)
+            {
+                return Decision.Fail(ReasonFlatKey);
+            }
+
+            if (registeredKeys == null)
+            {
+                return Decision.Fail(ReasonPermissionUnknown);
+            }
+
+            for (int i = 0; i < registeredKeys.Count; i++)
+            {
+                string candidate = registeredKeys[i];
+                if (!string.IsNullOrWhiteSpace(candidate) && string.Equals(candidate.Trim(), key, StringComparison.OrdinalIgnoreCase))
+                {
+                    return Decision.Pass();
+                }
+            }
+
+            return Decision.Fail(ReasonPermissionUnknown);
+        }

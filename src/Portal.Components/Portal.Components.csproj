@@ -133,6 +133,7 @@
     <Compile Include="PortalModuleFormContract.cs" />
     <Compile Include="PortalModuleFormProfileGate.cs" />
     <Compile Include="PortalModuleIsolationContract.cs" />
+    <Compile Include="PortalModulePermissionAuditContract.cs" />
     <Compile Include="BusinessApplicationInfo.cs" />
     <Compile Include="BusinessApplicationResult.cs" />
     <Compile Include="BusinessApplicationReviewRequest.cs" />

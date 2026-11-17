@@ -1,0 +1,21 @@
+        public static Decision IsAuditRecordWellFormed(
+            string category,
+            string action,
+            string outcome,
+            IList<string> registeredCategories,
+            IList<string> registeredActions)
+        {
+            if (!ContainsOrdinal(registeredCategories, category) || !ContainsOrdinal(registeredActions, action))
+            {
+                return Decision.Fail(ReasonAuditUnknown);
+            }
+
+            if (!string.Equals(outcome, "Success", StringComparison.Ordinal) &&
+                !string.Equals(outcome, "Failure", StringComparison.Ordinal) &&
+                !string.Equals(outcome, "Skipped", StringComparison.Ordinal))
+            {
+                return Decision.Fail(ReasonAuditBadOutcome);
+            }
+
+            return Decision.Pass();
+        }
